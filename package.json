@@ -9,7 +9,8 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "generate": "graphql-codegen"
   },
   "author": "Iain Collins <me@iaincollins.com>",
   "contributors": [
@@ -18,6 +19,13 @@
     "Lluis Agusti <hi@llu.lu>"
   ],
   "dependencies": {
+    "@apollo/client": "^3.7.10",
+    "@apollo/server": "^4.5.0",
+    "@as-integrations/next": "^1.2.0",
+    "@graphql-codegen/typescript-resolvers": "^3.1.1",
+    "@graphql-tools/load": "^7.8.13",
+    "@graphql-tools/graphql-file-loader": "^7.5.16",
+    "graphql": "^16.6.0",
     "mongodb": "^5.1.0",
     "next": "latest",
     "next-auth": "latest",
@@ -25,6 +33,8 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^3.2.2",
+    "@graphql-codegen/client-preset": "^2.1.1",
     "@types/node": "^18.15.5",
     "@types/react": "^18.0.15",
     "typescript": "^5.0.2"

@@ -17,8 +17,8 @@
   },
   "include": [
     "process.d.ts",
-    "types/next-env.d.ts",
-    "types/next-auth.d.ts",
+    "schemas/types/next-env.d.ts",
+    "schemas/types/next-auth.d.ts",
     "**/*.tsx",
     "**/*.ts"
   ],

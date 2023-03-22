@@ -61,7 +61,7 @@ Auth0Provider({
   },
   callbacks: {
     async jwt({ token }) {
-      token.userRole = "admin"
+      token.userRole = "client"
       return token
     },
   },
