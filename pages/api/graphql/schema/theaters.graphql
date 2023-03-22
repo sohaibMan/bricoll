@@ -1,0 +1,17 @@
+# Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+scalar ObjectID
+type Movie {
+  _id: ObjectID
+  title: String!
+  year: Int
+  rated: String
+  runtime: Int
+  director: String
+  cast: [String]
+}
+
+# The "Query" type is special: it lists all of the available queries that
+
+type Query {
+  Movies: [Movie]
+}
