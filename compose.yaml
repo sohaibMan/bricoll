@@ -26,6 +26,6 @@ services:
       - 27017:27017
     restart: always
     volumes: 
-      - ./mongo/data:/data/db
+      - /data/db
 
 
