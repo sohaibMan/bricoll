@@ -1,23 +1,13 @@
 {
   "private": true,
-  "description": "An example project for NextAuth.js with Next.js",
-  "repository": "https://github.com/nextauthjs/next-auth-example.git",
-  "bugs": {
-    "url": "https://github.com/nextauthjs/next-auth/issues"
-  },
-  "homepage": "https://next-auth-example.vercel.app",
+  "description": "Upwork clone with Next.js, GraphQL, Apollo, MongoDB, NextAuth.js, and Nginx (Docker) and much more ",
+  "repository": "https://github.com/sohaibMan/NextJsCourse",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
     "generate": "graphql-codegen"
   },
-  "author": "Iain Collins <me@iaincollins.com>",
-  "contributors": [
-    "Balázs Orbán <info@balazsorban.com>",
-    "Nico Domino <yo@ndo.dev>",
-    "Lluis Agusti <hi@llu.lu>"
-  ],
   "dependencies": {
     "@apollo/client": "^3.7.10",
     "@apollo/server": "^4.5.0",
