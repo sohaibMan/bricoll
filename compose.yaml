@@ -10,21 +10,21 @@ services:
       - 80:80
     depends_on:
       - nextjs
-    restart: always
+    restart: on-failure
   nextjs:
     image: nextjs
     build: ./nextjs
     volumes:
       - ./nextjs:/app
 
-    restart: always
+    restart: on-failure
     depends_on:
       -  mongo
   mongo:
     image: mongo
     ports:
       - 27017:27017
-    restart: always
+    restart: on-failure
     volumes: 
       - /data/db
 
