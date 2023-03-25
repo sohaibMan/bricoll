@@ -15,3 +15,7 @@ type Movie {
 type Query {
   Movies: [Movie]
 }
+
+type Mutation {
+  addBook(title: String, author: String): Book
+}
