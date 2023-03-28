@@ -1,11 +1,11 @@
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
-import clientPromise from "../../../lib/mongodb";
+import clientPromise from "../../../lib/mongodb"
 import path from 'node:path'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { ObjectId } from 'mongodb';
-
+import { typeDefs as scalarTypeDefs } from 'graphql-scalars';
 
 
 const client = await clientPromise
@@ -30,9 +30,12 @@ const resolvers = {
       async function (_: any, args: { id: ObjectId }, __: any, ___: any) {
         return await moviesCollection.find().limit(20).toArray();
       },
+    Movie: async (_: any, args: { id: ObjectId; }, __: any, ___: any) => {
+      return await moviesCollection.findOne({ _id: new ObjectId(args.id) });
+    }
   },
+  // Mutiation:
 };
-
 
 
 

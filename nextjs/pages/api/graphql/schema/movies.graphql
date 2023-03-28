@@ -1,5 +1,7 @@
 # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+
 scalar ObjectID
+
 type Movie {
   _id: ObjectID
   title: String!
@@ -14,8 +16,9 @@ type Movie {
 
 type Query {
   Movies: [Movie]
+  Movie(id: ID!): Movie
 }
 
 type Mutation {
-  addBook(title: String, author: String): Book
+  addMovie(title: String, director: String): Movie
 }
