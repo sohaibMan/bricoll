@@ -19,6 +19,7 @@
     "process.d.ts",
     "schemas/types/next-env.d.ts",
     "schemas/types/next-auth.d.ts",
+    "schemas/types/resolvers.d.ts",
     "**/*.tsx",
     "**/*.ts"
   ],

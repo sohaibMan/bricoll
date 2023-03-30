@@ -1,0 +1,86 @@
+# Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+
+scalar ObjectID
+scalar Date
+scalar URL
+
+enum AttachmentType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+enum level_of_expertise {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}
+
+enum size_of_project {
+  SMALL
+  MEDIUM
+  LARGE
+}
+# type Attachment {
+#   url: URL
+#   type: AttachmentType
+# }
+type Reactions {
+  love: Int!
+  dislike: Int!
+}
+
+input ProjectScopeInput {
+  estimated_duration_in_days: Int!
+  level_of_expertise: level_of_expertise!
+  size_of_project: size_of_project!
+}
+
+type ProjectScopeOutput {
+  estimated_duration_in_days: Int!
+  level_of_expertise: level_of_expertise!
+  size_of_project: size_of_project!
+}
+type Project {
+  #   client_id: ObjectID
+  _id: ObjectID
+  title: String!
+  description: String!
+  price: Float!
+  skills: [String!]!
+  reactions: [Reactions!]!
+  created_date: Date!
+  projectScope: ProjectScopeOutput!
+  # AttachmentUrl: [Attachment]
+}
+
+# The "Query" type is special: it lists all of the available queries that
+
+type Query {
+  Projects: [Project]
+  Project(id: ID!): Project
+}
+
+type queryResult {
+  _id: ObjectID!
+  ackandlodement: Boolean!
+}
+
+type Mutation {
+  addProject(
+    title: String!
+    description: String!
+    price: Float!
+    skills: [String!]!
+    projectScope: ProjectScopeInput!
+  ): queryResult
+  editProject(
+    id: ID!
+    title: String
+    description: String
+    price: Float
+    skills: [String!]
+    projectScope: ProjectScopeInput!
+  ): queryResult
+  deleteProject(id: ID!): queryResult
+}
