@@ -5,26 +5,43 @@ if (!process.env.MONGODB_URI) {
 }
 
 
-// Create a MongoClient with a MongoClientOptions object to set the Stable API version
-const client = new MongoClient(process.env.MONGODB_URI || "mongodb://bricoll_mongo:27017/bricoll", {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
+
+
+class MongoClientConnection {
+    private static _instance: MongoClient;
+
+    private constructor() {
+
+        // Create a MongoClient with a MongoClientOptions object to set the Stable API version
+        const client = new MongoClient(process.env.MONGODB_URI || "mongodb://bricoll_mongo:27017/bricoll", {
+            serverApi: {
+                version: ServerApiVersion.v1,
+                strict: true,
+                deprecationErrors: true,
+            }
+        }
+        );
+
+        MongoClientConnection._instance = client;
+
+    }
+
+    static async getInstance() {
+        if (this._instance) {
+            await this._instance.connect();
+            // Send a ping to confirm a successful connection
+            await this._instance.db("admin").command({ ping: 1 });
+            console.log("Pinged your deployment. You successfully connected to MongoDB!");
+            return this._instance;
+        }
+
+        new MongoClientConnection();
+        return this._instance;
     }
 }
-);
 
-try {
-    // Connect the client to the server (optional starting in v4.7)
-    await client.connect();
+const client = await MongoClientConnection.getInstance();
 
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-} finally {
-    // Ensures that the client will close when you finish/error
-    await client.close();
-}
+const db = client.db("bricoll");
 
-export default client.connect();
+export default db;

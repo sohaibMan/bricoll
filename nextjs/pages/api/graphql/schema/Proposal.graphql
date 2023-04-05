@@ -1,0 +1,74 @@
+# ! all the types may change in the future
+# the project could be one of the following
+
+enum project_status {
+  canceled
+  declined
+  in_progress
+  approved
+}
+# the proposal could be one of the following
+type Proposal {
+  id: ID! #auto generated
+  project_id: Project!
+  # freelancer_id: ID!
+  # from session get user_id
+  price: Float! @constraint(min: 1, max: 10000)
+  duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+  description: String! @constraint(minLength: 5, maxLength: 1000)
+  status: project_status!
+  created_at: Date!
+  # current time
+  updated_at: Date!
+  cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
+  AttachmentsURL: [Attachment]
+  # the link of urls of the attachments(files, images, video)
+}
+
+# Cover Letter, Attachments (images +video +files ...)
+
+type Query {
+  Proposal(id: ID!): Proposal
+  # by the freelancer | client
+  Proposals(project_id: ID!): [Proposal]
+  # on the client
+  Proposals(freelancer_id: ID!): [Proposal]
+  # on the freelancer
+}
+
+type Mutation {
+  submitProposal(
+    project_id: ID!
+    price: Float!
+    duration: Int!
+    description: String!
+    cover_letter: String!
+    AttachmentsURL: [AttachmentInput]
+    ackandlodement: Boolean! # the freelancer should accept the terms and conditions
+  ): Proposal
+  updateProposal(
+    id: ID!
+    price: Float!
+    duration: Int!
+    description: String!
+  ): Proposal
+  withdrawProposal(id: ID!): Proposal
+  # by the freelancer
+  acceptProposal(id: ID!): Proposal
+  # by the client
+  declineProposal(id: ID!): Proposal
+  # by the client
+  acceptProposal(id: ID!): Proposal
+  # by the freelancer and the client
+  open_chat_room(id: ID!): Proposal
+  # by the freelancer and the client
+  acceptTerms(id: ID!): Proposal
+  # by the freelancer and the client
+}
+
+type Subscription {
+  proposalStatusChanged(id: ID!): Proposal
+  # when the status of the proposal changed
+  projectGotProposal(id: ID!): Proposal
+  # when the project got a new proposal
+}

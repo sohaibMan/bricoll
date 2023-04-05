@@ -4,12 +4,6 @@ scalar ObjectID
 scalar Date
 scalar URL
 
-enum AttachmentType {
-  IMAGE
-  VIDEO
-  DOCUMENT
-}
-
 enum level_of_expertise {
   BEGINNER
   INTERMEDIATE
@@ -21,10 +15,7 @@ enum size_of_project {
   MEDIUM
   LARGE
 }
-# type Attachment {
-#   url: URL
-#   type: AttachmentType
-# }
+
 type Reactions {
   love: Int!
   dislike: Int!
@@ -32,26 +23,28 @@ type Reactions {
 
 input ProjectScopeInput {
   estimated_duration_in_days: Int!
+    @constraint(exclusiveMin: 0, exclusiveMax: 90)
   level_of_expertise: level_of_expertise!
   size_of_project: size_of_project!
 }
 
 type ProjectScopeOutput {
   estimated_duration_in_days: Int!
+    @constraint(exclusiveMin: 0, exclusiveMax: 90)
   level_of_expertise: level_of_expertise!
   size_of_project: size_of_project!
 }
 type Project {
   #   client_id: ObjectID
   _id: ObjectID
-  title: String!
-  description: String!
-  price: Float!
-  skills: [String!]!
-  reactions: [Reactions!]!
+  title: String! @constraint(minLength: 5, maxLength: 100)
+  description: String! @constraint(minLength: 5, maxLength: 1000)
+  price: Float! @constraint(min: 0)
+  skills: [String!]! @constraint(maxItems: 15)
+  reactions: Reactions!
   created_date: Date!
   projectScope: ProjectScopeOutput!
-  # AttachmentUrl: [Attachment]
+  AttachmentsURL: [Attachment]
 }
 
 # The "Query" type is special: it lists all of the available queries that
@@ -73,7 +66,7 @@ type Mutation {
     price: Float!
     skills: [String!]!
     projectScope: ProjectScopeInput!
-  ): queryResult
+  ): Project
   editProject(
     id: ID!
     title: String
@@ -81,6 +74,6 @@ type Mutation {
     price: Float
     skills: [String!]
     projectScope: ProjectScopeInput!
-  ): queryResult
+  ): Project
   deleteProject(id: ID!): queryResult
 }

@@ -1,0 +1,15 @@
+enum AttachmentType {
+  IMAGE
+  VIDEO
+  DOCUMENT
+}
+
+type Attachment {
+  url: URL
+  type: AttachmentType
+}
+
+input AttachmentInput {
+  url: URL
+  type: AttachmentType
+}
