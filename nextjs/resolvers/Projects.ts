@@ -1,6 +1,4 @@
-// import { Project, Resolvers } from '../../../types/resolvers';
-
-import { Project, Resolvers } from "../types/resolvers";
+import { Project, Resolvers } from "../types/resolvers.d";
 import { ObjectId } from 'mongodb';
 
 
@@ -18,6 +16,7 @@ export const ProjectResolvers: Resolvers = {
             },
         Project: async (parent, args, context, info) => {
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.id) });
+            if (!project) throw new Error("There is no project with this Id");
             return project as Project;
         }
     },
@@ -29,7 +28,7 @@ export const ProjectResolvers: Resolvers = {
                     love: 0,
                     dislike: 0,
                 },
-                created_date: new Date(),
+                created_at: new Date(),
             }
             const insertedProject = await projectsCollection.insertOne(project);
             return insertedProject.acknowledged ? project : null;
