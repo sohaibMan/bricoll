@@ -30,7 +30,6 @@ type Proposal {
 type Query {
   Proposal(id: ObjectID!): Proposal
   # by the freelancer | client
-  ProposalsByClient(client_id: ObjectID!): [Proposal]
   #todo on the client
   ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
   # on the freelancer

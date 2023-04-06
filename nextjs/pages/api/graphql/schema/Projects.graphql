@@ -44,7 +44,8 @@ type Project {
   reactions: Reactions!
   created_at: Date!
   projectScope: ProjectScopeOutput!
-  AttachmentsURL: [Attachment]
+  attachmentsURL: [Attachment]
+  proposals: [Proposal]
 }
 
 # The "Query" type is special: it lists all of the available queries that

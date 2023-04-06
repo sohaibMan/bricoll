@@ -17,10 +17,6 @@ export const ProposalResolvers: Resolvers = {
                 const proposals = await proposalsCollection.findOne({ _id: new ObjectId(args.id) })
                 return proposals as unknown as Proposal;
             },
-        ProposalsByClient: async (parent, args, context, info) => {
-            const proposals = await proposalsCollection.find({ client_id: new ObjectId(args.client_id) }).toArray();
-            return proposals as unknown as Proposal[];
-        },
         ProposalsByFreelancer: async (parent, args, context, info) => {
             const proposal = await proposalsCollection.findOne({ freelancer_id: new ObjectId(args.freelancer_id) });
             return proposal as unknown as Proposal[];
