@@ -17,14 +17,19 @@ export const ProposalResolvers: Resolvers = {
                 const proposals = await proposalsCollection.findOne({ _id: new ObjectId(args.id) })
                 return proposals as unknown as Proposal;
             },
-        ProposalsClient: async (parent, args, context, info) => {
-            const proposal = await proposalsCollection.find({ client_id: new ObjectId(args.client_id) }).toArray();
-            return proposal as unknown as Proposal[];
+        ProposalsByClient: async (parent, args, context, info) => {
+            const proposals = await proposalsCollection.find({ client_id: new ObjectId(args.client_id) }).toArray();
+            return proposals as unknown as Proposal[];
         },
-        ProposalsFreelancer: async (parent, args, context, info) => {
+        ProposalsByFreelancer: async (parent, args, context, info) => {
             const proposal = await proposalsCollection.findOne({ freelancer_id: new ObjectId(args.freelancer_id) });
             return proposal as unknown as Proposal[];
+        },
+        ProposalsByProject: async (parent, args, context, info) => {
+            const proposals = await proposalsCollection.find({ project_id: new ObjectId(args.project_id) }).toArray();
+            return proposals as unknown as Proposal[];
         }
+
     },
     Mutation: {
         submitProposal: async (parent, args, context, info) => {
@@ -35,6 +40,7 @@ export const ProposalResolvers: Resolvers = {
             // the project with this id doesn't exist
             const proposal: Proposal = {
                 ...args,
+                project_id: new ObjectId(args.project_id),
                 created_at: new Date(),
                 status: Proposal_Status.Approved,
                 updated_at: new Date()
@@ -57,7 +63,10 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            return updateProposal as unknown as Proposal;
+            // check if the proposal exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
+            //return the value (the updated proposal)
+            return updateProposal.value as unknown as Proposal;
         },
         declineProposal: async (parent, args, context, info) => {
             const updateProposal = await proposalsCollection.findOneAndUpdate(
@@ -71,7 +80,10 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            return updateProposal as unknown as Proposal;
+            // check if the proposal exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
+            //return the value (the updated proposal)
+            return updateProposal.value as unknown as Proposal;
 
         },
         withdrawProposal: async (parent, args, context, info) => {
@@ -86,7 +98,10 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            return updateProposal as unknown as Proposal;
+            // check if the proposal exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
+            //return the value (the updated proposal)
+            return updateProposal.value as unknown as Proposal;
 
         },
         acceptProposal: async (parent, args, context, info) => {
@@ -101,7 +116,10 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            return updateProposal as unknown as Proposal;
+            // check if the proposal exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
+            //return the value (the updated proposal)
+            return updateProposal.value as unknown as Proposal;
 
         }
 

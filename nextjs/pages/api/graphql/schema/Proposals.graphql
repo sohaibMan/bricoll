@@ -9,10 +9,10 @@ enum proposal_status {
 }
 # the proposal could be one of the following
 type Proposal {
-  id: ID #auto generated
-  project_id: ID!
-  # freelancer_id: ID!
-  # from session get user_id
+  _id: ObjectID #auto generated
+  project_id: ObjectID!
+  # freelancer_id: ObjectID!
+  #todo from session get user_id
   price: Float! @constraint(min: 1, max: 10000)
   duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
   description: String! @constraint(minLength: 5, maxLength: 1000)
@@ -28,17 +28,19 @@ type Proposal {
 # Cover Letter, Attachments (images +video +files ...)
 
 type Query {
-  Proposal(id: ID!): Proposal
+  Proposal(id: ObjectID!): Proposal
   # by the freelancer | client
-  ProposalsClient(client_id: ID!): [Proposal]
-  # on the client
-  ProposalsFreelancer(freelancer_id: ID!): [Proposal]
+  ProposalsByClient(client_id: ObjectID!): [Proposal]
+  #todo on the client
+  ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
   # on the freelancer
+  ProposalsByProject(project_id: ObjectID!): [Proposal]
+  # on the client(project owner)
 }
 
 type Mutation {
   submitProposal(
-    project_id: ID!
+    project_id: ObjectID!
     price: Float!
     duration: Int!
     description: String!
@@ -47,29 +49,29 @@ type Mutation {
     ackandlodement: Boolean! # the freelancer should accept the terms and conditions
   ): Proposal!
   editProposal(
-    id: ID!
+    id: ObjectID!
     price: Float!
     duration: Int!
     description: String!
   ): Proposal
-  declineProposal(id: ID!): Proposal
+  declineProposal(id: ObjectID!): Proposal
   # by the client
-  withdrawProposal(id: ID!): Proposal
+  withdrawProposal(id: ObjectID!): Proposal
   # by the freelancer
-  acceptProposal(id: ID!): Proposal
+  acceptProposal(id: ObjectID!): Proposal
   # by the client
   # todo
-  # acceptProposal(id: ID!): Proposal
+  # acceptProposal(id: ObjectID!): Proposal
   # # by the freelancer and the client
-  # open_chat_room(id: ID!): Proposal
+  # open_chat_room(id: ObjectID!): Proposal
   # by the freelancer and the client
-  # acceptTerms(id: ID!): Proposal
+  # acceptTerms(id: ObjectID!): Proposal
   #by the freelancer and the client
 }
 
 type Subscription {
-  proposalStatusChanged(id: ID!): Proposal
+  proposalStatusChanged(id: ObjectID!): Proposal
   # when the status of the proposal changed
-  projectGotProposal(id: ID!): Proposal
+  projectGotProposal(id: ObjectID!): Proposal
   # when the project got a new proposal
 }
