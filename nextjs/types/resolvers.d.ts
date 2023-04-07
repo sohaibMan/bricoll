@@ -90,8 +90,8 @@ export type MutationEditProposalArgs = {
 
 
 export type MutationSubmitProposalArgs = {
-  AttachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
   ackandlodement: Scalars['Boolean'];
+  attachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
   cover_letter: Scalars['String'];
   description: Scalars['String'];
   duration: Scalars['Int'];
@@ -133,8 +133,8 @@ export type ProjectScopeOutput = {
 
 export type Proposal = {
   __typename?: 'Proposal';
-  AttachmentsURL?: Maybe<Array<Maybe<Attachment>>>;
   _id?: Maybe<Scalars['ObjectID']>;
+  attachmentsURL?: Maybe<Array<Maybe<Attachment>>>;
   cover_letter: Scalars['String'];
   created_at: Scalars['Date'];
   description: Scalars['String'];
@@ -408,8 +408,8 @@ export type ProjectScopeOutputResolvers<ContextType = any, ParentType extends Re
 }>;
 
 export type ProposalResolvers<ContextType = any, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
-  AttachmentsURL?: Resolver<Maybe<Array<Maybe<ResolversTypes['Attachment']>>>, ParentType, ContextType>;
   _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
+  attachmentsURL?: Resolver<Maybe<Array<Maybe<ResolversTypes['Attachment']>>>, ParentType, ContextType>;
   cover_letter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

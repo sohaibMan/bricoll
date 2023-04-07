@@ -21,7 +21,7 @@ type Proposal {
   # current time
   updated_at: Date!
   cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
-  AttachmentsURL: [Attachment]
+  attachmentsURL: [Attachment]
   # the link of urls of the attachments(files, images, video)
 }
 
@@ -30,7 +30,7 @@ type Proposal {
 type Query {
   Proposal(id: ObjectID!): Proposal
   # by the freelancer | client
-  #todo on the client
+  # todo on the client
   ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
   # on the freelancer
   ProposalsByProject(project_id: ObjectID!): [Proposal]
@@ -44,7 +44,7 @@ type Mutation {
     duration: Int!
     description: String!
     cover_letter: String!
-    AttachmentsURL: [AttachmentInput]
+    attachmentsURL: [AttachmentInput]
     ackandlodement: Boolean! # the freelancer should accept the terms and conditions
   ): Proposal!
   editProposal(
