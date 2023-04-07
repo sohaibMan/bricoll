@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["ackandlodement", "bricoll", "Upwork"]
+  "cSpell.words": ["ackandlodement", "bricoll", "Upwork"],
+  "githubPullRequests.ignoredPullRequestBranches": ["master"]
 }

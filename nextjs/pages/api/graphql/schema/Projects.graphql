@@ -42,9 +42,10 @@ type Project {
   price: Float! @constraint(min: 0)
   skills: [String!]! @constraint(maxItems: 15)
   reactions: Reactions!
-  created_date: Date!
+  created_at: Date!
   projectScope: ProjectScopeOutput!
-  AttachmentsURL: [Attachment]
+  attachmentsURL: [Attachment]
+  proposals: [Proposal]
 }
 
 # The "Query" type is special: it lists all of the available queries that

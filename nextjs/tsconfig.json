@@ -21,7 +21,8 @@
     "schemas/types/next-auth.d.ts",
     "schemas/types/resolvers.d.ts",
     "**/*.tsx",
-    "**/*.ts"
+    "**/*.ts",
+    "resolvers/test.js"
   ],
   "exclude": ["node_modules"]
 }

@@ -3,13 +3,8 @@ import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import path from 'node:path'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
-import { makeExecutableSchema } from '@graphql-tools/schema';
-import { constraintDirectiveTypeDefs } from 'graphql-constraint-directive/apollo4';
-import { constraintDirective } from 'graphql-constraint-directive';
-
 import { ProjectResolvers } from '../../../resolvers/Projects';
 import { ProposalResolvers } from '../../../resolvers/Proposals';
-
 
 
 // path to this folders
@@ -22,13 +17,6 @@ const schema = loadSchemaSync(schemaPath, {
   loaders: [new GraphQLFileLoader()],
 });
 
-// create schema
-// let schema = makeExecutableSchema({
-//   typeDefs: [constraintDirectiveTypeDefs, loadSchema],
-// });
-// add constraint directive
-// schema = constraintDirective()(schema);
-
 
 // create apollo server instance
 const server = new ApolloServer({
@@ -36,7 +24,6 @@ const server = new ApolloServer({
   resolvers: [ProjectResolvers, ProposalResolvers]
 
 });
-
 
 
 export default startServerAndCreateNextHandler(server);
