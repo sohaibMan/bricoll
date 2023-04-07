@@ -47,6 +47,12 @@ export type Mutation = {
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   submitProposal: Proposal;
+  generateToken?: Maybe<Scalars['String']>;
+  open_chat_room?: Maybe<Proposal>;
+  sendingToken?: Maybe<Scalars['Boolean']>;
+  signup?: Maybe<User>;
+  submitProposal?: Maybe<Proposal>;
+  updateProposal?: Maybe<Proposal>;
   withdrawProposal?: Maybe<Proposal>;
 };
 
@@ -109,6 +115,29 @@ export type MutationEditProposalArgs = {
   duration: Scalars['Int'];
   id: Scalars['ObjectID'];
   price: Scalars['Float'];
+
+}
+
+export type MutationGenerateTokenArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationOpen_Chat_RoomArgs = {
+  id: Scalars['ID'];
+};
+
+
+export type MutationSendingTokenArgs = {
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+
+export type MutationSignupArgs = {
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+  role: UserRole;
 };
 
 
@@ -278,6 +307,18 @@ export type FreelancerProfile = {
   status?: Maybe<Status>;
 };
 
+export type User = {
+  __typename?: 'User';
+  address?: Maybe<Scalars['String']>;
+  email: Scalars['String'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+  passwordConfirm?: Maybe<Scalars['String']>;
+  phone?: Maybe<Scalars['String']>;
+  role: UserRole;
+  userId?: Maybe<Scalars['ID']>;
+};
+
 export enum Level_Of_Expertise {
   Advanced = 'ADVANCED',
   Beginner = 'BEGINNER',
@@ -390,6 +431,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Attachment: ResolverTypeWrapper<Attachment>;
@@ -495,6 +537,12 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id' | 'projectScope'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
+  generateToken?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType, Partial<MutationGenerateTokenArgs>>;
+  open_chat_room?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationOpen_Chat_RoomArgs, 'id'>>;
+  sendingToken?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationSendingTokenArgs>>;
+  signup?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<MutationSignupArgs, 'email' | 'name' | 'password' | 'role'>>;
+  submitProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
+  updateProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationUpdateProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   withdrawProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationWithdrawProposalArgs, 'id'>>;
 }>;
 
@@ -564,11 +612,13 @@ export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+// export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   passwordConfirm?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  passwordConfirm?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
@@ -609,6 +659,7 @@ export type FreelancerProfileResolvers<ContextType = ServerContext, ParentType e
 }>;
 
 export type QueryResultResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['queryResult'] = ResolversParentTypes['queryResult']> = ResolversObject<{
+// export type QueryResultResolvers<ContextType = any, ParentType extends ResolversParentTypes['queryResult'] = ResolversParentTypes['queryResult']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   ackandlodement?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

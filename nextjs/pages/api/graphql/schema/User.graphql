@@ -20,7 +20,6 @@ type User {
   name: String!
   email: String!
   password: String!
-  passwordConfirm: String!
   role: userRole!
   phone: String
   address: String
@@ -88,3 +87,7 @@ type Mutation {
 
 
 
+# type Mutation {
+
+
+# }
