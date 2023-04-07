@@ -1,6 +1,14 @@
 import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
+import CredentialsProvider from "next-auth/providers/credentials"
+import db from "../../../lib/mongodb";
+import bcrypt from 'bcrypt';
+import { User } from "next-auth/jwt";
+import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { clientPromise } from "../../../lib/mongodb";
+// import { User } from "next-auth/jwt";
+// import { User } from "next-auth/jwt";
 // import GithubProvider from "next-auth/providers/github"
 // import TwitterProvider from "next-auth/providers/twitter"
 // import Auth0Provider from "next-auth/providers/auth0"
@@ -10,7 +18,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 export const authOptions: NextAuthOptions = {
-  // https://next-auth.js.org/configuration/providers/oauth
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -20,6 +28,69 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
+    CredentialsProvider({
+      name: 'credentials',
+      credentials: {
+        email: { label: 'email', type: 'text' },
+        password: { label: 'password', type: 'password' }
+      },
+      async authorize(credentials) {
+
+        // const authResponse = await fetch("/users/login", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(credentials),
+        // })
+
+        // if (!authResponse.ok) {
+        //   return null
+        // }
+
+        // const user = await authResponse.json()
+
+        // return user
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error('Invalid credentials');
+        }
+
+        const user = await db.collection("users").findOne({ email: credentials.email }) as unknown as User | null;
+        // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
+
+
+        if (!user || !user?.hashedPassword) {
+          throw new Error('Invalid credentials');
+        }
+
+        const isCorrectPassword = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        );
+
+        if (!isCorrectPassword) {
+          throw new Error('Invalid credentials');
+        }
+
+
+        return user;
+        // return user as Awaitable<User | null>;
+
+        // let u: User;
+        // u.hashedPassword
+        // return new Promise<User>((resolve, reject) => resolve(user as unknown as User));
+        // return user as unknown as PromiseLike<User | null>;
+        // return user;
+        // const user1 = { id: 1, name: "J Smith", email: "jsmith@example.com" }
+        // return user1;
+        // const user = { id: 1, name: "J Smith", email: "jsmith@example.com" }
+        // if (credentials?.password == "hello123") {
+        //   return user
+        // } else {
+        //   return null;
+        // }
+      }
+    })
     /*
  EmailProvider({
      server: process.env.EMAIL_SERVER,
@@ -66,6 +137,8 @@ Auth0Provider({
       return token
     },
   },
+
+
 
 }
 

@@ -1,12 +1,11 @@
-// import { Project, Resolvers } from '../../../types/resolvers';
-
-import { Project, Resolvers } from "../types/resolvers";
+import { Project, Proposal, Resolvers } from "../types/resolvers.d";
 import { ObjectId } from 'mongodb';
 
 
 
 import db from "../lib/mongodb";
 const projectsCollection = db.collection("projects")
+const proposalsCollection = db.collection("proposals")
 
 export const ProjectResolvers: Resolvers = {
     Query: {
@@ -18,7 +17,14 @@ export const ProjectResolvers: Resolvers = {
             },
         Project: async (parent, args, context, info) => {
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.id) });
+            if (!project) throw new Error("There is no project with this Id");
             return project as Project;
+        }
+    },
+    Project: {
+        proposals: async (parent) => {
+            const proposals = await proposalsCollection.find({ project_id: new ObjectId(parent._id) }).toArray();
+            return proposals as unknown as Proposal[];
         }
     },
     Mutation: {
@@ -29,7 +35,7 @@ export const ProjectResolvers: Resolvers = {
                     love: 0,
                     dislike: 0,
                 },
-                created_date: new Date(),
+                created_at: new Date(),
             }
             const insertedProject = await projectsCollection.insertOne(project);
             return insertedProject.acknowledged ? project : null;
