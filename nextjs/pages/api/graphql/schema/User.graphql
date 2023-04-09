@@ -15,6 +15,7 @@ type User {
 }
 
 
+
 input userData {
   name: String!
   email: String!
