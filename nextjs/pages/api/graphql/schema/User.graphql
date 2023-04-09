@@ -1,0 +1,28 @@
+enum userRole {
+  Guest
+  Client
+  Freelancer
+}
+
+type User {
+  userId: ID
+  name: String!
+  email: String!
+  password: String!
+  role: userRole!
+  phone: String
+  address: String
+}
+
+
+input userData {
+  name: String!
+  email: String!
+  password: String!
+  role: userRole!
+}
+
+type Mutation {
+
+
+}
