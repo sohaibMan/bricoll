@@ -1,3 +1,14 @@
+enum status {
+  Online
+  Invisible
+}
+
+enum experience {
+  BEGINNER
+  INTERMEDIATE
+  EXPERT
+}
+
 enum userRole {
   Guest
   Client
@@ -9,11 +20,11 @@ type User {
   name: String!
   email: String!
   password: String!
+  passwordConfirm: String!
   role: userRole!
   phone: String
   address: String
 }
-
 
 
 input userData {
@@ -22,5 +33,58 @@ input userData {
   password: String!
   role: userRole!
 }
+
+type companyDetails {
+  _id: ID
+  name: String!
+  website: String!
+  industry: String
+  size: Int!
+  tagline: String
+  description: String
+}
+
+type clientProfile {
+  _id: ID
+  image: String
+  contact: User
+  status: status
+  company: companyDetails!
+}
+
+type freelancerProfile {
+  _id: ID
+  contact: User!
+  image: String
+  status: status
+  skills: [String!]
+  experienceLevel: experience!
+  categories: [String!]!
+  externalAccount: String
+  specializedProfile: [String]
+}
+
+
+type Query {
+  getProfile(_id: ID): User
+}
+
+type Mutation {
+  editProfile(
+    name: String
+    email: String
+    image: String
+    status: status
+  ) : Boolean
+  editPassword(
+    oldPassword: String
+    newPassword: String
+  ) : Boolean
+  deleteAccount(_id: ID): Boolean
+}
+
+
+
+
 
 

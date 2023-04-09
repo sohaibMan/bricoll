@@ -39,7 +39,10 @@ export type Mutation = {
   acceptProposal?: Maybe<Proposal>;
   addProject?: Maybe<Project>;
   declineProposal?: Maybe<Proposal>;
+  deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
+  editPassword?: Maybe<Scalars['Boolean']>;
+  editProfile?: Maybe<Scalars['Boolean']>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   submitProposal: Proposal;
@@ -66,8 +69,27 @@ export type MutationDeclineProposalArgs = {
 };
 
 
+export type MutationDeleteAccountArgs = {
+  _id?: InputMaybe<Scalars['ID']>;
+};
+
+
 export type MutationDeleteProjectArgs = {
   id: Scalars['ID'];
+};
+
+
+export type MutationEditPasswordArgs = {
+  newPassword?: InputMaybe<Scalars['String']>;
+  oldPassword?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationEditProfileArgs = {
+  email?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<Status>;
 };
 
 
@@ -152,6 +174,7 @@ export type Query = {
   Proposal?: Maybe<Proposal>;
   ProposalsByFreelancer?: Maybe<Array<Maybe<Proposal>>>;
   ProposalsByProject?: Maybe<Array<Maybe<Proposal>>>;
+  getProfile?: Maybe<User>;
 };
 
 
@@ -172,6 +195,11 @@ export type QueryProposalsByFreelancerArgs = {
 
 export type QueryProposalsByProjectArgs = {
   project_id: Scalars['ObjectID'];
+};
+
+
+export type QueryGetProfileArgs = {
+  _id?: InputMaybe<Scalars['ID']>;
 };
 
 export type Reactions = {
@@ -202,9 +230,49 @@ export type User = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
+  passwordConfirm: Scalars['String'];
   phone?: Maybe<Scalars['String']>;
   role: UserRole;
   userId?: Maybe<Scalars['ID']>;
+};
+
+export type ClientProfile = {
+  __typename?: 'clientProfile';
+  _id?: Maybe<Scalars['ID']>;
+  company: CompanyDetails;
+  contact?: Maybe<User>;
+  image?: Maybe<Scalars['String']>;
+  status?: Maybe<Status>;
+};
+
+export type CompanyDetails = {
+  __typename?: 'companyDetails';
+  _id?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
+  industry?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  size: Scalars['Int'];
+  tagline?: Maybe<Scalars['String']>;
+  website: Scalars['String'];
+};
+
+export enum Experience {
+  Beginner = 'BEGINNER',
+  Expert = 'EXPERT',
+  Intermediate = 'INTERMEDIATE'
+}
+
+export type FreelancerProfile = {
+  __typename?: 'freelancerProfile';
+  _id?: Maybe<Scalars['ID']>;
+  categories: Array<Scalars['String']>;
+  contact: User;
+  experienceLevel: Experience;
+  externalAccount?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  skills?: Maybe<Array<Scalars['String']>>;
+  specializedProfile?: Maybe<Array<Maybe<Scalars['String']>>>;
+  status?: Maybe<Status>;
 };
 
 export enum Level_Of_Expertise {
@@ -230,6 +298,11 @@ export enum Size_Of_Project {
   Large = 'LARGE',
   Medium = 'MEDIUM',
   Small = 'SMALL'
+}
+
+export enum Status {
+  Invisible = 'Invisible',
+  Online = 'Online'
 }
 
 export type UserData = {
@@ -337,10 +410,15 @@ export type ResolversTypes = ResolversObject<{
   Subscription: ResolverTypeWrapper<{}>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
+  clientProfile: ResolverTypeWrapper<ClientProfile>;
+  companyDetails: ResolverTypeWrapper<CompanyDetails>;
+  experience: Experience;
+  freelancerProfile: ResolverTypeWrapper<FreelancerProfile>;
   level_of_expertise: Level_Of_Expertise;
   proposal_status: Proposal_Status;
   queryResult: ResolverTypeWrapper<QueryResult>;
   size_of_project: Size_Of_Project;
+  status: Status;
   userData: UserData;
   userRole: UserRole;
 }>;
@@ -366,6 +444,9 @@ export type ResolversParentTypes = ResolversObject<{
   Subscription: {};
   URL: Scalars['URL'];
   User: User;
+  clientProfile: ClientProfile;
+  companyDetails: CompanyDetails;
+  freelancerProfile: FreelancerProfile;
   queryResult: QueryResult;
   userData: UserData;
 }>;
@@ -405,7 +486,10 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
   addProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationAddProjectArgs, 'description' | 'price' | 'projectScope' | 'skills' | 'title'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
+  deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationDeleteAccountArgs>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
+  editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditPasswordArgs>>;
+  editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id' | 'projectScope'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
@@ -457,6 +541,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
   ProposalsByFreelancer?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType, RequireFields<QueryProposalsByFreelancerArgs, 'freelancer_id'>>;
   ProposalsByProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType, RequireFields<QueryProposalsByProjectArgs, 'project_id'>>;
+  getProfile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryGetProfileArgs>>;
 }>;
 
 export type ReactionsResolvers<ContextType = any, ParentType extends ResolversParentTypes['Reactions'] = ResolversParentTypes['Reactions']> = ResolversObject<{
@@ -479,9 +564,43 @@ export type UserResolvers<ContextType = any, ParentType extends ResolversParentT
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  passwordConfirm?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ClientProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['clientProfile'] = ResolversParentTypes['clientProfile']> = ResolversObject<{
+  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  company?: Resolver<ResolversTypes['companyDetails'], ParentType, ContextType>;
+  contact?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['status']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type CompanyDetailsResolvers<ContextType = any, ParentType extends ResolversParentTypes['companyDetails'] = ResolversParentTypes['companyDetails']> = ResolversObject<{
+  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  industry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  size?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  tagline?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type FreelancerProfileResolvers<ContextType = any, ParentType extends ResolversParentTypes['freelancerProfile'] = ResolversParentTypes['freelancerProfile']> = ResolversObject<{
+  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  categories?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  contact?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  experienceLevel?: Resolver<ResolversTypes['experience'], ParentType, ContextType>;
+  externalAccount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  specializedProfile?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['status']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -504,6 +623,9 @@ export type Resolvers<ContextType = any> = ResolversObject<{
   Subscription?: SubscriptionResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
+  clientProfile?: ClientProfileResolvers<ContextType>;
+  companyDetails?: CompanyDetailsResolvers<ContextType>;
+  freelancerProfile?: FreelancerProfileResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
 }>;
 
