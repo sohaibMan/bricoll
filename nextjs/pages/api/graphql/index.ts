@@ -5,8 +5,10 @@ import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { ProjectResolvers } from '../../../resolvers/Projects';
 import { ProposalResolvers } from '../../../resolvers/Proposals';
-
-
+import { getToken } from 'next-auth/jwt';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '../auth/[...nextauth]';
+import { ServerContext } from '../../../types/server-context';
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql")
 //path to schema from this folder
@@ -18,13 +20,26 @@ const schema = loadSchemaSync(schemaPath, {
 });
 
 
+// tmp (hardcoded)
+
+
 // create apollo server instance
-const server = new ApolloServer({
+const server = new ApolloServer<ServerContext>({
   typeDefs: schema,
-  resolvers: [ProjectResolvers, ProposalResolvers]
+  resolvers: [ProjectResolvers, ProposalResolvers],
 
 });
 
 
-export default startServerAndCreateNextHandler(server);
+export default startServerAndCreateNextHandler(server, {
+  context: async (req, res) => {
+    // the users that sign with a provider (google or facebook ) will have a session with this info
+    const session = await getServerSession(req, res, authOptions);
+    if (!session) return { user: null }
+    return { user: { id: session.user.id, userRole: session.user.userRole } };
+
+  },
+
+
+});
 

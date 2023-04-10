@@ -35,7 +35,7 @@ type ProjectScopeOutput {
   size_of_project: size_of_project!
 }
 type Project {
-  #   client_id: ObjectID
+  client_id: ObjectID
   _id: ObjectID
   title: String! @constraint(minLength: 5, maxLength: 100)
   description: String! @constraint(minLength: 5, maxLength: 1000)

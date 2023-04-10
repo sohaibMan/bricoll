@@ -1,14 +1,24 @@
 import "next-auth/jwt"
-import User, { DefaultUser } from "next-auth"
+import User, { DefaultSession, DefaultUser } from "next-auth"
 
 // Read more at: https://next-auth.js.org/getting-started/typescript#module-augmentation
 
-declare module "next-auth/jwt" {
+
+declare module "next-auth" {
+
+
   interface JWT {
     /** The user's role. */
-    userRole?: "admin" | "client" | "freelancer"
+    userRole?: "client" | "freelancer"
   }
   interface User extends DefaultUser {
     hashedPassword: string
   }
+  interface Session {
+    user: {
+      id: string
+      userRole: "client" | "freelancer"
+    } & DefaultSession["user"]
+  }
 }
+

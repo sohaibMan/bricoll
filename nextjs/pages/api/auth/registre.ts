@@ -12,6 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         password,
     } = body;
     if (!email || !username || !password) return res.status(400).json({ message: "Missing fields" });
+    // if password is too short
+    // if username is too short
+    // if email already exists
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = await userCollection.insertOne({

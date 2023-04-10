@@ -17,9 +17,7 @@
   },
   "include": [
     "process.d.ts",
-    "schemas/types/next-env.d.ts",
-    "schemas/types/next-auth.d.ts",
-    "schemas/types/resolvers.d.ts",
+    "schemas/types/*.ts",
     "**/*.tsx",
     "**/*.ts",
     "resolvers/test.js"

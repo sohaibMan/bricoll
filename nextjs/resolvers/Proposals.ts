@@ -6,6 +6,7 @@ import { Proposal, Proposal_Status, Resolvers } from "../types/resolvers.d";
 
 
 import db from "../lib/mongodb";
+import { GraphQLError } from 'graphql';
 const proposalsCollection = db.collection("proposals")
 const projectsCollection = db.collection("projects")
 
@@ -32,7 +33,13 @@ export const ProposalResolvers: Resolvers = {
             // check if the project exits
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.project_id) })
 
-            if (!project) throw new Error("The project no longer exists")
+            if (!project) throw new GraphQLError("The project no longer exists",
+                {
+                    extensions: {
+                        code: 'NOTFOUND',
+                        http: { status: 404 },
+                    },
+                });
             // the project with this id doesn't exist
             const proposal: Proposal = {
                 ...args,

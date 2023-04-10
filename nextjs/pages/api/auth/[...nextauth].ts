@@ -4,7 +4,7 @@ import FacebookProvider from "next-auth/providers/facebook"
 import CredentialsProvider from "next-auth/providers/credentials"
 import db from "../../../lib/mongodb";
 import bcrypt from 'bcrypt';
-import { User } from "next-auth/jwt";
+import { User } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { clientPromise } from "../../../lib/mongodb";
 // import { User } from "next-auth/jwt";
@@ -136,6 +136,19 @@ Auth0Provider({
       token.userRole = "client"
       return token
     },
+    async session({ session, user, token }) {
+      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token)
+      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
+      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
+      // to be imported
+      enum userRole {
+        "admin", "client", "freelancer"
+      }
+      // to be in
+      session.user.id = user.id;
+      session.user.userRole = "client"
+      return session;
+    }
   },
 
 
