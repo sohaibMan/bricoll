@@ -35,7 +35,7 @@ type ProjectScopeOutput {
   size_of_project: size_of_project!
 }
 type Project {
-  #   client_id: ObjectID
+  client_id: ObjectID
   _id: ObjectID
   title: String! @constraint(minLength: 5, maxLength: 100)
   description: String! @constraint(minLength: 5, maxLength: 1000)
@@ -45,7 +45,7 @@ type Project {
   created_at: Date!
   projectScope: ProjectScopeOutput!
   attachmentsURL: [Attachment]
-  proposals: [Proposal]
+  proposals: [Proposal] # proposals for this project
 }
 
 # The "Query" type is special: it lists all of the available queries that

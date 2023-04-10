@@ -43,6 +43,17 @@ export default async function handler(
     }
 
     // ? Hashing the password
+    const userCollection = db.collection("users")
+    const body = await req.body;
+    const {
+        email,
+        username,
+        password,
+    } = body;
+    if (!email || !username || !password) return res.status(400).json({ message: "Missing fields" });
+    // if password is too short
+    // if username is too short
+    // if email already exists
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // ? Inserting the user information into DB
