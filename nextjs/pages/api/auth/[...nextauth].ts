@@ -58,7 +58,6 @@ export const authOptions: NextAuthOptions = {
         const user = await db.collection("users").findOne({ email: credentials.email }) as unknown as User | null;
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
 
-
         if (!user || !user?.hashedPassword) {
           throw new Error('Invalid credentials');
         }

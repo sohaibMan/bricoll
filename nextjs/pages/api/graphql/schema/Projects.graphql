@@ -45,7 +45,7 @@ type Project {
   created_at: Date!
   projectScope: ProjectScopeOutput!
   attachmentsURL: [Attachment]
-  proposals: [Proposal]
+  proposals: [Proposal] # proposals for this project
 }
 
 # The "Query" type is special: it lists all of the available queries that

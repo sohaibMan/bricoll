@@ -14,23 +14,32 @@ export const ProposalResolvers: Resolvers = {
     Query: {
         Proposal:
             async (parent, args, context, info) => {
+                //? the client have access related to him project
+                //? the freelance have access only to his proposal.. 
                 // to add scrolling pagination 
                 const proposals = await proposalsCollection.findOne({ _id: new ObjectId(args.id) })
                 return proposals as unknown as Proposal;
             },
-        ProposalsByFreelancer: async (parent, args, context, info) => {
-            const proposal = await proposalsCollection.findOne({ freelancer_id: new ObjectId(args.freelancer_id) });
-            return proposal as unknown as Proposal[];
-        },
-        ProposalsByProject: async (parent, args, context, info) => {
-            const proposals = await proposalsCollection.find({ project_id: new ObjectId(args.project_id) }).toArray();
-            return proposals as unknown as Proposal[];
-        }
+        // ProposalsByFreelancer: async (parent, args, context, info) => {
+        //     const proposal = await proposalsCollection.findOne({ freelancer_id: new ObjectId(args.freelancer_id) });
+        //     return proposal as unknown as Proposal[];
+        // },
+        // ProposalsByProject: async (parent, args, context, info) => {
+        //     const proposals = await proposalsCollection.find({ project_id: new ObjectId(args.project_id) }).toArray();
+        //     return proposals as unknown as Proposal[];
+        // }
 
     },
     Mutation: {
         submitProposal: async (parent, args, context, info) => {
             // check if the project exits
+            if (!context.user) throw new GraphQLError("You are unauthorized",
+                {
+                    extensions: {
+                        code: 'unauthorized',
+                        http: { status: 401 },
+                    },
+                });
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.project_id) })
 
             if (!project) throw new GraphQLError("The project no longer exists",
@@ -43,6 +52,7 @@ export const ProposalResolvers: Resolvers = {
             // the project with this id doesn't exist
             const proposal: Proposal = {
                 ...args,
+                freelancer_id: new ObjectId(context.user.id),
                 project_id: new ObjectId(args.project_id),
                 created_at: new Date(),
                 status: Proposal_Status.Approved,

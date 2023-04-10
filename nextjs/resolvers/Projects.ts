@@ -14,10 +14,12 @@ export const ProjectResolvers: Resolvers = {
         Projects:
             async (parent, args, context, info) => {
                 // to add scrolling pagination 
+                // ? public 
                 const projects = await projectsCollection.aggregate([{ $sample: { size: 20 } }]).toArray()
                 return projects as Project[];
             },
         Project: async (parent, args, context, info) => {
+            // ? private 
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.id) });
             if (!project) throw new GraphQLError("There is no project with this Id",
                 {
@@ -39,7 +41,8 @@ export const ProjectResolvers: Resolvers = {
     },
     Mutation: {
         addProject: async (parent, args, context, info) => {
-            if (!context.user) throw new GraphQLError("There is no project with this Id",
+            // ? private 
+            if (!context.user) throw new GraphQLError("You are unauthorized",
                 {
                     extensions: {
                         code: 'unauthorized',
@@ -60,9 +63,16 @@ export const ProjectResolvers: Resolvers = {
             return insertedProject.acknowledged ? project : null;
         },
         editProject: async (parent, args, context: ServerContext, info) => {
-
+            // private 
+            if (!context.user) throw new GraphQLError("You are unauthorized",
+                {
+                    extensions: {
+                        code: 'unauthorized',
+                        http: { status: 401 },
+                    },
+                });
             const updateProject = await projectsCollection.findOneAndUpdate(
-                { _id: new ObjectId(args.id) },
+                { _id: new ObjectId(args.id), client_id: new ObjectId(context.user.id) },
                 {
                     $set: {
                         ...args
@@ -76,8 +86,16 @@ export const ProjectResolvers: Resolvers = {
         },
         deleteProject: async (parent, args, context, info) => {
             // todo ;add a check if the user is the owner of the project
+            //todo : check is the project active ...
+            if (!context.user) throw new GraphQLError("You are unauthorized",
+                {
+                    extensions: {
+                        code: 'unauthorized',
+                        http: { status: 401 },
+                    },
+                });
 
-            const deleteProject = await projectsCollection.deleteOne({ _id: new ObjectId(args.id) })
+            const deleteProject = await projectsCollection.deleteOne({ _id: new ObjectId(args.id), client_id: new ObjectId(context.user.id) })
             return {
                 ackandlodement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
                 _id: args.id
