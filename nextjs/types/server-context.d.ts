@@ -1,7 +1,9 @@
+import { UserRole } from "./resolvers.d";
+
 //! you will get this fields in the context value 
 interface UserInterface {
     id: string;
-    userRole: "client" | "freelancer";
+    userRole: UserRole;
 }
 export type ServerContext = {
     // we'd define the properties a user should have

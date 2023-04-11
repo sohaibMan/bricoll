@@ -1,13 +1,3 @@
-
-import { ApolloServer } from "@apollo/server";
-import { startServerAndCreateNextHandler } from "@as-integrations/next";
-import path from "node:path";
-import { loadSchemaSync } from "@graphql-tools/load";
-import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
-import { ProjectResolvers } from "../../../resolvers/Projects";
-import { ProposalResolvers } from "../../../resolvers/Proposals";
-
-
 import { ApolloServer } from '@apollo/server';
 import { startServerAndCreateNextHandler } from '@as-integrations/next';
 import path from 'node:path'
@@ -19,6 +9,7 @@ import { getToken } from 'next-auth/jwt';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../auth/[...nextauth]';
 import { ServerContext } from '../../../types/server-context';
+import { UserRole } from '../../../types/resolvers';
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -42,10 +33,6 @@ const server = new ApolloServer<ServerContext>({
 
 });
 
-export default startServerAndCreateNextHandler(server);
-
-
-});
 
 
 export default startServerAndCreateNextHandler(server, {

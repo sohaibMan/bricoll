@@ -6,6 +6,7 @@ import db from "../../../lib/mongodb";
 import bcrypt from 'bcrypt';
 import { User } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
+import { UserRole } from "../../../types/resolvers.d";
 import { clientPromise } from "../../../lib/mongodb";
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
@@ -140,12 +141,10 @@ Auth0Provider({
       console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
       console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
       // to be imported
-      enum userRole {
-        "admin", "client", "freelancer"
-      }
+
       // to be in
       session.user.id = user.id;
-      session.user.userRole = "client"
+      session.user.userRole = UserRole.Client;
       return session;
     }
   },

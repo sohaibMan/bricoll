@@ -1,7 +1,6 @@
 import { User, Resolvers } from "../types/resolvers";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 // import { getToken } from "next-auth/jwt";
 
 import db from "../lib/mongodb";
@@ -29,7 +28,7 @@ export const UserResolvers: Resolvers = {
 
       // ? Hashing the password before inserting the user to database
       // // const hashPassword = await bcrypt.hash(args.password, 10);
-      
+
       let hashPassword = await bcrypt.hash(args.password, 10);
 
 
