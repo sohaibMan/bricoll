@@ -1,10 +1,10 @@
-import { User, Resolvers } from "../types/resolvers";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 // import { getToken } from "next-auth/jwt";
 
 import db from "../lib/mongodb";
 import { stringify } from "querystring";
+import { Resolvers, User } from "../types/resolvers.d";
 const userCollection = db.collection("users");
 
 const saltRounds: number = 10;

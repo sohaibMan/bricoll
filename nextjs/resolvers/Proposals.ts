@@ -2,11 +2,10 @@
 
 import { ObjectId } from 'mongodb';
 import { Proposal, Proposal_Status, Resolvers } from "../types/resolvers.d";
-
-
-
 import db from "../lib/mongodb";
 import { GraphQLError } from 'graphql';
+import { freelancerMiddleware } from './resolversHelpersFunctions/freelancerMiddleware';
+import { clientMiddleware } from './resolversHelpersFunctions/clientMiddleware';
 const proposalsCollection = db.collection("proposals")
 const projectsCollection = db.collection("projects")
 
@@ -33,13 +32,8 @@ export const ProposalResolvers: Resolvers = {
     Mutation: {
         submitProposal: async (parent, args, context, info) => {
             // check if the project exits
-            if (!context.user) throw new GraphQLError("You are unauthorized",
-                {
-                    extensions: {
-                        code: 'unauthorized',
-                        http: { status: 401 },
-                    },
-                });
+            freelancerMiddleware(context);
+
             const project = await projectsCollection.findOne({ _id: new ObjectId(args.project_id) })
 
             if (!project) throw new GraphQLError("The project no longer exists",
@@ -52,6 +46,7 @@ export const ProposalResolvers: Resolvers = {
             // the project with this id doesn't exist
             const proposal: Proposal = {
                 ...args,
+                // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
                 project_id: new ObjectId(args.project_id),
                 created_at: new Date(),
@@ -65,8 +60,12 @@ export const ProposalResolvers: Resolvers = {
             return proposal;
         },
         editProposal: async (parent, args, context, info) => {
+            // only the freelancer can edit his proposal
+            freelancerMiddleware(context);//=> check if the user is authenticated as freelancer (->stop the execution with an error if not authenticated as freelancer)
+            // the context is not null here
             const updateProposal = await proposalsCollection.findOneAndUpdate(
-                { _id: new ObjectId(args.id) },
+                // @ts-ignore
+                { _id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user.id) },
                 {
                     $set: {
                         ...args
@@ -82,8 +81,21 @@ export const ProposalResolvers: Resolvers = {
             return updateProposal.value as unknown as Proposal;
         },
         declineProposal: async (parent, args, context, info) => {
+            // only the client can decline a proposal
+            clientMiddleware(context);
+            // the client can decline just the proposal related to his project
+            // @ts-ignore
+            const project = await projectsCollection.findOne({ client_id: new ObjectId(context.user.id) })
+            if (!project) throw new GraphQLError("The project no longer exists",
+                {
+                    extensions: {
+                        code: 'NOTFOUND',
+                        http: { status: 404 },
+                    },
+                });
+
             const updateProposal = await proposalsCollection.findOneAndUpdate(
-                { _id: new ObjectId(args.id) },
+                { _id: new ObjectId(args.id), project_id: new ObjectId(project._id) },
                 {
                     $set: {
                         "status": Proposal_Status.Declined
@@ -100,8 +112,12 @@ export const ProposalResolvers: Resolvers = {
 
         },
         withdrawProposal: async (parent, args, context, info) => {
+            // only the freelancer can withdraw his proposal
+            freelancerMiddleware(context);
+            // the freelancer can withdraw just his proposal
             const updateProposal = await proposalsCollection.findOneAndUpdate(
-                { _id: new ObjectId(args.id) },
+                // @ts-ignore
+                { _id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user.id) },
                 {
                     $set: {
                         "status": Proposal_Status.Canceled
@@ -118,6 +134,19 @@ export const ProposalResolvers: Resolvers = {
 
         },
         acceptProposal: async (parent, args, context, info) => {
+            // only the client can accept a proposal
+            clientMiddleware(context);
+            // the client can accept just the proposal related to his project
+            // @ts-ignore
+            const project = await projectsCollection.findOne({ client_id: new ObjectId(context.user.id) })
+            if (!project) throw new GraphQLError("The project no longer exists",
+                {
+                    extensions: {
+                        code: 'NOTFOUND',
+                        http: { status: 404 },
+                    },
+                });
+
             const updateProposal = await proposalsCollection.findOneAndUpdate(
                 { _id: new ObjectId(args.id) },
                 {

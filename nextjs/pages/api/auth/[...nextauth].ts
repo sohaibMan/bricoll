@@ -137,9 +137,9 @@ Auth0Provider({
       return token
     },
     async session({ session, user, token }) {
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token)
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
+      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token)
+      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
+      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
       // to be imported
 
       // to be in

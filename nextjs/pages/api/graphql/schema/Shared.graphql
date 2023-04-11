@@ -1,0 +1,5 @@
+enum level_of_expertise {
+  BEGINNER
+  INTERMEDIATE
+  ADVANCED
+}

@@ -259,20 +259,15 @@ export type CompanyDetails = {
   website: Scalars['String'];
 };
 
-export enum Experience {
-  Beginner = 'BEGINNER',
-  Expert = 'EXPERT',
-  Intermediate = 'INTERMEDIATE'
-}
-
 export type FreelancerProfile = {
   __typename?: 'freelancerProfile';
   _id?: Maybe<Scalars['ID']>;
   categories: Array<Scalars['String']>;
   contact: User;
-  experienceLevel: Experience;
+  experienceLevel: Level_Of_Expertise;
   externalAccount?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
+  proposals?: Maybe<Array<Maybe<Proposal>>>;
   skills?: Maybe<Array<Scalars['String']>>;
   specializedProfile?: Maybe<Array<Maybe<Scalars['String']>>>;
   status?: Maybe<Status>;
@@ -414,7 +409,6 @@ export type ResolversTypes = ResolversObject<{
   User: ResolverTypeWrapper<User>;
   clientProfile: ResolverTypeWrapper<ClientProfile>;
   companyDetails: ResolverTypeWrapper<CompanyDetails>;
-  experience: Experience;
   freelancerProfile: ResolverTypeWrapper<FreelancerProfile>;
   level_of_expertise: Level_Of_Expertise;
   proposal_status: Proposal_Status;
@@ -599,9 +593,10 @@ export type FreelancerProfileResolvers<ContextType = ServerContext, ParentType e
   _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
   categories?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   contact?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  experienceLevel?: Resolver<ResolversTypes['experience'], ParentType, ContextType>;
+  experienceLevel?: Resolver<ResolversTypes['level_of_expertise'], ParentType, ContextType>;
   externalAccount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
   skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   specializedProfile?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['status']>, ParentType, ContextType>;
