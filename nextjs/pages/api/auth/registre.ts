@@ -16,7 +16,7 @@ export default async function handler(
 
     const userCollection = db.collection("users");
 
-    const userData: User = await req.body;
+    const userData: User = req.body;
     const { email, name, password, passwordConfirm, role } = userData;
 
     // ? Verifying the incoming data from the user
