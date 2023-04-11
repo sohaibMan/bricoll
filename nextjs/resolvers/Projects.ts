@@ -55,11 +55,12 @@ export const ProjectResolvers: Resolvers = {
                     dislike: 0,
                 },
                 created_at: new Date(),
+                category: args.category
             }
             const insertedProject = await projectsCollection.insertOne(project);
             return insertedProject.acknowledged ? project : null;
         },
-        editProject: async (parent, args, context: ServerContext, info) => {
+        editProject: async (parent, args, context, info) => {
             // private 
             // the owner of the project can edit it
             clientMiddleware(context);
@@ -84,6 +85,10 @@ export const ProjectResolvers: Resolvers = {
             // before deleting the project we should delete all the proposals related to it 
             // private
             clientMiddleware(context);
+            // if there is at least approved proposal you can't delete a project
+            const proposals = await proposalsCollection.findOne({ project_id: new ObjectId(args.id), status: "approved" })
+            if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
+
             // @ts-expect-error
             const deleteProject = await projectsCollection.deleteOne({ _id: new ObjectId(args.id), client_id: new ObjectId(context.user.id) })
             return {
