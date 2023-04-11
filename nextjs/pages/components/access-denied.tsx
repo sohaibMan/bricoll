@@ -1,4 +1,6 @@
 import { signIn } from "next-auth/react"
+import {getSession } from "next-auth/react";
+
 
 export default function AccessDenied() {
   return (

@@ -14,6 +14,7 @@ declare module "next-auth" {
   }
   interface User extends DefaultUser {
     hashedPassword: string
+    userRole: UserRole
   }
   interface Session {
     user: {

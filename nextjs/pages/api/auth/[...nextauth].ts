@@ -1,13 +1,15 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
-import CredentialsProvider from "next-auth/providers/credentials"
+import NextAuth, { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
 import db from "../../../lib/mongodb";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 import { User } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers.d";
 import { clientPromise } from "../../../lib/mongodb";
+import { JWT } from "next-auth/jwt";
+
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
 // import GithubProvider from "next-auth/providers/github"
@@ -20,6 +22,13 @@ import { clientPromise } from "../../../lib/mongodb";
 // https://next-auth.js.org/configuration/options
 export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
+
+  // // enabe JWT
+  session: {
+    strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_ID,
@@ -29,14 +38,14 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.FACEBOOK_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
-    CredentialsProvider({
-      name: 'credentials',
-      credentials: {
-        email: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' }
-      },
-      async authorize(credentials) {
 
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
+      },
+      async authorize(credentials, req) {
         // const authResponse = await fetch("/users/login", {
         //   method: "POST",
         //   headers: {
@@ -50,17 +59,23 @@ export const authOptions: NextAuthOptions = {
         // }
 
         // const user = await authResponse.json()
+        // console.log(credentials);
 
         // return user
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
-        const user = await db.collection("users").findOne({ email: credentials.email }) as unknown as User | null;
+        const user = (await db
+          .collection("users")
+          .findOne({ email: credentials.email })) as unknown as User | null;
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
+        // console.log(user);
+
+        // TODO : We have to validate the email using a third-party library like validator.js
 
         if (!user || !user?.hashedPassword) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         const isCorrectPassword = await bcrypt.compare(
@@ -69,9 +84,18 @@ export const authOptions: NextAuthOptions = {
         );
 
         if (!isCorrectPassword) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
+        // TODO : generating the token using headers authorization
+        // const token = jwt.sign({ id }, process.env.NEXTAUTH_SECRET, {
+        //   expires: new Date(
+        //     Date.now() +  24 * 60 * 60 * 1000
+        //   ),
+        //   httpOnly: true,
+        //   secure: true,
+        // });
+        // console.log(user);
 
         return user;
         // return user as Awaitable<User | null>;
@@ -89,8 +113,8 @@ export const authOptions: NextAuthOptions = {
         // } else {
         //   return null;
         // }
-      }
-    })
+      },
+    }),
     /*
  EmailProvider({
      server: process.env.EMAIL_SERVER,
@@ -131,26 +155,86 @@ Auth0Provider({
   theme: {
     colorScheme: "light",
   },
+  debug: true,
   callbacks: {
-    async jwt({ token }) {
-      token.userRole = "client"
-      return token
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   const isAllowedToSignIn = true;
+    //   if (isAllowedToSignIn) {
+    //     return true;
+    //   } else {
+    //     // Return false to display a default error message
+    //     return false;
+    //     // Or you can return a URL to redirect to:
+    //     // return '/unauthorized'
+    //   }
+    // },
+    // async redirect({ url, baseUrl }) {
+    //   // Allows relative callback URLs
+    //   if (url.startsWith("/")) return `${baseUrl}${url}`
+    //   // Allows callback URLs on the same origin
+    //   else if (new URL(url).origin === baseUrl) return url
+    //   return baseUrl
+    // },
+    
+    // async jwt({ token }) {
+    //   token.userRole = "client"
+    //   return token
+    // },
+    async jwt({ token, user, profile }) {
+      // Persist the OAuth access_token and or the user id to the token right after signin
+      // console.log(user, token, profile);
+
+      // token.accessToken = user.access_token;
+      token.id = user.id;
+      // token.email = user?.email;
+      token.email = user.email;
+      // token.userRole = user.userRole
+      token.userRole = "Client";
+      console.log(token);
+
+      return token;
     },
     async session({ session, user, token }) {
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token)
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
-      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
+      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token);
+      console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user);
+      console.log(
+        "🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:",
+        session
+      );
       // to be imported
-
+      // enum UserRole {
+      //   Guest,
+      //   Client,
+      //   Freelancer
+      // }
       // to be in
       session.user.id = user.id;
       session.user.userRole = UserRole.Client;
+
       return session;
-    }
+    },
   },
+  // jwt: {
+  //   async encode(params: {
+  //     token: JWT;
+  //     secret: string;
+  //     maxAge: number;
+  //   }): Promise<string> {
+  //     // return a custom encoded JWT string
+  //     return new Promise((resolve, reject) =>
+  //       resolve(
+  //         "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+  //       )
+  //     );
+  //   },
+  //   async decode(params: {
+  //     token: string;
+  //     secret: string;
+  //   }): Promise<JWT | null> {
+  //     // return a `JWT` object, or `null` if decoding failed
+  //     return {};
+  //   },
+  // },
+};
 
-
-
-}
-
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

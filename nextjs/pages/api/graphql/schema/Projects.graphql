@@ -43,7 +43,7 @@ type Project {
   skills: [String!]! @constraint(maxItems: 15)
   reactions: Reactions!
   created_at: Date!
-  projectScope: ProjectScopeOutput!
+  projectScope: ProjectScopeOutput
   attachmentsURL: [Attachment]
   proposals: [Proposal] # proposals for this project
 }

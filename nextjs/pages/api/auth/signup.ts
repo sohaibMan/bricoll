@@ -2,8 +2,8 @@ import bcrypt from "bcrypt";
 import { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../lib/mongodb";
 import { getToken } from "next-auth/jwt";
-import { User } from "../../../types/resolvers";
-
+import { User, UserRole } from "../../../types/resolvers";
+import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -14,13 +14,26 @@ export default async function handler(
   try {
     // todos (validate user existence and add infos ...)
 
+    const userRole = getCookie("userRole", { req, res });
+
+    // console.log(userRole);
+
+    // const userRole = getCookie("userRole");
+    // console.log(userRole);
+
+    // if (!userRole) {
+    //   res.redirect(400, "/profileType");
+    // }
+
+    // console.log(userRole);
+
     const userCollection = db.collection("users");
 
     const userData: User = await req.body;
-    const { email, name, password, passwordConfirm, role } = userData;
+    const { email, name, password } = userData;
 
     // ? Verifying the incoming data from the user
-    if (!email || !name || !password || !passwordConfirm || !role) {
+    if (!email || !name || !password) {
       // throw new Error('There are some fields not filling them yet!')
       return res.status(400).json({ message: "Missing fields" });
     }
@@ -37,9 +50,9 @@ export default async function handler(
     // ? Verifying if the password and passwordConfirm are the same
     if (req.body.password !== req.body.passwordConfirm) {
       return res.status(400).json({
-        status: 'failed',
-        message: "The password and passwordConfirm are not the same !"
-      })
+        status: "failed",
+        message: "The password and passwordConfirm are not the same !",
+      });
     }
 
     // ? Hashing the password
@@ -54,13 +67,11 @@ export default async function handler(
       email,
       name,
       hashedPassword,
-      role,
+      userRole,
       created_at: new Date(),
     });
 
-
     // ? Sending the email to verify the account
-
 
     // ? redirecting to the email verification page
 
