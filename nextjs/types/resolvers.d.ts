@@ -35,19 +35,45 @@ export enum AttachmentType {
   Video = 'VIDEO'
 }
 
+export type Contract = {
+  __typename?: 'Contract';
+  _id: Scalars['ObjectID'];
+  client_id: Scalars['ObjectID'];
+  createdAt: Scalars['Date'];
+  duration: Scalars['Int'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  status: Scalars['String'];
+  terms?: Maybe<Array<Maybe<Scalars['String']>>>;
+  updatedAt: Scalars['Date'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  acceptContract?: Maybe<Contract>;
   acceptProposal?: Maybe<Proposal>;
   addProject?: Maybe<Project>;
+  cancelContract?: Maybe<Contract>;
+  createContract?: Maybe<Contract>;
   declineProposal?: Maybe<Proposal>;
   deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
+  dislikeProject?: Maybe<QueryResult>;
   editPassword?: Maybe<Scalars['Boolean']>;
   editProfile?: Maybe<Scalars['Boolean']>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
+  loveProject?: Maybe<QueryResult>;
   submitProposal: Proposal;
+  unDislikeProject?: Maybe<QueryResult>;
+  unLoveProject?: Maybe<QueryResult>;
   withdrawProposal?: Maybe<Proposal>;
+};
+
+
+export type MutationAcceptContractArgs = {
+  _id: Scalars['ObjectID'];
 };
 
 
@@ -65,6 +91,22 @@ export type MutationAddProjectArgs = {
 };
 
 
+export type MutationCancelContractArgs = {
+  _id: Scalars['ObjectID'];
+};
+
+
+export type MutationCreateContractArgs = {
+  client_id: Scalars['ObjectID'];
+  duration: Scalars['Int'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  status: Scalars['String'];
+  terms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
 export type MutationDeclineProposalArgs = {
   id: Scalars['ObjectID'];
 };
@@ -76,7 +118,12 @@ export type MutationDeleteAccountArgs = {
 
 
 export type MutationDeleteProjectArgs = {
-  id: Scalars['ID'];
+  id?: InputMaybe<Scalars['ObjectID']>;
+};
+
+
+export type MutationDislikeProjectArgs = {
+  id?: InputMaybe<Scalars['ObjectID']>;
 };
 
 
@@ -96,7 +143,7 @@ export type MutationEditProfileArgs = {
 
 export type MutationEditProjectArgs = {
   description?: InputMaybe<Scalars['String']>;
-  id: Scalars['ID'];
+  id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
   projectScope: ProjectScopeInput;
   skills?: InputMaybe<Array<Scalars['String']>>;
@@ -112,6 +159,11 @@ export type MutationEditProposalArgs = {
 };
 
 
+export type MutationLoveProjectArgs = {
+  id?: InputMaybe<Scalars['ObjectID']>;
+};
+
+
 export type MutationSubmitProposalArgs = {
   ackandlodement: Scalars['Boolean'];
   attachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
@@ -120,6 +172,16 @@ export type MutationSubmitProposalArgs = {
   duration: Scalars['Int'];
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
+};
+
+
+export type MutationUnDislikeProjectArgs = {
+  id?: InputMaybe<Scalars['ObjectID']>;
+};
+
+
+export type MutationUnLoveProjectArgs = {
+  id?: InputMaybe<Scalars['ObjectID']>;
 };
 
 
@@ -391,6 +453,7 @@ export type ResolversTypes = ResolversObject<{
   AttachmentInput: AttachmentInput;
   AttachmentType: AttachmentType;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
+  Contract: ResolverTypeWrapper<Contract>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -424,6 +487,7 @@ export type ResolversParentTypes = ResolversObject<{
   Attachment: Attachment;
   AttachmentInput: AttachmentInput;
   Boolean: Scalars['Boolean'];
+  Contract: Contract;
   Date: Scalars['Date'];
   Float: Scalars['Float'];
   ID: Scalars['ID'];
@@ -474,21 +538,42 @@ export type AttachmentResolvers<ContextType = ServerContext, ParentType extends 
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  terms?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
   name: 'Date';
 }
 
 export type MutationResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
+  acceptContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationAcceptContractArgs, '_id'>>;
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
   addProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationAddProjectArgs, 'description' | 'price' | 'projectScope' | 'skills' | 'title'>>;
+  cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, '_id'>>;
+  createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'client_id' | 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'status'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationDeleteAccountArgs>>;
-  deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
+  deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDeleteProjectArgs>>;
+  dislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDislikeProjectArgs>>;
   editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditPasswordArgs>>;
   editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id' | 'projectScope'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
+  loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
+  unDislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnDislikeProjectArgs>>;
+  unLoveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnLoveProjectArgs>>;
   withdrawProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationWithdrawProposalArgs, 'id'>>;
 }>;
 
@@ -611,6 +696,7 @@ export type QueryResultResolvers<ContextType = ServerContext, ParentType extends
 
 export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Attachment?: AttachmentResolvers<ContextType>;
+  Contract?: ContractResolvers<ContextType>;
   Date?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   ObjectID?: GraphQLScalarType;

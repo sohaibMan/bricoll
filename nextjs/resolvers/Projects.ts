@@ -4,6 +4,7 @@ import db from "../lib/mongodb";
 import { GraphQLError } from "graphql";
 import { ServerContext } from "../types/server-context";
 import { clientMiddleware } from "./resolversHelpersFunctions/clientMiddleware";
+import { freelancerMiddleware } from "./resolversHelpersFunctions/freelancerMiddleware";
 const projectsCollection = db.collection("projects")
 const proposalsCollection = db.collection("proposals")
 
@@ -89,6 +90,66 @@ export const ProjectResolvers: Resolvers = {
                 ackandlodement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
                 _id: args.id
             }
+        },
+        loveProject: async (parent, args, context, info) => {
+            // private 
+            // only the account of type freelancer can love a project
+            freelancerMiddleware(context);
+            const project = await projectsCollection.updateOne(
+                { _id: new ObjectId(args.id) },
+                {
+                    $inc: {
+                        "reactions.love": 1
+                    }
+                }
+
+            )
+            return { _id: args.id, ackandlodement: project.acknowledged }
+        },
+        dislikeProject: async (parent, args, context, info) => {
+            // private 
+            // only the account of type freelancer can dislike a project
+            freelancerMiddleware(context);
+            const project = await projectsCollection.updateOne(
+                { _id: new ObjectId(args.id) },
+                {
+                    $inc: {
+                        "reactions.dislike": 1
+                    }
+                }
+
+            )
+            return { _id: args.id, ackandlodement: project.acknowledged }
+        },
+        unLoveProject: async (parent, args, context, info) => {
+            // private 
+            // only the account of type freelancer can love a project
+            freelancerMiddleware(context);
+            const project = await projectsCollection.updateOne(
+                { _id: new ObjectId(args.id) },
+                {
+                    $inc: {
+                        "reactions.love": -1
+                    }
+                }
+
+            )
+            return { _id: args.id, ackandlodement: project.acknowledged }
+        },
+        unDislikeProject: async (parent, args, context, info) => {
+            // private 
+            // only the account of type freelancer can dislike a project
+            freelancerMiddleware(context);
+            const project = await projectsCollection.updateOne(
+                { _id: new ObjectId(args.id) },
+                {
+                    $inc: {
+                        "reactions.dislike": -1
+                    }
+                }
+
+            )
+            return { _id: args.id, ackandlodement: project.acknowledged }
         }
 
     }
