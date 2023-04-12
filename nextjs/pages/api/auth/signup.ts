@@ -1,9 +1,12 @@
 import bcrypt from "bcrypt";
+import cookie from "cookie";
 import { NextApiRequest, NextApiResponse } from "next";
 import db from "../../../lib/mongodb";
 import { getToken } from "next-auth/jwt";
 import { User, UserRole } from "../../../types/resolvers";
 import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
+import jwt from "jsonwebtoken";
+import { ObjectId } from "mongodb";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -21,9 +24,9 @@ export default async function handler(
     // const userRole = getCookie("userRole");
     // console.log(userRole);
 
-    // if (!userRole) {
-    //   res.redirect(400, "/profileType");
-    // }
+    if (!userRole) {
+      res.redirect(400, "/api/auth/profileType");
+    }
 
     // console.log(userRole);
 
@@ -31,6 +34,7 @@ export default async function handler(
 
     const userData: User = await req.body;
     const { email, name, password } = userData;
+    const isCompleted = false;
 
     // ? Verifying the incoming data from the user
     if (!email || !name || !password) {
@@ -68,14 +72,41 @@ export default async function handler(
       name,
       hashedPassword,
       userRole,
+      isCompleted,
       created_at: new Date(),
     });
+
+    const { insertedId } = user;
+    // console.log(insertedId.toString());
+
+    const userId = insertedId.toString();
 
     // ? Sending the email to verify the account
 
     // ? redirecting to the email verification page
 
+    // ? clear the cookie of userRole property
+
+    //* Genrating Token
+    // const token = jwt.sign({ userId }, process.env.NEXTAUTH_SECRET, {
+    //   algorithm: 'HS256',
+    //   expiresIn: 60 * 60 * 24,
+    // });
+
+    // // console.log('token : ', token);
+
+    // const cookieOptions = {
+    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    //   httpOnly: true,
+    //   secure: true,
+    // };
+
+    // res.setHeader("jwt-cookie", cookie.serialize("jwt", token, cookieOptions));
+
+    setCookie('userId', userId, { req, res, maxAge: 60 * 60 * 24 })
+
     // ? sending the success response
+    // TODO : Redirection to '/api/auth/createProfile' route after the registration
     return res.status(201).json({
       status: "success",
       data: {
@@ -83,7 +114,7 @@ export default async function handler(
       },
     });
   } catch (error) {
-    res.status(400).json({
+    res.status(500).json({
       status: "failed",
       message: error,
     });
