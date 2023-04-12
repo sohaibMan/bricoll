@@ -38,9 +38,16 @@ const server = new ApolloServer<ServerContext>({
 export default startServerAndCreateNextHandler(server, {
   context: async (req, res) => {
     // the users that sign with a provider (google or facebook ) will have a session with this info
-    const session = await getServerSession(req, res, authOptions);
-    if (!session) return { user: null }
-    return { user: { id: session.user.id, userRole: session.user.userRole } };
+    const token = await getToken({ req });
+    console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+    if (!token || !token.sub) return { user: null }
+    return { user: { id: token.sub, userRole: token.userRole } }
+    // }
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+    // const session = await getServerSession(req, res, authOptions);
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ session:", session)
+    // if (!session) return { user: null }
+    // return { user: { id: session.user.id, userRole: session.user.userRole } };
 
   },
 

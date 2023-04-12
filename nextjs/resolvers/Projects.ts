@@ -155,7 +155,24 @@ export const ProjectResolvers: Resolvers = {
 
             )
             return { _id: args.id, ackandlodement: project.acknowledged }
-        }
+        },
+        // searchProject: async (parent, args, context, info) => {
+            // todo 
+        // [
+        //   {
+        //     $search: {
+        //       index: "default",
+        //       text: {
+        //         query: "<query>",
+        //         path: {
+        //           wildcard: "*"
+        //         }
+        //       }
+        //     }
+        //   }
+        // ]
+        // }
+
 
     }
 }

@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error('Invalid credentials');
         }
 
-        const user = await db.collection("users").findOne({ email: credentials.email }) as unknown as User | null;
+        const user = await db.collection("users").findOne({ email: credentials.email });
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
 
         if (!user || !user?.hashedPassword) {
@@ -71,9 +71,12 @@ export const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }
+        return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name };
+        // return { id: "1", userRole: UserRole.Client }
 
+        // console.log("🚀 ~ file: [...nextauth].ts:93 ~ authorize ~ user:", user)
 
-        return user;
+        // return { id: user._id };
         // return user as Awaitable<User | null>;
 
         // let u: User;
@@ -132,22 +135,34 @@ Auth0Provider({
     colorScheme: "light",
   },
   callbacks: {
-    async jwt({ token }) {
-      token.userRole = "client"
+    async jwt({ token, user }) {
+      console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ user:", user)
+      // user.userRole
+
+      if (user?.userRole) token.userRole = user.userRole;
+      // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
+      // token.email
+      // token.
       return token
     },
     async session({ session, user, token }) {
-      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ token:", token)
-      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ user:", user)
-      // console.log("🚀 ~ file: [...nextauth].ts:140 ~ session ~ session:", session)
+      // console.log("🚀 ~ file: [...nextauth].ts:143 ~ session ~ token:", token)
+      // console.log("🚀 ~ fil/e: [...nextauth].ts:144 ~ session ~ user:", user)
+      // console.log("🚀 ~ file: [...nextauth].ts:146 ~ session ~ session:", session)
       // to be imported
 
       // to be in
-      session.user.id = user.id;
-      session.user.userRole = UserRole.Client;
+      // session.user.id = user.id;
+      // session.user.userRole = UserRole.Client;
       return session;
-    }
+
+    },
+
   },
+  session: {
+    // Set to jwt in order to CredentialsProvider works properly
+    strategy: 'jwt'
+  }
 
 
 
