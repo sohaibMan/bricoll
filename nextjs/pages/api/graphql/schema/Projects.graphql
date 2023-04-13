@@ -72,8 +72,10 @@ type queryResult {
 }
 # filter options
 input filterOptionsInput {
-  price: Float
+  priceMin: Float
+  priceMax: Float
   category: ProjectCategoriesEnum
+  skills: [String!]
 }
 
 type Mutation {
@@ -99,5 +101,5 @@ type Mutation {
   dislikeProject(id: ObjectID): queryResult
   unLoveProject(id: ObjectID): queryResult
   unDislikeProject(id: ObjectID): queryResult
-  searchProject(query: String, filter: filterOptionsInput): [Project]
+  searchProject(query: String!, filter: filterOptionsInput): [Project]
 }

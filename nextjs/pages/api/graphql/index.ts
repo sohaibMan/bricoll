@@ -39,7 +39,7 @@ export default startServerAndCreateNextHandler(server, {
   context: async (req, res) => {
     // the users that sign with a provider (google or facebook ) will have a session with this info
     const token = await getToken({ req });
-    console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
     if (!token || !token.sub) return { user: null }
     return { user: { id: token.sub, userRole: token.userRole } }
     // }

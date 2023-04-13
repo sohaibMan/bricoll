@@ -174,7 +174,7 @@ export type MutationProcessPaymentArgs = {
 
 export type MutationSearchProjectArgs = {
   filter?: InputMaybe<FilterOptionsInput>;
-  query?: InputMaybe<Scalars['String']>;
+  query: Scalars['String'];
 };
 
 
@@ -348,7 +348,9 @@ export type CompanyDetails = {
 
 export type FilterOptionsInput = {
   category?: InputMaybe<ProjectCategoriesEnum>;
-  price?: InputMaybe<Scalars['Float']>;
+  priceMax?: InputMaybe<Scalars['Float']>;
+  priceMin?: InputMaybe<Scalars['Float']>;
+  skills?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export type FreelancerProfile = {
@@ -475,6 +477,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
   context: TContext,
   info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
+
 
 
 /** Mapping between all available schema types and the resolvers types */
@@ -605,7 +608,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
   processPayment?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationProcessPaymentArgs, '_id'>>;
-  searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, Partial<MutationSearchProjectArgs>>;
+  searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   unDislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnDislikeProjectArgs>>;
   unLoveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnLoveProjectArgs>>;

@@ -136,7 +136,7 @@ Auth0Provider({
   },
   callbacks: {
     async jwt({ token, user }) {
-      console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ user:", user)
+      // console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ user:", user)
       // user.userRole
 
       if (user?.userRole) token.userRole = user.userRole;

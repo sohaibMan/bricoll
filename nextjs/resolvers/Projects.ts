@@ -1,5 +1,5 @@
 import { Project, Proposal, Resolvers } from "../types/resolvers.d";
-import { ObjectId } from 'mongodb';
+import { AggregateOptions, ObjectId } from 'mongodb';
 import db from "../lib/mongodb";
 import { GraphQLError } from "graphql";
 import { ServerContext } from "../types/server-context";
@@ -156,22 +156,57 @@ export const ProjectResolvers: Resolvers = {
             )
             return { _id: args.id, ackandlodement: project.acknowledged }
         },
-        // searchProject: async (parent, args, context, info) => {
+        searchProject: async (parent, args, context, info) => {
             // todo 
-        // [
-        //   {
-        //     $search: {
-        //       index: "default",
-        //       text: {
-        //         query: "<query>",
-        //         path: {
-        //           wildcard: "*"
-        //         }
-        //       }
-        //     }
-        //   }
-        // ]
-        // }
+            const aggregation: any =
+                [
+                    {
+
+                        $search: {
+                            index: "default",
+                            text: {
+                                query: args.query,
+                                path: {
+                                    wildcard: "*"
+                                }
+                            }
+                        }
+                    },
+
+                ]
+
+            if (args.filter?.category) aggregation.push({
+                $match: {
+                    "category": args.filter.category
+                }
+            })
+            if (args.filter?.skills) aggregation.push({
+                $match: {
+                    "skills": {
+                        $in: args.filter.skills
+                    }
+                }
+            })
+            if (args.filter?.priceMin) aggregation.push({
+                $match: {
+                    "price": {
+                        $gte: args.filter.priceMin
+                    }
+                }
+            })
+            if (args.filter?.priceMax) aggregation.push({
+                $match: {
+                    "price": {
+                        $lte: args.filter.priceMax
+                    }
+                }
+            })
+
+
+            const projects = await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
+            // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
+            return projects;
+        }
 
 
     }
