@@ -34,6 +34,16 @@ type ProjectScopeOutput {
   level_of_expertise: level_of_expertise!
   size_of_project: size_of_project!
 }
+
+enum ProjectCategoriesEnum {
+  WEB_DEVELOPMENT
+  MOBILE_DEVELOPMENT
+  DESIGN
+  DATA_SCIENCE
+  MARKETING
+  WRITING
+  OTHER
+}
 type Project {
   client_id: ObjectID
   _id: ObjectID
@@ -46,6 +56,7 @@ type Project {
   projectScope: ProjectScopeOutput
   attachmentsURL: [Attachment]
   proposals: [Proposal] # proposals for this project
+  category: ProjectCategoriesEnum!
 }
 
 # The "Query" type is special: it lists all of the available queries that
@@ -59,6 +70,13 @@ type queryResult {
   _id: ObjectID!
   ackandlodement: Boolean!
 }
+# filter options
+input filterOptionsInput {
+  priceMin: Float
+  priceMax: Float
+  category: ProjectCategoriesEnum
+  skills: [String!]
+}
 
 type Mutation {
   addProject(
@@ -67,14 +85,21 @@ type Mutation {
     price: Float!
     skills: [String!]!
     projectScope: ProjectScopeInput!
+    category: ProjectCategoriesEnum!
   ): Project
   editProject(
-    id: ID!
+    id: ObjectID!
     title: String
     description: String
     price: Float
     skills: [String!]
-    projectScope: ProjectScopeInput!
+    projectScope: ProjectScopeInput
+    category: ProjectCategoriesEnum
   ): Project
-  deleteProject(id: ID!): queryResult
+  deleteProject(id: ObjectID): queryResult
+  loveProject(id: ObjectID): queryResult
+  dislikeProject(id: ObjectID): queryResult
+  unLoveProject(id: ObjectID): queryResult
+  unDislikeProject(id: ObjectID): queryResult
+  searchProject(query: String!, filter: filterOptionsInput): [Project]
 }

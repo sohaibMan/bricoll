@@ -13,11 +13,11 @@ class MongoClientConnection {
         const client = new MongoClient(
             process.env.MONGODB_URI || "mongodb://bricoll_mongo:27017/bricoll",
             {
-                serverApi: {
-                    version: ServerApiVersion.v1,
-                    strict: true,
-                    deprecationErrors: true,
-                },
+                // serverApi: {
+                //     version: ServerApiVersion.v1,
+                //     strict: true,
+                //     deprecationErrors: true,
+                // },
             }
         );
 

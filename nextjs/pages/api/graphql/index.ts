@@ -37,21 +37,16 @@ export default startServerAndCreateNextHandler(server, {
     const token = await getToken({ req, secret });
 
     // the users that sign with a provider (google or facebook ) will have a session with this info
-    const session = await getServerSession(req, res, authOptions);
-
-    if (!session || !token) return { user: null };
-    console.log("session ", session);
-    console.log("token ", token);
-
-
-    // if (
-    //   req.headers.authorization &&
-    //   req.headers.authorization.startsWith("Bearer")
-    // ) {
-    //   token = req.headers.authorization.split(" ")[1];
+    // const token = await getToken({ req });
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+    if (!token || !token.sub) return { user: null }
+    return { user: { id: token.sub, userRole: token.userRole } }
     // }
-    
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+    // const session = await getServerSession(req, res, authOptions);
+    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ session:", session)
+    // if (!session) return { user: null }
+    // return { user: { id: session.user.id, userRole: session.user.userRole } };
 
-    return { user: { id: session?.user.id, userRole: session?.user.userRole } || {id: token.id, email: token.email} };
   },
 });

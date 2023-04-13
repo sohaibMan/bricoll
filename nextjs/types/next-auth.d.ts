@@ -4,14 +4,18 @@ import { UserRole } from "./resolvers"
 
 // Read more at: https://next-auth.js.org/getting-started/typescript#module-augmentation
 
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
+  interface JWT {
+    /** OpenID ID Token */
+    userRole: UserRole
+  }
+}
+
+
+
 
 declare module "next-auth" {
-
-
-  interface JWT {
-    /** The user's role. */
-    userRole?: UserRole
-  }
   interface User extends DefaultUser {
     hashedPassword: string
     userRole: UserRole

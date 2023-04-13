@@ -3,12 +3,6 @@ enum status {
   Invisible
 }
 
-enum experience {
-  BEGINNER
-  INTERMEDIATE
-  EXPERT
-}
-
 enum userRole {
   Guest
   Client
@@ -24,7 +18,6 @@ type User {
   phone: String
   address: String
 }
-
 
 input userData {
   name: String!
@@ -57,12 +50,12 @@ type freelancerProfile {
   image: String
   status: status
   skills: [String!]
-  experienceLevel: experience!
+  experienceLevel: level_of_expertise!
   categories: [String!]!
   externalAccount: String
   specializedProfile: [String]
+  proposals: [Proposal] # chain this to the  freelancer resolvers @ZenaguiAnas
 }
-
 
 type Query {
   getProfile(_id: ID): User
@@ -74,20 +67,11 @@ type Mutation {
     email: String
     image: String
     status: status
-  ) : Boolean
-  editPassword(
-    oldPassword: String
-    newPassword: String
-  ) : Boolean
+  ): Boolean
+  editPassword(oldPassword: String, newPassword: String): Boolean
   deleteAccount(_id: ID): Boolean
 }
 
-
-
-
-
-
 # type Mutation {
-
 
 # }

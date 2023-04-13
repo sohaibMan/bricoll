@@ -1,8 +1,11 @@
- import { NextRequest, NextResponse } from "next/server";
-// import bcrypt from "bcrypt";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt";
+// import { getToken } from "next-auth/jwt";
 
-// import jwt from "jsonwebtoken";
-// // import { getToken } from "next-auth/jwt";
+import db from "../lib/mongodb";
+import { stringify } from "querystring";
+import { Resolvers, User } from "../types/resolvers.d";
+const userCollection = db.collection("users");
 
 // import db from "../lib/mongodb";
 // import { stringify } from "querystring";
