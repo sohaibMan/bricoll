@@ -7,44 +7,47 @@ import { stringify } from "querystring";
 import { Resolvers, User } from "../types/resolvers.d";
 const userCollection = db.collection("users");
 
-const saltRounds: number = 10;
+// import db from "../lib/mongodb";
+// import { stringify } from "querystring";
+// const userCollection = db.collection("users");
 
-export const UserResolvers: Resolvers = {
-  // Query: {},
+// const saltRounds: number = 10;
 
-  Mutation: {
-    signup: async (parent, args, contextValue, info) => {
-      const user: User = await userCollection.findOne({ email: args.email });
+// export const UserResolvers: Resolvers = {
+//   // Query: {},
 
-      // ? Checking if the user is existed in DB
-      if (user) {
-        throw new Error("This email is already exists !");
-      }
+//   Mutation: {
+//     signup: async (parent, args, contextValue, info) => {
+//       const user = await userCollection.findOne({ email: args.email });
 
-      // ? Checking if the password and passwordConfirm are the same
-      // if (args.password !== args.passwordConfirm) {
-      //   throw new Error("The passwords are not the same !");
-      // }
+//       // ? Checking if the user is existed in DB
+//       if (user) {
+//         throw new Error("This email is already exists !");
+//       }
 
-      // ? Hashing the password before inserting the user to database
-      // // const hashPassword = await bcrypt.hash(args.password, 10);
+//       // ? Checking if the password and passwordConfirm are the same
+//       // if (args.password !== args.passwordConfirm) {
+//       //   throw new Error("The passwords are not the same !");
+//       // }
 
-      let hashPassword = await bcrypt.hash(args.password, 10);
+//       // ? Hashing the password before inserting the user to database
+//       // // const hashPassword = await bcrypt.hash(args.password, 10);
 
+//       let hashPassword = await bcrypt.hash(args.password, 10);
 
-      const userData: User = {
-        name: args.name,
-        email: args.email,
-        role: args.role,
-        password: hashPassword,
-      };
+//       const userData = {
+//         name: args.name,
+//         email: args.email,
+//         role: args.role,
+//         password: hashPassword,
+//       };
 
-      const newUser = await userCollection.insertOne(userData);
+//       const newUser = await userCollection.insertOne(userData);
 
-      // ? Generating the token for a user
-      // const token = jwt.sign({email: args.email}, process.env.NEXTAUTH_SECRET, {expiresIn: '1h'});
+//       // ? Generating the token for a user
+//       // const token = jwt.sign({email: args.email}, process.env.NEXTAUTH_SECRET, {expiresIn: '1h'});
 
-      return userData;
-    },
-  },
-};
+//       return userData;
+//     },
+//   },
+// };

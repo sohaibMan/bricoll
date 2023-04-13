@@ -17,7 +17,7 @@ declare module "next-auth/jwt" {
 
 declare module "next-auth" {
   interface User extends DefaultUser {
-    hashedPassword?: string
+    hashedPassword: string
     userRole: UserRole
   }
   interface Session {

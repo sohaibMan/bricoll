@@ -212,7 +212,7 @@ export type Project = {
   created_at: Scalars['Date'];
   description: Scalars['String'];
   price: Scalars['Float'];
-  projectScope: ProjectScopeOutput;
+  projectScope?: Maybe<ProjectScopeOutput>;
   proposals?: Maybe<Array<Maybe<Proposal>>>;
   reactions: Reactions;
   skills: Array<Scalars['String']>;
@@ -320,7 +320,6 @@ export type User = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
-  passwordConfirm: Scalars['String'];
   phone?: Maybe<Scalars['String']>;
   role: UserRole;
   userId?: Maybe<Scalars['ID']>;
@@ -627,7 +626,7 @@ export type ProjectResolvers<ContextType = ServerContext, ParentType extends Res
   created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  projectScope?: Resolver<ResolversTypes['ProjectScopeOutput'], ParentType, ContextType>;
+  projectScope?: Resolver<Maybe<ResolversTypes['ProjectScopeOutput']>, ParentType, ContextType>;
   proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
   reactions?: Resolver<ResolversTypes['Reactions'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
@@ -686,7 +685,6 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  passwordConfirm?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
   userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
