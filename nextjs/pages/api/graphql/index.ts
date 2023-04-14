@@ -6,10 +6,8 @@ import { GraphQLFileLoader } from "@graphql-tools/graphql-file-loader";
 import { ProjectResolvers } from "../../../resolvers/Projects";
 import { ProposalResolvers } from "../../../resolvers/Proposals";
 import { getToken } from "next-auth/jwt";
-import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]";
 import { ServerContext } from "../../../types/server-context";
-import { UserRole } from "../../../types/resolvers";
+import { constraintDirective, constraintDirectiveTypeDefs } from "graphql-constraint-directive";
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -17,15 +15,16 @@ const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
 const schemaPath = path.join(rootPath, "/schema/*.graphql");
 
 // load schema
-const schema = loadSchemaSync(schemaPath, {
+let schema = loadSchemaSync(schemaPath, {
   loaders: [new GraphQLFileLoader()],
 });
 
+schema = constraintDirective()(schema)
 // tmp (hardcoded)
 
 // create apollo server instance
 const server = new ApolloServer<ServerContext>({
-  typeDefs: schema,
+  typeDefs: [constraintDirectiveTypeDefs, schema],
   resolvers: [ProjectResolvers, ProposalResolvers],
 });
 

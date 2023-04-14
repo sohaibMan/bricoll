@@ -16,11 +16,11 @@ type Proposal {
   price: Float! @constraint(min: 1, max: 10000)
   duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
   description: String! @constraint(minLength: 5, maxLength: 1000)
-  status: proposal_status!
-  created_at: Date!
-  # current time
-  updated_at: Date!
   cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
+  created_at: Date!
+  updated_at: Date!
+  status: proposal_status!
+  # current time
   attachmentsURL: [Attachment]
   # the link of urls of the attachments(files, images, video)
 }
@@ -40,18 +40,18 @@ type Query {
 type Mutation {
   submitProposal(
     project_id: ObjectID!
-    price: Float!
-    duration: Int!
-    description: String!
-    cover_letter: String!
+    price: Float! @constraint(min: 1, max: 10000)
+    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+    description: String! @constraint(minLength: 5, maxLength: 1000)
+    cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
     attachmentsURL: [AttachmentInput]
     ackandlodement: Boolean! # the freelancer should accept the terms and conditions
   ): Proposal!
   editProposal(
     id: ObjectID!
-    price: Float!
-    duration: Int!
-    description: String!
+    price: Float! @constraint(min: 1, max: 10000)
+    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+    description: String! @constraint(minLength: 5, maxLength: 1000)
   ): Proposal
   declineProposal(id: ObjectID!): Proposal
   # by the client
