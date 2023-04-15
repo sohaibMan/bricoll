@@ -5,6 +5,7 @@ type Contract {
   freelancer_id: ObjectID!
   client_id: ObjectID!
   project_id: ObjectID!
+  proposal_id: ObjectID!
   price: Float!
   duration: Int!
   status: String!
@@ -12,21 +13,31 @@ type Contract {
   updatedAt: Date!
   terms: [String]
 }
-
+enum ContractStatus {
+  PENDING # default not signed
+  ACCEPTED # signed by both parties
+  CANCELLED # cancelled by either party
+  COMPLETED # completed by both parties
+}
+type Query {
+  Contract(id: ObjectID!): Contract
+}
 type Mutation {
   # todo (implement this mutation)
   # the client creates a contract (hire a freelancer)
   createContract(
     freelancer_id: ObjectID!
     project_id: ObjectID!
+    proposal_id: ObjectID!
     price: Float!
     duration: Int!
-    status: String!
+    status: ContractStatus!
     terms: [String]
   ): Contract
+  # todo
   #   both the client and the freelancer can accept a contract
-  acceptContract(_id: ObjectID!): Contract
+  # acceptContract(_id: ObjectID!): Contract
   #   both the client and the freelancer can cancel a contract
-  cancelContract(_id: ObjectID!): Contract
-  processPayment(_id: ObjectID!): Contract
+  # cancelContract(_id: ObjectID!): Contract
+  # processPayment(_id: ObjectID!): Contract
 }

@@ -45,7 +45,11 @@ export const ProposalResolvers: Resolvers = {
                 });
             // the project with this id doesn't exist
             const proposal: Proposal = {
-                ...args,
+                _id: new ObjectId(),
+                cover_letter: args.cover_letter,
+                description: args.description,
+                price: args.price,
+                duration: args.duration,
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
                 project_id: new ObjectId(args.project_id),

@@ -8,6 +8,7 @@ import { ProposalResolvers } from "../../../resolvers/Proposals";
 import { getToken } from "next-auth/jwt";
 import { ServerContext } from "../../../types/server-context";
 import { constraintDirective, constraintDirectiveTypeDefs } from "graphql-constraint-directive";
+import { ContractResolvers } from "../../../resolvers/Contract";
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -25,7 +26,7 @@ schema = constraintDirective()(schema)
 // create apollo server instance
 const server = new ApolloServer<ServerContext>({
   typeDefs: [constraintDirectiveTypeDefs, schema],
-  resolvers: [ProjectResolvers, ProposalResolvers],
+  resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers],
 });
 
 export default startServerAndCreateNextHandler(server, {

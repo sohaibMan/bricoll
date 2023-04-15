@@ -44,17 +44,23 @@ export type Contract = {
   freelancer_id: Scalars['ObjectID'];
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
+  proposal_id: Scalars['ObjectID'];
   status: Scalars['String'];
   terms?: Maybe<Array<Maybe<Scalars['String']>>>;
   updatedAt: Scalars['Date'];
 };
 
+export enum ContractStatus {
+  Accepted = 'ACCEPTED',
+  Cancelled = 'CANCELLED',
+  Completed = 'COMPLETED',
+  Pending = 'PENDING'
+}
+
 export type Mutation = {
   __typename?: 'Mutation';
-  acceptContract?: Maybe<Contract>;
   acceptProposal?: Maybe<Proposal>;
   addProject?: Maybe<Project>;
-  cancelContract?: Maybe<Contract>;
   createContract?: Maybe<Contract>;
   declineProposal?: Maybe<Proposal>;
   deleteAccount?: Maybe<Scalars['Boolean']>;
@@ -65,17 +71,11 @@ export type Mutation = {
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   loveProject?: Maybe<QueryResult>;
-  processPayment?: Maybe<Contract>;
   searchProject?: Maybe<Array<Maybe<Project>>>;
   submitProposal: Proposal;
   unDislikeProject?: Maybe<QueryResult>;
   unLoveProject?: Maybe<QueryResult>;
   withdrawProposal?: Maybe<Proposal>;
-};
-
-
-export type MutationAcceptContractArgs = {
-  _id: Scalars['ObjectID'];
 };
 
 
@@ -94,17 +94,13 @@ export type MutationAddProjectArgs = {
 };
 
 
-export type MutationCancelContractArgs = {
-  _id: Scalars['ObjectID'];
-};
-
-
 export type MutationCreateContractArgs = {
   duration: Scalars['Int'];
   freelancer_id: Scalars['ObjectID'];
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
-  status: Scalars['String'];
+  proposal_id: Scalars['ObjectID'];
+  status: ContractStatus;
   terms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -164,11 +160,6 @@ export type MutationEditProposalArgs = {
 
 export type MutationLoveProjectArgs = {
   id?: InputMaybe<Scalars['ObjectID']>;
-};
-
-
-export type MutationProcessPaymentArgs = {
-  _id: Scalars['ObjectID'];
 };
 
 
@@ -259,12 +250,18 @@ export type Proposal = {
 
 export type Query = {
   __typename?: 'Query';
+  Contract?: Maybe<Contract>;
   Project?: Maybe<Project>;
   Projects?: Maybe<Array<Maybe<Project>>>;
   Proposal?: Maybe<Proposal>;
   ProposalsByFreelancer?: Maybe<Array<Maybe<Proposal>>>;
   ProposalsByProject?: Maybe<Array<Maybe<Proposal>>>;
   getProfile?: Maybe<User>;
+};
+
+
+export type QueryContractArgs = {
+  id: Scalars['ObjectID'];
 };
 
 
@@ -486,6 +483,7 @@ export type ResolversTypes = ResolversObject<{
   AttachmentType: AttachmentType;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Contract: ResolverTypeWrapper<Contract>;
+  ContractStatus: ContractStatus;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
@@ -581,6 +579,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   terms?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
@@ -592,11 +591,9 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type MutationResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
-  acceptContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationAcceptContractArgs, '_id'>>;
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
   addProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationAddProjectArgs, 'category' | 'description' | 'price' | 'projectScope' | 'skills' | 'title'>>;
-  cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, '_id'>>;
-  createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'status'>>;
+  createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'proposal_id' | 'status'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationDeleteAccountArgs>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDeleteProjectArgs>>;
@@ -606,7 +603,6 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'description' | 'id' | 'price' | 'skills' | 'title'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
-  processPayment?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationProcessPaymentArgs, '_id'>>;
   searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   unDislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnDislikeProjectArgs>>;
@@ -657,6 +653,7 @@ export type ProposalResolvers<ContextType = ServerContext, ParentType extends Re
 }>;
 
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
+  Contract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<QueryContractArgs, 'id'>>;
   Project?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectArgs, 'id'>>;
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;

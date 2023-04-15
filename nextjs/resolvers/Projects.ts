@@ -46,7 +46,11 @@ export const ProjectResolvers: Resolvers = {
 
 
       const project: Project = {
-        ...args,
+        // ...args,
+        title: args.title,
+        description: args.description,
+        price: args.price,
+        skills: args.skills,
         // because I've used the middleware function that will throw an error if the context.user is null which not inferred by typescript
         // @ts-ignore
         client_id: new ObjectId(context.user.id),
