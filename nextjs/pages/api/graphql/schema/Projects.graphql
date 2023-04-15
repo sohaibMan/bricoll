@@ -47,10 +47,10 @@ enum ProjectCategoriesEnum {
 type Project {
   client_id: ObjectID
   _id: ObjectID
-  title: String! @constraint(minLength: 5, maxLength: 100)
-  description: String! @constraint(minLength: 5, maxLength: 1000)
-  price: Float! @constraint(min: 0)
-  skills: [String!]! @constraint(maxItems: 15)
+  title: String!
+  description: String!
+  price: Float!
+  skills: [String!]!
   reactions: Reactions!
   created_at: Date!
   projectScope: ProjectScopeOutput
@@ -82,7 +82,7 @@ type Mutation {
   addProject(
     title: String! @constraint(minLength: 5, maxLength: 100)
     description: String! @constraint(minLength: 5, maxLength: 1000)
-    price: Float! @constraint(exclusiveMin: 0)
+    price: Float! @constraint(min: 1, max: 100000)
     skills: [String!]! @constraint(maxItems: 15)
     projectScope: ProjectScopeInput!
     category: ProjectCategoriesEnum!
@@ -91,7 +91,7 @@ type Mutation {
     id: ObjectID!
     title: String! @constraint(minLength: 5, maxLength: 100)
     description: String! @constraint(minLength: 5, maxLength: 1000)
-    price: Float! @constraint(min: 0)
+    price: Float! @constraint(min: 1, max: 100000)
     skills: [String!]! @constraint(maxItems: 15)
     projectScope: ProjectScopeInput
     category: ProjectCategoriesEnum

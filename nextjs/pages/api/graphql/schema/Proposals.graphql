@@ -13,10 +13,10 @@ type Proposal {
   project_id: ObjectID!
   freelancer_id: ObjectID!
   #todo from session get user_id
-  price: Float! @constraint(min: 1, max: 10000)
-  duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-  description: String! @constraint(minLength: 5, maxLength: 1000)
-  cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
+  price: Float!
+  duration: Int!
+  description: String!
+  cover_letter: String!
   created_at: Date!
   updated_at: Date!
   status: proposal_status!
