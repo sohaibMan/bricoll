@@ -4,9 +4,8 @@ import FacebookProvider from "next-auth/providers/facebook"
 import CredentialsProvider from "next-auth/providers/credentials"
 import db from "../../../lib/mongodb";
 import bcrypt from 'bcrypt';
-import { User } from "next-auth";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
-import { UserRole } from "../../../types/resolvers.d";
+import { UserRole } from "../../../types/resolvers";
 import { clientPromise } from "../../../lib/mongodb";
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
@@ -59,7 +58,7 @@ export const authOptions: NextAuthOptions = {
         const user = await db.collection("users").findOne({ email: credentials.email });
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
 
-        if (!user || !user?.hashedPassword) {
+        if (!user || !user.hashedPassword) {
           throw new Error('Invalid credentials');
         }
 
@@ -145,7 +144,7 @@ Auth0Provider({
       // token.
       return token
     },
-    async session({ session, user, token }) {
+    async session({ session}) {
       // console.log("🚀 ~ file: [...nextauth].ts:143 ~ session ~ token:", token)
       // console.log("🚀 ~ fil/e: [...nextauth].ts:144 ~ session ~ user:", user)
       // console.log("🚀 ~ file: [...nextauth].ts:146 ~ session ~ session:", session)

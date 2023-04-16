@@ -12,7 +12,6 @@ type Proposal {
   _id: ObjectID #auto generated
   project_id: ObjectID!
   freelancer_id: ObjectID!
-  #todo from session get user_id
   price: Float!
   duration: Int!
   description: String!
@@ -30,7 +29,6 @@ type Proposal {
 type Query {
   Proposal(id: ObjectID!): Proposal
   # by the freelancer | client
-  # todo on the client
   ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
   # on the freelancer
   ProposalsByProject(project_id: ObjectID!): [Proposal]
@@ -59,8 +57,6 @@ type Mutation {
   acceptProposal(id: ObjectID!): Proposal
   # by the client
   # todo
-  # acceptProposal(id: ObjectID!): Proposal
-  # # by the freelancer and the client
   # open_chat_room(id: ObjectID!): Proposal
   # by the freelancer and the client
   # acceptTerms(id: ObjectID!): Proposal

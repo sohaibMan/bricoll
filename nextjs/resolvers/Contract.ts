@@ -1,8 +1,14 @@
 import { ObjectId } from "mongodb";
 import db from "../lib/mongodb";
-import { Contract, ContractStatus, Project, Resolvers } from "../types/resolvers.d";
+import {
+    Contract,
+    ContractStatus,
+    Project,
+    Resolvers
+} from "../types/resolvers";
 import { GraphQLError } from "graphql";
 import { clientMiddleware } from "./resolversHelpersFunctions/clientMiddleware";
+import { freelancerMiddleware } from "./resolversHelpersFunctions/freelancerMiddleware";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")
@@ -13,8 +19,8 @@ export const ContractResolvers: Resolvers = {
         Contract:
             async (parent, args, context, info) => {
                 //? the client have access related to him project
-                //? the freelance have access only to his proposal.. 
-                // to add scrolling pagination 
+                //? the freelance have access only to his proposal
+                // to add scrolling pagination
                 if (!context.user) throw new GraphQLError("You must be authenticated to access this resource",
                     {
                         extensions: {
@@ -25,13 +31,14 @@ export const ContractResolvers: Resolvers = {
                 )
                 //? you must be authenticated to access this resource
                 //? you must know the id of the contract to access it
-                //? you must be the client or the freelancer of the contract to access it
+                //? you must be the client or  freelancer of the contract to access it
                 const contract = await contractCollection.findOne({ $and: [{ _id: new ObjectId(args.id) }, { $or: [{ client_id: new ObjectId(context.user.id) }, { freelancer_id: new ObjectId(context.user.id) }] }] })
                 return contract as unknown as Contract;
             },
     },
     Mutation: {
         createContract: async (parent, args, context, info) => {
+            // the contract status is Pending( by client)
             //? you must be authenticated to access this resource
             //? you should be a client to access this resource
             clientMiddleware(context);
@@ -81,6 +88,45 @@ export const ContractResolvers: Resolvers = {
             )
 
             return contract;
+
+        },
+        acceptContract: async (parent, args, context, info) => {
+            // the contract status is accepted (by freelancer)
+            // you must be a freelancer to accept a contract that is created by a client
+            freelancerMiddleware(context)
+
+            // @ts-ignore
+            return await contractCollection.findOneAndUpdate({ _id: new ObjectId(args.id), freelancer_id: new Object(context.user.id) }, { $set: { status: ContractStatus.Accepted } }, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
+        },
+        cancelContract: async (parent, args, context, info) => {
+            // the contract status is canceled
+            // you must be a freelancer to accept a contract that is created by a client
+            freelancerMiddleware(context)
+
+            return  await contractCollection.findOneAndUpdate({
+                _id: new ObjectId(args.id),
+            // @ts-ignore
+                freelancer_id: new Object(context.user.id)
+            }, {$set: {status: ContractStatus.Cancelled}}, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
+        },
+        completeContract: async (parent, args, context, info) => {
+            // the contract status is
+            // you must be a freelancer to accept a contract that is created by a client
+            clientMiddleware(context)
+            // todo check if client pays for the contract 
+            // @ZenaguiAnas (we should add a payment here)
+
+            // @ts-ignore
+            return  await contractCollection.findOneAndUpdate({ _id: new ObjectId(args.id), client_id: new Object(context.user.id) }, { $set: { status: ContractStatus.Completed } }, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
 
         }
     }
