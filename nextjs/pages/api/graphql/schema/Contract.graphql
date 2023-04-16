@@ -35,9 +35,11 @@ type Mutation {
     terms: [String]
   ): Contract
   # todo
-  #   both the client and the freelancer can accept a contract
-  # acceptContract(_id: ObjectID!): Contract
-  #   both the client and the freelancer can cancel a contract
-  # cancelContract(_id: ObjectID!): Contract
+  #   only the freelancer can accept a contract or deny it ( the freelancer accepts by default after he creates it)
+  acceptContract(id: ObjectID!): Contract
+  #   only the freelancer can cancel a contract (the client only create it and can't cancel it)
+  cancelContract(_id: ObjectID!): Contract
   # processPayment(_id: ObjectID!): Contract
+  # only the client can complete a contract if the freelancer has accepted it
+  completeContract(_id: ObjectID!): Contract
 }

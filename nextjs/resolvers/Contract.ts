@@ -3,6 +3,7 @@ import db from "../lib/mongodb";
 import { Contract, ContractStatus, Project, Resolvers } from "../types/resolvers.d";
 import { GraphQLError } from "graphql";
 import { clientMiddleware } from "./resolversHelpersFunctions/clientMiddleware";
+import { freelancerMiddleware } from "./resolversHelpersFunctions/freelancerMiddleware";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")
@@ -32,6 +33,7 @@ export const ContractResolvers: Resolvers = {
     },
     Mutation: {
         createContract: async (parent, args, context, info) => {
+            // the contract status is Pending( by client)
             //? you must be authenticated to access this resource
             //? you should be a client to access this resource
             clientMiddleware(context);
@@ -81,6 +83,45 @@ export const ContractResolvers: Resolvers = {
             )
 
             return contract;
+
+        },
+        acceptContract: async (parent, args, context, info) => {
+            // the contract status is accepted (by freelancer)
+            // you must be a freelancer to accept a contract that is created by a client
+            freelancerMiddleware(context)
+
+            // @ts-ignore
+            const updateContract = contractCollection.findOneAndUpdate({ _id: new ObjectId(args.id), freelancer_id: new Object(context.user.id) }, { $set: { status: ContractStatus.Accepted } }, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
+            return updateContract;
+        },
+        cancelContract: async (parent, args, context, info) => {
+            // the contract status is cancled
+            // you must be a freelancer to accept a contract that is created by a client
+            freelancerMiddleware(context)
+
+            // @ts-ignore
+            const updateContract = contractCollection.findOneAndUpdate({ _id: new ObjectId(args.id), freelancer_id: new Object(context.user.id) }, { $set: { status: ContractStatus.Cancelled } }, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
+            return updateContract;
+        },
+        completeContract: async (parent, args, context, info) => {
+            // the contract status is cancled
+            // you must be a freelancer to accept a contract that is created by a client
+            clientMiddleware(context)
+            // todo check if client pays for the contract 
+            // @ZenaguiAnas (we should add a payment here)
+
+            // @ts-ignore
+            const updateContract = contractCollection.findOneAndUpdate({ _id: new ObjectId(args.id), client_id: new Object(context.user.id) }, { $set: { status: ContractStatus.Completed } }, {
+                returnDocument: "after"
+            }) as unknown as Contract;
+
+            return updateContract;
 
         }
     }
