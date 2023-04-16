@@ -170,7 +170,6 @@ export type MutationSearchProjectArgs = {
 
 
 export type MutationSubmitProposalArgs = {
-  ackandlodement: Scalars['Boolean'];
   attachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
   cover_letter: Scalars['String'];
   description: Scalars['String'];
@@ -604,7 +603,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
   searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
-  submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'ackandlodement' | 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
+  submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   unDislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnDislikeProjectArgs>>;
   unLoveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnLoveProjectArgs>>;
   withdrawProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationWithdrawProposalArgs, 'id'>>;

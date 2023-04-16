@@ -45,7 +45,6 @@ type Mutation {
     description: String! @constraint(minLength: 5, maxLength: 1000)
     cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
     attachmentsURL: [AttachmentInput]
-    ackandlodement: Boolean! # the freelancer should accept the terms and conditions
   ): Proposal!
   editProposal(
     id: ObjectID!

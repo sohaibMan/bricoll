@@ -44,6 +44,21 @@ export const ProposalResolvers: Resolvers = {
                     },
                 });
             // the project with this id doesn't exist
+            // check if the freelancer already submit a proposal 
+            // @ts-ignore
+            // the freelancer can submit one and only one proposal for each project if the status is InProgress or Approved or Declined which mean unless the proposal is canceled by the freelancer him self
+            // const submitProposal = await projectsCollection.findOne({ freelancer_id: context.user.id, project_id: args.project_id, status: { $in: [Proposal_Status.InProgress, Proposal_Status.Approved, Proposal_Status.Declined] } })
+            const submitProposal = await proposalsCollection.findOne({ freelancer_id: new ObjectId(context.user.id), project_id: new ObjectId(args.project_id), status: { $nin: [Proposal_Status.Canceled] } })
+            // const submitProposal = await projectsCollection.findOne({ freelancer_id: context.user.id, project_id: args.project_id, status: { $nin: [Proposal_Status.Canceled] } })
+            if (submitProposal) throw new GraphQLError("You already submit a proposal for this project",
+
+                {
+                    extensions: {
+                        code: 'ALREADYEXISTS',
+                        http: { status: 400 },
+                    },
+                });
+            // the freelancer already submit a proposal for this project
             const proposal: Proposal = {
                 _id: new ObjectId(),
                 cover_letter: args.cover_letter,
@@ -54,7 +69,7 @@ export const ProposalResolvers: Resolvers = {
                 freelancer_id: new ObjectId(context.user.id),
                 project_id: new ObjectId(args.project_id),
                 created_at: new Date(),
-                status: Proposal_Status.Approved,
+                status: Proposal_Status.InProgress,
                 updated_at: new Date()
             }
             const insertedProposal = await proposalsCollection.insertOne(proposal);
