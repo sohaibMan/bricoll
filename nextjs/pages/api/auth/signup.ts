@@ -7,6 +7,7 @@ import { User, UserRole } from "../../../types/resolvers";
 import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
+import getConfig from "next/config";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -88,27 +89,28 @@ export default async function handler(
     // ? clear the cookie of userRole property
 
     //* Genrating Token
-    // const token = jwt.sign({ userId }, process.env.NEXTAUTH_SECRET, {
-    //   algorithm: 'HS256',
-    //   expiresIn: 60 * 60 * 24,
-    // });
+    const token = jwt.sign({ sub: userId }, process.env.NEXTAUTH_SECRET, {
+      expiresIn: "70d",
+    });
 
-    // // console.log('token : ', token);
+    console.log("token : ", token);
 
-    // const cookieOptions = {
-    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    //   httpOnly: true,
-    //   secure: true,
-    // };
+    const cookieOptions = {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: true,
+    };
 
-    // res.setHeader("jwt-cookie", cookie.serialize("jwt", token, cookieOptions));
+    // res.setHeader("jwt", cookie.serialize("jwt", token, cookieOptions));
 
-    setCookie('userId', userId, { req, res, maxAge: 60 * 60 * 24 })
+    setCookie("jwt", token, { req, res, maxAge: 60 * 60 * 24 });
+    setCookie("userId", userId, { req, res, maxAge: 60 * 60 * 24 });
 
     // ? sending the success response
     // TODO : Redirection to '/api/auth/createProfile' route after the registration
     return res.status(201).json({
       status: "success",
+      token: token,
       data: {
         userData,
       },
