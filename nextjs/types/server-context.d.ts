@@ -1,4 +1,4 @@
-import { UserRole } from "./resolvers.d";
+import { UserRole } from "./resolvers";
 
 //! you will get this fields in the context value 
 interface UserInterface {

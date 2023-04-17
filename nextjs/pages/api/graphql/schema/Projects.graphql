@@ -1,14 +1,14 @@
 # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-scalar ObjectID
+#scalar ObjectID
 scalar Date
 scalar URL
 
-enum level_of_expertise {
-  BEGINNER
-  INTERMEDIATE
-  ADVANCED
-}
+#enum level_of_expertise {
+#  BEGINNER
+#  INTERMEDIATE
+#  ADVANCED
+#}
 
 enum size_of_project {
   SMALL
@@ -61,10 +61,6 @@ type Project {
 
 # The "Query" type is special: it lists all of the available queries that
 
-type Query {
-  Projects: [Project]
-  Project(id: ID!): Project
-}
 
 type queryResult {
   _id: ObjectID!
@@ -78,28 +74,3 @@ input filterOptionsInput {
   skills: [String!]
 }
 
-type Mutation {
-  addProject(
-    title: String! @constraint(minLength: 5, maxLength: 100)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-    price: Float! @constraint(min: 1, max: 100000)
-    skills: [String!]! @constraint(maxItems: 15)
-    projectScope: ProjectScopeInput!
-    category: ProjectCategoriesEnum!
-  ): Project
-  editProject(
-    id: ObjectID!
-    title: String! @constraint(minLength: 5, maxLength: 100)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-    price: Float! @constraint(min: 1, max: 100000)
-    skills: [String!]! @constraint(maxItems: 15)
-    projectScope: ProjectScopeInput
-    category: ProjectCategoriesEnum
-  ): Project
-  deleteProject(id: ObjectID): queryResult
-  loveProject(id: ObjectID): queryResult
-  dislikeProject(id: ObjectID): queryResult
-  unLoveProject(id: ObjectID): queryResult
-  unDislikeProject(id: ObjectID): queryResult
-  searchProject(query: String!, filter: filterOptionsInput): [Project]
-}

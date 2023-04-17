@@ -1,7 +1,7 @@
 // import { Proposal, Resolvers } from '../../../types/resolvers';
 
 import { ObjectId } from 'mongodb';
-import { Proposal, Proposal_Status, Resolvers } from "../types/resolvers.d";
+import { Proposal, Proposal_Status, Resolvers } from "../types/resolvers";
 import db from "../lib/mongodb";
 import { GraphQLError } from 'graphql';
 import { freelancerMiddleware } from './resolversHelpersFunctions/freelancerMiddleware';
@@ -14,7 +14,7 @@ export const ProposalResolvers: Resolvers = {
         Proposal:
             async (parent, args, context, info) => {
                 //? the client have access related to him project
-                //? the freelance have access only to his proposal.. 
+                //? the freelance have access only to his proposal...
                 // to add scrolling pagination 
                 const proposals = await proposalsCollection.findOne({ _id: new ObjectId(args.id) })
                 return proposals as unknown as Proposal;

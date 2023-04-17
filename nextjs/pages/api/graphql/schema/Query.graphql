@@ -1,0 +1,16 @@
+type Query{
+    # Proposals
+    Proposal(id: ObjectID!): Proposal
+    # by the freelancer | client
+    ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
+    # on the freelancer
+    ProposalsByProject(project_id: ObjectID!): [Proposal]
+    # on the client(project owner)
+    # Projects
+    Projects: [Project]
+    Project(id: ID!): Project
+    # Contract
+    Contract(id: ObjectID!): Contract
+    # Profile management
+    getProfile(_id: ID): User
+}

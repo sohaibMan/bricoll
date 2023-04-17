@@ -1,4 +1,4 @@
-import { UserRole } from "../../types/resolvers.d";
+import { UserRole } from "../../types/resolvers";
 import { GraphQLError } from 'graphql';
 import { ServerContext } from '../../types/server-context';
 
