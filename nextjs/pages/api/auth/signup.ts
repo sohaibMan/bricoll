@@ -8,6 +8,7 @@ import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
 import getConfig from "next/config";
+import sgMail from "@sendgrid/mail";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -82,7 +83,7 @@ export default async function handler(
 
     const userId = insertedId.toString();
 
-    // ? Sending the email to verify the account
+    
 
     // ? redirecting to the email verification page
 
@@ -106,8 +107,24 @@ export default async function handler(
     setCookie("jwt", token, { req, res, maxAge: 60 * 60 * 24 });
     setCookie("userId", userId, { req, res, maxAge: 60 * 60 * 24 });
 
+    // ? Sending the email to verify the account
+    const emailVerification = `http://localhost:3000/api/auth/${token}`;
+
+    const text = `To verify your email please click on this link : <a href="${emailVerification}">Click me</a>.`;
+
+
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    await sgMail.send({
+      to: `${email}`,
+      from: "zenaguianas20@gmail.com",
+      subject: "Email Verification !",
+      html: `<p>${text}</p>`
+    });
+
+
     // ? sending the success response
-    // TODO : Redirection to '/api/auth/createProfile' route after the registration
+    // TODO : Redirection to '/api/auth/emailVerification' then '/api/auth/createProfile' route after the registration
     return res.status(201).json({
       status: "success",
       token: token,
