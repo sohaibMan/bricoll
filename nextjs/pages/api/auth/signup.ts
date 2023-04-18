@@ -7,6 +7,8 @@ import { User, UserRole } from "../../../types/resolvers";
 import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
+import getConfig from "next/config";
+import sgMail from "@sendgrid/mail";
 
 const secret = process.env.NEXTAUTH_SECRET;
 
@@ -81,34 +83,51 @@ export default async function handler(
 
     const userId = insertedId.toString();
 
-    // ? Sending the email to verify the account
+    
 
     // ? redirecting to the email verification page
 
     // ? clear the cookie of userRole property
 
     //* Genrating Token
-    // const token = jwt.sign({ userId }, process.env.NEXTAUTH_SECRET, {
-    //   algorithm: 'HS256',
-    //   expiresIn: 60 * 60 * 24,
-    // });
+    const token = jwt.sign({ sub: userId }, process.env.NEXTAUTH_SECRET, {
+      expiresIn: "70d",
+    });
 
-    // // console.log('token : ', token);
+    console.log("token : ", token);
 
-    // const cookieOptions = {
-    //   expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
-    //   httpOnly: true,
-    //   secure: true,
-    // };
+    const cookieOptions = {
+      expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
+      httpOnly: true,
+      secure: true,
+    };
 
-    // res.setHeader("jwt-cookie", cookie.serialize("jwt", token, cookieOptions));
+    // res.setHeader("jwt", cookie.serialize("jwt", token, cookieOptions));
 
-    setCookie('userId', userId, { req, res, maxAge: 60 * 60 * 24 })
+    setCookie("jwt", token, { req, res, maxAge: 60 * 60 * 24 });
+    setCookie("userId", userId, { req, res, maxAge: 60 * 60 * 24 });
+
+    // ? Sending the email to verify the account
+    const emailVerification = `http://localhost:3000/api/auth/${token}`;
+
+    const text = `To verify your email please click on this link : <a href="${emailVerification}">Click me</a>.`;
+
+
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    await sgMail.send({
+      to: `${email}`,
+      from: "zenaguianas20@gmail.com",
+      subject: "Email Verification !",
+      html: `<p>${text}</p>`
+    });
+
 
     // ? sending the success response
-    // TODO : Redirection to '/api/auth/createProfile' route after the registration
+    // TODO : Redirection to '/api/auth/emailVerification' then '/api/auth/createProfile' route after the registration
     return res.status(201).json({
       status: "success",
+      token: token,
       data: {
         userData,
       },
