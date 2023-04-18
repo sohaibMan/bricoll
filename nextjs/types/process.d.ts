@@ -13,5 +13,6 @@ declare namespace NodeJS {
     AUTH0_ID: string
     AUTH0_SECRET: string
     MONGODB_URI: string
+    SENDGRID_API_KEY:string
   }
 }

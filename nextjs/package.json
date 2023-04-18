@@ -22,6 +22,7 @@
     "bcrypt": "^5.1.0",
     "cookie": "^0.5.0",
     "cookies-next": "^2.1.1",
+    "deep-email-validator": "^0.1.21",
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "graphql-constraint-directive": "^5.0.0",

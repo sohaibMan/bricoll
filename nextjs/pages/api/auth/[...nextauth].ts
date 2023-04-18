@@ -70,7 +70,10 @@ export const authOptions: NextAuthOptions = {
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }
-        return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name };
+
+
+
+        return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name,isCompleted:user.isCompleted as boolean };
         // return { id: "1", userRole: UserRole.Client }
 
         // console.log("🚀 ~ file: [...nextauth].ts:93 ~ authorize ~ user:", user)
@@ -135,15 +138,20 @@ Auth0Provider({
   },
   callbacks: {
     async jwt({ token, user }) {
+      // console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ token:", token)
       // console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ user:", user)
       // user.userRole
 
       if (user?.userRole) token.userRole = user.userRole;
+      console.log(user?.isCompleted)
+      if(user?.isCompleted!==undefined) token.isCompleted = user?.isCompleted;
+
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
       // token.email
       // token.
       return token
     },
+
     async session({ session}) {
       // console.log("🚀 ~ file: [...nextauth].ts:143 ~ session ~ token:", token)
       // console.log("🚀 ~ fil/e: [...nextauth].ts:144 ~ session ~ user:", user)
@@ -154,8 +162,10 @@ Auth0Provider({
       // session.user.id = user.id;
       // session.user.userRole = UserRole.Client;
       return session;
-
     },
+    // async signIn({ user, account, profile, email, credentials }) {
+    //   return user.isCompleted;
+    // }
 
   },
   session: {

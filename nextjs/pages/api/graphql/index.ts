@@ -41,6 +41,13 @@ export default startServerAndCreateNextHandler(server,
         // const token = await getToken({ req });
         // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
         if (!token || !token.sub) return {user: null}
+
+        // console.log(token.userRole)
+        if(token && token.isCompleted === false) {
+            // res.redirect(300, "/api/auth/createProfile")
+       throw new Error("Please complete your profile")
+        }
+        //
         return {user: {id: token.sub, userRole: token.userRole as UserRole}}
         // }
         // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
