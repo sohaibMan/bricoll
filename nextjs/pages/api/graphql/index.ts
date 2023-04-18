@@ -9,6 +9,7 @@ import { getToken } from "next-auth/jwt";
 import { ServerContext } from "../../../types/server-context";
 import { constraintDirective, constraintDirectiveTypeDefs } from "graphql-constraint-directive";
 import { ContractResolvers } from "../../../resolvers/Contract";
+import {UserRole} from "../../../types/resolvers";
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -29,24 +30,24 @@ const server = new ApolloServer<ServerContext>({
   resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers],
 });
 
-export default startServerAndCreateNextHandler(server, {
-  context: async (req, res) => {
-    const secret = process.env.NEXTAUTH_SECRET;
+export default startServerAndCreateNextHandler(server,
+    {
+      context: async (req, _) => {
+        const secret = process.env.NEXTAUTH_SECRET;
+        //
+        const token = await getToken({req, secret});
 
-    // 
-    const token = await getToken({ req, secret });
+        // the users that sign with a provider (google or facebook ) will have a session with this info
+        // const token = await getToken({ req });
+        // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+        if (!token || !token.sub) return {user: null}
+        return {user: {id: token.sub, userRole: token.userRole as UserRole}}
+        // }
+        // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
+        // const session = await getServerSession(req, res, authOptions);
+        // console.log("🚀 ~ file: index.ts:42 ~ context: ~ session:", session)
+        // if (!session) return { user: null }
+        // return { user: { id: session.user.id, userRole: session.user.userRole } };
 
-    // the users that sign with a provider (google or facebook ) will have a session with this info
-    // const token = await getToken({ req });
-    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
-    if (!token || !token.sub) return { user: null }
-    return { user: { id: token.sub, userRole: token.userRole } }
-    // }
-    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
-    // const session = await getServerSession(req, res, authOptions);
-    // console.log("🚀 ~ file: index.ts:42 ~ context: ~ session:", session)
-    // if (!session) return { user: null }
-    // return { user: { id: session.user.id, userRole: session.user.userRole } };
-
-  },
-});
+      },
+    });

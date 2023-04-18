@@ -1,8 +1,8 @@
-import { Project, Proposal, Resolvers } from "../types/resolvers.d";
-import { AggregateOptions, ObjectId } from 'mongodb';
+import { Project, Proposal, Resolvers } from "../types/resolvers";
+import {  ObjectId } from 'mongodb';
 import db from "../lib/mongodb";
 import { GraphQLError } from "graphql";
-import { ServerContext } from "../types/server-context";
+// import { ServerContext } from "../types/server-context";
 import { clientMiddleware } from "./resolversHelpersFunctions/clientMiddleware";
 import { freelancerMiddleware } from "./resolversHelpersFunctions/freelancerMiddleware";
 const projectsCollection = db.collection("projects")
@@ -207,9 +207,9 @@ export const ProjectResolvers: Resolvers = {
       })
 
 
-      const projects = await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
+      return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
       // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
-      return projects;
+      // return projects;
     }
 
 

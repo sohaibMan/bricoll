@@ -4,27 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="fix some typescript issues">
-      <change afterPath="$PROJECT_DIR$/.idea/Bricoll.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment=" add cancelContract and completeContract functions and refactor the code">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Contract.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Contract.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Proposals.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Proposals.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="GraphQL File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsbtTreeLayoutManager">
+    <layout place="tools.popupGrunt">
+      <scroll-view-position x="0" y="0" />
+    </layout>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -33,6 +39,9 @@
     <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2NmM3nlh3MwP41OP6DEIDU7CR6i" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -42,6 +51,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "code__refactoring",
     "last_opened_file_path": "/home/sohaib/Desktop/Bricoll",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -65,8 +76,31 @@
       <workItem from="1680264994832" duration="40000" />
       <workItem from="1680265093351" duration="25000" />
       <workItem from="1681667137867" duration="310000" />
-      <workItem from="1681667464359" duration="1498000" />
+      <workItem from="1681667464359" duration="1791000" />
+      <workItem from="1681669277275" duration="919000" />
+      <workItem from="1681670347140" duration="312000" />
+      <workItem from="1681670676915" duration="177000" />
+      <workItem from="1681671226306" duration="358000" />
+      <workItem from="1681725910867" duration="257000" />
+      <workItem from="1681730444696" duration="565000" />
+      <workItem from="1681758354213" duration="245000" />
+      <workItem from="1681760689956" duration="1049000" />
     </task>
+    <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
+      <created>1681669093611</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1681669093611</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" add cancelContract and completeContract functions and refactor the code">
+      <created>1681761216119</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1681761216119</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -85,6 +119,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix some typescript issues" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix some typescript issues" />
+    <MESSAGE value=" add cancelContract and completeContract functions" />
+    <MESSAGE value=" add cancelContract and completeContract functions and refactor the code" />
+    <option name="LAST_COMMIT_MESSAGE" value=" add cancelContract and completeContract functions and refactor the code" />
   </component>
 </project>

@@ -26,42 +26,6 @@ type Proposal {
 
 # Cover Letter, Attachments (images +video +files ...)
 
-type Query {
-  Proposal(id: ObjectID!): Proposal
-  # by the freelancer | client
-  ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
-  # on the freelancer
-  ProposalsByProject(project_id: ObjectID!): [Proposal]
-  # on the client(project owner)
-}
-
-type Mutation {
-  submitProposal(
-    project_id: ObjectID!
-    price: Float! @constraint(min: 1, max: 10000)
-    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-    cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
-    attachmentsURL: [AttachmentInput]
-  ): Proposal!
-  editProposal(
-    id: ObjectID!
-    price: Float! @constraint(min: 1, max: 10000)
-    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-  ): Proposal
-  declineProposal(id: ObjectID!): Proposal
-  # by the client
-  withdrawProposal(id: ObjectID!): Proposal
-  # by the freelancer
-  acceptProposal(id: ObjectID!): Proposal
-  # by the client
-  # todo
-  # open_chat_room(id: ObjectID!): Proposal
-  # by the freelancer and the client
-  # acceptTerms(id: ObjectID!): Proposal
-  #by the freelancer and the client
-}
 
 type Subscription {
   proposalStatusChanged(id: ObjectID!): Proposal

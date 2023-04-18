@@ -1,0 +1,81 @@
+type Mutation {
+    #    Project
+    addProject(
+        title: String! @constraint(minLength: 5, maxLength: 100)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+        price: Float! @constraint(min: 1, max: 100000)
+        skills: [String!]! @constraint(maxItems: 15)
+        projectScope: ProjectScopeInput!
+        category: ProjectCategoriesEnum!
+    ): Project
+    editProject(
+        id: ObjectID!
+        title: String! @constraint(minLength: 5, maxLength: 100)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+        price: Float! @constraint(min: 1, max: 100000)
+        skills: [String!]! @constraint(maxItems: 15)
+        projectScope: ProjectScopeInput
+        category: ProjectCategoriesEnum
+    ): Project
+    deleteProject(id: ObjectID): queryResult
+    loveProject(id: ObjectID): queryResult
+    dislikeProject(id: ObjectID): queryResult
+    unLoveProject(id: ObjectID): queryResult
+    unDislikeProject(id: ObjectID): queryResult
+    searchProject(query: String!, filter: filterOptionsInput): [Project]
+    #    Proposal
+    submitProposal(
+        project_id: ObjectID!
+        price: Float! @constraint(min: 1, max: 10000)
+        duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+        cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
+        attachmentsURL: [AttachmentInput]
+    ): Proposal!
+    editProposal(
+        id: ObjectID!
+        price: Float! @constraint(min: 1, max: 10000)
+        duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+    ): Proposal
+    declineProposal(id: ObjectID!): Proposal
+    # by the client
+    withdrawProposal(id: ObjectID!): Proposal
+    # by the freelancer
+    acceptProposal(id: ObjectID!): Proposal
+    # by the client
+    # todo
+    # open_chat_room(id: ObjectID!): Proposal
+    # by the freelancer and the client
+    # acceptTerms(id: ObjectID!): Proposal
+    #by the freelancer and the client
+    # contract
+    # the client creates a contract (hire a freelancer)
+    createContract(
+        freelancer_id: ObjectID!
+        project_id: ObjectID!
+        proposal_id: ObjectID!
+        price: Float!
+        duration: Int!
+        status: ContractStatus!
+        terms: [String]
+    ): Contract
+
+    #   only the freelancer can accept a contract or deny it ( the freelancer accepts by default after he creates it)
+    acceptContract(id: ObjectID!): Contract
+    #   only the freelancer can cancel a contract (the client only create it and can't cancel it)
+    cancelContract(id: ObjectID!): Contract
+    # processPayment(id: ObjectID!): Contract
+    # only the client can complete a contract if the freelancer has accepted it
+    completeContract(id: ObjectID!): Contract
+    #    User
+    editProfile(
+        name: String
+        email: String
+        image: String
+        status: status
+    ): Boolean
+    editPassword(oldPassword: String, newPassword: String): Boolean
+    deleteAccount(_id: ID): Boolean
+
+}

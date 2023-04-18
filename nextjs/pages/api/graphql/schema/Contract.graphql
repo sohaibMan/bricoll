@@ -19,27 +19,4 @@ enum ContractStatus {
   CANCELLED # cancelled by either party
   COMPLETED # completed by both parties
 }
-type Query {
-  Contract(id: ObjectID!): Contract
-}
-type Mutation {
 
-  # the client creates a contract (hire a freelancer)
-  createContract(
-    freelancer_id: ObjectID!
-    project_id: ObjectID!
-    proposal_id: ObjectID!
-    price: Float!
-    duration: Int!
-    status: ContractStatus!
-    terms: [String]
-  ): Contract
-
-  #   only the freelancer can accept a contract or deny it ( the freelancer accepts by default after he creates it)
-  acceptContract(id: ObjectID!): Contract
-  #   only the freelancer can cancel a contract (the client only create it and can't cancel it)
-  cancelContract(id: ObjectID!): Contract
-  # processPayment(id: ObjectID!): Contract
-  # only the client can complete a contract if the freelancer has accepted it
-  completeContract(id: ObjectID!): Contract
-}
