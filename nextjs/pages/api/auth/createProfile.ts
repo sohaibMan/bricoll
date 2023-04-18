@@ -41,7 +41,7 @@ export default async function handler(
     }
 
     const { skills, level, language } = req.body;
-    let {email, name, hashedPassword, userRole} : any = user;
+    // let {email, name} : any = user;
 
     // console.log(email, name, hashedPassword, userRole);
     
@@ -50,8 +50,7 @@ export default async function handler(
 
     // user?.isCompleted = true;
 
-
-    const newUserInfo = await db.collection("users").findOneAndUpdate(
+    db.collection("users").findOneAndUpdate(
       { _id: new ObjectId(user_id) },
       {
         $set: {
