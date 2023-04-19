@@ -7,9 +7,10 @@ import db from "../../../lib/mongodb";
 import { User } from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
+import emailService from "../../../lib/email";
 // import { ObjectId } from "mongodb";
 // import getConfig from "next/config";
-import sgMail from "@sendgrid/mail";
+
 
     const userCollection = db.collection("users");
 // const secret = process.env.NEXTAUTH_SECRET;
@@ -126,10 +127,7 @@ export default async function handler(
     const emailVerificationLink = `http://localhost:3000/api/auth/emailVerification/${token}`;
     const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
 
-
-    //
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-    sgMail.send({
+    emailService.sendEmail({
       to: `${email}`,
       from: "zenaguianas20@gmail.com",
       subject: "Email Verification !",

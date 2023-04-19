@@ -1,5 +1,5 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
-import { promisify } from "util";
+
 
 if (!process.env.MONGODB_URI) {
     throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
