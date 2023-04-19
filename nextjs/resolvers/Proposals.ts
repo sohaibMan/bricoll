@@ -114,7 +114,7 @@ export const ProposalResolvers: Resolvers = {
                 });
 
             const updateProposal = await proposalsCollection.findOneAndUpdate(
-                { _id: new ObjectId(args.id), project_id: new ObjectId(project._id) },
+                { _id: new ObjectId(args.id), project_id: new ObjectId(project._id) , status: Proposal_Status.InProgress},
                 {
                     $set: {
                         "status": Proposal_Status.Declined

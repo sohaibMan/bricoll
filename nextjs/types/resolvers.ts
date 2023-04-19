@@ -159,12 +159,12 @@ export type MutationEditProfileArgs = {
 
 export type MutationEditProjectArgs = {
   category?: InputMaybe<ProjectCategoriesEnum>;
-  description: Scalars['String'];
+  description?: InputMaybe<Scalars['String']>;
   id: Scalars['ObjectID'];
-  price: Scalars['Float'];
+  price?: InputMaybe<Scalars['Float']>;
   projectScope?: InputMaybe<ProjectScopeInput>;
-  skills: Array<Scalars['String']>;
-  title: Scalars['String'];
+  skills?: InputMaybe<Array<Scalars['String']>>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -271,8 +271,6 @@ export type Query = {
   Project?: Maybe<Project>;
   Projects?: Maybe<Array<Maybe<Project>>>;
   Proposal?: Maybe<Proposal>;
-  ProposalsByFreelancer?: Maybe<Array<Maybe<Proposal>>>;
-  ProposalsByProject?: Maybe<Array<Maybe<Proposal>>>;
   getProfile?: Maybe<User>;
 };
 
@@ -289,16 +287,6 @@ export type QueryProjectArgs = {
 
 export type QueryProposalArgs = {
   id: Scalars['ObjectID'];
-};
-
-
-export type QueryProposalsByFreelancerArgs = {
-  freelancer_id: Scalars['ObjectID'];
-};
-
-
-export type QueryProposalsByProjectArgs = {
-  project_id: Scalars['ObjectID'];
 };
 
 
@@ -621,7 +609,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   dislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDislikeProjectArgs>>;
   editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditPasswordArgs>>;
   editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
-  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'description' | 'id' | 'price' | 'skills' | 'title'>>;
+  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
   searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
@@ -678,8 +666,6 @@ export type QueryResolvers<ContextType = ServerContext, ParentType extends Resol
   Project?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectArgs, 'id'>>;
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
-  ProposalsByFreelancer?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType, RequireFields<QueryProposalsByFreelancerArgs, 'freelancer_id'>>;
-  ProposalsByProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType, RequireFields<QueryProposalsByProjectArgs, 'project_id'>>;
   getProfile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryGetProfileArgs>>;
 }>;
 

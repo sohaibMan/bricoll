@@ -2,9 +2,9 @@ type Query{
     # Proposals
     Proposal(id: ObjectID!): Proposal
     # by the freelancer | client
-    ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
+#    ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
     # on the freelancer
-    ProposalsByProject(project_id: ObjectID!): [Proposal]
+#    ProposalsByProject(project_id: ObjectID!): [Proposal]
     # on the client(project owner)
     # Projects
     Projects: [Project]
