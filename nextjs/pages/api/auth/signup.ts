@@ -129,7 +129,6 @@ export default async function handler(
 
     emailService.sendEmail({
       to: `${email}`,
-      from: "zenaguianas20@gmail.com",
       subject: "Email Verification !",
       html: `<p>${text}</p>`
     });

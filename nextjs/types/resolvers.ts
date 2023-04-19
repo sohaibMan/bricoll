@@ -254,6 +254,7 @@ export type Proposal = {
   __typename?: 'Proposal';
   _id?: Maybe<Scalars['ObjectID']>;
   attachmentsURL?: Maybe<Array<Maybe<Attachment>>>;
+  client_id: Scalars['ObjectID'];
   cover_letter: Scalars['String'];
   created_at: Scalars['Date'];
   description: Scalars['String'];
@@ -649,6 +650,7 @@ export type ProjectScopeOutputResolvers<ContextType = ServerContext, ParentType 
 export type ProposalResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
   _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
   attachmentsURL?: Resolver<Maybe<Array<Maybe<ResolversTypes['Attachment']>>>, ParentType, ContextType>;
+  client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   cover_letter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

@@ -12,6 +12,7 @@ type Proposal {
   _id: ObjectID #auto generated
   project_id: ObjectID!
   freelancer_id: ObjectID!
+  client_id:ObjectID!
   price: Float!
   duration: Int!
   description: String!

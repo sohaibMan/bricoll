@@ -1,7 +1,7 @@
 import sgMail from "@sendgrid/mail";
 
-if (!process.env.MONGODB_URI) {
-    throw new Error('Invalid/Missing environment variable: "MONGODB_URI"');
+if (!process.env.SENDGRID_API_KEY || !process.env.SENDGRID_EMAIL_FROM) {
+    throw new Error('Invalid/Missing environment variable: "SENDGRID_API_KEY"');
 }
 
 class EmailService {
@@ -10,10 +10,10 @@ class EmailService {
         sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     }
 
-    public sendEmail({to, from, subject, html}:{to:string,from:string,subject:string,html:string}) {
+    public sendEmail({to, subject, html}:{to:string,subject:string,html:string}) {
         return sgMail.send({
             to,
-            from,
+            from:process.env.SENDGRID_EMAIL_FROM,
             subject,
             html
         });
