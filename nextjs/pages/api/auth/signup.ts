@@ -47,7 +47,7 @@ export default async function handler(
     }
     const emailValidation = await validate(email);
     if(!emailValidation.valid){
-      return res.status(400).json({message: 'Invalid email '+emailValidation.reason})
+      return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
     }
     // todo (validate email, password, username length)
     // ? Verifying if the password and passwordConfirm are the same

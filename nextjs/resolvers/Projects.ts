@@ -81,6 +81,8 @@ export const ProjectResolvers: Resolvers = {
           returnDocument: "after"
         }
       )
+      console.log(updateProject);
+      
       return updateProject as unknown as Project;
     },
     deleteProject: async (parent, args, context, info) => {
