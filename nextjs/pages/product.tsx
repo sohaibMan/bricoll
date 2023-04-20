@@ -1,6 +1,6 @@
 import React from 'react';
 // import {loadStripe} from '@stripe/stripe-js';
-import Button from "@mui/material/Button";
+import Button from "@mui/joy/Button";
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -25,7 +25,7 @@ export default function PreviewPage() {
             <section>
 
 
-                <Button role="link" size="medium" type="submit" variant="contained">Pay</Button>
+                <Button role="link" size="md" type="submit" variant="solid">Pay</Button>
 
             </section>
         </form>
