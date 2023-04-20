@@ -57,7 +57,6 @@ type Mutation {
         proposal_id: ObjectID!
         price: Float!
         duration: Int!
-        status: ContractStatus!
         terms: [String]
     ): Contract
 
@@ -67,7 +66,7 @@ type Mutation {
     cancelContract(id: ObjectID!): Contract
     # processPayment(id: ObjectID!): Contract
     # only the client can complete a contract if the freelancer has accepted it
-    completeContract(id: ObjectID!): Contract
+#    completeContract(id: ObjectID!): Contract (transfer to a rest api)
     #    User
     editProfile(
         name: String
