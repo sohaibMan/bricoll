@@ -15,5 +15,7 @@ declare namespace NodeJS {
     MONGODB_URI: string
     SENDGRID_API_KEY:string
     SENDGRID_EMAIL_FROM:string
+    STRIPE_SECRET_KEY:string
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:string
   }
 }

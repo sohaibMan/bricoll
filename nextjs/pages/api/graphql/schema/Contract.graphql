@@ -9,8 +9,8 @@ type Contract {
   price: Float!
   duration: Int!
   status: String!
-  createdAt: Date!
-  updatedAt: Date!
+  created_at: Date!
+  updated_at: Date!
   terms: [String]
 }
 enum ContractStatus {
