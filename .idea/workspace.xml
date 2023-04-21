@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,25 +59,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "full.screen.before.presentation.mode": "false",
-    "git-widget-placeholder": "stripe__payment",
-    "last_opened_file_path": "/home/sohaib/Desktop/graph_theory_project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "com.haulmont.rcb.reactEditorConfig",
-    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;stripe__payment&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.haulmont.rcb.reactEditorConfig&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -123,6 +129,7 @@
       <workItem from="1682008366835" duration="5000" />
       <workItem from="1682015171349" duration="13496000" />
       <workItem from="1682031778365" duration="1356000" />
+      <workItem from="1682093539552" duration="1990000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>

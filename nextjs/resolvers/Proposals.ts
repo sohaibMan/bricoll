@@ -39,6 +39,7 @@ export const ProposalResolvers: Resolvers = {
             // check if the project exits
             freelancerMiddleware(context);
 
+
             const project = await projectsCollection.findOne({_id: new ObjectId(args.project_id)}) as unknown as Project;
 
             if (!project) throw new GraphQLError("The project no longer exists",

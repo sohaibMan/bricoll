@@ -109,7 +109,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
-                updated_at:new Date()
+                updated_at: new Date()
             }, {$set: {status: ContractStatus.Accepted}}, {
                 returnDocument: "after"
             });
@@ -128,7 +128,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
-                updated_at:new Date()
+                updated_at: new Date()
             }, {$set: {status: ContractStatus.Cancelled}}, {
                 returnDocument: "after"
             });
@@ -137,6 +137,7 @@ export const ContractResolvers: Resolvers = {
             return updatedContract.value as unknown as Contract;
         },
         //     completeContract: async (parent, args, context, info) => {
+        // moved to a rest endpoint because it needs some redirection and strip integration
         //         // the contract status is
         //         // you must be a freelancer to accept a contract that is created by a client
         //         clientMiddleware(context)
@@ -159,7 +160,7 @@ export const ContractResolvers: Resolvers = {
         //     //     the freelancer has accepted the contract now the client can complete the contract if he pays for it
         //
         //     // programmatically create a product so the client has pays for it
-        //     // todo check if client pays for the contract
+        //     //  check if client pays for the contract
         //
         //     // @ZenaguiAnas (we should add a payment here)
         //

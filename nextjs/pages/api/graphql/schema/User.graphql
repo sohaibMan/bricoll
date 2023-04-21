@@ -1,4 +1,4 @@
-enum status {
+enum StatusEnum {
   Online
   Invisible
 }
@@ -41,7 +41,7 @@ type clientProfile {
   _id: ID
   image: String
   contact: User
-  status: status
+  status: StatusEnum
   company: companyDetails!
 }
 
@@ -49,7 +49,7 @@ type freelancerProfile {
   _id: ID
   contact: User!
   image: String
-  status: status
+  status: StatusEnum
   skills: [String!]
   experienceLevel: level_of_expertise!
   categories: [String!]!

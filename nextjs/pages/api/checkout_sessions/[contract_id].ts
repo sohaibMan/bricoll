@@ -11,16 +11,16 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         try {
-
+            // extract the contract id from the query
             const contract_id = req.query.contract_id?.toString();
 
             if (!contract_id) return res.status(400).json("bad request , provide the contract id \"");
-
+            // get the user id from the token
             const userToken = await getToken({req});
             if (!userToken) return res.status(401).json("you are not authenticated ")
             const client_id = userToken.sub;
             if (!client_id) return res.status(401).json("you are not authenticated ")
-            // console.log(client_id)
+            // get the contract from the database
             const contract = await contractCollection.findOne({
                 _id: new ObjectId(contract_id),
                 client_id: new ObjectId(client_id),
@@ -37,11 +37,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // console.log("there")
             let product;
             try {
+                // check if the product exists
                 product = await stripe.products.retrieve(contract_id);//check if the product
+                //check if the product is not active
                 if (!product.active) return res.status(400).json("The product is not active maybe already paid or got removed")
             } catch (e) {
                 //      the client came here the first time
                 //     the project doesn't exist
+                //the retrieve method throws an error if the product doesn't exist
                 product = await stripe.products.create({
                     id: contract_id,
                     name: 'Contract N:' + contract_id,
@@ -55,11 +58,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
             // console.log(product)
             //
-            await stripe.prices.create({
-                unit_amount_decimal: contract.price,
-                currency: 'usd',
-                product: product.id
-            });
+            // await stripe.prices.create({
+            //     unit_amount_decimal: contract.price,
+            //     currency: 'usd',
+            //     product: product.id
+            // });
             // // }
             // console.log(product)
             const session = await stripe.checkout.sessions.create({
@@ -80,10 +83,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 _id: new ObjectId(contract_id),
                 // @ts-ignore
                 client_id: new ObjectId(client_id),
-            }, {$set: {status: ContractStatus.Completed, created_at: new Date()}}, {
+            }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}}, {
                 returnDocument: "after"
             })
-
+            // make the product inactive so the client can't pay for it again
             await stripe.products.update(
                 contract_id,
                 {active: false}
