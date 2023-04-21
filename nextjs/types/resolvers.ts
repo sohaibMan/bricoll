@@ -67,16 +67,14 @@ export type Mutation = {
   declineProposal?: Maybe<Proposal>;
   deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
-  dislikeProject?: Maybe<QueryResult>;
   editPassword?: Maybe<Scalars['Boolean']>;
   editProfile?: Maybe<Scalars['Boolean']>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
-  loveProject?: Maybe<QueryResult>;
+  reactToProject?: Maybe<QueryResult>;
   searchProject?: Maybe<Array<Maybe<Project>>>;
   submitProposal: Proposal;
-  unDislikeProject?: Maybe<QueryResult>;
-  unLoveProject?: Maybe<QueryResult>;
+  undoReactToProject?: Maybe<QueryResult>;
   withdrawProposal?: Maybe<Proposal>;
 };
 
@@ -121,32 +119,22 @@ export type MutationDeclineProposalArgs = {
 };
 
 
-export type MutationDeleteAccountArgs = {
-  _id?: InputMaybe<Scalars['ID']>;
-};
-
-
 export type MutationDeleteProjectArgs = {
-  id?: InputMaybe<Scalars['ObjectID']>;
-};
-
-
-export type MutationDislikeProjectArgs = {
-  id?: InputMaybe<Scalars['ObjectID']>;
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationEditPasswordArgs = {
-  newPassword?: InputMaybe<Scalars['String']>;
-  oldPassword?: InputMaybe<Scalars['String']>;
+  newPassword: Scalars['String'];
+  oldPassword: Scalars['String'];
 };
 
 
 export type MutationEditProfileArgs = {
   email?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<Scalars['String']>;
+  imageUrl?: InputMaybe<Scalars['URL']>;
   name?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Status>;
+  status?: InputMaybe<StatusEnum>;
 };
 
 
@@ -169,8 +157,9 @@ export type MutationEditProposalArgs = {
 };
 
 
-export type MutationLoveProjectArgs = {
-  id?: InputMaybe<Scalars['ObjectID']>;
+export type MutationReactToProjectArgs = {
+  id: Scalars['ObjectID'];
+  reaction_type: Reaction_Type;
 };
 
 
@@ -190,13 +179,9 @@ export type MutationSubmitProposalArgs = {
 };
 
 
-export type MutationUnDislikeProjectArgs = {
-  id?: InputMaybe<Scalars['ObjectID']>;
-};
-
-
-export type MutationUnLoveProjectArgs = {
-  id?: InputMaybe<Scalars['ObjectID']>;
+export type MutationUndoReactToProjectArgs = {
+  id: Scalars['ObjectID'];
+  reaction_type: Reaction_Type;
 };
 
 
@@ -215,7 +200,7 @@ export type Project = {
   price: Scalars['Float'];
   projectScope?: Maybe<ProjectScopeOutput>;
   proposals?: Maybe<Array<Maybe<Proposal>>>;
-  reactions: Reactions;
+  reactions: Array<Maybe<Reactions>>;
   skills: Array<Scalars['String']>;
   title: Scalars['String'];
 };
@@ -288,11 +273,10 @@ export type QueryGetProfileArgs = {
   _id?: InputMaybe<Scalars['ID']>;
 };
 
-export type Reactions = {
-  __typename?: 'Reactions';
-  dislike: Scalars['Int'];
-  love: Scalars['Int'];
-};
+export enum StatusEnum {
+  Invisible = 'Invisible',
+  Online = 'Online'
+}
 
 export type Subscription = {
   __typename?: 'Subscription';
@@ -327,7 +311,7 @@ export type ClientProfile = {
   company: CompanyDetails;
   contact?: Maybe<User>;
   image?: Maybe<Scalars['String']>;
-  status?: Maybe<Status>;
+  status?: Maybe<StatusEnum>;
 };
 
 export type CompanyDetails = {
@@ -359,7 +343,7 @@ export type FreelancerProfile = {
   proposals?: Maybe<Array<Maybe<Proposal>>>;
   skills?: Maybe<Array<Scalars['String']>>;
   specializedProfile?: Maybe<Array<Maybe<Scalars['String']>>>;
-  status?: Maybe<Status>;
+  status?: Maybe<StatusEnum>;
 };
 
 export enum Level_Of_Expertise {
@@ -381,15 +365,21 @@ export type QueryResult = {
   ackandlodement: Scalars['Boolean'];
 };
 
+export enum Reaction_Type {
+  Dislike = 'DISLIKE',
+  Love = 'LOVE'
+}
+
+export type Reactions = {
+  __typename?: 'reactions';
+  freelancer_id: Scalars['ObjectID'];
+  reaction_type: Reaction_Type;
+};
+
 export enum Size_Of_Project {
   Large = 'LARGE',
   Medium = 'MEDIUM',
   Small = 'SMALL'
-}
-
-export enum Status {
-  Invisible = 'Invisible',
-  Online = 'Online'
 }
 
 export type UserData = {
@@ -496,7 +486,7 @@ export type ResolversTypes = ResolversObject<{
   ProjectScopeOutput: ResolverTypeWrapper<ProjectScopeOutput>;
   Proposal: ResolverTypeWrapper<Proposal>;
   Query: ResolverTypeWrapper<{}>;
-  Reactions: ResolverTypeWrapper<Reactions>;
+  StatusEnum: StatusEnum;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
@@ -508,8 +498,9 @@ export type ResolversTypes = ResolversObject<{
   level_of_expertise: Level_Of_Expertise;
   proposal_status: Proposal_Status;
   queryResult: ResolverTypeWrapper<QueryResult>;
+  reaction_type: Reaction_Type;
+  reactions: ResolverTypeWrapper<Reactions>;
   size_of_project: Size_Of_Project;
-  status: Status;
   userData: UserData;
   userRole: UserRole;
 }>;
@@ -531,7 +522,6 @@ export type ResolversParentTypes = ResolversObject<{
   ProjectScopeOutput: ProjectScopeOutput;
   Proposal: Proposal;
   Query: {};
-  Reactions: Reactions;
   String: Scalars['String'];
   Subscription: {};
   URL: Scalars['URL'];
@@ -541,6 +531,7 @@ export type ResolversParentTypes = ResolversObject<{
   filterOptionsInput: FilterOptionsInput;
   freelancerProfile: FreelancerProfile;
   queryResult: QueryResult;
+  reactions: Reactions;
   userData: UserData;
 }>;
 
@@ -597,18 +588,16 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, 'id'>>;
   createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'proposal_id'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
-  deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationDeleteAccountArgs>>;
-  deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDeleteProjectArgs>>;
-  dislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationDislikeProjectArgs>>;
-  editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditPasswordArgs>>;
+  deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
+  editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationEditPasswordArgs, 'newPassword' | 'oldPassword'>>;
   editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
-  loveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationLoveProjectArgs>>;
+  reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
   searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
-  unDislikeProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnDislikeProjectArgs>>;
-  unLoveProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, Partial<MutationUnLoveProjectArgs>>;
+  undoReactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationUndoReactToProjectArgs, 'id' | 'reaction_type'>>;
   withdrawProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationWithdrawProposalArgs, 'id'>>;
 }>;
 
@@ -626,7 +615,7 @@ export type ProjectResolvers<ContextType = ServerContext, ParentType extends Res
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   projectScope?: Resolver<Maybe<ResolversTypes['ProjectScopeOutput']>, ParentType, ContextType>;
   proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
-  reactions?: Resolver<ResolversTypes['Reactions'], ParentType, ContextType>;
+  reactions?: Resolver<Array<Maybe<ResolversTypes['reactions']>>, ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -663,12 +652,6 @@ export type QueryResolvers<ContextType = ServerContext, ParentType extends Resol
   getProfile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryGetProfileArgs>>;
 }>;
 
-export type ReactionsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Reactions'] = ResolversParentTypes['Reactions']> = ResolversObject<{
-  dislike?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  love?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type SubscriptionResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
   projectGotProposal?: SubscriptionResolver<Maybe<ResolversTypes['Proposal']>, "projectGotProposal", ParentType, ContextType, RequireFields<SubscriptionProjectGotProposalArgs, 'id'>>;
   proposalStatusChanged?: SubscriptionResolver<Maybe<ResolversTypes['Proposal']>, "proposalStatusChanged", ParentType, ContextType, RequireFields<SubscriptionProposalStatusChangedArgs, 'id'>>;
@@ -694,7 +677,7 @@ export type ClientProfileResolvers<ContextType = ServerContext, ParentType exten
   company?: Resolver<ResolversTypes['companyDetails'], ParentType, ContextType>;
   contact?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['status']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -719,13 +702,19 @@ export type FreelancerProfileResolvers<ContextType = ServerContext, ParentType e
   proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
   skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   specializedProfile?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['status']>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type QueryResultResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['queryResult'] = ResolversParentTypes['queryResult']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   ackandlodement?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ReactionsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['reactions'] = ResolversParentTypes['reactions']> = ResolversObject<{
+  freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  reaction_type?: Resolver<ResolversTypes['reaction_type'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -739,7 +728,6 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   ProjectScopeOutput?: ProjectScopeOutputResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
-  Reactions?: ReactionsResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
@@ -747,6 +735,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   companyDetails?: CompanyDetailsResolvers<ContextType>;
   freelancerProfile?: FreelancerProfileResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
+  reactions?: ReactionsResolvers<ContextType>;
 }>;
 
 export type DirectiveResolvers<ContextType = ServerContext> = ResolversObject<{

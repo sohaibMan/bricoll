@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/apollo.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/apollo.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/User.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Projects.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Projects.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +64,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;stripe__payment&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -129,7 +128,9 @@
       <workItem from="1682008366835" duration="5000" />
       <workItem from="1682015171349" duration="13496000" />
       <workItem from="1682031778365" duration="1356000" />
-      <workItem from="1682093539552" duration="1990000" />
+      <workItem from="1682093539552" duration="2553000" />
+      <workItem from="1682099370227" duration="37000" />
+      <workItem from="1682112423200" duration="5144000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -194,7 +195,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682032953012</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ...">
+      <created>1682096015593</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682096015594</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,6 +231,7 @@
     <MESSAGE value="refactor email service" />
     <MESSAGE value="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn" />
     <MESSAGE value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
+    <MESSAGE value="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ..." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ..." />
   </component>
 </project>

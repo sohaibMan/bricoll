@@ -17,11 +17,9 @@ type Mutation {
         projectScope: ProjectScopeInput
         category: ProjectCategoriesEnum
     ): Project
-    deleteProject(id: ObjectID): queryResult
-    loveProject(id: ObjectID): queryResult
-    dislikeProject(id: ObjectID): queryResult
-    unLoveProject(id: ObjectID): queryResult
-    unDislikeProject(id: ObjectID): queryResult
+    deleteProject(id: ObjectID!): queryResult
+    reactToProject(id: ObjectID!,reaction_type:reaction_type!): queryResult # likeProject LoveProject
+    undoReactToProject(id: ObjectID!,reaction_type:reaction_type!): queryResult #unDislikeProject , unLoveProject
     searchProject(query: String!, filter: filterOptionsInput): [Project]
     #    Proposal
     submitProposal(

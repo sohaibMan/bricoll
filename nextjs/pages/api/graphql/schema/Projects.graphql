@@ -11,66 +11,76 @@ scalar URL
 #}
 
 enum size_of_project {
-  SMALL
-  MEDIUM
-  LARGE
+    SMALL
+    MEDIUM
+    LARGE
 }
-
-type Reactions {
-  love: Int!
-  dislike: Int!
+enum reaction_type{
+    LOVE,
+    DISLIKE
+}
+#type Meta_data{
+#    freelancer_id:ObjectID
+#    reaction:Reaction_Types_Enum
+#}
+type reactions {
+    freelancer_id:ObjectID!
+    reaction_type:reaction_type!
+#    love: Int! # the count could be get from the reaction object
+#    dislike: Int!
+#    meta_data:[Meta_data!]
 }
 
 input ProjectScopeInput {
-  estimated_duration_in_days: Int!
+    estimated_duration_in_days: Int!
     @constraint(exclusiveMin: 0, exclusiveMax: 90)
-  level_of_expertise: level_of_expertise!
-  size_of_project: size_of_project!
+    level_of_expertise: level_of_expertise!
+    size_of_project: size_of_project!
 }
 
 type ProjectScopeOutput {
-  estimated_duration_in_days: Int!
+    estimated_duration_in_days: Int!
     @constraint(exclusiveMin: 0, exclusiveMax: 90)
-  level_of_expertise: level_of_expertise!
-  size_of_project: size_of_project!
+    level_of_expertise: level_of_expertise!
+    size_of_project: size_of_project!
 }
 
 enum ProjectCategoriesEnum {
-  WEB_DEVELOPMENT
-  MOBILE_DEVELOPMENT
-  DESIGN
-  DATA_SCIENCE
-  MARKETING
-  WRITING
-  OTHER
+    WEB_DEVELOPMENT
+    MOBILE_DEVELOPMENT
+    DESIGN
+    DATA_SCIENCE
+    MARKETING
+    WRITING
+    OTHER
 }
 type Project {
-  client_id: ObjectID
-  _id: ObjectID
-  title: String!
-  description: String!
-  price: Float!
-  skills: [String!]!
-  reactions: Reactions!
-  created_at: Date!
-  projectScope: ProjectScopeOutput
-  attachmentsURL: [Attachment]
-  proposals: [Proposal] # proposals for this project
-  category: ProjectCategoriesEnum!
+    client_id: ObjectID
+    _id: ObjectID
+    title: String!
+    description: String!
+    price: Float!
+    skills: [String!]!
+    reactions: [reactions]!
+    created_at: Date!
+    projectScope: ProjectScopeOutput
+    attachmentsURL: [Attachment]
+    proposals: [Proposal] # proposals for this project
+    category: ProjectCategoriesEnum!
 }
 
 # The "Query" type is special: it lists all of the available queries that
 
 
 type queryResult {
-  _id: ObjectID!
-  ackandlodement: Boolean!
+    _id: ObjectID!
+    ackandlodement: Boolean!
 }
 # filter options
 input filterOptionsInput {
-  priceMin: Float
-  priceMax: Float
-  category: ProjectCategoriesEnum
-  skills: [String!]
+    priceMin: Float
+    priceMax: Float
+    category: ProjectCategoriesEnum
+    skills: [String!]
 }
 
