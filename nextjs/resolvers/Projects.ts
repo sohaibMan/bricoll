@@ -7,6 +7,7 @@ import { clientMiddleware } from "./resolversHelpersFunctions/clientMiddleware";
 import { freelancerMiddleware } from "./resolversHelpersFunctions/freelancerMiddleware";
 const projectsCollection = db.collection("projects")
 const proposalsCollection = db.collection("proposals")
+import { redis } from "../lib/redis.ts"
 
 export const ProjectResolvers: Resolvers = {
   Query: {
@@ -19,7 +20,17 @@ export const ProjectResolvers: Resolvers = {
       },
     Project: async (parent, args, context, info) => {
       // ? private 
-      const project = await projectsCollection.findOne({ _id: new ObjectId(args.id) });
+
+      let project;
+
+      const cacheResults = await redis.get(args.id);
+      if(!cacheResults){
+        project = await projectsCollection.findOne({ _id: new ObjectId(args.id) });
+        await redis.set(args.id, project)   
+      }
+      
+      project = JSON.parse(cacheResults)
+
       if (!project) throw new GraphQLError("There is no project with this Id",
         {
           extensions: {
@@ -62,6 +73,12 @@ export const ProjectResolvers: Resolvers = {
         category: args.category
       }
       const insertedProject = await projectsCollection.insertOne(project);
+
+      console.log(insertedProject);
+      
+
+      await redis.set(insertedProject.insertedId.toString(), JSON.stringify(project));
+
       return insertedProject.acknowledged ? project : null;
     },
     editProject: async (parent, args, context, info) => {
@@ -82,7 +99,11 @@ export const ProjectResolvers: Resolvers = {
         }
       )
       console.log(updateProject);
-      
+
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.set(args.id, updateProject)   
+      }
       return updateProject as unknown as Project;
     },
     deleteProject: async (parent, args, context, info) => {
@@ -97,6 +118,12 @@ export const ProjectResolvers: Resolvers = {
 
       // @ts-expect-error
       const deleteProject = await projectsCollection.deleteOne({ _id: new ObjectId(args.id), client_id: new ObjectId(context.user.id) })
+      
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.del(args.id)   
+      }
+      
       return {
         ackandlodement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
         _id: args.id
@@ -115,6 +142,12 @@ export const ProjectResolvers: Resolvers = {
         }
 
       )
+
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.set(args.id, project)   
+      }
+
       return { _id: args.id, ackandlodement: project.acknowledged }
     },
     dislikeProject: async (parent, args, context, info) => {
@@ -130,6 +163,12 @@ export const ProjectResolvers: Resolvers = {
         }
 
       )
+
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.set(args.id, project)   
+      }
+
       return { _id: args.id, ackandlodement: project.acknowledged }
     },
     unLoveProject: async (parent, args, context, info) => {
@@ -145,6 +184,12 @@ export const ProjectResolvers: Resolvers = {
         }
 
       )
+
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.set(args.id, project)   
+      }
+
       return { _id: args.id, ackandlodement: project.acknowledged }
     },
     unDislikeProject: async (parent, args, context, info) => {
@@ -160,6 +205,12 @@ export const ProjectResolvers: Resolvers = {
         }
 
       )
+
+      const cacheResults = await redis.get(args.id);
+      if(cacheResults){
+         await redis.set(args.id, project)   
+      }
+
       return { _id: args.id, ackandlodement: project.acknowledged }
     },
     searchProject: async (parent, args, context, info) => {
