@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ...">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="add some functions of #27 pull request feature &#10;requestProjectSubmissionReview&#10;acceptRequestProjectSubmissionReview&#10;declineRequestProjectSubmissionReview&#10;cancelRequestProjectSubmissionReview">
+      <change afterPath="$PROJECT_DIR$/diagrams/activity_diagram.mdj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/apollo.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/apollo.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagrams/er_diagram.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/diagrams/er_diagram.mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Contract.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Contract.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Projects.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Projects.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
@@ -48,7 +51,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2NmM3nlh3MwP41OP6DEIDU7CR6i" />
   <component name="ProjectLevelVcsManager">
@@ -58,25 +61,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.haulmont.rcb.reactEditorConfig&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "Main",
+    "last_opened_file_path": "/home/sohaib/Desktop/letcode",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "com.haulmont.rcb.reactEditorConfig",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -130,7 +134,9 @@
       <workItem from="1682031778365" duration="1356000" />
       <workItem from="1682093539552" duration="2553000" />
       <workItem from="1682099370227" duration="37000" />
-      <workItem from="1682112423200" duration="5144000" />
+      <workItem from="1682112423200" duration="5199000" />
+      <workItem from="1682159028132" duration="12000" />
+      <workItem from="1682250687509" duration="5166000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -202,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682096015594</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="save loveProject,dislikeProject,unLoveProject,unDislikeProject actions to the database to keep track of the freelancer that react to project and show them a filled reactions buttons (love ,dlike...) and prevent them to re-react .... #26">
+      <created>1682117644721</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682117644721</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -220,6 +233,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix some typescript issues" />
     <MESSAGE value=" add cancelContract and completeContract functions" />
     <MESSAGE value=" add cancelContract and completeContract functions and refactor the code" />
@@ -232,6 +246,8 @@
     <MESSAGE value="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn" />
     <MESSAGE value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
     <MESSAGE value="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ..." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ..." />
+    <MESSAGE value="save loveProject,dislikeProject,unLoveProject,unDislikeProject actions to the database to keep track of the freelancer that react to project and show them a filled reactions buttons (love ,dlike...) and prevent them to re-react .... #26" />
+    <MESSAGE value="add some functions of #27 pull request feature &#10;requestProjectSubmissionReview&#10;acceptRequestProjectSubmissionReview&#10;declineRequestProjectSubmissionReview&#10;cancelRequestProjectSubmissionReview" />
+    <option name="LAST_COMMIT_MESSAGE" value="add some functions of #27 pull request feature &#10;requestProjectSubmissionReview&#10;acceptRequestProjectSubmissionReview&#10;declineRequestProjectSubmissionReview&#10;cancelRequestProjectSubmissionReview" />
   </component>
 </project>

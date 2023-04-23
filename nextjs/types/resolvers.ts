@@ -45,8 +45,9 @@ export type Contract = {
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
   proposal_id: Scalars['ObjectID'];
-  status: Scalars['String'];
-  terms?: Maybe<Array<Maybe<Scalars['String']>>>;
+  status: ContractStatus;
+  submission_reviews: Array<Maybe<Submission_Review>>;
+  terms: Array<Maybe<Scalars['String']>>;
   updated_at: Scalars['Date'];
 };
 
@@ -54,6 +55,7 @@ export enum ContractStatus {
   Accepted = 'ACCEPTED',
   Cancelled = 'CANCELLED',
   Completed = 'COMPLETED',
+  Paid = 'PAID',
   Pending = 'PENDING'
 }
 
@@ -61,10 +63,13 @@ export type Mutation = {
   __typename?: 'Mutation';
   acceptContract?: Maybe<Contract>;
   acceptProposal?: Maybe<Proposal>;
+  acceptRequestProjectSubmissionReview?: Maybe<QueryResult>;
   addProject?: Maybe<Project>;
   cancelContract?: Maybe<Contract>;
+  cancelRequestProjectSubmissionReview?: Maybe<QueryResult>;
   createContract?: Maybe<Contract>;
   declineProposal?: Maybe<Proposal>;
+  declineRequestProjectSubmissionReview?: Maybe<QueryResult>;
   deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
   editPassword?: Maybe<Scalars['Boolean']>;
@@ -72,6 +77,7 @@ export type Mutation = {
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   reactToProject?: Maybe<QueryResult>;
+  requestProjectSubmissionReview?: Maybe<QueryResult>;
   searchProject?: Maybe<Array<Maybe<Project>>>;
   submitProposal: Proposal;
   undoReactToProject?: Maybe<QueryResult>;
@@ -86,6 +92,12 @@ export type MutationAcceptContractArgs = {
 
 export type MutationAcceptProposalArgs = {
   id: Scalars['ObjectID'];
+};
+
+
+export type MutationAcceptRequestProjectSubmissionReviewArgs = {
+  project_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
 };
 
 
@@ -104,18 +116,30 @@ export type MutationCancelContractArgs = {
 };
 
 
+export type MutationCancelRequestProjectSubmissionReviewArgs = {
+  project_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
+};
+
+
 export type MutationCreateContractArgs = {
   duration: Scalars['Int'];
   freelancer_id: Scalars['ObjectID'];
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
   proposal_id: Scalars['ObjectID'];
-  terms?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  terms: Array<Scalars['String']>;
 };
 
 
 export type MutationDeclineProposalArgs = {
   id: Scalars['ObjectID'];
+};
+
+
+export type MutationDeclineRequestProjectSubmissionReviewArgs = {
+  project_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
 };
 
 
@@ -160,6 +184,14 @@ export type MutationEditProposalArgs = {
 export type MutationReactToProjectArgs = {
   id: Scalars['ObjectID'];
   reaction_type: Reaction_Type;
+};
+
+
+export type MutationRequestProjectSubmissionReviewArgs = {
+  attachments: Array<AttachmentInput>;
+  description: Scalars['String'];
+  project_id: Scalars['ObjectID'];
+  title: Scalars['String'];
 };
 
 
@@ -278,6 +310,25 @@ export enum StatusEnum {
   Online = 'Online'
 }
 
+export enum SubmissionReviewStatus {
+  Accepted = 'ACCEPTED',
+  Cancelled = 'CANCELLED',
+  Declined = 'Declined',
+  Pending = 'PENDING'
+}
+
+export type Submission_Review = {
+  __typename?: 'Submission_review';
+  _id: Scalars['ObjectID'];
+  accepted_at?: Maybe<Scalars['Date']>;
+  attachments: Array<Attachment>;
+  created_at: Scalars['Date'];
+  description: Scalars['String'];
+  status: SubmissionReviewStatus;
+  title: Scalars['String'];
+  updated_at: Scalars['Date'];
+};
+
 export type Subscription = {
   __typename?: 'Subscription';
   projectGotProposal?: Maybe<Proposal>;
@@ -362,7 +413,7 @@ export enum Proposal_Status {
 export type QueryResult = {
   __typename?: 'queryResult';
   _id: Scalars['ObjectID'];
-  ackandlodement: Scalars['Boolean'];
+  acknowledgement: Scalars['Boolean'];
 };
 
 export enum Reaction_Type {
@@ -488,6 +539,8 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   StatusEnum: StatusEnum;
   String: ResolverTypeWrapper<Scalars['String']>;
+  SubmissionReviewStatus: SubmissionReviewStatus;
+  Submission_review: ResolverTypeWrapper<Submission_Review>;
   Subscription: ResolverTypeWrapper<{}>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
@@ -523,6 +576,7 @@ export type ResolversParentTypes = ResolversObject<{
   Proposal: Proposal;
   Query: {};
   String: Scalars['String'];
+  Submission_review: Submission_Review;
   Subscription: {};
   URL: Scalars['URL'];
   User: User;
@@ -571,8 +625,9 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  terms?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
+  submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
+  terms?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -584,10 +639,13 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 export type MutationResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = ResolversObject<{
   acceptContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationAcceptContractArgs, 'id'>>;
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
+  acceptRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAcceptRequestProjectSubmissionReviewArgs, 'project_id' | 'submission_review_id'>>;
   addProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationAddProjectArgs, 'category' | 'description' | 'price' | 'projectScope' | 'skills' | 'title'>>;
   cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, 'id'>>;
-  createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'proposal_id'>>;
+  cancelRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationCancelRequestProjectSubmissionReviewArgs, 'project_id' | 'submission_review_id'>>;
+  createContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCreateContractArgs, 'duration' | 'freelancer_id' | 'price' | 'project_id' | 'proposal_id' | 'terms'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
+  declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'project_id' | 'submission_review_id'>>;
   deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
   editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationEditPasswordArgs, 'newPassword' | 'oldPassword'>>;
@@ -595,6 +653,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
+  requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'attachments' | 'description' | 'project_id' | 'title'>>;
   searchProject?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, RequireFields<MutationSearchProjectArgs, 'query'>>;
   submitProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationSubmitProposalArgs, 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   undoReactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationUndoReactToProjectArgs, 'id' | 'reaction_type'>>;
@@ -650,6 +709,18 @@ export type QueryResolvers<ContextType = ServerContext, ParentType extends Resol
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
   getProfile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<QueryGetProfileArgs>>;
+}>;
+
+export type Submission_ReviewResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Submission_review'] = ResolversParentTypes['Submission_review']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  accepted_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  attachments?: Resolver<Array<ResolversTypes['Attachment']>, ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['SubmissionReviewStatus'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type SubscriptionResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = ResolversObject<{
@@ -708,7 +779,7 @@ export type FreelancerProfileResolvers<ContextType = ServerContext, ParentType e
 
 export type QueryResultResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['queryResult'] = ResolversParentTypes['queryResult']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  ackandlodement?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  acknowledgement?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -728,6 +799,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   ProjectScopeOutput?: ProjectScopeOutputResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Submission_review?: Submission_ReviewResolvers<ContextType>;
   Subscription?: SubscriptionResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;

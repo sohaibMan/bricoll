@@ -99,7 +99,7 @@ export const ProjectResolvers: Resolvers = {
                 client_id: new ObjectId(context.user.id)
             })
             return {
-                ackandlodement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
+                acknowledgement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
                 _id: args.id
             }
         },
@@ -118,7 +118,7 @@ export const ProjectResolvers: Resolvers = {
                     }
                 }
             )
-            return {_id: args.id, ackandlodement: project.modifiedCount === 1}
+            return {_id: args.id, acknowledgement: project.modifiedCount === 1}
         },
         // dislikeProject: async (parent, args, context, info) => {
         //     // private
@@ -166,7 +166,7 @@ export const ProjectResolvers: Resolvers = {
 
         }
 )
-return {_id: args.id, ackandlodement: project.modifiedCount == 1}
+return {_id: args.id, acknowledgement: project.modifiedCount == 1}
 },
 searchProject: async (parent, args, context, info) => {
     // todo

@@ -4,7 +4,7 @@ import {
     Contract,
     ContractStatus,
     Project,
-    Resolvers
+    Resolvers, Submission_Review, SubmissionReviewStatus
 } from "../types/resolvers";
 import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
@@ -83,6 +83,8 @@ export const ContractResolvers: Resolvers = {
                 price: args.price,
                 created_at: new Date(),
                 updated_at: new Date(),
+                submission_reviews: [],
+                terms: args.terms,
             }
             const insertedContract = await contractCollection.insertOne(contract);
             if (!insertedContract.acknowledged) throw new GraphQLError("An error has occurred ",
@@ -176,5 +178,143 @@ export const ContractResolvers: Resolvers = {
         //
         // }
 // }
+        requestProjectSubmissionReview: async (parent, args, context, info) => {
+            //     rules : only client can request a review
+            //     rules : the contract status must be completed
+            //     rules : the contract must be paid
+            // the freelancer can send multiple requests for review (for example multiple versions of the project)
+            freelancerMiddleware(context);
+
+            const submission_review: Submission_Review = {
+                _id: new ObjectId(),
+                created_at: new Date(),
+                updated_at: new Date(),
+                attachments: args.attachments,
+                description: args.description,
+                title: args.title,
+                status: SubmissionReviewStatus.Pending,
+            }
+            const contract = await contractCollection.updateOne({
+                    _id: new ObjectId(args.project_id),
+                    // @ts-ignore
+                    freelancer_id: new ObjectId(context.user.id),
+                    status: ContractStatus.Completed,
+                },
+                {
+                    $push: {
+                        submission_reviews: submission_review
+                    }
+
+                })
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+                extensions: {
+                    code: 'NOTFOUND',
+                    http: {status: 404},
+                }
+            })
+            return {
+                acknowledgement: contract.upsertedCount === 1,
+                _id: submission_review._id
+            };
+        },
+        acceptRequestProjectSubmissionReview: async (parent, args, context, info) => {
+            clientMiddleware(context);
+            // because we will handle payment here the client can accept only one submission review
+
+            const contract = await contractCollection.updateOne(
+                {
+                    _id: new ObjectId(args.project_id),
+                    // @ts-ignore
+                    client_id: new ObjectId(context.user.id),
+                    "submission_reviews._id": new ObjectId(args.submission_review_id),
+                    "submission_reviews.status": SubmissionReviewStatus.Pending,
+                    status: ContractStatus.Completed,
+                },
+                {
+                    $set: {
+                        "submission_reviews.$.status": SubmissionReviewStatus.Accepted,
+                        "submission_reviews.$.updated_at": new Date(),
+                        "submission_reviews.$.accepted_at": new Date(),
+                        "status": ContractStatus.Paid,
+                    }
+                }
+            )
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+                extensions: {
+                    code: 'NOTFOUND',
+                    http: {status: 404},
+                }
+            })
+            // the client should receive a payment request
+
+            return {
+                acknowledgement: contract.upsertedCount === 1,
+                _id: args.submission_review_id
+            }
+
+        },
+        declineRequestProjectSubmissionReview: async (parent, args, context, info) => {
+            clientMiddleware(context);
+            const contract = await contractCollection.updateOne(
+                {
+                    _id: new ObjectId(args.project_id),
+                    // @ts-ignore
+                    client_id: new ObjectId(context.user.id),
+                    "submission_reviews._id": new ObjectId(args.submission_review_id),
+                    "submission_reviews.status": SubmissionReviewStatus.Pending,
+                    status: ContractStatus.Completed,
+                },
+                {
+                    $set: {
+                        "submission_reviews.$.status": SubmissionReviewStatus.Declined,
+                        "submission_reviews.$.updated_at": new Date(),
+                    }
+                }
+            )
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+                extensions: {
+                    code: 'NOTFOUND',
+                    http: {status: 404},
+                }
+            })
+
+            return {
+                acknowledgement: contract.upsertedCount === 1,
+                _id: args.submission_review_id
+            }
+
+        },
+        cancelRequestProjectSubmissionReview: async (parent, args, context, info) => {
+            freelancerMiddleware(context);
+            const contract = await contractCollection.updateOne(
+                {
+                    _id: new ObjectId(args.project_id),
+                    // @ts-ignore
+                    freelancer_id: new ObjectId(context.user.id),
+                    "submission_reviews._id": new ObjectId(args.submission_review_id),
+                    "submission_reviews.status": SubmissionReviewStatus.Pending
+                },
+                {
+                    $set: {
+                        "submission_reviews.$.status": SubmissionReviewStatus.Cancelled,
+                        "submission_reviews.$.updated_at": new Date(),
+                    }
+                }
+            )
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+                extensions: {
+                    code: 'NOTFOUND',
+                    http: {status: 404},
+                }
+            })
+
+            return {
+                acknowledgement: contract.upsertedCount === 1,
+                _id: args.submission_review_id
+            }
+
+        }
+
+
     }
 }

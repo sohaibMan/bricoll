@@ -74,7 +74,7 @@ type Project {
 
 type queryResult {
     _id: ObjectID!
-    ackandlodement: Boolean!
+    acknowledgement: Boolean!
 }
 # filter options
 input filterOptionsInput {
