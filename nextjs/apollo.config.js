@@ -1,5 +1,5 @@
 module.exports = {
-  client: {
+   client: {
     service: {
       name: "bricoll",
       url: "http://localhost/api/graphql",

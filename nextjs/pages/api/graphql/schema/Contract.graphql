@@ -1,22 +1,42 @@
 scalar ObjectID
 
+enum SubmissionReviewStatus {
+    PENDING
+    ACCEPTED
+    Declined
+    CANCELLED
+}
+type Submission_review{
+    _id: ObjectID!
+    attachments: [Attachment!]!
+    title: String!
+    description: String!
+    created_at: Date!
+    updated_at: Date!
+    accepted_at: Date
+    status: SubmissionReviewStatus!
+}
+
 type Contract {
-  _id: ObjectID!
-  freelancer_id: ObjectID!
-  client_id: ObjectID!
-  project_id: ObjectID!
-  proposal_id: ObjectID!
-  price: Float!
-  duration: Int!
-  status: String!
-  createdAt: Date!
-  updatedAt: Date!
-  terms: [String]
+    _id: ObjectID!
+    freelancer_id: ObjectID!
+    client_id: ObjectID!
+    project_id: ObjectID!
+    proposal_id: ObjectID!
+    price: Float!
+    duration: Int!
+    status: ContractStatus!
+    created_at: Date!
+    updated_at: Date!
+    terms: [String]!
+    submission_reviews: [Submission_review]!
 }
 enum ContractStatus {
-  PENDING # default not signed
-  ACCEPTED # signed by both parties
-  CANCELLED # cancelled by either party
-  COMPLETED # completed by both parties
+    PENDING # default not signed by the freelancer (by default signed by the client because he created it !!!)
+    ACCEPTED # signed by both parties
+    CANCELLED # cancelled by either party
+    COMPLETED #!!! completed by both parties !!!!
+    PAID #!!! paid by the client !!!!
+
 }
 
