@@ -25,6 +25,7 @@ export default async function handler(
         passwordResetExpires: { $gt: Date.now() },
     });
 
+    
     // ? If token has not expired, and there is user, set the new password
     if (!user) {
       return res.status(400).json({

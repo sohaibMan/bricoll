@@ -4,6 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
+import { redis } from "../../../lib/redis.ts"
 
 
 export default async function handler(
@@ -26,6 +27,12 @@ export default async function handler(
     await db.collection("users").deleteOne({ _id: new ObjectId(user_id) })
 
     // TODO: redirection to home page /
+
+    // Deleting the user from the cache of Redis if existed 
+    const cachedResults = await redis.get(user.email);
+    if(cachedResults){
+      redis.del('email');
+    }
 
     res.status(204).json({
       status: 'success',

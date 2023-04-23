@@ -7,6 +7,7 @@ import bcrypt from 'bcrypt';
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
 import { clientPromise } from "../../../lib/mongodb";
+import { redis } from "../../../lib/redis.ts"
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
 // import GithubProvider from "next-auth/providers/github"
@@ -17,6 +18,26 @@ import { clientPromise } from "../../../lib/mongodb";
 
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
+
+async function verifyUserData(user: any, credentialPassword: string){
+  if (!user || !user.hashedPassword) {
+    throw new Error('Invalid credentials');
+  }
+
+  const isCorrectPassword = await bcrypt.compare(
+    credentialPassword,
+    user.hashedPassword
+  );
+
+  if (!isCorrectPassword) {
+    throw new Error('Invalid credentials');
+  }
+
+  // console.log("queried data from Redis ...");
+
+  return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name,isCompleted:user.isCompleted as boolean };
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -50,30 +71,40 @@ export const authOptions: NextAuthOptions = {
 
         // const user = await authResponse.json()
 
+        let user;
+
         // return user
         if (!credentials?.email || !credentials?.password) {
           throw new Error('Invalid credentials');
         }
 
-        const user = await db.collection("users").findOne({ email: credentials.email });
+        try {
+          const cacheResults = await redis.get(credentials.email);
+          if(cacheResults){
+            user = JSON.parse(cacheResults);
+
+            console.log("queried data from Redis Database ...")
+
+            return verifyUserData(user, credentials.password);
+          }
+
+          user = await db.collection("users").findOne({ email: credentials.email });
+
+          console.log("queried data from MongoDB ...")
+
+          // Caching the data via Redis
+          await redis.set(credentials.email, JSON.stringify(user))
+
+          return verifyUserData(user, credentials.password);
+
+        } catch( err ){
+          throw new Error(err);
+        }
+
+        // user = await db.collection("users").findOne({ email: credentials.email });
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
 
-        if (!user || !user.hashedPassword) {
-          throw new Error('Invalid credentials');
-        }
-
-        const isCorrectPassword = await bcrypt.compare(
-          credentials.password,
-          user.hashedPassword
-        );
-
-        if (!isCorrectPassword) {
-          throw new Error('Invalid credentials');
-        }
-
-
-
-        return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name,isCompleted:user.isCompleted as boolean };
+        
         // return { id: "1", userRole: UserRole.Client }
 
         // console.log("🚀 ~ file: [...nextauth].ts:93 ~ authorize ~ user:", user)

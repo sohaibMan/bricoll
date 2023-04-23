@@ -8,6 +8,7 @@ import { User } from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import emailService from "../../../lib/email";
+import { redis } from "../../../lib/redis.ts"
 // import { ObjectId } from "mongodb";
 // import getConfig from "next/config";
 
@@ -39,6 +40,8 @@ export default async function handler(
     const userData: User = await req.body;
     const { email, name, password } = userData;
     // const isCompleted = false;
+
+    await redis.set('email', email);
 
     // ? Verifying the incoming data from the user
     if (!email || !name || !password) {
@@ -94,9 +97,6 @@ export default async function handler(
 
     // const userId = insertedId.toString();
 
-
-
-    
 
     // ? redirecting to the email verification page
 

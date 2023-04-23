@@ -8,6 +8,8 @@ import { ObjectId } from "mongodb";
 import {getToken} from "next-auth/jwt";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
+import { redis } from "../../../lib/redis.ts"
+
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,7 +34,17 @@ export default async function handler(
     }
 
     const user_id = userTokenDecoded.user_id;
+
+
+    // const cachedValue = await redis.get(user_id);
+
+    // if(cachedValue){
+    //   return 
+    // }
+
     const user = await db.collection("users").findOne({ _id: new ObjectId(user_id) });
+
+    // await redis.set(user_id, JSON.stringify(user))
 
     console.log("user ", user);
 
@@ -41,7 +53,7 @@ export default async function handler(
     }
 
     const { skills, level, language } = req.body;
-    // let {email, name} : any = user;
+    let {email, name} : any = user;
 
     // console.log(email, name, hashedPassword, userRole);
     
@@ -50,7 +62,7 @@ export default async function handler(
 
     // user?.isCompleted = true;
 
-    db.collection("users").findOneAndUpdate(
+    const newUserData = await db.collection("users").findOneAndUpdate(
       { _id: new ObjectId(user_id) },
       {
         $set: {
@@ -63,6 +75,10 @@ export default async function handler(
     );
 
     // console.log(newUserInfo);
+
+    // ? Caching the data 
+    await redis.set(email, JSON.stringify(newUserData));
+
     // TODO : Differencing between the user (client or freelancer)
 
     // TODO : Redirection to the '/api/auth/signin' and clearing the cookies

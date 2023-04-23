@@ -6,7 +6,23 @@ import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
 import crypto from "crypto";
 import sgMail from "@sendgrid/mail";
+import { redis } from "../../../lib/redis.ts"
 
+async function fetchData(email: string){
+  // fetching the data from Redis Database 
+  const cacheResults = await redis.get(email);
+  if(cacheResults){
+    return JSON.parse(cacheResults);
+  }
+  
+  // fetching the data from MongoDB
+  const user = await db.collection("users").findOne({ email });
+
+  // ? Caching the user data 
+  await redis.set('email', JSON.stringify(user))
+
+  return user;
+}
 
 export default async function handler(
   req: NextApiRequest,
@@ -14,7 +30,7 @@ export default async function handler(
 ) {
   try {
     // ? Get user based on posted email
-    const user = await db.collection("users").findOne({ email: req.body.email });
+    const user = fetchData(req.body.email);
     if (!user) {
       return res.status(404).json({
         status: "failed",
