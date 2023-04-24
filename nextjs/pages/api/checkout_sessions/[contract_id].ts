@@ -48,23 +48,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 product = await stripe.products.create({
                     id: contract_id,
                     name: 'Contract N:' + contract_id,
-                    description: "Buy paying your are accepting those terms " + contract.terms || " " + " within " + contract.duration + " days",
+                    description: "Buy paying your are accepting those terms " + contract.terms || " " + " within " + contract.duration + " days" + "\n fees: " + contract.fees || " " + "\n price: " + contract.price || " ",
                     default_price_data: {
-                        unit_amount_decimal: +contract.price * 100,//cents to dollar
+                        unit_amount_decimal: contract.price * 100 + contract.fees,//cents to dollar (100 cents = 1 dollar)(price + fees)
                         currency: "usd"
                     }
 
                 });
             }
-            // console.log(product)
-            //
-            // await stripe.prices.create({
-            //     unit_amount_decimal: contract.price,
-            //     currency: 'usd',
-            //     product: product.id
-            // });
-            // // }
-            // console.log(product)
             const session = await stripe.checkout.sessions.create({
                 line_items: [
                     {

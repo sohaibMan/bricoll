@@ -30,6 +30,7 @@ type Contract {
     updated_at: Date!
     terms: [String]!
     submission_reviews: [Submission_review]!
+    fees: Float! # for simplicity we will assume that the percentage fees are fixed (10%) for both parties (-5% for the freelancer and -5% for the client)
 }
 enum ContractStatus {
     PENDING # default not signed by the freelancer (by default signed by the client because he created it !!!)
