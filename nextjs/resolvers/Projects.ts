@@ -20,7 +20,11 @@ export const ProjectResolvers: Resolvers = {
             },
         Project: async (parent, args, context, info) => {
             // ? private
-            const project = await projectsCollection.findOne({_id: new ObjectId(args.id)});
+            clientMiddleware(context);
+            const project = await projectsCollection.findOne({
+                _id: new ObjectId(args.id),
+                client_id: new ObjectId(context.user?.id)
+            });
             if (!project) throw new GraphQLError("There is no project with this Id",
                 {
                     extensions: {
@@ -91,7 +95,7 @@ export const ProjectResolvers: Resolvers = {
             clientMiddleware(context);
             // if there is at least approved proposal you can't delete a project
             // index scan on project_id
-            const proposals = await proposalsCollection.findOne({project_id: new ObjectId(args.id), status: "approved"})
+            const proposals = await proposalsCollection.findOne({project_id: new ObjectId(args.id),client_id:new ObjectId(context.user?.id), status: "approved"})
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
 
 
@@ -122,34 +126,6 @@ export const ProjectResolvers: Resolvers = {
             )
             return {_id: args.id, acknowledgement: project.modifiedCount === 1}
         },
-        // dislikeProject: async (parent, args, context, info) => {
-        //     // private
-        //     // only the account of type freelancer can dislike a project
-        //     freelancerMiddleware(context);
-        //     const project = await projectsCollection.updateOne(
-        //         {_id: new ObjectId(args.id)},
-        //         {
-        //             $inc: {
-        //                 "reactions.dislike": 1
-        //             }
-        //         }
-        //     )
-        //     return {_id: args.id, ackandlodement: project.acknowledged}
-        // },
-        // unLoveProject: async (parent, args, context, info) => {
-        //     // private
-        //     // only the account of type freelancer can love a project
-        //     freelancerMiddleware(context);
-        //     const project = await projectsCollection.updateOne(
-        //         {_id: new ObjectId(args.id)},
-        //         {
-        //             $inc: {
-        //                 "reactions.love": -1
-        //             }
-        //         }
-        //     )
-        //     return {_id: args.id, ackandlodement: project.acknowledged}
-        // },
         undoReactToProject: async (parent, args, context, info) => {
             // private
             // only the account of type freelancer can dislike a project
@@ -171,7 +147,6 @@ export const ProjectResolvers: Resolvers = {
             return {_id: args.id, acknowledgement: project.modifiedCount == 1}
         },
         searchProject: async (parent, args, context, info) => {
-            // todo
             const aggregation: any =
                 [
                     {
@@ -218,8 +193,6 @@ export const ProjectResolvers: Resolvers = {
 
 
             return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
-            // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
-            // return projects;
         }
 
 

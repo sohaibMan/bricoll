@@ -112,8 +112,6 @@ export const ContractResolvers: Resolvers = {
             // the contract status is accepted (by freelancer)
             // you must be a freelancer to accept a contract that is created by a client
             freelancerMiddleware(context)
-            console.log(context.user?.id)
-            console.log(args.id);
             // @ts-ignore
             const updatedContract = await contractCollection.findOneAndUpdate({
                 _id: new ObjectId(args.id),
@@ -146,46 +144,6 @@ export const ContractResolvers: Resolvers = {
             //return the value (the updated proposal)
             return updatedContract.value as unknown as Contract;
         },
-        //     completeContract: async (parent, args, context, info) => {
-        // moved to a rest endpoint because it needs some redirection and strip integration
-        //         // the contract status is
-        //         // you must be a freelancer to accept a contract that is created by a client
-        //         clientMiddleware(context)
-        //         // @ts-ignore
-        //         // get a contract of the user that is not accepted by the freelancer (the client can't complete a contract that is not accepted by the freelancer)
-        //         //  the contract can be completed only if its status is accepted not pending or cancelled or completed
-        //         const contract = await contractCollection.findOne({
-        //             _id: new ObjectId(args.id),
-        //             // @ts-ignore
-        //             // client_id: new Object(context.user.id),
-        //             status: {$nin: [ContractStatus.Accepted]}  // pending or cancelled or completed
-        //         }) as unknown as Contract | null
-        //
-        //         if (contract) throw new GraphQLError("The contract can't be completed because it is" + contract.status, {
-        //             extensions: {
-        //                 code: 'BAD_REQUEST',
-        //                 http: {status: 400},
-        //             }
-        //         })
-        //     //     the freelancer has accepted the contract now the client can complete the contract if he pays for it
-        //
-        //     // programmatically create a product so the client has pays for it
-        //     //  check if client pays for the contract
-        //
-        //     // @ZenaguiAnas (we should add a payment here)
-        //
-        //     // @ts-ignore
-        //     // return  await contractCollection.findOneAndUpdate({
-        //     //     _id: new ObjectId(args.id),
-        //     //     // @ts-ignore
-        //     //     client_id: new Object(context.user.id)
-        //     // }, {$set: {status: ContractStatus.Completed}}, {
-        //     //     returnDocument: "after"
-        //     // }) as unknown as Contract;
-        //
-        //
-        // }
-// }
         requestProjectSubmissionReview: async (parent, args, context, info) => {
             //     rules : only client can request a review
             //     rules : the contract status must be completed
