@@ -35,6 +35,7 @@ export const ContractResolvers: Resolvers = {
                 //? you must be authenticated to access this resource
                 //? you must know the id of the contract to access it
                 //? you must be the client or  freelancer of the contract to access it
+                // index scan
                 const contract = await contractCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user.id)}, {freelancer_id: new ObjectId(context.user.id)}]}]})
                 return contract as unknown as Contract;
             },
