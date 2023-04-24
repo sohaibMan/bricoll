@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import db from "../../../lib/mongodb";
+import db from "../../../../lib/mongodb";
 import { getToken } from "next-auth/jwt";
-import { User, UserRole } from "../../../types/resolvers";
+import { User, UserRole } from "../../../../types/resolvers";
 import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
