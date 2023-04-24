@@ -35,6 +35,7 @@ export const ProjectResolvers: Resolvers = {
         // one (resolvers chaine)
         proposals: async (parent) => {
             // many
+            // index scan on project_id
             const proposals = await proposalsCollection.find({project_id: new ObjectId(parent._id)}).toArray();
             return proposals as unknown as Proposal[];
         }
@@ -89,6 +90,7 @@ export const ProjectResolvers: Resolvers = {
             // private
             clientMiddleware(context);
             // if there is at least approved proposal you can't delete a project
+            // index scan on project_id
             const proposals = await proposalsCollection.findOne({project_id: new ObjectId(args.id), status: "approved"})
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
 
@@ -162,64 +164,64 @@ export const ProjectResolvers: Resolvers = {
                             freelancer_id: new ObjectId(context.user?.id),
                             reaction_type: args.reaction_type
                         }
+                    }
+
                 }
+            )
+            return {_id: args.id, acknowledgement: project.modifiedCount == 1}
+        },
+        searchProject: async (parent, args, context, info) => {
+            // todo
+            const aggregation: any =
+                [
+                    {
 
-        }
-)
-return {_id: args.id, acknowledgement: project.modifiedCount == 1}
-},
-searchProject: async (parent, args, context, info) => {
-    // todo
-    const aggregation: any =
-        [
-            {
-
-                $search: {
-                    index: "default",
-                    text: {
-                        query: args.query,
-                        path: {
-                            wildcard: "*"
+                        $search: {
+                            index: "default",
+                            text: {
+                                query: args.query,
+                                path: {
+                                    wildcard: "*"
+                                }
+                            }
                         }
+                    },
+
+                ]
+
+            if (args.filter?.category) aggregation.push({
+                $match: {
+                    "category": args.filter.category
+                }
+            })
+            if (args.filter?.skills) aggregation.push({
+                $match: {
+                    "skills": {
+                        $in: args.filter.skills
                     }
                 }
-            },
+            })
+            if (args.filter?.priceMin) aggregation.push({
+                $match: {
+                    "price": {
+                        $gte: args.filter.priceMin
+                    }
+                }
+            })
+            if (args.filter?.priceMax) aggregation.push({
+                $match: {
+                    "price": {
+                        $lte: args.filter.priceMax
+                    }
+                }
+            })
 
-        ]
 
-    if (args.filter?.category) aggregation.push({
-        $match: {
-            "category": args.filter.category
+            return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
+            // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
+            // return projects;
         }
-    })
-    if (args.filter?.skills) aggregation.push({
-        $match: {
-            "skills": {
-                $in: args.filter.skills
-            }
-        }
-    })
-    if (args.filter?.priceMin) aggregation.push({
-        $match: {
-            "price": {
-                $gte: args.filter.priceMin
-            }
-        }
-    })
-    if (args.filter?.priceMax) aggregation.push({
-        $match: {
-            "price": {
-                $lte: args.filter.priceMax
-            }
-        }
-    })
 
 
-    return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
-    // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
-    // return projects;
-}
-
-
-}
+    }
 }
