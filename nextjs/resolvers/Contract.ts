@@ -1,9 +1,9 @@
-import {ObjectId} from "mongodb";
+import { ObjectId} from "mongodb";
 import db from "../lib/mongodb";
 import {
     Contract,
     ContractStatus,
-    Project,
+    Project, Proposal_Status,
     Resolvers, Submission_Review, SubmissionReviewStatus
 } from "../types/resolvers";
 import {GraphQLError} from "graphql";
@@ -61,12 +61,19 @@ export const ContractResolvers: Resolvers = {
                     },
                 });
             // check if the proposal exits
-            const proposal = await proposalsCollection.findOne({
-                _id: new ObjectId(args.proposal_id),
-                project_id: new ObjectId(project._id),
-                freelancer_id: new ObjectId(args.freelancer_id)
-            }) as unknown as Project | null
-            if (!proposal) throw new GraphQLError("The proposal no longer exists",
+            const proposal= await proposalsCollection.findOneAndUpdate({
+                    _id: new ObjectId(args.proposal_id),
+                    project_id: new ObjectId(project._id),
+                    freelancer_id: new ObjectId(args.freelancer_id)
+                },
+                {
+                    $set: {
+                        status: Proposal_Status.Completed,
+                    },
+                }
+            )
+
+            if (!proposal.value) throw new GraphQLError("The proposal no longer exists",
 
                 {
                     extensions: {

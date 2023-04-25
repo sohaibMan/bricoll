@@ -26,9 +26,9 @@ enum reaction_type{
 type reactions {
     freelancer_id:ObjectID!
     reaction_type:reaction_type!
-#    love: Int! # the count could be get from the reaction object
-#    dislike: Int!
-#    meta_data:[Meta_data!]
+    #    love: Int! # the count could be get from the reaction object
+    #    dislike: Int!
+    #    meta_data:[Meta_data!]
 }
 
 input ProjectScopeInput {
@@ -54,6 +54,11 @@ enum ProjectCategoriesEnum {
     WRITING
     OTHER
 }
+
+type ProjectStats{
+    status_count: Int! # the count of proposals that are in progress
+    status_type: proposal_status# the count of proposals that are approved
+}
 type Project {
     client_id: ObjectID
     _id: ObjectID
@@ -67,6 +72,7 @@ type Project {
     attachmentsURL: [Attachment]
     proposals: [Proposal] # proposals for this project
     category: ProjectCategoriesEnum!
+    stats: [ProjectStats]
 }
 
 # The "Query" type is special: it lists all of the available queries that
