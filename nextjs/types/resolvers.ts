@@ -235,6 +235,7 @@ export type Project = {
   proposals?: Maybe<Array<Maybe<Proposal>>>;
   reactions: Array<Maybe<Reactions>>;
   skills: Array<Scalars['String']>;
+  stats?: Maybe<Array<Maybe<ProjectStats>>>;
   title: Scalars['String'];
 };
 
@@ -259,6 +260,12 @@ export type ProjectScopeOutput = {
   estimated_duration_in_days: Scalars['Int'];
   level_of_expertise: Level_Of_Expertise;
   size_of_project: Size_Of_Project;
+};
+
+export type ProjectStats = {
+  __typename?: 'ProjectStats';
+  status_count: Scalars['Int'];
+  status_type?: Maybe<Proposal_Status>;
 };
 
 export type Proposal = {
@@ -416,6 +423,7 @@ export enum Level_Of_Expertise {
 export enum Proposal_Status {
   Approved = 'approved',
   Canceled = 'canceled',
+  Completed = 'completed',
   Declined = 'declined',
   InProgress = 'in_progress'
 }
@@ -545,6 +553,7 @@ export type ResolversTypes = ResolversObject<{
   ProjectCategoriesEnum: ProjectCategoriesEnum;
   ProjectScopeInput: ProjectScopeInput;
   ProjectScopeOutput: ResolverTypeWrapper<ProjectScopeOutput>;
+  ProjectStats: ResolverTypeWrapper<ProjectStats>;
   Proposal: ResolverTypeWrapper<Proposal>;
   Query: ResolverTypeWrapper<{}>;
   StatusEnum: StatusEnum;
@@ -584,6 +593,7 @@ export type ResolversParentTypes = ResolversObject<{
   Project: Project;
   ProjectScopeInput: ProjectScopeInput;
   ProjectScopeOutput: ProjectScopeOutput;
+  ProjectStats: ProjectStats;
   Proposal: Proposal;
   Query: {};
   String: Scalars['String'];
@@ -689,6 +699,7 @@ export type ProjectResolvers<ContextType = ServerContext, ParentType extends Res
   proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
   reactions?: Resolver<Array<Maybe<ResolversTypes['reactions']>>, ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  stats?: Resolver<Maybe<Array<Maybe<ResolversTypes['ProjectStats']>>>, ParentType, ContextType>;
   title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -697,6 +708,12 @@ export type ProjectScopeOutputResolvers<ContextType = ServerContext, ParentType 
   estimated_duration_in_days?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   level_of_expertise?: Resolver<ResolversTypes['level_of_expertise'], ParentType, ContextType>;
   size_of_project?: Resolver<ResolversTypes['size_of_project'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type ProjectStatsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['ProjectStats'] = ResolversParentTypes['ProjectStats']> = ResolversObject<{
+  status_count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  status_type?: Resolver<Maybe<ResolversTypes['proposal_status']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -819,6 +836,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   ObjectID?: GraphQLScalarType;
   Project?: ProjectResolvers<ContextType>;
   ProjectScopeOutput?: ProjectScopeOutputResolvers<ContextType>;
+  ProjectStats?: ProjectStatsResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Submission_review?: Submission_ReviewResolvers<ContextType>;

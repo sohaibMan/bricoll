@@ -1,4 +1,4 @@
-import {Project, Proposal, Resolvers} from "../types/resolvers";
+import {Project, ProjectStats, Proposal, Resolvers} from "../types/resolvers";
 import {ObjectId} from 'mongodb';
 import db from "../lib/mongodb";
 import {GraphQLError} from "graphql";
@@ -42,6 +42,45 @@ export const ProjectResolvers: Resolvers = {
             // index scan on project_id
             const proposals = await proposalsCollection.find({project_id: new ObjectId(parent._id)}).toArray();
             return proposals as unknown as Proposal[];
+        },
+        stats: async (parent) => {
+            /*
+        stats or the project based on the project id (parent._id)
+        proposal_in_progress: Int! # the count of proposals that are in progress
+        proposal_approved: Int! # the count of proposals that are approved
+        hired_freelancer: Int!# the count of hired freelancers
+        the project has an index on the project status which can be one of the following values () and on project id
+        enum proposal_status {
+       canceled
+       declined
+       in_progress
+       approved
+       completed # the proposal has a contract
+       */
+            const aggregation = [
+                {
+                    '$match': {
+                        'project_id': new ObjectId('643ebf8189deb80372b22991')
+                    }
+                }, {
+                    '$group': {
+                        '_id': '$status',
+                        'status_count': {
+                            '$sum': 1
+                        }
+                    }
+                }, {
+                    '$addFields': {
+                        'status_type': '$_id'
+                    }
+                }, {
+                    '$project': {
+                        '_id': 0
+                    }
+                }
+            ]
+            return await proposalsCollection.aggregate(aggregation).toArray() as unknown as ProjectStats[];
+
         }
     },
     Mutation: {
@@ -95,7 +134,11 @@ export const ProjectResolvers: Resolvers = {
             clientMiddleware(context);
             // if there is at least approved proposal you can't delete a project
             // index scan on project_id
-            const proposals = await proposalsCollection.findOne({project_id: new ObjectId(args.id),client_id:new ObjectId(context.user?.id), status: "approved"})
+            const proposals = await proposalsCollection.findOne({
+                project_id: new ObjectId(args.id),
+                client_id: new ObjectId(context.user?.id),
+                status: "approved"
+            })
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
 
 
