@@ -1,4 +1,4 @@
-import {Project, Proposal, Resolvers} from "../types/resolvers";
+import {Project, ProjectStats, Proposal, Resolvers} from "../types/resolvers";
 import {ObjectId} from 'mongodb';
 import db from "../lib/mongodb";
 import {GraphQLError} from "graphql";
@@ -20,7 +20,11 @@ export const ProjectResolvers: Resolvers = {
             },
         Project: async (parent, args, context, info) => {
             // ? private
-            const project = await projectsCollection.findOne({_id: new ObjectId(args.id)});
+            clientMiddleware(context);
+            const project = await projectsCollection.findOne({
+                _id: new ObjectId(args.id),
+                client_id: new ObjectId(context.user?.id)
+            });
             if (!project) throw new GraphQLError("There is no project with this Id",
                 {
                     extensions: {
@@ -35,8 +39,48 @@ export const ProjectResolvers: Resolvers = {
         // one (resolvers chaine)
         proposals: async (parent) => {
             // many
+            // index scan on project_id
             const proposals = await proposalsCollection.find({project_id: new ObjectId(parent._id)}).toArray();
             return proposals as unknown as Proposal[];
+        },
+        stats: async (parent) => {
+            /*
+        stats or the project based on the project id (parent._id)
+        proposal_in_progress: Int! # the count of proposals that are in progress
+        proposal_approved: Int! # the count of proposals that are approved
+        hired_freelancer: Int!# the count of hired freelancers
+        the project has an index on the project status which can be one of the following values () and on project id
+        enum proposal_status {
+       canceled
+       declined
+       in_progress
+       approved
+       completed # the proposal has a contract
+       */
+            const aggregation = [
+                {
+                    '$match': {
+                        'project_id': new ObjectId('643ebf8189deb80372b22991')
+                    }
+                }, {
+                    '$group': {
+                        '_id': '$status',
+                        'status_count': {
+                            '$sum': 1
+                        }
+                    }
+                }, {
+                    '$addFields': {
+                        'status_type': '$_id'
+                    }
+                }, {
+                    '$project': {
+                        '_id': 0
+                    }
+                }
+            ]
+            return await proposalsCollection.aggregate(aggregation).toArray() as unknown as ProjectStats[];
+
         }
     },
     Mutation: {
@@ -89,7 +133,12 @@ export const ProjectResolvers: Resolvers = {
             // private
             clientMiddleware(context);
             // if there is at least approved proposal you can't delete a project
-            const proposals = await proposalsCollection.findOne({project_id: new ObjectId(args.id), status: "approved"})
+            // index scan on project_id
+            const proposals = await proposalsCollection.findOne({
+                project_id: new ObjectId(args.id),
+                client_id: new ObjectId(context.user?.id),
+                status: "approved"
+            })
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
 
 
@@ -120,34 +169,6 @@ export const ProjectResolvers: Resolvers = {
             )
             return {_id: args.id, acknowledgement: project.modifiedCount === 1}
         },
-        // dislikeProject: async (parent, args, context, info) => {
-        //     // private
-        //     // only the account of type freelancer can dislike a project
-        //     freelancerMiddleware(context);
-        //     const project = await projectsCollection.updateOne(
-        //         {_id: new ObjectId(args.id)},
-        //         {
-        //             $inc: {
-        //                 "reactions.dislike": 1
-        //             }
-        //         }
-        //     )
-        //     return {_id: args.id, ackandlodement: project.acknowledged}
-        // },
-        // unLoveProject: async (parent, args, context, info) => {
-        //     // private
-        //     // only the account of type freelancer can love a project
-        //     freelancerMiddleware(context);
-        //     const project = await projectsCollection.updateOne(
-        //         {_id: new ObjectId(args.id)},
-        //         {
-        //             $inc: {
-        //                 "reactions.love": -1
-        //             }
-        //         }
-        //     )
-        //     return {_id: args.id, ackandlodement: project.acknowledged}
-        // },
         undoReactToProject: async (parent, args, context, info) => {
             // private
             // only the account of type freelancer can dislike a project
@@ -162,64 +183,61 @@ export const ProjectResolvers: Resolvers = {
                             freelancer_id: new ObjectId(context.user?.id),
                             reaction_type: args.reaction_type
                         }
+                    }
+
                 }
+            )
+            return {_id: args.id, acknowledgement: project.modifiedCount == 1}
+        },
+        searchProject: async (parent, args, context, info) => {
+            const aggregation: any =
+                [
+                    {
 
-        }
-)
-return {_id: args.id, acknowledgement: project.modifiedCount == 1}
-},
-searchProject: async (parent, args, context, info) => {
-    // todo
-    const aggregation: any =
-        [
-            {
-
-                $search: {
-                    index: "default",
-                    text: {
-                        query: args.query,
-                        path: {
-                            wildcard: "*"
+                        $search: {
+                            index: "default",
+                            text: {
+                                query: args.query,
+                                path: {
+                                    wildcard: "*"
+                                }
+                            }
                         }
+                    },
+
+                ]
+
+            if (args.filter?.category) aggregation.push({
+                $match: {
+                    "category": args.filter.category
+                }
+            })
+            if (args.filter?.skills) aggregation.push({
+                $match: {
+                    "skills": {
+                        $in: args.filter.skills
                     }
                 }
-            },
+            })
+            if (args.filter?.priceMin) aggregation.push({
+                $match: {
+                    "price": {
+                        $gte: args.filter.priceMin
+                    }
+                }
+            })
+            if (args.filter?.priceMax) aggregation.push({
+                $match: {
+                    "price": {
+                        $lte: args.filter.priceMax
+                    }
+                }
+            })
 
-        ]
 
-    if (args.filter?.category) aggregation.push({
-        $match: {
-            "category": args.filter.category
+            return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
         }
-    })
-    if (args.filter?.skills) aggregation.push({
-        $match: {
-            "skills": {
-                $in: args.filter.skills
-            }
-        }
-    })
-    if (args.filter?.priceMin) aggregation.push({
-        $match: {
-            "price": {
-                $gte: args.filter.priceMin
-            }
-        }
-    })
-    if (args.filter?.priceMax) aggregation.push({
-        $match: {
-            "price": {
-                $lte: args.filter.priceMax
-            }
-        }
-    })
 
 
-    return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
-    // console.log("🚀 ~ file: Projects.ts:176 ~ searchProject: ~ projects:", projects)
-    // return projects;
-}
-
-
-}
+    }
 }

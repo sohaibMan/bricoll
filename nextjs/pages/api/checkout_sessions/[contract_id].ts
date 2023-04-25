@@ -21,9 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const client_id = userToken.sub;
             if (!client_id) return res.status(401).json("you are not authenticated ")
             // get the contract from the database
+            // index scan on _id
             const contract = await contractCollection.findOne({
-                _id: new ObjectId(contract_id),
-                client_id: new ObjectId(client_id),
+                _id: new ObjectId(contract_id), // the id already exists
+                client_id: new ObjectId(client_id),// simple check if the client is the owner of the contract
                 status: ContractStatus.Accepted,// pending or cancelled or completed
             }) as unknown as Contract | null
 
@@ -69,7 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 cancel_url: `${req.headers.origin}/?canceled=true`,
             });
 
-
+            // index scan
             await contractCollection.findOneAndUpdate({
                 _id: new ObjectId(contract_id),
                 // @ts-ignore
