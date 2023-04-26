@@ -1,6 +1,5 @@
-;
+import db from "../../../../lib/mongodb";
 import {NextApiRequest, NextApiResponse} from "next";
-import db from "../../../lib/mongodb";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
@@ -30,10 +29,7 @@ import {ObjectId} from "mongodb";
 //   }
 // }
 
-
-    req: NextApiRequest,
-    res: NextApiResponse
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse){
     try {
         // const router = useRouter();
 

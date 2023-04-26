@@ -8,7 +8,7 @@ import {User} from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import emailService from "../../../lib/email";
-import { redis } from "../../../lib/redis.ts"
+// import { redis } from "../../../lib/redis.ts"
 // import { ObjectId } from "mongodb";
 // import getConfig from "next/config";
 
@@ -59,25 +59,7 @@ export default async function handler(
                 message: "The password and passwordConfirm are not the same !",
             });
         }
-     
 
-    // ? Verifying the incoming data from the user
-    if (!email || !name || !password) {
-      // throw new Error('There are some fields not filling them yet!')
-      return res.status(400).json({ message: "Missing fields" });
-    }
-    const emailValidation = await validate(email);
-    if(!emailValidation.valid){
-      return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
-    }
-    // todo (validate email, password, username length)
-    // ? Verifying if the password and passwordConfirm are the same
-    if (req.body.password !== req.body.passwordConfirm) {
-      return res.status(400).json({
-        status: "failed",
-        message: "The password and passwordConfirm are not the same !",
-      });
-    }
 
         // ? Checking if the user's email is existed in DB
         // index scan (email)
@@ -113,7 +95,7 @@ export default async function handler(
         // console.log(insertedId.toString());
 
 
-    // ? redirecting to the email verification page
+        // ? redirecting to the email verification page
 
 
         // ? clear the cookie of userRole property
@@ -142,21 +124,18 @@ export default async function handler(
         // const emailVerification = `http://localhost:3000/api/auth/${token}`;
         const emailVerificationLink = `http://localhost:3000/api/auth/emailVerification/${token}`;
         const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
-    // ? Sending the email to verify the account
-    // const emailVerification = `http://localhost:3000/api/auth/${token}`;
-    const emailVerificationLink = `http://localhost:3000/api/auth/emailVerification/${token}`;
-    // const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
+        // const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
 
         emailService.sendEmail({
             to: `${email}`,
             subject: "Email Verification !",
             html: `<p>${text}</p>`
         });
-    emailService.sendEmail({
-      to: `${email}`,
-      subject: "Complete your sign-up: Verify your Bricoll account",
-      // html: `<p>${text}</p>`
-      html: `
+        emailService.sendEmail({
+            to: `${email}`,
+            subject: "Complete your sign-up: Verify your Bricoll account",
+            // html: `<p>${text}</p>`
+            html: `
       <!DOCTYPE html>
       <html>
         <head>
@@ -199,7 +178,7 @@ export default async function handler(
         </body>
       </html>
     `
-    });
+        });
 
 
         // ? sending the success response

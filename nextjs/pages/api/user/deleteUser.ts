@@ -4,7 +4,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
-import { redis } from "../../../lib/redis.ts"
+import { redis } from "../../../lib/redis"
 
 
 

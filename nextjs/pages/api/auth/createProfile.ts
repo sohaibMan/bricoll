@@ -8,7 +8,7 @@ import {ObjectId} from "mongodb";
 import {getToken} from "next-auth/jwt";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
-import { redis } from "../../../lib/redis.ts"
+import { redis } from "../../../lib/redis"
 
 
 export default async function handler(
@@ -44,8 +44,8 @@ export default async function handler(
 
 
     const user = await db.collection("users").findOne({ _id: new ObjectId(user_id) });
-        const user_id = userTokenDecoded.user_id;
-        const user = await db.collection("users").findOne({_id: new ObjectId(user_id)});
+        // const user_id = userTokenDecoded.user_id;
+        // const user = await db.collection("users").findOne({_id: new ObjectId(user_id)});
 
 
     // await redis.set(user_id, JSON.stringify(user))

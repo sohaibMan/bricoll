@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
 import { clientPromise } from "../../../lib/mongodb";
-import { redis } from "../../../lib/redis.ts"
+import { redis } from "../../../lib/redis"
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
 // import GithubProvider from "next-auth/providers/github"
@@ -97,8 +97,10 @@ export const authOptions: NextAuthOptions = {
 
           return verifyUserData(user, credentials.password);
 
-        } catch( err ){
+        } catch( err: any ){
+          // todo :handle error
           throw new Error(err);
+        //
         }
 
         // user = await db.collection("users").findOne({ email: credentials.email });

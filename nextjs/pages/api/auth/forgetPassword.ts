@@ -6,7 +6,8 @@ import jwt from "jsonwebtoken";
 import { ObjectId } from "mongodb";
 import crypto from "crypto";
 import sgMail from "@sendgrid/mail";
-import { redis } from "../../../lib/redis.ts"
+import { redis } from "../../../lib/redis"
+import {User} from "../../../types/resolvers";
 
 async function fetchData(email: string){
   // fetching the data from Redis Database 
@@ -21,7 +22,7 @@ async function fetchData(email: string){
   // ? Caching the user data 
   await redis.set('email', JSON.stringify(user))
 
-  return user;
+  return user as User | null
 }
 
 export default async function handler(
@@ -30,7 +31,7 @@ export default async function handler(
 ) {
   try {
     // ? Get user based on posted email
-    const user = fetchData(req.body.email);
+    const user =await fetchData(req.body.email);
     if (!user) {
       return res.status(404).json({
         status: "failed",
@@ -64,6 +65,7 @@ export default async function handler(
     const text = `Forgot your password ? Submit a PATCH request with your new password and passwordConfirm to: <a href="${resetURL}">Click me</a>.\nIf you didn't forget your password, please ignore this email!`;
 
     try {
+      // todo (Import the mail service from the mail service file)
       sgMail.setApiKey(process.env.SENDGRID_API_KEY);
       sgMail.send({
       to: `${req.body.email}`,
