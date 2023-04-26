@@ -22,6 +22,10 @@ export default async function handler(
         //   const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET);
         //   console.log("decoded : ", decoded);
 
+    // const userId: any = getCookie("userId", { req, res });
+    const userToken: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET }) || getCookie("jwt", { req, res });
+    // console.log('userId : ', userId);
+    const userTokenDecoded = jwt.verify(userToken, process.env.NEXTAUTH_SECRET) as  {user_id: string}
         // const userId: any = getCookie("userId", { req, res });
         const userToken: any = await getToken({req, secret: process.env.NEXTAUTH_SECRET}) || getCookie("jwt", {
             req,
@@ -34,6 +38,8 @@ export default async function handler(
             return res.status(401).json({message: 'Unauthorized!'})
         }
 
+    const user_id = userTokenDecoded.user_id;
+    const user = await db.collection("users").findOne({ _id: new ObjectId(user_id) });
         const user_id = userTokenDecoded.user_id;
         const user = await db.collection("users").findOne({_id: new ObjectId(user_id)});
 

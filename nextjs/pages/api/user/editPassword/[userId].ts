@@ -1,8 +1,10 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../lib/mongodb";
-import {getCookie} from "cookies-next";
+import { getToken } from "next-auth/jwt";
+import { User, UserRole } from "../../../types/resolvers";
+import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 import jwt from "jsonwebtoken";
-import {ObjectId} from "mongodb";
+import { ObjectId } from "mongodb";
 import bcrypt from "bcrypt";
 
 
@@ -32,6 +34,7 @@ export default async function handler(
         const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET);
 
 
+
         if (decoded.sub !== user?._id.toString()) {
             return res.status(401).json({
                 status: "failed",
@@ -59,6 +62,7 @@ export default async function handler(
                 },
             }
         );
+
         res.status(200).json({
             status: "success",
             data: {

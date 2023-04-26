@@ -57,6 +57,23 @@ export default async function handler(
                 message: "The password and passwordConfirm are not the same !",
             });
         }
+    // ? Verifying the incoming data from the user
+    if (!email || !name || !password) {
+      // throw new Error('There are some fields not filling them yet!')
+      return res.status(400).json({ message: "Missing fields" });
+    }
+    const emailValidation = await validate(email);
+    if(!emailValidation.valid){
+      return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
+    }
+    // todo (validate email, password, username length)
+    // ? Verifying if the password and passwordConfirm are the same
+    if (req.body.password !== req.body.passwordConfirm) {
+      return res.status(400).json({
+        status: "failed",
+        message: "The password and passwordConfirm are not the same !",
+      });
+    }
 
         // ? Checking if the user's email is existed in DB
         // index scan (email)
@@ -122,12 +139,64 @@ export default async function handler(
         // const emailVerification = `http://localhost:3000/api/auth/${token}`;
         const emailVerificationLink = `http://localhost:3000/api/auth/emailVerification/${token}`;
         const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
+    // ? Sending the email to verify the account
+    // const emailVerification = `http://localhost:3000/api/auth/${token}`;
+    const emailVerificationLink = `http://localhost:3000/api/auth/emailVerification/${token}`;
+    // const text = `To verify your email please click on this link : <a href="${emailVerificationLink}">Click me</a>.`;
 
         emailService.sendEmail({
             to: `${email}`,
             subject: "Email Verification !",
             html: `<p>${text}</p>`
         });
+    emailService.sendEmail({
+      to: `${email}`,
+      subject: "Complete your sign-up: Verify your Bricoll account",
+      // html: `<p>${text}</p>`
+      html: `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Welcome to Bricoll</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              font-size: 16px;
+              line-height: 1.5;
+              color: #333;
+            }
+            p {
+              margin-bottom: 20px;
+            }
+            a {
+              display: inline-block;
+              padding: 10px 20px;
+              background-color: #e8eaed87;
+              color: #fff;
+              text-decoration: none;
+              border-radius: 5px;
+              transition: all 0.2s ease;
+            }
+          
+            .signature {
+              margin-top: 50px;
+              font-style: italic;
+              color: #777;
+            }
+          </style>
+        </head>
+        <body>
+          <p>Dear ${name},</p>
+          <p>Thank you for signing up for our service! To verify your account and start using our platform, please click the link below:</p>
+          <p><a href="${emailVerificationLink}">Verify my account</a></p>
+          <p>If you did not sign up for our platform, please disregard this email.</p>
+          <p>Thanks again for choosing our service!</p>
+          <p class="signature">Sincerely,<br>The Bricoll Team</p>
+        </body>
+      </html>
+    `
+    });
 
 
         // ? sending the success response
