@@ -137,7 +137,7 @@ export default async function handler(
             // html: `<p>${text}</p>`
             html: `
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
         <head>
           <meta charset="UTF-8">
           <title>Welcome to Bricoll</title>

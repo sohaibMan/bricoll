@@ -50,7 +50,7 @@ export default async function handler(
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         // ? Updating the user password
-        const newUserPass = await db.collection("users").findOneAndUpdate(
+        await db.collection("users").findOneAndUpdate(
             {_id: user?._id},
             {
                 $set: {
@@ -58,7 +58,6 @@ export default async function handler(
                 },
             }
         );
-
         res.status(200).json({
             status: "success",
             data: {

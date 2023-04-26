@@ -1,12 +1,9 @@
 import db from "../../../lib/mongodb";
-import { NextApiRequest, NextApiResponse } from "next";
+import {NextApiRequest, NextApiResponse} from "next";
 // import {deleteCookie, getCookie, setCookie} from "cookies-next";
-import { getToken } from "next-auth/jwt";
-import jwt from "jsonwebtoken";
-import { ObjectId } from "mongodb";
 import crypto from "crypto";
 import sgMail from "@sendgrid/mail";
-import { redis } from "../../../lib/redis"
+import {redis} from "../../../lib/redis"
 import {User} from "../../../types/resolvers";
 
 async function fetchData(email: string){

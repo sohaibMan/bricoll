@@ -58,7 +58,7 @@ export default async function handler(
         }
 
     const { skills, level, language } = req.body;
-    let {email, name} : any = user;
+    let {email} : any = user;
 
 
         // console.log(email, name, hashedPassword, userRole);
