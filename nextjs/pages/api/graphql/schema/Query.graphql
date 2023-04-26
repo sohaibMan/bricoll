@@ -1,16 +1,12 @@
 type Query{
     # Proposals
     Proposal(id: ObjectID!): Proposal
-    # by the freelancer | client
-#    ProposalsByFreelancer(freelancer_id: ObjectID!): [Proposal]
-    # on the freelancer
-#    ProposalsByProject(project_id: ObjectID!): [Proposal]
-    # on the client(project owner)
     # Projects
-    Projects: [Project]
-    Project(id: ID!): Project
+    Projects(query: String, filter: filterOptionsInput): [Project]
+    # Project by id (client,freelancer) Note the client can access to his proposals and the freelancer to his proposals only
+    Project(id: ObjectID!): Project
     # Contract
     Contract(id: ObjectID!): Contract
     # Profile management
-    getProfile(_id: ID): User
+    getProfile(_id: ObjectID!): User
 }
