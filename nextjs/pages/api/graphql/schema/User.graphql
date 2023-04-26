@@ -61,7 +61,7 @@ type freelancerProfile {
     categories: [String!]!
     externalAccount: String
     specializedProfile: [String]
-    proposals: [Proposal] # chain this to the  freelancer resolvers @ZenaguiAnas
+    proposals: [Proposal] #todo chain this to the  freelancer resolvers @ZenaguiAnas
     stripe_account_link: String
     earnings:earnings
 }

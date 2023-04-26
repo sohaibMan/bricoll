@@ -22,16 +22,9 @@ type Proposal {
     updated_at: Date!
     status: proposal_status!
     # current time
-    attachmentsURL: [Attachment]
+    attachments: [Attachment]
     # the link of urls of the attachments(files, images, video)
 }
 
 # Cover Letter, Attachments (images +video +files ...)
 
-
-type Subscription {
-    proposalStatusChanged(id: ObjectID!): Proposal
-    # when the status of the proposal changed
-    projectGotProposal(id: ObjectID!): Proposal
-    # when the project got a new proposal
-}
