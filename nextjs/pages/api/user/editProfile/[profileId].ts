@@ -1,8 +1,10 @@
+;
 import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../lib/mongodb";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
+
 // import { useRouter } from "next/router";
 
 // export default async function handler(req: NextApiRequest, res: NextApiResponse){
@@ -28,7 +30,7 @@ import {ObjectId} from "mongodb";
 //   }
 // }
 
-export default async function handler(
+
     req: NextApiRequest,
     res: NextApiResponse
 ) {
@@ -96,4 +98,5 @@ export default async function handler(
             message: error,
         });
     }
+
 }

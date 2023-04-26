@@ -8,6 +8,7 @@ import {User} from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import emailService from "../../../lib/email";
+import { redis } from "../../../lib/redis.ts"
 // import { ObjectId } from "mongodb";
 // import getConfig from "next/config";
 
@@ -19,6 +20,7 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+
     try {
         // todos (validate user existence and add infos ...)
 
@@ -57,6 +59,8 @@ export default async function handler(
                 message: "The password and passwordConfirm are not the same !",
             });
         }
+     
+
     // ? Verifying the incoming data from the user
     if (!email || !name || !password) {
       // throw new Error('There are some fields not filling them yet!')
@@ -108,10 +112,9 @@ export default async function handler(
         // const { insertedId } = user;
         // console.log(insertedId.toString());
 
-        // const userId = insertedId.toString();
 
+    // ? redirecting to the email verification page
 
-        // ? redirecting to the email verification page
 
         // ? clear the cookie of userRole property
 
