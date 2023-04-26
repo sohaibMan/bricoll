@@ -22,13 +22,29 @@ export const ProposalResolvers: Resolvers = {
                 //? the freelance have access only to his proposal...
                 // to add scrolling pagination
                 // index scan on id
-                const proposals = await proposalsCollection.findOne({_id: new ObjectId(args.id)})
-                return proposals as unknown as Proposal;
+                if (!context.user) throw new GraphQLError("You are not authenticated",
+                    {
+                        extensions: {
+                            code: 'UNAUTHENTICATED',
+                            http: {status: 401},
+                        },
+                    }
+                )
+                const proposals = await proposalsCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user.id)}, {freelancer_id: new ObjectId(context.user.id)}]}]}) as unknown as Proposal | null;
+                if (!proposals) throw new GraphQLError("The proposal no longer exists",
+                    {
+                        extensions: {
+                            code: 'NOTFOUND',
+                            http: {status: 404},
+                        }
+                    }
+                )
+                return proposals;
             },
 
     },
     Mutation: {
-        submitProposal: async (parent, args, context, info) => {
+        createProposal: async (parent, args, context, info) => {
             // check if the project exits
             freelancerMiddleware(context);
 

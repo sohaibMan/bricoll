@@ -37,6 +37,14 @@ export const ContractResolvers: Resolvers = {
                 //? you must be the client or  freelancer of the contract to access it
                 // index scan
                 const contract = await contractCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user.id)}, {freelancer_id: new ObjectId(context.user.id)}]}]})
+                if(!contract) throw new GraphQLError("The contract no longer exists",
+                    {
+                        extensions: {
+                            code: 'NOTFOUND',
+                            http: {status: 404},
+                        }
+                    }
+                )
                 return contract as unknown as Contract;
             },
     },

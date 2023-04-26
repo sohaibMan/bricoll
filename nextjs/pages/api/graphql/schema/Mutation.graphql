@@ -1,12 +1,13 @@
 type Mutation {
-    #    Project
-    addProject(
+    #    Project (client)
+    createProject(
         title: String! @constraint(minLength: 5, maxLength: 100)
         description: String! @constraint(minLength: 5, maxLength: 1000)
         price: Float! @constraint(min: 1, max: 100000)
         skills: [String!]! @constraint(maxItems: 15)
         projectScope: ProjectScopeInput!
         category: ProjectCategoriesEnum!
+        attachments: [AttachmentInput!]
     ): Project
     editProject(
         id: ObjectID!
@@ -20,9 +21,8 @@ type Mutation {
     deleteProject(id: ObjectID!): queryResult
     reactToProject(id: ObjectID!,reaction_type:reaction_type!): queryResult # likeProject LoveProject
     undoReactToProject(id: ObjectID!,reaction_type:reaction_type!): queryResult #unDislikeProject , unLoveProject
-    searchProject(query: String!, filter: filterOptionsInput): [Project]
     #    Proposal
-    submitProposal(
+    createProposal(
         project_id: ObjectID!
         price: Float! @constraint(min: 1, max: 10000)
         duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
