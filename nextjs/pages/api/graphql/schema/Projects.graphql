@@ -1,34 +1,20 @@
-# Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-
-#scalar ObjectID
 scalar Date
 scalar URL
-
-#enum level_of_expertise {
-#  BEGINNER
-#  INTERMEDIATE
-#  ADVANCED
-#}
 
 enum size_of_project {
     SMALL
     MEDIUM
     LARGE
 }
+
 enum reaction_type{
     LOVE,
     DISLIKE
 }
-#type Meta_data{
-#    freelancer_id:ObjectID
-#    reaction:Reaction_Types_Enum
-#}
+
 type reactions {
     freelancer_id:ObjectID!
     reaction_type:reaction_type!
-#    love: Int! # the count could be get from the reaction object
-#    dislike: Int!
-#    meta_data:[Meta_data!]
 }
 
 input ProjectScopeInput {
@@ -54,6 +40,16 @@ enum ProjectCategoriesEnum {
     WRITING
     OTHER
 }
+
+type ProjectStats{
+    #    status_count: Int! # the count of proposals that are in progress
+    #    status_type: proposal_status# the count of proposals that are approved
+    declined_count: Int! # the count of proposals that are declined
+    completed_count: Int! # the count of proposals that are completed
+    approved_count: Int! # the count of proposals that are approved
+    in_progress_count: Int! # the count of proposals that are in progress
+}
+
 type Project {
     client_id: ObjectID
     _id: ObjectID
@@ -61,13 +57,45 @@ type Project {
     description: String!
     price: Float!
     skills: [String!]!
-    reactions: [reactions]!
+    reactions: [reactions!]!
     created_at: Date!
-    projectScope: ProjectScopeOutput
-    attachmentsURL: [Attachment]
-    proposals: [Proposal] # proposals for this project
+    projectScope: ProjectScopeOutput!
+    attachments: [Attachment!]!
     category: ProjectCategoriesEnum!
+    stats: ProjectStats #calculated by the resolver not in the database
+    proposals: [Proposal!] #calculated by the resolver not in the database
 }
+#type ProjectWithProposals {
+#    client_id: ObjectID
+#    _id: ObjectID
+#    title: String!
+#    description: String!
+#    price: Float!
+#    skills: [String!]!
+#    reactions: [reactions!]!
+#    created_at: Date!
+#    projectScope: ProjectScopeOutput!
+#    attachments: [Attachment!]!
+#    category: ProjectCategoriesEnum!
+#    stats: ProjectStats #calculated by the resolver not in the database
+#    proposals: [Proposal!] #calculated by the resolver not in the database
+#}
+# project with proposals and stats for client only on Project resolver
+#type ProjectWithProposals{
+#    client_id: ObjectID
+#    _id: ObjectID
+#    title: String!
+#    description: String!
+#    price: Float!
+#    skills: [String!]!
+#    reactions: [reactions!]!
+#    created_at: Date!
+#    projectScope: ProjectScopeOutput!
+#    attachments: [Attachment!]!
+#    category: ProjectCategoriesEnum!
+#    stats: ProjectStats
+#    proposals: [Proposal!] # proposals for this project
+#}
 
 # The "Query" type is special: it lists all of the available queries that
 
@@ -84,3 +112,33 @@ input filterOptionsInput {
     skills: [String!]
 }
 
+#type ProjectSearchResult {
+#    _id: ObjectID! #so you can check the project details
+#    title: String! # so you can show the title
+#    description: String! # so you can show the description
+#    price: Float! # so you can show the price
+#    skills: [String!]! # so you can show the skills
+#    category: ProjectCategoriesEnum! # so you can show the category
+#    projectScope: ProjectScopeOutput! # so you can show the projectScope
+#    reactions: [reactions!]! # so you can show the reactions
+#    created_at: Date! # so you can show the created_at
+#    client_id: ObjectID! # so you can show the client_id
+#    attachments: [Attachment!]! # so you can show the attachments
+#    stats: ProjectStats
+#}
+
+
+#union ProjectResultForFreelancer = BaseProject | type SearchProjectResult{
+#    client_id: ObjectID
+#    _id: ObjectID
+#    title: String!
+#    description: String!
+#    price: Float!
+#    skills: [String!]!
+#    reactions: [reactions!]!
+#    created_at: Date!
+#    projectScope: ProjectScopeOutput!
+#    attachments: [Attachment!]!
+#    category: ProjectCategoriesEnum!
+#    stats: ProjectStats
+#}

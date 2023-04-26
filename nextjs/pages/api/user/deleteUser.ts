@@ -7,6 +7,7 @@ import { ObjectId } from "mongodb";
 import { redis } from "../../../lib/redis.ts"
 
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -27,6 +28,7 @@ export default async function handler(
     await db.collection("users").deleteOne({ _id: new ObjectId(user_id) })
 
     // TODO: redirection to home page /
+
 
     // Deleting the user from the cache of Redis if existed 
     const cachedResults = await redis.get(user.email);

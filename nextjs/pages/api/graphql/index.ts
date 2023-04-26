@@ -7,10 +7,11 @@ import {ProjectResolvers} from "../../../resolvers/Projects";
 import {ProposalResolvers} from "../../../resolvers/Proposals";
 import {getToken} from "next-auth/jwt";
 import {ServerContext} from "../../../types/server-context";
-import { constraintDirectiveTypeDefs} from "graphql-constraint-directive";
+import {constraintDirectiveTypeDefs} from "graphql-constraint-directive";
 import {ContractResolvers} from "../../../resolvers/Contract";
 import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
+import depthLimit from 'graphql-depth-limit'
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -34,7 +35,8 @@ const plugins = [
 const server = new ApolloServer<ServerContext>({
     typeDefs: [constraintDirectiveTypeDefs, schema],
     resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers],
-    plugins
+    plugins,
+    validationRules:[depthLimit(4)]
 });
 
 export default startServerAndCreateNextHandler(server,
@@ -45,8 +47,6 @@ export default startServerAndCreateNextHandler(server,
             const token = await getToken({req, secret});
 
             // the users that sign with a provider (google or facebook ) will have a session with this info
-            // const token = await getToken({ req });
-            // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
             if (!token || !token.sub) return {user: null}
 
             // console.log(token.userRole)
@@ -56,12 +56,7 @@ export default startServerAndCreateNextHandler(server,
             }
             //
             return {user: {id: token.sub, userRole: token.userRole as UserRole}}
-            // }
-            // console.log("🚀 ~ file: index.ts:42 ~ context: ~ token:", token)
-            // const session = await getServerSession(req, res, authOptions);
-            // console.log("🚀 ~ file: index.ts:42 ~ context: ~ session:", session)
-            // if (!session) return { user: null }
-            // return { user: { id: session.user.id, userRole: session.user.userRole } };
+
 
         },
     });

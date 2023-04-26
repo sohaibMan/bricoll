@@ -21,9 +21,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const client_id = userToken.sub;
             if (!client_id) return res.status(401).json("you are not authenticated ")
             // get the contract from the database
+            // index scan on _id
             const contract = await contractCollection.findOne({
-                _id: new ObjectId(contract_id),
-                client_id: new ObjectId(client_id),
+                _id: new ObjectId(contract_id), // the id already exists
+                client_id: new ObjectId(client_id),// simple check if the client is the owner of the contract
                 status: ContractStatus.Accepted,// pending or cancelled or completed
             }) as unknown as Contract | null
 
@@ -48,23 +49,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 product = await stripe.products.create({
                     id: contract_id,
                     name: 'Contract N:' + contract_id,
-                    description: "Buy paying your are accepting those terms " + contract.terms || " " + " within " + contract.duration + " days",
+                    description: "Buy paying your are accepting those terms " + contract.terms || " " + " within " + contract.duration + " days" + "\n fees: " + contract.fees || " " + "\n price: " + contract.price || " ",
                     default_price_data: {
-                        unit_amount_decimal: +contract.price * 100,//cents to dollar
+                        unit_amount_decimal: contract.price * 100 + contract.fees,//cents to dollar (100 cents = 1 dollar)(price + fees)
                         currency: "usd"
                     }
 
                 });
             }
-            // console.log(product)
-            //
-            // await stripe.prices.create({
-            //     unit_amount_decimal: contract.price,
-            //     currency: 'usd',
-            //     product: product.id
-            // });
-            // // }
-            // console.log(product)
             const session = await stripe.checkout.sessions.create({
                 line_items: [
                     {
@@ -78,7 +70,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 cancel_url: `${req.headers.origin}/?canceled=true`,
             });
 
-
+            // index scan
             await contractCollection.findOneAndUpdate({
                 _id: new ObjectId(contract_id),
                 // @ts-ignore

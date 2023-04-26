@@ -1,10 +1,10 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../lib/mongodb";
 // import { getToken } from "next-auth/jwt";
 // import { User, UserRole } from "../../../types/resolvers";
 // import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 // import jwt from "jsonwebtoken";
-import { ObjectId } from "mongodb";
+import {ObjectId} from "mongodb";
 import {getToken} from "next-auth/jwt";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
@@ -12,17 +12,17 @@ import { redis } from "../../../lib/redis.ts"
 
 
 export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+    req: NextApiRequest,
+    res: NextApiResponse
 ) {
-  try {
-    // ? Checking if the
-    // const token: any = req.headers.authorization?.split(" ")[1];
+    try {
+        // ? Checking if the
+        // const token: any = req.headers.authorization?.split(" ")[1];
 
-    // console.log('token v2 : ', token);
+        // console.log('token v2 : ', token);
 
-    //   const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET);
-    //   console.log("decoded : ", decoded);
+        //   const decoded = jwt.verify(token, process.env.NEXTAUTH_SECRET);
+        //   console.log("decoded : ", decoded);
 
     // const userId: any = getCookie("userId", { req, res });
     const userToken: any = await getToken({ req, secret: process.env.NEXTAUTH_SECRET }) || getCookie("jwt", { req, res });
@@ -42,25 +42,30 @@ export default async function handler(
     //   return 
     // }
 
+
     const user = await db.collection("users").findOne({ _id: new ObjectId(user_id) });
+        const user_id = userTokenDecoded.user_id;
+        const user = await db.collection("users").findOne({_id: new ObjectId(user_id)});
+
 
     // await redis.set(user_id, JSON.stringify(user))
 
     console.log("user ", user);
 
-    if (user?.isCompleted === true) {
-      return res.redirect("/");
-    }
+
+        if (user?.isCompleted === true) {
+            return res.redirect("/");
+        }
 
     const { skills, level, language } = req.body;
     let {email, name} : any = user;
 
-    // console.log(email, name, hashedPassword, userRole);
-    
 
-    // const { isCompleted }: any = user;
+        // console.log(email, name, hashedPassword, userRole);
 
-    // user?.isCompleted = true;
+
+        // const { isCompleted }: any = user;
+
 
     const newUserData = await db.collection("users").findOneAndUpdate(
       { _id: new ObjectId(user_id) },
@@ -91,4 +96,5 @@ export default async function handler(
       message: error,
     });
   }
+
 }

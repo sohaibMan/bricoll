@@ -2,35 +2,29 @@
 # the project could be one of the following
 
 enum proposal_status {
-  canceled
-  declined
-  in_progress
-  approved
+    canceled
+    declined
+    in_progress
+    approved
+    completed # the proposal has a contract
 }
 # the proposal could be one of the following
 type Proposal {
-  _id: ObjectID #auto generated
-  project_id: ObjectID!
-  freelancer_id: ObjectID!
-  client_id:ObjectID!
-  price: Float!
-  duration: Int!
-  description: String!
-  cover_letter: String!
-  created_at: Date!
-  updated_at: Date!
-  status: proposal_status!
-  # current time
-  attachmentsURL: [Attachment]
-  # the link of urls of the attachments(files, images, video)
+    _id: ObjectID #auto generated
+    project_id: ObjectID!
+    freelancer_id: ObjectID!
+    client_id:ObjectID!
+    price: Float!
+    duration: Int!
+    description: String!
+    cover_letter: String!
+    created_at: Date!
+    updated_at: Date!
+    status: proposal_status!
+    # current time
+    attachments: [Attachment]
+    # the link of urls of the attachments(files, images, video)
 }
 
 # Cover Letter, Attachments (images +video +files ...)
 
-
-type Subscription {
-  proposalStatusChanged(id: ObjectID!): Proposal
-  # when the status of the proposal changed
-  projectGotProposal(id: ObjectID!): Proposal
-  # when the project got a new proposal
-}
