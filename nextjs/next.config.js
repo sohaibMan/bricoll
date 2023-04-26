@@ -11,6 +11,7 @@ const nextConfig = withPWA({
     config.experiments = { ...config.experiments, topLevelAwait: true };
     return config;
   },
+  
 });
 
 module.exports = nextConfig;
