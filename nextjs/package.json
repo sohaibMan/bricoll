@@ -39,6 +39,7 @@
     "graphql-scalars": "^1.20.4",
     "ioredis": "^5.3.2",
     "jsonwebtoken": "^9.0.0",
+    "micro": "^10.0.1",
     "mongodb": "^5.2.0",
     "next": "latest",
     "next-auth": "^4.21.1",

@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="commit resolvers.ts file  because it needed in deployment" />
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="client payment is done , to be tested after deploying the app">
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/process.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/process.d.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +161,7 @@
       <workItem from="1682603222591" duration="2902000" />
       <workItem from="1682606220354" duration="517000" />
       <workItem from="1682608094423" duration="712000" />
-      <workItem from="1682616280532" duration="2502000" />
+      <workItem from="1682616280532" duration="7772000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -276,7 +282,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682618638652</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="remove old file related to socket.io">
+      <created>1682618874289</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1682618874289</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,6 +330,8 @@
     <MESSAGE value="connect Apollo Client to Apollo Server #53" />
     <MESSAGE value="remove socket connection" />
     <MESSAGE value="commit resolvers.ts file  because it needed in deployment" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit resolvers.ts file  because it needed in deployment" />
+    <MESSAGE value="remove old file related to socket.io" />
+    <MESSAGE value="client payment is done , to be tested after deploying the app" />
+    <option name="LAST_COMMIT_MESSAGE" value="client payment is done , to be tested after deploying the app" />
   </component>
 </project>

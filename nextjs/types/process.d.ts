@@ -18,5 +18,6 @@ declare namespace NodeJS {
     REDIS_URL: string
     STRIPE_SECRET_KEY:string
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:string
+    ENDPOINT_SECRET:string
   }
 }
