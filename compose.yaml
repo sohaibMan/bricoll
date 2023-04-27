@@ -26,8 +26,6 @@ services:
     container_name: bricoll_nextjs
   bricoll_mongo:
     image: mongo
-    ports:
-      - 27017:27017
     restart: on-failure
     volumes: 
       - /data/db
@@ -35,8 +33,6 @@ services:
     container_name: bricoll_mongo
   bricoll_redis:
     image: redis
-    ports:
-      - 6379:6379
     restart: on-failure
     hostname: bricoll_redis
     container_name: bricoll_redis
