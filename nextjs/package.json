@@ -10,7 +10,7 @@
     "generate": "graphql-codegen --watch"
   },
   "dependencies": {
-    "@apollo/client": "^3.7.10",
+    "@apollo/client": "^3.7.12",
     "@apollo/server": "^4.5.0",
     "@as-integrations/next": "^1.2.0",
     "@emotion/react": "^11.10.6",

@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="fix other files">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="update some mutations functions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/product.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Projects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/resolvers/Proposals.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,7 +153,7 @@
       <workItem from="1682533981369" duration="175000" />
       <workItem from="1682545209979" duration="12000" />
       <workItem from="1682594401325" duration="6601000" />
-      <workItem from="1682602266076" duration="357000" />
+      <workItem from="1682602266076" duration="744000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -255,7 +246,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682341161130</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="update some mutations functions">
+      <created>1682602929118</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682602929118</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -291,6 +289,7 @@
     <MESSAGE value="add some pseudocode to be tested later" />
     <MESSAGE value="add some pseudocode to be tested later #27" />
     <MESSAGE value="enhance  quries and resolvers" />
-    <option name="LAST_COMMIT_MESSAGE" value="enhance  quries and resolvers" />
+    <MESSAGE value="update some mutations functions" />
+    <option name="LAST_COMMIT_MESSAGE" value="update some mutations functions" />
   </component>
 </project>
