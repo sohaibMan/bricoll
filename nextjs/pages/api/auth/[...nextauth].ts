@@ -83,19 +83,21 @@ export const authOptions: NextAuthOptions = {
           if(cacheResults){
             user = JSON.parse(cacheResults);
 
-            console.log("queried data from Redis Database ...")
+            // console.log("queried data from Redis Database ...",user)
+            // console.log("verfication",await verifyUserData(user, credentials.password))
 
-            return verifyUserData(user, credentials.password);
+            return await verifyUserData(user, credentials.password);
           }
-
+          // console.log("cache miss ...")
           user = await db.collection("users").findOne({ email: credentials.email });
 
-          console.log("queried data from MongoDB ...")
+          // console.log("queried data from MongoDB ...")
 
-          // Caching the data via Redis
+          // Caching the da
+          // ta via Redis
           await redis.set(credentials.email, JSON.stringify(user))
 
-          return verifyUserData(user, credentials.password);
+          return await verifyUserData(user, credentials.password);
 
         } catch( err: any ){
           // todo :handle error
@@ -176,7 +178,7 @@ Auth0Provider({
       // user.userRole
 
       if (user?.userRole) token.userRole = user.userRole;
-      console.log(user?.isCompleted)
+      // console.log(user?.isCompleted)
       if(user?.isCompleted!==undefined) token.isCompleted = user?.isCompleted;
 
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)

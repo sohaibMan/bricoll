@@ -17,9 +17,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             if (!contract_id) return res.status(400).json("bad request , provide the contract id \"");
             // get the user id from the token
             const userToken = await getToken({req});
-            if (!userToken) return res.status(401).json("you are not authenticated ")
+            if (!userToken || !userToken.sub) return res.status(401).json("you are not authenticated ")
             const client_id = userToken.sub;
-            if (!client_id) return res.status(401).json("you are not authenticated ")
             // get the contract from the database
             // index scan on _id
             const contract = await contractCollection.findOne({
@@ -30,16 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (!contract) return res.status(400).json("The contract can't be completed because it is not accepted or  or cancelled or already completed");
 
-            // Create Checkout Sessions from body params.
-            // the client may be not authenticated  make sure not to revile any crucial infos
-            // check if the product already exists
-            // console.log("here")/
-            // let product = await stripe.products.retrieve(contract_id);
-            // console.log("there")
             let product;
             try {
                 // check if the product exists
                 product = await stripe.products.retrieve(contract_id);//check if the product
+                console.log(product)
                 //check if the product is not active
                 if (!product.active) return res.status(400).json("The product is not active maybe already paid or got removed")
             } catch (e) {
@@ -69,22 +63,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 success_url: `${req.headers.origin}/?success=true`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
             });
-
             // index scan
-            await contractCollection.findOneAndUpdate({
-                _id: new ObjectId(contract_id),
-                // @ts-ignore
-                client_id: new ObjectId(client_id),
-            }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}}, {
-                returnDocument: "after"
-            })
+            // todo (host the app to get access to web hooks) #27
+            // ! on Payment success logique
+            // console.log(session)
+            // await contractCollection.findOneAndUpdate({
+            //     _id: new ObjectId(contract_id),
+            //     // @ts-ignore
+            //     client_id: new ObjectId(client_id),
+            // }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}}, {
+            //     returnDocument: "after"
+            // })
             // make the product inactive so the client can't pay for it again
-            await stripe.products.update(
-                contract_id,
-                {active: false}
-            );
+            // await stripe.products.update(
+            //     contract_id,
+            //     {active: false}
+            // );
 
-            // await  stripe.products.updateOne(contract_id).
 
             res.redirect(303, session.url);
 

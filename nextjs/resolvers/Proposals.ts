@@ -159,7 +159,7 @@ export const ProposalResolvers: Resolvers = {
             return proposal;
 
         },
-        withdrawProposal: async (parent, args, context, info) => {
+        cancelProposal: async (parent, args, context, info) => {
             // only the freelancer can withdraw his proposal
             freelancerMiddleware(context);
             // the freelancer can withdraw just his proposal

@@ -38,7 +38,7 @@ type Mutation {
     ): Proposal
     declineProposal(id: ObjectID!): Proposal
     # by the client
-    withdrawProposal(id: ObjectID!): Proposal
+    cancelProposal(id: ObjectID!): Proposal
     # by the freelancer
     acceptProposal(id: ObjectID!): Proposal
     # by the client

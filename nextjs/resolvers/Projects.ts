@@ -235,7 +235,7 @@ export const ProjectResolvers: Resolvers = {
             // only the account of type freelancer can dislike a project
             // console.log(context.user?.id)
             // freelancerMiddleware(context);
-            console.log(context.user?.id)
+            // console.log(context.user?.id)
             const project = await projectsCollection.updateOne(
                 {_id: new ObjectId(args.id)},
                 {

@@ -1,4 +1,4 @@
-import { ObjectId} from "mongodb";
+import {ObjectId} from "mongodb";
 import db from "../lib/mongodb";
 import {
     Contract,
@@ -37,7 +37,7 @@ export const ContractResolvers: Resolvers = {
                 //? you must be the client or  freelancer of the contract to access it
                 // index scan
                 const contract = await contractCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user.id)}, {freelancer_id: new ObjectId(context.user.id)}]}]})
-                if(!contract) throw new GraphQLError("The contract no longer exists",
+                if (!contract) throw new GraphQLError("The contract no longer exists",
                     {
                         extensions: {
                             code: 'NOTFOUND',
@@ -54,6 +54,18 @@ export const ContractResolvers: Resolvers = {
             //? you must be authenticated to access this resource
             //? you should be a client to access this resource
             clientMiddleware(context);
+            // check if a contract already exists
+            // the same freelancer and the same project and the same proposal and the same client are not allowed to have more than one contract and pending they may create another one after changing the status of the first one\
+            // index on project id
+            const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: ContractStatus.Pending}]})
+            if (AnExistingContract) throw new GraphQLError("You already have a pending contract with this freelancer on this project please complete it first",
+                {
+                    extensions: {
+                        code: 'BAD_USER_INPUT',
+                        http: {status: 400},
+                    }
+                }
+            )
             // check if the project exits
             // @ts-ignore
             const project = await projectsCollection.findOne({
@@ -69,7 +81,7 @@ export const ContractResolvers: Resolvers = {
                     },
                 });
             // check if the proposal exits
-            const proposal= await proposalsCollection.findOneAndUpdate({
+            const proposal = await proposalsCollection.findOneAndUpdate({
                     _id: new ObjectId(args.proposal_id),
                     project_id: new ObjectId(project._id),
                     freelancer_id: new ObjectId(args.freelancer_id)
@@ -132,8 +144,8 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
-                updated_at: new Date()
-            }, {$set: {status: ContractStatus.Accepted}}, {
+
+            }, {$set: {status: ContractStatus.Accepted, updated_at: new Date()}}, {
                 returnDocument: "after"
             });
 
@@ -151,8 +163,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
-                updated_at: new Date()
-            }, {$set: {status: ContractStatus.Cancelled}}, {
+            }, {$set: {status: ContractStatus.Cancelled, updated_at: new Date()}}, {
                 returnDocument: "after"
             });
             if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The updatedContract no longer exists");

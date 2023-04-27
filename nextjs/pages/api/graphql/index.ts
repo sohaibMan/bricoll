@@ -12,6 +12,7 @@ import {ContractResolvers} from "../../../resolvers/Contract";
 import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
+import {GraphQLError} from "graphql";
 
 // path to this folders
 const rootPath = path.join(__dirname, "../../../../", "pages/api/graphql");
@@ -36,24 +37,33 @@ const server = new ApolloServer<ServerContext>({
     typeDefs: [constraintDirectiveTypeDefs, schema],
     resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers],
     plugins,
-    validationRules:[depthLimit(4)]
+    validationRules: [depthLimit(4)]
 });
 
 export default startServerAndCreateNextHandler(server,
     {
-        context: async (req, _) => {
+        context: async (req, res) => {
             const secret = process.env.NEXTAUTH_SECRET;
             //
             const token = await getToken({req, secret});
+
+            // console.log("token is",token)
 
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}
 
             // console.log(token.userRole)
             if (token && token.isCompleted === false) {
-                // res.redirect(300, "/api/auth/createProfile")
-                throw new Error("Please complete your profile")
+                throw new GraphQLError("Please complete your profile",
+                    {
+                        extensions: {
+                            code: "BAD_REQUEST",
+                            http: {status: 400}
+
+                        }
+                    })
             }
+
             //
             return {user: {id: token.sub, userRole: token.userRole as UserRole}}
 
