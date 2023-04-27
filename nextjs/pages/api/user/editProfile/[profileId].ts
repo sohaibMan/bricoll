@@ -3,6 +3,8 @@ import {NextApiRequest, NextApiResponse} from "next";
 import {getCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
+import { redis } from "../../../../lib/redis"
+
 
 // import { useRouter } from "next/router";
 
@@ -73,7 +75,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     "Sorry cannot update the password, try to use this route /updateMyPassword !",
             });
         }
-        await db.collection("users").updateOne(
+        const newUserData = await db.collection("users").updateOne(
             {_id: user?._id},
             {
                 $set: {
@@ -82,6 +84,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 },
             }
         );
+
+        // ? Caching the new data  
+        await redis.set(user?.email, JSON.stringify(newUserData));
+
         res.status(200).json({
             status: "success",
             data: {

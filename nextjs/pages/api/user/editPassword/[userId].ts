@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
 import bcrypt from "bcrypt";
 import db from "../../../../lib/mongodb";
+import { redis } from "../../../../lib/redis"
 
 
 export default async function handler(
@@ -50,7 +51,7 @@ export default async function handler(
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
         // ? Updating the user password
-        await db.collection("users").findOneAndUpdate(
+        const newUserData = await db.collection("users").findOneAndUpdate(
             {_id: user?._id},
             {
                 $set: {
@@ -58,6 +59,12 @@ export default async function handler(
                 },
             }
         );
+
+        
+        // ? Caching the new data  
+        await redis.set(user?.email, JSON.stringify(newUserData));
+        
+
         res.status(200).json({
             status: "success",
             data: {
