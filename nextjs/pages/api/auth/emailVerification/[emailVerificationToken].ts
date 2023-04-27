@@ -3,10 +3,12 @@
 // import bcrypt from "bcrypt";
 import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../../lib/mongodb";
-
-const userCollection = db.collection("users");
+import { redis } from "../../../../lib/redis"
 import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
+
+
+const userCollection = db.collection("users");
 
 export default async function handler(
     req: NextApiRequest,
@@ -19,8 +21,12 @@ export default async function handler(
         }
         const jwtTokenDecoded = jwt.verify(jwtToken, process.env.NEXTAUTH_SECRET) as { user_id: string };
         const userId = jwtTokenDecoded.user_id;
+
+        // ? Getting the user data 
+        const user = await db.collection("users").findOne({_id: new ObjectId(userId)});
+
         // index scan
-        userCollection.updateOne({_id: new ObjectId(userId)}, {$set: {isEmailVerified: true}});
+        const newUserData = await userCollection.updateOne({_id: new ObjectId(userId)}, {$set: {isEmailVerified: true}});
 
 
         // const oldToken = getCookie("jwt", { req, res });
@@ -31,6 +37,9 @@ export default async function handler(
         //     message: "Invalid token !",
         //   });
         // }
+
+        // ? Caching the new data  
+        await redis.set(user?.email, JSON.stringify(newUserData));
 
         // Todo : redirect to the login page
 

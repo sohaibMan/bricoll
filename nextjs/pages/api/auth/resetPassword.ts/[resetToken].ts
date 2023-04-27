@@ -7,6 +7,7 @@ import { ObjectId } from "mongodb";
 import crypto from "crypto";
 import sgMail from "@sendgrid/mail";
 import bcrypt from "bcrypt";
+import { redis } from "../../../../lib/redis"
 
 export default async function handler(
   req: NextApiRequest,
@@ -36,7 +37,7 @@ export default async function handler(
 
     const newHashPassword = await bcrypt.hash(req.body.password, 10);
 
-    await db.collection("users").findOneAndUpdate(
+    const newUserData = await db.collection("users").findOneAndUpdate(
       { email: user.email },
       {
         $set: {
@@ -46,6 +47,9 @@ export default async function handler(
         }
       }
     );
+
+    // ? Caching the new data  
+    await redis.set(user.email, JSON.stringify(newUserData));
 
     // TODO:  Redirection to the signin page /api/auth/signin
 
