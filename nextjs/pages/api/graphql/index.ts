@@ -3,12 +3,12 @@ import {startServerAndCreateNextHandler} from "@as-integrations/next";
 import path from "node:path";
 import {loadSchemaSync} from "@graphql-tools/load";
 import {GraphQLFileLoader} from "@graphql-tools/graphql-file-loader";
-import {ProjectResolvers} from "../../../resolvers/Projects";
-import {ProposalResolvers} from "../../../resolvers/Proposals";
+import {ProjectResolvers} from "./resolvers/Projects";
+import {ProposalResolvers} from "./resolvers/Proposals";
 import {getToken} from "next-auth/jwt";
 import {ServerContext} from "../../../types/server-context";
 import {constraintDirectiveTypeDefs} from "graphql-constraint-directive";
-import {ContractResolvers} from "../../../resolvers/Contract";
+import {ContractResolvers} from "./resolvers/Contract";
 import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'

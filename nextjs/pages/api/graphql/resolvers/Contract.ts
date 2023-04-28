@@ -1,11 +1,11 @@
 import {ObjectId} from "mongodb";
-import db from "../lib/mongodb";
+import db from "../../../../lib/mongodb";
 import {
     Contract,
     ContractStatus,
     Project, Proposal_Status,
     Resolvers, Submission_Review, SubmissionReviewStatus
-} from "../types/resolvers";
+} from "../../../../types/resolvers";
 import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";

@@ -21,7 +21,7 @@
     "**/*.tsx",
     "**/*.ts",
     "**/**/*.ts",
-    "resolvers/test.js"
+    "pages/api/graphql/resolvers/test.js"
   ],
   "exclude": ["node_modules"]
 }

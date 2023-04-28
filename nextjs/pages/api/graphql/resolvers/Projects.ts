@@ -1,6 +1,6 @@
-import {Project, ProjectStats, Proposal, Resolvers} from "../types/resolvers";
+import {Project, ProjectStats, Proposal, Resolvers} from "../../../../types/resolvers";
 import {ObjectId} from 'mongodb';
-import db from "../lib/mongodb";
+import db from "../../../../lib/mongodb";
 import {GraphQLError} from "graphql";
 // import { ServerContext } from "../types/server-context";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
