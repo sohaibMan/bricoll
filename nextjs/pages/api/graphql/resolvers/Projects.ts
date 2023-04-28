@@ -14,7 +14,7 @@ export const ProjectResolvers: Resolvers = {
         Project: async (parent, args, context, info) => {
             // ? private
             // the client can get all details about his project
-            if (!context.user) return null;
+            // the freelancer can get all details about the project if he submits a proposal to it
 
             const project = await projectsCollection.findOne({
                 _id: new ObjectId(args.id),
