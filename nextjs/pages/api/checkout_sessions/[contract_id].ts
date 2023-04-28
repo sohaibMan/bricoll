@@ -14,10 +14,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // extract the contract id from the query
             const contract_id = req.query.contract_id?.toString();
 
-            if (!contract_id) return res.status(400).json("bad request , provide the contract id \"");
-            // get the user id from the token
-            const userToken = await getToken({req});
-            if (!userToken || !userToken.sub) return res.status(401).json("you are not authenticated ")
+            if (!contract_id) return res.status(400).json({
+                messaage: "bad request , provide the contract id "});
+                // get the user id from the token
+                const userToken = await getToken({req});
+                if(!
+            userToken || !userToken.sub
+        )
+            return res.status(401).json({messaage: "you are not authenticated "})
             const client_id = userToken.sub;
             // get the contract from the database
             // index scan on _id
@@ -27,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 status: ContractStatus.Accepted,// pending or cancelled or completed
             }) as unknown as Contract | null
 
-            if (!contract) return res.status(400).json("The contract can't be completed because it is not accepted or  or cancelled or already completed");
+            if (!contract) return res.status(400).json({messaage: "The contract can't be completed because it is not accepted or  or cancelled or already completed"});
 
             let product;
             try {
@@ -35,7 +39,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 product = await stripe.products.retrieve(contract_id);//check if the product
                 console.log(product)
                 //check if the product is not active
-                if (!product.active) return res.status(400).json("The product is not active maybe already paid or got removed")
+                if (!product.active) return res.status(400).json({messaage: "The product is not active maybe already paid or got removed"})
             } catch (e) {
                 //      the client came here the first time
                 //     the project doesn't exist
@@ -84,11 +88,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             res.redirect(303, session.url);
 
         } catch
-            (err: any) {
-            res.status(err.statusCode || 500).json(err.message);
+            (err: any)
+            {
+                res.status(err.statusCode || 500).json({messaage: err.message});
+            }
         }
-    } else {
-        res.setHeader('Allow', 'POST');
-        res.status(405).end('Method Not Allowed');
+    else
+        {
+            res.setHeader('Allow', 'POST');
+            res.status(405).end('Method Not Allowed');
+        }
     }
-}

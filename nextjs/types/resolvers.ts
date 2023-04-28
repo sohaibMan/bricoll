@@ -54,10 +54,16 @@ export type Contract = {
 
 export enum ContractStatus {
   Accepted = 'ACCEPTED',
-  Cancelled = 'CANCELLED',
+  CancelledByClient = 'CANCELLED_BY_CLIENT',
+  CancelledByFreelancer = 'CANCELLED_BY_FREELANCER',
   Completed = 'COMPLETED',
   Paid = 'PAID',
   Pending = 'PENDING'
+}
+
+export enum EarningsStatus {
+  Pending = 'PENDING',
+  Withdrawn = 'withdrawn'
 }
 
 export type Mutation = {
@@ -530,6 +536,7 @@ export type ResolversTypes = ResolversObject<{
   Contract: ResolverTypeWrapper<Contract>;
   ContractStatus: ContractStatus;
   Date: ResolverTypeWrapper<Scalars['Date']>;
+  EarningsStatus: EarningsStatus;
   Float: ResolverTypeWrapper<Scalars['Float']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;

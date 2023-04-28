@@ -364,4 +364,8 @@ async function OnProposalChange(user_id:ObjectId){
     }
 }
 
+async function OnPaymentReceive(user_id:ObjectId){
+
+}
+
 export {OnNewProposal,OnProposalAccepted,OnProposalDeclined,OnProposalWithDrawn,OnProposalChange};

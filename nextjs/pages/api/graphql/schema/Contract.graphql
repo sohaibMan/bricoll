@@ -6,6 +6,11 @@ enum SubmissionReviewStatus {
     Declined
     CANCELLED
 }
+# Freelancer
+enum EarningsStatus{
+    PENDING
+    withdrawn
+}
 type Submission_review{
     _id: ObjectID!
     attachments: [Attachment!]!
@@ -35,9 +40,10 @@ type Contract {
 enum ContractStatus {
     PENDING # default not signed by the freelancer (by default signed by the client because he created it !!!)
     ACCEPTED # signed by both parties
-    CANCELLED # cancelled by either party
+    CANCELLED_BY_FREELANCER # cancelled by freelancer
+    CANCELLED_BY_CLIENT # cancelled by client
     COMPLETED #!!! completed by both parties !!!!
-    PAID #!!! paid by the client !!!!
+    PAID # added to the freelancer's balance
 
 }
 
