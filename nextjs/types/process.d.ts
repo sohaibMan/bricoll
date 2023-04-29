@@ -1,7 +1,6 @@
 declare namespace NodeJS {
   export interface ProcessEnv {
     NEXTAUTH_URL: string
-
     NEXTAUTH_SECRET: string
     GITHUB_ID: string
     GITHUB_SECRET: string
@@ -19,7 +18,7 @@ declare namespace NodeJS {
     REDIS_URL: string
     STRIPE_SECRET_KEY:string
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:string
-    ENDPOINT_SECRET:string
+    SIGNING_SECRET:string
     NEXT_PUBLIC_AZURE_STORAGE_SAS_TOKEN:string
     NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME:string
   }

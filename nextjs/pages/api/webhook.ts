@@ -10,24 +10,23 @@ if (!process.env.STRIPE_SECRET_KEY) throw new Error("no STRIPE_SECRET_KEY was fo
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-if (!process.env.ENDPOINT_SECRET) throw new Error("no ENDPOINT_SECRET was found");
+if (!process.env.SIGNING_SECRET) throw new Error("no ENDPOINT_SECRET was found");
 import {buffer} from "micro";
 import {ObjectId} from "mongodb";
 import {ContractStatus} from "../../types/resolvers";
 import db from "../../lib/mongodb";
+import {log} from "util";
 
-const endpointSecret = process.env.ENDPOINT_SECRET;
+const endpointSecret = process.env.SIGNING_SECRET;
 
 async function handlePaymentIntentSucceeded(contract_id: string) {
 
+    // console.log(contract_id)
+
     const contractCollection = db.collection("contract")
-    await contractCollection.findOneAndUpdate({
+    const test = await contractCollection.updateOne({
         _id: new ObjectId(contract_id),
-        // @ts-ignore
-        client_id: new ObjectId(client_id),
-    }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}}, {
-        returnDocument: "after"
-    })
+    }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}})
     // make the product inactive so the client can't pay for it again
     await stripe.products.update(
         contract_id,
@@ -43,6 +42,7 @@ export default async function handler(
     if (req.method !== "POST") return res.end()
     let event;
     const buf = await buffer(req);
+
 
     // console.log(req.Payload)
 
@@ -67,14 +67,14 @@ export default async function handler(
 
     // Handle the event
     switch (event.type) {
-        case 'payment_intent.succeeded':
+        case 'checkout.session.completed':
             const paymentIntent = event.data.object;
-            console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`, paymentIntent.id);
-            const contract_id = paymentIntent.id;
+            // console.log(`PaymentIntent for ${paymentIntent.amount} was successful!`, paymentIntent.id);
 
             // Then define and call a method to handle the successful payment intent.
             // handle the contract payment details
-            await handlePaymentIntentSucceeded(paymentIntent.id);
+            //  console.log(paymentIntent)
+            await handlePaymentIntentSucceeded(paymentIntent.metadata.contract_id)
             break;
 
         default:
