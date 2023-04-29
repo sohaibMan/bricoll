@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="add file upload using azure blob service so the client and the freelancer can upload/share files between them #30&#10;(to be customized )">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="move utils functions to page folder">
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/linkaccount.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/user/link_account/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/user/link_account/index.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/product.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/process.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/process.d.ts" afterDir="false" />
     </list>
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="add file upload using azure blob service so the client and the freelancer can upload/share files between them #30&#10;(to be customized )" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,8 +24,8 @@
         <option value="com.haulmont.rcb.index" />
         <option value="com.haulmont.rcb.useInitial" />
         <option value="com.haulmont.rcb.README" />
-        <option value="com.haulmont.rcb.function_component" />
         <option value="TypeScript File" />
+        <option value="com.haulmont.rcb.function_component" />
       </list>
     </option>
   </component>
@@ -61,26 +59,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Payment&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/letcode&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "Main",
+    "last_opened_file_path": "/home/sohaib/Desktop/letcode",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -91,9 +89,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/user" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql" />
-      <recent name="$PROJECT_DIR$/nextjs/pages" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql/schema" />
     </key>
@@ -170,6 +168,7 @@
       <workItem from="1682696110172" duration="163000" />
       <workItem from="1682701014614" duration="507000" />
       <workItem from="1682711673297" duration="31000" />
+      <workItem from="1682802001237" duration="5379000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -325,7 +324,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682692745361</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="move utils functions to page folder">
+      <created>1682802554817</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1682802554820</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -347,7 +353,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value=" add cancelContract and completeContract functions and refactor the code" />
     <MESSAGE value="fix some bugs ( craete profile" />
     <MESSAGE value="fix some bugs ( create profile" />
     <MESSAGE value="fix some bugs ( create profile... )" />
@@ -372,6 +377,7 @@
     <MESSAGE value="rate limiting #40" />
     <MESSAGE value="move resolvers folder to /graphql where he belongs" />
     <MESSAGE value="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account" />
-    <option name="LAST_COMMIT_MESSAGE" value="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account" />
+    <MESSAGE value="move utils functions to page folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="move utils functions to page folder" />
   </component>
 </project>
