@@ -1,35 +1,30 @@
+
 import { useEffect, useState } from "react";
 import Pusher from "pusher-js";
 import axios from "axios";
+
+interface ChatProps {
+  sender: string;
+}
 
 interface Chat {
   sender: string;
   message: string;
 }
 
-interface ChatEvent {
-  sender: string;
-  message: string;
-}
-
-interface Props {
-  sender: string;
-}
-
-const Chat = ({ sender }: any) => {
-  const [chats, setChats] = useState([]);
+const Chat = ({ sender }: ChatProps): JSX.Element => {
+  const [chats, setChats] = useState<Chat[]>([]);
   const [messageToSend, setMessageToSend] = useState("");
 
   useEffect(() => {
-    const pusher = new Pusher(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY, {
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY as string, {
       cluster: "eu",
-      authEndpoint: "api/pusher"
     });
 
     const channel = pusher.subscribe("chat");
 
-    channel.bind("chat-event", function (data: any) {
-      setChats((prevState): any => [
+    channel.bind("chat-event", function (data: Chat) {
+      setChats((prevState) => [
         ...prevState,
         { sender: data.sender, message: data.message },
       ]);
@@ -40,7 +35,7 @@ const Chat = ({ sender }: any) => {
     };
   }, []);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await axios.post("/api/pusher", { message: messageToSend, sender });
   };
@@ -49,19 +44,15 @@ const Chat = ({ sender }: any) => {
     <>
       <p>Hello, {sender}</p>
       <div>
-        {chats.map((chat: any, id) => (
-          <>
+        {chats.map((chat, id) => (
+          <div key={id}>
             <p>{chat.message}</p>
             <small>{chat.sender}</small>
-          </>
+          </div>
         ))}
       </div>
 
-      <form
-        onSubmit={(e) => {
-          handleSubmit(e);
-        }}
-      >
+      <form onSubmit={(e) => handleSubmit(e)}>
         <input
           type="text"
           value={messageToSend}
@@ -75,3 +66,4 @@ const Chat = ({ sender }: any) => {
 };
 
 export default Chat;
+

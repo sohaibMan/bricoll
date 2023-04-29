@@ -13,21 +13,24 @@
 //   );
 // }
 
-// !!!
+// !!
 import Button from "./components/Button";
+import { FormEvent, ChangeEvent } from "react";
 
-export default function Login({ handleLogin, handleLoginChange }: any) {
+interface LoginProps {
+  handleLogin: (e: FormEvent<HTMLFormElement>) => void;
+  handleLoginChange: (e: ChangeEvent<HTMLInputElement>) => void;
+}
+
+export default function Login({ handleLogin, handleLoginChange }: LoginProps): JSX.Element {
   return (
     <div>
       <div>
-      <h1>Chattr</h1>
-      <p>your chats, your way</p>
+        <h1>Chattr</h1>
+        <p>your chats, your way</p>
       </div>
-      
       <form onSubmit={handleLogin}>
-        <p>
-          Enter your name to start:
-        </p>
+        <p>Enter your name to start:</p>
         <div>
           <input
             type="text"

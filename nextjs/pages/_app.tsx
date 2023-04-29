@@ -29,15 +29,51 @@
 
 
 // !!!!
-import { useState } from "react";
-import { useRouter } from "next/router";
+// import { useState } from "react";
+// import { useRouter } from "next/router";
 
-interface MyAppProps {
-  Component: any;
-  pageProps: any;
+// interface MyAppProps {
+//   Component: any;
+//   pageProps: any;
+// }
+
+// const MyApp = ({ Component, pageProps }: MyAppProps) => {
+//   const [username, setUsername] = useState("");
+//   const router = useRouter();
+
+//   const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault();
+//     router.push("/chat");
+//   };
+
+//   return (
+//     <Component
+//       handleLoginChange={(e: React.ChangeEvent<HTMLInputElement>) => setUsername(e.target.value)} handleLogin={handleLogin} username={username}
+//     //   sender={sender}
+//     //   handleLogin={handleLogin}
+//       {...pageProps}
+//     />
+//   );
+// }
+
+// export default MyApp;
+
+
+// !!
+import { useState, ChangeEvent } from "react";
+import { useRouter } from "next/router";
+import { AppProps } from "next/app";
+
+interface MyAppProps extends AppProps {
+  handleLoginChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  sender: string;
+  handleLogin: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const MyApp = ({ Component, pageProps }: MyAppProps) => {
+export default function MyApp({
+  Component,
+  pageProps,
+}: MyAppProps): JSX.Element {
   const [sender, setSender] = useState("");
   const router = useRouter();
 
@@ -48,12 +84,12 @@ const MyApp = ({ Component, pageProps }: MyAppProps) => {
 
   return (
     <Component
-      handleLoginChange={(e: React.ChangeEvent<HTMLInputElement>) => setSender(e.target.value)}
+      handleLoginChange={(e: ChangeEvent<HTMLInputElement>) =>
+        setSender(e.target.value)
+      }
       sender={sender}
       handleLogin={handleLogin}
       {...pageProps}
     />
   );
 }
-
-export default MyApp;
