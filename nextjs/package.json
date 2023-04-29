@@ -13,6 +13,7 @@
     "@apollo/client": "^3.7.12",
     "@apollo/server": "^4.5.0",
     "@as-integrations/next": "^1.2.0",
+    "@azure/storage-blob": "^12.14.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@graphql-codegen/typescript-resolvers": "^3.1.1",
