@@ -18,6 +18,11 @@ declare namespace NodeJS {
     REDIS_URL: string
     STRIPE_SECRET_KEY:string
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:string
+    PUSHER_APP_ID:string
+    PUSHER_KEY:string
+    PUSH_SECRET:string
+    PUSHER_CLUSTER:string
+    NEXT_PUBLIC_KEY:string
     SIGNING_SECRET:string
     NEXT_PUBLIC_AZURE_STORAGE_SAS_TOKEN:string
     NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME:string
