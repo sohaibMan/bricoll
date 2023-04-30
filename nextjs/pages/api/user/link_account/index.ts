@@ -25,7 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
         }
     )
-    // console.log(freelancer)
     // if the client already has a stripe account redirect to him only(create account once)
     if (freelancer) {
        const accountLink= await stripe.accountLinks.create({
@@ -51,7 +50,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return_url: process.env.NEXTAUTH_URL,
         type: 'account_onboarding',
     });
-    // console.log(accountLink)
     // redirect the client to accountLink.url
     await usersCollection.updateOne({_id: new ObjectId(freelancer_id)}, {
         $set: {

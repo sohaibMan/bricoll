@@ -73,22 +73,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 success_url: `${req.headers.origin}/?success=true`,
                 cancel_url: `${req.headers.origin}/?canceled=true`,
             });
-            // index scan
-            // todo (host the app to get access to web hooks) #27
-            // ! on Payment success logique
-            // console.log(session)
-            // await contractCollection.findOneAndUpdate({
-            //     _id: new ObjectId(contract_id),
-            //     // @ts-ignore
-            //     client_id: new ObjectId(client_id),
-            // }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}}, {
-            //     returnDocument: "after"
-            // })
-            // make the product inactive so the client can't pay for it again
-            // await stripe.products.update(
-            //     contract_id,
-            //     {active: false}
-            // );
+
 
 
             res.redirect(303, session.url);

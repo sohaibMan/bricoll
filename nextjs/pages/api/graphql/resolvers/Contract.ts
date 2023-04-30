@@ -186,7 +186,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(),
                 created_at: new Date(),
                 updated_at: new Date(),
-                attachments: args.attachments,
+                attachments: args.attachments || [],
                 description: args.description,
                 title: args.title,
                 status: SubmissionReviewStatus.Pending,
@@ -225,24 +225,33 @@ export const ContractResolvers: Resolvers = {
                 readConcern: {level: "local"},
                 writeConcern: {w: 'majority'}
             };
-
-            const transactionResults = await session.withTransaction(async () => {
-            }, transactionOptions);
+            session.startTransaction(transactionOptions);
+            // const transactionResults = await session.withTransaction(async () => {
+            // }, transactionOptions);
             try {
                 const contract = await contractCollection.findOneAndUpdate(
                     {
-                        _id: new ObjectId(args.contract_id),
-                        // @ts-ignore
-                        client_id: new ObjectId(context.user.id),
-                        "submission_reviews._id": new ObjectId(args.submission_review_id),
-                        "submission_reviews.status": SubmissionReviewStatus.Pending,
-                        status: ContractStatus.Completed,
+                        $and: [
+                            {_id: new ObjectId(args.contract_id)},
+                            {client_id: new ObjectId(context.user?.id)},
+                            {status: ContractStatus.Completed},
+                            {
+                                submission_reviews:
+                                    {
+                                        $elemMatch: {
+                                            "_id": new ObjectId(args.submission_review_id),
+                                            "status": SubmissionReviewStatus.Pending
+                                        }
+                                    }
+                            }
+
+                        ]
                     },
                     {
                         $set: {
-                            "submission_reviews.$.status": SubmissionReviewStatus.Accepted,
+                            "submission_reviews.$.status":
+                            SubmissionReviewStatus.Accepted,
                             "submission_reviews.$.updated_at": new Date(),
-                            "submission_reviews.$.accepted_at": new Date(),
                             "status": ContractStatus.Paid,
                         }
                     },
@@ -251,20 +260,15 @@ export const ContractResolvers: Resolvers = {
                         session
                     }
                 )
-                if (contract.ok === 0 || !contract.value) throw new GraphQLError("The contract no longer exists", {
-                    extensions: {
-                        code: 'NOTFOUND',
-                        http: {status: 404},
-                    }
-                })
+                // console.log(contract)
+                if (contract.ok === 0 || !contract.value) throw new Error("The contract no longer exists");
 
 
-
-                const freelancer = await usersCollection.updateOne({_id: new ObjectId(context.user?.id)}, {
+                const freelancer = await usersCollection.updateOne({_id: contract.value.freelancer_id}, {
                         $push: {
                             earnings: {
                                 contract_id: new ObjectId(args.contract_id),
-                                amount: contract.value.price * 100 - contract.value.fees,
+                                amount: contract.value.price - contract.value.fees,
                                 created_at: new Date(),
                                 currency: "usd",
                                 description: "Payment for the contract " + args.contract_id,
@@ -274,19 +278,36 @@ export const ContractResolvers: Resolvers = {
                     },
                     {session}
                 )
-
-
-
-            } catch (e) {
-
-            } finally {
-                await session.endSession();
-
-                return {
-                    acknowledgement: !!transactionResults,
-                    _id: args.submission_review_id
+                if (freelancer.modifiedCount !== 1) {
+                    //rol back if the freelancer is not found
+                    throw new Error("An error has occurred while updating the freelancer earnings")
                 }
 
+
+            } catch (e: any) {
+                // console.log(e)
+                await session.abortTransaction();
+                throw  new GraphQLError(e.message, {
+                    extensions: {
+                        code: 'BAD_REQUEST',
+                        http: {status: 400},
+                    }
+                });
+            } finally {
+
+
+                // return {
+                //     acknowledgement: !!transactionResults,
+                //     _id: args.submission_review_id
+                // }
+
+            }
+            // console.log(transactionResults)
+            await session.commitTransaction();
+            await session.endSession();
+            return {
+                acknowledgement: true,
+                _id: args.submission_review_id
             }
 
 
@@ -295,21 +316,32 @@ export const ContractResolvers: Resolvers = {
             clientMiddleware(context);
             const contract = await contractCollection.updateOne(
                 {
-                    _id: new ObjectId(args.contract_id),
-                    // @ts-ignore
-                    client_id: new ObjectId(context.user.id),
-                    "submission_reviews._id": new ObjectId(args.submission_review_id),
-                    "submission_reviews.status": SubmissionReviewStatus.Pending,
-                    status: ContractStatus.Completed,
+                    $and: [
+                        {_id: new ObjectId(args.contract_id)},
+                        {client_id: new ObjectId(context.user?.id)},
+                        {status: ContractStatus.Completed},
+                        {
+                            submission_reviews:
+                                {
+                                    $elemMatch: {
+                                        "_id": new ObjectId(args.submission_review_id),
+                                        "status": SubmissionReviewStatus.Pending
+                                    }
+                                }
+                        }
+
+                    ]
                 },
                 {
                     $set: {
-                        "submission_reviews.$.status": SubmissionReviewStatus.Declined,
-                        "submission_reviews.$.updated_at": new Date(),
+                        "submission_reviews.$.status":
+                        SubmissionReviewStatus.Declined,
+                        "submission_reviews.$.updated_at":
+                            new Date()
                     }
                 }
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
@@ -317,7 +349,7 @@ export const ContractResolvers: Resolvers = {
             })
 
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: contract.modifiedCount === 1,
                 _id: args.submission_review_id
             }
 
@@ -326,28 +358,43 @@ export const ContractResolvers: Resolvers = {
             freelancerMiddleware(context);
             const contract = await contractCollection.updateOne(
                 {
-                    _id: new ObjectId(args.contract_id),
-                    // @ts-ignore
-                    freelancer_id: new ObjectId(context.user.id),
-                    "submission_reviews._id": new ObjectId(args.submission_review_id),
-                    "submission_reviews.status": SubmissionReviewStatus.Pending
+                    $and: [
+                        {_id: new ObjectId(args.contract_id)},
+                        {freelancer_id: new ObjectId(context.user?.id)},
+                        {status: ContractStatus.Completed},
+                        {
+                            submission_reviews:
+                                {
+                                    $elemMatch: {
+                                        "_id": new ObjectId(args.submission_review_id),
+                                        "status": SubmissionReviewStatus.Pending
+                                    }
+                                }
+                        }
+
+                    ]
                 },
                 {
                     $set: {
-                        "submission_reviews.$.status": SubmissionReviewStatus.Cancelled,
-                        "submission_reviews.$.updated_at": new Date(),
+                        "submission_reviews.$.status":
+                        SubmissionReviewStatus.Cancelled,
+                        "submission_reviews.$.updated_at":
+                            new Date(),
+                        "submission_reviews.$.cancelled_at":
+                            new Date(),
                     }
                 }
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            // console.log(contract)
 
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: contract.modifiedCount === 1,
                 _id: args.submission_review_id
             }
 

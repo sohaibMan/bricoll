@@ -58,7 +58,7 @@ type Mutation {
         terms: [String!]!  @constraint(maxItems: 15)
     ): Contract
     #    the id is of the submission id
-    requestProjectSubmissionReview(contract_id: ObjectID!,title:String!,description:String!,attachments:[AttachmentInput!]!): queryResult # reviews will be added inside the contract as an array of reviews
+    requestProjectSubmissionReview(contract_id: ObjectID!,title:String!,description:String!,attachments:[AttachmentInput!]): queryResult # reviews will be added inside the contract as an array of reviews
     acceptRequestProjectSubmissionReview(contract_id: ObjectID!,submission_review_id: ObjectID!): queryResult
     declineRequestProjectSubmissionReview(contract_id: ObjectID!,submission_review_id: ObjectID!): queryResult
     cancelRequestProjectSubmissionReview(contract_id: ObjectID!,submission_review_id: ObjectID!): queryResult

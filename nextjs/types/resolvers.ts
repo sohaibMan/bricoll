@@ -210,7 +210,7 @@ export type MutationReactToProjectArgs = {
 
 
 export type MutationRequestProjectSubmissionReviewArgs = {
-  attachments: Array<AttachmentInput>;
+  attachments?: InputMaybe<Array<AttachmentInput>>;
   contract_id: Scalars['ObjectID'];
   description: Scalars['String'];
   title: Scalars['String'];
@@ -669,7 +669,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
-  requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'attachments' | 'contract_id' | 'description' | 'title'>>;
+  requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'contract_id' | 'description' | 'title'>>;
   undoReactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationUndoReactToProjectArgs, 'id' | 'reaction_type'>>;
 }>;
 
