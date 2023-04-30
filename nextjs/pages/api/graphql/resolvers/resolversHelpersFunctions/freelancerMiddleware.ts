@@ -1,6 +1,6 @@
-import { UserRole } from "../../types/resolvers";
+import { UserRole } from "../../../../../types/resolvers";
 import { GraphQLError } from 'graphql';
-import { ServerContext } from '../../types/server-context';
+import { ServerContext } from '../../../../../types/server-context';
 
 export const freelancerMiddleware = (context: ServerContext) => {
     // this middleware is used to check if the user is authenticated as freelancer

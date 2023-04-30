@@ -1,7 +1,7 @@
 import {ObjectId} from "mongodb";
-import db from "../../lib/mongodb";
-import emailService from "../../lib/email";
-import {User} from "../../types/resolvers";
+import db from "../../../../../lib/mongodb";
+import emailService from "../../../../../lib/email";
+import {User} from "../../../../../types/resolvers";
 
 const usersCollection = db.collection("users")
 
@@ -14,7 +14,7 @@ async function OnNewProposal(user_id:ObjectId){
         const subject = 'You have received a new Proposal ';
         const html = `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -87,7 +87,7 @@ async function OnProposalAccepted(user_id:ObjectId){
         const subject = 'Your proposal has been accepted ';
         const html = `
         <!DOCTYPE html>
-        <html>
+        <html lang="lang">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -158,7 +158,7 @@ async function OnProposalDeclined(user_id:ObjectId){
         const subject = 'Sorry your proposal has been declined ';
         const html = `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -229,7 +229,7 @@ async function OnProposalWithDrawn(user_id:ObjectId){
         const subject = 'Sorry your proposal has been withdrawn by the freelancer  ';
         const html = `
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -301,7 +301,7 @@ async function OnProposalChange(user_id:ObjectId){
         const subject = 'Your proposal terms has been changed ';
         const html = `<h1>Hello ${name} , your proposal has been changed , click me for more details , a button and more bla bla bla </h1>
         <!DOCTYPE html>
-        <html>
+        <html lang="en">
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -362,6 +362,10 @@ async function OnProposalChange(user_id:ObjectId){
         `;
         await emailService.sendEmail({to:email,subject,html});
     }
+}
+
+async function OnPaymentReceive(user_id:ObjectId){
+
 }
 
 export {OnNewProposal,OnProposalAccepted,OnProposalDeclined,OnProposalWithDrawn,OnProposalChange};

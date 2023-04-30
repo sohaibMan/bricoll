@@ -23,5 +23,8 @@ declare namespace NodeJS {
     PUSH_SECRET:string
     PUSHER_CLUSTER:string
     NEXT_PUBLIC_KEY:string
+    SIGNING_SECRET:string
+    NEXT_PUBLIC_AZURE_STORAGE_SAS_TOKEN:string
+    NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME:string
   }
 }

@@ -1,6 +1,6 @@
-import {Project, ProjectStats, Proposal, Resolvers} from "../types/resolvers";
+import {Project, ProjectStats, Proposal, Resolvers} from "../../../../types/resolvers";
 import {ObjectId} from 'mongodb';
-import db from "../lib/mongodb";
+import db from "../../../../lib/mongodb";
 import {GraphQLError} from "graphql";
 // import { ServerContext } from "../types/server-context";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
@@ -14,7 +14,7 @@ export const ProjectResolvers: Resolvers = {
         Project: async (parent, args, context, info) => {
             // ? private
             // the client can get all details about his project
-            if (!context.user) return null;
+            // the freelancer can get all details about the project if he submits a proposal to it
 
             const project = await projectsCollection.findOne({
                 _id: new ObjectId(args.id),

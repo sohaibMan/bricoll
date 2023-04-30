@@ -1,16 +1,19 @@
-import {ObjectId} from "mongodb";
-import db from "../lib/mongodb";
+import {ObjectId, TransactionOptions} from "mongodb";
+import db, {clientPromise} from "../../../../lib/mongodb";
 import {
     Contract,
     ContractStatus,
-    Project, Proposal_Status,
-    Resolvers, Submission_Review, SubmissionReviewStatus
-} from "../types/resolvers";
+    EarningsStatus,
+    Proposal_Status,
+    Resolvers,
+    Submission_Review,
+    SubmissionReviewStatus,
+    UserRole
+} from "../../../../types/resolvers";
 import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
-
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")
@@ -49,6 +52,43 @@ export const ContractResolvers: Resolvers = {
             },
     },
     Mutation: {
+        acceptContract: async (parent, args, context, info) => {
+            // the contract status is accepted (by freelancer)
+            // you must be a freelancer to accept a contract that is created by a client
+            freelancerMiddleware(context)
+            // @ts-ignore
+            const updatedContract = await contractCollection.findOneAndUpdate({
+                _id: new ObjectId(args.id),
+                // @ts-ignore
+                freelancer_id: new ObjectId(context.user.id),
+
+            }, {$set: {status: ContractStatus.Accepted, updated_at: new Date()}}, {
+                returnDocument: "after"
+            });
+
+            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The Contract no longer exists");
+            //return the value (the updated proposal)
+            return updatedContract.value as unknown as Contract;
+
+        },
+        cancelContract: async (parent, args, context, info) => {
+            // both the client and the freelancer can cancel the contract
+            authenticatedMiddleware(context)
+
+            const updatedContract = await contractCollection.findOneAndUpdate({
+                $and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]
+            }, {
+                $set: {
+                    status: context.user?.userRole === UserRole.Client ? ContractStatus.CancelledByClient : ContractStatus.CancelledByFreelancer,
+                    updated_at: new Date()
+                }
+            }, {
+                returnDocument: "after"
+            });
+            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The updatedContract no longer exists");
+            //return the value (the updated proposal)
+            return updatedContract.value as unknown as Contract;
+        },
         createContract: async (parent, args, context, info) => {
             // the contract status is Pending( by client)
             //? you must be authenticated to access this resource
@@ -57,7 +97,7 @@ export const ContractResolvers: Resolvers = {
             // check if a contract already exists
             // the same freelancer and the same project and the same proposal and the same client are not allowed to have more than one contract and pending they may create another one after changing the status of the first one\
             // index on project id
-            const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: ContractStatus.Pending}]})
+            const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: ContractStatus.Pending}]}, {projection: {_id: 1}})
             if (AnExistingContract) throw new GraphQLError("You already have a pending contract with this freelancer on this project please complete it first",
                 {
                     extensions: {
@@ -72,7 +112,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.project_id),
                 // @ts-ignore
                 client_id: new ObjectId(context.user.id)
-            }) as unknown as Project | null
+            }, {projection: {_id: 1}})
             if (!project) throw new GraphQLError("The project no longer exists",
                 {
                     extensions: {
@@ -81,9 +121,9 @@ export const ContractResolvers: Resolvers = {
                     },
                 });
             // check if the proposal exits
-            const proposal = await proposalsCollection.findOneAndUpdate({
+            const proposal = await proposalsCollection.updateOne({
                     _id: new ObjectId(args.proposal_id),
-                    project_id: new ObjectId(project._id),
+                    project_id: new ObjectId(args.project_id),
                     freelancer_id: new ObjectId(args.freelancer_id)
                 },
                 {
@@ -93,7 +133,7 @@ export const ContractResolvers: Resolvers = {
                 }
             )
 
-            if (!proposal.value) throw new GraphQLError("The proposal no longer exists",
+            if (!proposal) throw new GraphQLError("The proposal no longer exists",
 
                 {
                     extensions: {
@@ -135,41 +175,6 @@ export const ContractResolvers: Resolvers = {
             return contract;
 
         },
-        acceptContract: async (parent, args, context, info) => {
-            // the contract status is accepted (by freelancer)
-            // you must be a freelancer to accept a contract that is created by a client
-            freelancerMiddleware(context)
-            // @ts-ignore
-            const updatedContract = await contractCollection.findOneAndUpdate({
-                _id: new ObjectId(args.id),
-                // @ts-ignore
-                freelancer_id: new ObjectId(context.user.id),
-
-            }, {$set: {status: ContractStatus.Accepted, updated_at: new Date()}}, {
-                returnDocument: "after"
-            });
-
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The Contract no longer exists");
-            //return the value (the updated proposal)
-            return updatedContract.value as unknown as Contract;
-
-        },
-        cancelContract: async (parent, args, context, info) => {
-            // the contract status is canceled
-            // you must be a freelancer to accept a contract that is created by a client
-            freelancerMiddleware(context)
-
-            const updatedContract = await contractCollection.findOneAndUpdate({
-                _id: new ObjectId(args.id),
-                // @ts-ignore
-                freelancer_id: new ObjectId(context.user.id),
-            }, {$set: {status: ContractStatus.Cancelled, updated_at: new Date()}}, {
-                returnDocument: "after"
-            });
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The updatedContract no longer exists");
-            //return the value (the updated proposal)
-            return updatedContract.value as unknown as Contract;
-        },
         requestProjectSubmissionReview: async (parent, args, context, info) => {
             //     rules : only client can request a review
             //     rules : the contract status must be completed
@@ -181,7 +186,7 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(),
                 created_at: new Date(),
                 updated_at: new Date(),
-                attachments: args.attachments,
+                attachments: args.attachments || [],
                 description: args.description,
                 title: args.title,
                 status: SubmissionReviewStatus.Pending,
@@ -212,107 +217,131 @@ export const ContractResolvers: Resolvers = {
         acceptRequestProjectSubmissionReview: async (parent, args, context, info) => {
             clientMiddleware(context);
             // because we will handle payment here the client can accept only one submission review
-
-            const contract = await contractCollection.findOneAndUpdate(
-                {
-                    _id: new ObjectId(args.contract_id),
-                    // @ts-ignore
-                    client_id: new ObjectId(context.user.id),
-                    "submission_reviews._id": new ObjectId(args.submission_review_id),
-                    "submission_reviews.status": SubmissionReviewStatus.Pending,
-                    status: ContractStatus.Completed,
-                },
-                {
-                    $set: {
-                        "submission_reviews.$.status": SubmissionReviewStatus.Accepted,
-                        "submission_reviews.$.updated_at": new Date(),
-                        "submission_reviews.$.accepted_at": new Date(),
-                        "status": ContractStatus.Paid,
-                    }
-                },
-                {
-                    returnDocument: "after"
-                }
-            )
-            if (contract.ok === 0 || !contract.value) throw new GraphQLError("The contract no longer exists", {
-                extensions: {
-                    code: 'NOTFOUND',
-                    http: {status: 404},
-                }
-            })
-            //todo the client should receive a payment request
-            // check if the client has an account(already paid for a project)
-            let account;
+            // irreversible action (idempotent request) (status change from completed to paid once and only once)
+            // this transaction is acid (atomicity, consistency, isolation, durability) (all or nothing) complain
+            const session = (await clientPromise).startSession();
+            const transactionOptions: TransactionOptions = {
+                readPreference: 'primary',
+                readConcern: {level: "local"},
+                writeConcern: {w: 'majority'}
+            };
+            session.startTransaction(transactionOptions);
+            // const transactionResults = await session.withTransaction(async () => {
+            // }, transactionOptions);
             try {
-                account = await stripe.accounts.retrieve(context.user?.id);
-            } catch (e) {
-                // create an account for the client (if it doesn't exist)
-                account = await stripe.accounts.create({
-                    type: 'express',
-                    id: context.user?.id
-                });
-
-                const accountLink = await stripe.accountLinks.create({
-                    account: context.user?.id,
-                    // refresh_url: process.env.STRIPE_REDIRECT_URL,
-                    return_url: process.env.NEXTAUTH_URL,
-                    type: 'account_onboarding',
-                });
-                // todo send the client a link to complete his account and save the link in the database
-
-                const freelancer = await usersCollection.updateOne({_id: new ObjectId(context.user?.id)}, {
-                        $set: {
-                            account_link: accountLink.url
-
-                        },
-                        $push: {
-                            earnings: {
-                                contract_id: args.contract_id,
-                                amount: contract.value.price * 100 - contract.value.fees,
-                                created_at: new Date(),
-                                currency: "usd",
+                const contract = await contractCollection.findOneAndUpdate(
+                    {
+                        $and: [
+                            {_id: new ObjectId(args.contract_id)},
+                            {client_id: new ObjectId(context.user?.id)},
+                            {status: ContractStatus.Completed},
+                            {
+                                submission_reviews:
+                                    {
+                                        $elemMatch: {
+                                            "_id": new ObjectId(args.submission_review_id),
+                                            "status": SubmissionReviewStatus.Pending
+                                        }
+                                    }
                             }
+
+                        ]
+                    },
+                    {
+                        $set: {
+                            "submission_reviews.$.status":
+                            SubmissionReviewStatus.Accepted,
+                            "submission_reviews.$.updated_at": new Date(),
+                            "status": ContractStatus.Paid,
                         }
+                    },
+                    {
+                        returnDocument: "after",
+                        session
                     }
                 )
+                // console.log(contract)
+                if (contract.ok === 0 || !contract.value) throw new Error("The contract no longer exists");
+
+
+                const freelancer = await usersCollection.updateOne({_id: contract.value.freelancer_id}, {
+                        $push: {
+                            earnings: {
+                                contract_id: new ObjectId(args.contract_id),
+                                amount: contract.value.price - contract.value.fees,
+                                created_at: new Date(),
+                                currency: "usd",
+                                description: "Payment for the contract " + args.contract_id,
+                                status: EarningsStatus.Pending,
+                            }
+                        }
+                    },
+                    {session}
+                )
+                if (freelancer.modifiedCount !== 1) {
+                    //rol back if the freelancer is not found
+                    throw new Error("An error has occurred while updating the freelancer earnings")
+                }
+
+
+            } catch (e: any) {
+                // console.log(e)
+                await session.abortTransaction();
+                throw  new GraphQLError(e.message, {
+                    extensions: {
+                        code: 'BAD_REQUEST',
+                        http: {status: 400},
+                    }
+                });
+            } finally {
+
+
+                // return {
+                //     acknowledgement: !!transactionResults,
+                //     _id: args.submission_review_id
+                // }
+
             }
-
-
-            const transfer = await stripe.transfers.create({
-                amount: contract.value.price * 100 - contract.value.fees,
-                currency: "usd",
-                destination: context.user?.id,
-            })
-
-
-            // contract_id: args.contract_id,
-            // submission_review_id: args.submission_review_id,
-
+            // console.log(transactionResults)
+            await session.commitTransaction();
+            await session.endSession();
             return {
-                acknowledgement: contract.ok === 1,
+                acknowledgement: true,
                 _id: args.submission_review_id
             }
+
 
         },
         declineRequestProjectSubmissionReview: async (parent, args, context, info) => {
             clientMiddleware(context);
             const contract = await contractCollection.updateOne(
                 {
-                    _id: new ObjectId(args.contract_id),
-                    // @ts-ignore
-                    client_id: new ObjectId(context.user.id),
-                    "submission_reviews._id": new ObjectId(args.submission_review_id),
-                    "submission_reviews.status": SubmissionReviewStatus.Pending,
-                    status: ContractStatus.Completed,
+                    $and: [
+                        {_id: new ObjectId(args.contract_id)},
+                        {client_id: new ObjectId(context.user?.id)},
+                        {status: ContractStatus.Completed},
+                        {
+                            submission_reviews:
+                                {
+                                    $elemMatch: {
+                                        "_id": new ObjectId(args.submission_review_id),
+                                        "status": SubmissionReviewStatus.Pending
+                                    }
+                                }
+                        }
+
+                    ]
                 },
                 {
                     $set: {
-                        "submission_reviews.$.status": SubmissionReviewStatus.Declined,
-                        "submission_reviews.$.updated_at": new Date(),
+                        "submission_reviews.$.status":
+                        SubmissionReviewStatus.Declined,
+                        "submission_reviews.$.updated_at":
+                            new Date()
                     }
                 }
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
@@ -320,7 +349,7 @@ export const ContractResolvers: Resolvers = {
             })
 
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: contract.modifiedCount === 1,
                 _id: args.submission_review_id
             }
 
@@ -329,28 +358,43 @@ export const ContractResolvers: Resolvers = {
             freelancerMiddleware(context);
             const contract = await contractCollection.updateOne(
                 {
-                    _id: new ObjectId(args.contract_id),
-                    // @ts-ignore
-                    freelancer_id: new ObjectId(context.user.id),
-                    "submission_reviews._id": new ObjectId(args.submission_review_id),
-                    "submission_reviews.status": SubmissionReviewStatus.Pending
+                    $and: [
+                        {_id: new ObjectId(args.contract_id)},
+                        {freelancer_id: new ObjectId(context.user?.id)},
+                        {status: ContractStatus.Completed},
+                        {
+                            submission_reviews:
+                                {
+                                    $elemMatch: {
+                                        "_id": new ObjectId(args.submission_review_id),
+                                        "status": SubmissionReviewStatus.Pending
+                                    }
+                                }
+                        }
+
+                    ]
                 },
                 {
                     $set: {
-                        "submission_reviews.$.status": SubmissionReviewStatus.Cancelled,
-                        "submission_reviews.$.updated_at": new Date(),
+                        "submission_reviews.$.status":
+                        SubmissionReviewStatus.Cancelled,
+                        "submission_reviews.$.updated_at":
+                            new Date(),
+                        "submission_reviews.$.cancelled_at":
+                            new Date(),
                     }
                 }
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            // console.log(contract)
 
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: contract.modifiedCount === 1,
                 _id: args.submission_review_id
             }
 
