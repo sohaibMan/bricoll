@@ -53,6 +53,7 @@
     "react-dom": "^18.2.0",
     "redis": "^4.6.5",
     "stripe": "^12.2.0",
+    "swr": "^2.1.5",
     "validator": "^13.9.0"
   },
   "devDependencies": {

@@ -1,13 +1,13 @@
-import NextAuth, { NextAuthOptions } from "next-auth"
-import GoogleProvider from "next-auth/providers/google"
-import FacebookProvider from "next-auth/providers/facebook"
-import CredentialsProvider from "next-auth/providers/credentials"
+import NextAuth, { NextAuthOptions } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import FacebookProvider from "next-auth/providers/facebook";
+import CredentialsProvider from "next-auth/providers/credentials";
 import db from "../../../lib/mongodb";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
 import { clientPromise } from "../../../lib/mongodb";
-import { redis } from "../../../lib/redis"
+import { redis } from "../../../lib/redis";
 // import { User } from "next-auth/jwt";
 // import { User } from "next-auth/jwt";
 // import GithubProvider from "next-auth/providers/github"
@@ -19,9 +19,9 @@ import { redis } from "../../../lib/redis"
 // For more information on each option (and a full list of options) go to
 // https://next-auth.js.org/configuration/options
 
-async function verifyUserData(user: any, credentialPassword: string){
+async function verifyUserData(user: any, credentialPassword: string) {
   if (!user || !user.hashedPassword) {
-    throw new Error('Invalid credentials');
+    throw new Error("Invalid credentials");
   }
 
   const isCorrectPassword = await bcrypt.compare(
@@ -30,12 +30,18 @@ async function verifyUserData(user: any, credentialPassword: string){
   );
 
   if (!isCorrectPassword) {
-    throw new Error('Invalid credentials');
+    throw new Error("Invalid credentials");
   }
 
   // console.log("queried data from Redis ...");
 
-  return { id: user._id.toString(), userRole: user.userRole as UserRole, email: user.email, name: user.name,isCompleted:user.isCompleted as boolean };
+  return {
+    id: user._id.toString(),
+    userRole: user.userRole as UserRole,
+    email: user.email,
+    name: user.name,
+    isCompleted: user.isCompleted as boolean,
+  };
 }
 
 export const authOptions: NextAuthOptions = {
@@ -50,13 +56,12 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.FACEBOOK_SECRET,
     }),
     CredentialsProvider({
-      name: 'credentials',
+      name: "credentials",
       credentials: {
-        email: { label: 'email', type: 'text' },
-        password: { label: 'password', type: 'password' }
+        email: { label: "email", type: "text" },
+        password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-
         // const authResponse = await fetch("/users/login", {
         //   method: "POST",
         //   headers: {
@@ -75,12 +80,12 @@ export const authOptions: NextAuthOptions = {
 
         // return user
         if (!credentials?.email || !credentials?.password) {
-          throw new Error('Invalid credentials');
+          throw new Error("Invalid credentials");
         }
 
         try {
           const cacheResults = await redis.get(credentials.email);
-          if(cacheResults){
+          if (cacheResults) {
             user = JSON.parse(cacheResults);
 
             // console.log("queried data from Redis Database ...",user)
@@ -89,26 +94,26 @@ export const authOptions: NextAuthOptions = {
             return await verifyUserData(user, credentials.password);
           }
           // console.log("cache miss ...")
-          user = await db.collection("users").findOne({ email: credentials.email });
+          user = await db
+            .collection("users")
+            .findOne({ email: credentials.email });
 
           // console.log("queried data from MongoDB ...")
 
           // Caching the da
           // ta via Redis
-          await redis.set(credentials.email, JSON.stringify(user))
+          await redis.set(credentials.email, JSON.stringify(user));
 
           return await verifyUserData(user, credentials.password);
-
-        } catch( err: any ){
+        } catch (err: any) {
           // todo :handle error
           throw new Error(err);
-        //
+          //
         }
 
         // user = await db.collection("users").findOne({ email: credentials.email });
         // console.log("🚀 ~ file: [...nextauth].ts:57 ~ authorize ~ user:", user)
 
-        
         // return { id: "1", userRole: UserRole.Client }
 
         // console.log("🚀 ~ file: [...nextauth].ts:93 ~ authorize ~ user:", user)
@@ -129,8 +134,8 @@ export const authOptions: NextAuthOptions = {
         // } else {
         //   return null;
         // }
-      }
-    })
+      },
+    }),
     /*
  EmailProvider({
      server: process.env.EMAIL_SERVER,
@@ -172,22 +177,31 @@ Auth0Provider({
     colorScheme: "light",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
       // console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ token:", token)
       // console.log("🚀 ~ file: [...nextauth].ts:139 ~ jwt ~ user:", user)
       // user.userRole
 
       if (user?.userRole) token.userRole = user.userRole;
       // console.log(user?.isCompleted)
-      if(user?.isCompleted!==undefined) token.isCompleted = user?.isCompleted;
+      if (user?.isCompleted !== undefined)
+        token.isCompleted = user?.isCompleted;
+
+      // if (account) {
+      //   token.accessToken = account.access_token;
+      // }
+
+      if (account) {
+        token.accessToken = account.access_token;
+      }
 
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
       // token.email
       // token.
-      return token
+      return token;
     },
 
-    async session({ session}) {
+    async session({ session, token, user }) {
       // console.log("🚀 ~ file: [...nextauth].ts:143 ~ session ~ token:", token)
       // console.log("🚀 ~ fil/e: [...nextauth].ts:144 ~ session ~ user:", user)
       // console.log("🚀 ~ file: [...nextauth].ts:146 ~ session ~ session:", session)
@@ -196,20 +210,24 @@ Auth0Provider({
       // to be in
       // session.user.id = user.id;
       // session.user.userRole = UserRole.Client;
+      session.user.accessToken = token.accessToken;
+
+      // if(session) {
+      //   session = Object.assign({}, session, {accessToken: token.accessToken})
+      //   }
+
+      // console.log(session);
+
       return session;
     },
     // async signIn({ user, account, profile, email, credentials }) {
     //   return user.isCompleted;
     // }
-
   },
   session: {
     // Set to jwt in order to CredentialsProvider works properly
-    strategy: 'jwt'
-  }
+    strategy: "jwt",
+  },
+};
 
-
-
-}
-
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

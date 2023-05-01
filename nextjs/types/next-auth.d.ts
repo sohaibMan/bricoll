@@ -20,11 +20,13 @@ declare module "next-auth" {
 
     userRole: UserRole
     isCompleted:boolean
+    // accesToken: any
   }
   interface Session {
     user: {
-      id: string
+      id: number
       userRole: UserRole
+      accessToken: any
     } & DefaultSession["user"]
   }
 }

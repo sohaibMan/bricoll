@@ -9,6 +9,8 @@ export default function Header() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
 
+  // console.log("session v2 ", useSession());
+
   return (
     <header>
       <noscript>

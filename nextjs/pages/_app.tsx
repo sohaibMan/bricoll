@@ -1,30 +1,30 @@
-// import {SessionProvider} from "next-auth/react";
-// import "./styles.css";
+import {SessionProvider} from "next-auth/react";
+import "./styles.css";
 
-// import type {AppProps} from "next/app";
-// import type {Session} from "next-auth";
-// import {DevSupport} from "@react-buddy/ide-toolbox-next";
-// import {ComponentPreviews, useInitial} from "../components/dev";
-// import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import type {AppProps} from "next/app";
+import type {Session} from "next-auth";
+import {DevSupport} from "@react-buddy/ide-toolbox-next";
+import {ComponentPreviews, useInitial} from "../components/dev";
+import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
-// const client = new ApolloClient({
-//     uri: 'http://localhost:3000/api/graphql',
-//     cache: new InMemoryCache(),
-// });
+const client = new ApolloClient({
+    uri: 'http://localhost:3000/api/graphql',
+    cache: new InMemoryCache(),
+});
 
-// // Use of the <SessionProvider> is mandatory to allow components that call
-// // `useSession()` anywhere in your application to access the `session` object.
-// export default function App({Component, pageProps: {session, ...pageProps},}: AppProps<{ session: Session }>) {
-//     return (
-//         <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
-//             <SessionProvider session={session}>
-//                 <ApolloProvider client={client}>
-//                     <Component {...pageProps} />
-//                 </ApolloProvider>
-//             </SessionProvider>
-//         </DevSupport>
-//     );
-// }
+// Use of the <SessionProvider> is mandatory to allow components that call
+// `useSession()` anywhere in your application to access the `session` object.
+export default function App({Component, pageProps: {session, ...pageProps},}: AppProps<{ session: Session }>) {
+    return (
+        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+            <SessionProvider session={session}>
+                <ApolloProvider client={client}>
+                    <Component {...pageProps} />
+                </ApolloProvider>
+            </SessionProvider>
+        </DevSupport>
+    );
+}
 
 
 
@@ -60,36 +60,32 @@
 
 
 // !!
-import { useState, ChangeEvent } from "react";
-import { useRouter } from "next/router";
-import { AppProps } from "next/app";
+// import { AppProps } from 'next/app';
+// import {SessionProvider} from "next-auth/react";
+// // import '../styles/globals.css';
 
-interface MyAppProps extends AppProps {
-  handleLoginChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  sender: string;
-  handleLogin: (e: React.FormEvent<HTMLFormElement>) => void;
-}
+// function MyApp({ Component, pageProps }: AppProps) {
+//   return (
+//     <SessionProvider session={pageProps.session}>
+//       <Component {...pageProps} />
+//     </SessionProvider>
+//   );
+// }
 
-export default function MyApp({
-  Component,
-  pageProps,
-}: MyAppProps): JSX.Element {
-  const [sender, setSender] = useState("");
-  const router = useRouter();
+// export default MyApp;
 
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    router.push("/chat");
-  };
 
-  return (
-    <Component
-      handleLoginChange={(e: ChangeEvent<HTMLInputElement>) =>
-        setSender(e.target.value)
-      }
-      sender={sender}
-      handleLogin={handleLogin}
-      {...pageProps}
-    />
-  );
-}
+// import { SessionProvider } from "next-auth/react"
+
+// export default function App({
+//   Component,
+//   pageProps: { session, ...pageProps },
+// }) {
+//   // console.log("session from _app: ", session);
+
+//   return (
+//     <SessionProvider session={session}>
+//       <Component {...pageProps} />
+//     </SessionProvider>
+//   )
+// }
