@@ -4,14 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="create strip account (connect) for freelancer on demand">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="payment is completed e2e #27">
+      <change afterPath="$PROJECT_DIR$/nextjs/lib/email/emailHelpers.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/email.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/email/email.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/signup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/signup.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/user/link_account/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/user/link_account/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Proposals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/resolversHelpersFunctions/notifyEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/email/notifyEmail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/user/editPassword/[userId].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/user/editPassword/[userId].ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/user/withdraw_balance/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/user/withdraw_balance/[contract_id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,26 +66,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/letcode&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "full.screen.before.presentation.mode": "false",
+    "git-widget-placeholder": "MainButRefactored",
+    "last_opened_file_path": "/home/sohaib/Desktop/letcode",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "editor.preferences.import",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -92,11 +97,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/lib/email" />
       <recent name="$PROJECT_DIR$/nextjs/pages" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/user" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql" />
       <recent name="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql/schema" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -172,7 +177,13 @@
       <workItem from="1682701014614" duration="507000" />
       <workItem from="1682711673297" duration="31000" />
       <workItem from="1682802001237" duration="6151000" />
-      <workItem from="1682850468378" duration="9060000" />
+      <workItem from="1682850468378" duration="9209000" />
+      <workItem from="1682862660857" duration="320000" />
+      <workItem from="1682878531469" duration="43000" />
+      <workItem from="1682879274370" duration="4000" />
+      <workItem from="1682894909628" duration="419000" />
+      <workItem from="1682943347466" duration="3315000" />
+      <workItem from="1682946708015" duration="619000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -342,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1682807810338</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="payment is completed e2e #27">
+      <created>1682859629480</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1682859629480</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,7 +382,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix some bugs ( create profile" />
     <MESSAGE value="fix some bugs ( create profile... )" />
     <MESSAGE value="remove ProposalsByFreelancer , and ProposalsByProject from the query type to be added in the user query type" />
     <MESSAGE value="fix serverContext path" />
@@ -389,6 +406,7 @@
     <MESSAGE value="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account" />
     <MESSAGE value="move utils functions to page folder" />
     <MESSAGE value="create strip account (connect) for freelancer on demand" />
-    <option name="LAST_COMMIT_MESSAGE" value="create strip account (connect) for freelancer on demand" />
+    <MESSAGE value="payment is completed e2e #27" />
+    <option name="LAST_COMMIT_MESSAGE" value="payment is completed e2e #27" />
   </component>
 </project>

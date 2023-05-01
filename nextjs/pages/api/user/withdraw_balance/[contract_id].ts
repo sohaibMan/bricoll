@@ -4,6 +4,7 @@ import {getToken} from "next-auth/jwt";
 import db, {clientPromise} from "../../../../lib/mongodb";
 import {ObjectId, TransactionOptions} from "mongodb";
 import {EarningsStatus, UserRole} from "../../../../types/resolvers";
+import {OnPaymentReceive} from "../../../../lib/email/notifyEmail";
 
 const usersCollection = db.collection("users")
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
@@ -62,7 +63,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         // console.log(EarningsStatus.Pending)
         if (!updateFreelancerEarning.value) return res.status(400).json("The freelancer doesn't have any earnings with this contract id or the earnings are already withdrawn")
         //earnings of length 1 (belongs only to the contract id)(fees are already deducted)
-        const amount = updateFreelancerEarning.value.earnings[0].amount
+        var amount = updateFreelancerEarning.value.earnings[0].amount // sorry for the var but I need to use it after the catch block
         // create a transfer to the freelancer account
         await stripe.transfers.create({
             amount: amount * 100,
@@ -78,6 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     await session.commitTransaction();
     await session.endSession();
+    OnPaymentReceive(freelancer_id, contract_id, amount);
     res.status(200).json({message: "success"})
 
 }

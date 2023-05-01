@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {ObjectId} from "mongodb";
 import bcrypt from "bcrypt";
 import db from "../../../../lib/mongodb";
-import { redis } from "../../../../lib/redis"
+import {redis} from "../../../../lib/redis"
 
 
 export default async function handler(
@@ -60,10 +60,10 @@ export default async function handler(
             }
         );
 
-        
+
         // ? Caching the new data  
         await redis.set(user?.email, JSON.stringify(newUserData));
-        
+
 
         res.status(200).json({
             status: "success",

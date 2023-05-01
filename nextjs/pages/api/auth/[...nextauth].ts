@@ -8,16 +8,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
 import { clientPromise } from "../../../lib/mongodb";
 import { redis } from "../../../lib/redis"
-// import { User } from "next-auth/jwt";
-// import { User } from "next-auth/jwt";
-// import GithubProvider from "next-auth/providers/github"
-// import TwitterProvider from "next-auth/providers/twitter"
-// import Auth0Provider from "next-auth/providers/auth0"
-// import AppleProvider from "next-auth/providers/apple"
-// import EmailProvider from "next-auth/providers/email"
 
-// For more information on each option (and a full list of options) go to
-// https://next-auth.js.org/configuration/options
 
 async function verifyUserData(user: any, credentialPassword: string){
   if (!user || !user.hashedPassword) {
@@ -57,19 +48,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
 
-        // const authResponse = await fetch("/users/login", {
-        //   method: "POST",
-        //   headers: {
-        //     "Content-Type": "application/json",
-        //   },
-        //   body: JSON.stringify(credentials),
-        // })
 
-        // if (!authResponse.ok) {
-        //   return null
-        // }
-
-        // const user = await authResponse.json()
 
         let user;
 
