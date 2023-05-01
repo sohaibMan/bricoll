@@ -14,6 +14,12 @@ import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
+import {
+    onAcceptContract,
+    onCancelContract,
+    onCreateContract,
+    onRequestProjectSubmissionReview
+} from "../../../../lib/email/notifyEmail";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")
@@ -66,8 +72,10 @@ export const ContractResolvers: Resolvers = {
                 returnDocument: "after"
             });
 
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The Contract no longer exists");
+            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The Contract no longer exists");
             //return the value (the updated proposal)
+            // send email to the client
+            onAcceptContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
 
         },
@@ -85,8 +93,9 @@ export const ContractResolvers: Resolvers = {
             }, {
                 returnDocument: "after"
             });
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The updatedContract no longer exists");
+            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
             //return the value (the updated proposal)
+            onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
         createContract: async (parent, args, context, info) => {
@@ -172,6 +181,7 @@ export const ContractResolvers: Resolvers = {
                 },
             )
 
+            onCreateContract(contract.freelancer_id)
             return contract;
 
         },
@@ -191,26 +201,30 @@ export const ContractResolvers: Resolvers = {
                 title: args.title,
                 status: SubmissionReviewStatus.Pending,
             }
-            const contract = await contractCollection.updateOne({
+            const contract = await contractCollection.findOneAndUpdate({
                     _id: new ObjectId(args.contract_id),
                     // @ts-ignore
                     freelancer_id: new ObjectId(context.user.id),
                     status: ContractStatus.Completed,
                 },
                 {
+                    // @ts-ignore
                     $push: {
                         submission_reviews: submission_review
                     }
-
+                },
+                {
+                    returnDocument: "before"
                 })
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.value === null) throw new GraphQLError("The contract no longer exists", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: contract.value !== null,
                 _id: submission_review._id
             };
         },

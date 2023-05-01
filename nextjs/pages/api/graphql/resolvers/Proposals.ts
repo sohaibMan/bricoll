@@ -5,12 +5,12 @@ import {GraphQLError} from 'graphql';
 import {freelancerMiddleware} from './resolversHelpersFunctions/freelancerMiddleware';
 import {clientMiddleware} from './resolversHelpersFunctions/clientMiddleware';
 import {
-    OnNewProposal,
-    OnProposalAccepted,
-    OnProposalChange,
-    OnProposalDeclined,
-    OnProposalWithDrawn
-} from "./resolversHelpersFunctions/notifyEmail";
+    OnAcceptProposal,
+    OnCancelProposal,
+    OnCreateProposal,
+    OnEditProposal,
+    OnProposalDeclined
+} from "../../../../lib/email/notifyEmail";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 
 const proposalsCollection = db.collection("proposals")
@@ -89,7 +89,7 @@ export const ProposalResolvers: Resolvers = {
 
             if (!insertedProposal.acknowledged) throw new Error("The project no longer exists");
             // do await to send the email(fire and forget)
-            OnNewProposal(project.client_id);
+            OnCreateProposal(project.client_id);
             return proposal;
         },
         editProposal: async (parent, args, context, info) => {
@@ -113,7 +113,7 @@ export const ProposalResolvers: Resolvers = {
             if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
             //return the value (the updated proposal)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnProposalChange(proposal.client_id);
+            OnEditProposal(proposal.client_id);
             return proposal;
         },
         declineProposal: async (parent, args, context, info) => {
@@ -175,7 +175,7 @@ export const ProposalResolvers: Resolvers = {
                 });
             //return the value (the updated proposal)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnProposalWithDrawn(proposal.client_id);
+            OnCancelProposal(proposal.client_id);
             return proposal;
 
         },
@@ -207,10 +207,10 @@ export const ProposalResolvers: Resolvers = {
             if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
             //return the value (the updated proposal)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnProposalAccepted(proposal.freelancer_id);
+            OnAcceptProposal(proposal.freelancer_id);
             return proposal;
-
         }
+
 
     }
 }

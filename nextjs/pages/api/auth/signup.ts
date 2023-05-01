@@ -7,7 +7,7 @@ import db from "../../../lib/mongodb";
 import {User} from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
-import emailService from "../../../lib/email";
+import emailService from "../../../lib/email/email";
 // import { redis } from "../../../lib/redis.ts"
 // import { ObjectId } from "mongodb";
 // import getConfig from "next/config";
