@@ -2,10 +2,10 @@
 # the project could be one of the following
 
 enum proposal_status {
-    canceled
-    declined
-    in_progress
-    approved
+    canceled # the freelancer canceled the proposal or the project no longer available
+    declined # the client declined the proposal
+    in_progress # the proposal is in progress
+    approved # the proposal is approved by the client
     completed # the proposal has a contract
 }
 # the proposal could be one of the following

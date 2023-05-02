@@ -1,7 +1,6 @@
 import {ObjectId} from "mongodb";
 import emailService from "./email";
 import {getUserById, htmlMarkupGenerator} from "./emailHelpers";
-import {async} from "rxjs";
 
 
 async function OnCreateProposal(client_id: ObjectId) {
@@ -137,8 +136,32 @@ async  function onRequestProjectSubmissionReview(client_id:ObjectId){
         <p>Dear ${clientName},</p>
     `
     await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
-
 }
+async function  onAcceptRequestProjectSubmissionReview(freelancer_id:ObjectId){
+    const freelancer=await getUserById(freelancer_id);
+    const clientEmail = freelancer.email;
+    const clientName = freelancer.name;
+    const subject = 'congrats you have a new payment ';
+    const html = `
+        <h1>You have got a new payament check our paltaform for more details</h1>
+        <p>Dear ${clientName},</p>
+    `
+    await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
+}
+async function onDeclineRequestProjectSubmissionReview(freelancer_id:ObjectId){
+    const freelancer=await getUserById(freelancer_id);
+    const clientEmail = freelancer.email;
+    const clientName = freelancer.name;
+    const subject = 'sorry but your request of project submission has ben rejected ';
+    const html = `
+        <p>Dear ${clientName},</p>
+        <h1>You have got a new update about your contrat check our paltaform for more details</h1>
+    
+    `
+    await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
+}
+
+
 export {
     OnCreateProposal,
     OnAcceptProposal,
@@ -149,6 +172,8 @@ export {
     onCreateContract,
     onAcceptContract,
     onCancelContract,
-    onRequestProjectSubmissionReview
+    onRequestProjectSubmissionReview,
+    onAcceptRequestProjectSubmissionReview,
+    onDeclineRequestProjectSubmissionReview
 };
 //todo send email on declineRequestProjectSubmissionReview
