@@ -1,4 +1,4 @@
-import {Project, ProjectStats, Proposal, Resolvers} from "../../../../types/resolvers";
+import {Project, ProjectStats, Proposal, Proposal_Status, Resolvers} from "../../../../types/resolvers";
 import {ObjectId} from 'mongodb';
 import db from "../../../../lib/mongodb";
 import {GraphQLError} from "graphql";
@@ -188,8 +188,6 @@ export const ProjectResolvers: Resolvers = {
             return updateProject.value as unknown as Project;
         },
         deleteProject: async (parent, args, context, info) => {
-            // todo ;add a check if the user is the owner of the project
-            // todo : check is the project active ...(has contracts)
             // before deleting the project we should delete all the proposals related to it
             // private
             clientMiddleware(context);
@@ -201,15 +199,43 @@ export const ProjectResolvers: Resolvers = {
                 status: "approved"
             })
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
+            // todo : mark all the proposals as canceled
+            await proposalsCollection.updateMany({
+                    project_id: new ObjectId(args.id),
+                    client_id: new ObjectId(context.user?.id),
+                    status: {
+                        $or: [Proposal_Status.InProgress, Proposal_Status.Approved]
+                    }
+                }, {
+                    $set: {
+                        status: Proposal_Status.Canceled
+                    }
+                }
+            )
+            //archive the project instead of deleting it
+            await projectsCollection.aggregate(
+                [
+                    {
+                        '$match': {
+                            _id: new ObjectId(args.id),
+                            // @ts-expect-error
+                            client_id: new ObjectId(context.user.id)
+                        }
+                    },
 
-
-            const deleteProject = await projectsCollection.deleteOne({
-                _id: new ObjectId(args.id),
-                // @ts-expect-error
-                client_id: new ObjectId(context.user.id)
-            })
+                    {
+                        $merge: {
+                            db: "bricoll_archive",
+                            into: "archived_projects",
+                            on: "_id",
+                            whenMatched: "replace",
+                            whenNotMatched: "insert"
+                        }
+                    }
+                ]
+            )
             return {
-                acknowledgement: deleteProject.acknowledged && deleteProject.deletedCount === 1,
+                acknowledgement: true,
                 _id: args.id
             }
         },

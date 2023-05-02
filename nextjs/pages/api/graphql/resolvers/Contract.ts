@@ -15,9 +15,9 @@ import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {
-    onAcceptContract,
+    onAcceptContract, onAcceptRequestProjectSubmissionReview,
     onCancelContract,
-    onCreateContract,
+    onCreateContract, onDeclineRequestProjectSubmissionReview,
     onRequestProjectSubmissionReview
 } from "../../../../lib/email/notifyEmail";
 
@@ -224,7 +224,7 @@ export const ContractResolvers: Resolvers = {
             })
             onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
             return {
-                acknowledgement: contract.value !== null,
+                acknowledgement: true,
                 _id: submission_review._id
             };
         },
@@ -240,10 +240,11 @@ export const ContractResolvers: Resolvers = {
                 writeConcern: {w: 'majority'}
             };
             session.startTransaction(transactionOptions);
+            let contract;
             // const transactionResults = await session.withTransaction(async () => {
             // }, transactionOptions);
             try {
-                const contract = await contractCollection.findOneAndUpdate(
+                 contract = await contractCollection.findOneAndUpdate(
                     {
                         $and: [
                             {_id: new ObjectId(args.contract_id)},
@@ -319,6 +320,9 @@ export const ContractResolvers: Resolvers = {
             // console.log(transactionResults)
             await session.commitTransaction();
             await session.endSession();
+
+            onAcceptRequestProjectSubmissionReview(contract.value.freelancer_id);
+
             return {
                 acknowledgement: true,
                 _id: args.submission_review_id
@@ -328,7 +332,7 @@ export const ContractResolvers: Resolvers = {
         },
         declineRequestProjectSubmissionReview: async (parent, args, context, info) => {
             clientMiddleware(context);
-            const contract = await contractCollection.updateOne(
+            const contract = await contractCollection.findOneAndUpdate(
                 {
                     $and: [
                         {_id: new ObjectId(args.contract_id)},
@@ -353,17 +357,22 @@ export const ContractResolvers: Resolvers = {
                         "submission_reviews.$.updated_at":
                             new Date()
                     }
+                },
+                {
+                    "returnDocument":"after"
                 }
+
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
+            if (contract.value ==null) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
 
             return {
-                acknowledgement: contract.modifiedCount === 1,
+                acknowledgement: contract.ok===1,
                 _id: args.submission_review_id
             }
 
