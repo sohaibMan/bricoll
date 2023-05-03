@@ -10,6 +10,8 @@ export default function Header() {
   const loading = status === "loading";
   
 
+  console.log("session from header ");
+
   return (
     <header>
       <noscript>

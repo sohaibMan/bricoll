@@ -1,69 +1,62 @@
+// import React, { useState } from 'react';
+// import { useSession } from 'next-auth/react';
+// import Chat from './components/Chat';
 
-import { useEffect, useState } from "react";
-import Pusher from "pusher-js";
-import axios from "axios";
+// interface User {
+//   id: number;
+//   name: string;
+//   email: string;
+// }
 
-interface ChatProps {
-  sender: string;
-}
+// const ChatPage = () => {
+//   const {data: session} = useSession();
+//   const [receiverUser, setReceiverUser] = useState<User | null>(null);
 
-interface Chat {
-  sender: string;
-  message: string;
-}
+//   const handleSelectUser = (user: User) => {
+//     setReceiverUser(user);
+//   };
 
-const Chat = ({ sender }: ChatProps): JSX.Element => {
-  const [chats, setChats] = useState<Chat[]>([]);
-  const [messageToSend, setMessageToSend] = useState("");
+//   return (
+//     <div>
+//       <h1>Chat</h1>
 
-  useEffect(() => {
-    const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY as string, {
-      cluster: "eu",
-    });
+//       {receiverUser ? (
+//         <Chat receiverUser={receiverUser} />
+//       ) : (
+//         <ul>
+//           {session?.users.map((user: User) => (
+//             <li key={user.id}>
+//               <button onClick={() => handleSelectUser(user)}>{user.name}</button>
+//             </li>
+//           ))}
+//         </ul>
+//       )}
+//     </div>
+//   )}
 
-    const channel = pusher.subscribe("chat");
+import React from 'react';
+import { useSession } from 'next-auth/react';
+import Chat from './components/Chat';
 
-    channel.bind("chat-event", function (data: Chat) {
-      setChats((prevState) => [
-        ...prevState,
-        { sender: data.sender, message: data.message },
-      ]);
-    });
+const ChatPage = () => {
 
-    return () => {
-      pusher.unsubscribe("chat");
-    };
-  }, []);
+  // if (!session) {
+  //   // User is not authenticated, redirect to login page or show a message
+  //   return <div>Please sign in to view this page</div>;
+  // }
+  
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await axios.post("/api/pusher", { message: messageToSend, sender });
-  };
+  const receiverUser = { id: 2, name: 'anas zn', email: 'anas.zn@example.com' }; 
 
   return (
-    <>
-      <p>Hello, {sender}</p>
-      <div>
-        {chats.map((chat, id) => (
-          <div key={id}>
-            <p>{chat.message}</p>
-            <small>{chat.sender}</small>
-          </div>
-        ))}
-      </div>
-
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          value={messageToSend}
-          onChange={(e) => setMessageToSend(e.target.value)}
-          placeholder="start typing...."
-        />
-        <button type="submit">Send</button>
-      </form>
-    </>
+    
+    <div>
+      <h1>Chat</h1>
+      <Chat receiverUser={receiverUser} />
+    </div>
   );
 };
 
-export default Chat;
+export default ChatPage;
+
 
