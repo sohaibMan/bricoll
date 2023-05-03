@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import Pusher from 'pusher';
+import {pusher} from '../../lib/pusher';
 
 interface Message {
   id: number;
@@ -25,13 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     createdAt: new Date().toISOString(),
   };
 
-  const pusher = new Pusher({
-    appId: process.env.PUSHER_APP_ID,
-    key: process.env.NEXT_PUBLIC_KEY,
-    secret: process.env.PUSHER_KEY,
-    cluster: process.env.PUSHER_CLUSTER,
-    useTLS: true,
-  });
 
   const channel = pusher.trigger(`private-chat-${message.senderUserId}-${message.receiverUserId}`, 'new-message', message);
 

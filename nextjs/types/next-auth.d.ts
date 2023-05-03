@@ -17,14 +17,14 @@ declare module "next-auth/jwt" {
 
 declare module "next-auth" {
   interface User extends DefaultUser {
-
+    id: any
     userRole: UserRole
     isCompleted:boolean
     // accesToken: any
   }
   interface Session {
     user: {
-      id: number
+      id: any
       userRole: UserRole
       accessToken: any
     } & DefaultSession["user"]

@@ -13,8 +13,14 @@ const pusher = new Pusher({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { socket_id, channel_name } = req.body;
 
+  console.log("socket id: ", socket_id);
+  
+
   try {
+
     const {user}: any = await getSession({req})
+    console.log("user: ", user);
+    
 
     const channelData = {
       user_id: user.id,

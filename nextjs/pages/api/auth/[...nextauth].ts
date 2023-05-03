@@ -198,6 +198,9 @@ Auth0Provider({
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
       // token.email
       // token.
+
+      // console.log(token);
+
       return token;
     },
 
@@ -208,14 +211,9 @@ Auth0Provider({
       // to be imported
 
       // to be in
-      // session.user.id = user.id;
+      session.user.id = token.sub;
       // session.user.userRole = UserRole.Client;
       session.user.accessToken = token.accessToken;
-
-      // if(session) {
-      //   session = Object.assign({}, session, {accessToken: token.accessToken})
-      //   }
-
       // console.log(session);
 
       return session;

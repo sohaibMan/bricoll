@@ -1,10 +1,10 @@
 // import { useSession, getSession } from "next-auth/react";
 
 // import Layout from "./components/layout";
-// export default function IndexPage({ user }: any) {
+// export default function IndexPage({user}) {
 //   const { data: session, status: loading } = useSession();
 
-//   console.log("session v3 ", user.accessToken);
+//   // console.log("session v3 ", user);
 
 //   return (
 //     <>
@@ -51,79 +51,213 @@
 // }
 
 // !!
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+// import Pusher from "pusher-js";
+// import { signIn, signOut, useSession, getSession } from "next-auth/react";
+
+// export default function Home(session: any) {
+//   const { status: loading } = useSession();
+
+//   const [messages, setMessages] = useState([]);
+
+//   // console.log("Access token v1 : ", session.user?.accessToken);
+
+//   useEffect(() => {
+//     // console.log("Access token after v1 : ", session.user.accessToken);
+
+//     if (session) {
+//       const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
+//         cluster: process.env.PUSHER_CLUSTER,
+//         authEndpoint: "/api/chat/pusherAuth",
+//         auth: {
+//           headers: {
+//             Authorization: `Bearer ${session.user?.accessToken}`,
+//           },
+//         },
+//       });
+
+//       console.log("Access token after v1 : ", session.user.accessToken);
+
+//       const channel = pusher.subscribe("chat");
+//       channel.bind("new-message", (data: any) => {
+//         // setMessages((messages) => [...messages, data]);
+//       });
+
+//       return () => {
+//         pusher.disconnect();
+//       };
+//     }
+//   }, [session]);
+
+//   const handleSubmit = async (event: any) => {
+//     event.preventDefault();
+
+//     const formData = new FormData(event.target);
+//     const message = formData.get("message");
+
+//     await fetch("/api/chat", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${session.user.accessToken}`,
+//       },
+//       body: JSON.stringify({ message }),
+//     });
+//   };
+
+//   if (loading) {
+//     return <div>Loading...</div>;
+//   }
+
+//   if (!session) {
+//     return <div>Please sign in to use the chat</div>;
+//   }
+
+//   return (
+//     <div>
+//       <h1>Chat Room</h1>
+//       <ul>
+//         {messages.map((message, index) => (
+//           <li key={index}>{/* {message.from}: {message.message} */}</li>
+//         ))}
+//       </ul>
+//       <form onSubmit={handleSubmit}>
+//         <input type="text" name="message" required />
+//         <button type="submit">Send</button>
+//       </form>
+//     </div>
+//   );
+// }
+
+// export async function getServerSideProps(ctx) {
+//   const session = await getSession(ctx)
+//   if (!session) {
+//     return {
+//       props: {}
+//     }
+//   }
+//   const { user } = session;
+//   return {
+//     props: { user },
+//   }
+// }
+
+
+import React, { useState, useEffect } from "react";
 import Pusher from "pusher-js";
-import { signIn, signOut, useSession, getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
+import { Session } from "next-auth";
 
-export default function Home(session: any) {
+interface Message {
+  id: number;
+  senderUserId: number;
+  receiverUserId: number;
+  text: string;
+  createdAt: string;
+}
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
+
+interface Props {
+  receiverUser: User;
+}
+
+export default function Chat(session: Session) {
   const { status: loading } = useSession();
+  const [messages, setMessages] = useState<Message[]>([]);
+  const [newMessage, setNewMessage] = useState("");
+  const receiverUser = { id: 2, name: 'anas zn', email: 'anas.zn@example.com' }; 
 
-  const [messages, setMessages] = useState([]);
+  // console.log("session v3 : ", session.user);
+  
 
-  // console.log("Access token v1 : ", session.user?.accessToken);
 
   useEffect(() => {
-    // console.log("Access token after v1 : ", session.user.accessToken);
+    // if (!session) return;
 
-    if (session) {
+    const pusher = new Pusher(process.env.PUSHER_KEY, {
+      cluster: process.env.PUSHER_CLUSTER,
+      authEndpoint: "/api/pusher/auth",
+      auth: {
+        headers: {
+          Authorization: `Bearer ${session?.user.accessToken}`,
+        },
+      },
+    });
 
-      const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
-        cluster: process.env.PUSHER_CLUSTER,
-        // authEndpoint: '/api/chat/pusherAuth',
-        // auth: {
-        //   headers: {
-        //     Authorization: `Bearer ${session.user?.accessToken}`,
-        //   },
-        // },
-      });
+    console.log("pusher: ", pusher);
+    
 
-      console.log("Access token after v1 : ", session.user.accessToken);
+    const channel = pusher.subscribe(
+      `private-chat-${session?.user.id}-${receiverUser.id}`
+    );
 
-      const channel = pusher.subscribe("chat");
-      channel.bind("new-message", (data: any) => {
-        // setMessages((messages) => [...messages, data]);
-      });
+    channel.bind("new-message", (message: Message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
 
-      return () => {
-        pusher.disconnect();
-      };
-    }
-  }, [session]);
+    return () => {
+      pusher.unsubscribe(`private-chat-${session?.user.id}-${receiverUser.id}`);
+      pusher.disconnect();
+    };
+  }, [receiverUser?.id, session?.user.accessToken, session?.user.id]);
 
-  const handleSubmit = async (event: any) => {
+  const handleNewMessage = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const message = formData.get("message");    
+    if (!newMessage) {
+      return;
+    }
 
-    await fetch("/api/chat", {
+    const response = await fetch("/api/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${session.user.accessToken}`,
+        Authorization: `Bearer ${session?.user.accessToken}`,
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({
+        senderUserId: session?.user.id,
+        receiverUserId: receiverUser?.id,
+        text: newMessage,
+      }),
     });
+
+    // console.log("response: ", response);
+    
+
+    if (response.ok) {
+      setNewMessage("");
+    }
   };
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (!session) {
-    return <div>Please sign in to use the chat</div>;
-  }
 
   return (
     <div>
-      <h1>Chat Room</h1>
-      <ul>
-        {messages.map((message, index) => (
-          <li key={index}>{/* {message.from}: {message.message} */}</li>
+      <h2>Chat with {receiverUser?.name}</h2>
+
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <span>
+              {message.senderUserId === session?.user.id
+                ? "You"
+                : receiverUser?.name}
+              :{" "}
+            </span>
+            <span>{message.text}</span>
+          </div>
         ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="message" required />
+      </div>
+
+      <form onSubmit={handleNewMessage}>
+        <input
+          type="text"
+          value={newMessage}
+          onChange={(event) => setNewMessage(event.target.value)}
+        />
         <button type="submit">Send</button>
       </form>
     </div>
@@ -131,21 +265,16 @@ export default function Home(session: any) {
 }
 
 export async function getServerSideProps(ctx: any) {
-  const session = await getSession(ctx);
+  const session = await getSession(ctx)
   if (!session) {
     return {
-      props: session,
-    };
-
-    // return session
+      props: {}
+    }
   }
-
-  // console.log("session from server : ", session.user);
-
   const { user } = session;
   return {
     props: session,
-  };
-
-  // return session
+  }
 }
+
+

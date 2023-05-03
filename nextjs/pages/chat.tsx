@@ -44,6 +44,7 @@ const ChatPage = () => {
   //   // User is not authenticated, redirect to login page or show a message
   //   return <div>Please sign in to view this page</div>;
   // }
+  
 
   const receiverUser = { id: 2, name: 'anas zn', email: 'anas.zn@example.com' }; 
 
