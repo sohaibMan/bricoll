@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {pusher} from '../../lib/pusher';
+import {ObjectId} from "mongodb";
 
 interface Message {
-  id: number;
-  senderUserId: number;
-  receiverUserId: number;
+  id: ObjectId;
+  senderUserId: ObjectId;
+  receiverUserId: ObjectId;
   text: string;
-  createdAt: string;
+  createdAt: Date;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -18,15 +19,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const message: Message = {
-    id: Math.floor(Math.random() * 1000000), // generate a random ID for the message
+    id: new ObjectId(), // generate a random ID for the message
     senderUserId,
     receiverUserId,
     text,
-    createdAt: new Date().toISOString(),
+    createdAt: new Date()
   };
+  console.log(`private-chat-${message.senderUserId.toString()}-${message.receiverUserId.toString()}`)
 
-
-  const channel = pusher.trigger(`private-chat-${message.senderUserId}-${message.receiverUserId}`, 'new-message', message);
+ await pusher.trigger(`private-chat-${message.senderUserId.toString()}-${message.receiverUserId.toString()}`, 'new-message', message);
 
   res.status(200).json(message);
 }

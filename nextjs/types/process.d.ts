@@ -20,7 +20,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY:string
     PUSHER_APP_ID:string
     PUSHER_KEY:string
-    PUSH_SECRET:string
+    PUSHER_SECRET:string
     NEXT_PUBLIC_PUSHER_CLUSTER:string
     NEXT_PUBLIC_PUSHER_KEY:string
     SIGNING_SECRET:string

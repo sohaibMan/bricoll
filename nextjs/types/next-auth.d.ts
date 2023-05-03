@@ -1,5 +1,6 @@
 import { DefaultSession, DefaultUser } from "next-auth"
 import { UserRole } from "./resolvers"
+import {ObjectId} from "mongodb";
 
 // Read more at: https://next-auth.js.org/getting-started/typescript#module-augmentation
 
@@ -17,16 +18,16 @@ declare module "next-auth/jwt" {
 
 declare module "next-auth" {
   interface User extends DefaultUser {
-    id: any
+    id: ObjectId
     userRole: UserRole
     isCompleted:boolean
-    // accesToken: any
+    accessToken: string
   }
   interface Session {
     user: {
-      id: any
+      id: ObjectId
       userRole: UserRole
-      accessToken: any
+      accessToken: string
     } & DefaultSession["user"]
   }
 }

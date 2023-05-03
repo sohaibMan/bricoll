@@ -1,40 +1,33 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/react';
-import Pusher from 'pusher';
+import {NextApiRequest, NextApiResponse} from 'next';
+import {pusher} from "../../../lib/pusher";
+import {getToken} from "next-auth/jwt";
 
-const pusher = new Pusher({
-  appId: process.env.PUSHER_APP_ID,
-  key: process.env.PUSHER_KEY,
-  secret: process.env.PUSH_SECRET,
-  cluster: process.env.PUSHER_CLUSTER,
-  useTLS: true,
-});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { socket_id, channel_name } = req.body;
 
-  console.log("socket id: ", socket_id);
-  
+    const {socket_id, channel_name} = req.body;
+    // console.log("socket id: ", socket_id);
 
-  try {
 
-    const {user}: any = await getSession({req})
-    console.log("user: ", user);
-    
+    try {
 
-    const channelData = {
-      user_id: user.id,
-      user_info: {
-        name: user.name,
-        email: user.email,
-      },
-    };
+        const token = await getToken({req})
+        // console.log("user: ", token);
 
-    const auth = pusher.authenticate(socket_id, channel_name, channelData);
+        if (!token || !token.sub || !token.name || !token.email) return res.status(404).json({message:"not authorized"})
 
-    res.send(auth);
-  } catch (error) {
-    console.log(error);
-    res.status(403).send('Forbidden');
-  }
+
+        const channelData = {
+            user_id: token.sub,
+            user_info: {
+                name: token.name,
+                email: token.email,
+            },
+        };
+        const authResponse =pusher.authorizeChannel(socket_id, channel_name, channelData);
+        res.send(authResponse);
+    } catch (error) {
+        console.log((error as Error).stack);
+        res.status(403).send('Forbidden');
+    }
 }
