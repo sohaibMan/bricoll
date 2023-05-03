@@ -8,6 +8,7 @@ import styles from "./header.module.css";
 export default function Header() {
   const { data: session, status } = useSession();
   const loading = status === "loading";
+  
 
   console.log("session from header ");
 

@@ -65,39 +65,7 @@ type Project {
     stats: ProjectStats #calculated by the resolver not in the database
     proposals: [Proposal!] #calculated by the resolver not in the database
 }
-#type ProjectWithProposals {
-#    client_id: ObjectID
-#    _id: ObjectID
-#    title: String!
-#    description: String!
-#    price: Float!
-#    skills: [String!]!
-#    reactions: [reactions!]!
-#    created_at: Date!
-#    projectScope: ProjectScopeOutput!
-#    attachments: [Attachment!]!
-#    category: ProjectCategoriesEnum!
-#    stats: ProjectStats #calculated by the resolver not in the database
-#    proposals: [Proposal!] #calculated by the resolver not in the database
-#}
-# project with proposals and stats for client only on Project resolver
-#type ProjectWithProposals{
-#    client_id: ObjectID
-#    _id: ObjectID
-#    title: String!
-#    description: String!
-#    price: Float!
-#    skills: [String!]!
-#    reactions: [reactions!]!
-#    created_at: Date!
-#    projectScope: ProjectScopeOutput!
-#    attachments: [Attachment!]!
-#    category: ProjectCategoriesEnum!
-#    stats: ProjectStats
-#    proposals: [Proposal!] # proposals for this project
-#}
 
-# The "Query" type is special: it lists all of the available queries that
 
 
 type queryResult {
@@ -111,34 +79,3 @@ input filterOptionsInput {
     category: ProjectCategoriesEnum
     skills: [String!]
 }
-
-#type ProjectSearchResult {
-#    _id: ObjectID! #so you can check the project details
-#    title: String! # so you can show the title
-#    description: String! # so you can show the description
-#    price: Float! # so you can show the price
-#    skills: [String!]! # so you can show the skills
-#    category: ProjectCategoriesEnum! # so you can show the category
-#    projectScope: ProjectScopeOutput! # so you can show the projectScope
-#    reactions: [reactions!]! # so you can show the reactions
-#    created_at: Date! # so you can show the created_at
-#    client_id: ObjectID! # so you can show the client_id
-#    attachments: [Attachment!]! # so you can show the attachments
-#    stats: ProjectStats
-#}
-
-
-#union ProjectResultForFreelancer = BaseProject | type SearchProjectResult{
-#    client_id: ObjectID
-#    _id: ObjectID
-#    title: String!
-#    description: String!
-#    price: Float!
-#    skills: [String!]!
-#    reactions: [reactions!]!
-#    created_at: Date!
-#    projectScope: ProjectScopeOutput!
-#    attachments: [Attachment!]!
-#    category: ProjectCategoriesEnum!
-#    stats: ProjectStats
-#}

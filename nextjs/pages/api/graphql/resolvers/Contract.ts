@@ -14,6 +14,12 @@ import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
+import {
+    onAcceptContract, onAcceptRequestProjectSubmissionReview,
+    onCancelContract,
+    onCreateContract, onDeclineRequestProjectSubmissionReview,
+    onRequestProjectSubmissionReview
+} from "../../../../lib/email/notifyEmail";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")
@@ -66,8 +72,10 @@ export const ContractResolvers: Resolvers = {
                 returnDocument: "after"
             });
 
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The Contract no longer exists");
+            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The Contract no longer exists");
             //return the value (the updated proposal)
+            // send email to the client
+            onAcceptContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
 
         },
@@ -85,8 +93,9 @@ export const ContractResolvers: Resolvers = {
             }, {
                 returnDocument: "after"
             });
-            if (updatedContract.lastErrorObject?.updatedExisting === false) throw new Error("The updatedContract no longer exists");
+            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
             //return the value (the updated proposal)
+            onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
         createContract: async (parent, args, context, info) => {
@@ -172,6 +181,7 @@ export const ContractResolvers: Resolvers = {
                 },
             )
 
+            onCreateContract(contract.freelancer_id)
             return contract;
 
         },
@@ -191,26 +201,30 @@ export const ContractResolvers: Resolvers = {
                 title: args.title,
                 status: SubmissionReviewStatus.Pending,
             }
-            const contract = await contractCollection.updateOne({
+            const contract = await contractCollection.findOneAndUpdate({
                     _id: new ObjectId(args.contract_id),
                     // @ts-ignore
                     freelancer_id: new ObjectId(context.user.id),
                     status: ContractStatus.Completed,
                 },
                 {
+                    // @ts-ignore
                     $push: {
                         submission_reviews: submission_review
                     }
-
+                },
+                {
+                    returnDocument: "before"
                 })
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists", {
+            if (contract.value === null) throw new GraphQLError("The contract no longer exists", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
             return {
-                acknowledgement: contract.upsertedCount === 1,
+                acknowledgement: true,
                 _id: submission_review._id
             };
         },
@@ -226,10 +240,11 @@ export const ContractResolvers: Resolvers = {
                 writeConcern: {w: 'majority'}
             };
             session.startTransaction(transactionOptions);
+            let contract;
             // const transactionResults = await session.withTransaction(async () => {
             // }, transactionOptions);
             try {
-                const contract = await contractCollection.findOneAndUpdate(
+                 contract = await contractCollection.findOneAndUpdate(
                     {
                         $and: [
                             {_id: new ObjectId(args.contract_id)},
@@ -305,6 +320,9 @@ export const ContractResolvers: Resolvers = {
             // console.log(transactionResults)
             await session.commitTransaction();
             await session.endSession();
+
+            onAcceptRequestProjectSubmissionReview(contract.value.freelancer_id);
+
             return {
                 acknowledgement: true,
                 _id: args.submission_review_id
@@ -314,7 +332,7 @@ export const ContractResolvers: Resolvers = {
         },
         declineRequestProjectSubmissionReview: async (parent, args, context, info) => {
             clientMiddleware(context);
-            const contract = await contractCollection.updateOne(
+            const contract = await contractCollection.findOneAndUpdate(
                 {
                     $and: [
                         {_id: new ObjectId(args.contract_id)},
@@ -339,17 +357,22 @@ export const ContractResolvers: Resolvers = {
                         "submission_reviews.$.updated_at":
                             new Date()
                     }
+                },
+                {
+                    "returnDocument":"after"
                 }
+
             )
-            if (contract.matchedCount === 0) throw new GraphQLError("The contract no longer exists or your request already treated", {
+            if (contract.value ==null) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
                 }
             })
+            onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
 
             return {
-                acknowledgement: contract.modifiedCount === 1,
+                acknowledgement: contract.ok===1,
                 _id: args.submission_review_id
             }
 
