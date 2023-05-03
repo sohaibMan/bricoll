@@ -167,20 +167,21 @@ interface Props {
 }
 
 export default function Chat(session: Session) {
-  const { status: loading } = useSession();
+  const { status: loading,data } = useSession();
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const receiverUser = { id: 2, name: 'anas zn', email: 'anas.zn@example.com' }; 
 
   // console.log("session v3 : ", session.user);
+  console.log(data)
   
 
 
   useEffect(() => {
     // if (!session) return;
 
-    const pusher = new Pusher(process.env.PUSHER_KEY, {
-      cluster: process.env.PUSHER_CLUSTER,
+    const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
+      cluster: process.env.NEXT_PUBLIC_PUSHER_CLUSTER,
       authEndpoint: "/api/pusher/auth",
       auth: {
         headers: {
@@ -189,7 +190,7 @@ export default function Chat(session: Session) {
       },
     });
 
-    console.log("pusher: ", pusher);
+
     
 
     const channel = pusher.subscribe(
