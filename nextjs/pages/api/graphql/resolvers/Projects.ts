@@ -29,7 +29,6 @@ export const ProjectResolvers: Resolvers = {
             return project as Project;
         },
         Projects: async (parent, args, context, info) => {
-            freelancerMiddleware(context);
             // if the user doesn't provide a query we will return 20 random projects
             if (!args.query) return await projectsCollection.aggregate([{$sample: {size: 20}}]).toArray() as Project[];
             const aggregation: any =
@@ -84,7 +83,7 @@ export const ProjectResolvers: Resolvers = {
         // one (resolvers chain)
         proposals: async (parent, args, context, info) => {
             // many
-            // index scan on project_id
+            // indexes scan on project_id
             // parent.
             const proposals = await proposalsCollection.find({$and: [{project_id: new ObjectId(parent._id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]}).toArray();
             return proposals as unknown as Proposal[];
@@ -259,8 +258,7 @@ export const ProjectResolvers: Resolvers = {
         undoReactToProject: async (parent, args, context, info) => {
             // private
             // only the account of type freelancer can dislike a project
-            // console.log(context.user?.id)
-            // freelancerMiddleware(context);
+            freelancerMiddleware(context);
             // console.log(context.user?.id)
             const project = await projectsCollection.updateOne(
                 {_id: new ObjectId(args.id)},
