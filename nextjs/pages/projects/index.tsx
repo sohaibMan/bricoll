@@ -1,6 +1,6 @@
 import {gql, useQuery} from '@apollo/client';
-import ProjectCard from "../components/Project/ProjectCard";
-import {Project} from "../types/resolvers";
+import ProjectCard from "../../components/Project/ProjectCard";
+import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
 
 const GET_PROJECTS = gql`

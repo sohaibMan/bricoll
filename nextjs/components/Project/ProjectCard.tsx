@@ -10,6 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownOffAltRoundedIcon from "@mui/icons-material/ThumbDownOffAltRounded";
+import moment from "moment";
 
 
 export default function ProjectCard({project}: { project: Project }) {
@@ -20,7 +21,7 @@ export default function ProjectCard({project}: { project: Project }) {
             <Card
                 variant="outlined"
                 sx={(theme) => ({
-                    width: "60vw",
+                    width: "70vw",
                     gridColumn: 'span 2',
                     flexDirection: 'row',
                     flexWrap: 'wrap',
@@ -35,7 +36,7 @@ export default function ProjectCard({project}: { project: Project }) {
                 })}
             >
 
-                <Box sx={{width: "50vw"}}>
+                <Box sx={{width: "60vw"}}>
                     <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
                         <Link
                             href={`products/${project._id}`}
@@ -50,9 +51,11 @@ export default function ProjectCard({project}: { project: Project }) {
                         </Link>
                     </Typography>
                     <Typography level="h6" sx={{fontSize: 'sm', fontWeight: "light", color: "#495057"}} mb={0.5}>
-                        {project.projectScope.size_of_project.toLowerCase()} | {" "}
-                        {project.projectScope.estimated_duration_in_days} days | {" "}
-                        {project.projectScope.level_of_expertise.toLowerCase()}
+                        Est. Budget {project.price.toFixed(2)} $ | {" "}
+                        Est. Time {project.projectScope.estimated_duration_in_days} days | {" "}
+                        Size {project.projectScope.size_of_project.toLowerCase()} | {" "}
+                        Level {project.projectScope.level_of_expertise.toLowerCase()} | {" "}
+                        Posted {moment(project.created_at).fromNow()}
                     </Typography>
                     <Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>
                         {project.description}
