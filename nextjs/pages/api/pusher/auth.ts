@@ -18,7 +18,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 
         const channelData = {
-            user_id: token.sub,
+            user_id: token.sub.toString(),
             user_info: {
                 name: token.name,
                 email: token.email,

@@ -43,11 +43,10 @@ const server = new ApolloServer<ServerContext>({
 export default startServerAndCreateNextHandler(server,
     {
         context: async (req, res) => {
-            const secret = process.env.NEXTAUTH_SECRET;
             //
-            const token = await getToken({req, secret});
+            const token = await getToken({req});
 
-            // console.log("token is",token)
+            console.log("token is", token)
 
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}
@@ -65,7 +64,13 @@ export default startServerAndCreateNextHandler(server,
             }
 
             //
-            return {user: {id: token.sub, userRole: token.userRole as UserRole}}
+            return {
+                user: {
+                    id: token.sub.toString(),
+                    userRole: token.userRole as UserRole,
+                    accessToken: token.accessToken
+                }
+            }
 
 
         },
