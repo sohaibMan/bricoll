@@ -36,7 +36,6 @@
 
 import React from 'react';
 import { useSession } from 'next-auth/react';
-import Chat from './components/Chat';
 
 const ChatPage = () => {
 
@@ -52,7 +51,6 @@ const ChatPage = () => {
     
     <div>
       <h1>Chat</h1>
-      <Chat receiverUser={receiverUser} />
     </div>
   );
 };

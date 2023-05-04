@@ -24,7 +24,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 email: token.email,
             },
         };
-        const authResponse =pusher.authorizeChannel(socket_id, channel_name, channelData);
+        const authResponse = pusher.authorizeChannel(socket_id, channel_name, channelData);
         res.send(authResponse);
     } catch (error) {
         console.log((error as Error).stack);

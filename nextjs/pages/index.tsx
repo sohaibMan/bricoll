@@ -20,7 +20,8 @@ export default function Chat() {
 
     const [messages, setMessages] = useState<Message[]>([]);
     const [newMessage, setNewMessage] = useState("");
-    const receiverUser:User = {id:"645012f904bd8b633568faf2", name: 'anas zn', email: 'anas.zn@example.com'};
+    const receiverUser:User = {id:"643eb75439eae20fa6adb475"
+      , name: 'anas zn', email: 'anas.zn@example.com'};
 
 
     useEffect(() => {
@@ -39,17 +40,17 @@ export default function Chat() {
 
 
         const channel = pusher.subscribe(
-            `private-chat-${session.user.id}-${receiverUser.id}`
+            `private-chat-1`
         );
 
-        console.log(`private-chat-${session.user.id}-${receiverUser.id}`)
+        console.log(`private-chat-1`)
 
         channel.bind("new-message", (message: Message) => {
             setMessages((prevMessages) => [...prevMessages, message]);
         });
 
         return () => {
-            pusher.unsubscribe(`private-chat-${session?.user.id}-${receiverUser.id}`);
+            pusher.unsubscribe(`private-chat-1`);
             pusher.disconnect();
         };
     }, [receiverUser?.id, session?.user?.accessToken, session?.user?.id]);
@@ -112,4 +113,5 @@ export default function Chat() {
         </Layout>
     );
 }
+
 
