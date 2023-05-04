@@ -47,10 +47,10 @@ export default async function handler(
             // throw new Error('There are some fields not filling them yet!')
             return res.status(400).json({message: "Missing fields"});
         }
-        const emailValidation = await validate(email);
-        if (!emailValidation.valid) {
-            return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
-        }
+        // const emailValidation = await validate(email);
+        // if (!emailValidation.valid) {
+        //     return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
+        // }//;
         // todo (validate email, password, username length)
         // ? Verifying if the password and passwordConfirm are the same
         if (req.body.password !== req.body.passwordConfirm) {

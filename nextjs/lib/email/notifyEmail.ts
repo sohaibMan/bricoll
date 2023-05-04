@@ -73,8 +73,8 @@ async function OnEditProposal(client_id: ObjectId) {
 
 }
 
-async function OnPaymentReceive(freelancer_id: string, contract_id: string, amount: number) {
-    const user = await getUserById(new ObjectId(freelancer_id));
+async function OnPaymentReceive(freelancer_id: ObjectId, contract_id: string, amount: number) {
+    const user = await getUserById(freelancer_id);
     const email = user.email;
     const name = user.name;
     // todo (add the link to the project from the frontend)

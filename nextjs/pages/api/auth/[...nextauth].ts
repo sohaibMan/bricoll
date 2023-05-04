@@ -1,16 +1,17 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions, User } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials";
-import db from "../../../lib/mongodb";
+import db, { clientPromise } from "../../../lib/mongodb";
 import bcrypt from "bcrypt";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
-import { clientPromise } from "../../../lib/mongodb";
-import { redis } from "../../../lib/redis"
+import { redis } from "../../../lib/redis";
 
-
-async function verifyUserData(user: any, credentialPassword: string) {
+async function verifyUserData(
+  user: any,
+  credentialPassword: string
+): Promise<User> {
   if (!user || !user.hashedPassword) {
     throw new Error("Invalid credentials");
   }
@@ -32,6 +33,7 @@ async function verifyUserData(user: any, credentialPassword: string) {
     email: user.email,
     name: user.name,
     isCompleted: user.isCompleted as boolean,
+    accessToken: user.accessToken,
   };
 }
 
@@ -53,7 +55,6 @@ export const authOptions: NextAuthOptions = {
         password: { label: "password", type: "password" },
       },
       async authorize(credentials) {
-
         let user;
 
         // return user
@@ -115,41 +116,41 @@ export const authOptions: NextAuthOptions = {
       },
     }),
     /*
- EmailProvider({
-     server: process.env.EMAIL_SERVER,
-     from: process.env.EMAIL_FROM,
-   }),
-// Temporarily removing the Apple provider from the demo site as the
-// callback URL for it needs updating due to Vercel changing domains
+     EmailProvider({
+         server: process.env.EMAIL_SERVER,
+         from: process.env.EMAIL_FROM,
+       }),
+    // Temporarily removing the Apple provider from the demo site as the
+    // callback URL for it needs updating due to Vercel changing domains
 
-Providers.Apple({
-  clientId: process.env.APPLE_ID,
-  clientSecret: {
-    appleId: process.env.APPLE_ID,
-    teamId: process.env.APPLE_TEAM_ID,
-    privateKey: process.env.APPLE_PRIVATE_KEY,
-    keyId: process.env.APPLE_KEY_ID,
-  },
-}),
+    Providers.Apple({
+      clientId: process.env.APPLE_ID,
+      clientSecret: {
+        appleId: process.env.APPLE_ID,
+        teamId: process.env.APPLE_TEAM_ID,
+        privateKey: process.env.APPLE_PRIVATE_KEY,
+        keyId: process.env.APPLE_KEY_ID,
+      },
+    }),
 
-GithubProvider({
-  clientId: process.env.GITHUB_ID,
-  clientSecret: process.env.GITHUB_SECRET,
-}),
-GoogleProvider({
-  clientId: process.env.GOOGLE_ID,
-  clientSecret: process.env.GOOGLE_SECRET,
-}),
-TwitterProvider({
-  clientId: process.env.TWITTER_ID,
-  clientSecret: process.env.TWITTER_SECRET,
-}),
-Auth0Provider({
-  clientId: process.env.AUTH0_ID,
-  clientSecret: process.env.AUTH0_SECRET,
-  issuer: process.env.AUTH0_ISSUER,
-}),
-*/
+    GithubProvider({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
+    }),
+    TwitterProvider({
+      clientId: process.env.TWITTER_ID,
+      clientSecret: process.env.TWITTER_SECRET,
+    }),
+    Auth0Provider({
+      clientId: process.env.AUTH0_ID,
+      clientSecret: process.env.AUTH0_SECRET,
+      issuer: process.env.AUTH0_ISSUER,
+    }),
+    */
   ],
   theme: {
     colorScheme: "light",
@@ -169,15 +170,15 @@ Auth0Provider({
       //   token.accessToken = account.access_token;
       // }
 
-      if (account) {
-        token.accessToken = account.access_token;
+      if ((account && account.access_token) || (user && user.accessToken) ) {
+        token.accessToken = account?.access_token || user.accessToken;
       }
 
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
       // token.email
       // token.
 
-      // console.log(token);
+      console.log("user v3:  ", user);
 
       return token;
     },
@@ -193,6 +194,8 @@ Auth0Provider({
       // session.user.userRole = UserRole.Client;
       session.user.accessToken = token.accessToken;
       // console.log(session);
+
+      
 
       return session;
     },

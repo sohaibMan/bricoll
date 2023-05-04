@@ -4,6 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="fix pusher.js chat app">
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="try to fix auth">
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Project/ProjectCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id].tsx/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Bricoll.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bricoll.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/email/notifyEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/email/notifyEmail.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/chat/indext.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/chat/indext.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/chat/pusherAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/chat/pusherAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/pusher/auth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/pusher/auth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/chat.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/test.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects.tsx" afterDir="false" />
+    </list>
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="creat Project card and reactions" />
+
     <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="add SearchForm">
       <change afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/SearchButton.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/nextjs/pages/components/EditableDeletableChip.tsx" afterDir="false" />
@@ -28,6 +50,7 @@
       <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/upload.tsx" afterDir="false" />
     </list>
+
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,16 +65,29 @@
         <option value="com.haulmont.rcb.index" />
         <option value="com.haulmont.rcb.useInitial" />
         <option value="com.haulmont.rcb.README" />
-        <option value="TypeScript File" />
         <option value="com.haulmont.rcb.function_component" />
+        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="Main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MainButRefactored" />
+        <entry key="$PROJECT_DIR$" value="Main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -78,6 +114,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/letcode&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
@@ -112,11 +166,18 @@
       <recent name="$PROJECT_DIR$/nextjs/components/Project" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+
+      <recent name="$PROJECT_DIR$/nextjs/pages" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/api/user" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql/schema" />
       <recent name="$PROJECT_DIR$/nextjs/pages/Components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/pages/Components" />
       <recent name="$PROJECT_DIR$/nextjs/pages/Components/SearchForm" />
       <recent name="$PROJECT_DIR$/nextjs/pages/projects" />
       <recent name="$PROJECT_DIR$/nextjs/lib/email" />
+
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/nextjs/pages/Components/SearchForm/Index.tsx" />
@@ -197,6 +258,11 @@
       <workItem from="1682701014614" duration="507000" />
       <workItem from="1682711673297" duration="31000" />
       <workItem from="1682802001237" duration="6151000" />
+      <workItem from="1682850468378" duration="9060000" />
+      <workItem from="1683146357423" duration="2380000" />
+      <workItem from="1683149979581" duration="3097000" />
+      <workItem from="1683153897532" duration="2592000" />
+      <workItem from="1683199392866" duration="2295000" />
       <workItem from="1682850468378" duration="9209000" />
       <workItem from="1682862660857" duration="320000" />
       <workItem from="1682878531469" duration="43000" />
@@ -377,6 +443,7 @@
       <option name="project" value="LOCAL" />
       <updated>1682807810338</updated>
     </task>
+    <option name="localTasksCounter" value="25" />
     <task id="LOCAL-00025" summary="payment is completed e2e #27">
       <created>1682859629480</created>
       <option name="number" value="00025" />
@@ -420,6 +487,10 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="fix some bugs ( create profile" />
+    <MESSAGE value="fix some bugs ( create profile... )" />
+    <MESSAGE value="remove ProposalsByFreelancer , and ProposalsByProject from the query type to be added in the user query type" />
+    <MESSAGE value="fix serverContext path" />
     <MESSAGE value="refactor email service" />
     <MESSAGE value="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn" />
     <MESSAGE value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
@@ -441,6 +512,7 @@
     <MESSAGE value="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account" />
     <MESSAGE value="move utils functions to page folder" />
     <MESSAGE value="create strip account (connect) for freelancer on demand" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
     <MESSAGE value="payment is completed e2e #27" />
     <MESSAGE value="creat Project card and reactions" />
     <MESSAGE value="add price and created_at infos" />
