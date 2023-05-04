@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import uploadFileToBlob, {getBlobsInContainer} from "../utils/azure-storage-blob";
-import DisplayImagesFromContainer from "../../components/ContainerImage";
+import uploadFileToBlob, {getBlobsInContainer} from "../../utils/azure-storage-blob";
+import DisplayImagesFromContainer from "../ContainerImage";
 
 
 const Upload = (): JSX.Element => {

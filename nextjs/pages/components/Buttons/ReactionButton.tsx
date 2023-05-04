@@ -1,4 +1,4 @@
-import {Reaction_Type, Reactions} from "../../types/resolvers";
+import {Reaction_Type, Reactions} from "../../../types/resolvers";
 import IconButton from "@mui/joy/IconButton";
 import * as React from "react";
 import {useState} from "react";

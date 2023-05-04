@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="creat Project card and reactions" />
+    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="add SearchForm">
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/SearchButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/EditableDeletableChip.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/CategoriesAutocomplete.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/Index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/MoneyInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SearchInput.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SkillsAutocomplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/ContainerImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/ContainerImage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Project/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Project/ReactionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/ReactionButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/dev/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/dev/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/dev/palette.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/dev/previews.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/dev/useInitial.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/Button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/Upload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/upload.tsx" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +68,7 @@
     <dismissed value="$PROJECT_DIR$/nextjs/package.json" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2NmM3nlh3MwP41OP6DEIDU7CR6i" />
   <component name="ProjectLevelVcsManager">
@@ -63,7 +86,7 @@
     "WebServerToolWindowFactoryState": "false",
     "full.screen.before.presentation.mode": "false",
     "git-widget-placeholder": "Main",
-    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/Project/LoveButton.tsx",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/pages/Components/SearchForm/Index.tsx",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,13 +112,14 @@
       <recent name="$PROJECT_DIR$/nextjs/components/Project" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components/Buttons" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components/SearchForm" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects" />
       <recent name="$PROJECT_DIR$/nextjs/lib/email" />
-      <recent name="$PROJECT_DIR$/nextjs/pages" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/user" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions" />
     </key>
     <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components/SearchForm/Index.tsx" />
       <recent name="$PROJECT_DIR$/nextjs/components/Project/LoveButton.tsx" />
       <recent name="$PROJECT_DIR$/nextjs/components/Project/DislikeButton.tsx" />
     </key>
@@ -183,6 +207,7 @@
       <workItem from="1682958740336" duration="7000" />
       <workItem from="1683039537089" duration="2445000" />
       <workItem from="1683205540535" duration="5656000" />
+      <workItem from="1683217267571" duration="22129000" />
     </task>
     <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
       <created>1681669093611</created>
@@ -366,7 +391,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683211216309</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="add price and created_at infos">
+      <created>1683219256660</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1683219256660</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -388,8 +420,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="remove ProposalsByFreelancer , and ProposalsByProject from the query type to be added in the user query type" />
-    <MESSAGE value="fix serverContext path" />
     <MESSAGE value="refactor email service" />
     <MESSAGE value="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn" />
     <MESSAGE value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
@@ -413,6 +443,8 @@
     <MESSAGE value="create strip account (connect) for freelancer on demand" />
     <MESSAGE value="payment is completed e2e #27" />
     <MESSAGE value="creat Project card and reactions" />
-    <option name="LAST_COMMIT_MESSAGE" value="creat Project card and reactions" />
+    <MESSAGE value="add price and created_at infos" />
+    <MESSAGE value="add SearchForm" />
+    <option name="LAST_COMMIT_MESSAGE" value="add SearchForm" />
   </component>
 </project>

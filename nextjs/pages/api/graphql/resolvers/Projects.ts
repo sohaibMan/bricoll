@@ -29,24 +29,23 @@ export const ProjectResolvers: Resolvers = {
             return project as Project;
         },
         Projects: async (parent, args, context, info) => {
-            // if the user doesn't provide a query we will return 20 random projects
-            if (!args.query) return await projectsCollection.aggregate([{$sample: {size: 20}}]).toArray() as Project[];
-            const aggregation: any =
-                [
-                    {
+            // if the user doesn't provide a query, we will return 20 random projects
 
-                        $search: {
-                            index: "default",
-                            text: {
-                                query: args.query,
-                                path: {
-                                    wildcard: "*"
-                                }
-                            }
+            const aggregation: any = []
+            if (args.query) aggregation.push({
+
+                $search: {
+                    index: "default",
+                    text: {
+                        query: args.query,
+                        path: {
+                            wildcard: "*"
                         }
-                    },
+                    }
+                }
+            },)
+            // if (args.query) .aggregate([{$sample: {size: 20}}]).toArray() as Project[];
 
-                ]
 
             if (args.filter?.category) aggregation.push({
                 $match: {
@@ -67,6 +66,7 @@ export const ProjectResolvers: Resolvers = {
                     }
                 }
             })
+
             if (args.filter?.priceMax) aggregation.push({
                 $match: {
                     "price": {
@@ -75,7 +75,7 @@ export const ProjectResolvers: Resolvers = {
                 }
             })
 
-
+            if (aggregation.length === 0) return await projectsCollection.aggregate([{$sample: {size: 20}}]).toArray() as Project[];
             return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
         }
     },
