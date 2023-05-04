@@ -4,7 +4,6 @@ import "./styles.css";
 import type {AppProps} from "next/app";
 import type {Session} from "next-auth";
 import {DevSupport} from "@react-buddy/ide-toolbox-next";
-import {ComponentPreviews, useInitial} from "../components/dev";
 import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 const client = new ApolloClient({
@@ -17,13 +16,11 @@ const client = new ApolloClient({
 export default function App({Component, pageProps: {session, ...pageProps},}: AppProps<{ session: Session }>) {
 
     return (
-        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
             <SessionProvider session={session}>
                 <ApolloProvider client={client}>
                     <Component {...pageProps} />
                 </ApolloProvider>
             </SessionProvider>
-        </DevSupport>
     );
 }
 
