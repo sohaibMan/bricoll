@@ -1,17 +1,24 @@
 import * as React from 'react';
-import FormControl from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
-import Stack from '@mui/joy/Stack';
 import Input from '@mui/joy/Input';
-
-export default function SearchInput(props: { parentRef: React.RefObject<HTMLInputElement> }) {
+import SearchIcon from "@mui/icons-material/Search";
+// onKeyPress={(e) => e.key === "Enter" && props.onClickHandler}
+export default function SearchInput(props: {
+    parentRef: React.RefObject<HTMLInputElement>,
+    onClickHandler: () => void,
+}) {
     return (
-        <Stack spacing={2} sx={{width: 300}}>
-            <FormControl id="free-solo-2-demo">
-                <FormLabel>Search query</FormLabel>
-                <Input slotProps={{input: {ref: props.parentRef}}} />
-            </FormControl>
-        </Stack>
+        <>
+
+            <Input placeholder="Search query"
+                   slotProps={{input: {ref: props.parentRef}}}
+                   endDecorator={
+                       <>
+                           <SearchIcon onClick={props.onClickHandler} sx={{cursor: "pointer"}}/>
+                       </>
+                   }
+
+            />
+        </>
     );
 }
 

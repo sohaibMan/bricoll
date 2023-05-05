@@ -2,13 +2,18 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Project} from "../../../types/resolvers";
-import {Chip, Stack} from "@mui/joy";
+import {Chip, Stack} from '@mui/joy';
+import {Project, Reaction_Type} from "../../../types/resolvers";
+import {ReactionButton} from "../Buttons/ReactionButton";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import ThumbDownOffAltRoundedIcon from "@mui/icons-material/ThumbDownOffAltRounded";
 import moment from "moment";
-import {BarChart} from "../chart/BarChart";
+import Link from 'next/link';
+import {Link as MUILink} from "@mui/joy";
 
-
-export default function ProjectCard({project}: { project: Project }) {
+export default function ProjectItemCard({project}: { project: Project }) {
 
 
     return (
@@ -33,9 +38,16 @@ export default function ProjectCard({project}: { project: Project }) {
 
                 <Box sx={{width: "60vw"}}>
                     <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
-
-                        {project.title}
-
+                        <Link href={`projects/${project._id}`}>
+                            <MUILink  overlay
+                                     underline="none"
+                                     sx={{
+                                         color: 'text.primary',
+                                         '&.Mui-focusVisible:after': {outlineOffset: '-4px'},
+                                     }}>
+                                {project.title}
+                            </MUILink>
+                        </Link>
                     </Typography>
                     <Typography level="h6" sx={{fontSize: 'sm', fontWeight: "light", color: "#495057"}} mb={0.5}>
                         Est. Budget {project.price.toFixed(2)} $ | {" "}
@@ -59,11 +71,31 @@ export default function ProjectCard({project}: { project: Project }) {
                     </Stack>
                 </Box>
 
-                    <Stack alignItems="center">
-                        {project.stats && <BarChart stats={project.stats}/>}
-                    </Stack>
 
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                        maxWidth: 200,
+                    }}
+                >
+                    <Box sx={{display: 'flex', gap: 1}}>
 
+                        <ReactionButton project_id={project._id} reactions={project.reactions}
+                                        reaction_type={Reaction_Type.Love}
+                                        active_icon={<FavoriteIcon color="primary"/>}
+                                        inactive_icon={<FavoriteBorderRoundedIcon color="primary"/>}
+                        />
+
+                        <ReactionButton project_id={project._id} reactions={project.reactions}
+                                        reaction_type={Reaction_Type.Dislike}
+                                        active_icon={<ThumbDownIcon color="primary"/>}
+                                        inactive_icon={<ThumbDownOffAltRoundedIcon color="primary"/>}
+                        />
+
+                    </Box>
+                </Box>
 
 
             </Card>

@@ -30,7 +30,7 @@ export const ProjectResolvers: Resolvers = {
         },
         Projects: async (parent, args, context, info) => {
             // if the user doesn't provide a query, we will return 20 random projects
-
+            console.log(args)
             const aggregation: any = []
             if (args.query) aggregation.push({
 

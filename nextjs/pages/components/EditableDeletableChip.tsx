@@ -11,11 +11,11 @@ export default function EditableDeletableChip(props: {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
             <Chip
-                variant="outlined"
-                color="neutral"
+                variant="soft"
+                color="primary"
                 endDecorator={
                     <ChipDelete
-                        color="neutral"
+                        color="primary"
                         variant="plain"
                         onClick={() => props.onDelete(props.label)}
                     >

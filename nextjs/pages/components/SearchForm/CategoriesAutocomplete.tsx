@@ -10,7 +10,6 @@ export default function CategoriesAutocomplete(props: {
             placeholder="categories"
             disableClearable={false}
             options={categories.map(el => el.label.split("_").join(" ").toLowerCase())}
-            sx={{width: 300}}
             slotProps={{input: {ref: props.parentRef}}}
         />
     );

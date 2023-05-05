@@ -7,6 +7,7 @@ import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../../types/resolvers
 import {OperationVariables} from "@apollo/client";
 import MoneyInput from "./MoneyInput";
 import SkillsAutocomplete from "./SkillsAutocomplete";
+import {Stack} from "@mui/joy";
 
 
 export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVariables> | undefined)) => void }) {
@@ -17,7 +18,7 @@ export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVa
     const [skills, setSkills] = React.useState<string[]>([]);
 
 
-    async function searchOnClickHandler() {
+    function searchOnClickHandler() {
         // if all are empty do nothing
         let variables: QueryProjectsArgs = {};
         let isEmpty = true;
@@ -59,18 +60,27 @@ export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVa
 
 
         !isEmpty && props.onRefetch(variables); // if not empty
-        !isEmpty && console.log(variables); // if not empty
+
 
     }
 
+    const searchBestMatchOnClickHandler = () => props.onRefetch({
+        query: "",
+        filter: {}
+    })
 
-    return <>
-        <SearchInput parentRef={searchInputRef}/>
+
+    return <Stack spacing={2} sx={{width: "50%"}}>
+        <SearchInput onClickHandler={searchOnClickHandler} parentRef={searchInputRef}/>
         <CategoriesAutocomplete parentRef={categoriesAutocompleteRef}/>
         <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
+        <Stack spacing={2} direction="row">
         <MoneyInput placeholder="price Min" parentRef={moneyInputMinRef}/>
         <MoneyInput placeholder="price Max" parentRef={moneyInputMaxRef}/>
-        <SearchButton onClickHandler={searchOnClickHandler}/>
-
-    </>;
+        </Stack>
+        <Stack direction="row" spacing={1}>
+            <SearchButton label={"search"} onClickHandler={searchOnClickHandler}/>
+            <SearchButton label={"Best match"} onClickHandler={searchBestMatchOnClickHandler}/>
+        </Stack>
+    </Stack>;
 }

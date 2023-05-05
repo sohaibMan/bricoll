@@ -16,9 +16,10 @@ export default function SkillsAutocomplete(props: {
         props.setSkills(props.skills.filter(el => el != label))
     }
     const addHandler = () => {
-        if (InputRef.current!.value === "") return;
-        if (props.skills.includes(InputRef.current!.value)) return;
-        props.setSkills([...props.skills, InputRef.current!.value]);
+        if (InputRef.current!.value.trim() === "") return;
+        if (props.skills.includes(InputRef.current!.value.trim())) return;
+        if (props.skills.length >= 5) return;
+        props.setSkills([...props.skills, InputRef.current!.value.trim()]);
         InputRef.current!.value = "";
     }
 
@@ -26,9 +27,12 @@ export default function SkillsAutocomplete(props: {
         <Stack direction="row" spacing={2}>
             {props.skills.map((el, i) => <EditableDeletableChip onDelete={deleteHandler} key={i} label={el}/>)}
         </Stack>
-        <Stack direction="row" spacing={2}>
-            <Input size="sm" slotProps={{input: {ref: InputRef}}} placeholder="Skills"/>
-            <Button onClick={addHandler} size="md" startDecorator={<Add/>}>Add to cart</Button>
+        <Stack direction="row" spacing={2} justifyContent="space-between" sx={{width: "100%"}}>
+            <Input disabled={props.skills.length >= 5} size="md" sx={{width: "75%"}}
+                   slotProps={{input: {ref: InputRef}}}
+                   placeholder={props.skills.length >= 5 ? "Max 5 skills" : "Skills"}/>
+            <Button disabled={props.skills.length >= 5} onClick={addHandler} size="md"
+                    startDecorator={<Add/>}>Add</Button>
         </Stack>
 
     </>
