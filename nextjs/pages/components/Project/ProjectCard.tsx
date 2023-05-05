@@ -3,9 +3,10 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Project} from "../../../types/resolvers";
-import {Chip, Stack} from "@mui/joy";
+import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
-import {BarChart} from "../chart/BarChart";
+import {BarChart} from "../Chart/BarChart";
+import Attachments from "../ListItems/Attachments";
 
 
 export default function ProjectCard({project}: { project: Project }) {
@@ -57,13 +58,18 @@ export default function ProjectCard({project}: { project: Project }) {
                         {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
                         <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                     </Stack>
+                    <Divider sx={{margin: "10px"}}/>
+                    <Typography>
+                        Project Attachments
+                    </Typography>
+                    {project.attachments.length > 0 && <Attachments attachments={project.attachments}/>}
                 </Box>
 
-                    <Stack alignItems="center">
-                        {project.stats && <BarChart stats={project.stats}/>}
-                    </Stack>
 
-
+                <Stack alignItems="center" sx={{width: "100%", height: "20rem"}}>
+                    {project.stats && !(project.stats.approved_count === 0 && project.stats.completed_count === 0 && project.stats.declined_count === 0 && project.stats.in_progress_count === 0) &&
+                        <BarChart stats={project.stats}/>}
+                </Stack>
 
 
             </Card>

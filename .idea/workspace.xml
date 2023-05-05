@@ -4,29 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update the node modules and add a chart to the project by id and add some styles to the search bar">
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectItemCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectItemCardSkeleton.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/components/chart/BarChart.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Buttons/SearchButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Buttons/SearchButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/EditableDeletableChip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/EditableDeletableChip.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/CategoriesAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/CategoriesAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/Index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/MoneyInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/MoneyInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SearchInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SearchInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SkillsAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SkillsAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id].tsx/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-    </list>
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update the node modules and add a chart to the project by id and add some styles to the search bar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -87,8 +65,16 @@
       <option name="presentableId" value="Default" />
       <updated>1683293947030</updated>
       <workItem from="1683293953105" duration="552000" />
-      <workItem from="1683294991921" duration="14946000" />
+      <workItem from="1683294991921" duration="15044000" />
     </task>
+    <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
+      <created>1683310064878</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1683310064878</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

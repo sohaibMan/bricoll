@@ -7,9 +7,11 @@ enum AttachmentType {
 type Attachment {
   url: URL
   type: AttachmentType
+  name: String
 }
 
 input AttachmentInput {
   url: URL
   type: AttachmentType
+  name: String
 }

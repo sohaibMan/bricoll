@@ -20,11 +20,13 @@ export type Scalars = {
 
 export type Attachment = {
   __typename?: 'Attachment';
+  name?: Maybe<Scalars['String']>;
   type?: Maybe<AttachmentType>;
   url?: Maybe<Scalars['URL']>;
 };
 
 export type AttachmentInput = {
+  name?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<AttachmentType>;
   url?: InputMaybe<Scalars['URL']>;
 };
@@ -624,6 +626,7 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['AttachmentType']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
