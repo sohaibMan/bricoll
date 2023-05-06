@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": ["dom", "dom.iterable", "esnext", "es6", "webworker"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,7 +21,8 @@
     "**/*.tsx",
     "**/*.ts",
     "**/**/*.ts",
-    "pages/api/graphql/resolvers/test.js"
+    "pages/api/graphql/resolvers/test.js",
+    "pages/service-worker.js"
   ],
   "exclude": ["node_modules"]
 }

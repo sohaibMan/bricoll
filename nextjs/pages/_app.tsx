@@ -1,33 +1,67 @@
-import {SessionProvider} from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import "./styles.css";
+import type { AppProps } from "next/app";
+import type { Session } from "next-auth";
+import { DevSupport } from "@react-buddy/ide-toolbox-next";
+import { ComponentPreviews, useInitial } from "../components/dev";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-import type {AppProps} from "next/app";
-import type {Session} from "next-auth";
-import {DevSupport} from "@react-buddy/ide-toolbox-next";
-import {ComponentPreviews, useInitial} from "../components/dev";
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+import { useEffect } from "react";
 
 const client = new ApolloClient({
-    uri: 'http://localhost:3000/api/graphql',
-    cache: new InMemoryCache(),
+  uri: "http://localhost:3000/api/graphql",
+  cache: new InMemoryCache(),
 });
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
-export default function App({Component, pageProps: {session, ...pageProps},}: AppProps<{ session: Session }>) {
-    
-    return (
-        <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
-            <SessionProvider session={session}>
-                <ApolloProvider client={client}>
-                    <Component {...pageProps} />
-                </ApolloProvider>
-            </SessionProvider>
-        </DevSupport>
-    );
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps<{ session: Session }>) {
+  // useEffect(() => {
+  //     if ('serviceWorker' in navigator) {
+  //       window.addEventListener('load', () => {
+  //         navigator.serviceWorker.register('service-worker.js', { scope: "/" }).then((registration) => {
+  //           console.log('Service worker registered: ', registration);
+  //         }).catch((registrationError) => {
+  //           console.log('Service worker registration failed: ', registrationError);
+  //         });
+  //       });
+  //     }
+  //   }, []);
+
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("/sw.js").then(
+          function (registration) {
+            console.log(
+              "Service Worker registration successful with scope: ",
+              registration.scope
+            );
+          },
+          function (err) {
+            console.log("Service Worker registration failed: ", err);
+          }
+        );
+      });
+    }
+  }, []);
+
+  return (
+    <DevSupport
+      ComponentPreviews={ComponentPreviews}
+      useInitialHook={useInitial}
+    >
+      <SessionProvider session={session}>
+        <ApolloProvider client={client}>
+          <Component {...pageProps} />
+        </ApolloProvider>
+      </SessionProvider>
+    </DevSupport>
+  );
 }
-
-
 
 // !!!!
 // import { useState } from "react";
@@ -59,7 +93,6 @@ export default function App({Component, pageProps: {session, ...pageProps},}: Ap
 
 // export default MyApp;
 
-
 // !!
 // import { AppProps } from 'next/app';
 // import {SessionProvider} from "next-auth/react";
@@ -74,7 +107,6 @@ export default function App({Component, pageProps: {session, ...pageProps},}: Ap
 // }
 
 // export default MyApp;
-
 
 // import { SessionProvider } from "next-auth/react"
 
