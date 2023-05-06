@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import {gql, useQuery} from "@apollo/client";
-import ProjectItemCardSkeleton from "../../components/Project/ProjectItemCardSkeleton";
+import ProjectCardSkeleton from "../../components/Project/ProjectCardSkeleton";
 import {Project} from "../../../types/resolvers"
 import ProjectCard from "../../components/Project/ProjectCard";
 
@@ -43,7 +43,7 @@ export default function Project() {
                 projectId: project_id
             }
         });
-    if (loading) return <ProjectItemCardSkeleton/>
+    if (loading) return <ProjectCardSkeleton/>
     if (error) return <h1>{error.message}</h1>;
     if (!data || !data.Project) return <h1>bobo</h1>
 
