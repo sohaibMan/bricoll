@@ -3,6 +3,9 @@ import {gql, useQuery} from "@apollo/client";
 import ProjectCardSkeleton from "../../components/Project/ProjectCardSkeleton";
 import {Project} from "../../../types/resolvers"
 import ProjectCard from "../../components/Project/ProjectCard";
+import * as React from "react";
+import CustomLink from "../../components/CustomLink/CustomLink";
+
 
 const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
     Project(id: $projectId) {
@@ -46,9 +49,17 @@ export default function Project() {
     if (loading) return <ProjectCardSkeleton/>
     if (error) return <h1>{error.message}</h1>;
     if (!data || !data.Project) return <h1>bobo</h1>
-
+    // {/*    tmp link*/}
+    // {/* todo handle (freelancer already submmit)*/}
     return (
-        <ProjectCard project={data.Project}/>
+        <>
+            <ProjectCard project={data.Project}/>
+            <CustomLink href={`${data.Project._id}/proposal`}>
+                Submit a proposal
+            </CustomLink>
+
+
+        </>
     )
 
 };

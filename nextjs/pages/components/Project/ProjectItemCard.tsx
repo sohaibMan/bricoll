@@ -10,8 +10,7 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownOffAltRoundedIcon from "@mui/icons-material/ThumbDownOffAltRounded";
 import moment from "moment";
-import Link from 'next/link';
-import {Link as MUILink} from "@mui/joy";
+import CustomLink from "../CustomLink/CustomLink";
 
 export default function ProjectItemCard({project}: { project: Project }) {
 
@@ -38,16 +37,20 @@ export default function ProjectItemCard({project}: { project: Project }) {
 
                 <Box sx={{width: "60vw"}}>
                     <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
-                        <Link href={`projects/${project._id}`}>
-                            <MUILink  overlay
-                                     underline="none"
-                                     sx={{
-                                         color: 'text.primary',
-                                         '&.Mui-focusVisible:after': {outlineOffset: '-4px'},
-                                     }}>
-                                {project.title}
-                            </MUILink>
-                        </Link>
+
+                        <CustomLink
+                            overlay
+                            underline="none"
+                            href={`projects/${project._id}`}
+                            sx={{
+                                cursor: 'pointer',
+                                color: 'text.primary',
+                                '&.Mui-focusVisible:after': {outlineOffset: '-4px'},
+                            }}
+                        >
+                            {project.title}
+                        </CustomLink>
+
                     </Typography>
                     <Typography level="h6" sx={{fontSize: 'sm', fontWeight: "light", color: "#495057"}} mb={0.5}>
                         Est. Budget {project.price.toFixed(2)} $ | {" "}
