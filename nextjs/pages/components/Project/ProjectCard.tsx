@@ -17,7 +17,7 @@ export default function ProjectCard({project}: { project: Project }) {
         <Card
             variant="outlined"
             sx={(theme) => ({
-                width: "100%",
+                width: "60vw",
                 gridColumn: 'span 2',
                 flexDirection: 'row',
                 flexWrap: 'wrap',

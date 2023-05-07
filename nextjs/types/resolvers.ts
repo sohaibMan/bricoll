@@ -198,6 +198,7 @@ export type MutationEditProjectArgs = {
 
 
 export type MutationEditProposalArgs = {
+  cover_letter: Scalars['String'];
   description: Scalars['String'];
   duration: Scalars['Int'];
   id: Scalars['ObjectID'];
@@ -670,7 +671,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationEditPasswordArgs, 'newPassword' | 'oldPassword'>>;
   editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
-  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
+  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'cover_letter' | 'description' | 'duration' | 'id' | 'price'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
   requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'contract_id' | 'description' | 'title'>>;
   undoReactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationUndoReactToProjectArgs, 'id' | 'reaction_type'>>;

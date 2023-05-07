@@ -35,27 +35,37 @@ export default function SubmitProposalForm({project_id}: SubmitProposalFormProps
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (+price <= 0) return toast.error("Price can't be negative")
-        if (+duration <= 0) return toast.error("Duration can't be negative")
+        if (+duration <= 0 || +duration >= 90) return toast.error("Duration should be between 1 and 90 days")
         if (+description.length >= 10000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
         if (+coverLetter.length >= 10000 || +coverLetter.length <= 5) return toast.error("Cover Letter should be between 5 and 1000")
+        try {
+            toast.promise(
+                createProposal({
+                    variables: {
+                        projectId: project_id,
+                        price: +price,
+                        duration: +duration,
+                        coverLetter,
+                        description
 
-        await toast.promise(
-            createProposal({
-                variables: {
-                    projectId: project_id,
-                    price: +price,
-                    duration: +duration,
-                    coverLetter,
-                    description
-
+                    }
+                }),
+                {
+                    loading: 'Saving...',
+                    success: <b>Form submitted!</b>,
+                    error: <b>{error?.message}</b>,
                 }
-            }),
-            {
-                loading: 'Saving...',
-                success: <b>Form submitted!</b>,
-                error: <b>{error?.message}</b>,
-            }
-        );
+            ).then(() => {
+                setPrice("")
+                setDuration("")
+                setDescription("")
+                setCoverLetter("")
+                //todo redirect to proposal page
+            })
+
+        } catch (e) {
+            console.error(e)
+        }
         // toast.success("Hello World")
     }
 

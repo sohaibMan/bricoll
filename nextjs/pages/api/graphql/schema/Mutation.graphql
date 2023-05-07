@@ -27,7 +27,7 @@ type Mutation {
         price: Float! @constraint(min: 1, max: 10000)
         duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
         description: String! @constraint(minLength: 5, maxLength: 1000)
-        cover_letter: String! @constraint(minLength: 5, maxLength: 1000)
+        cover_letter: String! @constraint(minLength: 5, maxLength: 100000)
         attachmentsURL: [AttachmentInput]
     ): Proposal!
     editProposal(
@@ -35,6 +35,7 @@ type Mutation {
         price: Float! @constraint(min: 1, max: 10000)
         duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
         description: String! @constraint(minLength: 5, maxLength: 1000)
+        cover_letter: String! @constraint(minLength: 5, maxLength: 100000)
     ): Proposal
     declineProposal(id: ObjectID!): Proposal
     # by the client

@@ -5,6 +5,7 @@ import {Project} from "../../../types/resolvers"
 import ProjectCard from "../../components/Project/ProjectCard";
 import * as React from "react";
 import CustomLink from "../../components/CustomLink/CustomLink";
+import Typography from "@mui/joy/Typography";
 
 
 const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
@@ -32,9 +33,12 @@ const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
             approved_count
             in_progress_count
         }
+        proposals {
+            _id ##get the proposals of me as a freelancer to this project
+        }
     }
 }`
-
+// todo link to proposal page
 export default function Project() {
     const router = useRouter();
     const {project_id} = router.query;
@@ -50,13 +54,17 @@ export default function Project() {
     if (error) return <h1>{error.message}</h1>;
     if (!data || !data.Project) return <h1>bobo</h1>
     // {/*    tmp link*/}
-    // {/* todo handle (freelancer already submmit)*/}
     return (
         <>
             <ProjectCard project={data.Project}/>
-            <CustomLink href={`${data.Project._id}/proposal`}>
-                Submit a proposal
-            </CustomLink>
+            {(data.Project.proposals && data.Project.proposals.length > 0) ?
+                <Typography level="h6">You already submitted a proposal</Typography>
+                :
+                <CustomLink href={`${data.Project._id}/proposal`}>
+                    Submit a proposal
+                </CustomLink>
+
+            }
 
 
         </>
