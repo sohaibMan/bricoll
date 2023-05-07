@@ -7,7 +7,7 @@ async function OnCreateProposal(client_id: ObjectId) {
     const user = await getUserById(client_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'You have received a new Proposal ';
     const html = `
               <h1>New proposal submitted for your project!</h1>
@@ -20,7 +20,7 @@ async function OnAcceptProposal(freelancer_id: ObjectId) {
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'Your proposal has been accepted ';
     const html = `
               <h1>Your proposal has been accepted!</h1>
@@ -33,7 +33,7 @@ async function OnCancelProposal(freelancer_id: ObjectId) {
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'Sorry your proposal has been declined ';
     const html = `
               <h1>Your proposal has been declined!</h1>
@@ -47,7 +47,7 @@ async function OnProposalDeclined(client_id: ObjectId) {
     const user = await getUserById(client_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'Sorry your proposal has been withdrawn by the freelancer  ';
     const html = `
       
@@ -63,7 +63,7 @@ async function OnEditProposal(client_id: ObjectId) {
     const user = await getUserById(client_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'Your proposal terms has been changed ';
     const html = `
               <h1>Your proposal has been changed! check the website for more details</h1>
@@ -77,7 +77,7 @@ async function OnPaymentReceive(freelancer_id: ObjectId, contract_id: string, am
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const name = user.name;
-    // todo (add the link to the project from the frontend)
+    // todo (create the link to the project from the frontend)
     const subject = 'Your proposal terms has been changed ';
     const html = `
               <h1>you have recive a payment check your earning and your bank account</h1>

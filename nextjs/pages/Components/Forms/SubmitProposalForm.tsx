@@ -7,6 +7,7 @@ import Textarea from '@mui/joy/Textarea';
 import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
+import {MutationCreateProposalArgs} from "../../../types/resolvers";
 
 
 // TODO - ADD OTHER FIELDS AND CUSTOMIZE THE FUNCTION
@@ -25,9 +26,6 @@ interface SubmitProposalFormProps {
 
 export default function SubmitProposalForm({project_id}: SubmitProposalFormProps) {
     const [createProposal, {data, loading, error}] = useMutation(CREATE_PROPOSAL_MUTATION);
-    // if (error) toast.error(error.message);
-
-    const [currency, setCurrency] = useState<string>("");
     const [price, setPrice] = useState<string>("");
     const [duration, setDuration] = useState<string>("");
     const [description, setDescription] = useState<string>("");
@@ -38,17 +36,17 @@ export default function SubmitProposalForm({project_id}: SubmitProposalFormProps
         if (+duration <= 0 || +duration >= 90) return toast.error("Duration should be between 1 and 90 days")
         if (+description.length >= 10000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
         if (+coverLetter.length >= 10000 || +coverLetter.length <= 5) return toast.error("Cover Letter should be between 5 and 1000")
+        const mutationCreateProposalArgs: MutationCreateProposalArgs = {
+            project_id: project_id,
+            price: +price,
+            duration: +duration,
+            cover_letter: coverLetter,
+            description
+        }
         try {
             toast.promise(
                 createProposal({
-                    variables: {
-                        projectId: project_id,
-                        price: +price,
-                        duration: +duration,
-                        coverLetter,
-                        description
-
-                    }
+                    variables: mutationCreateProposalArgs
                 }),
                 {
                     loading: 'Saving...',

@@ -1,4 +1,4 @@
-import Layout from "./components/layout";
+import Layout from "./Components/layout";
 import React, {useEffect, useState} from "react";
 import Pusher from "pusher-js";
 import {useSession} from "next-auth/react";

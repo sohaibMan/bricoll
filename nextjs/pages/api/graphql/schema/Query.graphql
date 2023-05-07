@@ -3,7 +3,7 @@ type Query{
     Proposal(id: ObjectID!): Proposal
     # Projects
     Projects(query: String, filter: filterOptionsInput): [Project]
-    # Project by id (client,freelancer) Note the client can access to his proposals and the freelancer to his proposals only
+    # Cards by id (client,freelancer) Note the client can access to his proposals and the freelancer to his proposals only
     Project(id: ObjectID!): Project
     # Contract
     Contract(id: ObjectID!): Contract

@@ -1,12 +1,12 @@
-import SearchInput from "./SearchInput";
-import CategoriesAutocomplete from "./CategoriesAutocomplete";
+import SearchInput from "../Inputs/SearchInput";
+import CategoriesAutocomplete from "../AutoCompletes/CategoriesAutocomplete";
 import * as React from "react";
 import {useRef} from "react";
 import SearchButton from "../Buttons/SearchButton";
 import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../../types/resolvers";
 import {OperationVariables} from "@apollo/client";
-import MoneyInput from "./MoneyInput";
-import SkillsAutocomplete from "./SkillsAutocomplete";
+import MoneyInput from "../Inputs/MoneyInput";
+import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";
 import {Stack} from "@mui/joy";
 
 
@@ -72,11 +72,11 @@ export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVa
 
     return <Stack spacing={2} sx={{width: "50%"}}>
         <SearchInput onClickHandler={searchOnClickHandler} parentRef={searchInputRef}/>
-        <CategoriesAutocomplete parentRef={categoriesAutocompleteRef}/>
+        <CategoriesAutocomplete placeholder="categories" parentRef={categoriesAutocompleteRef}/>
         <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
         <Stack spacing={2} direction="row">
-        <MoneyInput placeholder="price Min" parentRef={moneyInputMinRef}/>
-        <MoneyInput placeholder="price Max" parentRef={moneyInputMaxRef}/>
+            <MoneyInput placeholder="price Min" parentRef={moneyInputMinRef}/>
+            <MoneyInput placeholder="price Max" parentRef={moneyInputMaxRef}/>
         </Stack>
         <Stack direction="row" spacing={1}>
             <SearchButton label={"search"} onClickHandler={searchOnClickHandler}/>

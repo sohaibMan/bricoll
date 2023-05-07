@@ -10,7 +10,7 @@ import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import ThumbDownOffAltRoundedIcon from "@mui/icons-material/ThumbDownOffAltRounded";
 import moment from "moment";
-import CustomLink from "../CustomLink/CustomLink";
+import CustomLink from "../CustomLinks/CustomLink";
 
 export default function ProjectItemCard({project}: { project: Project }) {
 

@@ -28,7 +28,6 @@ export type Attachment = {
 export type AttachmentInput = {
   name?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<AttachmentType>;
-  url?: InputMaybe<Scalars['URL']>;
 };
 
 export enum AttachmentType {

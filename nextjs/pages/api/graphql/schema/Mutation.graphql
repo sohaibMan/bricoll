@@ -1,10 +1,10 @@
 type Mutation {
-    #    Project (client)
+    #    Cards (client)
     createProject(
         title: String! @constraint(minLength: 5, maxLength: 100)
         description: String! @constraint(minLength: 5, maxLength: 1000)
         price: Float! @constraint(min: 1, max: 100000)
-        skills: [String!]! @constraint(maxItems: 15)
+        skills: [String!]! @constraint(maxItems: 5)
         projectScope: ProjectScopeInput!
         category: ProjectCategoriesEnum!
         attachments: [AttachmentInput!]

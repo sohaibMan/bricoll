@@ -1,5 +1,5 @@
-import Layout from "./components/layout";
-import UploadButtons from "./components/Buttons/Upload";
+import Layout from "./Components/layout";
+import UploadButtons from "./Components/Buttons/Upload";
 
 export default function upload() {
     // As this page uses Server Side Rendering, the `session` will be already

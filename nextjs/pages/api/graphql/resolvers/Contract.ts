@@ -32,7 +32,7 @@ export const ContractResolvers: Resolvers = {
             async (parent, args, context, info) => {
                 //? the client have access related to him project
                 //? the freelance have access only to his proposal
-                // to add scrolling pagination
+                // to create scrolling pagination
                 if (!context.user) throw new GraphQLError("You must be authenticated to access this resource",
                     {
                         extensions: {

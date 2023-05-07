@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import SubmitProposalForm from "../../../components/Forms/SubmitProposalForm";
+import SubmitProposalForm from "../../../Components/Forms/SubmitProposalForm";
 
 export default function SubmitProposal() {
     const router = useRouter();

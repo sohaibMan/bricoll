@@ -11,7 +11,6 @@ type Attachment {
 }
 
 input AttachmentInput {
-  url: URL
   type: AttachmentType
-  name: String
+    name: String
 }

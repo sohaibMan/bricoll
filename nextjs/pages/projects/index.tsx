@@ -1,9 +1,9 @@
 import {gql, useQuery} from '@apollo/client';
-import ProjectItemCard from "../components/Project/ProjectItemCard";
+import ProjectItemCard from "../Components/Cards/ProjectItemCard";
 import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
-import {SearchForm} from "../components/SearchForm/Index";
-import ProjectItemCardSkeleton from "../components/Project/ProjectItemCardSkeleton";
+import {SearchForm} from "../Components/Forms/SearchForm";
+import ProjectItemCardSkeleton from "../Components/Skeletons/ProjectItemCardSkeleton";
 
 const GET_PROJECTS = gql`
     query Project($query: String, $filter: filterOptionsInput) {

@@ -6,7 +6,7 @@ import {Project} from "../../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../ListItems/Attachments";
-import {BarChart} from "../Chart/BarChart";
+import {BarChart} from "../Charts/BarChart";
 
 
 export default function ProjectCard({project}: { project: Project }) {

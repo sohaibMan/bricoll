@@ -44,7 +44,7 @@ export const ProjectResolvers: Resolvers = {
                     }
                 }
             },)
-            // if (args.query) .aggregate([{$sample: {size: 20}}]).toArray() as Project[];
+            // if (args.query) .aggregate([{$sample: {size: 20}}]).toArray() as Cards[];
 
 
             if (args.filter?.category) aggregation.push({
@@ -136,7 +136,7 @@ export const ProjectResolvers: Resolvers = {
     Mutation: {
         createProject: async (parent, args, context, info) => {
             // ? private
-            // only the account of type client can add a project
+            // only the account of type client can create a project
             clientMiddleware(context);// it throws an error if the user is not authenticated as client
 
 

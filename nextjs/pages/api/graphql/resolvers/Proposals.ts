@@ -22,7 +22,7 @@ export const ProposalResolvers: Resolvers = {
             async (parent, args, context, info) => {
                 //? the client have access related to him project
                 //? the freelance have access only to his proposal...
-                // to add scrolling pagination
+                // to create scrolling pagination
                 // index scan on id
                 authenticatedMiddleware(context);// throws a graphql error if the user is not authenticated
                 const proposals = await proposalsCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]}) as unknown as Proposal | null;

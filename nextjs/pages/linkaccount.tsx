@@ -1,5 +1,4 @@
-import {useSession} from "next-auth/react";
-import Layout from "./components/layout";
+import Layout from "./Components/layout";
 import Button from "@mui/joy/Button";
 import React from "react";
 
