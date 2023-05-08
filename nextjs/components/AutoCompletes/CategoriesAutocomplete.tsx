@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ProjectCategoriesEnum} from "../../../types/resolvers";
+import {ProjectCategoriesEnum} from "../../types/resolvers";
 import CustomAutocomplete from "./Autocomplete";
 
 const categories = [

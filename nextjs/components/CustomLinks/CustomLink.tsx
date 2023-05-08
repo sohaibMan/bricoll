@@ -1,4 +1,4 @@
-// Components/MyLink.tsx
+// components/MyLink.tsx
 import { LinkProps, Link as MuiLink } from "@mui/joy";
 import NextLink, { LinkProps as NextLinkProps } from "next/link";
 // Defining the CustomNextLink

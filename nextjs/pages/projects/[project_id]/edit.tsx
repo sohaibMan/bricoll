@@ -1,4 +1,4 @@
-import ProjectForm from "../../Components/Forms/ProjectForm";
+import ProjectForm from "../../../components/Forms/ProjectForm";
 import {gql, useQuery} from "@apollo/client";
 import {Project} from "../../../types/resolvers";
 import {Stack} from "@mui/joy";

@@ -1,10 +1,10 @@
 import {useRouter} from "next/router";
 import {gql, useQuery} from "@apollo/client";
-import ProjectCardSkeleton from "../../Components/Skeletons/ProjectCardSkeleton";
+import ProjectCardSkeleton from "../../../components/Skeletons/ProjectCardSkeleton";
 import {Project} from "../../../types/resolvers"
-import ProjectCard from "../../Components/Cards/ProjectCard";
+import ProjectCard from "../../../components/Cards/ProjectCard";
 import * as React from "react";
-import CustomLink from "../../Components/CustomLinks/CustomLink";
+import CustomLink from "../../../components/CustomLinks/CustomLink";
 import Typography from "@mui/joy/Typography";
 
 

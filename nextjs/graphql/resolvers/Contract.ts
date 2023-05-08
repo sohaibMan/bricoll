@@ -1,5 +1,5 @@
 import {ObjectId, TransactionOptions} from "mongodb";
-import db, {clientPromise} from "../../../../lib/mongodb";
+import db, {clientPromise} from "../../lib/mongodb";
 import {
     Contract,
     ContractStatus,
@@ -9,7 +9,7 @@ import {
     Submission_Review,
     SubmissionReviewStatus,
     UserRole
-} from "../../../../types/resolvers";
+} from "../../types/resolvers";
 import {GraphQLError} from "graphql";
 import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
@@ -19,7 +19,7 @@ import {
     onCancelContract,
     onCreateContract, onDeclineRequestProjectSubmissionReview,
     onRequestProjectSubmissionReview
-} from "../../../../lib/email/notifyEmail";
+} from "../../lib/email/notifyEmail";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")

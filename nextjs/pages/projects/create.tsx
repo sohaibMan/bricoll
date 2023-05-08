@@ -1,4 +1,4 @@
-import ProjectForm from "../Components/Forms/ProjectForm";
+import ProjectForm from "../../components/Forms/ProjectForm";
 import {gql} from "@apollo/client";
 
 const CREATE_PROJECT_MUTATION = gql`

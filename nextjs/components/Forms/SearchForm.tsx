@@ -3,7 +3,7 @@ import CategoriesAutocomplete from "../AutoCompletes/CategoriesAutocomplete";
 import * as React from "react";
 import {useRef} from "react";
 import SearchButton from "../Buttons/SearchButton";
-import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../../types/resolvers";
+import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../types/resolvers";
 import {OperationVariables} from "@apollo/client";
 import MoneyInput from "../Inputs/MoneyInput";
 import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";

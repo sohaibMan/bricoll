@@ -1,4 +1,4 @@
-import Layout from "./Components/layout";
+import Layout from "../components/layout";
 
 export default function ClientPage() {
   return (

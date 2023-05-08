@@ -18,7 +18,7 @@ import {
     ProjectCategoriesEnum,
     ProjectScopeInput,
     Size_Of_Project
-} from "../../../types/resolvers";
+} from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
 

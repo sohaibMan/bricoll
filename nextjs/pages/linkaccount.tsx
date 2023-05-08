@@ -1,4 +1,4 @@
-import Layout from "./Components/layout";
+import Layout from "../components/layout";
 import Button from "@mui/joy/Button";
 import React from "react";
 

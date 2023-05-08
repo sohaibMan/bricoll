@@ -6,7 +6,7 @@ import Textarea from '@mui/joy/Textarea';
 import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
-import {MutationCreateProposalArgs, MutationEditProposalArgs, Proposal} from "../../../types/resolvers";
+import {MutationCreateProposalArgs, MutationEditProposalArgs, Proposal} from "../../types/resolvers";
 import {DurationInput} from "../Inputs/DurationInput";
 import {PriceInput} from "../Inputs/PriceInput";
 

@@ -1,6 +1,6 @@
 import {ObjectId} from 'mongodb';
-import {Project, Proposal, Proposal_Status, Resolvers} from "../../../../types/resolvers";
-import db from "../../../../lib/mongodb";
+import {Project, Proposal, Proposal_Status, Resolvers} from "../../types/resolvers";
+import db from "../../lib/mongodb";
 import {GraphQLError} from 'graphql';
 import {freelancerMiddleware} from './resolversHelpersFunctions/freelancerMiddleware';
 import {clientMiddleware} from './resolversHelpersFunctions/clientMiddleware';
@@ -10,7 +10,7 @@ import {
     OnCreateProposal,
     OnEditProposal,
     OnProposalDeclined
-} from "../../../../lib/email/notifyEmail";
+} from "../../lib/email/notifyEmail";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 
 const proposalsCollection = db.collection("proposals")

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Project} from "../../../types/resolvers";
+import {Project} from "../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../ListItems/Attachments";

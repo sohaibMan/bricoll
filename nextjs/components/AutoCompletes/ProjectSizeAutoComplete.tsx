@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Size_Of_Project} from "../../../types/resolvers";
+import {Size_Of_Project} from "../../types/resolvers";
 import CustomAutocomplete from "./Autocomplete";
 
 const projectSizes = [

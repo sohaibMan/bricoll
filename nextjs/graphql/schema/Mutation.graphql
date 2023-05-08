@@ -71,14 +71,5 @@ type Mutation {
     # processPayment(id: ObjectID!): Contract
     # only the client can complete a contract if the freelancer has accepted it
     #    completeContract(id: ObjectID!): Contract (transfer to a rest api)
-    #    User
-    editProfile(
-        name: String @constraint(minLength: 3, maxLength: 20)
-        email: String  @constraint(minLength: 5, format: "email")
-        imageUrl: URL
-        status: StatusEnum
-    ): Boolean
-    editPassword(oldPassword: String! @constraint(minLength: 8, maxLength: 100),  newPassword: String! @constraint(minLength: 8, maxLength: 100))  : Boolean
-    deleteAccount: Boolean # todo this is complicated task (delete all the data related to the user(projects, proposals, contracts, chats, messages, notifications, etc.)) and you don't need an Id
 
 }

@@ -3,7 +3,7 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Chip, Stack} from '@mui/joy';
-import {Project, Reaction_Type} from "../../../types/resolvers";
+import {Project, Reaction_Type} from "../../types/resolvers";
 import {ReactionButton} from "../Buttons/ReactionButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";

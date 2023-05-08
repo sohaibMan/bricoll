@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Level_Of_Expertise} from "../../../types/resolvers";
+import {Level_Of_Expertise} from "../../types/resolvers";
 import CustomAutocomplete from "./Autocomplete";
 
 const levelsOfExpertise = [

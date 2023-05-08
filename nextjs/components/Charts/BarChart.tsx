@@ -1,5 +1,5 @@
 import {Pie} from "react-chartjs-2";
-import {ProjectStats} from "../../../types/resolvers";
+import {ProjectStats} from "../../types/resolvers";
 import {CategoryScale} from "chart.js";
 import Chart from "chart.js/auto";
 

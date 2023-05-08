@@ -74,22 +74,22 @@ export default function Header() {
             <Link href="/">Home</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/client">Client</Link>
+            <Link href="/nextjs/pages/client">Client</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/server">Server</Link>
+            <Link href="/nextjs/pages/server">Server</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/protected">Protected</Link>
+            <Link href="/nextjs/pages/protected">Protected</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/api-example">API</Link>
+            <Link href="/nextjs/pages/api-example">API</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/admin">Admin</Link>
+            <Link href="/nextjs/pages/admin">Admin</Link>
           </li>
           <li className={styles.navItem}>
-            <Link href="/me">Me</Link>
+            <Link href="/nextjs/pages/me">Me</Link>
           </li>
         </ul>
       </nav>

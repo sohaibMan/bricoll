@@ -1,7 +1,7 @@
 import * as React from 'react';
 import List from '@mui/joy/List';
 import ListItem from '@mui/joy/ListItem';
-import {Attachment, AttachmentType} from "../../../types/resolvers";
+import {Attachment, AttachmentType} from "../../types/resolvers";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
