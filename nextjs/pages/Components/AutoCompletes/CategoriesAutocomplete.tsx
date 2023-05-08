@@ -16,9 +16,10 @@ const categories = [
 export default function CategoriesAutocomplete(props: {
     parentRef: React.RefObject<HTMLInputElement>
     placeholder: string
+    defaultValue?: string
 }) {
     return (
-        <CustomAutocomplete parentRef={props.parentRef} labels={categories} placeholder={props.placeholder}/>
+        <CustomAutocomplete defaultValue={props.defaultValue} parentRef={props.parentRef} labels={categories} placeholder={props.placeholder}/>
     );
 }
 

@@ -72,12 +72,16 @@ export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVa
 
     return <Stack spacing={2} sx={{width: "50%"}}>
         <SearchInput onClickHandler={searchOnClickHandler} parentRef={searchInputRef}/>
+
         <CategoriesAutocomplete placeholder="categories" parentRef={categoriesAutocompleteRef}/>
+
         <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
+
         <Stack spacing={2} direction="row">
             <MoneyInput placeholder="price Min" parentRef={moneyInputMinRef}/>
             <MoneyInput placeholder="price Max" parentRef={moneyInputMaxRef}/>
         </Stack>
+
         <Stack direction="row" spacing={1}>
             <SearchButton label={"search"} onClickHandler={searchOnClickHandler}/>
             <SearchButton label={"Best match"} onClickHandler={searchBestMatchOnClickHandler}/>
