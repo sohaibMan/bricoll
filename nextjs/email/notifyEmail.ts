@@ -1,5 +1,5 @@
 import {ObjectId} from "mongodb";
-import emailService from "./email";
+import emailService from "../lib/email";
 import {getUserById, htmlMarkupGenerator} from "./emailHelpers";
 
 

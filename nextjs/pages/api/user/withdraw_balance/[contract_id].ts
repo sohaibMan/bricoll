@@ -4,7 +4,7 @@ import {getToken} from "next-auth/jwt";
 import db, {clientPromise} from "../../../../lib/mongodb";
 import {ObjectId, TransactionOptions} from "mongodb";
 import {EarningsStatus, UserRole} from "../../../../types/resolvers";
-import {OnPaymentReceive} from "../../../../lib/email/notifyEmail";
+import {OnPaymentReceive} from "../../../../email/notifyEmail";
 
 const usersCollection = db.collection("users")
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);

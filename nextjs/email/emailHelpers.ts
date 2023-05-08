@@ -1,6 +1,6 @@
 import {ObjectId} from "mongodb";
-import db from "../mongodb";
-import {User} from "../../types/resolvers";
+import db from "../lib/mongodb";
+import {User} from "../types/resolvers";
 
 async function getUserById(user_id: ObjectId) {
     const usersCollection = db.collection("users")

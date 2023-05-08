@@ -17,11 +17,9 @@
   },
   "include": [
     "process.d.ts",
-    "schemas/types/*.ts",
     "**/*.tsx",
     "**/*.ts",
     "**/**/*.ts",
-    "graphql/resolvers/test.js"
   ],
   "exclude": ["node_modules"]
 }

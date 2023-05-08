@@ -80,10 +80,7 @@ export type Mutation = {
   createProposal: Proposal;
   declineProposal?: Maybe<Proposal>;
   declineRequestProjectSubmissionReview?: Maybe<QueryResult>;
-  deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
-  editPassword?: Maybe<Scalars['Boolean']>;
-  editProfile?: Maybe<Scalars['Boolean']>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   reactToProject?: Maybe<QueryResult>;
@@ -168,20 +165,6 @@ export type MutationDeclineRequestProjectSubmissionReviewArgs = {
 
 export type MutationDeleteProjectArgs = {
   id: Scalars['ObjectID'];
-};
-
-
-export type MutationEditPasswordArgs = {
-  newPassword: Scalars['String'];
-  oldPassword: Scalars['String'];
-};
-
-
-export type MutationEditProfileArgs = {
-  email?: InputMaybe<Scalars['String']>;
-  imageUrl?: InputMaybe<Scalars['URL']>;
-  name?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<StatusEnum>;
 };
 
 
@@ -665,10 +648,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   createProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationCreateProposalArgs, 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
-  deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
-  editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationEditPasswordArgs, 'newPassword' | 'oldPassword'>>;
-  editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;

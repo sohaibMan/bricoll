@@ -19,7 +19,7 @@ import {
     onCancelContract,
     onCreateContract, onDeclineRequestProjectSubmissionReview,
     onRequestProjectSubmissionReview
-} from "../../lib/email/notifyEmail";
+} from "../../email/notifyEmail";
 
 const contractCollection = db.collection("contract")
 const projectsCollection = db.collection("projects")

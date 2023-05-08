@@ -10,7 +10,7 @@ import {
     OnCreateProposal,
     OnEditProposal,
     OnProposalDeclined
-} from "../../lib/email/notifyEmail";
+} from "../../email/notifyEmail";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 
 const proposalsCollection = db.collection("proposals")
