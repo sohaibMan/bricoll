@@ -2,13 +2,13 @@
 # the project could be one of the following
 
 enum proposal_status {
-    canceled # the freelancer canceled the proposal or the project no longer available
-    declined # the client declined the proposal
-    in_progress # the proposal is in progress
-    approved # the proposal is approved by the client
-    completed # the proposal has a contract
+    canceled # the freelancer canceled the proposals or the project no longer available
+    declined # the client declined the proposals
+    in_progress # the proposals is in progress
+    approved # the proposals is approved by the client
+    completed # the proposals has a contract
 }
-# the proposal could be one of the following
+# the proposals could be one of the following
 type Proposal {
     _id: ObjectID #auto generated
     project_id: ObjectID!

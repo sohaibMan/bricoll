@@ -21,12 +21,12 @@ export const ProposalResolvers: Resolvers = {
         Proposal:
             async (parent, args, context, info) => {
                 //? the client have access related to him project
-                //? the freelance have access only to his proposal...
+                //? the freelance have access only to his proposals...
                 // to create scrolling pagination
                 // index scan on id
                 authenticatedMiddleware(context);// throws a graphql error if the user is not authenticated
                 const proposals = await proposalsCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]}) as unknown as Proposal | null;
-                if (!proposals) throw new GraphQLError("The proposal no longer exists",
+                if (!proposals) throw new GraphQLError("The proposals no longer exists",
                     {
                         extensions: {
                             code: 'NOTFOUND',
@@ -54,8 +54,8 @@ export const ProposalResolvers: Resolvers = {
                     },
                 });
             // the project with this id doesn't exist
-            // check if the freelancer already submit a proposal 
-            // the freelancer can submit one and only one proposal for each project if the status is InProgress or Approved or Declined which mean unless the proposal is canceled by the freelancer him self
+            // check if the freelancer already submit a proposals
+            // the freelancer can submit one and only one proposals for each project if the status is InProgress or Approved or Declined which mean unless the proposals is canceled by the freelancer him self
             // index scan on project_id
             const submitProposal = await proposalsCollection.findOne({
                 project_id: new ObjectId(args.project_id),
@@ -63,7 +63,7 @@ export const ProposalResolvers: Resolvers = {
                 status: {$nin: [Proposal_Status.Canceled]}
             })
             // const submitProposal = await projectsCollection.findOne({ freelancer_id: context.user.id, project_id: args.project_id, status: { $nin: [Proposal_Status.Canceled] } })
-            if (submitProposal) throw new GraphQLError("You already submit a proposal for this project",
+            if (submitProposal) throw new GraphQLError("You already submit a proposals for this project",
 
                 {
                     extensions: {
@@ -71,7 +71,7 @@ export const ProposalResolvers: Resolvers = {
                         http: {status: 400},
                     },
                 });
-            // the freelancer already submit a proposal for this project
+            // the freelancer already submit a proposals for this project
             const proposal: Proposal = {
                 _id: new ObjectId(),
                 cover_letter: args.cover_letter,
@@ -94,32 +94,34 @@ export const ProposalResolvers: Resolvers = {
         },
         editProposal: async (parent, args, context, info) => {
 
-            // only the freelancer can edit his proposal
+            // only the freelancer can edit his proposals
             freelancerMiddleware(context);//=> check if the user is authenticated as freelancer (->stop the execution with an error if not authenticated as freelancer)
             // the context is not null here
+            let updatedFields = Object.assign({}, args);
+            delete updatedFields.id;// it will contain all the updated fields without the id
+
+            //     because the args contain the id of the project ,and we don't want to update it
             const updateProposal = await proposalsCollection.findOneAndUpdate(
                 // index on id
                 {_id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user?.id)},
                 {
-                    $set: {
-                        ...args
-                    }
+                    $set: updatedFields
                 }
                 , {
                     returnDocument: "after"
                 }
             )
-            // check if the proposal exits
-            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
-            //return the value (the updated proposal)
+            // check if the proposals exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposals no longer exists");
+            //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
             OnEditProposal(proposal.client_id);
             return proposal;
         },
         declineProposal: async (parent, args, context, info) => {
-            // only the client can decline a proposal
+            // only the client can decline a proposals
             clientMiddleware(context);
-            // the client can decline just the proposal related to his project
+            // the client can decline just the proposals related to his project
             const project = await projectsCollection.findOne({client_id: new ObjectId(context.user?.id)})
             if (!project) throw new GraphQLError("The project no longer exists",
                 {
@@ -141,18 +143,18 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            // check if the proposal exits
-            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
-            //return the value (the updated proposal)
+            // check if the proposals exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposals no longer exists");
+            //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
             OnProposalDeclined(proposal.freelancer_id);
             return proposal;
 
         },
         cancelProposal: async (parent, args, context, info) => {
-            // only the freelancer can withdraw his proposal
+            // only the freelancer can withdraw his proposals
             freelancerMiddleware(context);
-            // the freelancer can withdraw just his proposal
+            // the freelancer can withdraw just his proposals
             // index scan on id
             const updateProposal = await proposalsCollection.findOneAndUpdate(
                 {_id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user?.id)},
@@ -166,23 +168,23 @@ export const ProposalResolvers: Resolvers = {
                 }
             )
             // console.log(updateProposal)
-            // check if the proposal exits
-            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new GraphQLError("The proposal no longer exists",
+            // check if the proposals exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new GraphQLError("The proposals no longer exists",
                 {
                     extensions: {
                         code: 'NOTFOUND',
                     }
                 });
-            //return the value (the updated proposal)
+            //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
             OnCancelProposal(proposal.client_id);
             return proposal;
 
         },
         acceptProposal: async (parent, args, context, info) => {
-            // only the client can accept a proposal
+            // only the client can accept a proposals
             clientMiddleware(context);
-            // the client can accept just the proposal related to his project
+            // the client can accept just the proposals related to his project
             const project = await projectsCollection.findOne({client_id: new ObjectId(context.user?.id)})
             if (!project) throw new GraphQLError("The project no longer exists",
                 {
@@ -203,9 +205,9 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
-            // check if the proposal exits
-            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposal no longer exists");
-            //return the value (the updated proposal)
+            // check if the proposals exits
+            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposals no longer exists");
+            //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
             OnAcceptProposal(proposal.freelancer_id);
             return proposal;

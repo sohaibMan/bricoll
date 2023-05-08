@@ -15,9 +15,11 @@ import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 import {freelancerMiddleware} from "./resolversHelpersFunctions/freelancerMiddleware";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {
-    onAcceptContract, onAcceptRequestProjectSubmissionReview,
+    onAcceptContract,
+    onAcceptRequestProjectSubmissionReview,
     onCancelContract,
-    onCreateContract, onDeclineRequestProjectSubmissionReview,
+    onCreateContract,
+    onDeclineRequestProjectSubmissionReview,
     onRequestProjectSubmissionReview
 } from "../../email/notifyEmail";
 
@@ -31,21 +33,14 @@ export const ContractResolvers: Resolvers = {
         Contract:
             async (parent, args, context, info) => {
                 //? the client have access related to him project
-                //? the freelance have access only to his proposal
+                //? the freelance have access only to his proposals
                 // to create scrolling pagination
-                if (!context.user) throw new GraphQLError("You must be authenticated to access this resource",
-                    {
-                        extensions: {
-                            code: 'UNAUTHENTICATED',
-                            http: {status: 401},
-                        },
-                    }
-                )
+                authenticatedMiddleware(context)
                 //? you must be authenticated to access this resource
                 //? you must know the id of the contract to access it
                 //? you must be the client or  freelancer of the contract to access it
                 // index scan
-                const contract = await contractCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user.id)}, {freelancer_id: new ObjectId(context.user.id)}]}]})
+                const contract = await contractCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]})
                 if (!contract) throw new GraphQLError("The contract no longer exists",
                     {
                         extensions: {
@@ -73,7 +68,7 @@ export const ContractResolvers: Resolvers = {
             });
 
             if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The Contract no longer exists");
-            //return the value (the updated proposal)
+            //return the value (the updated proposals)
             // send email to the client
             onAcceptContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
@@ -94,7 +89,7 @@ export const ContractResolvers: Resolvers = {
                 returnDocument: "after"
             });
             if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
-            //return the value (the updated proposal)
+            //return the value (the updated proposals)
             onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
@@ -104,7 +99,7 @@ export const ContractResolvers: Resolvers = {
             //? you should be a client to access this resource
             clientMiddleware(context);
             // check if a contract already exists
-            // the same freelancer and the same project and the same proposal and the same client are not allowed to have more than one contract and pending they may create another one after changing the status of the first one\
+            // the same freelancer and the same project and the same proposals and the same client are not allowed to have more than one contract and pending they may create another one after changing the status of the first one\
             // index on project id
             const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: ContractStatus.Pending}]}, {projection: {_id: 1}})
             if (AnExistingContract) throw new GraphQLError("You already have a pending contract with this freelancer on this project please complete it first",
@@ -129,7 +124,7 @@ export const ContractResolvers: Resolvers = {
                         http: {status: 404},
                     },
                 });
-            // check if the proposal exits
+            // check if the proposals exits
             const proposal = await proposalsCollection.updateOne({
                     _id: new ObjectId(args.proposal_id),
                     project_id: new ObjectId(args.project_id),
@@ -142,7 +137,7 @@ export const ContractResolvers: Resolvers = {
                 }
             )
 
-            if (!proposal) throw new GraphQLError("The proposal no longer exists",
+            if (!proposal) throw new GraphQLError("The proposals no longer exists",
 
                 {
                     extensions: {
@@ -183,6 +178,26 @@ export const ContractResolvers: Resolvers = {
 
             onCreateContract(contract.freelancer_id)
             return contract;
+
+        },
+        editContract: async (parent, args, context, info) => {
+            clientMiddleware(context);
+
+            let updatedFields = Object.assign({}, args);
+            delete updatedFields.id;
+            //     because the args contain the id of the project ,and we don't want to update it
+
+            const updatedContract = await contractCollection.findOneAndUpdate({
+                _id: new ObjectId(args.id), client_id: new ObjectId(context.user?.id), status: ContractStatus.Pending
+            }, {
+                $set: updatedFields
+            }, {
+                returnDocument: "after"
+            });
+            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
+            //return the value (the updated proposals)
+
+            return updatedContract.value as unknown as Contract;
 
         },
         requestProjectSubmissionReview: async (parent, args, context, info) => {
@@ -244,7 +259,7 @@ export const ContractResolvers: Resolvers = {
             // const transactionResults = await session.withTransaction(async () => {
             // }, transactionOptions);
             try {
-                 contract = await contractCollection.findOneAndUpdate(
+                contract = await contractCollection.findOneAndUpdate(
                     {
                         $and: [
                             {_id: new ObjectId(args.contract_id)},
@@ -359,11 +374,10 @@ export const ContractResolvers: Resolvers = {
                     }
                 },
                 {
-                    "returnDocument":"after"
+                    "returnDocument": "after"
                 }
-
             )
-            if (contract.value ==null) throw new GraphQLError("The contract no longer exists or your request already treated", {
+            if (contract.value == null) throw new GraphQLError("The contract no longer exists or your request already treated", {
                 extensions: {
                     code: 'NOTFOUND',
                     http: {status: 404},
@@ -372,7 +386,7 @@ export const ContractResolvers: Resolvers = {
             onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
 
             return {
-                acknowledgement: contract.ok===1,
+                acknowledgement: contract.ok === 1,
                 _id: args.submission_review_id
             }
 

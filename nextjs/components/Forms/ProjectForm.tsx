@@ -29,20 +29,20 @@ import {DurationInput} from "../Inputs/DurationInput";
 
 type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 // node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
-export default function ProjectForm(props: { defaultProject?: Project, PROJECT_MUTATION: DocumentNode }) {
+export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION: DocumentNode }) {
 
 
     const defaultState = {
-        title: props.defaultProject?.title || "",
-        description: props.defaultProject?.description || "",
-        price: props.defaultProject?.price || "",
-        duration: props.defaultProject?.projectScope.estimated_duration_in_days || "",
-        skills: props.defaultProject?.skills || [],
-        category: props.defaultProject?.category.split("_").join(" ").toLowerCase() as ProjectCategoriesEnum || "",
-        projectSize: props.defaultProject?.projectScope.size_of_project.split("_").join(" ").toLowerCase() || "",
-        levelOfExpertise: props.defaultProject?.projectScope.level_of_expertise.split("_").join(" ").toLowerCase() || ""
+        title: props.project?.title || "",
+        description: props.project?.description || "",
+        price: props.project?.price || "",
+        duration: props.project?.projectScope.estimated_duration_in_days || "",
+        skills: props.project?.skills || [],
+        category: props.project?.category.split("_").join(" ").toLowerCase() as ProjectCategoriesEnum || "",
+        projectSize: props.project?.projectScope.size_of_project.split("_").join(" ").toLowerCase() || "",
+        levelOfExpertise: props.project?.projectScope.level_of_expertise.split("_").join(" ").toLowerCase() || ""
     }
-    console.log(defaultState)
+
     const [mutationProject, {data, loading, error}] = useMutation(props.PROJECT_MUTATION)
     // todo (handle mutation response )
 
@@ -73,7 +73,7 @@ export default function ProjectForm(props: { defaultProject?: Project, PROJECT_M
             size_of_project: projectSizeAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as Size_Of_Project
         }
         const mutationProjectArgs: MutationProjectArgs = {
-            id: props.defaultProject?._id,
+            id: props.project?._id,
             price: +price,
             title,
             description,

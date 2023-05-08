@@ -21,7 +21,7 @@ async function OnAcceptProposal(freelancer_id: ObjectId) {
     const email = user.email;
     const name = user.name;
     // todo (create the link to the project from the frontend)
-    const subject = 'Your proposal has been accepted ';
+    const subject = 'Your proposals has been accepted ';
     const html = `
               <h1>Your proposal has been accepted!</h1>
               <p>Dear ${name},</p>
@@ -34,7 +34,7 @@ async function OnCancelProposal(freelancer_id: ObjectId) {
     const email = user.email;
     const name = user.name;
     // todo (create the link to the project from the frontend)
-    const subject = 'Sorry your proposal has been declined ';
+    const subject = 'Sorry your proposals has been declined ';
     const html = `
               <h1>Your proposal has been declined!</h1>
               <p>Dear ${name},</p>
@@ -48,7 +48,7 @@ async function OnProposalDeclined(client_id: ObjectId) {
     const email = user.email;
     const name = user.name;
     // todo (create the link to the project from the frontend)
-    const subject = 'Sorry your proposal has been withdrawn by the freelancer  ';
+    const subject = 'Sorry your proposals has been withdrawn by the freelancer  ';
     const html = `
       
               <h1>Sorry Your proposal has been withdrawn by the freelancer!</h1>
@@ -64,7 +64,7 @@ async function OnEditProposal(client_id: ObjectId) {
     const email = user.email;
     const name = user.name;
     // todo (create the link to the project from the frontend)
-    const subject = 'Your proposal terms has been changed ';
+    const subject = 'Your proposals terms has been changed ';
     const html = `
               <h1>Your proposal has been changed! check the website for more details</h1>
               <p>Dear ${name},</p>
@@ -78,7 +78,7 @@ async function OnPaymentReceive(freelancer_id: ObjectId, contract_id: string, am
     const email = user.email;
     const name = user.name;
     // todo (create the link to the project from the frontend)
-    const subject = 'Your proposal terms has been changed ';
+    const subject = 'Your proposals terms has been changed ';
     const html = `
               <h1>you have recive a payment check your earning and your bank account</h1>
                 <p>you have recive a payment of ${amount} for the contract ${contract_id}</p>

@@ -38,7 +38,7 @@ const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
         }
     }
 }`
-// todo link to proposal page
+// todo link to proposals page
 export default function Project() {
     const router = useRouter();
     const {project_id} = router.query;

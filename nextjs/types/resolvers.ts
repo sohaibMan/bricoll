@@ -49,7 +49,7 @@ export type Contract = {
   proposal_id: Scalars['ObjectID'];
   status: ContractStatus;
   submission_reviews: Array<Maybe<Submission_Review>>;
-  terms: Array<Maybe<Scalars['String']>>;
+  terms: Scalars['String'];
   updated_at: Scalars['Date'];
 };
 
@@ -81,6 +81,7 @@ export type Mutation = {
   declineProposal?: Maybe<Proposal>;
   declineRequestProjectSubmissionReview?: Maybe<QueryResult>;
   deleteProject?: Maybe<QueryResult>;
+  editContract?: Maybe<Contract>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
   reactToProject?: Maybe<QueryResult>;
@@ -127,7 +128,7 @@ export type MutationCreateContractArgs = {
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
   proposal_id: Scalars['ObjectID'];
-  terms: Array<Scalars['String']>;
+  terms: Scalars['String'];
 };
 
 
@@ -165,6 +166,14 @@ export type MutationDeclineRequestProjectSubmissionReviewArgs = {
 
 export type MutationDeleteProjectArgs = {
   id: Scalars['ObjectID'];
+};
+
+
+export type MutationEditContractArgs = {
+  duration?: InputMaybe<Scalars['Int']>;
+  id: Scalars['ObjectID'];
+  price?: InputMaybe<Scalars['Float']>;
+  terms?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -627,7 +636,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
   submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
-  terms?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  terms?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -649,6 +658,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
+  editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id'>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;

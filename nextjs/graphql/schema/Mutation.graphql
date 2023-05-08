@@ -43,10 +43,6 @@ type Mutation {
     # by the freelancer
     acceptProposal(id: ObjectID!): Proposal
     # by the client
-    # todo
-    # open_chat_room(id: ObjectID!): Proposal
-    # by the freelancer and the client
-    # acceptTerms(id: ObjectID!): Proposal
     #by the freelancer and the client
     # contract
     # the client creates a contract (hire a freelancer)
@@ -55,9 +51,16 @@ type Mutation {
         project_id: ObjectID!
         proposal_id: ObjectID!
         price: Float! @constraint(min: 1, max: 10000)
-        duration: Int!
-        terms: [String!]!  @constraint(maxItems: 15)
+        duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        terms: String! @constraint(minLength: 5, maxLength: 100000)
     ): Contract
+
+    editContract(
+        id: ObjectID!
+        price: Float @constraint(min: 1, max: 10000)
+        duration: Int @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        terms: String  @constraint(minLength: 5, maxLength: 100000)
+    ): Contract ### you can only edit the in progress contracts
     #    the id is of the submission id
     requestProjectSubmissionReview(contract_id: ObjectID!,title:String!,description:String!,attachments:[AttachmentInput!]): queryResult # reviews will be added inside the contract as an array of reviews
     acceptRequestProjectSubmissionReview(contract_id: ObjectID!,submission_review_id: ObjectID!): queryResult

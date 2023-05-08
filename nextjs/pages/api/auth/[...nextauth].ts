@@ -178,7 +178,7 @@ export const authOptions: NextAuthOptions = {
       // token.email
       // token.
 
-      console.log("user v3:  ", user);
+      // console.log("user v3:  ", user);
 
       return token;
     },

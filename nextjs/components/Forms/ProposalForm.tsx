@@ -40,7 +40,7 @@ export default function ProposalForm(props: {
         if (+description.length >= 10000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
         if (+coverLetter.length >= 10000 || +coverLetter.length <= 5) return toast.error("Cover Letter should be between 5 and 1000")
         const mutationCreateProposalArgs: MutationCreateProposalArgs | MutationEditProposalArgs = {
-            id: props.proposal?._id, // needed in the edit proposal only
+            id: props.proposal?._id, // needed in the edit proposals only
             project_id: props.project_id, // needed in the created project and the edit project
             price: +price,
             duration: +duration,
@@ -62,7 +62,7 @@ export default function ProposalForm(props: {
                 setDuration("")
                 setDescription("")
                 setCoverLetter("")
-                //todo redirect to proposal page
+                //todo redirect to proposals page
             })
 
         } catch (e) {

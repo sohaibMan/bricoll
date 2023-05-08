@@ -14,7 +14,7 @@ export const ProjectResolvers: Resolvers = {
         Project: async (parent, args, context, info) => {
             // ? private
             // the client can get all details about his project
-            // the freelancer can get all details about the project if he submits a proposal to it
+            // the freelancer can get all details about the project if he submits a proposals to it
 
             const project = await projectsCollection.findOne({
                 _id: new ObjectId(args.id),
@@ -100,7 +100,7 @@ export const ProjectResolvers: Resolvers = {
        declined
        in_progress
        approved
-       completed # the proposal has a contract
+       completed # the proposals has a contract
        */
             const aggregation = [
                 {
@@ -141,7 +141,6 @@ export const ProjectResolvers: Resolvers = {
 
 
             const project: Project = {
-                // ...args,
                 title: args.title,
                 description: args.description,
                 price: args.price,
@@ -163,14 +162,16 @@ export const ProjectResolvers: Resolvers = {
             // private
             // the owner of the project can edit it
             clientMiddleware(context);
+            let updatedFields = Object.assign({}, args);
+            delete updatedFields.id;
+            //     because the args contain the id of the project ,and we don't want to update it
             const updateProject = await projectsCollection.findOneAndUpdate(
                 // because I've used the middleware function that will throw an error if the context.user is null which not inferred by typescript
-                // @ts-ignore
-                {_id: new ObjectId(args.id), client_id: new ObjectId(context.user.id)},
+
+                {_id: new ObjectId(args.id), client_id: new ObjectId(context.user?.id)},
                 {
-                    $set: {
-                        ...args
-                    }
+                    $set: updatedFields,
+
                 }
                 , {
                     returnDocument: "after"
@@ -190,7 +191,7 @@ export const ProjectResolvers: Resolvers = {
             // before deleting the project we should delete all the proposals related to it
             // private
             clientMiddleware(context);
-            // if there is at least approved proposal you can't delete a project
+            // if there is at least approved proposals you can't delete a project
             // index scan on project_id
             const proposals = await proposalsCollection.findOne({
                 project_id: new ObjectId(args.id),
