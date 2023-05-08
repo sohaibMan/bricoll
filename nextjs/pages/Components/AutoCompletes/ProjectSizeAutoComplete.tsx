@@ -13,9 +13,10 @@ const projectSizes = [
 export default function ProjectSizeAutoComplete(props: {
     parentRef: React.RefObject<HTMLInputElement>
     placeholder: string
+    defaultValue?: string
 }) {
     return (
-        <CustomAutocomplete parentRef={props.parentRef} labels={projectSizes} placeholder={props.placeholder}/>
+        <CustomAutocomplete defaultValue={props.defaultValue} parentRef={props.parentRef} labels={projectSizes} placeholder={props.placeholder}/>
     );
 }
 

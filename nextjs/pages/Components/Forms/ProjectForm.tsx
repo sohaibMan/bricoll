@@ -1,4 +1,4 @@
-import {gql, useMutation} from "@apollo/client";
+import {DocumentNode, useMutation} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
@@ -14,6 +14,8 @@ import LevelOfExpertiseAutoComplete from "../AutoCompletes/LevelOfExpertiseAutoC
 import {
     Level_Of_Expertise,
     MutationCreateProjectArgs,
+    MutationEditProjectArgs,
+    Project,
     ProjectCategoriesEnum,
     ProjectScopeInput,
     Size_Of_Project
@@ -23,64 +25,33 @@ import {
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
-const CREATE_PROJECT_MUTATION = gql`
-    mutation CreateProject($title: String!, $description: String!, $price: Float!, $skills: [String!]!, $projectScope: ProjectScopeInput!, $category: ProjectCategoriesEnum!) {
-        createProject(title: $title, description: $description, price: $price, skills: $skills, projectScope: $projectScope, category: $category) {
-            client_id
-            _id
-            title
-            description
-            price
-            skills
-            reactions {
-                freelancer_id
-                reaction_type
-            }
-            created_at
-            projectScope {
-                estimated_duration_in_days
-                level_of_expertise
-                size_of_project
-            }
-            attachments {
-                url
-                type
-                name
-            }
-            category
-            stats {
-                declined_count
-                completed_count
-                approved_count
-                in_progress_count
-            }
-            proposals {
-                _id
-                project_id
-                freelancer_id
-                client_id
-                price
-                duration
-                description
-                cover_letter
-                created_at
-                updated_at
-                status
-            }
-        }
+
+type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
+// node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
+export default function ProjectForm(props: { defaultProject?: Project, PROJECT_MUTATION: DocumentNode }) {
+
+
+    const defaultState = {
+        title: props.defaultProject?.title || "",
+        description: props.defaultProject?.description || "",
+        price: props.defaultProject?.price || "",
+        duration: props.defaultProject?.projectScope.estimated_duration_in_days || "",
+        skills: props.defaultProject?.skills || [],
+        category: props.defaultProject?.category.split("_").join(" ").toLowerCase() as ProjectCategoriesEnum || "",
+        projectSize: props.defaultProject?.projectScope.size_of_project.split("_").join(" ").toLowerCase() || "",
+        levelOfExpertise: props.defaultProject?.projectScope.level_of_expertise.split("_").join(" ").toLowerCase() || ""
     }
-`;
-
-
-export default function CreatProjectForm() {
-    const [creatProject, {data, loading, error}] = useMutation(CREATE_PROJECT_MUTATION)
+    console.log(defaultState)
+    const [mutationProject, {data, loading, error}] = useMutation(props.PROJECT_MUTATION)
     // todo (handle mutation response )
 
-    const [price, setPrice] = useState<string>("");
-    const [duration, setDuration] = useState<string>("");
-    const [description, setDescription] = useState<string>("");
-    const [skills, setSkills] = React.useState<string[]>([]);
-    const [title, setTitle] = useState<string>("");
+    // mutationProject (create or edit) project
+
+    const [price, setPrice] = useState<string>(defaultState.price.toString());
+    const [duration, setDuration] = useState<string>(defaultState.duration.toString());
+    const [description, setDescription] = useState<string>(defaultState.description);
+    const [skills, setSkills] = React.useState<string[]>(defaultState.skills);
+    const [title, setTitle] = useState<string>(defaultState.title);
     const categoriesAutocompleteRef = useRef<HTMLInputElement>(null);
     const levelOfExpertiseAutoComplete = useRef<HTMLInputElement>(null);
     const projectSizeAutocompleteRef = useRef<HTMLInputElement>(null);
@@ -100,7 +71,8 @@ export default function CreatProjectForm() {
             level_of_expertise: levelOfExpertiseAutoComplete.current.value.split(" ").join("_").toUpperCase() as Level_Of_Expertise,
             size_of_project: projectSizeAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as Size_Of_Project
         }
-        const mutationCreateProjectArgs: MutationCreateProjectArgs = {
+        const mutationProjectArgs: MutationProjectArgs = {
+            id: props.defaultProject?._id,
             price: +price,
             title,
             description,
@@ -110,8 +82,8 @@ export default function CreatProjectForm() {
         }
         try {
             toast.promise(
-                creatProject({
-                    variables: mutationCreateProjectArgs
+                mutationProject({
+                    variables: mutationProjectArgs
                 }),
                 {
                     loading: 'Saving...',
@@ -169,15 +141,19 @@ export default function CreatProjectForm() {
                         type="number"
                         required
                     />
-                    <CategoriesAutocomplete placeholder="categories" parentRef={categoriesAutocompleteRef}/>
-                    <LevelOfExpertiseAutoComplete placeholder="Level of expertise"
+                    <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
+                                            parentRef={categoriesAutocompleteRef}/>
+                    <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
+                                                  placeholder="Level of expertise"
                                                   parentRef={levelOfExpertiseAutoComplete}/>
-                    <ProjectSizeAutoComplete placeholder="Project size" parentRef={projectSizeAutocompleteRef}/>
+                    <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
+                                             parentRef={projectSizeAutocompleteRef}/>
 
 
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
-                    <Textarea placeholder="description" value={description} required
+                    <Textarea defaultValue={defaultState.description} placeholder="Description" value={description}
+                              required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 
 

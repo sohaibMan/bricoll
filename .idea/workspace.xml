@@ -5,58 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add CreateProjectForm page and code refactoring">
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/Autocomplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/LevelOfExpertiseAutoComplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/ProjectSizeAutoComplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/Components/Forms/CreateProjectForm.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/projects/create.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/lib/email/notifyEmail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/email/notifyEmail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/admin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/admin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api-example.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api-example.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/signup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/signup.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Proposals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Attachement.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Attachement.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Query.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/schema/Query.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/client.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Buttons/Button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Buttons/Button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Buttons/ReactionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Buttons/ReactionButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Buttons/SearchButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Buttons/SearchButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Buttons/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Buttons/Upload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Chart/BarChart.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Charts/BarChart.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/ContainerImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/ContainerImage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/CustomLink/CustomLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/CustomLinks/CustomLink.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/EditableDeletableChip.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/EditableDeletableChip.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Forms/SubmitProposalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Forms/SubmitProposalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/ListItems/Attachments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/ListItems/Attachments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Cards/ProjectCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectCardSkeleton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Skeletons/ProjectCardSkeleton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Cards/ProjectItemCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/Project/ProjectItemCardSkeleton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Skeletons/ProjectItemCardSkeleton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/CategoriesAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/CategoriesAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/Index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Forms/SearchForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/MoneyInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Inputs/MoneyInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SearchInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Inputs/SearchInput.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/SearchForm/SkillsAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/SkillsAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/access-denied.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/access-denied.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/Autocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/Autocomplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/CategoriesAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/CategoriesAutocomplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/LevelOfExpertiseAutoComplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/LevelOfExpertiseAutoComplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/ProjectSizeAutoComplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/AutoCompletes/ProjectSizeAutoComplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/Components/Forms/CreateProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/Forms/ProjectForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/components/header.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/header.module.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/components/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/Components/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/home.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/linkaccount.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/linkaccount.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/me.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/me.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/policy.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/policy.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposal/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposal/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/protected.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/protected.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/server.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/server.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/upload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/product.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/product.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/create.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +53,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Main",
-    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/pages/components/SearchForm",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/pages/projects",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -117,18 +75,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/SearchForm" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/pages" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/Project/Card" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/components/Project" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects/[project_id]" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/AutoComplete" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/Input" />
       <recent name="$PROJECT_DIR$/nextjs/pages/components/Skeleton" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/projects" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -154,7 +112,13 @@
       <workItem from="1683469352019" duration="654000" />
       <workItem from="1683470045946" duration="279000" />
       <workItem from="1683471309571" duration="1027000" />
-      <workItem from="1683474078583" duration="8358000" />
+      <workItem from="1683474078583" duration="8524000" />
+      <workItem from="1683489625200" duration="30000" />
+      <workItem from="1683492934544" duration="23000" />
+      <workItem from="1683533691860" duration="1066000" />
+      <workItem from="1683534983344" duration="932000" />
+      <workItem from="1683550925029" duration="18000" />
+      <workItem from="1683551336160" duration="4887000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -198,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683476153434</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="add CreateProjectForm page and code refactoring">
+      <created>1683484173974</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683484173974</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +190,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/nextjs/pages/Components/Cards/ProjectItemCard.tsx</url>
           <line>27</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
