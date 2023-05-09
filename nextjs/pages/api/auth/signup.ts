@@ -33,7 +33,7 @@ export default async function handler(
         // console.log(userRole);
 
 
-        const userData: User = await req.body;
+        const userData = await req.body;
         const {email, name, password} = userData;
         // const isCompleted = false;
 
@@ -79,6 +79,7 @@ export default async function handler(
             name,
             hashedPassword,
             userRole,
+            reviews: [],
             isCompleted: false,
             created_at: new Date(),
             isEmailVerified: false,
