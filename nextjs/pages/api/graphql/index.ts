@@ -13,6 +13,7 @@ import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
 import {GraphQLError} from "graphql";
+import { ProfileResolvers } from "../../../graphql/resolvers/Profile";
 
 // path to those folders
 const rootPath = path.join(__dirname, "../../../../");
@@ -35,7 +36,7 @@ const plugins = [
 // create apollo server instance
 const server = new ApolloServer<ServerContext>({
     typeDefs: [constraintDirectiveTypeDefs, schema],
-    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers],
+    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers,ProfileResolvers],
     plugins,
     validationRules: [depthLimit(4)]
 });

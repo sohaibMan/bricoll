@@ -8,5 +8,6 @@ type Query{
     # Contract
     Contract(id: ObjectID!): Contract
     # Profile management
-    getProfile(_id: ObjectID!): User
+    Profile: User
+
 }

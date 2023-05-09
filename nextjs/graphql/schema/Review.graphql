@@ -1,0 +1,9 @@
+
+
+type Review {
+  _id: ObjectID!
+  reviewer_id: ObjectID!
+  rating: Float! @constraint(min: 1, max: 5) 
+  description: String!
+  createdAt: Date!
+}
