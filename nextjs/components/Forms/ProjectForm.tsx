@@ -21,7 +21,7 @@ import {
 } from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
-import {router} from "next/client";
+
 
 
 //TODO ADD ATTACHMENTS TO PROJECT
@@ -29,8 +29,11 @@ import {router} from "next/client";
 //TODO the freelancer and Unauthorized user can't create a project
 
 type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
+import {useRouter} from "next/router";
 // node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION: DocumentNode }) {
+
+    const router = useRouter();
 
 
     const defaultState = {

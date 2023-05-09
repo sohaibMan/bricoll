@@ -14,24 +14,13 @@ import Tabs from "@mui/joy/Tabs";
 import TabList from "@mui/joy/TabList";
 import Tab, {tabClasses} from "@mui/joy/Tab";
 import DropZone from "./DropZone";
-import {gql, useQuery} from "@apollo/client";
 import {User} from "../../types/resolvers";
 import {useRouter} from "next/router";
 
-export default function MyProfile() {
-    const oldUserData = gql`
-        query Profile {
-            Profile {
-                _id
-                name
-                email
-                # role
-                image
-            }
-        }
-    `;
+export default function MyProfile(props: {
+    user: User
+}) {
 
-    const {loading, error, data} = useQuery<{ Profile: User }>(oldUserData);
     const [nameState, setNameState] = React.useState("");
     const [emailState, setEmailState] = React.useState("");
     const [imageState, setImageState] = React.useState("");
@@ -40,15 +29,16 @@ export default function MyProfile() {
 
     // console.log();
 
-    if (loading) return <h1>Loading... </h1>
-    if (error || !data) return <h1>`Error! {error !== undefined ? error?.message : "An Erorr has occured"}</h1>;
 
     // const updateUser = fetch("/api/auth")
 
     //
     async function updateHandling(e: ChangeEvent<HTMLFormElement>) {
+
+
         e.preventDefault();
 
+        //todo {name: nameState, email: emailState, image: imageState} validate user input and  return a toast if the input is not value
         const response = await fetch(`/api/user/editProfile`, {
             method: "POST",
             headers: {
@@ -206,7 +196,7 @@ export default function MyProfile() {
                                     }}
                                     placeholder="first name"
                                     // value={data.Profile.name}
-                                    defaultValue={data.Profile.name}
+                                    defaultValue={props.user.name}
                                 />
                             </FormControl>
                             {/* <FormControl sx={{ flex: 1 }}>
@@ -227,7 +217,7 @@ export default function MyProfile() {
                                 startDecorator={<i data-feather="mail"/>}
                                 placeholder="email"
                                 // value={data.email}
-                                defaultValue={data.Profile.email}
+                                defaultValue={props.user.email}
                             />
                         </FormControl>
 

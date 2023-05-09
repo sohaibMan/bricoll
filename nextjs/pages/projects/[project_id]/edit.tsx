@@ -2,8 +2,9 @@ import ProjectForm from "../../../components/Forms/ProjectForm";
 import {gql, useQuery} from "@apollo/client";
 import {Project} from "../../../types/resolvers";
 import {Stack} from "@mui/joy";
-import {useRouter} from "next/router";
 import * as React from "react";
+import ProjectItemCardSkeleton from "../../../components/Skeletons/ProjectCardSkeleton";
+import {useRouter} from "next/router";
 
 
 const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
@@ -67,13 +68,10 @@ const EDIT_PROJECT_MUTATION = gql`
 `
 
 
-function ProjectCardSkeleton() {
-    return null;
-}
-
-const EditProject = () => {
+export default function Index ()  {
 
 
+    // @ts-ignore
     const router = useRouter();
     const {project_id} = router.query;
     if (!project_id) return (<></>)
@@ -87,7 +85,7 @@ const EditProject = () => {
 
     if (loading) return <Stack spacing={4}>
         <Stack spacing={2}>
-            <ProjectCardSkeleton/>
+            <ProjectItemCardSkeleton/>
         </Stack>
     </Stack>
 
@@ -100,4 +98,4 @@ const EditProject = () => {
 
 };
 
-export default EditProject;
+

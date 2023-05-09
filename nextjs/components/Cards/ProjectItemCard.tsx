@@ -20,7 +20,7 @@ export default function ProjectItemCard({project,children}: {
             <Card
                 variant="outlined"
                 sx={(theme) => ({
-                    width: "70vw",
+                    width: "100%",
                     gridColumn: 'span 2',
                     flexDirection: 'row',
                     flexWrap: 'wrap',
