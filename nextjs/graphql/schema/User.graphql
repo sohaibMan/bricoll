@@ -11,10 +11,10 @@ enum userRole {
 }
 
 type User {
-  id: ObjectID!
+  _id: ObjectID!
   name: String!
   email: String!
-  role: userRole!
+  role: String!
 #   phone: String
   address: String
   image: String
