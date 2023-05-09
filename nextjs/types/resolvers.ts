@@ -367,17 +367,17 @@ export type Submission_Review = {
 
 export type User = {
   __typename?: 'User';
+  _id: Scalars['ObjectID'];
   address?: Maybe<Scalars['String']>;
   contracts?: Maybe<Array<Contract>>;
   earnings?: Maybe<Earnings>;
   email: Scalars['String'];
-  id: Scalars['ObjectID'];
   image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   projects?: Maybe<Array<Project>>;
   proposals?: Maybe<Array<Proposal>>;
   review?: Maybe<Array<Maybe<Review>>>;
-  role: UserRole;
+  role: Scalars['String'];
   skills?: Maybe<Array<Scalars['String']>>;
   status?: Maybe<StatusEnum>;
 };
@@ -772,17 +772,17 @@ export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contracts?: Resolver<Maybe<Array<ResolversTypes['Contract']>>, ParentType, ContextType>;
   earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
   proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
   review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
-  role?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

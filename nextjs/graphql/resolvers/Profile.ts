@@ -20,11 +20,11 @@ export const ProfileResolvers: Resolvers = {
     Query: {
     Profile: async (parent, args, context, info) => {
       authenticatedMiddleware(context);
-      console.log(context);
 
-      return (await users.findOne({
+
+      return await users.findOne({
         _id: new ObjectId(context.user?.id),
-      })) as unknown as User;
+      }) as unknown as User;
     },
   },
   User: {
