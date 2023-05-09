@@ -199,13 +199,11 @@ export const ProjectResolvers: Resolvers = {
                 status: "approved"
             })
             if (proposals) throw new GraphQLError("Can't delete this project because you have some approved proposals , please make them cancel first")
-            // todo : mark all the proposals as canceled
+
             await proposalsCollection.updateMany({
                     project_id: new ObjectId(args.id),
                     client_id: new ObjectId(context.user?.id),
-                    status: {
-                        $or: [Proposal_Status.InProgress, Proposal_Status.Approved]
-                    }
+                    status: {$in: [Proposal_Status.InProgress, Proposal_Status.Approved]}
                 }, {
                     $set: {
                         status: Proposal_Status.Canceled
@@ -213,19 +211,18 @@ export const ProjectResolvers: Resolvers = {
                 }
             )
             //archive the project instead of deleting it
-            await projectsCollection.aggregate(
+            const aggregrationResult = await projectsCollection.aggregate(
                 [
                     {
-                        '$match': {
+                        $match: {
                             _id: new ObjectId(args.id),
-                            // @ts-expect-error
-                            client_id: new ObjectId(context.user.id)
+                            client_id: new ObjectId(context.user?.id)
                         }
                     },
 
                     {
                         $merge: {
-                            db: "bricoll_archive",
+                            // db: "bricoll_archive",
                             into: "archived_projects",
                             on: "_id",
                             whenMatched: "replace",
@@ -233,7 +230,14 @@ export const ProjectResolvers: Resolvers = {
                         }
                     }
                 ]
-            )
+            ).toArray()
+            console.log(aggregrationResult)
+
+            const deletedProject = await projectsCollection.deleteOne({_id: new ObjectId(args.id)})
+
+            if(deletedProject.deletedCount !== 1)throw  new GraphQLError("An Error has occurred")
+
+            // todo handle error
             return {
                 acknowledgement: true,
                 _id: args.id

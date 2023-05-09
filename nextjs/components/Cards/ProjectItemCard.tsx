@@ -3,17 +3,17 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Chip, Stack} from '@mui/joy';
-import {Project, Reaction_Type} from "../../types/resolvers";
-import {ReactionButton} from "../Buttons/ReactionButton";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import FavoriteBorderRoundedIcon from "@mui/icons-material/FavoriteBorderRounded";
-import ThumbDownIcon from "@mui/icons-material/ThumbDown";
-import ThumbDownOffAltRoundedIcon from "@mui/icons-material/ThumbDownOffAltRounded";
+import {Project} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
+import {ProjectCardControlButtons} from "../Buttons/ProjectCardControlButtons";
 
-export default function ProjectItemCard({project}: { project: Project }) {
 
+export default function ProjectItemCard({project,children}: {
+    project: Project,
+    children: React.JSX.Element
+}) {
+    // todo :try to refactore the card
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -83,21 +83,10 @@ export default function ProjectItemCard({project}: { project: Project }) {
                         maxWidth: 200,
                     }}
                 >
-                    <Box sx={{display: 'flex', gap: 1}}>
-
-                        <ReactionButton project_id={project._id} reactions={project.reactions}
-                                        reaction_type={Reaction_Type.Love}
-                                        active_icon={<FavoriteIcon color="primary"/>}
-                                        inactive_icon={<FavoriteBorderRoundedIcon color="primary"/>}
-                        />
-
-                        <ReactionButton project_id={project._id} reactions={project.reactions}
-                                        reaction_type={Reaction_Type.Dislike}
-                                        active_icon={<ThumbDownIcon color="primary"/>}
-                                        inactive_icon={<ThumbDownOffAltRoundedIcon color="primary"/>}
-                        />
-
-                    </Box>
+                    {children &&
+                        <Box sx={{display: 'flex', gap: 1}}>
+                            {children}
+                        </Box>}
                 </Box>
 
 

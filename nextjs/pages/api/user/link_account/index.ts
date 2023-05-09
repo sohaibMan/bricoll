@@ -8,12 +8,12 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const usersCollection = db.collection("users")
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 //     rules : the freelancer can link his account once
-//     the freelancer can link his account only if he has an earning and his account not already linked
+//     the freelancer can link his account only if he has an earnings and his account not already linked
     if (req.method !== "POST") return res.status(405).json({message: "method not allowed"})
     const token = await getToken({req})
     if (!token || !token.sub || token.userRole != UserRole.Freelancer) return res.status(401).json("you are not authenticated ")
     const freelancer_id = token.sub;
-    // check if the freelancer has an earning
+    // check if the freelancer has an earnings
     // check if the freelancer already linked his account
     const freelancer = await usersCollection.findOne({
             $and: [{_id: new ObjectId(freelancer_id)}, {"stripe_account_id": {$exists: true}}]

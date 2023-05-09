@@ -21,6 +21,7 @@ import {
 } from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
+import {router} from "next/client";
 
 
 //TODO ADD ATTACHMENTS TO PROJECT
@@ -92,12 +93,7 @@ export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION
                     error: <b>{error?.message}</b>,
                 }
             ).then(() => {
-                // setPrice("")
-                // setDescription("")
-                // setTitle("")
-                // setDuration("")
-                // setSkills([])
-                //todo redirect to project page to see your project in details later
+                router.back()
             })
 
         } catch (e) {

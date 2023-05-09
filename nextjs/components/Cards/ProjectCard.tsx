@@ -24,7 +24,7 @@ export default function ProjectCard({project}: { project: Project }) {
                 overflow: 'hidden',
                 gap: 'clamp(0px, (100% - 360px + 32px) * 999, 16px)',
                 transition: 'transform 0.3s, border 0.3s',
-                minHeight: "90vh",
+                minHeight: "80vh",
                 '&:hover': {
                     borderColor: theme.vars.palette.primary.outlinedHoverBorder,
                     transform: 'translateY(-2px)',
@@ -60,29 +60,39 @@ export default function ProjectCard({project}: { project: Project }) {
                     <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
 
+            </Box>
 
-                {project.attachments.length > 0 &&
-                    <Box>
-                        <Divider sx={{margin: "10px"}}/>
-                        <Typography>Project Attachments</Typography> <Attachments
-                        attachments={project.attachments}/>
+            <Box sx={{width: "100%"}}>
+                <Divider sx={{margin: "10px"}}/>
 
-                    </Box>
+                <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
+                    Project Attachments
+                </Typography>
 
+                {project.attachments.length > 0 ?
+                    <Attachments attachments={project.attachments}/> : <Typography>No Attachments</Typography>
                 }
             </Box>
 
+            <Box sx={{width: "100%"}}>
 
-            <Stack alignItems="center" sx={{width: "100%", height: "20rem"}}>
 
-                {project.stats && !(project.stats.approved_count === 0 && project.stats.completed_count === 0 && project.stats.declined_count === 0 && project.stats.in_progress_count === 0) &&
-                    <Box>
-                        <Divider sx={{margin: "10px"}}/>
-                        <BarChart stats={project.stats}/>
-                    </Box>
 
-                }
-            </Stack>
+                <Stack>
+                    <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
+                        Project Statistics
+                    </Typography>
+                    {(project.stats && !(project.stats.approved_count === 0 && project.stats.completed_count === 0 && project.stats.declined_count === 0 && project.stats.in_progress_count === 0)) ?
+                        <Box sx={{width: "100%", height: "20rem"}}>
+                            <Divider sx={{margin: "10px"}}/>
+                            <BarChart stats={project.stats}/>
+                        </Box>
+                        : <Typography>No statistics</Typography>
+
+                    }
+                </Stack>
+
+            </Box>
 
 
         </Card>

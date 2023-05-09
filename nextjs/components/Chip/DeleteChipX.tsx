@@ -4,7 +4,7 @@ import Chip from '@mui/joy/Chip';
 import ChipDelete from '@mui/joy/ChipDelete';
 import CloseIcon from '@mui/icons-material/Close';
 
-export default function EditableDeletableChip(props: {
+export default function DeleteChipX(props: {
     label: string,
     onDelete: (label: string) => void
 }) {

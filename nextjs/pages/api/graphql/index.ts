@@ -47,7 +47,7 @@ export default startServerAndCreateNextHandler(server,
             //
             const token = await getToken({req});
 
-            console.log("token is", token)
+
 
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}

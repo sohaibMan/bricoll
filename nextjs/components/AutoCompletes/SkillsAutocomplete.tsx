@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {useRef} from 'react';
 import Input from "@mui/joy/Input";
-import EditableDeletableChip from "../EditableDeletableChip";
+import DeleteChipX from "../Chip/DeleteChipX";
 import Button from '@mui/joy/Button';
 import Add from '@mui/icons-material/Add';
 import Stack from '@mui/joy/Stack';
@@ -25,7 +25,7 @@ export default function SkillsAutocomplete(props: {
 
     return <>
         <Stack direction="row" spacing={2}>
-            {props.skills.map((el, i) => <EditableDeletableChip onDelete={deleteHandler} key={i} label={el}/>)}
+            {props.skills.map((el, i) => <DeleteChipX onDelete={deleteHandler} key={i} label={el}/>)}
         </Stack>
         <Stack direction="row" spacing={2} justifyContent="space-between" sx={{width: "100%"}}>
             <Input disabled={props.skills.length >= 5} size="md" sx={{width: "75%"}}

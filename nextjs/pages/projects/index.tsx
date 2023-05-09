@@ -4,6 +4,7 @@ import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
 import {SearchForm} from "../../components/Forms/SearchForm";
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
+import {ProjectCardControlButtons} from "../../components/Buttons/ProjectCardControlButtons";
 
 const GET_PROJECTS = gql`
     query Project($query: String, $filter: filterOptionsInput) {
@@ -47,9 +48,12 @@ export default function DisplayLocations() {
     if (!data) return <p>No projects</p>
 
 
+    // @ts-ignore
     return <Stack spacing={4}>
         <SearchForm onRefetch={refetch}/>
-        <Stack spacing={2}>{data.Projects.map((project) => <ProjectItemCard key={project._id.toString()}
-                                                                            project={project}/>)}</Stack>
+        <Stack spacing={2}>{data.Projects.map((project) => <ProjectItemCard key={project._id.toString()} project={project}>
+            <ProjectCardControlButtons projectId={project._id} reactions={project.reactions}/>
+            </ProjectItemCard>
+        )}</Stack>
     </Stack>
 }

@@ -93,10 +93,10 @@ const EditProject = () => {
 
 
     if (error) return <p>Error : {error.message}</p>;
-    if (!data) return <p>No projects</p>
+    if (!data || !data.Project) return <p>No projects</p>
 
-
-    return <ProjectForm PROJECT_MUTATION={EDIT_PROJECT_MUTATION} defaultProject={data.Project}/>;
+// return  <h1>{JSON.stringify(data)}</h1>
+    return <ProjectForm PROJECT_MUTATION={EDIT_PROJECT_MUTATION} project={data.Project}/>;
 
 };
 

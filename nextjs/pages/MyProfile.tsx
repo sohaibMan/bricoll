@@ -5,9 +5,9 @@ import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import useScript from './useScript';
 import customTheme from './theme';
-import Sidebar from '../components/dashboard/Sidebar';
-import Header from '../components/dashboard/Header';
-import MyProfile from '../components/dashboard/MyProfile';
+import Sidebar from '../components/Dashboard/Sidebar';
+import Header from '../components/Dashboard/Header';
+import MyProfile from '../components/Dashboard/MyProfile';
 
 const useEnhancedEffect =
   typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;

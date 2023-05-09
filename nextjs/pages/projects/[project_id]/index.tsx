@@ -60,7 +60,7 @@ export default function Project() {
             {(data.Project.proposals && data.Project.proposals.length > 0) ?
                 <Typography level="h6">You already submitted a proposal</Typography>
                 :
-                <CustomLink href={`${data.Project._id}/proposal/create`}>
+                <CustomLink href={`${data.Project._id}/proposals/create`}>
                     Submit a proposal
                 </CustomLink>
 
