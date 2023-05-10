@@ -170,8 +170,8 @@ export const authOptions: NextAuthOptions = {
       //   token.accessToken = account.access_token;
       // }
 
-      if ((account && account.access_token) || (user && user.accessToken) ) {
-        token.accessToken = account?.access_token || user.accessToken;
+      if (account && account.access_token) {
+        token.accessToken = account.access_token;
       }
 
       // console.log("🚀 ~ file: [...nextauth].ts:135 ~ jwt ~ token:", token)
