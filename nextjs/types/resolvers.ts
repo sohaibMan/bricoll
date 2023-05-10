@@ -20,13 +20,14 @@ export type Scalars = {
 
 export type Attachment = {
   __typename?: 'Attachment';
+  name?: Maybe<Scalars['String']>;
   type?: Maybe<AttachmentType>;
   url?: Maybe<Scalars['URL']>;
 };
 
 export type AttachmentInput = {
+  name?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<AttachmentType>;
-  url?: InputMaybe<Scalars['URL']>;
 };
 
 export enum AttachmentType {
@@ -48,7 +49,7 @@ export type Contract = {
   proposal_id: Scalars['ObjectID'];
   status: ContractStatus;
   submission_reviews: Array<Maybe<Submission_Review>>;
-  terms: Array<Maybe<Scalars['String']>>;
+  terms: Scalars['String'];
   updated_at: Scalars['Date'];
 };
 
@@ -71,6 +72,7 @@ export type Mutation = {
   acceptContract?: Maybe<Contract>;
   acceptProposal?: Maybe<Proposal>;
   acceptRequestProjectSubmissionReview?: Maybe<QueryResult>;
+  addReview?: Maybe<QueryResult>;
   cancelContract?: Maybe<Contract>;
   cancelProposal?: Maybe<Proposal>;
   cancelRequestProjectSubmissionReview?: Maybe<QueryResult>;
@@ -79,13 +81,13 @@ export type Mutation = {
   createProposal: Proposal;
   declineProposal?: Maybe<Proposal>;
   declineRequestProjectSubmissionReview?: Maybe<QueryResult>;
-  deleteAccount?: Maybe<Scalars['Boolean']>;
   deleteProject?: Maybe<QueryResult>;
-  editPassword?: Maybe<Scalars['Boolean']>;
-  editProfile?: Maybe<Scalars['Boolean']>;
+  editContract?: Maybe<Contract>;
   editProject?: Maybe<Project>;
   editProposal?: Maybe<Proposal>;
+  editReview?: Maybe<QueryResult>;
   reactToProject?: Maybe<QueryResult>;
+  removeReview?: Maybe<QueryResult>;
   requestProjectSubmissionReview?: Maybe<QueryResult>;
   undoReactToProject?: Maybe<QueryResult>;
 };
@@ -104,6 +106,13 @@ export type MutationAcceptProposalArgs = {
 export type MutationAcceptRequestProjectSubmissionReviewArgs = {
   contract_id: Scalars['ObjectID'];
   submission_review_id: Scalars['ObjectID'];
+};
+
+
+export type MutationAddReviewArgs = {
+  description: Scalars['String'];
+  rating: Scalars['Float'];
+  user_id: Scalars['ObjectID'];
 };
 
 
@@ -129,7 +138,7 @@ export type MutationCreateContractArgs = {
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
   proposal_id: Scalars['ObjectID'];
-  terms: Array<Scalars['String']>;
+  terms: Scalars['String'];
 };
 
 
@@ -170,17 +179,11 @@ export type MutationDeleteProjectArgs = {
 };
 
 
-export type MutationEditPasswordArgs = {
-  newPassword: Scalars['String'];
-  oldPassword: Scalars['String'];
-};
-
-
-export type MutationEditProfileArgs = {
-  email?: InputMaybe<Scalars['String']>;
-  imageUrl?: InputMaybe<Scalars['URL']>;
-  name?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<StatusEnum>;
+export type MutationEditContractArgs = {
+  duration?: InputMaybe<Scalars['Int']>;
+  id: Scalars['ObjectID'];
+  price?: InputMaybe<Scalars['Float']>;
+  terms?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -196,16 +199,29 @@ export type MutationEditProjectArgs = {
 
 
 export type MutationEditProposalArgs = {
-  description: Scalars['String'];
-  duration: Scalars['Int'];
+  cover_letter?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  duration?: InputMaybe<Scalars['Int']>;
   id: Scalars['ObjectID'];
-  price: Scalars['Float'];
+  price?: InputMaybe<Scalars['Float']>;
+};
+
+
+export type MutationEditReviewArgs = {
+  description: Scalars['String'];
+  id: Scalars['ObjectID'];
+  rating: Scalars['Float'];
 };
 
 
 export type MutationReactToProjectArgs = {
   id: Scalars['ObjectID'];
   reaction_type: Reaction_Type;
+};
+
+
+export type MutationRemoveReviewArgs = {
+  id: Scalars['ObjectID'];
 };
 
 
@@ -289,10 +305,10 @@ export type Proposal = {
 export type Query = {
   __typename?: 'Query';
   Contract?: Maybe<Contract>;
+  Profile?: Maybe<User>;
   Project?: Maybe<Project>;
   Projects?: Maybe<Array<Maybe<Project>>>;
   Proposal?: Maybe<Proposal>;
-  getProfile?: Maybe<User>;
 };
 
 
@@ -316,9 +332,13 @@ export type QueryProposalArgs = {
   id: Scalars['ObjectID'];
 };
 
-
-export type QueryGetProfileArgs = {
+export type Review = {
+  __typename?: 'Review';
   _id: Scalars['ObjectID'];
+  createdAt: Scalars['Date'];
+  description: Scalars['String'];
+  rating: Scalars['Float'];
+  reviewer_id: Scalars['ObjectID'];
 };
 
 export enum StatusEnum {
@@ -347,13 +367,19 @@ export type Submission_Review = {
 
 export type User = {
   __typename?: 'User';
+  _id: Scalars['ObjectID'];
   address?: Maybe<Scalars['String']>;
+  contracts?: Maybe<Array<Contract>>;
+  earnings?: Maybe<Earnings>;
   email: Scalars['String'];
+  image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  password: Scalars['String'];
-  phone?: Maybe<Scalars['String']>;
-  role: UserRole;
-  userId?: Maybe<Scalars['ID']>;
+  projects?: Maybe<Array<Project>>;
+  proposals?: Maybe<Array<Proposal>>;
+  review?: Maybe<Array<Maybe<Review>>>;
+  role: Scalars['String'];
+  skills?: Maybe<Array<Scalars['String']>>;
+  status?: Maybe<StatusEnum>;
 };
 
 export type ClientProfile = {
@@ -362,6 +388,7 @@ export type ClientProfile = {
   company: CompanyDetails;
   contact?: Maybe<User>;
   image?: Maybe<Scalars['String']>;
+  review?: Maybe<Array<Maybe<Review>>>;
   status?: Maybe<StatusEnum>;
 };
 
@@ -388,22 +415,6 @@ export type FilterOptionsInput = {
   priceMax?: InputMaybe<Scalars['Float']>;
   priceMin?: InputMaybe<Scalars['Float']>;
   skills?: InputMaybe<Array<Scalars['String']>>;
-};
-
-export type FreelancerProfile = {
-  __typename?: 'freelancerProfile';
-  _id?: Maybe<Scalars['ID']>;
-  categories: Array<Scalars['String']>;
-  contact: User;
-  earnings?: Maybe<Earnings>;
-  experienceLevel: Level_Of_Expertise;
-  externalAccount?: Maybe<Scalars['String']>;
-  image?: Maybe<Scalars['String']>;
-  proposals?: Maybe<Array<Maybe<Proposal>>>;
-  skills?: Maybe<Array<Scalars['String']>>;
-  specializedProfile?: Maybe<Array<Maybe<Scalars['String']>>>;
-  status?: Maybe<StatusEnum>;
-  stripe_account_link?: Maybe<Scalars['String']>;
 };
 
 export enum Level_Of_Expertise {
@@ -549,6 +560,7 @@ export type ResolversTypes = ResolversObject<{
   ProjectStats: ResolverTypeWrapper<ProjectStats>;
   Proposal: ResolverTypeWrapper<Proposal>;
   Query: ResolverTypeWrapper<{}>;
+  Review: ResolverTypeWrapper<Review>;
   StatusEnum: StatusEnum;
   String: ResolverTypeWrapper<Scalars['String']>;
   SubmissionReviewStatus: SubmissionReviewStatus;
@@ -559,7 +571,6 @@ export type ResolversTypes = ResolversObject<{
   companyDetails: ResolverTypeWrapper<CompanyDetails>;
   earnings: ResolverTypeWrapper<Earnings>;
   filterOptionsInput: FilterOptionsInput;
-  freelancerProfile: ResolverTypeWrapper<FreelancerProfile>;
   level_of_expertise: Level_Of_Expertise;
   proposal_status: Proposal_Status;
   queryResult: ResolverTypeWrapper<QueryResult>;
@@ -588,6 +599,7 @@ export type ResolversParentTypes = ResolversObject<{
   ProjectStats: ProjectStats;
   Proposal: Proposal;
   Query: {};
+  Review: Review;
   String: Scalars['String'];
   Submission_review: Submission_Review;
   URL: Scalars['URL'];
@@ -596,7 +608,6 @@ export type ResolversParentTypes = ResolversObject<{
   companyDetails: CompanyDetails;
   earnings: Earnings;
   filterOptionsInput: FilterOptionsInput;
-  freelancerProfile: FreelancerProfile;
   queryResult: QueryResult;
   reactions: Reactions;
   userData: UserData;
@@ -624,6 +635,7 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
+  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   type?: Resolver<Maybe<ResolversTypes['AttachmentType']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -641,7 +653,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
   submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
-  terms?: Resolver<Array<Maybe<ResolversTypes['String']>>, ParentType, ContextType>;
+  terms?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -654,6 +666,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   acceptContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationAcceptContractArgs, 'id'>>;
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
   acceptRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAcceptRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
+  addReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAddReviewArgs, 'description' | 'rating' | 'user_id'>>;
   cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, 'id'>>;
   cancelProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationCancelProposalArgs, 'id'>>;
   cancelRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationCancelRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
@@ -662,13 +675,13 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   createProposal?: Resolver<ResolversTypes['Proposal'], ParentType, ContextType, RequireFields<MutationCreateProposalArgs, 'cover_letter' | 'description' | 'duration' | 'price' | 'project_id'>>;
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
-  deleteAccount?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
-  editPassword?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, RequireFields<MutationEditPasswordArgs, 'newPassword' | 'oldPassword'>>;
-  editProfile?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType, Partial<MutationEditProfileArgs>>;
+  editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id'>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
-  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'duration' | 'id' | 'price'>>;
+  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
+  editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'rating'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
+  removeReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRemoveReviewArgs, 'id'>>;
   requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'contract_id' | 'description' | 'title'>>;
   undoReactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationUndoReactToProjectArgs, 'id' | 'reaction_type'>>;
 }>;
@@ -727,10 +740,19 @@ export type ProposalResolvers<ContextType = ServerContext, ParentType extends Re
 
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   Contract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<QueryContractArgs, 'id'>>;
+  Profile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   Project?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectArgs, 'id'>>;
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, Partial<QueryProjectsArgs>>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
-  getProfile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryGetProfileArgs, '_id'>>;
+}>;
+
+export type ReviewResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Review'] = ResolversParentTypes['Review']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  reviewer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type Submission_ReviewResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Submission_review'] = ResolversParentTypes['Submission_review']> = ResolversObject<{
@@ -750,13 +772,19 @@ export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 }
 
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  contracts?: Resolver<Maybe<Array<ResolversTypes['Contract']>>, ParentType, ContextType>;
+  earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  role?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
-  userId?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
+  projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
+  proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
+  review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -765,6 +793,7 @@ export type ClientProfileResolvers<ContextType = ServerContext, ParentType exten
   company?: Resolver<ResolversTypes['companyDetails'], ParentType, ContextType>;
   contact?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -784,22 +813,6 @@ export type EarningsResolvers<ContextType = ServerContext, ParentType extends Re
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   contract_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type FreelancerProfileResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['freelancerProfile'] = ResolversParentTypes['freelancerProfile']> = ResolversObject<{
-  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  categories?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-  contact?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
-  earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
-  experienceLevel?: Resolver<ResolversTypes['level_of_expertise'], ParentType, ContextType>;
-  externalAccount?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  proposals?: Resolver<Maybe<Array<Maybe<ResolversTypes['Proposal']>>>, ParentType, ContextType>;
-  skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
-  specializedProfile?: Resolver<Maybe<Array<Maybe<ResolversTypes['String']>>>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
-  stripe_account_link?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -826,13 +839,13 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   ProjectStats?: ProjectStatsResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  Review?: ReviewResolvers<ContextType>;
   Submission_review?: Submission_ReviewResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
   clientProfile?: ClientProfileResolvers<ContextType>;
   companyDetails?: CompanyDetailsResolvers<ContextType>;
   earnings?: EarningsResolvers<ContextType>;
-  freelancerProfile?: FreelancerProfileResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
   reactions?: ReactionsResolvers<ContextType>;
 }>;

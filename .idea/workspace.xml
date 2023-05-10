@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="try to fix auth">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Project/ProjectCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id].tsx/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Bricoll.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bricoll.iml" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="adjust the dashboard menu with 3 options and make the sidebar interactive">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/graphql/resolvers/Projects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/EditProjectForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,40 +21,23 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="GraphQL File" />
-        <option value="com.haulmont.rcb.palette" />
-        <option value="com.haulmont.rcb.previews" />
-        <option value="com.haulmont.rcb.index" />
-        <option value="com.haulmont.rcb.useInitial" />
-        <option value="com.haulmont.rcb.README" />
+        <option value="package" />
+        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
-        <option value="com.haulmont.rcb.function_component" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="MainButRefactored" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="JsbtTreeLayoutManager">
-    <layout place="tools.popupGrunt">
-      <scroll-view-position x="0" y="0" />
-    </layout>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="PackageJsonUpdateNotifier">
-    <dismissed value="$PROJECT_DIR$/nextjs/package.json" />
-  </component>
   <component name="ProblemsViewState">
+    <option name="autoscrollToSource" value="true" />
     <option name="selectedTabId" value="CurrentFile" />
   </component>
-  <component name="ProjectId" id="2NmM3nlh3MwP41OP6DEIDU7CR6i" />
+  <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -61,27 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;full.screen.before.presentation.mode&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/letcode&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.import&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Main",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/pages/projects/[project_id]",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -91,280 +75,190 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects/[project_id]" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/dashboard" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/contracts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/nextjs/lib/email" />
-      <recent name="$PROJECT_DIR$/nextjs/pages" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/user" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/graphql" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
+      <recent name="$PROJECT_DIR$/nextjs/components/dashboard" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Dashboard" />
+      <recent name="$PROJECT_DIR$/nextjs/components" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/DashBoardProjects.tsx" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Buttons/ProjectCardControlButtons.tsx" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components/Inputs/PriceInput.tsx" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/Components/Inputs/DurationInput.tsx" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="925d8743-9326-4fd6-8502-15d8431ac608" name="Changes" comment="" />
-      <created>1680264608971</created>
+      <changelist id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="" />
+      <created>1683293947030</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1680264608971</updated>
-      <workItem from="1680264611329" duration="63000" />
-      <workItem from="1680264994832" duration="40000" />
-      <workItem from="1680265093351" duration="25000" />
-      <workItem from="1681667137867" duration="310000" />
-      <workItem from="1681667464359" duration="1791000" />
-      <workItem from="1681669277275" duration="919000" />
-      <workItem from="1681670347140" duration="312000" />
-      <workItem from="1681670676915" duration="177000" />
-      <workItem from="1681671226306" duration="358000" />
-      <workItem from="1681725910867" duration="257000" />
-      <workItem from="1681730444696" duration="565000" />
-      <workItem from="1681758354213" duration="245000" />
-      <workItem from="1681760689956" duration="1049000" />
-      <workItem from="1681822702525" duration="12948000" />
-      <workItem from="1681857702132" duration="131000" />
-      <workItem from="1681857854890" duration="63000" />
-      <workItem from="1681915216723" duration="867000" />
-      <workItem from="1681920673574" duration="2879000" />
-      <workItem from="1681925162358" duration="3112000" />
-      <workItem from="1681930207039" duration="93000" />
-      <workItem from="1681930318833" duration="374000" />
-      <workItem from="1681930970807" duration="52000" />
-      <workItem from="1681984978337" duration="1333000" />
-      <workItem from="1682008366835" duration="5000" />
-      <workItem from="1682015171349" duration="13496000" />
-      <workItem from="1682031778365" duration="1356000" />
-      <workItem from="1682093539552" duration="2553000" />
-      <workItem from="1682099370227" duration="37000" />
-      <workItem from="1682112423200" duration="5199000" />
-      <workItem from="1682159028132" duration="12000" />
-      <workItem from="1682250687509" duration="5234000" />
-      <workItem from="1682262828311" duration="5000" />
-      <workItem from="1682278937338" duration="1400000" />
-      <workItem from="1682284705352" duration="29000" />
-      <workItem from="1682335698362" duration="6000" />
-      <workItem from="1682336067844" duration="5098000" />
-      <workItem from="1682342326887" duration="4264000" />
-      <workItem from="1682348488109" duration="81000" />
-      <workItem from="1682353741205" duration="625000" />
-      <workItem from="1682357151698" duration="13000" />
-      <workItem from="1682368371073" duration="62000" />
-      <workItem from="1682440206438" duration="43000" />
-      <workItem from="1682445110549" duration="4667000" />
-      <workItem from="1682460176721" duration="4000" />
-      <workItem from="1682509436556" duration="658000" />
-      <workItem from="1682510528931" duration="4067000" />
-      <workItem from="1682514958195" duration="1385000" />
-      <workItem from="1682516387127" duration="2181000" />
-      <workItem from="1682518602319" duration="4475000" />
-      <workItem from="1682533981369" duration="175000" />
-      <workItem from="1682545209979" duration="12000" />
-      <workItem from="1682594401325" duration="6601000" />
-      <workItem from="1682602266076" duration="744000" />
-      <workItem from="1682603222591" duration="2902000" />
-      <workItem from="1682606220354" duration="517000" />
-      <workItem from="1682608094423" duration="712000" />
-      <workItem from="1682616280532" duration="8262000" />
-      <workItem from="1682625695443" duration="114000" />
-      <workItem from="1682625857480" duration="1794000" />
-      <workItem from="1682677658500" duration="8016000" />
-      <workItem from="1682691158294" duration="840000" />
-      <workItem from="1682696110172" duration="163000" />
-      <workItem from="1682701014614" duration="507000" />
-      <workItem from="1682711673297" duration="31000" />
-      <workItem from="1682802001237" duration="6151000" />
-      <workItem from="1682850468378" duration="9209000" />
-      <workItem from="1682862660857" duration="320000" />
-      <workItem from="1682878531469" duration="43000" />
-      <workItem from="1682879274370" duration="4000" />
-      <workItem from="1682894909628" duration="419000" />
-      <workItem from="1682943347466" duration="3315000" />
-      <workItem from="1682946708015" duration="619000" />
-      <workItem from="1682958740336" duration="7000" />
-      <workItem from="1683039537089" duration="2445000" />
+      <updated>1683293947030</updated>
+      <workItem from="1683293953105" duration="552000" />
+      <workItem from="1683294991921" duration="15044000" />
+      <workItem from="1683316970100" duration="3934000" />
+      <workItem from="1683322943274" duration="82000" />
+      <workItem from="1683372223497" duration="11693000" />
+      <workItem from="1683385573819" duration="33000" />
+      <workItem from="1683386683916" duration="644000" />
+      <workItem from="1683396584085" duration="6000" />
+      <workItem from="1683460282210" duration="3348000" />
+      <workItem from="1683469352019" duration="654000" />
+      <workItem from="1683470045946" duration="279000" />
+      <workItem from="1683471309571" duration="1027000" />
+      <workItem from="1683474078583" duration="8524000" />
+      <workItem from="1683489625200" duration="30000" />
+      <workItem from="1683492934544" duration="23000" />
+      <workItem from="1683533691860" duration="1066000" />
+      <workItem from="1683534983344" duration="932000" />
+      <workItem from="1683550925029" duration="18000" />
+      <workItem from="1683551336160" duration="10877000" />
+      <workItem from="1683570596687" duration="9084000" />
+      <workItem from="1683621891410" duration="16000" />
+      <workItem from="1683623172894" duration="51000" />
+      <workItem from="1683623260976" duration="5000" />
+      <workItem from="1683628180000" duration="260000" />
+      <workItem from="1683628477561" duration="246000" />
+      <workItem from="1683628824715" duration="22930000" />
+      <workItem from="1683657081617" duration="4835000" />
+      <workItem from="1683666901591" duration="6598000" />
+      <workItem from="1683673580954" duration="4781000" />
     </task>
-    <task id="LOCAL-00001" summary=" add cancelContract and completeContract functions">
-      <created>1681669093611</created>
+    <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
+      <created>1683310064878</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1681669093611</updated>
+      <updated>1683310064878</updated>
     </task>
-    <task id="LOCAL-00002" summary=" add cancelContract and completeContract functions and refactor the code">
-      <created>1681761216119</created>
+    <task id="LOCAL-00002" summary="add attachments to projects #74">
+      <created>1683320803741</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1681761216119</updated>
+      <updated>1683320803741</updated>
     </task>
-    <task id="LOCAL-00003" summary="fix some bugs ( create profile">
-      <created>1681832971283</created>
+    <task id="LOCAL-00003" summary="update project card skeleton">
+      <created>1683373560131</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1681832971283</updated>
+      <updated>1683373560131</updated>
     </task>
-    <task id="LOCAL-00004" summary="fix some bugs ( create profile... )">
-      <created>1681833090380</created>
+    <task id="LOCAL-00004" summary="add a submit proposal form">
+      <created>1683384484908</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1681833090380</updated>
+      <updated>1683384484908</updated>
     </task>
-    <task id="LOCAL-00005" summary="remove ProposalsByFreelancer , and ProposalsByProject from the query type to be added in the user query type">
-      <created>1681915293332</created>
+    <task id="LOCAL-00005" summary="add some check to submit a proposal form">
+      <created>1683475757598</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1681915293332</updated>
+      <updated>1683475757598</updated>
     </task>
-    <task id="LOCAL-00006" summary="fix serverContext path">
-      <created>1681915848189</created>
+    <task id="LOCAL-00006" summary="add some check to submit a proposal form">
+      <created>1683476153434</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1681915848189</updated>
+      <updated>1683476153434</updated>
     </task>
-    <task id="LOCAL-00007" summary="refactor email service">
-      <created>1681924727353</created>
+    <task id="LOCAL-00007" summary="add CreateProjectForm page and code refactoring">
+      <created>1683484173974</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1681924727353</updated>
+      <updated>1683484173974</updated>
     </task>
-    <task id="LOCAL-00008" summary="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn">
-      <created>1681928249825</created>
+    <task id="LOCAL-00008" summary=" I've added edit project form">
+      <created>1683557312687</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1681928249825</updated>
+      <updated>1683557312687</updated>
     </task>
-    <task id="LOCAL-00009" summary="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client">
-      <created>1682032953012</created>
+    <task id="LOCAL-00009" summary=" I've added edit project form">
+      <created>1683565995199</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1682032953012</updated>
+      <updated>1683565995200</updated>
     </task>
-    <task id="LOCAL-00010" summary="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ...">
-      <created>1682096015593</created>
+    <task id="LOCAL-00010" summary="I've moved the components folder to the nextjs folder and the graphql schemas and the resolvers to the nextjs folder, so they won't be treated as endpoints.">
+      <created>1683567342847</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1682096015594</updated>
+      <updated>1683567342847</updated>
     </task>
-    <task id="LOCAL-00011" summary="save loveProject,dislikeProject,unLoveProject,unDislikeProject actions to the database to keep track of the freelancer that react to project and show them a filled reactions buttons (love ,dlike...) and prevent them to re-react .... #26">
-      <created>1682117644721</created>
+    <task id="LOCAL-00011" summary="refactore the mail service">
+      <created>1683574333302</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1682117644721</updated>
+      <updated>1683574333302</updated>
     </task>
-    <task id="LOCAL-00012" summary="add some functions of #27 pull request feature &#10;requestProjectSubmissionReview&#10;acceptRequestProjectSubmissionReview&#10;declineRequestProjectSubmissionReview&#10;cancelRequestProjectSubmissionReview">
-      <created>1682256284487</created>
+    <task id="LOCAL-00012" summary="add contract form and fix some problems in the resolvers">
+      <created>1683581110205</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1682256284487</updated>
+      <updated>1683581110205</updated>
     </task>
-    <task id="LOCAL-00013" summary="add some pseudocode to be tested later #27">
-      <created>1682341161130</created>
+    <task id="LOCAL-00013" summary="add the project editor for dashboard">
+      <created>1683664029689</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1682341161130</updated>
+      <updated>1683664029689</updated>
     </task>
-    <task id="LOCAL-00014" summary="update some mutations functions">
-      <created>1682602929118</created>
+    <task id="LOCAL-00014" summary="add the project editor for dashboard">
+      <created>1683664691970</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1682602929118</updated>
+      <updated>1683664691970</updated>
     </task>
-    <task id="LOCAL-00015" summary="connect Apollo Client to Apollo Server #53">
-      <created>1682606102433</created>
+    <task id="LOCAL-00015" summary="adjust the dashboard menu with 3 options and make the sidebar interactive">
+      <created>1683674105443</created>
       <option name="number" value="00015" />
       <option name="presentableId" value="LOCAL-00015" />
       <option name="project" value="LOCAL" />
-      <updated>1682606102433</updated>
+      <updated>1683674105443</updated>
     </task>
-    <task id="LOCAL-00016" summary="remove socket connection">
-      <created>1682618056233</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1682618056233</updated>
-    </task>
-    <task id="LOCAL-00017" summary="commit resolvers.ts file  because it needed in deployment">
-      <created>1682618638652</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1682618638652</updated>
-    </task>
-    <task id="LOCAL-00018" summary="remove old file related to socket.io">
-      <created>1682618874289</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1682618874289</updated>
-    </task>
-    <task id="LOCAL-00019" summary="client payment is done , to be tested after deploying the app">
-      <created>1682625359905</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1682625359905</updated>
-    </task>
-    <task id="LOCAL-00020" summary="rate limiting #40">
-      <created>1682627627000</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1682627627000</updated>
-    </task>
-    <task id="LOCAL-00021" summary="move resolvers folder to /graphql where he belongs">
-      <created>1682678052680</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1682678052680</updated>
-    </task>
-    <task id="LOCAL-00022" summary="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account">
-      <created>1682692745361</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1682692745361</updated>
-    </task>
-    <task id="LOCAL-00023" summary="move utils functions to page folder">
-      <created>1682802554817</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1682802554820</updated>
-    </task>
-    <task id="LOCAL-00024" summary="create strip account (connect) for freelancer on demand">
-      <created>1682807810338</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1682807810338</updated>
-    </task>
-    <task id="LOCAL-00025" summary="payment is completed e2e #27">
-      <created>1682859629480</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1682859629480</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UnknownFeatures">
-    <option featureType="com.intellij.fileTypeFactory" implementationName="nginx.conf" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -378,32 +272,19 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix some bugs ( create profile... )" />
-    <MESSAGE value="remove ProposalsByFreelancer , and ProposalsByProject from the query type to be added in the user query type" />
-    <MESSAGE value="fix serverContext path" />
-    <MESSAGE value="refactor email service" />
-    <MESSAGE value="send freelancer emails on  OnNewProposal,OnProposalAccepted,OnProposalDeclined&#10;send client emails on OnProposalWithDrawn" />
-    <MESSAGE value="integrate payment using stripe on confirm contract that was created by the client and accepted by the freelancer and now paid by the client" />
-    <MESSAGE value="fix the validation package ,and update comment the payment process and add some validation to user input on User actions ..." />
-    <MESSAGE value="save loveProject,dislikeProject,unLoveProject,unDislikeProject actions to the database to keep track of the freelancer that react to project and show them a filled reactions buttons (love ,dlike...) and prevent them to re-react .... #26" />
-    <MESSAGE value="add some functions of #27 pull request feature &#10;requestProjectSubmissionReview&#10;acceptRequestProjectSubmissionReview&#10;declineRequestProjectSubmissionReview&#10;cancelRequestProjectSubmissionReview" />
-    <MESSAGE value="add some pseudocode to be tested later" />
-    <MESSAGE value="add some pseudocode to be tested later #27" />
-    <MESSAGE value="enhance  quries and resolvers" />
-    <MESSAGE value="update some mutations functions" />
-    <MESSAGE value="connect Apollo Client to Apollo Server" />
-    <MESSAGE value="connect Apollo Client to Apollo Server #53" />
-    <MESSAGE value="remove socket connection" />
-    <MESSAGE value="commit resolvers.ts file  because it needed in deployment" />
-    <MESSAGE value="remove old file related to socket.io" />
-    <MESSAGE value="client payment is done , to be tested after deploying the app" />
-    <MESSAGE value="rate limiting #40" />
-    <MESSAGE value="move resolvers folder to /graphql where he belongs" />
-    <MESSAGE value="#32 done&#10;#27 add a route to freelancer ,so they can link their account to a stripe account" />
-    <MESSAGE value="move utils functions to page folder" />
-    <MESSAGE value="create strip account (connect) for freelancer on demand" />
-    <MESSAGE value="payment is completed e2e #27" />
-    <option name="LAST_COMMIT_MESSAGE" value="payment is completed e2e #27" />
+    <MESSAGE value="update the node modules and add a chart to the project by id and add some styles to the search bar" />
+    <MESSAGE value="add attachments to projects #74" />
+    <MESSAGE value="update project card skeleton" />
+    <MESSAGE value="add a submit proposal form" />
+    <MESSAGE value="add some check to submit a proposal form" />
+    <MESSAGE value="add CreateProjectForm page and code refactoring" />
+    <MESSAGE value="add edit project form" />
+    <MESSAGE value=" I've added edit project form" />
+    <MESSAGE value="I've moved the components folder to the nextjs folder and the graphql schemas and the resolvers to the nextjs folder, so they won't be treated as endpoints." />
+    <MESSAGE value="refactore the mail service" />
+    <MESSAGE value="add contract form and fix some problems in the resolvers" />
+    <MESSAGE value="add the project editor for dashboard" />
+    <MESSAGE value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
   </component>
 </project>

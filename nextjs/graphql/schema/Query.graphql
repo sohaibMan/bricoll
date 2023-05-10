@@ -1,0 +1,13 @@
+type Query{
+    # Proposals
+    Proposal(id: ObjectID!): Proposal
+    # Projects
+    Projects(query: String, filter: filterOptionsInput): [Project]
+    # Cards by id (client,freelancer) Note the client can access to his proposals and the freelancer to his proposals only
+    Project(id: ObjectID!): Project
+    # Contract
+    Contract(id: ObjectID!): Contract
+    # Profile management
+    Profile: User
+
+}

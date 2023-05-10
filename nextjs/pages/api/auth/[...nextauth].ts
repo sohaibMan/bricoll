@@ -178,7 +178,7 @@ export const authOptions: NextAuthOptions = {
       // token.email
       // token.
 
-      // console.log(token);
+      // console.log("user v3:  ", token);
 
       return token;
     },
@@ -194,6 +194,8 @@ export const authOptions: NextAuthOptions = {
       // session.user.userRole = UserRole.Client;
       session.user.accessToken = token.accessToken;
       // console.log(session);
+
+      
 
       return session;
     },

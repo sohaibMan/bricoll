@@ -1,16 +1,11 @@
 import bcrypt from "bcrypt";
-// import cookie from "cookie";
 import validate from 'deep-email-validator'
 import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../lib/mongodb";
-// import { getToken } from "next-auth/jwt";
 import {User} from "../../../types/resolvers";
 import {deleteCookie, getCookie, setCookie} from "cookies-next";
 import jwt from "jsonwebtoken";
-import emailService from "../../../lib/email/email";
-// import { redis } from "../../../lib/redis.ts"
-// import { ObjectId } from "mongodb";
-// import getConfig from "next/config";
+import emailService from "../../../lib/email";
 
 
 const userCollection = db.collection("users");
@@ -22,7 +17,7 @@ export default async function handler(
 ) {
 
     try {
-        // todos (validate user existence and add infos ...)
+        // todos (validate user existence and create infos ...)
 
         const userRole = getCookie("userRole", {req, res});
 
@@ -38,7 +33,7 @@ export default async function handler(
         // console.log(userRole);
 
 
-        const userData: User = await req.body;
+        const userData = await req.body;
         const {email, name, password} = userData;
         // const isCompleted = false;
 
@@ -51,7 +46,6 @@ export default async function handler(
         if (!emailValidation.valid) {
             return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
         }
-        // todo (validate email, password, username length)
         // ? Verifying if the password and passwordConfirm are the same
         if (req.body.password !== req.body.passwordConfirm) {
             return res.status(400).json({
@@ -85,6 +79,7 @@ export default async function handler(
             name,
             hashedPassword,
             userRole,
+            reviews: [],
             isCompleted: false,
             created_at: new Date(),
             isEmailVerified: false,

@@ -1,3 +1,4 @@
+
 import Layout from "../components/home/layout/layout";
 import { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
@@ -28,6 +29,5 @@ const Home = () => {
       </Layout>
     </ThemeProvider>
   );
-};
 
 export default Home;

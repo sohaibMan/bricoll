@@ -1,0 +1,63 @@
+enum StatusEnum {
+  Online
+  Invisible
+}
+
+enum userRole {
+  Guest
+  Client
+  Freelancer
+  Admin
+}
+
+type User {
+  _id: ObjectID!
+  name: String!
+  email: String!
+  role: String!
+#   phone: String
+  address: String
+  image: String
+  status: StatusEnum
+  skills: [String!]
+#   experienceLevel: level_of_expertise!
+#   stripe_account_link: String
+  earnings: earnings
+  review: [Review]
+  proposals: [Proposal!]
+  projects: [Project!]
+  contracts: [Contract!]
+}
+
+input userData {
+  name: String!
+  email: String!
+  password: String!
+  role: userRole!
+}
+
+type companyDetails {
+  _id: ID
+  name: String!
+  website: String!
+  industry: String
+  size: Int!
+  tagline: String
+  description: String
+}
+
+type clientProfile {
+  _id: ID
+  image: String
+  contact: User
+  status: StatusEnum
+  company: companyDetails!
+  review: [Review]
+}
+
+type earnings {
+  contract_id: ObjectID!
+  amount: Float!
+  currency: String!
+}
+

@@ -75,6 +75,7 @@ export default async function handler(
           skills: skills,
           level: level,
           language: language,
+          access_token: getCookie("jwt", { req, res })
         }
       }
     );

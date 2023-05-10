@@ -1,4 +1,4 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import {MongoClient} from "mongodb";
 
 
 if (!process.env.MONGODB_URI) {
@@ -10,7 +10,7 @@ class MongoClientConnection {
 
     private constructor() {
         // Create a MongoClient with a MongoClientOptions object to set the Stable API version
-        const client = new MongoClient(
+        MongoClientConnection._instance = new MongoClient(
             process.env.MONGODB_URI || "mongodb://bricoll_mongo:27017/bricoll",
             {
                 // serverApi: {
@@ -20,15 +20,13 @@ class MongoClientConnection {
                 // },
             }
         );
-
-        MongoClientConnection._instance = client;
     }
 
     static async getInstance() {
         if (this._instance) {
             await this._instance.connect();
             // Send a ping to confirm a successful connection
-            await this._instance.db("admin").command({ ping: 1 });
+            await this._instance.db("admin").command({ping: 1});
             console.log(
                 "Pinged your deployment. You successfully connected to MongoDB!"
             );
@@ -38,6 +36,7 @@ class MongoClientConnection {
         new MongoClientConnection();
         return this._instance;
     }
+
     static getInstancePromise() {
         return this._instance.connect();
     }
@@ -49,7 +48,7 @@ const clientPromise = MongoClientConnection.getInstancePromise();
 //   resolve(client)
 // );
 
-// const clientPromise =promisify(client).call()
+
 const db = client.db("bricoll");
-export { clientPromise };
+export {clientPromise};
 export default db;
