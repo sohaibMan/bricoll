@@ -21,7 +21,6 @@ import {
 } from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
-import { FormLabel } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
 import {useRouter} from "next/router";
 //TODO ADD ATTACHMENTS TO PROJECT
@@ -32,16 +31,15 @@ export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjec
 // import ObjectID from "bson-objectid"
 
 
-
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: {
     project?: Project,
     PROJECT_MUTATION: DocumentNode,
     onSubmitProjectHandler: (project: Project) => void
-    label?:string
+    label?: string
 }) {
 
-const router=useRouter()
+    const router = useRouter()
     const defaultState = {
         title: props.project?.title || "",
         description: props.project?.description || "",
@@ -101,7 +99,7 @@ const router=useRouter()
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(({data}:any) => {
+            ).then(({data}: any) => {
                 //  any : FetchResult<{createProject:Project>}
 
                 const editProject = {
@@ -116,9 +114,9 @@ const router=useRouter()
 
                 props.onSubmitProjectHandler(editProject)//to close the modal and update the ui
 
-            //     clear the input
-            //   router.push("/projects/"+editProject._id);
-            //     router.push("/dashboard/component?home"+editProject._id); //todo tmp fix
+                //     clear the input
+                //   router.push("/projects/"+editProject._id);
+                //     router.push("/dashboard/component?home"+editProject._id); //todo tmp fix
             })
 
         } catch (e) {
@@ -134,36 +132,38 @@ const router=useRouter()
                 py: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 2,
+                gap: 4,
                 alignItems: 'center',
                 flexWrap: 'wrap',
             }}
         >
 
-            <form onSubmit={handleSubmit} style={{width:"100%"}}>
+            <form onSubmit={handleSubmit} style={{width: "100%"}}>
 
-                <Stack spacing={1}>
+                <Stack spacing={2}>
                     {/*{props.label && <FormLabel    sx={{pb: 2}}>{props.label}</FormLabel>}*/}
-                    {props.label &&  <Typography level="h4">{props.label}</Typography> }
+                    {props.label && <Typography level="h4">{props.label}</Typography>}
                     <Textarea placeholder="Title" value={title} required
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
-                    <Stack spacing={1} direction="row"   justifyContent="space-between"  divider={<Divider orientation="vertical" />}>
-                    <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
+                    <Stack spacing={1} direction="row" justifyContent="space-between"
+                           divider={<Divider orientation="vertical"/>}>
+                        <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
 
-                    <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
+                        <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
 
                     </Stack>
 
 
-                    <Stack spacing={1} direction="row"   justifyContent="space-between"  divider={<Divider orientation="vertical" />}>
-                    <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
-                                                  placeholder="Level of expertise"
-                                                  parentRef={levelOfExpertiseAutoComplete}/>
+                    <Stack spacing={1} direction="row" justifyContent="space-between"
+                           divider={<Divider orientation="vertical"/>}>
+                        <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
+                                                      placeholder="Level of expertise"
+                                                      parentRef={levelOfExpertiseAutoComplete}/>
 
-                    <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
-                                             parentRef={projectSizeAutocompleteRef}/>
+                        <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
+                                                 parentRef={projectSizeAutocompleteRef}/>
 
                     </Stack>
 

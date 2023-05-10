@@ -64,7 +64,7 @@ const createBlobInContainer = async (file: File) => {
 // </snippet_createBlobInContainer>
 
 // <snippet_uploadFileToBlob>
-const uploadFileToBlob = async (file: File | null): Promise<string> => {
+const uploadFileToBlob = async (file: File | null) => {
     if (!file) return "";
 
     // upload file

@@ -13,7 +13,7 @@ import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
 import {GraphQLError} from "graphql";
-import { ProfileResolvers } from "../../../graphql/resolvers/Profile";
+import {ProfileResolvers} from "../../../graphql/resolvers/Profile";
 
 // path to those folders
 const rootPath = path.join(__dirname, "../../../../");
@@ -36,7 +36,7 @@ const plugins = [
 // create apollo server instance
 const server = new ApolloServer<ServerContext>({
     typeDefs: [constraintDirectiveTypeDefs, schema],
-    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers,ProfileResolvers],
+    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers, ProfileResolvers],
     plugins,
     validationRules: [depthLimit(4)]
 });
@@ -46,8 +46,6 @@ export default startServerAndCreateNextHandler(server,
         context: async (req, res) => {
             //
             const token = await getToken({req});
-
-
 
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}

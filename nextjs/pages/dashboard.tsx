@@ -1,21 +1,17 @@
 import * as React from 'react';
-import {useState} from 'react';
 import {CssVarsProvider} from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
 import Box from '@mui/joy/Box';
 import useScript from './useScript';
-import customTheme from './theme';
+import customTheme from '../utils/theme';
 import Sidebar from '../components/Dashboard/Sidebar';
 import Header from '../components/Dashboard/Header';
 import MyProfile from "../components/Dashboard/MyProfile";
 import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
-import Stack from "@mui/joy/Stack";
-import CreateProjectForm from "../components/Forms/CreateProjectForm";
-import ProjectItemCard from "../components/Cards/ProjectItemCard";
-import {EditDeleteProjectControlButtons} from "../components/Buttons/EditDeleteProjectControlButtons";
 import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
+import {useSession} from "next-auth/react";
 
 const useEnhancedEffect =
     typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -69,12 +65,33 @@ const USER_PROFILE = gql`
 
 
 export default function Index() {
-    const {loading, error, data} = useQuery<{ Profile: User }>(USER_PROFILE);
+    const session=useSession()
     const status = useScript(`https://unpkg.com/feather-icons`);
+    const {loading, error, data} = useQuery<{ Profile: User }>(USER_PROFILE);
     const [currentComponent, setCurrentComponent] = React.useState(DashboardItems.Home);
-    const [projects, setProjects] = useState(data?.Profile?.projects || []);
 
+    // const defaultComponents= searchParams.get('search') as DashboardItems ||  DashboardItems.Home ;// defaultComponents from the url
+    // const [currentComponent, setCurrentComponent] = React.useState(defaultComponents);
 
+    //  const searchParams = useSearchParams();
+    //  const router=useRouter()
+    // const pathname=usePathname()
+    // //  // searchParams with a provided key/value pair
+    //  const createQueryString = useCallback(
+    //      (name: string, value: string) => {
+    //          const params = new URLSearchParams(searchParams);
+    //          params.set(name, value);
+    //
+    //          return params.toString();
+    //      },
+    //      [searchParams],
+    //  );
+    //
+    //  // todo fix this
+    //  useEffect( ()=>{
+    // //update the pathname on currentComponent change
+    //      router.push(pathname + '?' + createQueryString('search',currentComponent));
+    //  },[currentComponent])
 
 
     useEnhancedEffect(() => {
@@ -87,13 +104,16 @@ export default function Index() {
     }, [status]);
 
     if (loading) return <h1>Loading... </h1>
+
+
+    if(!session || !session.data?.user.userRole)return <h1>not auth</h1> ;// todo add a middlware instead/add userRole to the user data
+    const userRole= session.data?.user.userRole;
+
     if (error || !data || !data.Profile.projects) return <h1>`Error! {error !== undefined ? error?.message : "An Error has occurred"}</h1>;
 
 
-
-
-
     return (
+
         <CssVarsProvider disableTransitionOnChange theme={customTheme}>
             <GlobalStyles
                 styles={{
@@ -109,7 +129,7 @@ export default function Index() {
             <CssBaseline/>
             <Box sx={{display: 'flex', minHeight: '100dvh'}}>
                 <Header/>
-                <Sidebar currentComponent={currentComponent} user={data.Profile}
+                <Sidebar userRole={userRole} currentComponent={currentComponent} user={data.Profile}
                          setCurrentComponent={setCurrentComponent}/>
                 <Box
                     component="main"
@@ -140,14 +160,8 @@ export default function Index() {
                 >
                     {currentComponent === DashboardItems.Home ? <p>welcome to home (to be done)</p> : null}
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
-                    {data.Profile.projects && <DashBoardProjects currentComponent={currentComponent} projectsArr={data.Profile.projects}/>}
-                    {/*{currentComponent === DashboardItems.Projects && <Stack spacing={2}>{projects.map((project) =>*/}
-                    {/*    <ProjectItemCard*/}
-                    {/*        key={project._id.toString()} project={project}>*/}
-                    {/*        <EditDeleteProjectControlButtons project={project} setProjects={setProjects}/>*/}
-                    {/*    </ProjectItemCard>*/}
-                    {/*)}</Stack>}*/}
-                    {/*{currentComponent === DashboardItems.CreateProject && <CreateProjectForm  setProjects={setProjects}/>}*/}
+                    {data.Profile.projects &&
+                        <DashBoardProjects currentComponent={currentComponent} projectsArr={data.Profile.projects}/>}
                 </Box>
             </Box>
         </CssVarsProvider>

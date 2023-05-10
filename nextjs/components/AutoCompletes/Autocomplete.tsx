@@ -8,10 +8,13 @@ export default function CustomAutocomplete(props: {
     defaultValue?: string
 
 }) {
+    const defaultValue=props.defaultValue ?  props.defaultValue : null;
+
     return (
         <Autocomplete
+            // isOptionEqualToValue={(option,value)=>option===value}
             sx={{width : "50%"}}
-            defaultValue={props.defaultValue}
+            defaultValue={defaultValue}
             placeholder={props.placeholder}
             disableClearable={false}
             options={props.labels.map(el => el.label.split("_").join(" ").toLowerCase())}

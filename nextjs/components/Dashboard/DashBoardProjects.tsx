@@ -12,7 +12,7 @@ export default function DashBoardProjects(props: { projectsArr: Array<Project>, 
 
     const [projects, setProjects] = useState(props.projectsArr);
 
-    console.log(projects)
+
     if (props.currentComponent === DashboardItems.Projects) return <Stack spacing={2}>{projects.map((project) =>
         <ProjectItemCard
             key={project._id.toString()} project={project}>

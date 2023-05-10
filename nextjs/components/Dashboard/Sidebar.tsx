@@ -17,7 +17,7 @@ import Sheet from "@mui/joy/Sheet";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import { closeSidebar } from "../../pages/utils";
 import { DashboardItems } from "../../pages/dashboard";
-import { User } from "../../types/resolvers";
+import {User, UserRole} from "../../types/resolvers";
 import { ChangeEvent } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -30,6 +30,7 @@ export default function Sidebar(props: {
   setCurrentComponent: React.Dispatch<React.SetStateAction<DashboardItems>>;
   currentComponent: DashboardItems;
   user: User;
+  userRole:UserRole // to custom the links per userRole
 }) {
   const [query, setQuery] = React.useState("");
   const router = useRouter();
@@ -122,7 +123,7 @@ export default function Sidebar(props: {
           }
         }}
       />
-      <button onClick={performSearch}>Search</button>
+      {/*<button onClick={performSearch}>Search</button>*/}
       <Box
         sx={{
           minHeight: 0,
@@ -143,6 +144,13 @@ export default function Sidebar(props: {
         {/*</ListItem>*/}
 
                     {/*<ListItem>*/}
+          <List
+              sx={{
+                  flexGrow: 0,
+                  "--ListItem-radius": "8px",
+                  "--List-gap": "8px",
+              }}
+          >
                     <ListItem>
                         <ListItemButton selected={props.currentComponent === DashboardItems.Home}
                                         variant={props.currentComponent === DashboardItems.Home ? "soft" : "plain"}>
@@ -160,28 +168,31 @@ export default function Sidebar(props: {
                                 <i data-feather="chevron-up" />
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>MyProfile</ListItemContent>
+                                onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>My Profile</ListItemContent>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem nested>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
-                                        variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
-                            <ListItemDecorator>
-                                <i data-feather="layers" />
-                            </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
-                        </ListItemButton>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}
-                                        variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>
-                            <ListItemDecorator>
-                                <i data-feather="layers" />
-                            </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create Project</ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
+              {/*only clients*/}
+              {props.userRole===UserRole.Client && <ListItem nested>
+                  <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
+                                  variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
+                      <ListItemDecorator>
+                          <i data-feather="layers"/>
+                      </ListItemDecorator>
+                      <ListItemContent
+                          onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
+                  </ListItemButton>
+                  <ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}
+                                  variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>
+                      <ListItemDecorator>
+                          <i data-feather="layers"/>
+                      </ListItemDecorator>
+                      <ListItemContent
+                          onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create
+                          Project</ListItemContent>
+                  </ListItemButton>
+              </ListItem>}
 
+          </List>
                     {/*<ListItemButton>New user</ListItemButton>*/}
                     {/*</ListItem>*/}
                     {/*<ListItem>*/}
@@ -189,7 +200,7 @@ export default function Sidebar(props: {
                     {/*</ListItem>*/}
                     {/*</List>*/}
                     {/*</ListItem>*/}
-                </List>
+                {/*</List>*/}
                 {/*</ListItem>*/}
                 <List
                     sx={{

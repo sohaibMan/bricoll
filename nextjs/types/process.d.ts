@@ -27,5 +27,6 @@ declare namespace NodeJS {
     NEXT_PUBLIC_AZURE_STORAGE_SAS_TOKEN:string
     NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME:string
     NEXT_PUBLIC_CONTAINER_NAME:string
+    NOVU_API_SECRET:string
   }
 }
