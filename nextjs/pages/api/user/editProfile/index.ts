@@ -37,7 +37,7 @@ export default async function handler(
   try {
     // const router = useRouter();
 
-    if (!req.body.name || !req.body.email)
+    if (!req.body.name || !req.body.email || !req.body.image)
       return res.status(401).json({
         status: "failed",
         message: "Missing fields",
@@ -79,6 +79,7 @@ export default async function handler(
         $set: {
           name: req.body.name,
           email: req.body.email,
+          image: req.body.image,
         },
       }
     )) as unknown as User;

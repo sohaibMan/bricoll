@@ -79,6 +79,7 @@ export default async function handler(
             name,
             hashedPassword,
             userRole,
+            image: "",
             reviews: [],
             isCompleted: false,
             created_at: new Date(),

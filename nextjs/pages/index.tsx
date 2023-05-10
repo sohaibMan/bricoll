@@ -29,5 +29,6 @@ const Home = () => {
         </Layout>
       </ThemeProvider>
   );
-}
+  }
+
 export default Home;
