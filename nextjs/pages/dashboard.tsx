@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {CssVarsProvider} from '@mui/joy/styles';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import CssBaseline from '@mui/joy/CssBaseline';
@@ -10,8 +11,11 @@ import Header from '../components/Dashboard/Header';
 import MyProfile from "../components/Dashboard/MyProfile";
 import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
-import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 import Stack from "@mui/joy/Stack";
+import CreateProjectForm from "../components/Forms/CreateProjectForm";
+import ProjectItemCard from "../components/Cards/ProjectItemCard";
+import {EditDeleteProjectControlButtons} from "../components/Buttons/EditDeleteProjectControlButtons";
+import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 
 const useEnhancedEffect =
     typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -21,7 +25,8 @@ const useEnhancedEffect =
 export enum DashboardItems {
     MyProfile = 'MyProfile',
     Projects = 'Projects',
-    Home = "Home"
+    Home = "Home",
+    CreateProject = "CreateProject",
 }
 
 const USER_PROFILE = gql`
@@ -67,6 +72,9 @@ export default function Index() {
     const {loading, error, data} = useQuery<{ Profile: User }>(USER_PROFILE);
     const status = useScript(`https://unpkg.com/feather-icons`);
     const [currentComponent, setCurrentComponent] = React.useState(DashboardItems.Home);
+    const [projects, setProjects] = useState(data?.Profile?.projects || []);
+
+
 
 
     useEnhancedEffect(() => {
@@ -79,7 +87,9 @@ export default function Index() {
     }, [status]);
 
     if (loading) return <h1>Loading... </h1>
-    if (error || !data) return <h1>`Error! {error !== undefined ? error?.message : "An Erorr has occured"}</h1>;
+    if (error || !data || !data.Profile.projects) return <h1>`Error! {error !== undefined ? error?.message : "An Error has occurred"}</h1>;
+
+
 
 
 
@@ -99,7 +109,8 @@ export default function Index() {
             <CssBaseline/>
             <Box sx={{display: 'flex', minHeight: '100dvh'}}>
                 <Header/>
-                <Sidebar  currentComponent={currentComponent}  user={data.Profile} setCurrentComponent={setCurrentComponent}/>
+                <Sidebar currentComponent={currentComponent} user={data.Profile}
+                         setCurrentComponent={setCurrentComponent}/>
                 <Box
                     component="main"
                     className="MainContent"
@@ -129,10 +140,14 @@ export default function Index() {
                 >
                     {currentComponent === DashboardItems.Home ? <p>welcome to home (to be done)</p> : null}
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
-                    {currentComponent === DashboardItems.Projects && data.Profile.projects ?
-                        <Stack spacing={1}><DashBoardProjects projectsArr={data.Profile.projects}/></Stack> : null}
-
-
+                    {data.Profile.projects && <DashBoardProjects currentComponent={currentComponent} projectsArr={data.Profile.projects}/>}
+                    {/*{currentComponent === DashboardItems.Projects && <Stack spacing={2}>{projects.map((project) =>*/}
+                    {/*    <ProjectItemCard*/}
+                    {/*        key={project._id.toString()} project={project}>*/}
+                    {/*        <EditDeleteProjectControlButtons project={project} setProjects={setProjects}/>*/}
+                    {/*    </ProjectItemCard>*/}
+                    {/*)}</Stack>}*/}
+                    {/*{currentComponent === DashboardItems.CreateProject && <CreateProjectForm  setProjects={setProjects}/>}*/}
                 </Box>
             </Box>
         </CssVarsProvider>

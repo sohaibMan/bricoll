@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="adjust the dashboard menu with 3 options and make the sidebar interactive">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="create project is added to the dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/CreateProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/CreateProjectForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/EditProjectForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +35,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -61,7 +61,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.keymap",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -84,10 +84,10 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
+      <recent name="$PROJECT_DIR$/nextjs/components/EditProjectForm" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects_tmp" />
       <recent name="$PROJECT_DIR$/nextjs/components/dashboard" />
       <recent name="$PROJECT_DIR$/nextjs/components/Dashboard" />
-      <recent name="$PROJECT_DIR$/nextjs/components" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/DashBoardProjects.tsx" />
@@ -136,7 +136,9 @@
       <workItem from="1683628824715" duration="22930000" />
       <workItem from="1683657081617" duration="4835000" />
       <workItem from="1683666901591" duration="6598000" />
-      <workItem from="1683673580954" duration="4781000" />
+      <workItem from="1683673580954" duration="5224000" />
+      <workItem from="1683719196844" duration="6404000" />
+      <workItem from="1683730437724" duration="6104000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -243,7 +245,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683674105443</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="adding an edit project to the dashboard">
+      <created>1683678796675</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1683678796675</updated>
+    </task>
+    <task id="LOCAL-00017" summary="create project is added to the dashboard">
+      <created>1683730586166</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1683730586166</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +301,8 @@
     <MESSAGE value="add contract form and fix some problems in the resolvers" />
     <MESSAGE value="add the project editor for dashboard" />
     <MESSAGE value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
+    <MESSAGE value="adding an edit project to the dashboard" />
+    <MESSAGE value="create project is added to the dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="create project is added to the dashboard" />
   </component>
 </project>

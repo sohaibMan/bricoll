@@ -1,5 +1,8 @@
-import ProjectForm from "../../components/Forms/ProjectForm";
+import ProjectForm from "./ProjectForm";
 import {gql} from "@apollo/client";
+import Box from "@mui/joy/Box";
+import * as React from "react";
+import {Project} from "../../types/resolvers";
 
 const CREATE_PROJECT_MUTATION = gql`
 mutation CreateProject($title: String!, $description: String!, $price: Float!, $skills: [String!]!, $projectScope: ProjectScopeInput!, $category: ProjectCategoriesEnum!) {
@@ -29,10 +32,11 @@ mutation CreateProject($title: String!, $description: String!, $price: Float!, $
   }
 }
 `;
-const createProject = () => {
+export default  function CreateProjectForm(props:{
+    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+})  {
 
-
-    return <ProjectForm PROJECT_MUTATION={CREATE_PROJECT_MUTATION}/>;
+    return <Box sx={{width:"90%",margin:"auto"}}><ProjectForm label="Add a new Project" PROJECT_MUTATION={CREATE_PROJECT_MUTATION}
+                                                              onSubmitProjectHandler={(projet)=>{props.setProjects(prv=> [...prv,projet])}}/>
+    </Box>
 };
-
-export default createProject;

@@ -142,136 +142,80 @@ export default function Sidebar(props: {
         {/*    </ListItemButton>*/}
         {/*</ListItem>*/}
 
-        {/*<ListItem>*/}
-        {/*    <ListItemButton>*/}
-        {/*        <ListItemDecorator>*/}
-        {/*            <i data-feather="check-square"/>*/}
-        {/*        </ListItemDecorator>*/}
-        {/*        <ListItemContent>Tasks</ListItemContent>*/}
-        {/*        <Dropdown data-feather="chevron-down"/>*/}
-        {/*    </ListItemButton>*/}
-        {/*</ListItem>*/}
-        {/*<ListItem>*/}
-        {/*    <ListItemButton>*/}
-        {/*        <ListItemDecorator>*/}
-        {/*            <i data-feather="flag"/>*/}
-        {/*        </ListItemDecorator>*/}
-        {/*        <ListItemContent>Reporting</ListItemContent>*/}
-        {/*        <Dropdown data-feather="chevron-down"/>*/}
-        {/*    </ListItemButton>*/}
-        {/*</ListItem>*/}
-        {/*<ListItem>*/}
-        {/*<ListItemButton>*/}
-        {/*    <ListItemDecorator>*/}
-        {/*        <i data-feather="bar-chart-2"/>*/}
-        {/*    </ListItemDecorator>*/}
-        {/*    <ListItemContent>Users</ListItemContent>*/}
-        {/*    <i data-feather="chevron-up"/>*/}
-        {/*</ListItemButton>*/}
-        {/*<List>*/}
-        <List
-          sx={{
-            "--ListItem-radius": "8px",
-            "--List-gap": "4px",
-            "--List-nestedInsetStart": "40px",
-          }}
-        >
-          {/*<ListItem>*/}
-          <ListItem>
-            <ListItemButton
-              selected={props.currentComponent === DashboardItems.Home}
-              variant={
-                props.currentComponent === DashboardItems.Home
-                  ? "soft"
-                  : "plain"
-              }
-            >
-              <ListItemDecorator>
-                <i data-feather="home" />
-              </ListItemDecorator>
-              <ListItemContent
-                onClick={() => props.setCurrentComponent(DashboardItems.Home)}
-              >
-                Home
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton
-              selected={props.currentComponent === DashboardItems.MyProfile}
-              variant={
-                props.currentComponent === DashboardItems.MyProfile
-                  ? "soft"
-                  : "plain"
-              }
-            >
-              <ListItemDecorator>
-                <i data-feather="chevron-up" />
-              </ListItemDecorator>
-              <ListItemContent
-                onClick={() =>
-                  props.setCurrentComponent(DashboardItems.MyProfile)
-                }
-              >
-                MyProfile
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton
-              selected={props.currentComponent === DashboardItems.Projects}
-              variant={
-                props.currentComponent === DashboardItems.Projects
-                  ? "soft"
-                  : "plain"
-              }
-            >
-              <ListItemDecorator>
-                <i data-feather="layers" />
-              </ListItemDecorator>
-              <ListItemContent
-                onClick={() =>
-                  props.setCurrentComponent(DashboardItems.Projects)
-                }
-              >
-                Projects
-              </ListItemContent>
-            </ListItemButton>
-          </ListItem>{" "}
-          {/*<ListItemButton>New user</ListItemButton>*/}
-          {/*</ListItem>*/}
-          {/*<ListItem>*/}
-          {/*<ListItemButton>Role & Permission</ListItemButton>*/}
-          {/*</ListItem>*/}
-          {/*</List>*/}
-          {/*</ListItem>*/}
-        </List>
-        {/*</ListItem>*/}
-        <List
-          sx={{
-            mt: "auto",
-            flexGrow: 0,
-            "--ListItem-radius": "8px",
-            "--List-gap": "8px",
-          }}
-        >
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <i data-feather="life-buoy" />
-              </ListItemDecorator>
-              <ListItemContent>Supports</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-          <ListItem>
-            <ListItemButton>
-              <ListItemDecorator>
-                <i data-feather="settings" />
-              </ListItemDecorator>
-              <ListItemContent>Settings</ListItemContent>
-            </ListItemButton>
-          </ListItem>
-        </List>
+                    {/*<ListItem>*/}
+                    <ListItem>
+                        <ListItemButton selected={props.currentComponent === DashboardItems.Home}
+                                        variant={props.currentComponent === DashboardItems.Home ? "soft" : "plain"}>
+                            <ListItemDecorator>
+                                <i data-feather="home"/>
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() => props.setCurrentComponent(DashboardItems.Home)}>Home</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton selected={props.currentComponent === DashboardItems.MyProfile}
+                                        variant={props.currentComponent === DashboardItems.MyProfile ? "soft" : "plain"}>
+                            <ListItemDecorator>
+                                <i data-feather="chevron-up" />
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>MyProfile</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem nested>
+                        <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
+                                        variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
+                            <ListItemDecorator>
+                                <i data-feather="layers" />
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
+                        </ListItemButton>
+                        <ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}
+                                        variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>
+                            <ListItemDecorator>
+                                <i data-feather="layers" />
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create Project</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+
+                    {/*<ListItemButton>New user</ListItemButton>*/}
+                    {/*</ListItem>*/}
+                    {/*<ListItem>*/}
+                    {/*<ListItemButton>Role & Permission</ListItemButton>*/}
+                    {/*</ListItem>*/}
+                    {/*</List>*/}
+                    {/*</ListItem>*/}
+                </List>
+                {/*</ListItem>*/}
+                <List
+                    sx={{
+                        mt: "auto",
+                        flexGrow: 0,
+                        "--ListItem-radius": "8px",
+                        "--List-gap": "8px",
+                    }}
+                >
+                    <ListItem>
+                        <ListItemButton>
+                            <ListItemDecorator>
+                                <i data-feather="life-buoy"/>
+                            </ListItemDecorator>
+                            <ListItemContent>Supports</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <ListItemDecorator>
+                                <i data-feather="settings"/>
+                            </ListItemDecorator>
+                            <ListItemContent>Settings</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+                </List>
 
         {/*<Card*/}
         {/*    variant="soft"*/}
