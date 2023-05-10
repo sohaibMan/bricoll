@@ -23,11 +23,14 @@ import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
 import { FormLabel } from '@mui/joy';
 import Typography from '@mui/joy/Typography';
+import {useRouter} from "next/router";
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
 
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
+// import ObjectID from "bson-objectid"
+
 
 
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
@@ -38,7 +41,7 @@ export default function ProjectForm(props: {
     label?:string
 }) {
 
-
+const router=useRouter()
     const defaultState = {
         title: props.project?.title || "",
         description: props.project?.description || "",
@@ -98,10 +101,11 @@ export default function ProjectForm(props: {
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(() => {
-                // router.back()
+            ).then(({data}:any) => {
+                //  any : FetchResult<{createProject:Project>}
+
                 const editProject = {
-                    _id: props.project?._id,
+                    _id: props.project?._id || data.createProject._id,
                     price: +price,
                     title,
                     description,
@@ -111,6 +115,10 @@ export default function ProjectForm(props: {
                 } as unknown as Project;
 
                 props.onSubmitProjectHandler(editProject)//to close the modal and update the ui
+
+            //     clear the input
+            //   router.push("/projects/"+editProject._id);
+            //     router.push("/dashboard/component?home"+editProject._id); //todo tmp fix
             })
 
         } catch (e) {
