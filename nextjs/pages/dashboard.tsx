@@ -12,6 +12,7 @@ import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
 import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 import Stack from "@mui/joy/Stack";
+import CreateProjectForm from "../components/Forms/CreateProjectForm";
 
 const useEnhancedEffect =
     typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -21,7 +22,8 @@ const useEnhancedEffect =
 export enum DashboardItems {
     MyProfile = 'MyProfile',
     Projects = 'Projects',
-    Home = "Home"
+    Home = "Home",
+    CreateProject = "CreateProject",
 }
 
 const USER_PROFILE = gql`
@@ -129,9 +131,8 @@ export default function Index() {
                 >
                     {currentComponent === DashboardItems.Home ? <p>welcome to home (to be done)</p> : null}
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
-                    {currentComponent === DashboardItems.Projects && data.Profile.projects ?
-                        <Stack spacing={1}><DashBoardProjects projectsArr={data.Profile.projects}/></Stack> : null}
-
+                    {currentComponent === DashboardItems.Projects && data.Profile.projects ? <Stack spacing={1}><DashBoardProjects projectsArr={data.Profile.projects}/></Stack> : null}
+                    {currentComponent === DashboardItems.CreateProject ? <CreateProjectForm/>: null}
 
                 </Box>
             </Box>

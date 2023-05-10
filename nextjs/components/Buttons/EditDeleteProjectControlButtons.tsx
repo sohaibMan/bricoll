@@ -56,13 +56,13 @@ export function EditDeleteProjectControlButtons(props: {
     return <>
         <EditChipWithLabel clickHandler={() => setOpen(true)}/>
         <DeleteChipWithLabel actionHandler={deleteProjectHandler}/>
-        <Modal open={open} onClose={() => setOpen(false)}>
+        <Modal  open={open} onClose={() => setOpen(false)}>
             <ModalDialog
                 aria-labelledby="basic-modal-dialog-title"
                 aria-describedby="basic-modal-dialog-description"
-                sx={{maxWidth: 500}}
+                sx={{width: "50%"}}
             >
-                <EditProjectForm onSubmitProjectHandler={editeProjectHandler} project={props.project}/>
+                <EditProjectForm   onSubmitProjectHandler={editeProjectHandler} project={props.project}/>
 
             </ModalDialog>
         </Modal>

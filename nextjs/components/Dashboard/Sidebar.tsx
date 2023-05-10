@@ -169,7 +169,7 @@ export default function Sidebar(props: {
                                 onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>MyProfile</ListItemContent>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem>
+                    <ListItem nested>
                         <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
                                         variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
                             <ListItemDecorator>
@@ -178,7 +178,17 @@ export default function Sidebar(props: {
                             <ListItemContent
                                 onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
                         </ListItemButton>
-                    </ListItem> {/*<ListItemButton>New user</ListItemButton>*/}
+                        <ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}
+                                        variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>
+                            <ListItemDecorator>
+                                <i data-feather="layers" />
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create Project</ListItemContent>
+                        </ListItemButton>
+                    </ListItem>
+
+                    {/*<ListItemButton>New user</ListItemButton>*/}
                     {/*</ListItem>*/}
                     {/*<ListItem>*/}
                     {/*<ListItemButton>Role & Permission</ListItemButton>*/}

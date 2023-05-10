@@ -10,6 +10,7 @@ export default function CustomAutocomplete(props: {
 }) {
     return (
         <Autocomplete
+            sx={{width : "50%"}}
             defaultValue={props.defaultValue}
             placeholder={props.placeholder}
             disableClearable={false}

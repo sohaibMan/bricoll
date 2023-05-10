@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
 import Textarea from '@mui/joy/Textarea';
-import {Stack} from "@mui/joy";
+import {Divider, Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
 import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";
@@ -21,8 +21,8 @@ import {
 } from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
-
-
+import { FormLabel } from '@mui/joy';
+import Typography from '@mui/joy/Typography';
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
@@ -30,11 +30,12 @@ import {DurationInput} from "../Inputs/DurationInput";
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 
 
-// node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
+// note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: {
     project?: Project,
     PROJECT_MUTATION: DocumentNode,
     onSubmitProjectHandler: (project: Project) => void
+    label?:string
 }) {
 
 
@@ -131,25 +132,38 @@ export default function ProjectForm(props: {
             }}
         >
 
-            <form onSubmit={handleSubmit}>
-                <Stack spacing={2}>
+            <form onSubmit={handleSubmit} style={{width:"100%"}}>
 
+                <Stack spacing={1}>
+                    {/*{props.label && <FormLabel    sx={{pb: 2}}>{props.label}</FormLabel>}*/}
+                    {props.label &&  <Typography level="h4">{props.label}</Typography> }
                     <Textarea placeholder="Title" value={title} required
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
+                    <Stack spacing={1} direction="row"   justifyContent="space-between"  divider={<Divider orientation="vertical" />}>
                     <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
 
                     <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
-                    <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
-                                            parentRef={categoriesAutocompleteRef}/>
 
+                    </Stack>
+
+
+                    <Stack spacing={1} direction="row"   justifyContent="space-between"  divider={<Divider orientation="vertical" />}>
                     <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
                                                   placeholder="Level of expertise"
                                                   parentRef={levelOfExpertiseAutoComplete}/>
 
                     <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
                                              parentRef={projectSizeAutocompleteRef}/>
+
+                    </Stack>
+
+                    {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
+                    <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
+                                            parentRef={categoriesAutocompleteRef}/>
+
+                    {/*</Stack>*/}
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
                     <Textarea defaultValue={defaultState.description} placeholder="Description" value={description}

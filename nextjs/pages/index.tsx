@@ -22,12 +22,12 @@ const Home = () => {
   const [input, setInput] = useState("");
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Layout>
-        <div>Hello World</div>
-      </Layout>
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline/>
+        <Layout>
+          <div>Hello World</div>
+        </Layout>
+      </ThemeProvider>
   );
-
+}
 export default Home;

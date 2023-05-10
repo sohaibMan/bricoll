@@ -35,7 +35,7 @@ export default function ProjectItemCard({project,children}: {
                 })}
             >
 
-                <Box sx={{width: "60vw"}}>
+                <Box sx={{width: "80%"}}>
                     <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                         <CustomLink
