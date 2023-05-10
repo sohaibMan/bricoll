@@ -3,15 +3,16 @@ import DeleteChipWithLabel from "../Chip/DeleteChipWithLabel";
 import EditChipWithLabel from "../Chip/EditChipWithLabel";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {useRouter} from "next/router";
 import {Project} from "../../types/resolvers";
+import {Modal, ModalDialog} from "@mui/joy";
+import EditProjectForm from "../Forms/EditProjectForm";
 
 
 export function EditDeleteProjectControlButtons(props: {
-    project_id: string
+    project: Project
     setProjects: React.Dispatch<React.SetStateAction<Project[]>>
 }) {
-    const router = useRouter()
+    const [open, setOpen] = React.useState<boolean>(false);
     // todo remove the deleted project from the ui
 
     const DELETE_PROJECT = gql`
@@ -22,15 +23,14 @@ export function EditDeleteProjectControlButtons(props: {
             }
         }
     `
-    const [deleteProject, {data, error}] = useMutation<{ deleteProject: QueryResult }>(DELETE_PROJECT,
+    const [deleteProject, {error}] = useMutation<{ deleteProject: QueryResult }>(DELETE_PROJECT,
         {
             variables: {
-                deleteProjectId: props.project_id
+                deleteProjectId: props.project._id
             }
         })
 
-    const deleteProjectHandler = async function handler() {
-        // deleteProjectHandler().then(r => alert(JSON.stringify(r)))
+    const deleteProjectHandler = async () => {
         const confirmation = confirm("Are you sure you want to delete this project ")
         if (confirmation) {
             await toast.promise(
@@ -41,15 +41,30 @@ export function EditDeleteProjectControlButtons(props: {
                     error: <b>Could not save. {error?.message}</b>,
                 }
             ).finally(() => {
-                props.setProjects((prev) => prev.filter((project) => project._id !== props.project_id))
+                props.setProjects((prev) => prev.filter((project) => project._id !== props.project._id.toString()))
             })
         }
     }
 
+    const editeProjectHandler = (project: Project) => {
+
+        setOpen(false);
+        props.setProjects(prv => prv.map(prj => prj._id === project._id ? project : prj))
+    }
+
 
     return <>
-
-        <EditChipWithLabel actionHandler={() => router.push(`/projects/${props.project_id}/edit`)}/>
+        <EditChipWithLabel clickHandler={() => setOpen(true)}/>
         <DeleteChipWithLabel actionHandler={deleteProjectHandler}/>
+        <Modal open={open} onClose={() => setOpen(false)}>
+            <ModalDialog
+                aria-labelledby="basic-modal-dialog-title"
+                aria-describedby="basic-modal-dialog-description"
+                sx={{maxWidth: 500}}
+            >
+                <EditProjectForm onSubmitProjectHandler={editeProjectHandler} project={props.project}/>
+
+            </ModalDialog>
+        </Modal>
     </>;
 }

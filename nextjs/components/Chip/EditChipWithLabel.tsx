@@ -4,14 +4,14 @@ import Chip from '@mui/joy/Chip';
 import ChipDelete from '@mui/joy/ChipDelete';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function EditChipWithLabel({actionHandler}: { actionHandler: () => void }) {
+export default function EditChipWithLabel({clickHandler}: { clickHandler: () => void }) {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
 
             <Chip
                 variant="soft"
                 color="warning"
-                endDecorator={<ChipDelete onDelete={actionHandler}><EditIcon fontSize="small"/></ChipDelete>}>
+                endDecorator={<ChipDelete onDelete={clickHandler}><EditIcon fontSize="small"/></ChipDelete>}>
                 Edit
             </Chip>
 

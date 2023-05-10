@@ -23,17 +23,19 @@ import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
 
 
-
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
 
-type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
-import {useRouter} from "next/router";
-// node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
-export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION: DocumentNode }) {
+export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 
-    const router = useRouter();
+
+// node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
+export default function ProjectForm(props: {
+    project?: Project,
+    PROJECT_MUTATION: DocumentNode,
+    onSubmitProjectHandler: (project: Project) => void
+}) {
 
 
     const defaultState = {
@@ -96,7 +98,18 @@ export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION
                     error: <b>{error?.message}</b>,
                 }
             ).then(() => {
-                router.back()
+                // router.back()
+                const editProject = {
+                    _id: props.project?._id,
+                    price: +price,
+                    title,
+                    description,
+                    skills,
+                    projectScope,
+                    category: categoriesAutocompleteRef.current?.value
+                } as unknown as Project;
+
+                props.onSubmitProjectHandler(editProject)//to close the modal and update the ui
             })
 
         } catch (e) {
@@ -144,10 +157,10 @@ export default function ProjectForm(props: { project?: Project, PROJECT_MUTATION
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 
 
+                    <Button type=" submit"> Submit</Button>
+
                 </Stack>
 
-
-                <Button type=" submit"> Submit</Button>
 
             </form>
 

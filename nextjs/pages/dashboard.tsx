@@ -45,7 +45,18 @@ const USER_PROFILE = gql`
                     level_of_expertise
                     size_of_project
                 }
+                attachments {
+                    url
+                    type
+                }
                 category
+                stats {
+                    declined_count
+                    completed_count
+                    approved_count
+                    in_progress_count
+
+                }
             }
         }
     }
@@ -119,7 +130,7 @@ export default function Index() {
                     {currentComponent === DashboardItems.Home ? <p>welcome to home (to be done)</p> : null}
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
                     {currentComponent === DashboardItems.Projects && data.Profile.projects ?
-                        <Stack spacing={4}><DashBoardProjects projectsArr={data.Profile.projects}/></Stack> : null}
+                        <Stack spacing={1}><DashBoardProjects projectsArr={data.Profile.projects}/></Stack> : null}
 
 
                 </Box>

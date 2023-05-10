@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add the project editor for dashboard">
-      <change afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="adjust the dashboard menu with 3 options and make the sidebar interactive">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Chip/EditChipWithLabel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/MyProfile.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/contracts/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/earnings/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/profile/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/projects/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard/proposals/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/EditProjectForm.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,27 +45,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Chip&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/sohaib/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Main",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/pages/projects/[project_id]",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -82,18 +76,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects/[project_id]" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard" />
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/contracts" />
-      <recent name="$PROJECT_DIR$/nextjs/pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/dashboard" />
       <recent name="$PROJECT_DIR$/nextjs/components/Dashboard" />
       <recent name="$PROJECT_DIR$/nextjs/components" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/proposals" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/DashBoardProjects.tsx" />
@@ -142,7 +136,7 @@
       <workItem from="1683628824715" duration="22930000" />
       <workItem from="1683657081617" duration="4835000" />
       <workItem from="1683666901591" duration="6598000" />
-      <workItem from="1683673580954" duration="336000" />
+      <workItem from="1683673580954" duration="4781000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -242,7 +236,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683664691970</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="adjust the dashboard menu with 3 options and make the sidebar interactive">
+      <created>1683674105443</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1683674105443</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -283,6 +284,7 @@
     <MESSAGE value="refactore the mail service" />
     <MESSAGE value="add contract form and fix some problems in the resolvers" />
     <MESSAGE value="add the project editor for dashboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="add the project editor for dashboard" />
+    <MESSAGE value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
   </component>
 </project>

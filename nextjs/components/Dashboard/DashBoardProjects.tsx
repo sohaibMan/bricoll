@@ -11,7 +11,7 @@ export default function DashBoardProjects(props: { projectsArr: Array<Project> }
     const [projects, setProjects] = useState(props.projectsArr);
 
     return <Stack spacing={2}>{projects.map((project) => <ProjectItemCard key={project._id.toString()} project={project}>
-            <EditDeleteProjectControlButtons setProjects={setProjects} project_id={project._id}/>
+            <EditDeleteProjectControlButtons project={project} setProjects={setProjects} />
         </ProjectItemCard>
     )}</Stack>
 }
