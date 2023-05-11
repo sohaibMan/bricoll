@@ -78,6 +78,16 @@ const USER_PROFILE = gql`
                     type
                     name
                 }
+                freelancer {
+                    _id
+                    name
+                    image
+                    reviews {
+                        _id
+                        rating
+                        description
+                    }
+                }
             }
         }
     }
