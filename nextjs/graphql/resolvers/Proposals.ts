@@ -83,7 +83,8 @@ export const ProposalResolvers: Resolvers = {
                 project_id: new ObjectId(args.project_id),
                 created_at: new Date(),
                 status: Proposal_Status.InProgress,
-                updated_at: new Date()
+                updated_at: new Date(),
+                attachments: args.attachments || []
             }
             const insertedProposal = await proposalsCollection.insertOne(proposal);
 
@@ -103,7 +104,11 @@ export const ProposalResolvers: Resolvers = {
             //     because the args contain the id of the project ,and we don't want to update it
             const updateProposal = await proposalsCollection.findOneAndUpdate(
                 // index on id
-                {_id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user?.id)},
+                {
+                    _id: new ObjectId(args.id),
+                    freelancer_id: new ObjectId(context.user?.id),
+                    status: Proposal_Status.InProgress
+                },
                 {
                     $set: updatedFields
                 }
@@ -111,8 +116,9 @@ export const ProposalResolvers: Resolvers = {
                     returnDocument: "after"
                 }
             )
+            // console.log(updateProposal)
             // check if the proposals exits
-            if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposals no longer exists");
+            if (!updateProposal.value) throw new Error("The proposals no longer exists");
             //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
             OnEditProposal(proposal.client_id);
@@ -157,7 +163,11 @@ export const ProposalResolvers: Resolvers = {
             // the freelancer can withdraw just his proposals
             // index scan on id
             const updateProposal = await proposalsCollection.findOneAndUpdate(
-                {_id: new ObjectId(args.id), freelancer_id: new ObjectId(context.user?.id)},
+                {
+                    _id: new ObjectId(args.id),
+                    freelancer_id: new ObjectId(context.user?.id),
+                    status: Proposal_Status.InProgress
+                },
                 {
                     $set: {
                         "status": Proposal_Status.Canceled

@@ -141,9 +141,8 @@ export default function ProjectForm(props: {
             <form onSubmit={handleSubmit} style={{width: "100%"}}>
 
                 <Stack spacing={2}>
-                    {/*{props.label && <FormLabel    sx={{pb: 2}}>{props.label}</FormLabel>}*/}
                     {props.label && <Typography level="h4">{props.label}</Typography>}
-                    <Textarea placeholder="Title" value={title} required
+                    <Textarea placeholder="Title" defaultValue={defaultState.title} required
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
                     <Stack spacing={1} direction="row" justifyContent="space-between"
@@ -174,7 +173,7 @@ export default function ProjectForm(props: {
                     {/*</Stack>*/}
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
-                    <Textarea defaultValue={defaultState.description} placeholder="Description" value={description}
+                    <Textarea defaultValue={defaultState.description} placeholder="Description"
                               required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 

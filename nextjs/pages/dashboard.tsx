@@ -12,6 +12,7 @@ import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
 import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 import {useSession} from "next-auth/react";
+import {DashBoardProposals} from "../components/Dashboard/DashBoardProposals";
 
 const useEnhancedEffect =
     typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -23,6 +24,7 @@ export enum DashboardItems {
     Projects = 'Projects',
     Home = "Home",
     CreateProject = "CreateProject",
+    Proposals = "Proposals",
 }
 
 const USER_PROFILE = gql`
@@ -57,6 +59,24 @@ const USER_PROFILE = gql`
                     approved_count
                     in_progress_count
 
+                }
+            }
+            proposals {
+                _id
+                project_id
+                freelancer_id
+                client_id
+                price
+                duration
+                description
+                cover_letter
+                created_at
+                updated_at
+                status
+                attachments {
+                    url
+                    type
+                    name
                 }
             }
         }
@@ -109,8 +129,7 @@ export default function Index() {
     if(!session || !session.data?.user.userRole)return <h1>not auth</h1> ;// todo add a middlware instead/add userRole to the user data
     const userRole= session.data?.user.userRole;
 
-    if (error || !data || !data.Profile.projects) return <h1>`Error! {error !== undefined ? error?.message : "An Error has occurred"}</h1>;
-
+    if (error || !data || !data.Profile.projects || !data.Profile.proposals) return <h1>`Error! {error !== undefined ? error?.message : "An Error has occurred"}</h1>;
 
     return (
 
@@ -162,6 +181,9 @@ export default function Index() {
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
                     {data.Profile.projects &&
                         <DashBoardProjects currentComponent={currentComponent} projectsArr={data.Profile.projects}/>}
+                    {data.Profile.proposals &&
+                        <DashBoardProposals userRole={userRole} currentComponent={currentComponent}
+                                            proposalArr={data.Profile.proposals}/>}
                 </Box>
             </Box>
         </CssVarsProvider>

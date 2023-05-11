@@ -1,5 +1,6 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { ServerContext } from './server-context';
+import {GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig} from 'graphql';
+import {ServerContext} from './server-context';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -154,12 +155,12 @@ export type MutationCreateProjectArgs = {
 
 
 export type MutationCreateProposalArgs = {
-  attachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
-  cover_letter: Scalars['String'];
-  description: Scalars['String'];
-  duration: Scalars['Int'];
-  price: Scalars['Float'];
-  project_id: Scalars['ObjectID'];
+    attachments?: InputMaybe<Array<AttachmentInput>>;
+    cover_letter: Scalars['String'];
+    description: Scalars['String'];
+    duration: Scalars['Int'];
+    price: Scalars['Float'];
+    project_id: Scalars['ObjectID'];
 };
 
 
@@ -287,19 +288,19 @@ export type ProjectStats = {
 };
 
 export type Proposal = {
-  __typename?: 'Proposal';
-  _id?: Maybe<Scalars['ObjectID']>;
-  attachments?: Maybe<Array<Maybe<Attachment>>>;
-  client_id: Scalars['ObjectID'];
-  cover_letter: Scalars['String'];
-  created_at: Scalars['Date'];
-  description: Scalars['String'];
-  duration: Scalars['Int'];
-  freelancer_id: Scalars['ObjectID'];
-  price: Scalars['Float'];
-  project_id: Scalars['ObjectID'];
-  status: Proposal_Status;
-  updated_at: Scalars['Date'];
+    __typename?: 'Proposal';
+    _id?: Maybe<Scalars['ObjectID']>;
+    attachments?: Maybe<Array<Attachment>>;
+    client_id: Scalars['ObjectID'];
+    cover_letter: Scalars['String'];
+    created_at: Scalars['Date'];
+    description: Scalars['String'];
+    duration: Scalars['Int'];
+    freelancer_id: Scalars['ObjectID'];
+    price: Scalars['Float'];
+    project_id: Scalars['ObjectID'];
+    status: Proposal_Status;
+    updated_at: Scalars['Date'];
 };
 
 export type Query = {
@@ -723,18 +724,18 @@ export type ProjectStatsResolvers<ContextType = ServerContext, ParentType extend
 }>;
 
 export type ProposalResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
-  _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
-  attachments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Attachment']>>>, ParentType, ContextType>;
-  client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  cover_letter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-  project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['proposal_status'], ParentType, ContextType>;
-  updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+    _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
+    attachments?: Resolver<Maybe<Array<ResolversTypes['Attachment']>>, ParentType, ContextType>;
+    client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+    cover_letter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+    description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+    freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+    price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+    project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+    status?: Resolver<ResolversTypes['proposal_status'], ParentType, ContextType>;
+    updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

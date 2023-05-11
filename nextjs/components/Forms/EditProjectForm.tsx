@@ -19,7 +19,8 @@ export default function EditProjectForm(props: {
 
 }) {
 
-    return <ProjectForm label="Edit an existing poject" onSubmitProjectHandler={props.onSubmitProjectHandler} PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
+    return <ProjectForm label="Edit an existing project" onSubmitProjectHandler={props.onSubmitProjectHandler}
+                        PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
                         project={props.project}/>;
 
 };

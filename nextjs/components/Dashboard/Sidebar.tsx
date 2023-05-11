@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
-import { styled } from "@mui/joy/styles";
+import {ChangeEvent} from "react";
+import {styled} from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
@@ -15,12 +16,10 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import { closeSidebar } from "../../pages/utils";
-import { DashboardItems } from "../../pages/dashboard";
+import {closeSidebar} from "../../pages/utils";
+import {DashboardItems} from "../../pages/dashboard";
 import {User, UserRole} from "../../types/resolvers";
-import { ChangeEvent } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import {useRouter} from "next/router";
 
 const Dropdown = styled("i")(({ theme }) => ({
   color: theme.vars.palette.text.tertiary,
@@ -190,6 +189,28 @@ export default function Sidebar(props: {
                           onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create
                           Project</ListItemContent>
                   </ListItemButton>
+              </ListItem>}
+
+
+              {/*only freelancer*/}
+              {props.userRole === UserRole.Freelancer && <ListItem nested>
+                  <ListItemButton selected={props.currentComponent === DashboardItems.Proposals}
+                                  variant={props.currentComponent === DashboardItems.Proposals ? "soft" : "plain"}>
+                      <ListItemDecorator>
+                          <i data-feather="layers"/>
+                      </ListItemDecorator>
+                      <ListItemContent
+                          onClick={() => props.setCurrentComponent(DashboardItems.Proposals)}>Proposals</ListItemContent>
+                  </ListItemButton>
+                  {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
+                  {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
+                  {/*    <ListItemDecorator>*/}
+                  {/*        <i data-feather="layers"/>*/}
+                  {/*    </ListItemDecorator>*/}
+                  {/*    <ListItemContent*/}
+                  {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
+                  {/*        Project</ListItemContent>*/}
+                  {/*</ListItemButton>*/}
               </ListItem>}
 
           </List>

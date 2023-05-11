@@ -22,7 +22,7 @@ type Proposal {
     updated_at: Date!
     status: proposal_status!
     # current time
-    attachments: [Attachment]
+    attachments: [Attachment!]
     # the link of urls of the attachments(files, images, video)
 }
 
