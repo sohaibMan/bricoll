@@ -30,7 +30,7 @@ export const ProjectResolvers: Resolvers = {
         },
         Projects: async (parent, args, context, info) => {
             // if the user doesn't provide a query, we will return 20 random projects
-            console.log(args)
+            freelancerMiddleware(context)
             const aggregation: any = []
             if (args.query) aggregation.push({
 
@@ -74,8 +74,13 @@ export const ProjectResolvers: Resolvers = {
                     }
                 }
             })
-
-            if (aggregation.length === 0) return await projectsCollection.aggregate([{$sample: {size: 20}}]).toArray() as Project[];
+            // sort them by the most recent
+            aggregation.push({
+                $sort: {
+                    "created_at": -1
+                }
+            })
+            if (aggregation.length === 0) return await projectsCollection.aggregate([{$sample: {size: 40}}]).toArray() as Project[];
             return await projectsCollection.aggregate(aggregation).toArray() as unknown as Project[];
         }
     },

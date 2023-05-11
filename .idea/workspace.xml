@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add edit/accept project to proposal for clients in the dashboar">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/ProposalStatusAutocomplete.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Projects.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/utils/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +33,11 @@
       <list>
         <option value="Sohaib manah &lt;96356071+sohaibman@users.noreply.github.com&gt;" />
       </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="FreelancerAvatar" />
+      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
@@ -77,7 +86,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "inlay.hints",
     "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }

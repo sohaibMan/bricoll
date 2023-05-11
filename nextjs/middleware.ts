@@ -10,10 +10,16 @@ export default withAuth({
             if (req.nextUrl.pathname === "/admin") {
                 return token?.userRole === UserRole.Admin;
             }
+            if (req.nextUrl.pathname === "/projects") {
+                return token?.userRole === UserRole.Freelancer;
+            }
+            // if (req.nextUrl.pathname === "/dashboard") {
+            //     return token?.userRole === UserRole.Client || token?.userRole === UserRole.Freelancer;
+            // }
             // `/me` only requires the user to be logged in
             return !!token
         },
     },
 })
 
-export const config = {matcher: ["/admin", "/me"]}
+export const config = {matcher: ["/admin", "/me", "/projects", "/dashboard"]}

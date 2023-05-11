@@ -13,6 +13,7 @@ import {User} from "../types/resolvers";
 import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 import {useSession} from "next-auth/react";
 import {DashBoardProposals} from "../components/Dashboard/DashBoardProposals";
+import moment from "moment";
 
 const useEnhancedEffect =
     typeof window !== 'undefined' ? React.useLayoutEffect : React.useEffect;
@@ -126,8 +127,8 @@ export default function Index() {
     if (loading) return <h1>Loading... </h1>
 
 
-    if(!session || !session.data?.user.userRole)return <h1>not auth</h1> ;// todo add a middlware instead/add userRole to the user data
-    const userRole= session.data?.user.userRole;
+    if (!session.data?.user?.userRole) return <h1>not auth</h1>;// todo add a middlware instead/add userRole to the user data
+    const userRole = session.data?.user.userRole;
 
     if (error || !data || !data.Profile.projects || !data.Profile.proposals) return <h1>`Error! {error !== undefined ? error?.message : "An Error has occurred"}</h1>;
 
@@ -180,10 +181,11 @@ export default function Index() {
                     {currentComponent === DashboardItems.Home ? <p>welcome to home (to be done)</p> : null}
                     {currentComponent === DashboardItems.MyProfile ? <MyProfile user={data.Profile}/> : null}
                     {data.Profile.projects &&
-                        <DashBoardProjects currentComponent={currentComponent} projectsArr={data.Profile.projects}/>}
+                        <DashBoardProjects currentComponent={currentComponent}
+                                           projectsArr={data.Profile.projects.slice().sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1)}/>}
                     {data.Profile.proposals &&
                         <DashBoardProposals userRole={userRole} currentComponent={currentComponent}
-                                            proposalArr={data.Profile.proposals}/>}
+                                            proposalArr={data.Profile.proposals.slice().sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1)}/>}
                 </Box>
             </Box>
         </CssVarsProvider>

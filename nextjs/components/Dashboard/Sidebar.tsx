@@ -16,7 +16,7 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import {closeSidebar} from "../../pages/utils";
+import {closeSidebar} from "../../utils/utils";
 import {DashboardItems} from "../../pages/dashboard";
 import {User, UserRole} from "../../types/resolvers";
 import {useRouter} from "next/router";
