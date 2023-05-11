@@ -2,18 +2,18 @@ import * as React from 'react';
 import Autocomplete from '@mui/joy/Autocomplete';
 
 export default function CustomAutocomplete(props: {
-    parentRef: React.RefObject<HTMLInputElement>
     labels: { label: string }[]
     placeholder: string
+    parentRef?: React.RefObject<HTMLInputElement>
     defaultValue?: string
+    changeHandler?: (event: React.ChangeEvent<{}>, value: string | null) => void
 
 }) {
     const defaultValue=props.defaultValue ?  props.defaultValue : null;
-
     return (
         <Autocomplete
-            // isOptionEqualToValue={(option,value)=>option===value}
-            sx={{width : "50%"}}
+            onChange={props.changeHandler}
+            sx={{width: "50%"}}
             defaultValue={defaultValue}
             placeholder={props.placeholder}
             disableClearable={false}

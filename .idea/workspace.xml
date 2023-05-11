@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update dashboard layout">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptDeclineProposalControlButtons.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Chip/AcceptChipWithLabel.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add edit/accept project to proposal for clients in the dashboar">
+      <change afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/ProposalStatusAutocomplete.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Chip/CancelChipWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Chip/CancelChipWithLabel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +69,7 @@
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Main",
-    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/Chip",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/AutoCompletes",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -97,11 +93,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/AutoCompletes" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/projects/[project_id]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/utils" />
@@ -164,7 +160,8 @@
       <workItem from="1683740506864" duration="49000" />
       <workItem from="1683744389464" duration="13518000" />
       <workItem from="1683793367582" duration="13069000" />
-      <workItem from="1683811074986" duration="4953000" />
+      <workItem from="1683811074986" duration="5331000" />
+      <workItem from="1683823177735" duration="923000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -313,7 +310,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683813107995</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="add edit/accept project to proposal for clients in the dashboar">
+      <created>1683816560692</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1683816560692</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,8 +346,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <MESSAGE value="update the node modules and add a chart to the project by id and add some styles to the search bar" />
     <MESSAGE value="add attachments to projects #74" />
     <MESSAGE value="update project card skeleton" />
@@ -363,6 +366,10 @@
     <MESSAGE value="custom  dashboard per userRole" />
     <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="update dashboard layout" />
+    <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
+    <option name="LAST_COMMIT_MESSAGE" value="add edit/accept project to proposal for clients in the dashboar" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
