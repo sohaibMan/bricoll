@@ -12,6 +12,9 @@ import { createTheme } from "@mui/material/styles";
 // import { green, purple } from '@mui/material/colors';
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import StepContext from "../components/auth/registration/stepContext";
+
+// import FirstStep from "../components/auth/registration/firstStep";
 
 const theme = createTheme({
   palette: {
@@ -42,13 +45,15 @@ export default function App({
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
         <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Layout>
+          <StepContext>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              {/* <Layout> */}
               <Toaster />
               <Component {...pageProps} />
-            </Layout>
-          </ThemeProvider>
+              {/* </Layout> */}
+            </ThemeProvider>
+          </StepContext>
         </StyledEngineProvider>
       </ApolloProvider>
     </SessionProvider>
