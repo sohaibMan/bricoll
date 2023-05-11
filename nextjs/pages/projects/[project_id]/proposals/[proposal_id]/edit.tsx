@@ -78,7 +78,7 @@ const EditProposal = () => {
     if (!data) return <p>No proposals</p>
 
 
-    return <ProposalForm PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
+    return <ProposalForm onSubmitProposalHandler={()=>{}} label={"edit an existing proposal"} PROPOSAL_MUTATION={EDIT_PROJECT_MUTATION}
                          proposal={data.Proposal} project_id={data.Proposal.project_id}/>;
 
 };
