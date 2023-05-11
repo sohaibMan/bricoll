@@ -4,6 +4,7 @@ import Stack from "@mui/joy/Stack";
 import * as React from "react";
 import ProposalItemCard from "../Cards/ProposalItemCard";
 import {EditCancelProposalControlButtons} from "../Buttons/EditCancelProposalControlButtons";
+import {AcceptDeclineProposalControlButtons} from "../Buttons/AcceptDeclineProposalControlButtons";
 
 export const DashBoardProposals = (props: {
     proposalArr: Array<Proposal>,
@@ -17,8 +18,11 @@ export const DashBoardProposals = (props: {
             <ProposalItemCard
                 key={proposal._id.toString()} proposal={proposal}>
                 {/*freelancer only*/}
-                {(props.userRole === UserRole.Freelancer && proposal.status === Proposal_Status.InProgress) ?
-                    <EditCancelProposalControlButtons proposal={proposal} setProposals={setProposals}/> : <></>}
+                {props.userRole === UserRole.Freelancer && proposal.status === Proposal_Status.InProgress &&
+                    <EditCancelProposalControlButtons proposal={proposal} setProposals={setProposals}/>}
+                {/*    clients only*/}
+                {props.userRole === UserRole.Client && proposal.status === Proposal_Status.InProgress &&
+                    <AcceptDeclineProposalControlButtons proposal={proposal} setProposals={setProposals}/>}
             </ProposalItemCard>
         )}</Stack>
     )

@@ -3,7 +3,10 @@ import Box from '@mui/joy/Box';
 import Chip from '@mui/joy/Chip';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-export default function CancelChipWithLabel({actionHandler}: { actionHandler: () => void }) {
+export default function CancelChipWithLabel({actionHandler, label = "cancel"}: {
+    actionHandler: () => void,
+    label?: string
+}) {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
 
@@ -13,7 +16,7 @@ export default function CancelChipWithLabel({actionHandler}: { actionHandler: ()
                 onClick={actionHandler}
                 endDecorator={<CancelOutlinedIcon color="disabled"/>}
             >
-                Cancel
+                {label}
             </Chip>
 
         </Box>

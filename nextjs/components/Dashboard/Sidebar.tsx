@@ -193,7 +193,8 @@ export default function Sidebar(props: {
 
 
               {/*only freelancer*/}
-              {props.userRole === UserRole.Freelancer && <ListItem nested>
+              {/*{props.userRole === UserRole.Freelancer && */}
+              <ListItem nested>
                   <ListItemButton selected={props.currentComponent === DashboardItems.Proposals}
                                   variant={props.currentComponent === DashboardItems.Proposals ? "soft" : "plain"}>
                       <ListItemDecorator>
@@ -211,8 +212,7 @@ export default function Sidebar(props: {
                   {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
                   {/*        Project</ListItemContent>*/}
                   {/*</ListItemButton>*/}
-              </ListItem>}
-
+              </ListItem>
           </List>
                     {/*<ListItemButton>New user</ListItemButton>*/}
                     {/*</ListItem>*/}

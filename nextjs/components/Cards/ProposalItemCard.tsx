@@ -11,7 +11,7 @@ import Attachments from "../ListItems/Attachments";
 
 export default function ProposalItemCard({proposal, children}: {
     proposal: Proposal,
-    children: React.JSX.Element | React.JSX.Element[]
+    children: React.ReactNode
 }) {
 
     return (

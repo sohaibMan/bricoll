@@ -4,14 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add edit prposal mangement">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardWrapper.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update dashboard layout">
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptDeclineProposalControlButtons.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Chip/AcceptChipWithLabel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/[proposal_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/[proposal_id]/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/contracts/[contract_id]/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/contracts/[contract_id]/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/contracts/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/contracts/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/create.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Chip/CancelChipWithLabel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Chip/CancelChipWithLabel.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +55,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -64,27 +65,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Chip&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/sohaib/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Main",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/Chip",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -97,8 +98,8 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
       <recent name="$PROJECT_DIR$/nextjs/pages/projects/[project_id]" />
     </key>
@@ -163,7 +164,7 @@
       <workItem from="1683740506864" duration="49000" />
       <workItem from="1683744389464" duration="13518000" />
       <workItem from="1683793367582" duration="13069000" />
-      <workItem from="1683811074986" duration="1550000" />
+      <workItem from="1683811074986" duration="4953000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -305,7 +306,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683807631083</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update dashboard layout">
+      <created>1683813107995</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1683813107995</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,6 +362,7 @@
     <MESSAGE value="comeplete the project dashbaord" />
     <MESSAGE value="custom  dashboard per userRole" />
     <MESSAGE value="add edit prposal mangement" />
-    <option name="LAST_COMMIT_MESSAGE" value="add edit prposal mangement" />
+    <MESSAGE value="update dashboard layout" />
+    <option name="LAST_COMMIT_MESSAGE" value="update dashboard layout" />
   </component>
 </project>
