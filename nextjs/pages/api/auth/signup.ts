@@ -30,7 +30,7 @@ export default async function handler(
             return res.redirect("http://localhost:3000/api/auth/profileType");
         }
 
-        // console.log(userRole);
+        console.log(userRole);
 
 
         const userData = await req.body;
