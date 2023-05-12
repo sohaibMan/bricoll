@@ -50,3 +50,19 @@ iframe {
     margin: 0 0 15px 0;
     position: relative;
 }
+
+.App {
+    text-align: center;
+  }
+  
+  .App-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .center-stepper {
+    display: flex;
+    justify-content: center;
+  }
