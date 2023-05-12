@@ -42,20 +42,20 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
-        <StyledEngineProvider injectFirst>
+        {/* <StyledEngineProvider injectFirst> */}
           {/* <StepContext> */}
           <StepContextProvider>
 
-<!--             <ThemeProvider theme={theme}> -->
+{/* <!--             <ThemeProvider theme={theme}> --> */}
               <CssBaseline />
               {/* <Layout> */}
               <Toaster />
               <Component {...pageProps} />
               {/* </Layout> */}
-<!--             </ThemeProvider> -->
+{/* <!--             </ThemeProvider> --> */}
           {/* </StepContext> */}
           </StepContextProvider>
-        </StyledEngineProvider>
+        {/* </StyledEngineProvider> */}
       </ApolloProvider>
     </SessionProvider>
   );
