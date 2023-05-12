@@ -17,9 +17,6 @@ import DropZone from "./DropZone";
 import {User} from "../../types/resolvers";
 import {useRouter} from "next/router";
 import toast from "react-hot-toast";
-import Upload from "../Buttons/Upload";
-import CustomLink from "../CustomLinks/CustomLink";
-import CountrySelector from "./CountrySelector";
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 
 

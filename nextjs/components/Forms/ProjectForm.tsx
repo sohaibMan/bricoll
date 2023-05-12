@@ -167,7 +167,7 @@ export default function ProjectForm(props: {
                     </Stack>
 
                     {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
-                    <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
+                    <CategoriesAutocomplete defaultValue={defaultState.category}
                                             parentRef={categoriesAutocompleteRef}/>
 
                     {/*</Stack>*/}

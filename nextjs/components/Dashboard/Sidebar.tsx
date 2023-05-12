@@ -15,7 +15,7 @@ import ListItemContent from "@mui/joy/ListItemContent";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import ColorSchemeToggle from "./ColorSchemeToggle";
+import ColorSchemeToggleButton from "../Buttons/ColorSchemeToggleButton";
 import {closeSidebar} from "../../utils/utils";
 import {DashboardItems} from "../../pages/dashboard";
 import {User, UserRole} from "../../types/resolvers";
@@ -112,7 +112,7 @@ export default function Sidebar(props: {
 
                 {/*<Typography sx={{ fontWeight: 'medium' }}>Bricoll</Typography>*/}
                 <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
-                <ColorSchemeToggle sx={{ml: "auto"}}/>
+                <ColorSchemeToggleButton sx={{ml: "auto"}}/>
             </Box>
             <Input
                 startDecorator={<SearchIcon/>}

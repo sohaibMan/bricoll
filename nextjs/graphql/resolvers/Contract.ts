@@ -23,7 +23,7 @@ import {
     onRequestProjectSubmissionReview
 } from "../../email/notifyEmail";
 
-const contractCollection = db.collection("contract")
+const contractCollection = db.collection("contracts")
 const projectsCollection = db.collection("projects")
 const proposalsCollection = db.collection("proposals")
 const usersCollection = db.collection("users")
@@ -62,15 +62,16 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
+                status: ContractStatus.Pending
 
             }, {$set: {status: ContractStatus.Accepted, updated_at: new Date()}}, {
                 returnDocument: "after"
             });
 
-            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The Contract no longer exists");
+            if (!updatedContract.value) throw new Error("The Contract no longer exists");
             //return the value (the updated proposals)
             // send email to the client
-            onAcceptContract(updatedContract.value.client_id as ObjectId)
+            await onAcceptContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
 
         },
@@ -79,7 +80,7 @@ export const ContractResolvers: Resolvers = {
             authenticatedMiddleware(context)
 
             const updatedContract = await contractCollection.findOneAndUpdate({
-                $and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]
+                $and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}, {status: ContractStatus.Pending}]
             }, {
                 $set: {
                     status: context.user?.userRole === UserRole.Client ? ContractStatus.CancelledByClient : ContractStatus.CancelledByFreelancer,
@@ -90,7 +91,7 @@ export const ContractResolvers: Resolvers = {
             });
             if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
             //return the value (the updated proposals)
-            onCancelContract(updatedContract.value.client_id as ObjectId)
+            await onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
         createContract: async (parent, args, context, info) => {
@@ -146,6 +147,7 @@ export const ContractResolvers: Resolvers = {
                     },
                 });
 
+
             const contract: Contract = {
                 _id: new ObjectId(),
                 freelancer_id: new ObjectId(args.freelancer_id),
@@ -159,7 +161,7 @@ export const ContractResolvers: Resolvers = {
                 created_at: new Date(),
                 updated_at: new Date(),
                 submission_reviews: [],
-                terms: args.terms,
+                terms: args.terms || [] as string[],
                 fees: args.price * 0.05, // 5% of the price for the platform fees (both client and freelancer will pay 5% of the price)
                 // further explanation about the fees
                 // the client will pay 5% of the price to the platform (price + fees = 105% of the price)

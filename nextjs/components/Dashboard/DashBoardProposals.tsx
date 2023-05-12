@@ -7,6 +7,7 @@ import ProposalItemCard from "../Cards/ProposalItemCard";
 import {EditCancelProposalControlButtons} from "../Buttons/EditCancelProposalControlButtons";
 import {AcceptDeclineProposalControlButtons} from "../Buttons/AcceptDeclineProposalControlButtons";
 import ProposalStatusAutocomplete from "../AutoCompletes/ProposalStatusAutocomplete";
+import Typography from "@mui/joy/Typography";
 
 
 export const DashBoardProposals = (props: {
@@ -23,6 +24,7 @@ export const DashBoardProposals = (props: {
     if (props.currentComponent === DashboardItems.Proposals) return (
         <Stack spacing={2}>
             <ProposalStatusAutocomplete changeHandler={(event, value) => setQuery(() => value)}/>
+            {filteredProposals.length == 0 && <Typography level="h3">No Proposal found</Typography>}
             {filteredProposals.map((proposal) =>
                 <ProposalItemCard
                     key={proposal._id.toString()} proposal={proposal}>

@@ -57,38 +57,35 @@
 //   );
 // }
 
-import React, { useContext } from "react";
-import { Button, TextField } from "@mui/material";
+import React, {useContext} from "react";
+import {Button, TextField} from "@mui/material";
 // import { multiStepContext } from "./stepContext";
-import { toast } from "react-hot-toast";
-import CountrySelector from "../../Dashboard/CountrySelector";
-import { Box } from "@mui/material";
-import ContrySelector from "../../Dashboard/CountrySelector";
-import { multiStepContext } from "./stepContext";
+import {toast} from "react-hot-toast";
+import {multiStepContext} from "./stepContext";
 
 
 export default function FirstStep() {
-  const { setStep, userData, setUserData }: any = useContext(multiStepContext);
+    const {setStep, userData, setUserData}: any = useContext(multiStepContext);
 
-  function handleSubmit() {
-    const requiredFields = [
-      "bio",
-      "country",
-      "city",
-      "phone",
-      "language",
-      "photo",
-    ];
-    const missingFields = requiredFields.filter((field) => !userData[field]);
+    function handleSubmit() {
+        const requiredFields = [
+            "bio",
+            "country",
+            "city",
+            "phone",
+            "language",
+            "photo",
+        ];
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
-    if (missingFields.length) {
-      toast.error(
-        `Please fill in the following fields: ${missingFields.join(", ")}`
-      );
-    } else {
-      setStep(2);
+        if (missingFields.length) {
+            toast.error(
+                `Please fill in the following fields: ${missingFields.join(", ")}`
+            );
+        } else {
+            setStep(2);
+        }
     }
-  }
 
   return (
     <div>

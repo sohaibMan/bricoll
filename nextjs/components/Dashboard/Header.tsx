@@ -2,7 +2,7 @@ import * as React from 'react';
 import GlobalStyles from '@mui/joy/GlobalStyles';
 import IconButton from '@mui/joy/IconButton';
 import Sheet from '@mui/joy/Sheet';
-import ColorSchemeToggle from './ColorSchemeToggle';
+import ColorSchemeToggleButton from '../Buttons/ColorSchemeToggleButton';
 import {toggleSidebar} from '../../utils/utils';
 import MenuIcon from '@mui/icons-material/Menu';
 import Image from "next/image";
@@ -49,7 +49,7 @@ export default function Header() {
 
 
             {/*<MuiLogo variant="plain" sx={{ boxShadow: 'none', mr: 'auto' }} />*/}
-            <ColorSchemeToggle id={undefined}/>
+            <ColorSchemeToggleButton id={undefined}/>
         </Sheet>
   );
 }

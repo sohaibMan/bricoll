@@ -14,6 +14,7 @@ import {DashBoardProposals} from "../components/Dashboard/DashBoardProposals";
 import moment from "moment";
 import Link from "@mui/joy/Link";
 import CircularProgress from "@mui/joy/CircularProgress";
+import {DashBoardContracts} from "../components/Dashboard/DashBoardContracts";
 
 
 // list of all menus in the dashboard_tmp
@@ -78,6 +79,35 @@ const USER_PROFILE = gql`
                     name
                 }
             }
+            contracts {
+                _id
+                freelancer_id
+                client_id
+                project_id
+                proposal_id
+                price
+                duration
+                status
+                created_at
+                updated_at
+                terms
+                #                submission_reviews {
+                #                    _id
+                #                    attachments {
+                #                        url
+                #                        type
+                #                        name
+                #                    }
+                #                    title
+                #                    description
+                #                    created_at
+                #                    updated_at
+                #                    accepted_at
+                #                    status
+                #                }
+                fees
+            }
+
         }
     }
 `;
@@ -235,6 +265,17 @@ export default function Index() {
                             userRole={userRole}
                             currentComponent={currentComponent}
                             proposalArr={data.Profile.proposals
+                                .slice()
+                                .sort((a, b) =>
+                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                )}
+                        />
+                    )}
+                    {data.Profile.contracts && (
+                        <DashBoardContracts
+                            userRole={userRole}
+                            currentComponent={currentComponent}
+                            contractArr={data.Profile.contracts
                                 .slice()
                                 .sort((a, b) =>
                                     moment(b.created_at).isAfter(a.created_at) ? 1 : -1

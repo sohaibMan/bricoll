@@ -14,12 +14,13 @@ const categories = [
 ];
 
 export default function CategoriesAutocomplete(props: {
-    parentRef: React.RefObject<HTMLInputElement>
-    placeholder: string
+    parentRef?: React.RefObject<HTMLInputElement>
     defaultValue?: string
+    changeHandler?: (event: React.ChangeEvent<{}>, value: string | null) => void
 }) {
     return (
-        <CustomAutocomplete defaultValue={props.defaultValue} parentRef={props.parentRef} labels={categories} placeholder={props.placeholder}/>
+        <CustomAutocomplete changeHandler={props.changeHandler} defaultValue={props.defaultValue}
+                            parentRef={props.parentRef} labels={categories} placeholder={"categories"}/>
     );
 }
 

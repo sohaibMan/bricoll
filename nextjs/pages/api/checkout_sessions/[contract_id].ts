@@ -4,7 +4,7 @@ import {Contract, ContractStatus} from "../../../types/resolvers";
 import db from "../../../lib/mongodb";
 import {getToken} from "next-auth/jwt";
 
-const contractCollection = db.collection("contract")
+const contractCollection = db.collection("contracts")
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
