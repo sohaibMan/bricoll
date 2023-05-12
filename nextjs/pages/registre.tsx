@@ -6,18 +6,22 @@ import ThirdtStep from "../components/auth/registration/thirdStep";
 // import CheckoutPage from "../components/CheckoutPage";
 
 import { Stepper, StepLabel, Step } from "@mui/material";
-import { multiStepContext } from "../components/auth/registration/stepContext";
+// import { multiStepContext } from "../components/auth/registration/stepContext";
 import FourthStep from "../components/auth/registration/fourthStep";
-// import React, { useState, createContext } from "react";
 
-import StepContext from "../components/auth/registration/stepContext";
+// import StepContext from "../components/auth/registration/stepContext";
+
+import { StepContextProvider, multiStepContext } from "../components/auth/registration/stepContext";
+
 
 const steps = ["Overview", "Skills", "Experiences", "Complete Profile"];
 
 export default function Registre() {
+  // const { currentStep, finalData }: any = useContext(multiStepContext);
   const { currentStep, finalData }: any = useContext(multiStepContext);
 
-  console.log(finalData);
+
+  console.log(useContext(multiStepContext));
 
   // useEffect(() => {
 
@@ -39,6 +43,7 @@ export default function Registre() {
     }
   }
   return (
+    // <StepContextProvider>
       <div style={{ textAlign: "center" }}>
         <div
           style={{
@@ -53,9 +58,10 @@ export default function Registre() {
           </h3>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <Stepper
-              style={{ width: "40%" }}
+              style={{ width: "60%" }}
               activeStep={currentStep - 1}
               alternativeLabel
+              
               // orientation="horizontal"
             >
               {steps.map((label) => (
@@ -80,6 +86,6 @@ export default function Registre() {
       <ThirdtStep /> */}
         </div>
       </div>
-    // </StepContext>
+    // </StepContextProvider>
   );
 }

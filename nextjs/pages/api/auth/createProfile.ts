@@ -60,14 +60,14 @@ export default async function handler(
 
     // await redis.set(user_id, JSON.stringify(user))
 
-    console.log("user ", user);
+    // console.log("user ", user);
 
     if (user?.isCompleted === true) {
       return res.redirect("/");
     }
 
     // const { bio, level, language } = req.body;
-    let { email }: any = user;
+    let email = user?.email;
 
     console.log("email ", email);
     // console.log("req ", req.body);
@@ -99,7 +99,7 @@ export default async function handler(
       }
     );
 
-    // console.log(newUserInfo);
+    console.log("newUserInfo: ", newUserData);
 
     // ? Caching the data
     await redis.set(email, JSON.stringify(newUserData));

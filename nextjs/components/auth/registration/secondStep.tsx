@@ -98,8 +98,6 @@
 import React, { useContext } from "react";
 import { Button, TextField } from "@mui/material";
 import { multiStepContext } from "./stepContext";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import { toast } from "react-hot-toast";
 
 export default function SecondStep() {

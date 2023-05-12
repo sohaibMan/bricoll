@@ -19,6 +19,7 @@ import { useRouter } from "next/router";
 import toast from "react-hot-toast";
 import Upload from "../Buttons/Upload";
 import CustomLink from "../CustomLinks/CustomLink";
+import CountrySelector from "./CountrySelector";
 
 // const imageURL = ref
 
@@ -293,11 +294,14 @@ export default function MyProfile(props: { user: User }) {
             {/* <FormControl sx={{ display: { sm: "contents" } }}>
             <FormLabel>Role</FormLabel>x`
             <Input defaultValue="" />
-          </FormControl>
+          </FormControl>*/}
 
-          <Divider role="presentation" /> */}
+          {/* <Divider role="presentation" /> 
 
-            {/* <CountrySelector /> */}
+            <CountrySelector />
+
+            <Divider role="presentation" />  */}
+
 
             {/* <Box>
             <FormLabel>Bio</FormLabel>

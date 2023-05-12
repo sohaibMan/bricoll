@@ -59,45 +59,32 @@
 
 import React, { useContext } from "react";
 import { Button, TextField } from "@mui/material";
-import { multiStepContext } from "./stepContext";
-import { useFormik } from "formik";
-import * as yup from "yup";
+// import { multiStepContext } from "./stepContext";
 import { toast } from "react-hot-toast";
+import CountrySelector from "../../Dashboard/CountrySelector";
+import { Box } from "@mui/material";
+import ContrySelector from "../../Dashboard/CountrySelector";
+import { multiStepContext } from "./stepContext";
+
 
 export default function FirstStep() {
   const { setStep, userData, setUserData }: any = useContext(multiStepContext);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     bio: userData.bio,
-  //     country: userData.country,
-  //     city: userData.city,
-  //     phone: userData.phone,
-  //     language: userData.language,
-  //     photo: userData.phone,
-  //   },
-  //   validationSchema: yup.object({
-  //     bio: yup.string().required('Bio is required'),
-  //     country: yup.string().required('Country is required'),
-  //     city: yup.string().required('City name is required'),
-  //     phone: yup.string().required('Phone name is required'),
-  //     language: yup.string().required('Language name is required'),
-  //     photo: yup.string().required('Photo name is required')
-  //   }),
-  //   onSubmit: (values) => {
-  //     setUserData((), values);
-  //     console.log("values: ", values);
-
-  //     setStep(2);
-  //   }
-  // });
-
   function handleSubmit() {
-    const requiredFields = ["bio", "country", "city", "phone", "language", "photo"];
-    const missingFields = requiredFields.filter(field => !userData[field]);
-  
+    const requiredFields = [
+      "bio",
+      "country",
+      "city",
+      "phone",
+      "language",
+      "photo",
+    ];
+    const missingFields = requiredFields.filter((field) => !userData[field]);
+
     if (missingFields.length) {
-      toast.error(`Please fill in the following fields: ${missingFields.join(", ")}`);
+      toast.error(
+        `Please fill in the following fields: ${missingFields.join(", ")}`
+      );
     } else {
       setStep(2);
     }
@@ -131,6 +118,19 @@ export default function FirstStep() {
           }
         />
       </div>
+
+      {/* <div>
+        <CountrySelector
+          style={{marginLeft: "50px", marginRight: "50px"}}
+          label="Country"
+          name="country"
+          value={userData["country"]}
+          onChange={(e) =>
+            setUserData({ ...userData, country: e.target.value })
+          }
+        />
+      </div> */}
+
       <div>
         <TextField
           style={{ width: "30%" }}
@@ -196,10 +196,3 @@ export default function FirstStep() {
     </div>
   );
 }
-
-
-
-
-
-
-

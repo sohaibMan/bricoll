@@ -12,7 +12,8 @@ import { createTheme } from "@mui/material/styles";
 // import { green, purple } from '@mui/material/colors';
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import StepContext from "../components/auth/registration/stepContext";
+import { StepContextProvider } from "../components/auth/registration/stepContext";
+// import StepContext from "../components/auth/registration/stepContext";
 
 // import FirstStep from "../components/auth/registration/firstStep";
 
@@ -45,7 +46,9 @@ export default function App({
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
         <StyledEngineProvider injectFirst>
-          <StepContext>
+          {/* <StepContext> */}
+          <StepContextProvider>
+
             <ThemeProvider theme={theme}>
               <CssBaseline />
               {/* <Layout> */}
@@ -53,7 +56,8 @@ export default function App({
               <Component {...pageProps} />
               {/* </Layout> */}
             </ThemeProvider>
-          </StepContext>
+          {/* </StepContext> */}
+          </StepContextProvider>
         </StyledEngineProvider>
       </ApolloProvider>
     </SessionProvider>

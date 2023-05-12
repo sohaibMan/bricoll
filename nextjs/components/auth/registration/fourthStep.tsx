@@ -1,8 +1,6 @@
 import React, { ChangeEvent, useContext } from "react";
 import { Button, TextField } from "@mui/material";
 import { multiStepContext } from "./stepContext";
-import { useFormik } from "formik";
-import * as yup from "yup";
 import { toast } from "react-hot-toast";
 
 export default function FourthStep() {
@@ -55,9 +53,9 @@ export default function FourthStep() {
     
 
     // const [{country}] = [...finalData]
-    console.log("bio ", bio);
-    console.log("language ", language);
-    console.log("portf ", portfolio);
+    // console.log("bio ", bio);
+    // console.log("language ", language);
+    // console.log("portf ", portfolio);
 
     const response = await fetch(`/api/auth/createProfile`, {
       method: "POST",
@@ -81,8 +79,8 @@ export default function FourthStep() {
       }),
     });
 
-    const res = await response.json();
-    alert(JSON.stringify(res));
+    // const res = await response.json();
+    // alert(JSON.stringify(res));
     toast.success("The profile is created successfuly ✅");
   }
 
