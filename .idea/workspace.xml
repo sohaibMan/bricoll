@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add edit/accept project to proposal for clients in the dashboar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update dashbaord">
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Projects.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Projects.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/utils/utils.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +71,7 @@
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "Main",
-    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/AutoCompletes",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/public",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -102,11 +95,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/public" />
       <recent name="$PROJECT_DIR$/nextjs/components/AutoCompletes" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/utils" />
@@ -171,6 +164,11 @@
       <workItem from="1683793367582" duration="13069000" />
       <workItem from="1683811074986" duration="5331000" />
       <workItem from="1683823177735" duration="923000" />
+      <workItem from="1683837561887" duration="909000" />
+      <workItem from="1683839266883" duration="1437000" />
+      <workItem from="1683840787389" duration="34000" />
+      <workItem from="1683907029908" duration="46000" />
+      <workItem from="1683911571744" duration="5084000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -326,7 +324,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683816560692</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="protecting the routes">
+      <created>1683836258616</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1683836258616</updated>
+    </task>
+    <task id="LOCAL-00024" summary="update dashbaord">
+      <created>1683916626789</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1683916626796</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -376,7 +388,9 @@
     <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
-    <option name="LAST_COMMIT_MESSAGE" value="add edit/accept project to proposal for clients in the dashboar" />
+    <MESSAGE value="protecting the routes" />
+    <MESSAGE value="update dashbaord" />
+    <option name="LAST_COMMIT_MESSAGE" value="update dashbaord" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
