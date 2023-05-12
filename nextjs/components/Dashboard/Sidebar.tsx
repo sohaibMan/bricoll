@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import * as React from "react";
-import {ChangeEvent} from "react";
-import {styled} from "@mui/joy/styles";
+import { ChangeEvent } from "react";
+import { styled } from "@mui/joy/styles";
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
@@ -16,10 +16,21 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
 import ColorSchemeToggle from "./ColorSchemeToggle";
-import {closeSidebar} from "../../utils/utils";
-import {DashboardItems} from "../../pages/dashboard";
-import {User, UserRole} from "../../types/resolvers";
-import {useRouter} from "next/router";
+import { closeSidebar } from "../../utils/utils";
+import { DashboardItems } from "../../pages/dashboard";
+import { User, UserRole } from "../../types/resolvers";
+import { useRouter } from "next/router";
+import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import SplitscreenOutlinedIcon from "@mui/icons-material/SplitscreenOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import Brightness4OutlinedIcon from "@mui/icons-material/Brightness4Outlined";
+import { Skeleton } from "@mui/material";
 
 const Dropdown = styled("i")(({ theme }) => ({
   color: theme.vars.palette.text.tertiary,
@@ -29,10 +40,21 @@ export default function Sidebar(props: {
   setCurrentComponent: React.Dispatch<React.SetStateAction<DashboardItems>>;
   currentComponent: DashboardItems;
   user: User;
-  userRole:UserRole // to custom the links per userRole
+  userRole: UserRole; // to custom the links per userRole
 }) {
   const [query, setQuery] = React.useState("");
   const router = useRouter();
+
+  const [usersOpen, setUsersOpen] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    // simulate loading delay with setTimeout
+    const timeout = setTimeout(() => {
+      setLoading(false); // set loading to false after 1 second
+    }, 1000);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
@@ -44,6 +66,10 @@ export default function Sidebar(props: {
 
   function handleLogout(e: ChangeEvent<HTMLButtonElement>) {
     e.preventDefault();
+  }
+
+  function handleUsersClick() {
+    setUsersOpen(!usersOpen);
   }
 
   return (
@@ -104,6 +130,7 @@ export default function Sidebar(props: {
       />
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
         {/* <MuiLogo /> */}
+
         <Typography fontWeight="xl">Bricoll</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
@@ -142,112 +169,182 @@ export default function Sidebar(props: {
         {/*    </ListItemButton>*/}
         {/*</ListItem>*/}
 
-                    {/*<ListItem>*/}
-          <List
-              sx={{
-                  flexGrow: 0,
-                  "--ListItem-radius": "8px",
-                  "--List-gap": "8px",
-              }}
-          >
-                    <ListItem>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.Home}
-                                        variant={props.currentComponent === DashboardItems.Home ? "soft" : "plain"}>
-                            <ListItemDecorator>
-                                <i data-feather="home"/>
-                            </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.Home)}>Home</ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.MyProfile}
-                                        variant={props.currentComponent === DashboardItems.MyProfile ? "soft" : "plain"}>
-                            <ListItemDecorator>
-                                <i data-feather="chevron-up" />
-                            </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>My Profile</ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
-              {/*only clients*/}
-              {props.userRole===UserRole.Client && <ListItem nested>
-                  <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
-                                  variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
-                      <ListItemDecorator>
-                          <i data-feather="layers"/>
-                      </ListItemDecorator>
-                      <ListItemContent
-                          onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
-                  </ListItemButton>
-                  <ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}
-                                  variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>
-                      <ListItemDecorator>
-                          <i data-feather="layers"/>
-                      </ListItemDecorator>
-                      <ListItemContent
-                          onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create
-                          Project</ListItemContent>
-                  </ListItemButton>
-              </ListItem>}
-
-
-              {/*only freelancer*/}
-              {/*{props.userRole === UserRole.Freelancer && */}
-              <ListItem nested>
-                  <ListItemButton selected={props.currentComponent === DashboardItems.Proposals}
-                                  variant={props.currentComponent === DashboardItems.Proposals ? "soft" : "plain"}>
-                      <ListItemDecorator>
-                          <i data-feather="layers"/>
-                      </ListItemDecorator>
-                      <ListItemContent
-                          onClick={() => props.setCurrentComponent(DashboardItems.Proposals)}>Proposals</ListItemContent>
-                  </ListItemButton>
-                  {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
-                  {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
-                  {/*    <ListItemDecorator>*/}
-                  {/*        <i data-feather="layers"/>*/}
-                  {/*    </ListItemDecorator>*/}
-                  {/*    <ListItemContent*/}
-                  {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
-                  {/*        Project</ListItemContent>*/}
-                  {/*</ListItemButton>*/}
-              </ListItem>
-          </List>
-                    {/*<ListItemButton>New user</ListItemButton>*/}
-                    {/*</ListItem>*/}
-                    {/*<ListItem>*/}
-                    {/*<ListItemButton>Role & Permission</ListItemButton>*/}
-                    {/*</ListItem>*/}
-                    {/*</List>*/}
-                    {/*</ListItem>*/}
-                {/*</List>*/}
-                {/*</ListItem>*/}
-                <List
-                    sx={{
-                        mt: "auto",
-                        flexGrow: 0,
-                        "--ListItem-radius": "8px",
-                        "--List-gap": "8px",
-                    }}
+        {/*<ListItem>*/}
+        <List
+          sx={{
+            flexGrow: 0,
+            "--ListItem-radius": "8px",
+            "--List-gap": "8px",
+          }}
+        >
+          <ListItem>
+            <ListItemButton
+              selected={props.currentComponent === DashboardItems.Home}
+              variant={
+                props.currentComponent === DashboardItems.Home
+                  ? "soft"
+                  : "plain"
+              }
+            >
+              <ListItemDecorator>
+                {/* <i data-feather="home" /> */}
+                <OtherHousesOutlinedIcon />
+              </ListItemDecorator>
+              <ListItemContent
+                onClick={() => props.setCurrentComponent(DashboardItems.Home)}
+              >
+                Home
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton
+              selected={props.currentComponent === DashboardItems.MyProfile}
+              variant={
+                props.currentComponent === DashboardItems.MyProfile
+                  ? "soft"
+                  : "plain"
+              }
+            >
+              <ListItemDecorator>
+                {/* <i data-feather="chevron-up" /> */}
+                <AccountCircleOutlinedIcon />
+              </ListItemDecorator>
+              <ListItemContent
+                onClick={() =>
+                  props.setCurrentComponent(DashboardItems.MyProfile)
+                }
+              >
+                My Profile
+              </ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          {/*only clients*/}
+          {props.userRole === UserRole.Client && (
+            <ListItem nested>
+              <ListItemButton
+                onClick={handleUsersClick}
+                selected={props.currentComponent === DashboardItems.Projects}
+                variant={
+                  props.currentComponent === DashboardItems.Projects
+                    ? "soft"
+                    : "plain"
+                }
+              >
+                <ListItemDecorator>
+                  {/* <i data-feather="layers" /> */}
+                  <ListAltOutlinedIcon />
+                </ListItemDecorator>
+                <ListItemContent
+                  onClick={() =>
+                    props.setCurrentComponent(DashboardItems.Projects)
+                  }
                 >
-                    <ListItem>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <i data-feather="life-buoy"/>
-                            </ListItemDecorator>
-                            <ListItemContent>Supports</ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
-                    <ListItem>
-                        <ListItemButton>
-                            <ListItemDecorator>
-                                <i data-feather="settings"/>
-                            </ListItemDecorator>
-                            <ListItemContent>Settings</ListItemContent>
-                        </ListItemButton>
-                    </ListItem>
-                </List>
+                  Projects
+                </ListItemContent>
+                {usersOpen ? (
+                  <ExpandLessOutlinedIcon />
+                ) : (
+                  <KeyboardArrowDownOutlinedIcon />
+                )}
+              </ListItemButton>
+              {usersOpen && (
+                <ListItem nested>
+                  <ListItemButton
+                    selected={
+                      props.currentComponent === DashboardItems.CreateProject
+                    }
+                    variant={
+                      props.currentComponent === DashboardItems.CreateProject
+                        ? "soft"
+                        : "plain"
+                    }
+                  >
+                    <ListItemDecorator>
+                      {/* <i data-feather="layers" /> */}
+                      <AddBoxOutlinedIcon />
+                    </ListItemDecorator>
+                    <ListItemContent
+                      onClick={() =>
+                        props.setCurrentComponent(DashboardItems.CreateProject)
+                      }
+                    >
+                      Create Project
+                    </ListItemContent>
+                  </ListItemButton>
+                </ListItem>
+              )}
+            </ListItem>
+          )}
+
+          {/*only freelancer*/}
+          {/*{props.userRole === UserRole.Freelancer && */}
+          <ListItem nested>
+            <ListItemButton
+              selected={props.currentComponent === DashboardItems.Proposals}
+              variant={
+                props.currentComponent === DashboardItems.Proposals
+                  ? "soft"
+                  : "plain"
+              }
+            >
+              <ListItemDecorator>
+                {/* <i data-feather="layers" /> */}
+                <SplitscreenOutlinedIcon />
+              </ListItemDecorator>
+              <ListItemContent
+                onClick={() =>
+                  props.setCurrentComponent(DashboardItems.Proposals)
+                }
+              >
+                Proposals
+              </ListItemContent>
+            </ListItemButton>
+            {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
+            {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
+            {/*    <ListItemDecorator>*/}
+            {/*        <i data-feather="layers"/>*/}
+            {/*    </ListItemDecorator>*/}
+            {/*    <ListItemContent*/}
+            {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
+            {/*        Project</ListItemContent>*/}
+            {/*</ListItemButton>*/}
+          </ListItem>
+        </List>
+        {/*<ListItemButton>New user</ListItemButton>*/}
+        {/*</ListItem>*/}
+        {/*<ListItem>*/}
+        {/*<ListItemButton>Role & Permission</ListItemButton>*/}
+        {/*</ListItem>*/}
+        {/*</List>*/}
+        {/*</ListItem>*/}
+        {/*</List>*/}
+        {/*</ListItem>*/}
+        <List
+          sx={{
+            mt: "auto",
+            flexGrow: 0,
+            "--ListItem-radius": "8px",
+            "--List-gap": "8px",
+          }}
+        >
+          <ListItem>
+            <ListItemButton>
+              <ListItemDecorator>
+                <HelpOutlineOutlinedIcon />
+              </ListItemDecorator>
+              <ListItemContent>Supports</ListItemContent>
+            </ListItemButton>
+          </ListItem>
+          <ListItem>
+            <ListItemButton>
+              <ListItemDecorator>
+                <SettingsOutlinedIcon />
+              </ListItemDecorator>
+              <ListItemContent>Settings</ListItemContent>
+            </ListItemButton>
+          </ListItem>
+        </List>
 
         {/*<Card*/}
         {/*    variant="soft"*/}
@@ -274,9 +371,9 @@ export default function Sidebar(props: {
       </Box>
       <Divider />
       <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-        { props.user.image && 
-        <Avatar variant="outlined" src={props.user.image} />
-}
+        {props.user.image && (
+          <Avatar variant="outlined" src={props.user.image} />
+        )}
         <Box sx={{ minWidth: 0, flex: 1 }}>
           <Typography fontSize="sm" fontWeight="lg">
             {props.user.name}

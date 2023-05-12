@@ -17,6 +17,8 @@ import DropZone from "./DropZone";
 import {User} from "../../types/resolvers";
 import {useRouter} from "next/router";
 import toast from "react-hot-toast";
+import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
+
 
 // const imageURL = ref
 
@@ -246,13 +248,12 @@ export default function MyProfile(props: { user: User }) {
 
                         <FormControl sx={{display: {sm: "contents"}}}>
                             <FormLabel>Email</FormLabel>
-                            <FormLabel>Email</FormLabel>
                             <Input
                                 onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                     setEmailState(() => event.target.value);
                                 }}
                                 type="email"
-                                startDecorator={<i data-feather="mail"/>}
+                                startDecorator={<MailOutlinedIcon />}
                                 placeholder="email"
                                 // value={data.email}
                                 defaultValue={props.user.email}
