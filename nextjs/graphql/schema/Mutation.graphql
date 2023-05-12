@@ -28,7 +28,7 @@ type Mutation {
     duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
     description: String! @constraint(minLength: 5, maxLength: 1000)
     cover_letter: String! @constraint(minLength: 5, maxLength: 100000)
-    attachmentsURL: [AttachmentInput]
+    attachments: [AttachmentInput!]
   ): Proposal!
   editProposal(
     id: ObjectID!

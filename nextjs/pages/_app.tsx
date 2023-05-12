@@ -1,11 +1,9 @@
-import { SessionProvider } from "next-auth/react";
+import {SessionProvider} from "next-auth/react";
 import "./styles.css";
-
-import type { AppProps } from "next/app";
-import type { Session } from "next-auth";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import { Toaster } from "react-hot-toast";
-import { StyledEngineProvider } from "@mui/joy/styles";
+import type {AppProps} from "next/app";
+import type {Session} from "next-auth";
+import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
+import {Toaster} from "react-hot-toast";
 import Layout from "../components/home/layout/layout";
 import { useEffect, useState } from "react";
 import { createTheme } from "@mui/material/styles";
@@ -30,17 +28,16 @@ const theme = createTheme({
 });
 
 const client = new ApolloClient({
-  uri: "http://localhost:3000/api/graphql",
-  cache: new InMemoryCache(),
+    uri: "http://localhost:3000/api/graphql",
+    cache: new InMemoryCache(),
 });
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps<{ session: Session }>) {
-  const [input, setInput] = useState("");
+                                Component,
+                                pageProps: {session, ...pageProps},
+                            }: AppProps<{ session: Session }>) {
 
   return (
     <SessionProvider session={session}>
@@ -49,13 +46,13 @@ export default function App({
           {/* <StepContext> */}
           <StepContextProvider>
 
-            <ThemeProvider theme={theme}>
+<!--             <ThemeProvider theme={theme}> -->
               <CssBaseline />
               {/* <Layout> */}
               <Toaster />
               <Component {...pageProps} />
               {/* </Layout> */}
-            </ThemeProvider>
+<!--             </ThemeProvider> -->
           {/* </StepContext> */}
           </StepContextProvider>
         </StyledEngineProvider>

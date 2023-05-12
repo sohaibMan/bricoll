@@ -3,7 +3,7 @@ import Box from "@mui/joy/Box";
 import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
 import Textarea from '@mui/joy/Textarea';
-import {Stack} from "@mui/joy";
+import {Divider, Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
 import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";
@@ -21,23 +21,25 @@ import {
 } from "../../types/resolvers";
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
-
-
+import Typography from '@mui/joy/Typography';
+import {useRouter} from "next/router";
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
 
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
+// import ObjectID from "bson-objectid"
 
 
-// node : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
+// note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: {
     project?: Project,
     PROJECT_MUTATION: DocumentNode,
     onSubmitProjectHandler: (project: Project) => void
+    label?: string
 }) {
 
-
+    const router = useRouter()
     const defaultState = {
         title: props.project?.title || "",
         description: props.project?.description || "",
@@ -97,10 +99,11 @@ export default function ProjectForm(props: {
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(() => {
-                // router.back()
+            ).then(({data}: any) => {
+                //  any : FetchResult<{createProject:Project>}
+
                 const editProject = {
-                    _id: props.project?._id,
+                    _id: props.project?._id || data.createProject._id,
                     price: +price,
                     title,
                     description,
@@ -110,6 +113,10 @@ export default function ProjectForm(props: {
                 } as unknown as Project;
 
                 props.onSubmitProjectHandler(editProject)//to close the modal and update the ui
+
+                //     clear the input
+                //   router.push("/projects/"+editProject._id);
+                //     router.push("/dashboard/component?home"+editProject._id); //todo tmp fix
             })
 
         } catch (e) {
@@ -125,34 +132,48 @@ export default function ProjectForm(props: {
                 py: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 2,
+                gap: 4,
                 alignItems: 'center',
                 flexWrap: 'wrap',
             }}
         >
 
-            <form onSubmit={handleSubmit}>
-                <Stack spacing={2}>
+            <form onSubmit={handleSubmit} style={{width: "100%"}}>
 
-                    <Textarea placeholder="Title" value={title} required
+                <Stack spacing={2}>
+                    {props.label && <Typography level="h4">{props.label}</Typography>}
+                    <Textarea placeholder="Title" defaultValue={defaultState.title} required
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
-                    <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
+                    <Stack spacing={1} direction="row" justifyContent="space-between"
+                           divider={<Divider orientation="vertical"/>}>
+                        <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
 
-                    <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
+                        <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
+
+                    </Stack>
+
+
+                    <Stack spacing={1} direction="row" justifyContent="space-between"
+                           divider={<Divider orientation="vertical"/>}>
+                        <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
+                                                      placeholder="Level of expertise"
+                                                      parentRef={levelOfExpertiseAutoComplete}/>
+
+                        <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
+                                                 parentRef={projectSizeAutocompleteRef}/>
+
+                    </Stack>
+
+                    {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
                     <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
                                             parentRef={categoriesAutocompleteRef}/>
 
-                    <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
-                                                  placeholder="Level of expertise"
-                                                  parentRef={levelOfExpertiseAutoComplete}/>
-
-                    <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
-                                             parentRef={projectSizeAutocompleteRef}/>
+                    {/*</Stack>*/}
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
-                    <Textarea defaultValue={defaultState.description} placeholder="Description" value={description}
+                    <Textarea defaultValue={defaultState.description} placeholder="Description"
                               required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 

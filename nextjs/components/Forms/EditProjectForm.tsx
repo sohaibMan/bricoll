@@ -16,9 +16,11 @@ const EDIT_PROJECT_MUTATION = gql`
 export default function EditProjectForm(props: {
     project: Project
     onSubmitProjectHandler: (project:Project) => void
+
 }) {
 
-    return <ProjectForm onSubmitProjectHandler={props.onSubmitProjectHandler} PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
+    return <ProjectForm label="Edit an existing project" onSubmitProjectHandler={props.onSubmitProjectHandler}
+                        PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
                         project={props.project}/>;
 
 };

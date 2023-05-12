@@ -6,18 +6,21 @@ import Textarea from '@mui/joy/Textarea';
 import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
-import {MutationCreateProposalArgs, MutationEditProposalArgs, Proposal} from "../../types/resolvers";
+import {MutationCreateProposalArgs, MutationEditProposalArgs, Proposal, Proposal_Status} from "../../types/resolvers";
 import {DurationInput} from "../Inputs/DurationInput";
 import {PriceInput} from "../Inputs/PriceInput";
+import Typography from "@mui/joy/Typography";
 
 
 // TODO - ADD OTHER FIELDS AND CUSTOMIZE THE FUNCTION
 
 
 export default function ProposalForm(props: {
+    onSubmitProposalHandler: (proposal: Proposal) => void,
     project_id: string,
-    PROJECT_MUTATION: DocumentNode,
-    proposal?: Proposal
+    PROPOSAL_MUTATION: DocumentNode,
+    proposal?: Proposal,
+    label: string
 }) {
 
 
@@ -28,7 +31,7 @@ export default function ProposalForm(props: {
         coverLetter: props.proposal?.cover_letter || "",
     }
 
-    const [createProposal, {data, loading, error}] = useMutation(props.PROJECT_MUTATION);
+    const [createProposal, {data, loading, error}] = useMutation(props.PROPOSAL_MUTATION);
     const [price, setPrice] = useState<string>(defaultState.price);
     const [duration, setDuration] = useState<string>(defaultState.duration);
     const [description, setDescription] = useState<string>(defaultState.description);
@@ -57,12 +60,22 @@ export default function ProposalForm(props: {
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(() => {
-                setPrice("")
-                setDuration("")
-                setDescription("")
-                setCoverLetter("")
-                //todo redirect to proposals page
+            ).then((data: any) => {
+                // console.log(data)
+                // data.editProposal._id    // the id of the edited proposal
+                const editedProposal = {
+                    _id: props.proposal?._id || data?.editProposal?._id,
+                    duration: +duration,
+                    price: +price,
+                    description,
+                    cover_letter: coverLetter,
+                    status: data?.editProposal?.status || props.proposal?.status || Proposal_Status.InProgress
+                } as Proposal // it miss some fields but it's ok i won't use them in the edit proposal
+                // setPrice("")
+                // setDuration("")
+                // setDescription("")
+                // setCoverLetter("")
+                props.onSubmitProposalHandler(editedProposal)
             })
 
         } catch (e) {
@@ -76,6 +89,7 @@ export default function ProposalForm(props: {
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
         <Box
             sx={{
+                width: "100%",
                 py: 2,
                 display: 'flex',
                 flexDirection: 'column',
@@ -87,11 +101,15 @@ export default function ProposalForm(props: {
 
             <form onSubmit={handleSubmit}>
                 <Stack spacing={2}>
+                    {props.label && <Typography level="h4">{props.label}</Typography>}
 
-                    <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
+                    <Stack spacing={2} direction="row">
 
-                    <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
+                        <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
 
+                        <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
+
+                    </Stack>
                     <Textarea placeholder="description" value={description} required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={2}/>
 
@@ -99,10 +117,10 @@ export default function ProposalForm(props: {
                               onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>
 
 
+                    <Button type=" submit"> Submit</Button>
+
                 </Stack>
 
-
-                <Button type=" submit"> Submit</Button>
 
             </form>
 

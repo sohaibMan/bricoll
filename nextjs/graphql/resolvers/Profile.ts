@@ -1,8 +1,7 @@
 import db from "../../lib/mongodb";
-import {Contract, Project, Proposal, Resolvers, Review, User,} from "../../types/resolvers";
+import {Contract, Project, Proposal, Resolvers, Review, User, UserRole,} from "../../types/resolvers";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {ObjectId} from "mongodb";
-import {clientMiddleware} from "./resolversHelpersFunctions/clientMiddleware";
 
 const users = db.collection("users");
 const proposals = db.collection("proposals");
@@ -31,7 +30,8 @@ export const ProfileResolvers: Resolvers = {
                 .limit(20).toArray() as unknown as [Proposal];
         },
         projects: async (parent, args, context, info) => {
-            clientMiddleware(context);
+            // clientMiddleware(context);
+            if(context.user?.userRole===UserRole.Freelancer)return  [] ; // the user has no projects
 
             return await projects
                 .find({

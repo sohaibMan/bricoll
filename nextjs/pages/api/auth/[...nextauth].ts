@@ -184,16 +184,14 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token, user }) {
-      // console.log("🚀 ~ file: [...nextauth].ts:143 ~ session ~ token:", token)
-      // console.log("🚀 ~ fil/e: [...nextauth].ts:144 ~ session ~ user:", user)
-      // console.log("🚀 ~ file: [...nextauth].ts:146 ~ session ~ session:", session)
-      // to be imported
 
       // to be in
       session.user.id = token.sub;
       // session.user.userRole = UserRole.Client;
       session.user.accessToken = token.accessToken;
-      // console.log(session);
+      session.user.userRole=token.userRole;
+
+      // console.log(token);
 
       
 

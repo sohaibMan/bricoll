@@ -154,7 +154,7 @@ export type MutationCreateProjectArgs = {
 
 
 export type MutationCreateProposalArgs = {
-  attachmentsURL?: InputMaybe<Array<InputMaybe<AttachmentInput>>>;
+  attachments?: InputMaybe<Array<AttachmentInput>>;
   cover_letter: Scalars['String'];
   description: Scalars['String'];
   duration: Scalars['Int'];
@@ -289,7 +289,7 @@ export type ProjectStats = {
 export type Proposal = {
   __typename?: 'Proposal';
   _id?: Maybe<Scalars['ObjectID']>;
-  attachments?: Maybe<Array<Maybe<Attachment>>>;
+  attachments?: Maybe<Array<Attachment>>;
   client_id: Scalars['ObjectID'];
   cover_letter: Scalars['String'];
   created_at: Scalars['Date'];
@@ -724,7 +724,7 @@ export type ProjectStatsResolvers<ContextType = ServerContext, ParentType extend
 
 export type ProposalResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
   _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
-  attachments?: Resolver<Maybe<Array<Maybe<ResolversTypes['Attachment']>>>, ParentType, ContextType>;
+  attachments?: Resolver<Maybe<Array<ResolversTypes['Attachment']>>, ParentType, ContextType>;
   client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   cover_letter?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;

@@ -2,17 +2,17 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Chip, Stack} from '@mui/joy';
-import {Project} from "../../types/resolvers";
+import {Chip, Divider, Stack} from '@mui/joy';
+import {Proposal, Proposal_Status} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
+import Attachments from "../ListItems/Attachments";
 
 
-export default function ProjectItemCard({project, children}: {
-    project: Project,
-    children: React.JSX.Element
+export default function ProposalItemCard({proposal, children}: {
+    proposal: Proposal,
+    children: React.ReactNode
 }) {
-    // todo :try to refactore the card
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -39,21 +39,20 @@ export default function ProjectItemCard({project, children}: {
                 <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
-                        href={`projects/${project._id}`}
+                        href={`projects/${proposal.project_id}`}
                     >
-                        {project.title}
+                        {proposal.description}
                     </CustomLink>
 
                 </Typography>
                 <Typography level="h6" sx={{fontSize: 'sm', fontWeight: "light", color: "#495057"}} mb={0.5}>
-                    Est. Budget {project.price.toFixed(2)} $ | {" "}
-                    Est. Time {project.projectScope.estimated_duration_in_days} days | {" "}
-                    Size {project.projectScope.size_of_project.toLowerCase()} | {" "}
-                    Level {project.projectScope.level_of_expertise.toLowerCase()} | {" "}
-                    Posted {moment(project.created_at).fromNow()}
+                    Est. Budget {proposal.price.toFixed(2)} $ | {" "}
+                    Submitted {moment(proposal.created_at).fromNow()}
                 </Typography>
+                {/*{proposal.cover_letter}/*/}
+
                 <Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>
-                    {project.description}
+                    {proposal.cover_letter}
                 </Typography>
 
                 <Stack
@@ -62,10 +61,30 @@ export default function ProjectItemCard({project, children}: {
                     spacing={1}
 
                 >
-                    {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
-                    <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
+                    {proposal.status === Proposal_Status.Approved &&
+                        <Chip size="sm" color="success">{proposal.status.split("_").join(" ").toLowerCase()}</Chip>}
+                    {proposal.status === Proposal_Status.Canceled &&
+                        <Chip size="sm" color="warning">{proposal.status.split("_").join(" ").toLowerCase()}</Chip>}
+                    {proposal.status === Proposal_Status.InProgress &&
+                        <Chip size="sm" color="neutral">{proposal.status.split("_").join(" ").toLowerCase()}</Chip>}
+                    {proposal.status === Proposal_Status.Completed &&
+                        <Chip size="sm" color="info">{proposal.status.split("_").join(" ").toLowerCase()}</Chip>}
+                    {proposal.status === Proposal_Status.Declined &&
+                        <Chip size="sm" color="danger">{proposal.status.split("_").join(" ").toLowerCase()}</Chip>}
+
                 </Stack>
-                {/*</Box>*/}
+                {proposal.attachments &&
+                    <Box sx={{width: "100%"}}>
+                        <Divider sx={{margin: "10px"}}/>
+
+                        <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
+                            Attachments
+                        </Typography>
+
+                        {proposal.attachments.length > 0 ?
+                            <Attachments attachments={proposal.attachments}/> : <Typography>No Attachments</Typography>
+                        }
+                    </Box>}
 
 
                 <Box
