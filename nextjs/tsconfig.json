@@ -19,7 +19,7 @@
     "process.d.ts",
     "**/*.tsx",
     "**/*.ts",
-    "**/**/*.ts",
+    "**/**/*.ts", "pages/freelancers/profile/index.jsx",
   ],
   "exclude": ["node_modules"]
 }
