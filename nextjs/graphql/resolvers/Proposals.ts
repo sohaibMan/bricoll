@@ -1,5 +1,5 @@
 import {ObjectId} from 'mongodb';
-import {Project, Proposal, Proposal_Status, Resolvers} from "../../types/resolvers";
+import {Freelancer, Project, Proposal, Proposal_Status, Resolvers} from "../../types/resolvers";
 import db from "../../lib/mongodb";
 import {GraphQLError} from 'graphql';
 import {freelancerMiddleware} from './resolversHelpersFunctions/freelancerMiddleware';
@@ -15,6 +15,7 @@ import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticated
 
 const proposalsCollection = db.collection("proposals")
 const projectsCollection = db.collection("projects")
+const usersCollection = db.collection("users");
 
 export const ProposalResolvers: Resolvers = {
     Query: {
@@ -226,6 +227,19 @@ export const ProposalResolvers: Resolvers = {
             return proposal;
         }
 
+
+    },
+    Proposal: {
+        freelancer: async (parent, args, context, info) => {
+            return await usersCollection.findOne({_id: new ObjectId(parent.freelancer_id)}, {
+                projection: {
+                    name: 1,
+                    email: 1,
+                    image: 1,
+                    reviews: 1,
+                }
+            }) as unknown as Freelancer;
+        }
 
     }
 }

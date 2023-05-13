@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
       <change afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/TermsAutocomplete.tsx" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/nextjs/components/Chip/HireChipWithLabel.tsx" afterDir="false" />
@@ -25,6 +26,7 @@
       <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +184,7 @@
       <workItem from="1683744389464" duration="13518000" />
       <workItem from="1683793367582" duration="13069000" />
       <workItem from="1683811074986" duration="5331000" />
+
       <workItem from="1683823177735" duration="923000" />
       <workItem from="1683837561887" duration="909000" />
       <workItem from="1683839266883" duration="1437000" />
@@ -193,6 +196,7 @@
       <workItem from="1683974539386" duration="3244000" />
       <workItem from="1683978344903" duration="17000" />
       <workItem from="1683989159395" duration="14343000" />
+
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -348,6 +352,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683816560692</updated>
     </task>
+
     <task id="LOCAL-00023" summary="protecting the routes">
       <created>1683836258616</created>
       <option name="number" value="00023" />
@@ -397,7 +402,7 @@
       <option name="project" value="LOCAL" />
       <updated>1683977836548</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,6 +450,7 @@
     <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
+
     <MESSAGE value="protecting the routes" />
     <MESSAGE value="update dashbaord" />
     <MESSAGE value="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
@@ -454,6 +460,7 @@
     <MESSAGE value="add payment button to contracts&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <option name="LAST_COMMIT_MESSAGE" value="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
