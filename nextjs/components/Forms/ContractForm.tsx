@@ -4,7 +4,7 @@
 // import {FormEvent, useState} from "react";
 // import Textarea from '@mui/joy/Textarea';
 // import {Stack} from "@mui/joy";
-// import Button from "@mui/joy/Button";
+// import PayButton from "@mui/joy/PayButton";
 // import toast from "react-hot-toast";
 // import {Contract, MutationCreateContractArgs, MutationEditContractArgs} from "../../types/resolvers";
 // import {DurationInput} from "../Inputs/DurationInput";
@@ -100,7 +100,7 @@
 //                 </Stack>
 //
 //
-//                 <Button type=" submit"> Submit</Button>
+//                 <PayButton type=" submit"> Submit</PayButton>
 //
 //             </form>
 //

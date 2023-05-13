@@ -1,5 +1,5 @@
 // import React, { useContext } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 // import { useField } from 'formik';
 
@@ -48,10 +48,10 @@
 //         />
 //       </div>
 //       <div>
-//         <Button style={{marginTop: "50px"}} variant="contained" color="primary" onClick={() => setStep(2)}>
+//         <PayButton style={{marginTop: "50px"}} variant="contained" color="primary" onClick={() => setStep(2)}>
 //           {" "}
 //           Next{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );

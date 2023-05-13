@@ -1,5 +1,5 @@
 // import React, { useContext } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 
 // export default function ThirdStep() {
@@ -46,7 +46,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -54,9 +54,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -64,14 +64,14 @@
 //         >
 //           {" "}
 //           Submit{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );
 // }
 
 // import React, { useContext } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 // import { useFormik } from "formik";
 // import * as Yup from "yup";
@@ -144,7 +144,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -152,9 +152,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -162,14 +162,14 @@
 //         >
 //           {" "}
 //           Submit{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </form>
 //   );
 // }
 
 // import React, { useContext, useState } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 
 // export default function SecondStep() {
@@ -237,7 +237,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -245,9 +245,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -259,7 +259,7 @@
 //         >
 //           {" "}
 //           Next{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );

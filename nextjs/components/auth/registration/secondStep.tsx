@@ -1,5 +1,5 @@
 // import React, { useContext, useState } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 
 // export default function SecondStep() {
@@ -67,7 +67,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -75,9 +75,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -89,16 +89,16 @@
 //         >
 //           {" "}
 //           Next{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );
 // }
 
-import React, { useContext } from "react";
-import { Button, TextField } from "@mui/material";
-import { multiStepContext } from "./stepContext";
-import { toast } from "react-hot-toast";
+import React, {useContext} from "react";
+import {Button, TextField} from "@mui/material";
+import {multiStepContext} from "./stepContext";
+import {toast} from "react-hot-toast";
 
 export default function SecondStep() {
   const { setStep, userData, setUserData }: any = useContext(multiStepContext);

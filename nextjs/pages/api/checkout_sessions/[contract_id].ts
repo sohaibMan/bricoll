@@ -70,8 +70,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 ],
                 mode: 'payment',
-                success_url: `${req.headers.origin}/?success=true`,
-                cancel_url: `${req.headers.origin}/?canceled=true`,
+                success_url: `${req.headers.origin}/dashboard/?success=true`,
+                cancel_url: `${req.headers.origin}/dashboard/?canceled=true`,
             });
 
 

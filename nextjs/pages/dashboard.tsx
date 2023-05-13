@@ -162,9 +162,9 @@ export default function Index() {
                     marginTop: "350px",
                 }}
             >
-                {/* <Button startDecorator={<CircularProgress variant="solid" thickness={2} />}>
+                {/* <PayButton startDecorator={<CircularProgress variant="solid" thickness={2} />}>
             Loading…
-          </Button>
+          </PayButton>
           <IconButton>
             <CircularProgress thickness={2} />
           </IconButton> */}

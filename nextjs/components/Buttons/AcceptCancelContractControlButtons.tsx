@@ -3,7 +3,7 @@ import {gql, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
 import {Contract} from "../../types/resolvers";
 import AcceptChipWithLabel from "../Chip/AcceptChipWithLabel";
-import {CancelContractControlButtons} from "./CancelContractControlButtons";
+import {CancelContractControlButtons} from "./CancelPayContractControlButtons";
 
 
 export function AcceptCancelContractControlButtons(props: {
