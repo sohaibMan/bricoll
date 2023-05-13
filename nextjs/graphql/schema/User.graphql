@@ -15,18 +15,18 @@ type User {
   name: String!
   email: String!
   role: String!
-#   phone: String
+  #   phone: String
   address: String
   image: String
   status: StatusEnum
   skills: [String!]
-#   experienceLevel: level_of_expertise!
-#   stripe_account_link: String
+  #   experienceLevel: level_of_expertise!
+  #   stripe_account_link: String
   earnings: earnings
   review: [Review]
-  proposals: [Proposal!]
-  projects: [Project!]
-  contracts: [Contract!]
+  proposals: [Proposal!]!
+  projects: [Project!]!
+  contracts: [Contract!]!
 }
 
 input userData {

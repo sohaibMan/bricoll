@@ -5,16 +5,12 @@ import Box from "@mui/joy/Box";
 import customTheme from "../utils/theme";
 import Sidebar from "../components/Dashboard/Sidebar";
 import Header from "../components/Dashboard/Header";
-import {MyProfile} from "../components/Dashboard/MyProfile";
 import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
-import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
 import {useSession} from "next-auth/react";
-import {DashBoardProposals} from "../components/Dashboard/DashBoardProposals";
-import moment from "moment";
 import Link from "@mui/joy/Link";
 import CircularProgress from "@mui/joy/CircularProgress";
-import {DashBoardContracts} from "../components/Dashboard/DashBoardContracts";
+import {DashBoardWrapper} from "../components/Dashboard/MenuItems/DashBoardWrapper";
 
 
 // list of all menus in the dashboard_tmp
@@ -188,8 +184,8 @@ export default function Index() {
 
     if (!session.data?.user?.userRole) return <h1>not auth</h1>; // todo add a middlware instead/add userRole to the user data
     const userRole = session.data?.user.userRole;
-
-    if (error || !data || !data.Profile || !data.Profile.projects || !data.Profile.proposals)
+    // todo :fix this crap
+    if (error || !data || !data.Profile || !data.Profile.projects || !data.Profile.proposals || !data.Profile.contracts)
         return (
             <h1>
                 `Error! {error !== undefined ? error?.message : "An Error has occurred"}
@@ -246,40 +242,9 @@ export default function Index() {
                     {currentComponent === DashboardItems.Home ? (
                         <p>welcome to home (to be done)</p>
                     ) : null}
-                    {data.Profile && (
-                        <MyProfile key={data.Profile._id} currentComponent={currentComponent} user={data.Profile}/>)}
-                    {data.Profile.projects && (
-                        <DashBoardProjects
-                            currentComponent={currentComponent}
-                            projectsArr={data.Profile.projects
-                                .slice()
-                                .sort((a, b) =>
-                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                                )}
-                        />
-                    )}
-                    {data.Profile.proposals && (
-                        <DashBoardProposals
-                            userRole={userRole}
-                            currentComponent={currentComponent}
-                            proposalArr={data.Profile.proposals
-                                .slice()
-                                .sort((a, b) =>
-                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                                )}
-                        />
-                    )}
-                    {data.Profile.contracts && (
-                        <DashBoardContracts
-                            userRole={userRole}
-                            currentComponent={currentComponent}
-                            contractArr={data.Profile.contracts
-                                .slice()
-                                .sort((a, b) =>
-                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                                )}
-                        />
-                    )}
+
+                    <DashBoardWrapper currentComponent={currentComponent} userRole={userRole} profile={data.Profile}/>
+
                 </Box>
             </Box>
         </CssVarsProvider>

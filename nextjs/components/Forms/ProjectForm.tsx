@@ -142,7 +142,7 @@ export default function ProjectForm(props: {
 
                 <Stack spacing={2}>
                     {props.label && <Typography level="h4">{props.label}</Typography>}
-                    <Textarea placeholder="Title" defaultValue={defaultState.title} required
+                    <Textarea placeholder="Title" defaultValue={defaultState.title} required maxRows={4}
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
                     <Stack spacing={1} direction="row" justifyContent="space-between"
@@ -174,6 +174,7 @@ export default function ProjectForm(props: {
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
                     <Textarea defaultValue={defaultState.description} placeholder="Description"
+                              maxRows={5}
                               required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 

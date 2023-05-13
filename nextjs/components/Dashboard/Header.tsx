@@ -7,6 +7,7 @@ import {toggleSidebar} from '../../utils/utils';
 import MenuIcon from '@mui/icons-material/Menu';
 import Image from "next/image";
 import logo from "../../public/logo.png"
+import Link from "next/link";
 
 export default function Header() {
     return (
@@ -35,8 +36,10 @@ export default function Header() {
                     },
                 })}
             />
+            <Link href="/">
+                <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
+            </Link>
 
-            <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
 
             <IconButton
                 onClick={() => toggleSidebar()}

@@ -33,7 +33,7 @@ import GavelIcon from '@mui/icons-material/Gavel';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Image from "next/image";
 import logo from "../../public/logo.png";
-
+import Link from "next/link"
 
 export default function Sidebar(props: {
     setCurrentComponent: Dispatch<SetStateAction<DashboardItems>>;
@@ -109,9 +109,10 @@ export default function Sidebar(props: {
             <Box sx={{display: "flex", gap: 1, alignItems: "center"}}>
 
                 {/*<Avatar src={logo} sx={{width: 40, height: 40}}/>*/}
-
-                {/*<Typography sx={{ fontWeight: 'medium' }}>Bricoll</Typography>*/}
-                <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
+                <Link href="/">
+                    {/*<Typography sx={{ fontWeight: 'medium' }}>Bricoll</Typography>*/}
+                    <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
+                </Link>
                 <ColorSchemeToggleButton sx={{ml: "auto"}}/>
             </Box>
             <Input

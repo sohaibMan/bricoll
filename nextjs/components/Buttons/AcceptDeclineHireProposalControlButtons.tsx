@@ -1,15 +1,22 @@
 import * as React from "react";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {Proposal, Proposal_Status} from "../../types/resolvers";
+import {Contract, Proposal, Proposal_Status} from "../../types/resolvers";
 import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
 import AcceptChipWithLabel from "../Chip/AcceptChipWithLabel";
+import HireChipWithLabel from "../Chip/HireChipWithLabel";
+import {Modal, ModalClose, ModalDialog} from "@mui/joy";
+import CreateContractForm from "../Forms/CreateContractForm";
 
 
-export function AcceptDeclineProposalControlButtons(props: {
+export function AcceptDeclineHireProposalControlButtons(props: {
     proposal: Proposal
     setProposals: React.Dispatch<React.SetStateAction<Proposal[]>>
+    setContracts: React.Dispatch<React.SetStateAction<Contract[]>>
+    proposal_status: Proposal_Status
+
 }) {
+    const [open, setOpen] = React.useState<boolean>(false);
 
     const DECLINE_PROPOSAL = gql`
         mutation DeclineProposal($declineProposalId: ObjectID!) {
@@ -75,11 +82,39 @@ export function AcceptDeclineProposalControlButtons(props: {
         }
     }
 
+    const createContractHandler = function (contract: Contract) {
+        setOpen(false)
+        props.setContracts(prv => [...prv, contract])
+
+    }
 
     return <>
+        {/*&& proposal.status === (Proposal_Status.InProgress || Proposal_Status.Completed)*/}
+        {props.proposal_status === Proposal_Status.InProgress &&
+            <>
+                <CancelChipWithLabel label={"decline"} actionHandler={declineProposalHandler}/>
+                <AcceptChipWithLabel actionHandler={acceptProposalHandler}/>
+            </>
+        }
 
-        <CancelChipWithLabel label={"decline"} actionHandler={declineProposalHandler}/>
-        <AcceptChipWithLabel actionHandler={acceptProposalHandler}/>
+        {props.proposal.status === Proposal_Status.Approved && <HireChipWithLabel actionHandler={() => setOpen(true)}/>}
+
+        <Modal open={open} onClose={() => setOpen(false)}>
+
+            <ModalDialog
+                aria-labelledby="basic-modal-dialog-title"
+                aria-describedby="basic-modal-dialog-description"
+                sx={{minWidth: "50%"}}
+            >
+                <ModalClose/>
+                <CreateContractForm
+                    proposal={props.proposal}
+                    onSubmitContractHandler={createContractHandler}
+
+                />
+
+            </ModalDialog>
+        </Modal>
 
     </>;
 }
