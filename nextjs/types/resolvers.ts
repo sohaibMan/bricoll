@@ -9,7 +9,7 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-    ID: string;
+  ID: string;
   String: string;
   Boolean: boolean;
   Int: number;
@@ -40,18 +40,18 @@ export enum AttachmentType {
 export type Contract = {
   __typename?: 'Contract';
   _id: Scalars['ObjectID'];
-    client_id: Scalars['ObjectID'];
-    created_at: Scalars['Date'];
-    duration: Scalars['Int'];
-    fees: Scalars['Float'];
-    freelancer_id: Scalars['ObjectID'];
-    price: Scalars['Float'];
-    project_id: Scalars['ObjectID'];
-    proposal_id: Scalars['ObjectID'];
-    status: ContractStatus;
-    submission_reviews: Array<Maybe<Submission_Review>>;
-    terms: Array<Scalars['String']>;
-    updated_at: Scalars['Date'];
+  client_id: Scalars['ObjectID'];
+  created_at: Scalars['Date'];
+  duration: Scalars['Int'];
+  fees: Scalars['Float'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  proposal_id: Scalars['ObjectID'];
+  status: ContractStatus;
+  submission_reviews: Array<Maybe<Submission_Review>>;
+  terms: Array<Scalars['String']>;
+  updated_at: Scalars['Date'];
 };
 
 export enum ContractStatus {
@@ -134,12 +134,12 @@ export type MutationCancelRequestProjectSubmissionReviewArgs = {
 
 
 export type MutationCreateContractArgs = {
-    duration: Scalars['Int'];
-    freelancer_id: Scalars['ObjectID'];
-    price: Scalars['Float'];
-    project_id: Scalars['ObjectID'];
-    proposal_id: Scalars['ObjectID'];
-    terms: Array<Scalars['String']>;
+  duration: Scalars['Int'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  proposal_id: Scalars['ObjectID'];
+  terms: Array<Scalars['String']>;
 };
 
 
@@ -644,19 +644,19 @@ export type AttachmentResolvers<ContextType = ServerContext, ParentType extends 
 
 export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-    client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-    created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-    duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-    fees?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-    freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-    price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
-    project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-    proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-    status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
-    submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
-    terms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
-    updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+  client_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  duration?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  fees?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  freelancer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
+  project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
+  submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
+  terms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {

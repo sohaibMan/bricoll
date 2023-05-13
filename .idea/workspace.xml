@@ -4,34 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/ContractStatusAutocomplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptDeclineContractControlButtons.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Cards/ContractItemCard.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardContracts.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="Fix the overflow of the forms on larg text size and add a close button to them&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CategoriesAutocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CategoriesAutocomplete.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/ColorSchemeToggle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/ColorSchemeToggleButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/CountrySelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CountrySelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/EditorToolbar.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MuiLogo.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditCancelProposalControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditCancelProposalControlButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditDeleteProjectControlButtons.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/SearchForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/SearchForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Mutation.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Mutation.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,27 +67,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "ShowUsagesActions.previewPropertyKey": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Main",
-    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/Buttons",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
-    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Buttons&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/sohaib/.nvm/versions/node/v20.0.0/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;inlay.hints&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -196,6 +173,8 @@
       <workItem from="1683840787389" duration="34000" />
       <workItem from="1683907029908" duration="46000" />
       <workItem from="1683911571744" duration="11826000" />
+      <workItem from="1683924113917" duration="2667000" />
+      <workItem from="1683933693485" duration="3230000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -372,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683916985336</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="add contracts and its handlers(cancel/accept...)&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1683926765886</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1683926765886</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -425,7 +411,9 @@
     <MESSAGE value="protecting the routes" />
     <MESSAGE value="update dashbaord" />
     <MESSAGE value="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="add contracts and its handlers(cancel/accept...)&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="Fix the overflow of the forms on larg text size and add a close button to them&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix the overflow of the forms on larg text size and add a close button to them&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

@@ -3,7 +3,7 @@ import EditChipWithLabel from "../Chip/EditChipWithLabel";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
 import {Proposal, Proposal_Status} from "../../types/resolvers";
-import {Modal, ModalDialog} from "@mui/joy";
+import {Modal, ModalClose, ModalDialog} from "@mui/joy";
 import EditProposalForm from "../Forms/EditProposalForm";
 import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
 
@@ -60,11 +60,13 @@ export function EditCancelProposalControlButtons(props: {
         <EditChipWithLabel clickHandler={() => setOpen(true)}/>
         <CancelChipWithLabel actionHandler={cancelProposalHandler}/>
         <Modal open={open} onClose={() => setOpen(false)}>
+
             <ModalDialog
                 aria-labelledby="basic-modal-dialog-title"
                 aria-describedby="basic-modal-dialog-description"
-                sx={{width: "50%"}}
+                sx={{minWidth: "50%"}}
             >
+                <ModalClose/>
                 <EditProposalForm onSubmitProposalHandler={editeProposalHandler} proposal={props.proposal}/>
 
             </ModalDialog>
