@@ -5,7 +5,7 @@ import Box from "@mui/joy/Box";
 import customTheme from "../utils/theme";
 import Sidebar from "../components/Dashboard/Sidebar";
 import Header from "../components/Dashboard/Header";
-import MyProfile from "../components/Dashboard/MyProfile";
+import {MyProfile} from "../components/Dashboard/MyProfile";
 import {gql, useQuery} from "@apollo/client";
 import {User} from "../types/resolvers";
 import DashBoardProjects from "../components/Dashboard/DashBoardProjects";
@@ -118,7 +118,6 @@ export default function Index() {
     const [currentComponent, setCurrentComponent] = React.useState(
         DashboardItems.Home
     );
-
     // const defaultComponents= searchParams.get('search') as DashboardItems ||  DashboardItems.Home ;// defaultComponents from the url
     // const [currentComponent, setCurrentComponent] = React.useState(defaultComponents);
 
@@ -190,7 +189,7 @@ export default function Index() {
     if (!session.data?.user?.userRole) return <h1>not auth</h1>; // todo add a middlware instead/add userRole to the user data
     const userRole = session.data?.user.userRole;
 
-    if (error || !data || !data.Profile.projects || !data.Profile.proposals)
+    if (error || !data || !data.Profile || !data.Profile.projects || !data.Profile.proposals)
         return (
             <h1>
                 `Error! {error !== undefined ? error?.message : "An Error has occurred"}
@@ -247,9 +246,8 @@ export default function Index() {
                     {currentComponent === DashboardItems.Home ? (
                         <p>welcome to home (to be done)</p>
                     ) : null}
-                    {currentComponent === DashboardItems.MyProfile ? (
-                        <MyProfile user={data.Profile}/>
-                    ) : null}
+                    {data.Profile && (
+                        <MyProfile key={data.Profile._id} currentComponent={currentComponent} user={data.Profile}/>)}
                     {data.Profile.projects && (
                         <DashBoardProjects
                             currentComponent={currentComponent}

@@ -12,7 +12,7 @@ export default function ContractItemCard({contract, children}: {
     contract: Contract,
     children: React.ReactNode
 }) {
-    console.log(contract)
+
     // @ts-ignore
     return (
         <Box sx={{minHeight: 150}}>
@@ -79,8 +79,7 @@ export default function ContractItemCard({contract, children}: {
                         Contract Terms
                     </Typography>
                     {contract.terms.length > 0 ? contract.terms.map((term, i) =>
-                            <Typography>{i + 1} {term}</Typography>) :
-                        <Typography>No terms</Typography>}
+                        <Typography key={i}>{i + 1} {term}</Typography>) : <Typography>No terms</Typography>}
                 </Stack>
 
 

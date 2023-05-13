@@ -15,7 +15,7 @@ export const DashBoardProposals = (props: {
     currentComponent: DashboardItems,
     userRole: UserRole
 }) => {
-    const [proposals, setProposals] = React.useState(props.proposalArr);
+    const [proposals, setProposals] = useState(props.proposalArr);
     const [query, setQuery] = useState<string | null>("")
 
     const filteredProposals = query ? proposals.filter(proposal => proposal.status.split("_").join(" ").toLowerCase() === query) : proposals;

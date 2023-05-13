@@ -66,3 +66,9 @@ iframe {
     display: flex;
     justify-content: center;
   }
+
+.MuiAutocomplete-listbox {
+    z-index: 10000;
+    /*so the list box stay in the top of slider and the modal*/
+    /*    slide <=999 modal 10001*/
+}

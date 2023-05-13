@@ -18,28 +18,25 @@ import {User} from "../../types/resolvers";
 import {useRouter} from "next/router";
 import toast from "react-hot-toast";
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
+import {DashboardItems} from "../../pages/dashboard";
 
 
 // const imageURL = ref
+// todo :persist the state of my Profile between tabs
 
-export default function MyProfile(props: { user: User }) {
-    const [nameState, setNameState] = useState(props.user.name);
-    const [emailState, setEmailState] = useState(props.user.email);
-    const [imageState, setImageState] = useState(props.user.image || "");
-    //   const imageRef = useRef("");
-
+export const MyProfile = (props: { user: User, currentComponent: DashboardItems }) => {
+    const [nameState, setNameState] = useState(() => props.user.name);
+    const [emailState, setEmailState] = useState(() => props.user.email);
+    const [imageState, setImageState] = useState(() => props.user.image || "");
     const router = useRouter();
 
-    // console.log();
+    if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
-    // const updateUser = fetch("/api/auth")
 
-    //
-    //   alert(imageState);
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
-
-        const storagAccountName =
+        ``
+        const nextPublicAzureStorageAccountName =
             process.env.NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME;
         const containerName = process.env.NEXT_PUBLIC_CONTAINER_NAME;
 
@@ -60,7 +57,7 @@ export default function MyProfile(props: { user: User }) {
             body: JSON.stringify({
                 name: nameState,
                 email: emailState,
-                image: `https://${storagAccountName}.blob.core.windows.net/${containerName}/${imageState}`,
+                image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageState}`,
             }),
         });
 
@@ -70,13 +67,15 @@ export default function MyProfile(props: { user: User }) {
         // }
 
         const res = await response.json();
-        // alert(JSON.stringify(res));
-        setImageState(
-            "https://${storagAccountName}.blob.core.windows.net/${containerName}/${imageState}"
-        );
-        toast.success("The profile is updated successfuly ✅");
 
-        router.push("/");
+        if (res.status != "success") toast.error("oops an error has occurred")
+
+        setImageState(
+            "https://${nextpublicazurestorageaccountname}.blob.core.windows.net/${containerName}/${imageState}"
+        );
+        toast.success("The profile is updated successfully ");
+
+        // router.push("/");
 
         // return await response.json();
     }
@@ -93,7 +92,7 @@ export default function MyProfile(props: { user: User }) {
     }
 
     return (
-        <form onSubmit={updateHandling}>
+        <form onSubmit={updateHandling} key={props.user._id}>
             <Sheet
                 sx={{
                     bgcolor: "background.body",
