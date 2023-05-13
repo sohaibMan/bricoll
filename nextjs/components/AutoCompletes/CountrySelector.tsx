@@ -2,8 +2,7 @@ import * as React from 'react';
 import Autocomplete from '@mui/joy/Autocomplete';
 import AutocompleteOption from '@mui/joy/AutocompleteOption';
 import AspectRatio from '@mui/joy/AspectRatio';
-import FormControl, { FormControlProps } from '@mui/joy/FormControl';
-import FormLabel from '@mui/joy/FormLabel';
+import FormControl, {FormControlProps} from '@mui/joy/FormControl';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Typography from '@mui/joy/Typography';
 
@@ -13,7 +12,7 @@ export default function ContrySelector({ sx, ...props }: FormControlProps) {
       {...props}
       sx={[{ display: { sm: 'contents' } }, ...(Array.isArray(sx) ? sx : [sx])]}
     >
-      <FormLabel>Country</FormLabel>
+      {/* <FormLabel>Country</FormLabel> */}
       <Autocomplete
         autoHighlight
         isOptionEqualToValue={(option, value) => option.code === value.code}
@@ -22,7 +21,7 @@ export default function ContrySelector({ sx, ...props }: FormControlProps) {
         renderOption={(optionProps, option) => (
           <AutocompleteOption {...optionProps}>
             <ListItemDecorator>
-              <AspectRatio ratio="1" sx={{ minWidth: 20, borderRadius: '50%' }}>
+              <AspectRatio ratio="1" sx={{minWidth: 20, borderRadius: '50%' }}>
                 <img
                   loading="lazy"
                   width="20"

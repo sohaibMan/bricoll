@@ -50,3 +50,25 @@ iframe {
     margin: 0 0 15px 0;
     position: relative;
 }
+
+.App {
+    text-align: center;
+  }
+  
+  .App-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .center-stepper {
+    display: flex;
+    justify-content: center;
+  }
+
+.MuiAutocomplete-listbox {
+    z-index: 10000;
+    /*so the list box stay in the top of slider and the modal*/
+    /*    slide <=999 modal 10001*/
+}

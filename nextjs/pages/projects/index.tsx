@@ -5,6 +5,7 @@ import {Stack} from "@mui/joy";
 import {SearchForm} from "../../components/Forms/SearchForm";
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
 import {ProjectCardControlButtons} from "../../components/Buttons/ProjectCardControlButtons";
+import moment from "moment/moment";
 
 const GET_PROJECTS = gql`
     query Project($query: String, $filter: filterOptionsInput) {
@@ -30,8 +31,9 @@ const GET_PROJECTS = gql`
 `
 
 
-export default function DisplayLocations() {
+export default function Index() {
     // the types are not specific to check the query if you have any problem
+
     const {loading, error, refetch, data} = useQuery<{ Projects: Project[] }>(GET_PROJECTS);
 
     if (loading) return <Stack spacing={4}>
@@ -48,11 +50,12 @@ export default function DisplayLocations() {
     if (!data) return <p>No projects</p>
 
 
-    // @ts-ignore
     return <Stack spacing={4}>
         <SearchForm onRefetch={refetch}/>
-        <Stack spacing={2}>{data.Projects.map((project) => <ProjectItemCard key={project._id.toString()} project={project}>
-            <ProjectCardControlButtons projectId={project._id} reactions={project.reactions}/>
+        <Stack
+            spacing={2}>{data.Projects.slice().sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1).map((project) =>
+            <ProjectItemCard key={project._id.toString()} project={project}>
+                <ProjectCardControlButtons projectId={project._id} reactions={project.reactions}/>
             </ProjectItemCard>
         )}</Stack>
     </Stack>

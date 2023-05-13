@@ -3,6 +3,7 @@ import * as React from "react";
 import Box from "@mui/joy/Box";
 import Card, {CardProps} from "@mui/joy/Card";
 import Upload from "../Buttons/Upload";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 interface propsType extends CardProps {
     uploadHandler: React.Dispatch<React.SetStateAction<string>>
@@ -39,7 +40,7 @@ export default function DropZone({sx, ...props}: propsType) {
                         justifyContent: "center",
                     }}
                 >
-                    <i data-feather="upload-cloud"/>
+                    <FileUploadIcon/>
                 </Box>
             </Box>
             {/*<Typography level="body2" textAlign="center">*/}

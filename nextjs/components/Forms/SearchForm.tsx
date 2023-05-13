@@ -73,7 +73,7 @@ export function SearchForm(props: { onRefetch: (variables?: (Partial<OperationVa
     return <Stack spacing={2} sx={{width: "50%"}}>
         <SearchInput onClickHandler={searchOnClickHandler} parentRef={searchInputRef}/>
 
-        <CategoriesAutocomplete placeholder="categories" parentRef={categoriesAutocompleteRef}/>
+        <CategoriesAutocomplete parentRef={categoriesAutocompleteRef}/>
 
         <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
