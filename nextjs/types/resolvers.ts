@@ -9,8 +9,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-    ID: string;
-    String: string;
+  ID: string;
+  String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
@@ -20,16 +20,16 @@ export type Scalars = {
 };
 
 export type Attachment = {
-    __typename?: 'Attachment';
-    name: Scalars['String'];
-    type: Scalars['String'];
-    url: Scalars['URL'];
+  __typename?: 'Attachment';
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type AttachmentInput = {
-    name: Scalars['String'];
-    type: Scalars['String'];
-    url: Scalars['URL'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type Contract = {
@@ -184,6 +184,7 @@ export type MutationEditContractArgs = {
 
 
 export type MutationEditProjectArgs = {
+  attachments?: InputMaybe<Array<AttachmentInput>>;
   category?: InputMaybe<ProjectCategoriesEnum>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ObjectID'];
@@ -380,30 +381,23 @@ export type User = {
   _id: Scalars['ObjectID'];
   address?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
-  contracts?: Maybe<Array<Contract>>;
-  earnings?: Maybe<Earnings>;
+  contracts: Array<Contract>;
   email: Scalars['String'];
   experienceLevel?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
   jobTitle?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  payments: Array<Payments>;
   phone?: Maybe<Scalars['String']>;
   portfolio?: Maybe<Scalars['String']>;
   profileTitle?: Maybe<Scalars['String']>;
-  projects?: Maybe<Array<Project>>;
-  proposals?: Maybe<Array<Proposal>>;
-  review?: Maybe<Array<Maybe<Review>>>;
+  projects: Array<Project>;
+  proposals: Array<Proposal>;
+  reviews?: Maybe<Array<Maybe<Review>>>;
   role: Scalars['String'];
   skills?: Maybe<Scalars['String']>;
   status?: Maybe<StatusEnum>;
-};
-
-export type Earnings = {
-  __typename?: 'earnings';
-  amount: Scalars['Float'];
-  contract_id: Scalars['ObjectID'];
-  currency: Scalars['String'];
 };
 
 export type FilterOptionsInput = {
@@ -418,6 +412,15 @@ export enum Level_Of_Expertise {
   Beginner = 'BEGINNER',
   Intermediate = 'INTERMEDIATE'
 }
+
+export type Payments = {
+  __typename?: 'payments';
+  amount: Scalars['Float'];
+  contract_id: Scalars['ObjectID'];
+  created_at?: Maybe<Scalars['Date']>;
+  currency: Scalars['String'];
+  description: Scalars['String'];
+};
 
 export enum Proposal_Status {
   Approved = 'approved',
@@ -464,7 +467,7 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
-    resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
     ResolverFn<TResult, TParent, TContext, TArgs>
@@ -557,9 +560,9 @@ export type ResolversTypes = ResolversObject<{
   Submission_review: ResolverTypeWrapper<Submission_Review>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
-  earnings: ResolverTypeWrapper<Earnings>;
   filterOptionsInput: FilterOptionsInput;
   level_of_expertise: Level_Of_Expertise;
+  payments: ResolverTypeWrapper<Payments>;
   proposal_status: Proposal_Status;
   queryResult: ResolverTypeWrapper<QueryResult>;
   reaction_type: Reaction_Type;
@@ -591,8 +594,8 @@ export type ResolversParentTypes = ResolversObject<{
   Submission_review: Submission_Review;
   URL: Scalars['URL'];
   User: User;
-  earnings: Earnings;
   filterOptionsInput: FilterOptionsInput;
+  payments: Payments;
   queryResult: QueryResult;
   reactions: Reactions;
 }>;
@@ -619,10 +622,10 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
-    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
@@ -768,30 +771,32 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  contracts?: Resolver<Maybe<Array<ResolversTypes['Contract']>>, ParentType, ContextType>;
-  earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
+  contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   experienceLevel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   jobTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  payments?: Resolver<Array<ResolversTypes['payments']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
-  proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
-  review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
+  proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
+  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type EarningsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['earnings'] = ResolversParentTypes['earnings']> = ResolversObject<{
+export type PaymentsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['payments'] = ResolversParentTypes['payments']> = ResolversObject<{
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   contract_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -823,7 +828,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Submission_review?: Submission_ReviewResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
-  earnings?: EarningsResolvers<ContextType>;
+  payments?: PaymentsResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
   reactions?: ReactionsResolvers<ContextType>;
 }>;

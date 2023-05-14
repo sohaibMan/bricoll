@@ -6,7 +6,7 @@ import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
 import AcceptChipWithLabel from "../Chip/AcceptChipWithLabel";
 import HireChipWithLabel from "../Chip/HireChipWithLabel";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import CreateContractForm from "../Forms/CreateContractForm";
+import CreateContractForm from "../Forms/wrappers/CreateContractForm";
 
 
 export function AcceptDeclineHireProposalControlButtons(props: {

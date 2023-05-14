@@ -1,6 +1,7 @@
 import React, {ChangeEvent, Dispatch, useState} from "react";
 import uploadFilesToBlob from "../../utils/azure-storage-blob";
 import Button from "@mui/joy/Button";
+import {Stack} from "@mui/joy";
 
 const Upload = (props: {
     uploadHandler: Dispatch<React.SetStateAction<string>>;
@@ -37,42 +38,49 @@ const Upload = (props: {
             props.uploadHandler(fileUrls[0].url);
 
         }
-  };
+    };
 
 
-  const DisplayForm = () => (
-    <div style={{ display: "flex", flexDirection: "column", gap: "10px", padding: "10px" }}>
-      <input
-          type="file"
-          onChange={onFileChange}
-          key={inputKey}
-          style={{display: "none"}}
-          id="file-input"
-      />
-      <label htmlFor="file-input" style={{ cursor: "pointer" }}>
-        <Button
-          component="span"
-          sx={{ width: "150px", height: "40px", padding: "10px" }}
-        >
-          Choose File
-        </Button>
-      </label>
-      <Button
-        color="primary"
-        onClick={onFileUpload}
-        sx={{ width: "150px", height: "40px", padding: "10px" }}
-      >
-        Upload
-      </Button>
-    </div>
-  );
+    const DisplayForm = () => (
+        <div style={{display: "flex", flexDirection: "column", gap: "10px", padding: "10px"}}>
+            <input
+                type="file"
+                onChange={onFileChange}
+                key={inputKey}
+                style={{display: "none"}}
+                id="file-input"
+            />
+            <label htmlFor="file-input" style={{cursor: "pointer"}}>
+                <Button
+                    component="span"
+                    // sx={{width: "150px", height: "40px", padding: "10px"}}
+                >
+                    Choose File
+                </Button>
+            </label>
+            <Button
+                color="primary"
+                onClick={onFileUpload}
+                // sx={{width: "150px", height: "40px", padding: "10px"}}
+            >
+                Upload
+            </Button>
+        </div>
+    );
 
-  return (
-    <div>
-      {!uploading && <DisplayForm />}
-      {uploading && <div>Uploading</div>}
-    </div>
-  );
+    return (
+        <Stack
+            sx={{
+                width: "100%",
+                height: "5rem",
+                alignItems: "center",
+                justifyContent: "center"
+                // backgroundColor: "red"
+            }}>
+            {!uploading && <DisplayForm/>}
+            {uploading && <div>Uploading</div>}
+        </Stack>
+    );
 };
 
 export default Upload;

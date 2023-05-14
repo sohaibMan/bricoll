@@ -4,7 +4,7 @@ import {Dispatch, useState} from "react";
 import Stack from "@mui/joy/Stack";
 import ProjectItemCard from "../../Cards/ProjectItemCard";
 import {EditDeleteProjectControlButtons} from "../../Buttons/EditDeleteProjectControlButtons";
-import CreateProjectForm from "../../Forms/CreateProjectForm";
+import CreateProjectForm from "../../Forms/wrappers/CreateProjectForm";
 import {DashboardItems} from "../../../pages/dashboard";
 import Typography from "@mui/joy/Typography";
 import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";

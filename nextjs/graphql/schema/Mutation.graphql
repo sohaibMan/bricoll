@@ -17,6 +17,7 @@ type Mutation {
     skills: [String!] @constraint(maxItems: 15)
     projectScope: ProjectScopeInput
     category: ProjectCategoriesEnum
+    attachments: [AttachmentInput!]
   ): Project
   deleteProject(id: ObjectID!): queryResult
   reactToProject(id: ObjectID!, reaction_type: reaction_type!): queryResult # likeProject LoveProject

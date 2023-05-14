@@ -43,7 +43,7 @@ export default async function handler(
     // const user_id = userTokenDecoded.user_id;
     const user_id = userToken.sub;
 
-    console.log("userid, ", user_id);
+    // console.log("userid, ", user_id);
 
     // const cachedValue = await redis.get(user_id);
 
@@ -68,7 +68,7 @@ export default async function handler(
     // const { bio, level, language } = req.body;
     let email = user?.email;
 
-    console.log("email ", email);
+
     // console.log("req ", req.body);
 
     // console.log(email, name, hashedPassword, userRole);
@@ -76,27 +76,29 @@ export default async function handler(
     // const { isCompleted }: any = user;
 
     // todo some validation on user input
+    // this is important to the dashboard todo fix this crap/
     const newUserData = await db.collection("users").findOneAndUpdate(
-      { _id: new ObjectId(user_id) },
-      {
-        $set: {
-          isCompleted: true,
-          bio: req.body.bio,
-          country: req.body.country,
-          city: req.body.city,
-          phone: req.body.phone,
-          language: req.body.language,
-          photo: req.body.photo,
-          profileTitle: req.body.profileTitle,
-          experienceLevel: req.body.experienceLevel,
-          category: req.body.category,
-          jobTitle: req.body.job,
-          company: req.body.company,
-          educationLevel: req.body.educationLevel,
-          portfolio: req.body.portfolio,
-          access_token: getCookie("jwt", { req, res }),
-            reviews: []
-        },
+        {_id: new ObjectId(user_id)},
+        {
+          $set: {
+            isCompleted: true,
+            bio: req.body.bio,
+            country: req.body.country,
+            city: req.body.city,
+            // phone: req.body.phone,
+            language: req.body.language,
+            photo: req.body.photo,
+            profileTitle: req.body.profileTitle,
+            experienceLevel: req.body.experienceLevel,
+            category: req.body.category,
+            jobTitle: req.body.job,
+            company: req.body.company,
+            educationLevel: req.body.educationLevel,
+            portfolio: req.body.portfolio,
+            access_token: getCookie("jwt", {req, res}),
+            reviews: [],
+            payments: []
+          },
       }
     );
 

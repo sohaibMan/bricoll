@@ -2,7 +2,7 @@ import {gql, useQuery} from '@apollo/client';
 import ProjectItemCard from "../../components/Cards/ProjectItemCard";
 import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
-import {SearchForm} from "../../components/Forms/SearchForm";
+import {SearchForm} from "../../components/Forms/base/SearchForm";
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
 import {ProjectCardControlButtons} from "../../components/Buttons/ProjectCardControlButtons";
 import moment from "moment/moment";

@@ -18,23 +18,27 @@ import {User} from "../../types/resolvers";
 import toast from "react-hot-toast";
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import {DashboardItems} from "../../pages/dashboard";
+import BillingCard from "../Cards/BillingCard";
 
 
 // const imageURL = ref
-// todo :persist the state of my Profile between tabs
+enum currentTabEnum {
+    AccountSetting = "AccountSetting",
+    Billing = "Billing"
+}
 
 export const MyProfile = (props: { user: User, currentComponent: DashboardItems }) => {
     const [nameState, setNameState] = useState(props.user.name);
     const [emailState, setEmailState] = useState(props.user.email);
     const [imageLinkState, setImageLinkState] = useState(props.user.image);
+    const [currentTab, setCurrentTab] = useState<currentTabEnum>(currentTabEnum.AccountSetting)
+    const isSameState = nameState === props.user.name && emailState === props.user.email && imageLinkState === props.user.image;// does the state change or not
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
+    console.log(currentTab)
 
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
-
-
-        //todo {name: nameState, email: emailState, image: imageLinkState} validate user input and  return a toast if the input is not value
 
         if (!nameState) return toast.error("The name is empty, try to insert it!");
         if (!emailState)
@@ -56,10 +60,6 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
             }),
         });
 
-        // const blobItem = {
-        //     url: `https://${storageAccountName}.blob.core.windows.net/${containerName}/${blob.name}}`,
-        //     name: blob.name
-        // }
 
         const res = await response.json();
 
@@ -70,15 +70,8 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
         // );
         toast.success("The profile is updated successfully ");
 
-        // router.push("/");
-
-        // return await response.json();
     }
 
-    //   function submitHandler(e: ChangeEvent<HTMLFormElement>){
-    //     e.preventDefault();
-    //     toast.success("The profile is updated successfuly ✅")
-    //   }
 
     function cancelHandling() {
         // e.preventDefault()
@@ -86,6 +79,7 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
         setNameState(props.user.name)
         setImageLinkState(props.user.image)
     }
+
 
     return (
         <form onSubmit={updateHandling} key={props.user._id}>
@@ -102,7 +96,8 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                     My profile
                 </Typography>
                 <Tabs
-                    defaultValue={0}
+                    defaultValue={currentTab}
+                    onChange={(event, value) => setCurrentTab(value as currentTabEnum)}
                     sx={{
                         bgcolor: "background.body",
                         "--Tab-height": "48px",
@@ -191,115 +186,119 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                             },
                         })}
                     >
-                        <Tab value={0}>Account settings</Tab>
-                        <Tab value={1}>
-                            Billing{" "}
+                        <Tab value={currentTabEnum.AccountSetting}>Account
+                            settings</Tab>
+                        <Tab value={currentTabEnum.Billing}>
+                            Billing
                             <Chip size="sm" variant="soft" color="neutral" sx={{ml: 1}}>
-                                4
+                                {props.user?.payments?.length || 0}
                             </Chip>
                         </Tab>
                     </TabList>
-                    <Box
-                        sx={{
-                            pt: 3,
-                            pb: 10,
-                            display: "grid",
-                            gridTemplateColumns: {
-                                xs: "100%",
-                                sm: "minmax(120px, 30%) 1fr",
-                                lg: "280px 1fr minmax(120px, 208px)",
-                            },
-                            columnGap: {xs: 2, sm: 3, md: 4},
-                            rowGap: {xs: 2, sm: 2.5},
-                            "& > hr": {
-                                gridColumn: "1/-1",
-                            },
-                        }}
-                    >
-                        <FormLabel sx={{display: {xs: "none", sm: "block"}}}>
-                            Name
-                        </FormLabel>
-                        <Box sx={{display: {xs: "contents", sm: "flex"}, gap: 2}}>
-                            <FormControl sx={{flex: 1}}>
-                                <FormLabel sx={{display: {sm: "none"}}}>
-                                    First name
-                                </FormLabel>
-                                <Input
-                                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                        setNameState(() => event.target.value);
-                                    }}
-                                    placeholder="first name"
-                                    // value={data.Profile.name}
-                                    value={nameState}
-                                />
-                            </FormControl>
-                            {/* <FormControl sx={{ flex: 1 }}>
+                </Tabs>
+                {currentTab === currentTabEnum.Billing && <BillingCard payments={props.user.payments}/>}
+                {currentTab === currentTabEnum.AccountSetting && <Box
+                    sx={{
+                        pt: 3,
+                        pb: 10,
+                        display: "grid",
+                        gridTemplateColumns: {
+                            xs: "100%",
+                            sm: "minmax(120px, 30%) 1fr",
+                            lg: "280px 1fr minmax(120px, 208px)",
+                        },
+                        columnGap: {xs: 2, sm: 3, md: 4},
+                        rowGap: {xs: 2, sm: 2.5},
+                        "& > hr": {
+                            gridColumn: "1/-1",
+                        }
+                    }}
+                >
+
+                    <FormLabel sx={{display: {xs: "none", sm: "block"}}}>
+                        Name
+                    </FormLabel>
+                    <Box sx={{display: {xs: "contents", sm: "flex"}, gap: 2}}>
+                        <FormControl sx={{flex: 1}}>
+                            <FormLabel sx={{display: {sm: "none"}}}>
+                                First name
+                            </FormLabel>
+                            <Input
+                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                    setNameState(() => event.target.value);
+                                }}
+                                placeholder="first name"
+                                // value={data.Profile.name}
+                                value={nameState}
+                            />
+                        </FormControl>
+                        {/* <FormControl sx={{ flex: 1 }}>
               <FormLabel sx={{ display: { sm: "none" } }}>Last name</FormLabel>
               <Input placeholder="last name" value="" />
             </FormControl> */}
-                        </Box>
+                    </Box>
 
-                        <Divider role="presentation"/>
+                    <Divider role="presentation"/>
 
-                        <FormControl sx={{display: {sm: "contents"}}}>
-                            <FormLabel>Email</FormLabel>
-                            <Input
-                                onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                                    setEmailState(() => event.target.value);
-                                }}
-                                type="email"
-                                startDecorator={<MailOutlinedIcon/>}
-                                placeholder="email"
-                                // value={data.email}
-                                value={emailState}
-                            />
-                        </FormControl>
-
-                        <Divider role="presentation"/>
-
-                        <Box>
-                            <FormLabel>Your photo</FormLabel>
-                            <FormHelperText>
-                                This will be displayed on your profile.
-                            </FormHelperText>
-                        </Box>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                alignItems: "flex-start",
-                                flexWrap: "wrap",
-                                gap: 2.5,
+                    <FormControl sx={{display: {sm: "contents"}}}>
+                        <FormLabel>Email</FormLabel>
+                        <Input
+                            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                                setEmailState(() => event.target.value);
                             }}
-                        >
+                            type="email"
+                            startDecorator={<MailOutlinedIcon/>}
+                            placeholder="email"
+                            // value={data.email}
+                            value={emailState}
+                        />
+                    </FormControl>
 
-                            <Avatar
-                                size="lg"
-                                src={imageLinkState}
-                                sx={{"--Avatar-size": "64px"}}
-                                // value={props.user.image}
-                            />
+                    <Divider role="presentation"/>
 
-                            <DropZone uploadHandler={setImageLinkState}/>
-                            {/* <Upload onUpload={setImageLinkState} /> */}
-                        </Box>
+                    <Box>
+                        <FormLabel>Your photo</FormLabel>
+                        <FormHelperText>
+                            This will be displayed on your profile.
+                        </FormHelperText>
+                    </Box>
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "flex-start",
+                            flexWrap: "wrap",
+                            gap: 2.5,
+                        }}
+                    >
 
-                        <Divider role="presentation"/>
+                        <Avatar
+                            size="lg"
+                            src={imageLinkState}
+                            sx={{"--Avatar-size": "64px"}}
+                            // value={props.user.image}
+                        />
 
-                        {/* <FormControl sx={{ display: { sm: "contents" } }}>
+                        <DropZone uploadHandler={setImageLinkState}/>
+                        {/* <Upload onUpload={setImageLinkState} /> */}
+                    </Box>
+
+                    <Divider role="presentation"/>
+
+                    {/* <FormControl sx={{ display: { sm: "contents" } }}>
             <FormLabel>Role</FormLabel>x`
             <Input value="" />
           </FormControl>*/}
 
-                        {/* <Divider role="presentation" />
+                    {/* <Divider role="presentation" />
 
             <CountrySelector />
 
             <Divider role="presentation" />  */}
 
 
-                        {/* <CountrySelector /> */}
+                    {/* <CountrySelector /> */}
 
-                        {/* <Box>
+                    {/* <Box>
             <FormLabel>Bio</FormLabel>
             <FormHelperText>Write a short introduction.</FormHelperText>
           </Box>
@@ -313,11 +312,11 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
 
           <Divider role="presentation" /> */}
 
-                        {/* <Box>
+                    {/* <Box>
             <FormLabel>Portfolio projects</FormLabel>
             <FormHelperText>Share a few snippets of your work.</FormHelperText>
           </Box> */}
-                        {/* <Stack useFlexGap spacing={1.5}>
+                    {/* <Stack useFlexGap spacing={1.5}>
             <DropZone />
 
             <FileUpload
@@ -343,24 +342,24 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
 
           <Divider role="presentation" /> */}
 
-                        <Box
-                            sx={{
-                                gridColumn: "1/-1",
-                                justifySelf: "flex-end",
-                                display: "flex",
-                                gap: 1,
-                            }}
-                        >
-                            <Button variant="outlined" color="success" size="sm" onClick={cancelHandling}>
-                                Cancel
-                            </Button>
-                            <Button type="submit" size="sm">
-                                Save
-                            </Button>
-                        </Box>
+                    <Box
+                        sx={{
+                            gridColumn: "1/-1",
+                            justifySelf: "flex-end",
+                            display: "flex",
+                            gap: 1,
+                        }}
+                    >
+                        <Button variant="outlined" color="success" size="sm" onClick={cancelHandling}>
+                            Cancel
+                        </Button>
+                        <Button type="submit" size="sm"
+                                disabled={isSameState}>
+                            Save
+                        </Button>
                     </Box>
-                </Tabs>
+                </Box>}
             </Sheet>
         </form>
-    );
+    )
 }

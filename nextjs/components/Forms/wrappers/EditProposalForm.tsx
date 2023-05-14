@@ -1,6 +1,6 @@
-import ProposalForm from "./ProposalForm";
+import ProposalForm from "../base/ProposalForm";
 import {gql} from "@apollo/client";
-import {Proposal} from "../../types/resolvers";
+import {Proposal} from "../../../types/resolvers";
 import * as React from "react";
 
 

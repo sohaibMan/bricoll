@@ -1,12 +1,12 @@
-import SearchInput from "../Inputs/SearchInput";
-import CategoriesAutocomplete from "../AutoCompletes/CategoriesAutocomplete";
+import SearchInput from "../../Inputs/SearchInput";
+import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";
 import * as React from "react";
 import {useRef} from "react";
-import SearchButton from "../Buttons/SearchButton";
-import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../types/resolvers";
+import SearchButton from "../../Buttons/SearchButton";
+import {ProjectCategoriesEnum, QueryProjectsArgs} from "../../../types/resolvers";
 import {OperationVariables} from "@apollo/client";
-import MoneyInput from "../Inputs/MoneyInput";
-import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";
+import MoneyInput from "../../Inputs/MoneyInput";
+import SkillsAutocomplete from "../../AutoCompletes/SkillsAutocomplete";
 import {Stack} from "@mui/joy";
 
 

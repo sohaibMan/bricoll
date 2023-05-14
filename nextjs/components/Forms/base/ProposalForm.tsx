@@ -6,9 +6,14 @@ import Textarea from '@mui/joy/Textarea';
 import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
-import {MutationCreateProposalArgs, MutationEditProposalArgs, Proposal, Proposal_Status} from "../../types/resolvers";
-import {DurationInput} from "../Inputs/DurationInput";
-import {PriceInput} from "../Inputs/PriceInput";
+import {
+    MutationCreateProposalArgs,
+    MutationEditProposalArgs,
+    Proposal,
+    Proposal_Status
+} from "../../../types/resolvers";
+import {DurationInput} from "../../Inputs/DurationInput";
+import {PriceInput} from "../../Inputs/PriceInput";
 import Typography from "@mui/joy/Typography";
 
 
@@ -116,8 +121,7 @@ export default function ProposalForm(props: {
                     <Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}
                               onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>
 
-
-                    <Button type=" submit"> Submit</Button>
+                    <Button disabled={loading} type=" submit"> Submit</Button>
 
                 </Stack>
 
