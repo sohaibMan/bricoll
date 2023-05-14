@@ -310,6 +310,7 @@ export type Query = {
   __typename?: 'Query';
   Contract?: Maybe<Contract>;
   Profile?: Maybe<User>;
+  ProfileById?: Maybe<User>;
   Project?: Maybe<Project>;
   Projects?: Maybe<Array<Maybe<Project>>>;
   Proposal?: Maybe<Proposal>;
@@ -317,6 +318,11 @@ export type Query = {
 
 
 export type QueryContractArgs = {
+  id: Scalars['ObjectID'];
+};
+
+
+export type QueryProfileByIdArgs = {
   id: Scalars['ObjectID'];
 };
 
@@ -373,16 +379,23 @@ export type User = {
   __typename?: 'User';
   _id: Scalars['ObjectID'];
   address?: Maybe<Scalars['String']>;
-  contracts: Array<Contract>;
+  bio?: Maybe<Scalars['String']>;
+  contracts?: Maybe<Array<Contract>>;
   earnings?: Maybe<Earnings>;
   email: Scalars['String'];
-  image: Scalars['String'];
+  experienceLevel?: Maybe<Scalars['String']>;
+  image?: Maybe<Scalars['String']>;
+  jobTitle?: Maybe<Scalars['String']>;
+  language?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  projects: Array<Project>;
-  proposals: Array<Proposal>;
+  phone?: Maybe<Scalars['String']>;
+  portfolio?: Maybe<Scalars['String']>;
+  profileTitle?: Maybe<Scalars['String']>;
+  projects?: Maybe<Array<Project>>;
+  proposals?: Maybe<Array<Proposal>>;
   review?: Maybe<Array<Maybe<Review>>>;
   role: Scalars['String'];
-  skills?: Maybe<Array<Scalars['String']>>;
+  skills?: Maybe<Scalars['String']>;
   status?: Maybe<StatusEnum>;
 };
 
@@ -720,6 +733,7 @@ export type ProposalResolvers<ContextType = ServerContext, ParentType extends Re
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   Contract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<QueryContractArgs, 'id'>>;
   Profile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  ProfileById?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryProfileByIdArgs, 'id'>>;
   Project?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectArgs, 'id'>>;
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, Partial<QueryProjectsArgs>>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
@@ -753,16 +767,23 @@ export interface UrlScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 export type UserResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
+  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  contracts?: Resolver<Maybe<Array<ResolversTypes['Contract']>>, ParentType, ContextType>;
   earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  experienceLevel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  jobTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
-  proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
+  proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
   review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  skills?: Resolver<Maybe<Array<ResolversTypes['String']>>, ParentType, ContextType>;
+  skills?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

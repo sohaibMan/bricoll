@@ -9,5 +9,6 @@ type Query{
     Contract(id: ObjectID!): Contract
     # Profile management
     Profile: User
-
+    # Profile By Id : This functional is optional, just for avoiding some problems related to Profile query function
+    ProfileById(id: ObjectID!): User 
 }
