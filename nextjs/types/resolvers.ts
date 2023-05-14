@@ -306,6 +306,7 @@ export type Query = {
   __typename?: 'Query';
   Contract?: Maybe<Contract>;
   Profile?: Maybe<User>;
+  ProfileById?: Maybe<User>;
   Project?: Maybe<Project>;
   Projects?: Maybe<Array<Maybe<Project>>>;
   Proposal?: Maybe<Proposal>;
@@ -313,6 +314,11 @@ export type Query = {
 
 
 export type QueryContractArgs = {
+  id: Scalars['ObjectID'];
+};
+
+
+export type QueryProfileByIdArgs = {
   id: Scalars['ObjectID'];
 };
 
@@ -374,6 +380,7 @@ export type User = {
   email: Scalars['String'];
   image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  phone?: Maybe<Scalars['Int']>;
   projects?: Maybe<Array<Project>>;
   proposals?: Maybe<Array<Proposal>>;
   review?: Maybe<Array<Maybe<Review>>>;
@@ -741,6 +748,7 @@ export type ProposalResolvers<ContextType = ServerContext, ParentType extends Re
 export type QueryResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
   Contract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<QueryContractArgs, 'id'>>;
   Profile?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  ProfileById?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryProfileByIdArgs, 'id'>>;
   Project?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<QueryProjectArgs, 'id'>>;
   Projects?: Resolver<Maybe<Array<Maybe<ResolversTypes['Project']>>>, ParentType, ContextType, Partial<QueryProjectsArgs>>;
   Proposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<QueryProposalArgs, 'id'>>;
@@ -779,6 +787,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
   proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
   review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;

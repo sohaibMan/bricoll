@@ -9,8 +9,15 @@ const projects = db.collection("projects");
 const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
+        ProfileById: async (parent, args, context, info) => {
+            console.log("args: ", args.id);
+            
+            return await users.findOne({
+                _id: new ObjectId(args.id),
+            }) as unknown as User;
+        },
         Profile: async (parent, args, context, info) => {
-            console.log(context)
+            // console.log(context)
             authenticatedMiddleware(context);
 
             return await users.findOne({

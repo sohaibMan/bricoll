@@ -19,6 +19,7 @@ type User {
   address: String
   image: String
   status: StatusEnum
+  phone: Int
   skills: [String!]
 #   experienceLevel: level_of_expertise!
 #   stripe_account_link: String

@@ -2,8 +2,14 @@ import React from "react";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-import Rating from '@mui/material/Rating';
-import Stack from '@mui/material/Stack';
+// import db from "../../lib/mongodb";
+import { ObjectId } from "mongodb";
+
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/joy/Box";
+import Link from "@mui/joy/Link";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 import {
   MDBCol,
@@ -23,10 +29,88 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 
+import { gql, useQuery } from "@apollo/client";
 
+import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { User } from "../../types/resolvers";
+
+// const projects = db.collection("projects");
+// const users = db.collection("users");
+
+const USER_PROFILE = gql`
+  query ProfileById($profileByIdId: ObjectID!) {
+    ProfileById(id: $profileByIdId) {
+      name
+      email
+      image
+      projects {
+        _id
+        title
+        description
+        skills
+        created_at
+        category
+      }
+    }
+  }
+`;
 
 export default function ProfilePage() {
+  // const { data: session } = useSession();
+  const router = useRouter();
+  const { profileId } = router.query;
 
+  // console.log("profileId : ", profileId);
+
+  // if(!profileId) {
+  //   profileId = JSON.stringify(session?.user.id)
+  //   router.push(`/freelancers/${profileId}`)
+  // }
+
+  // console.log("session data : ", session?.user.id);
+
+  const { loading, error, data } = useQuery<{ ProfileById: User }>(
+    USER_PROFILE, {
+      variables: {
+        profileByIdId: profileId,
+      },
+    }
+  );
+
+  console.log("userData: ", data);
+  
+
+  if (loading)
+    return (
+      <Box
+        sx={{
+          justifyContent: "center",
+          display: "flex",
+          gap: 2,
+          alignItems: "center",
+          flexWrap: "wrap",
+          marginTop: "350px",
+        }}
+      >
+        <Link
+          component="button"
+          variant="outlined"
+          startDecorator={
+            <CircularProgress
+              variant="plain"
+              thickness={2}
+              sx={{ "--CircularProgress-size": "16px" }}
+            />
+          }
+          sx={{ p: 1 }}
+        >
+          Loading...
+        </Link>
+      </Box>
+    );
+
+    if (error) return <h1>{error.message}</h1>;
 
   return (
     <section style={{ backgroundColor: "#eee" }}>
@@ -58,15 +142,22 @@ export default function ProfilePage() {
                 />
                 <p className="text-muted mb-1">Full Stack Developer</p>
                 <p className="text-muted mb-4">Bay Area, San Francisco, CA</p>
-                  {/* <h5>Ratings</h5> */}
-                  <Stack style={{alignContent: "center", paddingLeft: "32%", paddingBottom: "30px"}} spacing={1}>
-                    <Rating
-                      name="half-rating-read"
-                      defaultValue={2.5}
-                      precision={0.5}
-                      readOnly
-                    />
-                  </Stack>
+                {/* <h5>Ratings</h5> */}
+                <Stack
+                  style={{
+                    alignContent: "center",
+                    paddingLeft: "32%",
+                    paddingBottom: "30px",
+                  }}
+                  spacing={1}
+                >
+                  <Rating
+                    name="half-rating-read"
+                    defaultValue={2.5}
+                    precision={0.5}
+                    readOnly
+                  />
+                </Stack>
                 {/* <br /> */}
                 <div className="d-flex justify-content-center mb-2">
                   <MDBBtn style={{ backgroundColor: "#73bb44" }}>Follow</MDBBtn>
@@ -79,13 +170,12 @@ export default function ProfilePage() {
 
             <MDBCard className="mb-4 mb-lg-0">
               <MDBCardBody className="p-0">
-              
                 <MDBListGroup flush className="rounded-3">
                   {/* <br /> */}
-                  <div style={{padding: "20px"}}>
-                  <h3>Portfolio</h3>
-                    </div> 
-                
+                  <div style={{ padding: "20px" }}>
+                    <h3>Portfolio</h3>
+                  </div>
+
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                     <MDBIcon
                       fab
@@ -98,7 +188,7 @@ export default function ProfilePage() {
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
-          
+
           <MDBCol lg="8">
             <MDBCard className="mb-4">
               <MDBCardBody>
@@ -110,7 +200,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      Johnatan Smith
+                      {data?.ProfileById.name}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -121,7 +211,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      example@example.com
+                      {data?.ProfileById.email}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
@@ -132,18 +222,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      (097) 234-5678
-                    </MDBCardText>
-                  </MDBCol>
-                </MDBRow>
-                <hr />
-                <MDBRow>
-                  <MDBCol sm="3">
-                    <MDBCardText>Mobile</MDBCardText>
-                  </MDBCol>
-                  <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      (098) 765-4321
+                      {data?.ProfileById.phone}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>
