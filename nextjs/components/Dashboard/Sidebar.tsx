@@ -255,6 +255,40 @@ export default function Sidebar(props: {
                     )}
 
 
+                    {/*only freelancer*/}
+                    {/*{props.userRole === UserRole.Freelancer && */}
+                    <ListItem nested>
+                        <ListItemButton
+                            selected={props.currentComponent === DashboardItems.Proposals}
+                            variant={
+                                props.currentComponent === DashboardItems.Proposals
+                                    ? "soft"
+                                    : "plain"
+                            }
+                        >
+                            <ListItemDecorator>
+                                {/* <i data-feather="layers" /> */}
+                                <SplitscreenOutlinedIcon/>
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() =>
+                                    props.setCurrentComponent(DashboardItems.Proposals)
+                                }
+                            >
+                                Proposals
+                            </ListItemContent>
+                        </ListItemButton>
+                        {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
+                        {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
+                        {/*    <ListItemDecorator>*/}
+                        {/*        <i data-feather="layers"/>*/}
+                        {/*    </ListItemDecorator>*/}
+                        {/*    <ListItemContent*/}
+                        {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
+                        {/*        Project</ListItemContent>*/}
+                        {/*</ListItemButton>*/}
+                    </ListItem>
+
                     {/*contracts*/}
 
                     <ListItem nested>
@@ -308,40 +342,6 @@ export default function Sidebar(props: {
                                 </ListItemButton>
                             </ListItem>
                         )}
-                    </ListItem>
-
-                    {/*only freelancer*/}
-                    {/*{props.userRole === UserRole.Freelancer && */}
-                    <ListItem nested>
-                        <ListItemButton
-                            selected={props.currentComponent === DashboardItems.Proposals}
-                            variant={
-                                props.currentComponent === DashboardItems.Proposals
-                                    ? "soft"
-                                    : "plain"
-                            }
-                        >
-                            <ListItemDecorator>
-                                {/* <i data-feather="layers" /> */}
-                                <SplitscreenOutlinedIcon/>
-                            </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() =>
-                                    props.setCurrentComponent(DashboardItems.Proposals)
-                                }
-                            >
-                                Proposals
-                            </ListItemContent>
-                        </ListItemButton>
-                        {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
-                        {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
-                        {/*    <ListItemDecorator>*/}
-                        {/*        <i data-feather="layers"/>*/}
-                        {/*    </ListItemDecorator>*/}
-                        {/*    <ListItemContent*/}
-                        {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
-                        {/*        Project</ListItemContent>*/}
-                        {/*</ListItemButton>*/}
                     </ListItem>
                 </List>
                 {/*<ListItemButton>New user</ListItemButton>*/}
@@ -406,7 +406,7 @@ export default function Sidebar(props: {
 
             <Stack direction={"row"} spacing={"1"}>
                 {props.user.image && (
-                    <Avatar variant="outlined" src={props.user.image}/>
+                    <Avatar variant="outlined" alt={props.user.name} src={props.user.image}/>
                 )}
                 <Box sx={{minWidth: 0, flex: 1}}>
                     <Stack direction="row" alignItems="center">

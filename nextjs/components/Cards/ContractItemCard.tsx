@@ -41,7 +41,25 @@ export default function ContractItemCard({contract, children}: {
                     <CustomLink
                         href={`projects/${contract.project_id}`}
                     >
-                        {contract.terms.join("\n")}
+                        {/*{contract.terms.join("\n")}*/}
+                        {/*{contract.}*/}
+                        {/*<Stack  direction="row"*/}
+                        {/*        spacing={2}*/}
+                        {/*        alignItems="center"*/}
+                        {/*    // justifyContent="space-around"*/}
+                        {/*>*/}
+                        {/*    <Typography>*/}
+                        {/*        {contract.description}*/}
+                        {/*    </Typography>*/}
+
+                        {/*    <Chip*/}
+                        {/*        color="neutral"*/}
+                        {/*        variant="outlined"*/}
+                        {/*        startDecorator={<Avatar alt={contract.freelancer.name} src={contract.freelancer.image}/>}*/}
+                        {/*    >*/}
+                        {/*        {contract.freelancer.name}*/}
+                        {/*    </Chip>*/}
+                        {/*</Stack>*/}
                     </CustomLink>
 
                 </Typography>

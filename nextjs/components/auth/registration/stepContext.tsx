@@ -33,7 +33,7 @@
 // }
 
 import React, {createContext, ReactNode, useState} from "react";
-
+// todo fix the types error
 export const multiStepContext = createContext();
 
 export const StepContextProvider = (props: { children: ReactNode }) => {
@@ -41,6 +41,7 @@ export const StepContextProvider = (props: { children: ReactNode }) => {
     const [userData, setUserData] = useState({});
     const [finalData, setFinalData] = useState([]);
 
+    // todo fix type error
     function submitData() {
         setFinalData((finalData) => [...finalData, userData]);
         setUserData({});
