@@ -235,9 +235,7 @@ export const ProposalResolvers: Resolvers = {
             return await usersCollection.findOne({_id: new ObjectId(context.user?.userRole === UserRole.Client ? parent.freelancer_id : parent.client_id)}, {
                 projection: {
                     name: 1,
-                    email: 1,
                     image: 1,
-                    reviews: 1,
                 }
             }) as unknown as ProfileMetaData;
         }

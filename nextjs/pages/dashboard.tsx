@@ -47,6 +47,7 @@ const USER_PROFILE = gql`
                 }
                 attachments {
                     url
+                    name
                     type
                 }
                 category
@@ -71,18 +72,13 @@ const USER_PROFILE = gql`
                 status
                 attachments {
                     url
-                    type
                     name
+                    type
                 }
                 user {
                     _id
                     name
                     image
-                    reviews {
-                        _id
-                        rating
-                        description
-                    }
                 }
             }
             contracts {
