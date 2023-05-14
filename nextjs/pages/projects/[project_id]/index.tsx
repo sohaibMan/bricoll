@@ -24,6 +24,7 @@ const GET_PROJECT = gql`query Project($projectId: ObjectID!) {
         }
         attachments {
             url
+            name
             type
         }
         category

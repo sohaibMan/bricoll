@@ -1,7 +1,7 @@
 import * as React from 'react';
 import List from '@mui/joy/List';
 import ListItem from '@mui/joy/ListItem';
-import {Attachment, AttachmentType} from "../../types/resolvers";
+import {Attachment} from "../../types/resolvers";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
@@ -14,18 +14,18 @@ interface AttachmentsProps {
 }
 
 export default function Attachments({attachments}: AttachmentsProps) {
-    // @ts-ignore
+    console.log(attachments)
     return (
 
         <List>
             {attachments.map((attachment, index) => (
                 <ListItem key={index}>
                     <Link href={attachment.url} aria-label="Download" color="inherit" target="_blank" rel="noopener">
-                        <Stack direction="row"    spacing={1}>
-                            {attachment.type === AttachmentType.Image && <AddPhotoAlternateIcon/>}
-                            {attachment.type === AttachmentType.Video && <VideoLibraryIcon/>}
-                            {attachment.type === AttachmentType.Document && <DocumentScannerIcon/>}
-                            <Typography  component="h3">
+                        <Stack direction="row" spacing={1}>
+                            {attachment.type.split("/")[0] === "image" ? <AddPhotoAlternateIcon/>
+                                : attachment.type.split("/")[0] === "video" ? <VideoLibraryIcon/> :
+                                    <DocumentScannerIcon/>}
+                            <Typography component="h3">
                                 {attachment.name}
                             </Typography>
                         </Stack>

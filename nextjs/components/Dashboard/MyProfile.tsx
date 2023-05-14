@@ -15,7 +15,6 @@ import TabList from "@mui/joy/TabList";
 import Tab, {tabClasses} from "@mui/joy/Tab";
 import DropZone from "./DropZone";
 import {User} from "../../types/resolvers";
-import {useRouter} from "next/router";
 import toast from "react-hot-toast";
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
 import {DashboardItems} from "../../pages/dashboard";
@@ -25,16 +24,14 @@ import {DashboardItems} from "../../pages/dashboard";
 // todo :persist the state of my Profile between tabs
 
 export const MyProfile = (props: { user: User, currentComponent: DashboardItems }) => {
-    const [nameState, setNameState] = useState(() => props.user.name);
-    const [emailState, setEmailState] = useState(() => props.user.email);
-    const [imageLinkState, setImageLinkState] = useState(() => props.user.image);
-    const router = useRouter();
+    const [nameState, setNameState] = useState(props.user.name);
+    const [emailState, setEmailState] = useState(props.user.email);
+    const [imageLinkState, setImageLinkState] = useState(props.user.image);
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
 
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
-        ``
 
 
         //todo {name: nameState, email: emailState, image: imageLinkState} validate user input and  return a toast if the input is not value
@@ -83,10 +80,11 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
     //     toast.success("The profile is updated successfuly ✅")
     //   }
 
-    function cancelHandling(e: MouseEvent<HTMLButtonElement>) {
+    function cancelHandling() {
         // e.preventDefault()
-
-        router.push('/')
+        setEmailState(props.user.email)
+        setNameState(props.user.name)
+        setImageLinkState(props.user.image)
     }
 
     return (
@@ -232,12 +230,12 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                                     }}
                                     placeholder="first name"
                                     // value={data.Profile.name}
-                                    defaultValue={props.user.name}
+                                    value={nameState}
                                 />
                             </FormControl>
                             {/* <FormControl sx={{ flex: 1 }}>
               <FormLabel sx={{ display: { sm: "none" } }}>Last name</FormLabel>
-              <Input placeholder="last name" defaultValue="" />
+              <Input placeholder="last name" value="" />
             </FormControl> */}
                         </Box>
 
@@ -250,10 +248,10 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                                     setEmailState(() => event.target.value);
                                 }}
                                 type="email"
-                                startDecorator={<MailOutlinedIcon />}
+                                startDecorator={<MailOutlinedIcon/>}
                                 placeholder="email"
                                 // value={data.email}
-                                defaultValue={props.user.email}
+                                value={emailState}
                             />
                         </FormControl>
 
@@ -278,7 +276,7 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                                 size="lg"
                                 src={imageLinkState}
                                 sx={{"--Avatar-size": "64px"}}
-                                // defaultValue={props.user.image}
+                                // value={props.user.image}
                             />
 
                             <DropZone uploadHandler={setImageLinkState}/>
@@ -289,10 +287,10 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
 
                         {/* <FormControl sx={{ display: { sm: "contents" } }}>
             <FormLabel>Role</FormLabel>x`
-            <Input defaultValue="" />
+            <Input value="" />
           </FormControl>*/}
 
-          {/* <Divider role="presentation" /> 
+                        {/* <Divider role="presentation" />
 
             <CountrySelector />
 
@@ -307,7 +305,7 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
           </Box>
           <Box>
             <EditorToolbar />
-            <Textarea minRows={4} sx={{ mt: 1.5 }} defaultValue="" />
+            <Textarea minRows={4} sx={{ mt: 1.5 }} value="" />
             <FormHelperText sx={{ mt: 0.75, fontSize: "xs" }}>
               275 characters left
             </FormHelperText>

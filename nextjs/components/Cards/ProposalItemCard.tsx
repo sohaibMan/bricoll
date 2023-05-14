@@ -40,7 +40,7 @@ export default function ProposalItemCard({proposal, children}: {
                 <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
-                        href={`projects/${proposal.project_id}`}
+                        href={`freelancers/${proposal.user._id}`}
                     >
                         <Stack direction="row"
                                spacing={2}

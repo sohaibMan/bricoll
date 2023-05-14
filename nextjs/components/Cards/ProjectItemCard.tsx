@@ -2,10 +2,11 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Chip, Stack} from '@mui/joy';
+import {Chip, Divider, Stack} from '@mui/joy';
 import {Project} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
+import Attachments from "../ListItems/Attachments";
 
 
 export default function ProjectItemCard({project, children}: {
@@ -65,7 +66,18 @@ export default function ProjectItemCard({project, children}: {
                     {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
                     <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
-                {/*</Box>*/}
+
+                <Box sx={{width: "100%"}}>
+                    <Divider sx={{margin: "10px"}}/>
+
+                    <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
+                        Project Attachments
+                    </Typography>
+
+                    {project.attachments.length > 0 ?
+                        <Attachments attachments={project.attachments}/> : <Typography>No Attachments</Typography>
+                    }
+                </Box>
 
 
                 <Box

@@ -9,8 +9,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
+    ID: string;
+    String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
@@ -20,22 +20,17 @@ export type Scalars = {
 };
 
 export type Attachment = {
-  __typename?: 'Attachment';
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<AttachmentType>;
-  url?: Maybe<Scalars['URL']>;
+    __typename?: 'Attachment';
+    name: Scalars['String'];
+    type: Scalars['String'];
+    url: Scalars['URL'];
 };
 
 export type AttachmentInput = {
-  name?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<AttachmentType>;
+    name: Scalars['String'];
+    type: Scalars['String'];
+    url: Scalars['URL'];
 };
-
-export enum AttachmentType {
-  Document = 'DOCUMENT',
-  Image = 'IMAGE',
-  Video = 'VIDEO'
-}
 
 export type Contract = {
   __typename?: 'Contract';
@@ -244,7 +239,6 @@ export type ProfileMetaData = {
   _id: Scalars['ObjectID'];
   image: Scalars['String'];
   name: Scalars['String'];
-  reviews: Array<Review>;
 };
 
 export type Project = {
@@ -457,7 +451,7 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
-  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+    resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
 export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
     ResolverFn<TResult, TParent, TContext, TArgs>
@@ -521,11 +515,11 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 ) => TResult | Promise<TResult>;
 
 
+
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = ResolversObject<{
   Attachment: ResolverTypeWrapper<Attachment>;
   AttachmentInput: AttachmentInput;
-  AttachmentType: AttachmentType;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Contract: ResolverTypeWrapper<Contract>;
   ContractStatus: ContractStatus;
@@ -612,10 +606,10 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['AttachmentType']>, ParentType, ContextType>;
-  url?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
@@ -671,7 +665,6 @@ export type ProfileMetaDataResolvers<ContextType = ServerContext, ParentType ext
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

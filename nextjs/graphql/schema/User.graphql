@@ -34,7 +34,6 @@ type ProfileMetaData{
   _id: ObjectID!
   name: String!
   image: String!
-  reviews: [Review!]!
 }
 
 #input userData {
