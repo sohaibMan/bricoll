@@ -4,29 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/TermsAutocomplete.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Chip/HireChipWithLabel.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/DashBoardWrapper.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Forms/CreateContractForm.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add a proposal status filter in the dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptCancelContractControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptCancelContractControlButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptDeclineProposalControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/AcceptDeclineHireProposalControlButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/EditCancelProposalControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/EditCancelProposalControlButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardContracts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/DashBoardContracts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProjects.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/DashBoardProjects.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardProposals.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/DashBoardProposals.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Header.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ContractItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ContractItemCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/CustomLinks/CustomLink.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/CustomLinks/CustomLink.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ContractForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ContractForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProposalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProposalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Proposals.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Proposals.graphql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/createProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/createProfile.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,11 +39,6 @@
       <list>
         <option value="Sohaib manah &lt;96356071+sohaibman@users.noreply.github.com&gt;" />
       </list>
-    </option>
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="FreelancerAvatar" />
-      </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
@@ -74,7 +61,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -91,7 +78,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "ShowUsagesActions.previewPropertyKey": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Main",
+    "git-widget-placeholder": "FreelancerAvatar",
     "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/AutoCompletes",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.standard": "true",
@@ -100,7 +87,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "inlay.hints",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -117,17 +104,17 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/components/AutoCompletes" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
-      <recent name="$PROJECT_DIR$/nextjs/components/AutoCompletes" />
       <recent name="$PROJECT_DIR$/nextjs/utils" />
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
+      <recent name="$PROJECT_DIR$/nextjs/components/EditProjectForm" />
+      <recent name="$PROJECT_DIR$/nextjs/pages/projects_tmp" />
+      <recent name="$PROJECT_DIR$/nextjs/components/dashboard" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/DashBoardProjects.tsx" />
@@ -184,19 +171,7 @@
       <workItem from="1683744389464" duration="13518000" />
       <workItem from="1683793367582" duration="13069000" />
       <workItem from="1683811074986" duration="5331000" />
-
-      <workItem from="1683823177735" duration="923000" />
-      <workItem from="1683837561887" duration="909000" />
-      <workItem from="1683839266883" duration="1437000" />
-      <workItem from="1683840787389" duration="34000" />
-      <workItem from="1683907029908" duration="46000" />
-      <workItem from="1683911571744" duration="11826000" />
-      <workItem from="1683924113917" duration="2667000" />
-      <workItem from="1683933693485" duration="7240000" />
-      <workItem from="1683974539386" duration="3244000" />
-      <workItem from="1683978344903" duration="17000" />
-      <workItem from="1683989159395" duration="14343000" />
-
+      <workItem from="1683823177735" duration="1429000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -352,57 +327,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683816560692</updated>
     </task>
-
-    <task id="LOCAL-00023" summary="protecting the routes">
-      <created>1683836258616</created>
+    <task id="LOCAL-00023" summary="add a proposal status filter in the dashboard">
+      <created>1683824351807</created>
       <option name="number" value="00023" />
       <option name="presentableId" value="LOCAL-00023" />
       <option name="project" value="LOCAL" />
-      <updated>1683836258616</updated>
+      <updated>1683824351807</updated>
     </task>
-    <task id="LOCAL-00024" summary="update dashbaord">
-      <created>1683916626789</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1683916626796</updated>
-    </task>
-    <task id="LOCAL-00025" summary="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1683916985336</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1683916985336</updated>
-    </task>
-    <task id="LOCAL-00026" summary="add contracts and its handlers(cancel/accept...)&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1683926765886</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1683926765886</updated>
-    </task>
-    <task id="LOCAL-00027" summary="Fix the overflow of the forms on larg text size and add a close button to them&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1683936975827</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1683936975827</updated>
-    </task>
-    <task id="LOCAL-00028" summary="fix autocompletion hidden zIndex&#10;todo :persist the state of my Profile between tabs&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1683940944743</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1683940944743</updated>
-    </task>
-    <task id="LOCAL-00029" summary="add payment button to contracts&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1683977836548</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1683977836548</updated>
-    </task>
-
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -431,8 +363,10 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="update the node modules and add a chart to the project by id and add some styles to the search bar" />
+    <MESSAGE value="add attachments to projects #74" />
+    <MESSAGE value="update project card skeleton" />
     <MESSAGE value="add a submit proposal form" />
     <MESSAGE value="add some check to submit a proposal form" />
     <MESSAGE value="add CreateProjectForm page and code refactoring" />
@@ -450,17 +384,8 @@
     <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
-
-    <MESSAGE value="protecting the routes" />
-    <MESSAGE value="update dashbaord" />
-    <MESSAGE value="update dashbaord&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="add contracts and its handlers(cancel/accept...)&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="Fix the overflow of the forms on larg text size and add a close button to them&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="fix autocompletion hidden zIndex&#10;todo :persist the state of my Profile between tabs&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="add payment button to contracts&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="add way to create a contract based on a proposal and refactore the dashboard &#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-
+    <MESSAGE value="add a proposal status filter in the dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="add a proposal status filter in the dashboard" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

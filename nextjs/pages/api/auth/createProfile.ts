@@ -1,14 +1,13 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import {NextApiRequest, NextApiResponse} from "next";
 import db from "../../../lib/mongodb";
 // import { getToken } from "next-auth/jwt";
 // import { User, UserRole } from "../../../types/resolvers";
 // import { getCookies, getCookie, setCookie, deleteCookie } from "cookies-next";
 // import jwt from "jsonwebtoken";
-import { ObjectId } from "mongodb";
-import { getToken } from "next-auth/jwt";
-import { getCookie } from "cookies-next";
-import jwt from "jsonwebtoken";
-import { redis } from "../../../lib/redis";
+import {ObjectId} from "mongodb";
+import {getToken} from "next-auth/jwt";
+import {getCookie} from "cookies-next";
+import {redis} from "../../../lib/redis";
 
 export default async function handler(
   req: NextApiRequest,
@@ -76,6 +75,7 @@ export default async function handler(
 
     // const { isCompleted }: any = user;
 
+    // todo some validation on user input
     const newUserData = await db.collection("users").findOneAndUpdate(
       { _id: new ObjectId(user_id) },
       {
@@ -95,6 +95,7 @@ export default async function handler(
           educationLevel: req.body.educationLevel,
           portfolio: req.body.portfolio,
           access_token: getCookie("jwt", { req, res }),
+            reviews: []
         },
       }
     );

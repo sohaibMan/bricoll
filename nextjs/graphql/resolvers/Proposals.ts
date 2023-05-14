@@ -1,5 +1,5 @@
 import {ObjectId} from 'mongodb';
-import {Freelancer, Project, Proposal, Proposal_Status, Resolvers} from "../../types/resolvers";
+import {ProfileMetaData, Project, Proposal, Proposal_Status, Resolvers, UserRole} from "../../types/resolvers";
 import db from "../../lib/mongodb";
 import {GraphQLError} from 'graphql';
 import {freelancerMiddleware} from './resolversHelpersFunctions/freelancerMiddleware';
@@ -20,7 +20,7 @@ const usersCollection = db.collection("users");
 export const ProposalResolvers: Resolvers = {
     Query: {
         Proposal:
-            async (parent, args, context, info) => {
+            async (parent, args, context, _) => {
                 //? the client have access related to him project
                 //? the freelance have access only to his proposals...
                 // to create scrolling pagination
@@ -40,7 +40,7 @@ export const ProposalResolvers: Resolvers = {
 
     },
     Mutation: {
-        createProposal: async (parent, args, context, info) => {
+        createProposal: async (parent, args, context, _) => {
             // check if the project exits
             freelancerMiddleware(context);
 
@@ -73,7 +73,7 @@ export const ProposalResolvers: Resolvers = {
                     },
                 });
             // the freelancer already submit a proposals for this project
-            const proposal: Proposal = {
+            const proposal = {
                 _id: new ObjectId(),
                 cover_letter: args.cover_letter,
                 description: args.description,
@@ -85,16 +85,16 @@ export const ProposalResolvers: Resolvers = {
                 created_at: new Date(),
                 status: Proposal_Status.InProgress,
                 updated_at: new Date(),
-                attachments: args.attachments || []
+                attachments: args.attachments || [],
             }
             const insertedProposal = await proposalsCollection.insertOne(proposal);
 
             if (!insertedProposal.acknowledged) throw new Error("The project no longer exists");
             // do await to send the email(fire and forget)
-            OnCreateProposal(project.client_id);
-            return proposal;
+            await OnCreateProposal(project.client_id);
+            return proposal as Proposal;
         },
-        editProposal: async (parent, args, context, info) => {
+        editProposal: async (parent, args, context, _) => {
 
             // only the freelancer can edit his proposals
             freelancerMiddleware(context);//=> check if the user is authenticated as freelancer (->stop the execution with an error if not authenticated as freelancer)
@@ -122,10 +122,10 @@ export const ProposalResolvers: Resolvers = {
             if (!updateProposal.value) throw new Error("The proposals no longer exists");
             //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnEditProposal(proposal.client_id);
+            await OnEditProposal(proposal.client_id);
             return proposal;
         },
-        declineProposal: async (parent, args, context, info) => {
+        declineProposal: async (parent, args, context, _) => {
             // only the client can decline a proposals
             clientMiddleware(context);
             // the client can decline just the proposals related to his project
@@ -157,11 +157,11 @@ export const ProposalResolvers: Resolvers = {
             if (updateProposal.lastErrorObject?.updatedExisting === false) throw new Error("The proposals no longer exists");
             //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnProposalDeclined(proposal.freelancer_id);
+            await OnProposalDeclined(proposal.freelancer_id);
             return proposal;
 
         },
-        cancelProposal: async (parent, args, context, info) => {
+        cancelProposal: async (parent, args, context, _) => {
             // only the freelancer can withdraw his proposals
             freelancerMiddleware(context);
             // the freelancer can withdraw just his proposals
@@ -191,11 +191,11 @@ export const ProposalResolvers: Resolvers = {
                 });
             //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnCancelProposal(proposal.client_id);
+            await OnCancelProposal(proposal.client_id);
             return proposal;
 
         },
-        acceptProposal: async (parent, args, context, info) => {
+        acceptProposal: async (parent, args, context, _) => {
             // only the client can accept a proposals
             clientMiddleware(context);
             // the client can accept just the proposals related to his project
@@ -223,22 +223,23 @@ export const ProposalResolvers: Resolvers = {
             if (!updateProposal.value) throw new Error("The proposals no longer exists");
             //return the value (the updated proposals)
             const proposal = updateProposal.value as unknown as Proposal;
-            OnAcceptProposal(proposal.freelancer_id);
+            await OnAcceptProposal(proposal.freelancer_id);
             return proposal;
         }
 
 
     },
     Proposal: {
-        freelancer: async (parent, args, context, info) => {
-            return await usersCollection.findOne({_id: new ObjectId(parent.freelancer_id)}, {
+        user: async (parent, args, context, _) => {
+            // if I am a client, give me the freelancer metadata and the opposite
+            return await usersCollection.findOne({_id: new ObjectId(context.user?.userRole === UserRole.Client ? parent.freelancer_id : parent.client_id)}, {
                 projection: {
                     name: 1,
                     email: 1,
                     image: 1,
                     reviews: 1,
                 }
-            }) as unknown as Freelancer;
+            }) as unknown as ProfileMetaData;
         }
 
     }

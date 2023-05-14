@@ -74,7 +74,7 @@ const USER_PROFILE = gql`
                     type
                     name
                 }
-                freelancer {
+                user {
                     _id
                     name
                     image

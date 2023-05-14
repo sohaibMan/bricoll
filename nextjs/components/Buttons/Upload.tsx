@@ -1,13 +1,11 @@
-import React, { Dispatch, useState } from "react";
+import React, {Dispatch, useState} from "react";
 import uploadFileToBlob from "../../utils/azure-storage-blob";
 import Button from "@mui/joy/Button";
 
 const Upload = (props: {
   uploadHandler: Dispatch<React.SetStateAction<string>>;
-}): JSX.Element => {
-  // // all blobs in container
-  const [blobList, setBlobList] = useState<string[]>([]);
-  //
+}) => {
+
   // // current file to upload into container
   const [fileSelected, setFileSelected] = useState<File | null>();
   const [fileUploaded, setFileUploaded] = useState<string>("");
@@ -39,8 +37,12 @@ const Upload = (props: {
       setFileUploaded(fileSelected.name);
       setUploading(false);
       setInputKey(Math.random().toString(36));
+      // `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageState}`,
+      const nextPublicAzureStorageAccountName =
+          process.env.NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME;
+      const containerName = process.env.NEXT_PUBLIC_CONTAINER_NAME;
+      props.uploadHandler(`https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${fileSelected.name}`);
 
-      props.uploadHandler(fileSelected.name);
     }
   };
 
