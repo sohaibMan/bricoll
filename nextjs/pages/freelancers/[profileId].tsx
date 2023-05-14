@@ -140,13 +140,13 @@ export default function ProfilePage() {
           <MDBCol lg="4">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
-                <MDBCardImage
-                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                {data?.ProfileById.image && <MDBCardImage
+                  src={data?.ProfileById.image}
                   alt="avatar"
                   className="rounded-circle"
-                  style={{ width: "150px", marginBottom: "10px" }}
+                  style={{ width: "150px", height: "150px", marginBottom: "10px" }}
                   fluid
-                />
+                />}
 
                 <p className="text-muted mb-1">{data?.ProfileById.jobTitle}</p>
                 <p className="text-muted mb-4">{data?.ProfileById.address}</p>
