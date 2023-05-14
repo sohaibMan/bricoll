@@ -27,26 +27,23 @@ import {DashboardItems} from "../../pages/dashboard";
 export const MyProfile = (props: { user: User, currentComponent: DashboardItems }) => {
     const [nameState, setNameState] = useState(() => props.user.name);
     const [emailState, setEmailState] = useState(() => props.user.email);
-    const [imageState, setImageState] = useState(() => props.user.image || "");
+    const [imageLinkState, setImageLinkState] = useState(() => props.user.image);
     const router = useRouter();
-
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
 
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
         ``
-        const nextPublicAzureStorageAccountName =
-            process.env.NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME;
-        const containerName = process.env.NEXT_PUBLIC_CONTAINER_NAME;
 
-        //todo {name: nameState, email: emailState, image: imageState} validate user input and  return a toast if the input is not value
+
+        //todo {name: nameState, email: emailState, image: imageLinkState} validate user input and  return a toast if the input is not value
 
         if (!nameState) return toast.error("The name is empty, try to insert it!");
         if (!emailState)
             return toast.error("The email is empty, try to insert it!");
         // // if(!emailState.includes('@')) return toast.error("Invalid Email Format!")
-        if (!imageState)
+        if (!imageLinkState)
             return toast.error("The image is empty, try to upload it!");
 
         const response = await fetch(`/api/user/editProfile`, {
@@ -57,7 +54,8 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
             body: JSON.stringify({
                 name: nameState,
                 email: emailState,
-                image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageState}`,
+                image: imageLinkState,
+                // image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageLinkState}`,
             }),
         });
 
@@ -70,9 +68,9 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
 
         if (res.status != "success") toast.error("oops an error has occurred")
 
-        setImageState(
-            "https://${nextpublicazurestorageaccountname}.blob.core.windows.net/${containerName}/${imageState}"
-        );
+        // setImageLinkState(
+        //     `https://${nextpublicazurestorageaccountname}.blob.core.windows.net/${containerName}/${imageLinkState}`
+        // );
         toast.success("The profile is updated successfully ");
 
         // router.push("/");
@@ -275,16 +273,16 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                                 gap: 2.5,
                             }}
                         >
-                            {props.user.image && (
-                                <Avatar
-                                    size="lg"
-                                    src={props.user.image}
-                                    sx={{"--Avatar-size": "64px"}}
-                                    // defaultValue={props.user.image}
-                                />
-                            )}
-                            <DropZone uploadHandler={setImageState}/>
-                            {/* <Upload onUpload={setImageState} /> */}
+
+                            <Avatar
+                                size="lg"
+                                src={imageLinkState}
+                                sx={{"--Avatar-size": "64px"}}
+                                // defaultValue={props.user.image}
+                            />
+
+                            <DropZone uploadHandler={setImageLinkState}/>
+                            {/* <Upload onUpload={setImageLinkState} /> */}
                         </Box>
 
                         <Divider role="presentation"/>

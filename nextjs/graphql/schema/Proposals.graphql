@@ -13,7 +13,7 @@ type Proposal {
     _id: ObjectID #auto generated
     project_id: ObjectID!
     freelancer_id: ObjectID!
-    freelancer: Freelancer
+    user: ProfileMetaData! # user meta data by id(client/freelancer by id)
     client_id:ObjectID!
     price: Float!
     duration: Int!
