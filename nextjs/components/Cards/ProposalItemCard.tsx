@@ -7,6 +7,7 @@ import {Proposal, Proposal_Status} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
 import Attachments from "../ListItems/Attachments";
+import Avatar from "@mui/joy/Avatar";
 
 
 export default function ProposalItemCard({proposal, children}: {
@@ -39,9 +40,25 @@ export default function ProposalItemCard({proposal, children}: {
                 <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
-                        href={`projects/${proposal.project_id}`}
+                        href={`freelancers/${proposal.user._id}`}
                     >
-                        {proposal.description}
+                        <Stack direction="row"
+                               spacing={2}
+                               alignItems="center"
+                            // justifyContent="space-around"
+                        >
+                            <Typography>
+                                {proposal.description}
+                            </Typography>
+
+                            <Chip
+                                color="neutral"
+                                variant="outlined"
+                                startDecorator={<Avatar alt={proposal.user.name} src={proposal.user.image}/>}
+                            >
+                                {proposal.user.name}
+                            </Chip>
+                        </Stack>
                     </CustomLink>
 
                 </Typography>

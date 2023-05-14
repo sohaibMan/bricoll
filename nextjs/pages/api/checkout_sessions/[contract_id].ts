@@ -4,7 +4,7 @@ import {Contract, ContractStatus} from "../../../types/resolvers";
 import db from "../../../lib/mongodb";
 import {getToken} from "next-auth/jwt";
 
-const contractCollection = db.collection("contract")
+const contractCollection = db.collection("contracts")
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
@@ -34,6 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
             if (!contract) return res.status(400).json({messaage: "The contract can't be completed because it is not accepted or  or cancelled or already completed"});
 
+
             let product;
             try {
                 // check if the product exists
@@ -50,17 +51,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     name: 'Contract N:' + contract_id,
                     description: "Buy paying your are accepting those terms " + contract.terms || " " + " within " + contract.duration + " days" + "\n fees: " + contract.fees || " " + "\n price: " + contract.price || " ",
                     default_price_data: {
-                        unit_amount_decimal: contract.price * 100 + contract.fees,//cents to dollar (100 cents = 1 dollar)(price + fees)
+                        unit_amount_decimal: Math.round(contract.price * 100 + contract.fees),//cents to dollar (100 cents = 1 dollar)(price + fees)
                         currency: "usd"
                     }
 
                 });
             }
+
             const session = await stripe.checkout.sessions.create({
                 client_reference_id:14321,
                 metadata: {
                     contract_id,
-                    test: 14321
+
                 },
                 line_items: [
                     {
@@ -70,8 +72,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 ],
                 mode: 'payment',
-                success_url: `${req.headers.origin}/?success=true`,
-                cancel_url: `${req.headers.origin}/?canceled=true`,
+                success_url: `${req.headers.origin}/dashboard/?success=true`,
+                cancel_url: `${req.headers.origin}/dashboard/?canceled=true`,
             });
 
 

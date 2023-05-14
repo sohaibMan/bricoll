@@ -4,7 +4,7 @@ import EditChipWithLabel from "../Chip/EditChipWithLabel";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
 import {Project} from "../../types/resolvers";
-import {Modal, ModalDialog} from "@mui/joy";
+import {Modal, ModalClose, ModalDialog} from "@mui/joy";
 import EditProjectForm from "../Forms/EditProjectForm";
 
 
@@ -60,9 +60,10 @@ export function EditDeleteProjectControlButtons(props: {
             <ModalDialog
                 aria-labelledby="basic-modal-dialog-title"
                 aria-describedby="basic-modal-dialog-description"
-                sx={{width: "50%"}}
+                sx={{minWidth: "50%"}}
             >
-                <EditProjectForm   onSubmitProjectHandler={editeProjectHandler} project={props.project}/>
+                <ModalClose/>
+                <EditProjectForm onSubmitProjectHandler={editeProjectHandler} project={props.project}/>
 
             </ModalDialog>
         </Modal>

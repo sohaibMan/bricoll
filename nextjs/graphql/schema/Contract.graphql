@@ -33,7 +33,8 @@ type Contract {
     status: ContractStatus!
     created_at: Date!
     updated_at: Date!
-    terms: String!
+    terms:[ String!]!
+#    freelancer:ProfileMetaData!
     submission_reviews: [Submission_review]!
     fees: Float! # for simplicity we will assume that the percentage fees are fixed (10%) for both parties (-5% for the freelancer and -5% for the client)
 }
@@ -44,6 +45,5 @@ enum ContractStatus {
     CANCELLED_BY_CLIENT # cancelled by client
     COMPLETED #!!! completed by both parties !!!!
     PAID # added to the freelancer's balance
-
 }
 

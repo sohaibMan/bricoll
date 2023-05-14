@@ -1,5 +1,6 @@
-import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
-import { ServerContext } from './server-context';
+import {GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig} from 'graphql';
+import {ServerContext} from './server-context';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -8,8 +9,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: string;
-  String: string;
+    ID: string;
+    String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
@@ -19,22 +20,17 @@ export type Scalars = {
 };
 
 export type Attachment = {
-  __typename?: 'Attachment';
-  name?: Maybe<Scalars['String']>;
-  type?: Maybe<AttachmentType>;
-  url?: Maybe<Scalars['URL']>;
+    __typename?: 'Attachment';
+    name: Scalars['String'];
+    type: Scalars['String'];
+    url: Scalars['URL'];
 };
 
 export type AttachmentInput = {
-  name?: InputMaybe<Scalars['String']>;
-  type?: InputMaybe<AttachmentType>;
+    name: Scalars['String'];
+    type: Scalars['String'];
+    url: Scalars['URL'];
 };
-
-export enum AttachmentType {
-  Document = 'DOCUMENT',
-  Image = 'IMAGE',
-  Video = 'VIDEO'
-}
 
 export type Contract = {
   __typename?: 'Contract';
@@ -49,7 +45,7 @@ export type Contract = {
   proposal_id: Scalars['ObjectID'];
   status: ContractStatus;
   submission_reviews: Array<Maybe<Submission_Review>>;
-  terms: Scalars['String'];
+  terms: Array<Scalars['String']>;
   updated_at: Scalars['Date'];
 };
 
@@ -138,7 +134,7 @@ export type MutationCreateContractArgs = {
   price: Scalars['Float'];
   project_id: Scalars['ObjectID'];
   proposal_id: Scalars['ObjectID'];
-  terms: Scalars['String'];
+  terms: Array<Scalars['String']>;
 };
 
 
@@ -238,6 +234,13 @@ export type MutationUndoReactToProjectArgs = {
   reaction_type: Reaction_Type;
 };
 
+export type ProfileMetaData = {
+  __typename?: 'ProfileMetaData';
+  _id: Scalars['ObjectID'];
+  image: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type Project = {
   __typename?: 'Project';
   _id?: Maybe<Scalars['ObjectID']>;
@@ -300,6 +303,7 @@ export type Proposal = {
   project_id: Scalars['ObjectID'];
   status: Proposal_Status;
   updated_at: Scalars['Date'];
+  user: ProfileMetaData;
 };
 
 export type Query = {
@@ -395,27 +399,6 @@ export type User = {
   status?: Maybe<StatusEnum>;
 };
 
-export type ClientProfile = {
-  __typename?: 'clientProfile';
-  _id?: Maybe<Scalars['ID']>;
-  company: CompanyDetails;
-  contact?: Maybe<User>;
-  image?: Maybe<Scalars['String']>;
-  review?: Maybe<Array<Maybe<Review>>>;
-  status?: Maybe<StatusEnum>;
-};
-
-export type CompanyDetails = {
-  __typename?: 'companyDetails';
-  _id?: Maybe<Scalars['ID']>;
-  description?: Maybe<Scalars['String']>;
-  industry?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
-  size: Scalars['Int'];
-  tagline?: Maybe<Scalars['String']>;
-  website: Scalars['String'];
-};
-
 export type Earnings = {
   __typename?: 'earnings';
   amount: Scalars['Float'];
@@ -467,13 +450,6 @@ export enum Size_Of_Project {
   Small = 'SMALL'
 }
 
-export type UserData = {
-  email: Scalars['String'];
-  name: Scalars['String'];
-  password: Scalars['String'];
-  role: UserRole;
-};
-
 export enum UserRole {
   Admin = 'Admin',
   Client = 'Client',
@@ -488,29 +464,31 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
-  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+    resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
+    ResolverFn<TResult, TParent, TContext, TArgs>
+    | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo
 ) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
@@ -524,17 +502,17 @@ export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
 }
 
 export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
-  | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
-  | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
+    | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
+    | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
-  | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
+    | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+    | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
-  parent: TParent,
-  context: TContext,
-  info: GraphQLResolveInfo
+    parent: TParent,
+    context: TContext,
+    info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
@@ -542,11 +520,11 @@ export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TConte
 export type NextResolverFn<T> = () => Promise<T>;
 
 export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
-  next: NextResolverFn<TResult>,
-  parent: TParent,
-  args: TArgs,
-  context: TContext,
-  info: GraphQLResolveInfo
+    next: NextResolverFn<TResult>,
+    parent: TParent,
+    args: TArgs,
+    context: TContext,
+    info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
 
@@ -555,17 +533,16 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Attachment: ResolverTypeWrapper<Attachment>;
   AttachmentInput: AttachmentInput;
-  AttachmentType: AttachmentType;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Contract: ResolverTypeWrapper<Contract>;
   ContractStatus: ContractStatus;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   EarningsStatus: EarningsStatus;
   Float: ResolverTypeWrapper<Scalars['Float']>;
-  ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
+  ProfileMetaData: ResolverTypeWrapper<ProfileMetaData>;
   Project: ResolverTypeWrapper<Project>;
   ProjectCategoriesEnum: ProjectCategoriesEnum;
   ProjectScopeInput: ProjectScopeInput;
@@ -580,8 +557,6 @@ export type ResolversTypes = ResolversObject<{
   Submission_review: ResolverTypeWrapper<Submission_Review>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
-  clientProfile: ResolverTypeWrapper<ClientProfile>;
-  companyDetails: ResolverTypeWrapper<CompanyDetails>;
   earnings: ResolverTypeWrapper<Earnings>;
   filterOptionsInput: FilterOptionsInput;
   level_of_expertise: Level_Of_Expertise;
@@ -590,7 +565,6 @@ export type ResolversTypes = ResolversObject<{
   reaction_type: Reaction_Type;
   reactions: ResolverTypeWrapper<Reactions>;
   size_of_project: Size_Of_Project;
-  userData: UserData;
   userRole: UserRole;
 }>;
 
@@ -602,10 +576,10 @@ export type ResolversParentTypes = ResolversObject<{
   Contract: Contract;
   Date: Scalars['Date'];
   Float: Scalars['Float'];
-  ID: Scalars['ID'];
   Int: Scalars['Int'];
   Mutation: {};
   ObjectID: Scalars['ObjectID'];
+  ProfileMetaData: ProfileMetaData;
   Project: Project;
   ProjectScopeInput: ProjectScopeInput;
   ProjectScopeOutput: ProjectScopeOutput;
@@ -617,13 +591,10 @@ export type ResolversParentTypes = ResolversObject<{
   Submission_review: Submission_Review;
   URL: Scalars['URL'];
   User: User;
-  clientProfile: ClientProfile;
-  companyDetails: CompanyDetails;
   earnings: Earnings;
   filterOptionsInput: FilterOptionsInput;
   queryResult: QueryResult;
   reactions: Reactions;
-  userData: UserData;
 }>;
 
 export type ConstraintDirectiveArgs = {
@@ -648,10 +619,10 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
-  name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  type?: Resolver<Maybe<ResolversTypes['AttachmentType']>, ParentType, ContextType>;
-  url?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+    url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
+    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
@@ -666,7 +637,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['ContractStatus'], ParentType, ContextType>;
   submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
-  terms?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  terms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
@@ -702,6 +673,13 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
 export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['ObjectID'], any> {
   name: 'ObjectID';
 }
+
+export type ProfileMetaDataResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['ProfileMetaData'] = ResolversParentTypes['ProfileMetaData']> = ResolversObject<{
+  _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
 
 export type ProjectResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Project'] = ResolversParentTypes['Project']> = ResolversObject<{
   _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
@@ -748,6 +726,7 @@ export type ProposalResolvers<ContextType = ServerContext, ParentType extends Re
   project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['proposal_status'], ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  user?: Resolver<ResolversTypes['ProfileMetaData'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -809,27 +788,6 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type ClientProfileResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['clientProfile'] = ResolversParentTypes['clientProfile']> = ResolversObject<{
-  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  company?: Resolver<ResolversTypes['companyDetails'], ParentType, ContextType>;
-  contact?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
-  image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
-  status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
-export type CompanyDetailsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['companyDetails'] = ResolversParentTypes['companyDetails']> = ResolversObject<{
-  _id?: Resolver<Maybe<ResolversTypes['ID']>, ParentType, ContextType>;
-  description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  industry?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  size?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
-  tagline?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  website?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
-}>;
-
 export type EarningsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['earnings'] = ResolversParentTypes['earnings']> = ResolversObject<{
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   contract_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
@@ -855,6 +813,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Date?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   ObjectID?: GraphQLScalarType;
+  ProfileMetaData?: ProfileMetaDataResolvers<ContextType>;
   Project?: ProjectResolvers<ContextType>;
   ProjectScopeOutput?: ProjectScopeOutputResolvers<ContextType>;
   ProjectStats?: ProjectStatsResolvers<ContextType>;
@@ -864,8 +823,6 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Submission_review?: Submission_ReviewResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
-  clientProfile?: ClientProfileResolvers<ContextType>;
-  companyDetails?: CompanyDetailsResolvers<ContextType>;
   earnings?: EarningsResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
   reactions?: ReactionsResolvers<ContextType>;

@@ -52,7 +52,7 @@ type Mutation {
     proposal_id: ObjectID!
     price: Float! @constraint(min: 1, max: 10000)
     duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    terms: String! @constraint(minLength: 5, maxLength: 100000)
+    terms: [String!]! @constraint(minLength: 5, maxLength: 100000)
   ): Contract
 
   editContract(

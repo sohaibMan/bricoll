@@ -10,32 +10,33 @@ import Typography from "@mui/joy/Typography";
 const GET_PROJECT = gql`
   query Project($projectId: ObjectID!) {
     Project(id: $projectId) {
-      client_id
-      _id
-      title
-      description
-      price
-      skills
-      created_at
-      projectScope {
-        estimated_duration_in_days
-        level_of_expertise
-        size_of_project
-      }
-      attachments {
-        url
-        type
-      }
-      category
-      stats {
-        declined_count
-        completed_count
-        approved_count
-        in_progress_count
-      }
-      proposals {
-        _id ##get the proposals of me as a freelancer to this project
-      }
+        client_id
+        _id
+        title
+        description
+        price
+        skills
+        created_at
+        projectScope {
+            estimated_duration_in_days
+            level_of_expertise
+            size_of_project
+        }
+        attachments {
+            url
+            name
+            type
+        }
+        category
+        stats {
+            declined_count
+            completed_count
+            approved_count
+            in_progress_count
+        }
+        proposals {
+            _id ##get the proposals of me as a freelancer to this project
+        }
     }
   }
 `;

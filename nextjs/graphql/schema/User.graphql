@@ -29,37 +29,44 @@ type User {
   portfolio: String
 #   stripe_account_link: String
   earnings: earnings
+
   review: [Review]
-  proposals: [Proposal!]
-  projects: [Project!]
-  contracts: [Contract!]
-}
+  proposals: [Proposal!]!
+  projects: [Project!]!
+  contracts: [Contract!]!
 
-input userData {
+}
+type ProfileMetaData{
+  _id: ObjectID!
   name: String!
-  email: String!
-  password: String!
-  role: userRole!
+  image: String!
 }
 
-type companyDetails {
-  _id: ID
-  name: String!
-  website: String!
-  industry: String
-  size: Int!
-  tagline: String
-  description: String
-}
-
-type clientProfile {
-  _id: ID
-  image: String
-  contact: User
-  status: StatusEnum
-  company: companyDetails!
-  review: [Review]
-}
+#input userData {
+#  name: String!
+#  email: String!
+#  password: String!
+#  role: userRole!
+#}
+#
+#type companyDetails {
+#  _id: ID
+#  name: String!
+#  website: String!
+#  industry: String
+#  size: Int!
+#  tagline: String
+#  description: String
+#}
+#
+#type clientProfile {
+#  _id: ID
+#  image: String
+#  contact: User
+#  status: StatusEnum
+#  company: companyDetails!
+#  reviews: [Review]
+#}
 
 type earnings {
   contract_id: ObjectID!

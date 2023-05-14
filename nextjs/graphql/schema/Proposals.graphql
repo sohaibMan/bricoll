@@ -13,6 +13,7 @@ type Proposal {
     _id: ObjectID #auto generated
     project_id: ObjectID!
     freelancer_id: ObjectID!
+    user: ProfileMetaData! # user meta data by id(client/freelancer by id)
     client_id:ObjectID!
     price: Float!
     duration: Int!
@@ -24,7 +25,10 @@ type Proposal {
     # current time
     attachments: [Attachment!]
     # the link of urls of the attachments(files, images, video)
+
 }
+
+
 
 # Cover Letter, Attachments (images +video +files ...)
 

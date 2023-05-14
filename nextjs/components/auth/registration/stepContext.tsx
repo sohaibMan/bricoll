@@ -32,34 +32,35 @@
 //   );
 // }
 
-import React, { useState, createContext } from "react";
-
+import React, {createContext, ReactNode, useState} from "react";
+// todo fix the types error
 export const multiStepContext = createContext();
 
-export const StepContextProvider = ({ children }) => {
-  const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState({});
-  const [finalData, setFinalData] = useState([]);
+export const StepContextProvider = (props: { children: ReactNode }) => {
+    const [currentStep, setStep] = useState(1);
+    const [userData, setUserData] = useState({});
+    const [finalData, setFinalData] = useState([]);
 
-  function submitData() {
-    setFinalData((finalData) => [...finalData, userData]);
-    setUserData({});
-  }
+    // todo fix type error
+    function submitData() {
+        setFinalData((finalData) => [...finalData, userData]);
+        setUserData({});
+    }
 
-  const contextValues = {
-    currentStep,
-    setStep,
-    userData,
-    setUserData,
-    finalData,
-    setFinalData,
-    submitData,
-  };
+    const contextValues = {
+        currentStep,
+        setStep,
+        userData,
+        setUserData,
+        finalData,
+        setFinalData,
+        submitData,
+    };
 
-  return (
-    <multiStepContext.Provider value={contextValues}>
-      {children}
-    </multiStepContext.Provider>
-  );
+    return (
+        <multiStepContext.Provider value={contextValues}>
+            {props.children}
+        </multiStepContext.Provider>
+    );
 };
 

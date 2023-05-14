@@ -1,4 +1,8 @@
 import {NextApiRequest, NextApiResponse} from "next";
+import {buffer} from "micro";
+import {ObjectId} from "mongodb";
+import {ContractStatus} from "../../types/resolvers";
+import db from "../../lib/mongodb";
 
 export const config = {
     api: {
@@ -11,11 +15,6 @@ if (!process.env.STRIPE_SECRET_KEY) throw new Error("no STRIPE_SECRET_KEY was fo
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 if (!process.env.SIGNING_SECRET) throw new Error("no ENDPOINT_SECRET was found");
-import {buffer} from "micro";
-import {ObjectId} from "mongodb";
-import {ContractStatus} from "../../types/resolvers";
-import db from "../../lib/mongodb";
-import {log} from "util";
 
 const endpointSecret = process.env.SIGNING_SECRET;
 
@@ -23,11 +22,11 @@ async function handlePaymentIntentSucceeded(contract_id: string) {
 
     // console.log(contract_id)
 
-    const contractCollection = db.collection("contract")
-    const test = await contractCollection.updateOne({
+    const contractCollection = db.collection("contracts")
+    await contractCollection.updateOne({
         _id: new ObjectId(contract_id),
-    }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}})
-    // make the product inactive so the client can't pay for it again
+    }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}});
+// make the product inactive so the client can't pay for it again
     await stripe.products.update(
         contract_id,
         {active: false}
@@ -81,6 +80,7 @@ export default async function handler(
             // Unexpected event type
             console.log(`Unhandled event type ${event.type}.`); // case 'payment_method.attached':
             const paymentMethod = event.data.object;
+            console.log(paymentMethod + " is not supported")
             // Then define and call a method to handle the successful attachment of a PaymentMethod.
             // handlePaymentMethodAttached(paymentMethod);
             break;

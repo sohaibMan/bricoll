@@ -2,7 +2,8 @@
 
 // <snippet_package>
 // THIS IS SAMPLE CODE ONLY - NOT MEANT FOR PRODUCTION USE
-import { BlobServiceClient, ContainerClient } from "@azure/storage-blob";
+import {BlobServiceClient, ContainerClient} from "@azure/storage-blob";
+import {randomUUID} from "@azure/core-util";
 
 const containerName = `attachments`;
 const sasToken = process.env.NEXT_PUBLIC_AZURE_STORAGE_SAS_TOKEN;
@@ -33,16 +34,16 @@ export const getBlobInContainer = async () => {
     // get list of blobs in container
     // eslint-disable-next-line
     // for await (const blob of containerClient.listBlobsFlat()) {
-        // console.log(`${blob.name}`);
+    // console.log(`${blob.name}`);
 
-        // const blobItem = {
-        //     url: `https://${storageAccountName}.blob.core.windows.net/${containerName}/${blob.name}?${sasToken}`,
-        //     name: blob.name
-        // }
-        // console.log(blobItem.url)
+    // const blobItem = {
+    //     url: `https://${storageAccountName}.blob.core.windows.net/${containerName}/${blob.name}?${sasToken}`,
+    //     name: blob.name
+    // }
+    // console.log(blobItem.url)
 
-        // if image is public, just construct URL
-        // returnedBlobUrls.push(blobItem);
+    // if image is public, just construct URL
+    // returnedBlobUrls.push(blobItem);
     // }
 
     // return returnedBlobUrls;
@@ -52,24 +53,40 @@ export const getBlobInContainer = async () => {
 // <snippet_createBlobInContainer>
 const createBlobInContainer = async (file: File) => {
     // create blobClient for container
-    const blobClient = containerClient.getBlockBlobClient(file.name);
+    const nextPublicAzureStorageAccountName =
+        process.env.NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME;
+    const containerName = process.env.NEXT_PUBLIC_CONTAINER_NAME;
+
+
+    const randomFileName = file.name + randomUUID();
+    const blobClient = containerClient.getBlockBlobClient(randomFileName);
 
     // set mimetype as determined from browser with file upload control
-    const options = { blobHTTPHeaders: { blobContentType: file.type } };
+    const options = {blobHTTPHeaders: {blobContentType: file.type}};
 
     // upload file
-        await blobClient.uploadData(file, options);
+    await blobClient.uploadData(file, options);
+    // file url
+    return `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${randomFileName}`;
 
 };
 // </snippet_createBlobInContainer>
 
 // <snippet_uploadFileToBlob>
-const uploadFileToBlob = async (file: File | null) => {
-    if (!file) return "";
+const uploadFilesToBlob = async (files: File[]) => {
+    const fileUrls: { url: string, name: string, type: string }[] = []
 
-    // upload file
-     await createBlobInContainer(file);
+    for (const file of files) {
+        if (!file) continue;
+        // upload file
+        //todo optimisation by promise.all
+        fileUrls.push({url: await createBlobInContainer(file), name: file.name, type: file.type})
+    }
+    console.log(fileUrls)
+
+    return fileUrls;
+
 };
 // </snippet_uploadFileToBlob>
 
-export default uploadFileToBlob;
+export default uploadFilesToBlob;

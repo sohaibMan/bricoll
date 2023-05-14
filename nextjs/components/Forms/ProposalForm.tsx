@@ -110,10 +110,10 @@ export default function ProposalForm(props: {
                         <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
                     </Stack>
-                    <Textarea placeholder="description" value={description} required
+                    <Textarea placeholder="description" value={description} required maxRows={5}
                               onChange={(e) => setDescription(() => e.target.value)} minRows={2}/>
 
-                    <Textarea placeholder="cover letter" value={coverLetter} required
+                    <Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}
                               onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>
 
 

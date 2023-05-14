@@ -1,5 +1,5 @@
 // import React, { useContext } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 
 // export default function ThirdStep() {
@@ -46,7 +46,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -54,9 +54,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -64,14 +64,14 @@
 //         >
 //           {" "}
 //           Submit{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );
 // }
 
 // import React, { useContext } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 // import { useFormik } from "formik";
 // import * as Yup from "yup";
@@ -144,7 +144,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -152,9 +152,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -162,14 +162,14 @@
 //         >
 //           {" "}
 //           Submit{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </form>
 //   );
 // }
 
 // import React, { useContext, useState } from "react";
-// import { Button, TextField } from "@mui/material";
+// import { PayButton, TextField } from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 
 // export default function SecondStep() {
@@ -237,7 +237,7 @@
 //         />
 //       </div>
 //       <div>
-//         <Button
+//         <PayButton
 //           style={{ marginRight: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="secondary"
@@ -245,9 +245,9 @@
 //         >
 //           {" "}
 //           Back{" "}
-//         </Button>{" "}
+//         </PayButton>{" "}
 //         <span></span>
-//         <Button
+//         <PayButton
 //           style={{ marginLeft: "80px", marginTop: "50px" }}
 //           variant="contained"
 //           color="primary"
@@ -259,118 +259,116 @@
 //         >
 //           {" "}
 //           Next{" "}
-//         </Button>
+//         </PayButton>
 //       </div>
 //     </div>
 //   );
 // }
 
-import React, { useContext } from "react";
-import { Button, TextField } from "@mui/material";
-import { multiStepContext } from "./stepContext";
-import { useFormik } from "formik";
-import * as yup from "yup";
-import { toast } from "react-hot-toast";
+import React, {useContext} from "react";
+import {Button, TextField} from "@mui/material";
+import {multiStepContext} from "./stepContext";
+import {toast} from "react-hot-toast";
 
 export default function FirstStep() {
-  const { setStep, userData, setUserData }: any = useContext(multiStepContext);
+    const {setStep, userData, setUserData}: any = useContext(multiStepContext);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     jobTitle: userData.jobTitle,
-  //     company: userData.company,
-  //     educationLevel: userData.educationLevel,
-  //   },
-  //   validationSchema: yup.object({
-  //     jobTitle: yup.string().required("Job Title is required"),
-  //     company: yup.string().required("Company is required"),
-  //     educationLevel: yup.string().required("Education Level name is required"),
-  //   }),
-  //   onSubmit: (values) => {
-  //     setUserData(values);
-  //     setStep(4);
-  //   },
-  // });
+    // const formik = useFormik({
+    //   initialValues: {
+    //     jobTitle: userData.jobTitle,
+    //     company: userData.company,
+    //     educationLevel: userData.educationLevel,
+    //   },
+    //   validationSchema: yup.object({
+    //     jobTitle: yup.string().required("Job Title is required"),
+    //     company: yup.string().required("Company is required"),
+    //     educationLevel: yup.string().required("Education Level name is required"),
+    //   }),
+    //   onSubmit: (values) => {
+    //     setUserData(values);
+    //     setStep(4);
+    //   },
+    // });
 
-  function handleSubmit() {
-    const requiredFields = ["jobTitle", "company", "educationLevel"];
-    const missingFields = requiredFields.filter((field) => !userData[field]);
+    function handleSubmit() {
+        const requiredFields = ["jobTitle", "company", "educationLevel"];
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
-    if (missingFields.length) {
-      toast.error(
-        `Please fill in the following fields: ${missingFields.join(", ")}`
-      );
-    } else {
-      setStep(4);
+        if (missingFields.length) {
+            toast.error(
+                `Please fill in the following fields: ${missingFields.join(", ")}`
+            );
+        } else {
+            setStep(4);
+        }
     }
-  }
 
-  return (
-    <div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Job Title"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="jobTitle"
-          value={userData["jobTitle"]}
-          onChange={(e) =>
-            setUserData({ ...userData, jobTitle: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Company Name"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="company"
-          value={userData["company"]}
-          onChange={(e) =>
-            setUserData({ ...userData, company: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Education Level"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="educationLevel"
-          value={userData["educationLevel"]}
-          onChange={(e) =>
-            setUserData({ ...userData, educationLevel: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <Button
-          style={{ marginRight: "80px", marginTop: "50px" }}
-          variant="contained"
-          color="primary"
-          onClick={() => setStep(2)}
-        >
-          {" "}
-          Back{" "}
-        </Button>{" "}
-        <span></span>
-        <Button
-          style={{ marginTop: "50px" }}
-          variant="contained"
-          color="success"
-          type="submit"
-          onClick={handleSubmit}
-        >
-          {" "}
-          Next{" "}
-        </Button>
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <div>
+                <TextField
+                    style={{width: "30%"}}
+                    label="Job Title"
+                    margin="normal"
+                    variant="outlined"
+                    color="primary"
+                    name="jobTitle"
+                    value={userData["jobTitle"]}
+                    onChange={(e) =>
+                        setUserData({...userData, jobTitle: e.target.value})
+                    }
+                />
+            </div>
+            <div>
+                <TextField
+                    style={{width: "30%"}}
+                    label="Company Name"
+                    margin="normal"
+                    variant="outlined"
+                    color="primary"
+                    name="company"
+                    value={userData["company"]}
+                    onChange={(e) =>
+                        setUserData({...userData, company: e.target.value})
+                    }
+                />
+            </div>
+            <div>
+                <TextField
+                    style={{width: "30%"}}
+                    label="Education Level"
+                    margin="normal"
+                    variant="outlined"
+                    color="primary"
+                    name="educationLevel"
+                    value={userData["educationLevel"]}
+                    onChange={(e) =>
+                        setUserData({...userData, educationLevel: e.target.value})
+                    }
+                />
+            </div>
+            <div>
+                <Button
+                    style={{marginRight: "80px", marginTop: "50px"}}
+                    variant="contained"
+                    color="primary"
+                    onClick={() => setStep(2)}
+                >
+                    {" "}
+                    Back{" "}
+                </Button>{" "}
+                <span></span>
+                <Button
+                    style={{marginTop: "50px"}}
+                    variant="contained"
+                    color="success"
+                    type="submit"
+                    onClick={handleSubmit}
+                >
+                    {" "}
+                    Next{" "}
+                </Button>
+            </div>
+        </div>
+    );
 }

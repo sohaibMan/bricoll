@@ -15,44 +15,32 @@ import TabList from "@mui/joy/TabList";
 import Tab, {tabClasses} from "@mui/joy/Tab";
 import DropZone from "./DropZone";
 import {User} from "../../types/resolvers";
-import {useRouter} from "next/router";
 import toast from "react-hot-toast";
-import Upload from "../Buttons/Upload";
-import CustomLink from "../CustomLinks/CustomLink";
-import CountrySelector from "./CountrySelector";
 import MailOutlinedIcon from '@mui/icons-material/MailOutlined';
+import {DashboardItems} from "../../pages/dashboard";
 
 
 // const imageURL = ref
+// todo :persist the state of my Profile between tabs
 
-export default function MyProfile(props: { user: User }) {
+export const MyProfile = (props: { user: User, currentComponent: DashboardItems }) => {
     const [nameState, setNameState] = useState(props.user.name);
     const [emailState, setEmailState] = useState(props.user.email);
-    const [imageState, setImageState] = useState(props.user.image || "");
-    //   const imageRef = useRef("");
+    const [imageLinkState, setImageLinkState] = useState(props.user.image);
+    if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
-    const router = useRouter();
 
-    // console.log();
-
-    // const updateUser = fetch("/api/auth")
-
-    //
-    //   alert(imageState);
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        const storagAccountName =
-            process.env.NEXT_PUBLIC_AZURE_STORAGE_ACCOUNT_NAME;
-        const containerName = process.env.NEXT_PUBLIC_CONTAINER_NAME;
 
-        //todo {name: nameState, email: emailState, image: imageState} validate user input and  return a toast if the input is not value
+        //todo {name: nameState, email: emailState, image: imageLinkState} validate user input and  return a toast if the input is not value
 
         if (!nameState) return toast.error("The name is empty, try to insert it!");
         if (!emailState)
             return toast.error("The email is empty, try to insert it!");
         // // if(!emailState.includes('@')) return toast.error("Invalid Email Format!")
-        if (!imageState)
+        if (!imageLinkState)
             return toast.error("The image is empty, try to upload it!");
 
         const response = await fetch(`/api/user/editProfile`, {
@@ -63,7 +51,8 @@ export default function MyProfile(props: { user: User }) {
             body: JSON.stringify({
                 name: nameState,
                 email: emailState,
-                image: `https://${storagAccountName}.blob.core.windows.net/${containerName}/${imageState}`,
+                image: imageLinkState,
+                // image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageLinkState}`,
             }),
         });
 
@@ -73,13 +62,15 @@ export default function MyProfile(props: { user: User }) {
         // }
 
         const res = await response.json();
-        // alert(JSON.stringify(res));
-        setImageState(
-            "https://${storagAccountName}.blob.core.windows.net/${containerName}/${imageState}"
-        );
-        toast.success("The profile is updated successfuly ✅");
 
-        router.push("/");
+        if (res.status != "success") toast.error("oops an error has occurred")
+
+        // setImageLinkState(
+        //     `https://${nextpublicazurestorageaccountname}.blob.core.windows.net/${containerName}/${imageLinkState}`
+        // );
+        toast.success("The profile is updated successfully ");
+
+        // router.push("/");
 
         // return await response.json();
     }
@@ -89,14 +80,15 @@ export default function MyProfile(props: { user: User }) {
     //     toast.success("The profile is updated successfuly ✅")
     //   }
 
-    function cancelHandling(e: MouseEvent<HTMLButtonElement>) {
+    function cancelHandling() {
         // e.preventDefault()
-
-        router.push('/')
+        setEmailState(props.user.email)
+        setNameState(props.user.name)
+        setImageLinkState(props.user.image)
     }
 
     return (
-        <form onSubmit={updateHandling}>
+        <form onSubmit={updateHandling} key={props.user._id}>
             <Sheet
                 sx={{
                     bgcolor: "background.body",
@@ -238,12 +230,12 @@ export default function MyProfile(props: { user: User }) {
                                     }}
                                     placeholder="first name"
                                     // value={data.Profile.name}
-                                    defaultValue={props.user.name}
+                                    value={nameState}
                                 />
                             </FormControl>
                             {/* <FormControl sx={{ flex: 1 }}>
               <FormLabel sx={{ display: { sm: "none" } }}>Last name</FormLabel>
-              <Input placeholder="last name" defaultValue="" />
+              <Input placeholder="last name" value="" />
             </FormControl> */}
                         </Box>
 
@@ -256,10 +248,10 @@ export default function MyProfile(props: { user: User }) {
                                     setEmailState(() => event.target.value);
                                 }}
                                 type="email"
-                                startDecorator={<MailOutlinedIcon />}
+                                startDecorator={<MailOutlinedIcon/>}
                                 placeholder="email"
                                 // value={data.email}
-                                defaultValue={props.user.email}
+                                value={emailState}
                             />
                         </FormControl>
 
@@ -279,26 +271,26 @@ export default function MyProfile(props: { user: User }) {
                                 gap: 2.5,
                             }}
                         >
-                            {props.user.image && (
-                                <Avatar
-                                    size="lg"
-                                    src={props.user.image}
-                                    sx={{"--Avatar-size": "64px"}}
-                                    // defaultValue={props.user.image}
-                                />
-                            )}
-                            <DropZone uploadHandler={setImageState}/>
-                            {/* <Upload onUpload={setImageState} /> */}
+
+                            <Avatar
+                                size="lg"
+                                src={imageLinkState}
+                                sx={{"--Avatar-size": "64px"}}
+                                // value={props.user.image}
+                            />
+
+                            <DropZone uploadHandler={setImageLinkState}/>
+                            {/* <Upload onUpload={setImageLinkState} /> */}
                         </Box>
 
                         <Divider role="presentation"/>
 
                         {/* <FormControl sx={{ display: { sm: "contents" } }}>
             <FormLabel>Role</FormLabel>x`
-            <Input defaultValue="" />
+            <Input value="" />
           </FormControl>*/}
 
-          {/* <Divider role="presentation" /> 
+                        {/* <Divider role="presentation" />
 
             <CountrySelector />
 
@@ -313,7 +305,7 @@ export default function MyProfile(props: { user: User }) {
           </Box>
           <Box>
             <EditorToolbar />
-            <Textarea minRows={4} sx={{ mt: 1.5 }} defaultValue="" />
+            <Textarea minRows={4} sx={{ mt: 1.5 }} value="" />
             <FormHelperText sx={{ mt: 0.75, fontSize: "xs" }}>
               275 characters left
             </FormHelperText>

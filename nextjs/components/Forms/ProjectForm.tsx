@@ -22,7 +22,8 @@ import {
 import {PriceInput} from "../Inputs/PriceInput";
 import {DurationInput} from "../Inputs/DurationInput";
 import Typography from '@mui/joy/Typography';
-import {useRouter} from "next/router";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
+import uploadFilesToBlob from "../../utils/azure-storage-blob";
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
@@ -30,6 +31,10 @@ import {useRouter} from "next/router";
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 // import ObjectID from "bson-objectid"
 
+
+const uploadFilesHandler = function () {
+
+}
 
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: {
@@ -39,7 +44,7 @@ export default function ProjectForm(props: {
     label?: string
 }) {
 
-    const router = useRouter()
+
     const defaultState = {
         title: props.project?.title || "",
         description: props.project?.description || "",
@@ -52,9 +57,7 @@ export default function ProjectForm(props: {
     }
 
     const [mutationProject, {data, loading, error}] = useMutation(props.PROJECT_MUTATION)
-    // todo (handle mutation response )
 
-    // mutationProject (create or edit) project
 
     const [price, setPrice] = useState<string>(defaultState.price.toString());
     const [duration, setDuration] = useState<string>(defaultState.duration.toString());
@@ -64,6 +67,7 @@ export default function ProjectForm(props: {
     const categoriesAutocompleteRef = useRef<HTMLInputElement>(null);
     const levelOfExpertiseAutoComplete = useRef<HTMLInputElement>(null);
     const projectSizeAutocompleteRef = useRef<HTMLInputElement>(null);
+    const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (+title.length >= 100 || +title.length <= 5) return toast.error("Title should be between 5 and 1000")
@@ -74,21 +78,40 @@ export default function ProjectForm(props: {
         if (!projectSizeAutocompleteRef.current?.value) return toast.error("Please select a project size")
         if (skills.length > 5) return toast.error("Max 5 skills")
         if (+description.length >= 1000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
+        if (uploadedFilesList && uploadedFilesList.length >= 6) return toast.error("You can't upload more than 5 files")
+
 
         const projectScope: ProjectScopeInput = {
             estimated_duration_in_days: +duration,
             level_of_expertise: levelOfExpertiseAutoComplete.current.value.split(" ").join("_").toUpperCase() as Level_Of_Expertise,
             size_of_project: projectSizeAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as Size_Of_Project
         }
-        const mutationProjectArgs: MutationProjectArgs = {
+
+
+        const mutationProjectArgs: any = {
             id: props.project?._id,
             price: +price,
             title,
             description,
             skills,
             projectScope,
-            category: categoriesAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum
+            category: categoriesAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum,
+            attachments: [] // default value
         }
+
+        if (uploadedFilesList) {
+            await toast.promise((async () => {
+                const files = uploadedFilesList[0]
+                mutationProjectArgs.attachments = await uploadFilesToBlob(Array.from(uploadedFilesList))
+
+            })(), {
+                loading: 'Uploading your files...',
+                success: <b>File uploaded !</b>,
+                error: <b>Failed to upload files</b>,
+            })
+        }
+
+
         try {
             toast.promise(
                 mutationProject({
@@ -109,14 +132,12 @@ export default function ProjectForm(props: {
                     description,
                     skills,
                     projectScope,
-                    category: categoriesAutocompleteRef.current?.value
+                    category: categoriesAutocompleteRef.current?.value,
+                    attachments: mutationProjectArgs.attachments
                 } as unknown as Project;
 
                 props.onSubmitProjectHandler(editProject)//to close the modal and update the ui
 
-                //     clear the input
-                //   router.push("/projects/"+editProject._id);
-                //     router.push("/dashboard/component?home"+editProject._id); //todo tmp fix
             })
 
         } catch (e) {
@@ -142,7 +163,7 @@ export default function ProjectForm(props: {
 
                 <Stack spacing={2}>
                     {props.label && <Typography level="h4">{props.label}</Typography>}
-                    <Textarea placeholder="Title" defaultValue={defaultState.title} required
+                    <Textarea placeholder="Title" defaultValue={defaultState.title} required maxRows={4}
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
                     <Stack spacing={1} direction="row" justifyContent="space-between"
@@ -167,17 +188,34 @@ export default function ProjectForm(props: {
                     </Stack>
 
                     {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
-                    <CategoriesAutocomplete defaultValue={defaultState.category} placeholder="categories"
+                    <CategoriesAutocomplete defaultValue={defaultState.category}
                                             parentRef={categoriesAutocompleteRef}/>
 
                     {/*</Stack>*/}
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
                     <Textarea defaultValue={defaultState.description} placeholder="Description"
+                              maxRows={5}
                               required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 
 
+                    {/*<Stack direction={"row"} alignItems={"center"}>*/}
+
+                    <Button
+                        component="label"
+                        color="neutral"
+                        // onClick={onFileUpload}
+                        // sx={{ width: "150px", height: "40px", padding: "10px" }}
+                    >
+                        <input onChange={(e) => setUploadedFilesList(e.target.files)} hidden accept="*"
+                               multiple
+                               type="file"/>
+                        Add attachments
+                        <FileUploadIcon/>
+                    </Button>
+
+                    {/*</Stack>*/}
                     <Button type=" submit"> Submit</Button>
 
                 </Stack>
