@@ -2,6 +2,7 @@ import db from "../../lib/mongodb";
 import {Contract, Project, Proposal, Resolvers, Review, User, UserRole,} from "../../types/resolvers";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {ObjectId} from "mongodb";
+import { checkingUserMiddleware } from "./resolversHelpersFunctions/checkingUserMiddleware";
 
 const users = db.collection("users");
 const proposals = db.collection("proposals");
@@ -11,6 +12,9 @@ export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, info) => {
             // console.log("args: ", args.id);
+            // authenticatedMiddleware(context);
+            checkingUserMiddleware(context)
+
             
             return await users.findOne({
                 _id: new ObjectId(args.id),

@@ -4,6 +4,7 @@ import { UserRole } from "./resolvers";
 interface UserInterface {
     id: string;
     userRole: UserRole;
+    isCompleted: boolean
 }
 export type ServerContext = {
     // we'd define the properties a user should have

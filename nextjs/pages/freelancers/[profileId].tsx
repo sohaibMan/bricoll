@@ -35,6 +35,7 @@ import { gql, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { User } from "../../types/resolvers";
+import { redirect } from "next/navigation";
 
 // const projects = db.collection("projects");
 // const users = db.collection("users");
@@ -64,12 +65,17 @@ const USER_PROFILE = gql`
 `;
 
 export default function ProfilePage() {
-  // const { data: session } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const { profileId } = router.query;
 
-  // TODO: -> Protecting this route from client users 
-  // TODO: -> Linkin the reviews with projects to get the rating 
+  // TODO: -> Checking if the user is authenticated
+  // if (!session?.user) {
+  //   redirect("/api/auth/signin");
+  // }
+
+  // TODO: -> Protecting this route from client users
+  // TODO: -> Linking the reviews with projects to get the rating
   // TODO: -> Implementing the logic of followers
 
   // console.log("profileId : ", profileId);
@@ -144,13 +150,19 @@ export default function ProfilePage() {
           <MDBCol lg="4">
             <MDBCard className="mb-4">
               <MDBCardBody className="text-center">
-                {data?.ProfileById.image && <MDBCardImage
-                  src={data?.ProfileById.image}
-                  alt="avatar"
-                  className="rounded-circle"
-                  style={{ width: "150px", height: "150px", marginBottom: "10px" }}
-                  fluid
-                />}
+                {data?.ProfileById.image && (
+                  <MDBCardImage
+                    src={data?.ProfileById.image}
+                    alt="avatar"
+                    className="rounded-circle"
+                    style={{
+                      width: "150px",
+                      height: "150px",
+                      marginBottom: "10px",
+                    }}
+                    fluid
+                  />
+                )}
 
                 <p className="text-muted mb-1">{data?.ProfileById.jobTitle}</p>
                 <p className="text-muted mb-4">{data?.ProfileById.address}</p>
@@ -212,7 +224,9 @@ export default function ProfilePage() {
                       style={{ color: "#333333" }}
                     />
                     <MDBCardText>
-                      <a href={data?.ProfileById.portfolio}>Github</a>
+                      {data?.ProfileById.portfolio && (
+                        <a href={data?.ProfileById.portfolio}>Github</a>
+                      )}
                     </MDBCardText>
                   </MDBListGroupItem>
                 </MDBListGroup>
