@@ -68,6 +68,10 @@ export default function ProfilePage() {
   const router = useRouter();
   const { profileId } = router.query;
 
+  // TODO: -> Protecting this route from client users 
+  // TODO: -> Linkin the reviews with projects to get the rating 
+  // TODO: -> Implementing the logic of followers
+
   // console.log("profileId : ", profileId);
 
   // if(!profileId) {
