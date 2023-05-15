@@ -32,7 +32,7 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
     const [emailState, setEmailState] = useState(props.user.email);
     const [imageLinkState, setImageLinkState] = useState(props.user.image);
     const [currentTab, setCurrentTab] = useState<currentTabEnum>(currentTabEnum.AccountSetting)
-    const isSameState = nameState === props.user.name && emailState === props.user.email && imageLinkState === props.user.image;// does the state change or not
+    const isSameState = nameState === props.user.name && emailState === props.user.email && imageLinkState === props.user.image;// does the state change or not ?
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
     console.log(currentTab)
@@ -271,12 +271,12 @@ export const MyProfile = (props: { user: User, currentComponent: DashboardItems 
                         }}
                     >
 
-                        <Avatar
+                        {imageLinkState && <Avatar
                             size="lg"
                             src={imageLinkState}
                             sx={{"--Avatar-size": "64px"}}
                             // value={props.user.image}
-                        />
+                        />}
 
                         <DropZone uploadHandler={setImageLinkState}/>
                         {/* <Upload onUpload={setImageLinkState} /> */}

@@ -4,7 +4,7 @@ import Button from "@mui/joy/Button";
 import {Stack} from "@mui/joy";
 
 const Upload = (props: {
-    uploadHandler: Dispatch<React.SetStateAction<string>>;
+    uploadHandler: Dispatch<React.SetStateAction<string | null | undefined>>;
 }) => {
 
     // // current file to upload into container
