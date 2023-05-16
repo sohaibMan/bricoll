@@ -1,67 +1,14 @@
-// import React, { useContext } from "react";
-// import { PayButton, TextField } from "@mui/material";
-// import { multiStepContext } from "./stepContext";
-// import { useField } from 'formik';
 
-// export default function FirstStep() {
-//   const { setStep, userData, setUserData }: any = useContext(multiStepContext);
-
-//   return (
-//     <div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="First Name"
-//           margin="normal"
-//           variant="outlined"
-//           color="primary"
-//           value={userData["firstname"]}
-//           onChange={(e) =>
-//             setUserData({ ...userData, firstname: e.target.value })
-//           }
-//         />
-//       </div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="Last Name"
-//           margin="normal"
-//           variant="outlined"
-//           color="primary"
-//           value={userData["lastname"]}
-//           onChange={(e) =>
-//             setUserData({ ...userData, lastname: e.target.value })
-//           }
-//         />
-//       </div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="Contact Name"
-//           margin="normal"
-//           variant="outlined"
-//           color="primary"
-//           value={userData["contact"]}
-//           onChange={(e) =>
-//             setUserData({ ...userData, contact: e.target.value })
-//           }
-//         />
-//       </div>
-//       <div>
-//         <PayButton style={{marginTop: "50px"}} variant="contained" color="primary" onClick={() => setStep(2)}>
-//           {" "}
-//           Next{" "}
-//         </PayButton>
-//       </div>
-//     </div>
-//   );
-// }
-
-import React, {useContext} from "react";
+import React, {ChangeEvent, useContext, useState} from "react";
 import {Button, TextField} from "@mui/material";
 // import { multiStepContext } from "./stepContext";
 import {toast} from "react-hot-toast";
 import {multiStepContext} from "./stepContext";
+import DropZone from "../../Dashboard/DropZone";
+import Avatar from "@mui/joy/Avatar";
+import Box from "@mui/joy/Box";
+import FormLabel from "@mui/joy/FormLabel";
+import FormHelperText from "@mui/joy/FormHelperText";
 
 
 export default function FirstStep() {
@@ -87,6 +34,9 @@ export default function FirstStep() {
             setStep(2);
         }
     }
+
+    // TODO: UPLOAD Image & selectorCountry API
+    
 
   return (
     <div>
@@ -193,6 +143,37 @@ export default function FirstStep() {
           onChange={(e) => setUserData({ ...userData, photo: e.target.value })}
         />
       </div>
+      {/* <Box sx={{ justifyContent: "center", display: "flex", marginLeft: "50px"}}>
+              <FormLabel>Your photo</FormLabel>
+              
+              <FormHelperText>
+                This will be displayed on your profile.
+              </FormHelperText>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "flex-start",
+                flexWrap: "wrap",
+                gap: 2.5,
+                justifyContent: "center"
+              }}
+            >
+              {imageLinkState && (
+                <Avatar
+                  size="lg"
+                  src={imageLinkState}
+                  sx={{ "--Avatar-size": "64px" }}
+                  // value={props.user.image}
+                />
+              )}
+              {
+              <DropZone onChange={(e: ChangeEvent<HTMLInputElement>) => setUserData({ ...userData, photo: e.target.value })} uploadHandler={function (value: React.SetStateAction<string>): void {
+            throw new Error("Function not implemented.");
+          } } /> 
+}
+              {/* <Upload onUpload={setImageLinkState} /> */}
+            {/* </Box> */} 
       <div>
         <Button
           style={{ marginTop: "50px" }}

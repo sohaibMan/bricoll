@@ -384,7 +384,6 @@ export type User = {
   address?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
   contracts: Array<Contract>;
-  earnings?: Maybe<Earnings>;
   email: Scalars['String'];
   experienceLevel?: Maybe<Scalars['String']>;
   image?: Maybe<Scalars['String']>;
@@ -774,7 +773,6 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
-  earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   experienceLevel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
