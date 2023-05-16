@@ -190,6 +190,7 @@ export const authOptions: NextAuthOptions = {
       // session.user.userRole = UserRole.Client;
       session.user.accessToken = token.accessToken;
       session.user.userRole=token.userRole;
+      session.user.isCompleted=token.isCompleted
 
       // console.log(token);
 

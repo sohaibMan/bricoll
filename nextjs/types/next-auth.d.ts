@@ -28,6 +28,7 @@ declare module "next-auth" {
         user: {
             id: ObjectId
             userRole: UserRole
+            isCompleted: boolean
             accessToken: string
         } & DefaultSession["user"]
     }

@@ -2,6 +2,7 @@ import db from "../../lib/mongodb";
 import {Contract, Project, Proposal, Resolvers, Review, User, UserRole,} from "../../types/resolvers";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {ObjectId} from "mongodb";
+import { checkingUserMiddleware } from "./resolversHelpersFunctions/checkingUserMiddleware";
 
 const users = db.collection("users");
 const proposals = db.collection("proposals");
@@ -10,7 +11,9 @@ const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, info) => {
-            // console.log("args: ", args.id);
+            console.log("context: ", context);
+            authenticatedMiddleware(context);  // ! OPTIONAL
+            checkingUserMiddleware(context)
             
             return await users.findOne({
                 _id: new ObjectId(args.id),
@@ -71,6 +74,7 @@ export const ProfileResolvers: Resolvers = {
             const review: Review = {
                 _id: new ObjectId(),
                 reviewer_id: new ObjectId(context.user?.id),
+                project_id: new ObjectId(args.project_id),
                 description: args.description,
                 rating: args.rating,
                 createdAt: Date.now()
@@ -94,6 +98,7 @@ export const ProfileResolvers: Resolvers = {
             const review: Review = {
                 _id: new ObjectId(args.id),
                 reviewer_id: new ObjectId(context.user?.id),
+                project_id: new ObjectId(args.project_id),
                 description: args.description,
                 rating: args.rating,
                 createdAt: Date.now()
