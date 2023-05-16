@@ -1,17 +1,17 @@
 import * as React from 'react';
+import {ReactNode} from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Chip, Divider, Stack} from '@mui/joy';
+import {Chip, Stack} from '@mui/joy';
 import {Project} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
-import Attachments from "../ListItems/Attachments";
 
 
 export default function ProjectItemCard({project, children}: {
     project: Project,
-    children: React.JSX.Element
+    children: ReactNode
 }) {
     // todo :try to refactore the card
 
@@ -67,32 +67,33 @@ export default function ProjectItemCard({project, children}: {
                     <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
 
-                <Box sx={{width: "100%"}}>
-                    <Divider sx={{margin: "10px"}}/>
+                {/*<Box sx={{width: "100%"}}>*/}
+                {/*<Divider sx={{margin: "10px"}}/>*/}
 
-                    <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
-                        Project Attachments
-                    </Typography>
+                {/*<Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>*/}
+                {/*    Project Attachments*/}
+                {/*</Typography>*/}
 
-                    {project.attachments.length > 0 ?
-                        <Attachments attachments={project.attachments}/> : <Typography>No Attachments</Typography>
-                    }
-                </Box>
+                {/*{project.attachments && project.attachments.length > 0 ?*/}
+                {/*    <Attachments attachments={project.attachments}/> : <Typography>No Attachments</Typography>*/}
+                {/*}*/}
+                {/*</Box>*/}
 
-
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                        maxWidth: 200,
-                    }}
-                >
-                    {children &&
-                        <Box sx={{display: 'flex', gap: 1}}>
-                            {children}
-                        </Box>}
-                </Box>
+                {children}
+                {/*<Box*/}
+                {/*    sx={{*/}
+                {/*        display: 'flex',*/}
+                {/*        flexDirection: 'column',*/}
+                {/*        gap: 2,*/}
+                {/*        width:"100%"*/}
+                {/*        // maxWidth: 200,*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    {children &&*/}
+                {/*        <Box sx={{display: 'flex', gap: 1}}>*/}
+                {/*            {children}*/}
+                {/*        </Box>}*/}
+                {/*</Box>*/}
 
 
             </Card>

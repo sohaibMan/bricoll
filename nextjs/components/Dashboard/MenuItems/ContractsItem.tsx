@@ -10,7 +10,7 @@ import {Dispatch, useState,SetStateAction} from "react";
 
 
 
-export const DashBoardContracts = (props: {
+export const ContractsItem = (props: {
     contracts: Array<Contract>,
     setContracts: Dispatch<SetStateAction<Contract[]>>
     currentComponent: DashboardItems,

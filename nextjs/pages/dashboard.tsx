@@ -10,7 +10,7 @@ import {User} from "../types/resolvers";
 import {useSession} from "next-auth/react";
 import Link from "@mui/joy/Link";
 import CircularProgress from "@mui/joy/CircularProgress";
-import {DashBoardWrapper} from "../components/Dashboard/MenuItems/DashBoardWrapper";
+import {DashBoardWrapper} from "../components/Dashboard/DashBoardWrapper";
 
 
 // list of all menus in the dashboard_tmp
@@ -21,7 +21,7 @@ export enum DashboardItems {
     CreateProject = "CreateProject",
     Proposals = "Proposals",
     Contracts = "Contracts",
-    CreateContract = "CreateContract",
+    SubmissionReviews = "SubmissionReviews",
 }
 
 const USER_PROFILE = gql`
@@ -251,9 +251,7 @@ export default function Index() {
                         overflow: "auto",
                     })}
                 >
-                    {currentComponent === DashboardItems.Home ? (
-                        <p>welcome to home (to be done)</p>
-                    ) : null}
+
 
                     <DashBoardWrapper currentComponent={currentComponent} userRole={userRole} profile={data.Profile}/>
 

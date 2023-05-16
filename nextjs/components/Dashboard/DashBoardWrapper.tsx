@@ -1,12 +1,13 @@
-import DashBoardProjects from "./DashBoardProjects";
+import DashBoardProjects from "./MenuItems/ProjectsItem";
 import moment from "moment/moment";
-import {DashBoardProposals} from "./DashBoardProposals";
-import {DashBoardContracts} from "./DashBoardContracts";
-import {DashboardItems} from "../../../pages/dashboard";
-import {User, UserRole} from "../../../types/resolvers";
+import {ContractsItem} from "./MenuItems/ContractsItem";
+import {DashboardItems} from "../../pages/dashboard";
+import {User, UserRole} from "../../types/resolvers";
 import * as React from "react";
 import {useState} from "react";
-import {MyProfile} from "../MyProfile";
+import {MyProfileItem} from "./MenuItems/MyProfileItem";
+import {HomeItem} from "./MenuItems/HomeItem";
+import {ProposalsItem} from "./MenuItems/ProposalsItem";
 
 export const DashBoardWrapper = (props: {
     currentComponent: DashboardItems
@@ -19,7 +20,9 @@ export const DashBoardWrapper = (props: {
     const [contracts, setContracts] = useState(props.profile.contracts);
     return (
         <>
-            <MyProfile currentComponent={props.currentComponent} user={props.profile}/>
+            {props.currentComponent === DashboardItems.Home && <HomeItem userRole={props.userRole} profile={props.profile}/>}
+
+            <MyProfileItem currentComponent={props.currentComponent} user={props.profile}/>
             <DashBoardProjects
                 currentComponent={props.currentComponent}
                 projects={projects
@@ -30,7 +33,7 @@ export const DashBoardWrapper = (props: {
                 setProjects={setProjects}
 
             />
-            <DashBoardProposals
+            <ProposalsItem
                 userRole={props.userRole}
                 currentComponent={props.currentComponent}
                 proposals={proposals
@@ -41,7 +44,7 @@ export const DashBoardWrapper = (props: {
                 setProposals={setProposals}
                 setContracts={setContracts}
             />
-            <DashBoardContracts
+            <ContractsItem
                 userRole={props.userRole}
                 currentComponent={props.currentComponent}
                 contracts={contracts
@@ -52,5 +55,5 @@ export const DashBoardWrapper = (props: {
                 setContracts={setContracts}
             />
         </>
-    )
-}
+    );
+};

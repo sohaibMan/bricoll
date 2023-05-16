@@ -4,17 +4,15 @@ import {CategoryScale} from "chart.js";
 import Chart from "chart.js/auto";
 
 Chart.register(CategoryScale);
-export const BarChart = (props: { stats: ProjectStats }) => {
+export const BarChart = (props: { labels: string[],values:number[] }) => {
 
 
-    const labels = Object.keys(props.stats).filter((key) => key !== "__typename").map(key => key.split("_").join(" ").toLowerCase())
-    const values = Object.values(props.stats).filter(key => typeof key === "number") as number[]
 
 
     const data = {
-        labels: labels,
+        labels: props.labels,
         datasets: [{
-            data: values,
+            data: props.values,
             borderWidth: 1
         }]
     };

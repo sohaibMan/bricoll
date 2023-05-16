@@ -28,7 +28,7 @@ type User {
   profileTitle: String
   portfolio: String
   #   stripe_account_link: String
-  payments: [payments!]!
+  payments: [payments]
   reviews: [Review]
   proposals: [Proposal!]!
   projects: [Project!]!
@@ -72,7 +72,7 @@ type payments {
   amount: Float!
   currency: String!
   description:String!
-  created_at:Date
+  created_at:Date!
 
 }
 

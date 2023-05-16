@@ -10,7 +10,7 @@ import ProposalStatusAutocomplete from "../../AutoCompletes/ProposalStatusAutoco
 import Typography from "@mui/joy/Typography";
 
 
-export const DashBoardProposals = (props: {
+export const ProposalsItem = (props: {
     proposals: Array<Proposal>,
     setProposals: Dispatch<React.SetStateAction<Proposal[]>>
     setContracts: Dispatch<React.SetStateAction<Contract[]>>

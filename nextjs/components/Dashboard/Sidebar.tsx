@@ -1,4 +1,3 @@
-import * as React from "react";
 import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
 import {signOut} from "next-auth/react"
 import GlobalStyles from "@mui/joy/GlobalStyles";
@@ -34,6 +33,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Image from "next/image";
 import logo from "../../public/logo.png";
 import Link from "next/link"
+import Badge from '@mui/joy/Badge';
 
 export default function Sidebar(props: {
     setCurrentComponent: Dispatch<SetStateAction<DashboardItems>>;
@@ -45,9 +45,9 @@ export default function Sidebar(props: {
     const [projectsTab, setProjectsTabsOpen] = useState(false);
     const [contractsTab, setContractsTabOpen] = useState(false);
 
-    const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-        setQuery(event.target.value);//todo filter tabs
-    };
+    // const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setQuery(event.target.value);//todo filter tabs
+    // };
 
 
     return (
@@ -115,17 +115,17 @@ export default function Sidebar(props: {
                 </Link>
                 <ColorSchemeToggleButton sx={{ml: "auto"}}/>
             </Box>
-            <Input
-                startDecorator={<SearchIcon/>}
-                placeholder="Search"
-                value={query}
-                onChange={handleSearch}
-                onKeyPress={(event) => {
-                    if (event.key === "Enter") {
-                        // performSearch();
-                    }
-                }}
-            />
+            {/*<Input*/}
+            {/*    startDecorator={<SearchIcon/>}*/}
+            {/*    placeholder="Search"*/}
+            {/*    value={query}*/}
+            {/*    onChange={handleSearch}*/}
+            {/*    onKeyPress={(event) => {*/}
+            {/*        if (event.key === "Enter") {*/}
+            {/*            // performSearch();*/}
+            {/*        }*/}
+            {/*    }}*/}
+            {/*/>*/}
             {/*<button onClick={performSearch}>Search</button>*/}
             <Box
                 sx={{
@@ -164,8 +164,10 @@ export default function Sidebar(props: {
                             }
                         >
                             <ListItemDecorator>
-                                {/* <i data-feather="home" /> */}
+
+
                                 <OtherHousesOutlinedIcon/>
+
                             </ListItemDecorator>
                             <ListItemContent
                                 onClick={() => props.setCurrentComponent(DashboardItems.Home)}
@@ -210,17 +212,23 @@ export default function Sidebar(props: {
                             >
                                 <ListItemDecorator>
                                     {/* <i data-feather="layers" /> */}
-                                    <ListAltOutlinedIcon/>
+                                    <Badge size="sm" badgeContent={props.user.projects.length}>
+                                        <ListAltOutlinedIcon/>
+                                    </Badge>
                                 </ListItemDecorator>
                                 <ListItemContent
                                     onClick={() =>
                                         props.setCurrentComponent(DashboardItems.Projects)
                                     }
                                 >
+
                                     Projects
+
                                 </ListItemContent>
                                 {projectsTab ? (
+
                                     <ExpandLessOutlinedIcon/>
+
                                 ) : (
                                     <KeyboardArrowDownOutlinedIcon/>
                                 )}
@@ -268,7 +276,9 @@ export default function Sidebar(props: {
                         >
                             <ListItemDecorator>
                                 {/* <i data-feather="layers" /> */}
-                                <SplitscreenOutlinedIcon/>
+                                <Badge size="sm" badgeContent={props.user.proposals.length}>
+                                    <SplitscreenOutlinedIcon/>
+                                </Badge>
                             </ListItemDecorator>
                             <ListItemContent
                                 onClick={() =>
@@ -302,7 +312,9 @@ export default function Sidebar(props: {
                             }
                         >
                             <ListItemDecorator>
-                                <GavelIcon/>
+                                <Badge size="sm"  badgeContent={props.user.contracts.length}>
+                                    <GavelIcon/>
+                                </Badge>
                             </ListItemDecorator>
                             <ListItemContent
                                 onClick={() =>
@@ -312,19 +324,19 @@ export default function Sidebar(props: {
                                 Contracts
                             </ListItemContent>
                             {contractsTab ? (
-                                <ExpandLessOutlinedIcon/>
-                            ) : (
                                 <KeyboardArrowDownOutlinedIcon/>
+                            ) : (
+                                <ExpandLessOutlinedIcon/>
                             )}
                         </ListItemButton>
                         {contractsTab && (
                             <ListItem nested>
                                 <ListItemButton
                                     selected={
-                                        props.currentComponent === DashboardItems.CreateContract
+                                        props.currentComponent === DashboardItems.SubmissionReviews
                                     }
                                     variant={
-                                        props.currentComponent === DashboardItems.CreateContract
+                                        props.currentComponent === DashboardItems.SubmissionReviews
                                             ? "soft"
                                             : "plain"
                                     }
@@ -335,9 +347,9 @@ export default function Sidebar(props: {
                                     </ListItemDecorator>
                                     <ListItemContent
                                         onClick={() =>
-                                            props.setCurrentComponent(DashboardItems.CreateContract)
+                                            props.setCurrentComponent(DashboardItems.SubmissionReviews)
                                         }
-                                    >Create Contract
+                                    >Submissions
                                     </ListItemContent>
                                 </ListItemButton>
                             </ListItem>

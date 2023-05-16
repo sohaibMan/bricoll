@@ -146,10 +146,10 @@ export default function ProjectForm(props: {
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
         <Box
             sx={{
-                py: 2,
+                py: 1,
                 display: 'flex',
                 flexDirection: 'column',
-                gap: 4,
+                gap: 2,
                 alignItems: 'center',
                 flexWrap: 'wrap',
             }}
@@ -157,7 +157,7 @@ export default function ProjectForm(props: {
 
             <form onSubmit={handleSubmit}>
 
-                <Stack spacing={2}>
+                <Stack spacing={1}>
                     {props.label && <Typography level="h4">{props.label}</Typography>}
                     <Textarea placeholder="Title" defaultValue={defaultState.title} required maxRows={4}
                               onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
@@ -191,7 +191,7 @@ export default function ProjectForm(props: {
                     <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
                     <Textarea defaultValue={defaultState.description} placeholder="Description"
-                              maxRows={5}
+                              maxRows={4}
                               required
                               onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
 

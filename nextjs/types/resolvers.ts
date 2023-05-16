@@ -390,7 +390,7 @@ export type User = {
   jobTitle?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   name: Scalars['String'];
-  payments: Array<Payments>;
+  payments?: Maybe<Array<Maybe<Payments>>>;
   phone?: Maybe<Scalars['String']>;
   portfolio?: Maybe<Scalars['String']>;
   profileTitle?: Maybe<Scalars['String']>;
@@ -419,7 +419,7 @@ export type Payments = {
   __typename?: 'payments';
   amount: Scalars['Float'];
   contract_id: Scalars['ObjectID'];
-  created_at?: Maybe<Scalars['Date']>;
+  created_at: Scalars['Date'];
   currency: Scalars['String'];
   description: Scalars['String'];
 };
@@ -779,7 +779,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   jobTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  payments?: Resolver<Array<ResolversTypes['payments']>, ParentType, ContextType>;
+  payments?: Resolver<Maybe<Array<Maybe<ResolversTypes['payments']>>>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -795,7 +795,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
 export type PaymentsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['payments'] = ResolversParentTypes['payments']> = ResolversObject<{
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   contract_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
-  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  created_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
