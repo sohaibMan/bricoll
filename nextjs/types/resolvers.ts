@@ -1,6 +1,5 @@
-import {GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig} from 'graphql';
-import {ServerContext} from './server-context';
-
+import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
+import { ServerContext } from './server-context';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -9,8 +8,8 @@ export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Mayb
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-    ID: string;
-    String: string;
+  ID: string;
+  String: string;
   Boolean: boolean;
   Int: number;
   Float: number;
@@ -20,16 +19,16 @@ export type Scalars = {
 };
 
 export type Attachment = {
-    __typename?: 'Attachment';
-    name: Scalars['String'];
-    type: Scalars['String'];
-    url: Scalars['URL'];
+  __typename?: 'Attachment';
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type AttachmentInput = {
-    name: Scalars['String'];
-    type: Scalars['String'];
-    url: Scalars['URL'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type Contract = {
@@ -380,7 +379,7 @@ export type User = {
   _id: Scalars['ObjectID'];
   address?: Maybe<Scalars['String']>;
   bio?: Maybe<Scalars['String']>;
-  contracts?: Maybe<Array<Contract>>;
+  contracts: Array<Contract>;
   earnings?: Maybe<Earnings>;
   email: Scalars['String'];
   experienceLevel?: Maybe<Scalars['String']>;
@@ -391,8 +390,8 @@ export type User = {
   phone?: Maybe<Scalars['String']>;
   portfolio?: Maybe<Scalars['String']>;
   profileTitle?: Maybe<Scalars['String']>;
-  projects?: Maybe<Array<Project>>;
-  proposals?: Maybe<Array<Proposal>>;
+  projects: Array<Project>;
+  proposals: Array<Proposal>;
   review?: Maybe<Array<Maybe<Review>>>;
   role: Scalars['String'];
   skills?: Maybe<Scalars['String']>;
@@ -464,31 +463,29 @@ export type ResolverTypeWrapper<T> = Promise<T> | T;
 
 
 export type ResolverWithResolve<TResult, TParent, TContext, TArgs> = {
-    resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
+  resolve: ResolverFn<TResult, TParent, TContext, TArgs>;
 };
-export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> =
-    ResolverFn<TResult, TParent, TContext, TArgs>
-    | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
+export type Resolver<TResult, TParent = {}, TContext = {}, TArgs = {}> = ResolverFn<TResult, TParent, TContext, TArgs> | ResolverWithResolve<TResult, TParent, TContext, TArgs>;
 
 export type ResolverFn<TResult, TParent, TContext, TArgs> = (
-    parent: TParent,
-    args: TArgs,
-    context: TContext,
-    info: GraphQLResolveInfo
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
 ) => Promise<TResult> | TResult;
 
 export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
-    parent: TParent,
-    args: TArgs,
-    context: TContext,
-    info: GraphQLResolveInfo
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
 ) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
-    parent: TParent,
-    args: TArgs,
-    context: TContext,
-    info: GraphQLResolveInfo
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
 export interface SubscriptionSubscriberObject<TResult, TKey extends string, TParent, TContext, TArgs> {
@@ -502,17 +499,17 @@ export interface SubscriptionResolverObject<TResult, TParent, TContext, TArgs> {
 }
 
 export type SubscriptionObject<TResult, TKey extends string, TParent, TContext, TArgs> =
-    | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
-    | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
+  | SubscriptionSubscriberObject<TResult, TKey, TParent, TContext, TArgs>
+  | SubscriptionResolverObject<TResult, TParent, TContext, TArgs>;
 
 export type SubscriptionResolver<TResult, TKey extends string, TParent = {}, TContext = {}, TArgs = {}> =
-    | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
-    | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
+  | ((...args: any[]) => SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>)
+  | SubscriptionObject<TResult, TKey, TParent, TContext, TArgs>;
 
 export type TypeResolveFn<TTypes, TParent = {}, TContext = {}> = (
-    parent: TParent,
-    context: TContext,
-    info: GraphQLResolveInfo
+  parent: TParent,
+  context: TContext,
+  info: GraphQLResolveInfo
 ) => Maybe<TTypes> | Promise<Maybe<TTypes>>;
 
 export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TContext, info: GraphQLResolveInfo) => boolean | Promise<boolean>;
@@ -520,11 +517,11 @@ export type IsTypeOfResolverFn<T = {}, TContext = {}> = (obj: T, context: TConte
 export type NextResolverFn<T> = () => Promise<T>;
 
 export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs = {}> = (
-    next: NextResolverFn<TResult>,
-    parent: TParent,
-    args: TArgs,
-    context: TContext,
-    info: GraphQLResolveInfo
+  next: NextResolverFn<TResult>,
+  parent: TParent,
+  args: TArgs,
+  context: TContext,
+  info: GraphQLResolveInfo
 ) => TResult | Promise<TResult>;
 
 
@@ -619,10 +616,10 @@ export type ConstraintDirectiveArgs = {
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AttachmentResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Attachment'] = ResolversParentTypes['Attachment']> = ResolversObject<{
-    name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-    url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
-    __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  type?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  url?: Resolver<ResolversTypes['URL'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type ContractResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Contract'] = ResolversParentTypes['Contract']> = ResolversObject<{
@@ -768,7 +765,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  contracts?: Resolver<Maybe<Array<ResolversTypes['Contract']>>, ParentType, ContextType>;
+  contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
   earnings?: Resolver<Maybe<ResolversTypes['earnings']>, ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   experienceLevel?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -779,8 +776,8 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  projects?: Resolver<Maybe<Array<ResolversTypes['Project']>>, ParentType, ContextType>;
-  proposals?: Resolver<Maybe<Array<ResolversTypes['Proposal']>>, ParentType, ContextType>;
+  projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
+  proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
   review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;

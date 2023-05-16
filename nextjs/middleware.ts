@@ -12,9 +12,9 @@ export default withAuth({
       if (req.nextUrl.pathname === "/projects") {
         return token?.userRole === UserRole.Freelancer;
       }
-      // if (req.nextUrl.pathname === "/dashboard") {
-      //     return token?.userRole === UserRole.Client || token?.userRole === UserRole.Freelancer;
-      // }
+    //   if (req.nextUrl.pathname === "/dashboard") {
+    //       return token?.userRole === UserRole.Client || token?.userRole === UserRole.Freelancer;
+    //   }
       // `/me` only requires the user to be logged in
       return !!token;
     },

@@ -11,10 +11,9 @@ const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, info) => {
-            // console.log("args: ", args.id);
+            console.log("context: ", context);
             // authenticatedMiddleware(context);
             checkingUserMiddleware(context)
-
             
             return await users.findOne({
                 _id: new ObjectId(args.id),
