@@ -4,7 +4,7 @@ import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
 import {Proposal, Proposal_Status} from "../../types/resolvers";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import EditProposalForm from "../Forms/EditProposalForm";
+import EditProposalForm from "../Forms/wrappers/EditProposalForm";
 import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
 
 

@@ -184,6 +184,7 @@ export type MutationEditContractArgs = {
 
 
 export type MutationEditProjectArgs = {
+  attachments?: InputMaybe<Array<AttachmentInput>>;
   category?: InputMaybe<ProjectCategoriesEnum>;
   description?: InputMaybe<Scalars['String']>;
   id: Scalars['ObjectID'];
@@ -390,6 +391,7 @@ export type User = {
   jobTitle?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
   name: Scalars['String'];
+  payments: Array<Payments>;
   phone?: Maybe<Scalars['String']>;
   portfolio?: Maybe<Scalars['String']>;
   profileTitle?: Maybe<Scalars['String']>;
@@ -399,13 +401,6 @@ export type User = {
   role: Scalars['String'];
   skills?: Maybe<Scalars['String']>;
   status?: Maybe<StatusEnum>;
-};
-
-export type Earnings = {
-  __typename?: 'earnings';
-  amount: Scalars['Float'];
-  contract_id: Scalars['ObjectID'];
-  currency: Scalars['String'];
 };
 
 export type FilterOptionsInput = {
@@ -420,6 +415,15 @@ export enum Level_Of_Expertise {
   Beginner = 'BEGINNER',
   Intermediate = 'INTERMEDIATE'
 }
+
+export type Payments = {
+  __typename?: 'payments';
+  amount: Scalars['Float'];
+  contract_id: Scalars['ObjectID'];
+  created_at?: Maybe<Scalars['Date']>;
+  currency: Scalars['String'];
+  description: Scalars['String'];
+};
 
 export enum Proposal_Status {
   Approved = 'approved',
@@ -557,9 +561,9 @@ export type ResolversTypes = ResolversObject<{
   Submission_review: ResolverTypeWrapper<Submission_Review>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
-  earnings: ResolverTypeWrapper<Earnings>;
   filterOptionsInput: FilterOptionsInput;
   level_of_expertise: Level_Of_Expertise;
+  payments: ResolverTypeWrapper<Payments>;
   proposal_status: Proposal_Status;
   queryResult: ResolverTypeWrapper<QueryResult>;
   reaction_type: Reaction_Type;
@@ -591,8 +595,8 @@ export type ResolversParentTypes = ResolversObject<{
   Submission_review: Submission_Review;
   URL: Scalars['URL'];
   User: User;
-  earnings: Earnings;
   filterOptionsInput: FilterOptionsInput;
+  payments: Payments;
   queryResult: QueryResult;
   reactions: Reactions;
 }>;
@@ -777,6 +781,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   jobTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  payments?: Resolver<Array<ResolversTypes['payments']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -789,10 +794,12 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
-export type EarningsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['earnings'] = ResolversParentTypes['earnings']> = ResolversObject<{
+export type PaymentsResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['payments'] = ResolversParentTypes['payments']> = ResolversObject<{
   amount?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   contract_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
+  created_at?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
   currency?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
@@ -824,7 +831,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Submission_review?: Submission_ReviewResolvers<ContextType>;
   URL?: GraphQLScalarType;
   User?: UserResolvers<ContextType>;
-  earnings?: EarningsResolvers<ContextType>;
+  payments?: PaymentsResolvers<ContextType>;
   queryResult?: QueryResultResolvers<ContextType>;
   reactions?: ReactionsResolvers<ContextType>;
 }>;

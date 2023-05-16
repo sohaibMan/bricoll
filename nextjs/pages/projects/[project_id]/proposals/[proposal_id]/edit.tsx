@@ -2,7 +2,7 @@ import {gql, useQuery} from "@apollo/client"
 import {Stack} from "@mui/joy";
 import {useRouter} from "next/router";
 import * as React from "react";
-import ProposalForm from "../../../../../components/Forms/ProposalForm";
+import ProposalForm from "../../../../../components/Forms/base/ProposalForm";
 import {Proposal} from "../../../../../types/resolvers";
 
 

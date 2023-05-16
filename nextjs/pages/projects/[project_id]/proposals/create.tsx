@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import ProposalForm from "../../../../components/Forms/ProposalForm";
+import ProposalForm from "../../../../components/Forms/base/ProposalForm";
 import {gql} from "@apollo/client";
 
 const CREATE_PROPOSAL_MUTATION = gql`

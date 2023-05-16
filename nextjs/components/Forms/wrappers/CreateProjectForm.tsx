@@ -1,8 +1,8 @@
-import ProjectForm from "./ProjectForm";
+import ProjectForm from "../base/ProjectForm";
 import {gql} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
-import {Project} from "../../types/resolvers";
+import {Project} from "../../../types/resolvers";
 
 const CREATE_PROJECT_MUTATION = gql`
     mutation CreateProject($title: String!, $description: String!, $price: Float!, $skills: [String!]!, $projectScope: ProjectScopeInput!, $category: ProjectCategoriesEnum!,$attachments: [AttachmentInput!]) {

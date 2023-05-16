@@ -1,6 +1,6 @@
-import ProjectForm from "./ProjectForm";
+import ProjectForm from "../base/ProjectForm";
 import {gql} from "@apollo/client";
-import {Project} from "../../types/resolvers";
+import {Project} from "../../../types/resolvers";
 import * as React from "react";
 
 

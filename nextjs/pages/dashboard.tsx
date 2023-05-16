@@ -32,6 +32,12 @@ const USER_PROFILE = gql`
             email
             # role
             image
+            payments {
+                currency
+                amount
+                contract_id
+                description
+            }
             projects {
                 client_id
                 _id

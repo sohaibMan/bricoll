@@ -63,7 +63,7 @@
     "react-hot-toast": "^2.4.1",
     "redis": "^4.6.5",
     "stripe": "^12.2.0",
-    "styled-components": "^5.0.0",
+    "styled-components": "^6.0.0-rc.1",
     "swr": "^2.1.5",
     "validator": "^13.9.0"
   },

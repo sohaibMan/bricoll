@@ -5,7 +5,7 @@ import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
 import {Project} from "../../types/resolvers";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import EditProjectForm from "../Forms/EditProjectForm";
+import EditProjectForm from "../Forms/wrappers/EditProjectForm";
 
 
 export function EditDeleteProjectControlButtons(props: {

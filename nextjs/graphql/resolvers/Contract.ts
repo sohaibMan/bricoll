@@ -298,12 +298,12 @@ export const ContractResolvers: Resolvers = {
 
                 const freelancer = await usersCollection.updateOne({_id: contract.value.freelancer_id}, {
                         $push: {
-                            earnings: {
+                            payments: {
                                 contract_id: new ObjectId(args.contract_id),
                                 amount: contract.value.price - contract.value.fees,
                                 created_at: new Date(),
                                 currency: "usd",
-                                description: "Payment for the contract " + args.contract_id,
+                                description: "Payment for the contract",
                                 status: EarningsStatus.Pending,
                             }
                         }

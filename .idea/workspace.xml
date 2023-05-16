@@ -4,23 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/UploadAttachments.tsx" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add the billing tab">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ProjectItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ProjectItemCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/ProposalItemCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DropZone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DropZone.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/CreateProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/CreateProjectForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/ProjectForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/ListItems/Attachments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/ListItems/Attachments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Proposals.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Attachement.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Attachement.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/utils/azure-storage-blob.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/utils/azure-storage-blob.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +56,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -81,7 +74,7 @@
     &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/AutoCompletes&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Cards&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -105,18 +98,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
       <recent name="$PROJECT_DIR$/nextjs/components/AutoCompletes" />
       <recent name="$PROJECT_DIR$/nextjs/components/Chip" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
-      <recent name="$PROJECT_DIR$/nextjs/components/Cards" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms/base" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms/wrappers" />
       <recent name="$PROJECT_DIR$/nextjs/utils" />
       <recent name="$PROJECT_DIR$/nextjs/components/Forms" />
       <recent name="$PROJECT_DIR$/nextjs/components/EditProjectForm" />
-      <recent name="$PROJECT_DIR$/nextjs/pages/projects_tmp" />
-      <recent name="$PROJECT_DIR$/nextjs/components/dashboard" />
     </key>
     <key name="es6.move.members.recent.items">
       <recent name="$PROJECT_DIR$/nextjs/pages/dashboard/DashBoardProjects.tsx" />
@@ -175,6 +168,8 @@
       <workItem from="1683811074986" duration="5331000" />
       <workItem from="1683823177735" duration="1429000" />
       <workItem from="1684070159685" duration="9402000" />
+      <workItem from="1684104970610" duration="1581000" />
+      <workItem from="1684106698863" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -337,7 +332,14 @@
       <option name="project" value="LOCAL" />
       <updated>1683824351807</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="add the billing tab">
+      <created>1684096111504</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1684096111505</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +391,8 @@
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
     <MESSAGE value="add a proposal status filter in the dashboard" />
     <MESSAGE value="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )" />
-    <option name="LAST_COMMIT_MESSAGE" value="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )" />
+    <MESSAGE value="add the billing tab" />
+    <option name="LAST_COMMIT_MESSAGE" value="add the billing tab" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

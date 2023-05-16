@@ -1,8 +1,8 @@
-import ContractForm from "./ContractForm";
+import ContractForm from "../base/ContractForm";
 import {gql} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
-import {Contract, Proposal} from "../../types/resolvers";
+import {Contract, Proposal} from "../../../types/resolvers";
 
 const CREATE_CONTRACT_MUTATION = gql`
     mutation CreateContract($freelancer_id: ObjectID!, $project_id: ObjectID!, $proposal_id: ObjectID!, $price: Float!, $duration: Int!, $terms: [String!]!) {

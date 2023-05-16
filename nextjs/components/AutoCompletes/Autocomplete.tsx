@@ -9,11 +9,11 @@ export default function CustomAutocomplete(props: {
     changeHandler?: (event: React.ChangeEvent<{}>, value: string | null) => void
 
 }) {
-    const defaultValue=props.defaultValue ?  props.defaultValue : null;
+    const defaultValue = props.defaultValue ? props.defaultValue : null;
     return (
         <Autocomplete
             onChange={props.changeHandler}
-            sx={{width: "50%"}}
+            sx={{width: "100%"}}
             defaultValue={defaultValue}
             placeholder={props.placeholder}
             disableClearable={false}

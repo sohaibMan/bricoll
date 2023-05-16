@@ -27,9 +27,8 @@ type User {
   language: String
   profileTitle: String
   portfolio: String
-#   stripe_account_link: String
-  earnings: earnings
-
+  #   stripe_account_link: String
+  payments: [payments!]!
   reviews: [Review]
   proposals: [Proposal!]!
   projects: [Project!]!
@@ -68,9 +67,12 @@ type ProfileMetaData{
 #  reviews: [Review]
 #}
 
-type earnings {
+type payments {
   contract_id: ObjectID!
   amount: Float!
   currency: String!
+  description:String!
+  created_at:Date
+
 }
 

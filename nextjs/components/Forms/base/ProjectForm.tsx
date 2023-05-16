@@ -6,10 +6,10 @@ import Textarea from '@mui/joy/Textarea';
 import {Divider, Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
-import SkillsAutocomplete from "../AutoCompletes/SkillsAutocomplete";
-import CategoriesAutocomplete from "../AutoCompletes/CategoriesAutocomplete";
-import ProjectSizeAutoComplete from "../AutoCompletes/ProjectSizeAutoComplete";
-import LevelOfExpertiseAutoComplete from "../AutoCompletes/LevelOfExpertiseAutoComplete";
+import SkillsAutocomplete from "../../AutoCompletes/SkillsAutocomplete";
+import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";
+import ProjectSizeAutoComplete from "../../AutoCompletes/ProjectSizeAutoComplete";
+import LevelOfExpertiseAutoComplete from "../../AutoCompletes/LevelOfExpertiseAutoComplete";
 import {
     Level_Of_Expertise,
     MutationCreateProjectArgs,
@@ -18,12 +18,12 @@ import {
     ProjectCategoriesEnum,
     ProjectScopeInput,
     Size_Of_Project
-} from "../../types/resolvers";
-import {PriceInput} from "../Inputs/PriceInput";
-import {DurationInput} from "../Inputs/DurationInput";
+} from "../../../types/resolvers";
+import {PriceInput} from "../../Inputs/PriceInput";
+import {DurationInput} from "../../Inputs/DurationInput";
 import Typography from '@mui/joy/Typography';
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-import uploadFilesToBlob from "../../utils/azure-storage-blob";
+import uploadFilesToBlob from "../../../utils/azure-storage-blob";
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
 //TODO the freelancer and Unauthorized user can't create a project
@@ -31,10 +31,6 @@ import uploadFilesToBlob from "../../utils/azure-storage-blob";
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 // import ObjectID from "bson-objectid"
 
-
-const uploadFilesHandler = function () {
-
-}
 
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
 export default function ProjectForm(props: {
@@ -159,7 +155,7 @@ export default function ProjectForm(props: {
             }}
         >
 
-            <form onSubmit={handleSubmit} style={{width: "100%"}}>
+            <form onSubmit={handleSubmit}>
 
                 <Stack spacing={2}>
                     {props.label && <Typography level="h4">{props.label}</Typography>}
@@ -201,22 +197,22 @@ export default function ProjectForm(props: {
 
 
                     {/*<Stack direction={"row"} alignItems={"center"}>*/}
+                    <Stack spacing={1} direction="row" justifyContent="space-between">
+                        <Button
+                            component="label"
+                            color="neutral"
 
-                    <Button
-                        component="label"
-                        color="neutral"
-                        // onClick={onFileUpload}
-                        // sx={{ width: "150px", height: "40px", padding: "10px" }}
-                    >
-                        <input onChange={(e) => setUploadedFilesList(e.target.files)} hidden accept="*"
-                               multiple
-                               type="file"/>
-                        Add attachments
-                        <FileUploadIcon/>
-                    </Button>
+                        >
+                            <input onChange={(e) => setUploadedFilesList(e.target.files)} hidden accept="*"
+                                   multiple
+                                   type="file"/>
+                            Add attachments
+                            <FileUploadIcon/>
+                        </Button>
 
-                    {/*</Stack>*/}
-                    <Button type=" submit"> Submit</Button>
+                        {/*</Stack>*/}
+                        <Button disabled={loading} type=" submit"> Submit</Button>
+                    </Stack>
 
                 </Stack>
 

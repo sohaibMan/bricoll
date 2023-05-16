@@ -6,13 +6,13 @@ import ContractStatusAutocomplete from "../../AutoCompletes/ContractStatusAutoco
 import Typography from '@mui/joy/Typography';
 import {AcceptCancelContractControlButtons} from "../../Buttons/AcceptCancelContractControlButtons";
 import {CancelPayContractControlButtons} from "../../Buttons/CancelPayContractControlButtons";
-import {Dispatch, useState} from "react";
-// import AlertDialog from "../Dialogs/AlertDialog";
+import {Dispatch, useState,SetStateAction} from "react";
+
 
 
 export const DashBoardContracts = (props: {
     contracts: Array<Contract>,
-    setContracts: Dispatch<React.SetStateAction<Contract[]>>
+    setContracts: Dispatch<SetStateAction<Contract[]>>
     currentComponent: DashboardItems,
     userRole: UserRole
 }) => {
@@ -29,7 +29,7 @@ export const DashBoardContracts = (props: {
                 {filteredContracts.length == 0 && <Typography level="h3">No contracts found</Typography>}
                 {filteredContracts.map((contract) =>
                     <>
-                        {/*{contract.status===ContractStatus.Accepted && <AlertDialog label={"you have a contract read to be paid "} contract_id={contract._id.toString()}/>}*/}
+
                         <ContractItemCard
                             key={contract._id.toString()} contract={contract}>
                             {/*freelancer only*/}

@@ -4,10 +4,10 @@ import * as React from "react";
 import {FormEvent, useState} from "react";
 import {Button, Stack} from "@mui/joy";
 import toast from "react-hot-toast";
-import {Contract, MutationCreateContractArgs, MutationEditContractArgs, Proposal} from "../../types/resolvers";
-import {DurationInput} from "../Inputs/DurationInput";
-import {PriceInput} from "../Inputs/PriceInput";
-import TermsAutocomplete from "../AutoCompletes/TermsAutocomplete";
+import {Contract, MutationCreateContractArgs, MutationEditContractArgs, Proposal} from "../../../types/resolvers";
+import {DurationInput} from "../../Inputs/DurationInput";
+import {PriceInput} from "../../Inputs/PriceInput";
+import TermsAutocomplete from "../../AutoCompletes/TermsAutocomplete";
 // TODO -COMPLETE OTHER IMPORTANT INTERACTIONS AND GET BACK TO HERE
 
 // TODO - ADD OTHER FIELDS AND CUSTOMIZE THE FUNCTION
@@ -96,7 +96,7 @@ export default function ContractForm(props: {
                     </Stack>
                     <TermsAutocomplete terms={terms} setTerms={setTerms}/>
                     <Stack spacing={2}>
-                        <Button type="submit">Submit</Button>
+                        <Button disabled={loading} type=" submit"> Submit</Button>
 
                     </Stack>
 

@@ -74,6 +74,7 @@ export default function FirstStep() {
             "city",
             "phone",
             "language",
+            "address",
             "photo",
         ];
         const missingFields = requiredFields.filter((field) => !userData[field]);
@@ -163,6 +164,20 @@ export default function FirstStep() {
           value={userData["language"]}
           onChange={(e) => {
             setUserData({ ...userData, language: e.target.value });
+          }}
+        />
+      </div>
+      <div>
+        <TextField
+          style={{ width: "30%" }}
+          label="Address"
+          margin="normal"
+          variant="outlined"
+          color="primary"
+          name="address"
+          value={userData["address"]}
+          onChange={(e) => {
+            setUserData({ ...userData, address: e.target.value });
           }}
         />
       </div>
