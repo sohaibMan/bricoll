@@ -12,7 +12,7 @@ export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, info) => {
             console.log("context: ", context);
-            // authenticatedMiddleware(context);
+            authenticatedMiddleware(context);  // ! OPTIONAL
             checkingUserMiddleware(context)
             
             return await users.findOne({
@@ -74,6 +74,7 @@ export const ProfileResolvers: Resolvers = {
             const review: Review = {
                 _id: new ObjectId(),
                 reviewer_id: new ObjectId(context.user?.id),
+                project_id: new ObjectId(args.project_id),
                 description: args.description,
                 rating: args.rating,
                 createdAt: Date.now()
@@ -97,6 +98,7 @@ export const ProfileResolvers: Resolvers = {
             const review: Review = {
                 _id: new ObjectId(args.id),
                 reviewer_id: new ObjectId(context.user?.id),
+                project_id: new ObjectId(args.project_id),
                 description: args.description,
                 rating: args.rating,
                 createdAt: Date.now()

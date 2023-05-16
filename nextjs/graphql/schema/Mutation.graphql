@@ -90,8 +90,8 @@ type Mutation {
     #    completeContract(id: ObjectID!): Contract (transfer to a rest api)
 
     # Review mutation function
-    addReview(user_id: ObjectID!, rating: Float!, description: String!): queryResult
-    editReview(id: ObjectID!, rating: Float!, description: String!): queryResult
+    addReview(user_id: ObjectID!, project_id: ObjectID!, rating: Float!, description: String!): queryResult
+    editReview(id: ObjectID!, project_id: ObjectID!, rating: Float!, description: String!): queryResult
     removeReview(id: ObjectID!): queryResult
 
 }

@@ -30,7 +30,7 @@ type User {
 #   stripe_account_link: String
   earnings: earnings
 
-  review: [Review]
+  reviews: [Review]
   proposals: [Proposal!]!
   projects: [Project!]!
   contracts: [Contract!]!

@@ -60,6 +60,9 @@ const USER_PROFILE = gql`
         created_at
         category
       }
+      reviews {
+        rating
+      }
     }
   }
 `;
@@ -69,14 +72,10 @@ export default function ProfilePage() {
   const router = useRouter();
   const { profileId } = router.query;
 
-  // TODO: -> Checking if the user is authenticated
-  // if (!session?.user) {
-  //   redirect("/api/auth/signin");
-  // }
+  // TODO: -> Checking if the user is authenticated : but we can remove this condition
 
-  // TODO: -> Protecting this route from client users
   // TODO: -> Linking the reviews with projects to get the rating
-  // TODO: -> Implementing the logic of followers
+  // TODO: OPTIONAL -> Implementing the logic of followers
 
   // console.log("profileId : ", profileId);
 
@@ -96,7 +95,22 @@ export default function ProfilePage() {
     }
   );
 
-  console.log("userData: ", data);
+  let averageRating;
+
+  if (data?.ProfileById.reviews && data?.ProfileById.reviews?.length > 0) {
+    const totalRating = data?.ProfileById.reviews.reduce((sum, review) => {
+      if (review?.rating && sum + review?.rating) {
+        return sum + review?.rating;
+      }
+      return 0;
+    }, 0);
+    averageRating = totalRating / data?.ProfileById.reviews.length;
+    console.log("Average rating:", averageRating);
+  } else {
+    console.log("No reviews found.");
+  }
+
+  // console.log("userData: ", data);
 
   if (loading)
     return (
@@ -177,7 +191,7 @@ export default function ProfilePage() {
                 >
                   <Rating
                     name="half-rating-read"
-                    defaultValue={2.5}
+                    defaultValue={averageRating}
                     precision={0.5}
                     readOnly
                   />

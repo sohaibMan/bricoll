@@ -106,6 +106,7 @@ export type MutationAcceptRequestProjectSubmissionReviewArgs = {
 
 export type MutationAddReviewArgs = {
   description: Scalars['String'];
+  project_id: Scalars['ObjectID'];
   rating: Scalars['Float'];
   user_id: Scalars['ObjectID'];
 };
@@ -205,6 +206,7 @@ export type MutationEditProposalArgs = {
 export type MutationEditReviewArgs = {
   description: Scalars['String'];
   id: Scalars['ObjectID'];
+  project_id: Scalars['ObjectID'];
   rating: Scalars['Float'];
 };
 
@@ -346,6 +348,7 @@ export type Review = {
   _id: Scalars['ObjectID'];
   createdAt: Scalars['Date'];
   description: Scalars['String'];
+  project_id: Scalars['ObjectID'];
   rating: Scalars['Float'];
   reviewer_id: Scalars['ObjectID'];
 };
@@ -392,7 +395,7 @@ export type User = {
   profileTitle?: Maybe<Scalars['String']>;
   projects: Array<Project>;
   proposals: Array<Proposal>;
-  review?: Maybe<Array<Maybe<Review>>>;
+  reviews?: Maybe<Array<Maybe<Review>>>;
   role: Scalars['String'];
   skills?: Maybe<Scalars['String']>;
   status?: Maybe<StatusEnum>;
@@ -647,7 +650,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   acceptContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationAcceptContractArgs, 'id'>>;
   acceptProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationAcceptProposalArgs, 'id'>>;
   acceptRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAcceptRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
-  addReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAddReviewArgs, 'description' | 'rating' | 'user_id'>>;
+  addReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationAddReviewArgs, 'description' | 'project_id' | 'rating' | 'user_id'>>;
   cancelContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationCancelContractArgs, 'id'>>;
   cancelProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationCancelProposalArgs, 'id'>>;
   cancelRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationCancelRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
@@ -660,7 +663,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id'>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
-  editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'rating'>>;
+  editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'project_id' | 'rating'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
   removeReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRemoveReviewArgs, 'id'>>;
   requestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRequestProjectSubmissionReviewArgs, 'contract_id' | 'description' | 'title'>>;
@@ -740,6 +743,7 @@ export type ReviewResolvers<ContextType = ServerContext, ParentType extends Reso
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   description?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   rating?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
   reviewer_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -778,7 +782,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   profileTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
-  review?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
+  reviews?: Resolver<Maybe<Array<Maybe<ResolversTypes['Review']>>>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
