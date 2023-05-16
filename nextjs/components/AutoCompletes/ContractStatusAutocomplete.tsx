@@ -1,14 +1,15 @@
-import {ContractStatus} from "../../types/resolvers";
+// import {Contract_status} from "../../types/resolvers";
 import CustomAutocomplete from "./Autocomplete";
 import * as React from "react";
+import {Contract_Status} from "../../types/resolvers";
 
 const contract_status = [
-    {label: ContractStatus.Pending},
-    {label: ContractStatus.Completed},
-    {label: ContractStatus.Accepted},
-    {label: ContractStatus.Paid},
-    {label: ContractStatus.CancelledByFreelancer},
-    {label: ContractStatus.CancelledByClient},
+    {label: Contract_Status.Pending},
+    {label: Contract_Status.Completed},
+    {label: Contract_Status.Accepted},
+    {label: Contract_Status.Paid},
+    {label: Contract_Status.CancelledByFreelancer},
+    {label: Contract_Status.CancelledByClient},
 
 ];
 

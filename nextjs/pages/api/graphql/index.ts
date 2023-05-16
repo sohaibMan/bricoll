@@ -12,7 +12,6 @@ import {ContractResolvers} from "../../../graphql/resolvers/Contract";
 import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
-import {GraphQLError} from "graphql";
 import {ProfileResolvers} from "../../../graphql/resolvers/Profile";
 
 // path to those folders
@@ -50,19 +49,9 @@ export default startServerAndCreateNextHandler(server,
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}
 
-            // console.log(token.userRole)
-            if (token && token.isCompleted === false) {
-                throw new GraphQLError("Please complete your profile",
-                    {
-                        extensions: {
-                            code: "BAD_REQUEST",
-                            http: {status: 400}
+            // to prevent the user from accessing our website if he didn't complete his profile
+            if (token && token.isCompleted === false) res.redirect("/complete-profile");
 
-                        }
-                    })
-            }
-
-            //
             return {
                 user: {
                     id: token.sub.toString(),

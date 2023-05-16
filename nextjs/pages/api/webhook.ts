@@ -1,7 +1,7 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {buffer} from "micro";
 import {ObjectId} from "mongodb";
-import {ContractStatus} from "../../types/resolvers";
+import {Contract_Status} from "../../types/resolvers";
 import db from "../../lib/mongodb";
 
 export const config = {
@@ -25,7 +25,7 @@ async function handlePaymentIntentSucceeded(contract_id: string) {
     const contractCollection = db.collection("contracts")
     await contractCollection.updateOne({
         _id: new ObjectId(contract_id),
-    }, {$set: {status: ContractStatus.Completed, updated_at: new Date()}});
+    }, {$set: {status: Contract_Status.Completed, updated_at: new Date()}});
 // make the product inactive so the client can't pay for it again
     await stripe.products.update(
         contract_id,

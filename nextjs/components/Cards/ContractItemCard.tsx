@@ -3,7 +3,7 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Chip, Stack} from '@mui/joy';
-import {Contract, ContractStatus} from "../../types/resolvers";
+import {Contract, Contract_Status} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink"
 
@@ -76,17 +76,17 @@ export default function ContractItemCard({contract, children}: {
                     spacing={1}
 
                 >
-                    {contract.status === ContractStatus.Paid &&
+                    {contract.status === Contract_Status.Paid &&
                         <Chip size="sm" color="primary">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
-                    {contract.status === ContractStatus.Accepted &&
+                    {contract.status === Contract_Status.Accepted &&
                         <Chip size="sm" color="success">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
-                    {contract.status === ContractStatus.CancelledByFreelancer &&
+                    {contract.status === Contract_Status.CancelledByFreelancer &&
                         <Chip size="sm" color="warning">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
-                    {contract.status === ContractStatus.Pending &&
+                    {contract.status === Contract_Status.Pending &&
                         <Chip size="sm" color="neutral">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
-                    {contract.status === ContractStatus.Completed &&
+                    {contract.status === Contract_Status.Completed &&
                         <Chip size="sm" color="info">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
-                    {contract.status === ContractStatus.CancelledByClient &&
+                    {contract.status === Contract_Status.CancelledByClient &&
                         <Chip size="sm" color="danger">{contract.status.split("_").join(" ").toLowerCase()}</Chip>}
 
                 </Stack>

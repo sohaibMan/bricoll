@@ -1,44 +1,56 @@
 enum StatusEnum {
-  Online
-  Invisible
+    Online
+    Invisible
 }
 
 enum userRole {
-  Guest
-  Client
-  Freelancer
-  Admin
+    Guest
+    Client
+    Freelancer
+    Admin
 }
 
 type User {
-  _id: ObjectID!
-  name: String!
-  email: String!
-  role: String!
-  phone: String
-  address: String
-  bio: String
-  image: String
-  status: StatusEnum
-  # skills: [String!]
-  skills: String
-  jobTitle: String
-  experienceLevel: String
-  language: String
-  profileTitle: String
-  portfolio: String
-  #   stripe_account_link: String
-  payments: [payments]
-  reviews: [Review]
-  proposals: [Proposal!]!
-  projects: [Project!]!
-  contracts: [Contract!]!
-
+    _id: ObjectID!
+    name: String!
+    email: String!
+    role: String!
+    phone: String
+    address: String
+    bio: String
+    image: String
+    status: StatusEnum
+    # skills: [String!]
+    skills: String
+    jobTitle: String
+    experienceLevel: String
+    language: String
+    profileTitle: String
+    portfolio: String
+    #   stripe_account_link: String
+    payments: [payments]!
+    reviews: [Review]
+    proposals: [Proposal!]!
+    projects: [Project!]!
+    contracts: [Contract!]!
+    proposals_stats: [Proposals_stats]!
+    contracts_stats: [Contract_stats]!
 }
+
+type Proposals_stats{
+    count: Int!
+    status: Proposal_status!
+}
+type Contract_stats{
+    count: Int!
+    status: Contract_status!
+}
+#todo add project and contract stats (number of hired devs ....)
+
 type ProfileMetaData{
-  _id: ObjectID!
-  name: String!
-  image: String!
+    _id: ObjectID!
+    name: String!
+    image: String!
 }
 
 #input userData {
@@ -68,11 +80,11 @@ type ProfileMetaData{
 #}
 
 type payments {
-  contract_id: ObjectID!
-  amount: Float!
-  currency: String!
-  description:String!
-  created_at:Date!
+    contract_id: ObjectID!
+    amount: Float!
+    currency: String!
+    description:String!
+    created_at:Date!
 
 }
 

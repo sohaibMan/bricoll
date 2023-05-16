@@ -1,8 +1,18 @@
 import db from "../../lib/mongodb";
-import {Contract, Project, Proposal, Resolvers, Review, User, UserRole,} from "../../types/resolvers";
+import {
+    Contract,
+    Contract_Stats,
+    Contract_Status,
+    Project,
+    Proposal,
+    Proposals_Stats,
+    Resolvers,
+    Review,
+    User,
+    UserRole,
+} from "../../types/resolvers";
 import {authenticatedMiddleware} from "./resolversHelpersFunctions/authenticatedMiddleware";
 import {ObjectId} from "mongodb";
-import { checkingUserMiddleware } from "./resolversHelpersFunctions/checkingUserMiddleware";
 
 const users = db.collection("users");
 const proposals = db.collection("proposals");
@@ -12,9 +22,8 @@ export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, info) => {
             console.log("context: ", context);
-            authenticatedMiddleware(context);  // ! OPTIONAL
-            checkingUserMiddleware(context)
-            
+            authenticatedMiddleware(context);
+
             return await users.findOne({
                 _id: new ObjectId(args.id),
             }) as unknown as User;
@@ -41,7 +50,7 @@ export const ProfileResolvers: Resolvers = {
         },
         projects: async (parent, args, context, info) => {
             // clientMiddleware(context);
-            if(context.user?.userRole===UserRole.Freelancer)return  [] ; // the user has no projects
+            if (context.user?.userRole === UserRole.Freelancer) return []; // the user has no projects
 
             return await projects
                 .find({
@@ -60,6 +69,71 @@ export const ProfileResolvers: Resolvers = {
                 })
                 .limit(20).toArray() as unknown as [Contract];
         },
+        proposals_stats: async (parent, args, context, info) => {
+            const proposalsStats = await proposals.aggregate([
+                {
+                    $match: {
+                        $or: [
+                            {client_id: new ObjectId(context.user?.id)},
+                            {freelancer_id: new ObjectId(context.user?.id)},
+                        ],
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$status",
+                        count: {
+                            $sum: 1,
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        status: "$_id",
+                        count: 1,
+                    }
+                }
+            ]).toArray()
+
+
+            return {
+                proposalsStats
+            } as unknown as [Proposals_Stats]
+        },
+        contracts_stats: async (parent, args, context, info) => {
+            const contractsStats = await contracts.aggregate([
+                {
+                    $match: {
+                        $or: [
+                            {client_id: new ObjectId(context.user?.id)},
+                            {freelancer_id: new ObjectId(context.user?.id)},
+                        ],
+                    },
+                },
+                {
+                    $group: {
+                        _id: "$status",
+                        count: {
+                            $sum: 1,
+                        },
+                    },
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        status: "$_id",
+                        count: 1,
+                    }
+                }
+            ]).toArray() as unknown as [{ status: Contract_Status; count: number }];
+
+
+            return {
+                contractsStats
+            } as unknown as [Contract_Stats]
+        },
+
     },
 
     Mutation: {

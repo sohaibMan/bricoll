@@ -1,7 +1,7 @@
 import * as React from "react";
 import {gql, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {Contract, ContractStatus} from "../../types/resolvers";
+import {Contract, Contract_Status} from "../../types/resolvers";
 import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
 import PayButton from "./PayButton";
 
@@ -58,6 +58,6 @@ export function CancelPayContractControlButtons(props: {
 
     return <>
         <CancelChipWithLabel label={"cancel"} actionHandler={cancelContractHandler}/>
-        {props.contract.status === ContractStatus.Accepted && <PayButton contract_id={props.contract._id}/>}
+        {props.contract.status === Contract_Status.Accepted && <PayButton contract_id={props.contract._id}/>}
     </>;
 }

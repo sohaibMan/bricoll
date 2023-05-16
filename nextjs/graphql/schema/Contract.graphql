@@ -1,6 +1,6 @@
 scalar ObjectID
 
-enum SubmissionReviewStatus {
+enum Submission_review_status {
     PENDING
     ACCEPTED
     Declined
@@ -19,7 +19,7 @@ type Submission_review{
     created_at: Date!
     updated_at: Date!
     accepted_at: Date
-    status: SubmissionReviewStatus!
+    status: Submission_review_status!
 }
 
 type Contract {
@@ -30,7 +30,7 @@ type Contract {
     proposal_id: ObjectID!
     price: Float!
     duration: Int!
-    status: ContractStatus!
+    status: Contract_status!
     created_at: Date!
     updated_at: Date!
     terms:[ String!]!
@@ -38,7 +38,7 @@ type Contract {
     submission_reviews: [Submission_review]!
     fees: Float! # for simplicity we will assume that the percentage fees are fixed (10%) for both parties (-5% for the freelancer and -5% for the client)
 }
-enum ContractStatus {
+enum Contract_status {
     PENDING # default not signed by the freelancer (by default signed by the client because he created it !!!)
     ACCEPTED # signed by both parties
     CANCELLED_BY_FREELANCER # cancelled by freelancer

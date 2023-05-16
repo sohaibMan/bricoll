@@ -32,6 +32,14 @@ const USER_PROFILE = gql`
             email
             # role
             image
+#            proposals_stats {
+#                count
+#                status
+#            }
+#            contracts_stats {
+#                count
+#                status
+#            }
             payments {
                 currency
                 amount

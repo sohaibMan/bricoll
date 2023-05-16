@@ -1,4 +1,4 @@
-import {Contract, ContractStatus, UserRole} from "../../../types/resolvers";
+import {Contract, Contract_Status, UserRole} from "../../../types/resolvers";
 import {DashboardItems} from "../../../pages/dashboard";
 import Stack from "@mui/joy/Stack";
 import ContractItemCard from "../../Cards/ContractItemCard";
@@ -33,11 +33,11 @@ export const ContractsItem = (props: {
                         <ContractItemCard
                             key={contract._id.toString()} contract={contract}>
                             {/*freelancer only*/}
-                            {props.userRole === UserRole.Freelancer && contract.status === ContractStatus.Pending &&
+                            {props.userRole === UserRole.Freelancer && contract.status === Contract_Status.Pending &&
                                 <AcceptCancelContractControlButtons contract={contract}
                                                                     setContracts={props.setContracts}/>}
                             {/*client only*/}
-                            {props.userRole === UserRole.Client && (contract.status === ContractStatus.Pending || contract.status === ContractStatus.Accepted) &&
+                            {props.userRole === UserRole.Client && (contract.status === Contract_Status.Pending || contract.status === Contract_Status.Accepted) &&
                                 <CancelPayContractControlButtons contract={contract}
                                                                  setContracts={props.setContracts}/>}
                         </ContractItemCard>

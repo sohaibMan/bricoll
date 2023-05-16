@@ -1,6 +1,6 @@
 import {NextApiRequest, NextApiResponse} from "next";
 import {ObjectId} from "mongodb";
-import {Contract, ContractStatus} from "../../../types/resolvers";
+import {Contract, Contract_Status} from "../../../types/resolvers";
 import db from "../../../lib/mongodb";
 import {getToken} from "next-auth/jwt";
 
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             const contract = await contractCollection.findOne({
                 _id: new ObjectId(contract_id), // the id already exists
                 client_id: new ObjectId(client_id),// simple check if the client is the owner of the contract
-                status: ContractStatus.Accepted,// pending or cancelled or completed
+                status: Contract_Status.Accepted,// pending or cancelled or completed
             }) as unknown as Contract | null
 
             if (!contract) return res.status(400).json({messaage: "The contract can't be completed because it is not accepted or  or cancelled or already completed"});
