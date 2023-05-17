@@ -6,7 +6,7 @@ import {Project} from "../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../ListItems/Attachments";
-import {BarChart} from "../Charts/BarChart";
+import {ProjectStatsBarChart} from "../Charts/ProjectStats";
 
 
 export default function ProjectCard({project}: { project: Project }) {
@@ -77,17 +77,15 @@ export default function ProjectCard({project}: { project: Project }) {
             <Box sx={{width: "100%"}}>
 
 
-
                 <Stack>
+                    <Divider sx={{margin: "10px"}}/>
                     <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
                         Project Statistics
                     </Typography>
-                    {(project.stats && !(project.stats.approved_count === 0 && project.stats.completed_count === 0 && project.stats.declined_count === 0 && project.stats.in_progress_count === 0)) ?
+                    {
                         <Box sx={{width: "100%", height: "20rem"}}>
-                            <Divider sx={{margin: "10px"}}/>
-                            <BarChart stats={project.stats}/>
+                            {project.stats ? <ProjectStatsBarChart stats={project.stats}/>:<Typography>No statistics</Typography>}
                         </Box>
-                        : <Typography>No statistics</Typography>
 
                     }
                 </Stack>

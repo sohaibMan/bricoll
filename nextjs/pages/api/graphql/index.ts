@@ -12,8 +12,7 @@ import {ContractResolvers} from "../../../graphql/resolvers/Contract";
 import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
-import {GraphQLError} from "graphql";
-import { ProfileResolvers } from "../../../graphql/resolvers/Profile";
+import {ProfileResolvers} from "../../../graphql/resolvers/Profile";
 
 // path to those folders
 const rootPath = path.join(__dirname, "../../../../");
@@ -36,7 +35,7 @@ const plugins = [
 // create apollo server instance
 const server = new ApolloServer<ServerContext>({
     typeDefs: [constraintDirectiveTypeDefs, schema],
-    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers,ProfileResolvers],
+    resolvers: [ProjectResolvers, ProposalResolvers, ContractResolvers, ProfileResolvers],
     plugins,
     validationRules: [depthLimit(4)]
 });
@@ -47,29 +46,18 @@ export default startServerAndCreateNextHandler(server,
             //
             const token = await getToken({req});
 
-
-
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}
 
-            // console.log(token.userRole)
-            if (token && token.isCompleted === false) {
-                throw new GraphQLError("Please complete your profile",
-                    {
-                        extensions: {
-                            code: "BAD_REQUEST",
-                            http: {status: 400}
+            // to prevent the users from accessing our website if he didn't complete his profile
+            if (token && token.isCompleted === false) res.redirect("/complete-profile");
 
-                        }
-                    })
-            }
-
-            //
             return {
                 user: {
                     id: token.sub.toString(),
                     userRole: token.userRole as UserRole,
-                    accessToken: token.accessToken
+                    accessToken: token.accessToken,
+                    isCompleted: token.isCompleted
                 }
             }
 

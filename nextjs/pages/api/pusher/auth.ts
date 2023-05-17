@@ -12,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
 
         const token = await getToken({req})
-        // console.log("user: ", token);
+        // console.log("users: ", token);
 
         if (!token || !token.sub || !token.name || !token.email) return res.status(404).json({message:"not authorized"})
 

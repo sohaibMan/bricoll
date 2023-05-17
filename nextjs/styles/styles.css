@@ -1,0 +1,74 @@
+body {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    margin: 0 auto;
+    color: #333;
+}
+
+li,
+p {
+    line-height: 1.5rem;
+}
+
+a {
+    font-weight: 500;
+}
+
+hr {
+    border: 1px solid #ddd;
+}
+
+iframe {
+    background: #ccc;
+    border: 1px solid #ccc;
+    height: 10rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    filter: invert(1);
+}
+
+.ltr {
+    text-align: left;
+}
+
+.rtl {
+    text-align: right;
+}
+
+.editor-placeholder {
+    color: #999;
+    overflow: hidden;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    user-select: none;
+    pointer-events: none;
+}
+
+.editor-paragraph {
+    margin: 0 0 15px 0;
+    position: relative;
+}
+
+.App {
+    text-align: center;
+  }
+  
+  .App-header {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(10px + 2vmin);
+  }
+  
+  .center-stepper {
+    display: flex;
+    justify-content: center;
+  }
+
+.MuiAutocomplete-listbox {
+    z-index: 10000;
+    /*so the list box stay in the top of slider and the modal*/
+    /*    slide <=999 modal 10001*/
+}

@@ -4,6 +4,7 @@ import Input from "@mui/joy/Input";
 
 export function PriceInput(props: { value: string, onChange: (e: ChangeEvent<HTMLInputElement>) => void }) {
     return <Input
+        sx={{width : "50%"}}
         value={props.value}
         onChange={props.onChange}
         placeholder="Price"

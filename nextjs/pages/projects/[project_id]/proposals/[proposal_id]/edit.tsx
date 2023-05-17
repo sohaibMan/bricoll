@@ -2,7 +2,7 @@ import {gql, useQuery} from "@apollo/client"
 import {Stack} from "@mui/joy";
 import {useRouter} from "next/router";
 import * as React from "react";
-import ProposalForm from "../../../../../components/Forms/ProposalForm";
+import ProposalForm from "../../../../../components/Forms/base/ProposalForm";
 import {Proposal} from "../../../../../types/resolvers";
 
 
@@ -78,7 +78,7 @@ const EditProposal = () => {
     if (!data) return <p>No proposals</p>
 
 
-    return <ProposalForm PROJECT_MUTATION={EDIT_PROJECT_MUTATION}
+    return <ProposalForm onSubmitProposalHandler={()=>{}} label={"edit an existing proposal"} PROPOSAL_MUTATION={EDIT_PROJECT_MUTATION}
                          proposal={data.Proposal} project_id={data.Proposal.project_id}/>;
 
 };

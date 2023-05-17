@@ -1,69 +1,85 @@
-import React, {useEffect, useState} from 'react';
-import uploadFileToBlob, {getBlobsInContainer} from "../../utils/azure-storage-blob";
-import DisplayImagesFromContainer from "../ContainerImage";
+import React, {ChangeEvent, Dispatch, useState} from "react";
+import uploadFilesToBlob from "../../utils/azure-storage-blob";
+import Button from "@mui/joy/Button";
+import {Stack} from "@mui/joy";
 
+const Upload = (props: {
+    uploadHandler: Dispatch<React.SetStateAction<string | null | undefined>>;
+}) => {
 
-const Upload = (): JSX.Element => {
-    // // all blobs in container
-    const [blobList, setBlobList] = useState<string[]>([]);
-    //
     // // current file to upload into container
     const [fileSelected, setFileSelected] = useState<File | null>();
-    const [fileUploaded, setFileUploaded] = useState<string>('');
+
     //
     // // UI/form management
     const [uploading, setUploading] = useState<boolean>(false);
     const [inputKey, setInputKey] = useState(Math.random().toString(36));
+
     //
     // *** GET FILES IN CONTAINER ***
-    useEffect(() => {
-        getBlobsInContainer().then((list: any) => {
-            // prepare UI for results`
-            setBlobList(list);
-        })
-    }, [fileUploaded]);
-    //
-    const onFileChange = (event: any) => {
-        // capture file into state
+
+    const onFileChange = (event: ChangeEvent<HTMLInputElement> | undefined) => {
+        if (!event || !event.target.files) return;
+        // file.name=fileName;
         setFileSelected(event.target.files[0]);
     };
 
     const onFileUpload = async () => {
-
         if (fileSelected && fileSelected?.name) {
             // prepare UI
             setUploading(true);
 
             // *** UPLOAD TO AZURE STORAGE ***
-            await uploadFileToBlob(fileSelected);
-
-            // reset state/form
+            const fileUrls = await uploadFilesToBlob([fileSelected]);
+            // reset stateform
             setFileSelected(null);
-            setFileUploaded(fileSelected.name);
             setUploading(false);
             setInputKey(Math.random().toString(36));
+            props.uploadHandler(fileUrls[0].url);
 
         }
-
     };
 
-    // display form
+
     const DisplayForm = () => (
-        <div>
-            <input type="file" onChange={onFileChange} key={inputKey || ''}/>
-            <button type="submit" onClick={onFileUpload}>
-                Upload!
-            </button>
+        <div style={{display: "flex", flexDirection: "column", gap: "10px", padding: "10px"}}>
+            <input
+                type="file"
+                onChange={onFileChange}
+                key={inputKey}
+                style={{display: "none"}}
+                id="file-input"
+            />
+            <label htmlFor="file-input" style={{cursor: "pointer"}}>
+                <Button
+                    component="span"
+                    // sx={{width: "150px", height: "40px", padding: "10px"}}
+                >
+                    Choose File
+                </Button>
+            </label>
+            <Button
+                color="primary"
+                onClick={onFileUpload}
+                // sx={{width: "150px", height: "40px", padding: "10px"}}
+            >
+                Upload
+            </Button>
         </div>
-    )
+    );
 
     return (
-        <div>
-            <h1>Upload file to Azure Blob Storage</h1>
+        <Stack
+            sx={{
+                width: "100%",
+                height: "5rem",
+                alignItems: "center",
+                justifyContent: "center"
+                // backgroundColor: "red"
+            }}>
             {!uploading && <DisplayForm/>}
             {uploading && <div>Uploading</div>}
-            {blobList.length > 0 && <DisplayImagesFromContainer blobList={blobList}/>}
-        </div>
+        </Stack>
     );
 };
 

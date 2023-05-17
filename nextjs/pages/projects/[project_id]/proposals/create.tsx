@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import * as React from "react";
-import ProposalForm from "../../../../components/Forms/ProposalForm";
+import ProposalForm from "../../../../components/Forms/base/ProposalForm";
 import {gql} from "@apollo/client";
 
 const CREATE_PROPOSAL_MUTATION = gql`
@@ -14,6 +14,6 @@ export default function SubmitProposal() {
     const router = useRouter();
     const {project_id} = router.query;
     if (!project_id) return (<></>)
-    return <ProposalForm PROJECT_MUTATION={CREATE_PROPOSAL_MUTATION} project_id={project_id.toString()}/>
+    return <ProposalForm  onSubmitProposalHandler={()=>{}}  label={"Submit a Proposal"} PROPOSAL_MUTATION={CREATE_PROPOSAL_MUTATION} project_id={project_id.toString()}/>
 
 }

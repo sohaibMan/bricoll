@@ -1,9 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import * as React from "react";
-import {styled} from "@mui/joy/styles";
+import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
+import {signOut} from "next-auth/react"
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
+import Stack from "@mui/joy/Stack";
 import Divider from "@mui/joy/Divider";
 import IconButton from "@mui/joy/IconButton";
 import Input from "@mui/joy/Input";
@@ -14,20 +14,42 @@ import ListItemContent from "@mui/joy/ListItemContent";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import Typography from "@mui/joy/Typography";
 import Sheet from "@mui/joy/Sheet";
-import ColorSchemeToggle from "./ColorSchemeToggle";
-import {closeSidebar} from "../../pages/utils";
+import ColorSchemeToggleButton from "../Buttons/ColorSchemeToggleButton";
+import {closeSidebar} from "../../utils/utils";
 import {DashboardItems} from "../../pages/dashboard";
-import {User} from "../../types/resolvers";
-
-const Dropdown = styled("i")(({theme}) => ({
-    color: theme.vars.palette.text.tertiary,
-}));
+import {User, UserRole} from "../../types/resolvers";
+import ExpandLessOutlinedIcon from "@mui/icons-material/ExpandLessOutlined";
+import KeyboardArrowDownOutlinedIcon from "@mui/icons-material/KeyboardArrowDownOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import OtherHousesOutlinedIcon from "@mui/icons-material/OtherHousesOutlined";
+import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
+import SplitscreenOutlinedIcon from "@mui/icons-material/SplitscreenOutlined";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import SearchIcon from '@mui/icons-material/Search';
+import GavelIcon from '@mui/icons-material/Gavel';
+import LogoutIcon from '@mui/icons-material/Logout';
+import Image from "next/image";
+import logo from "../../public/logo.png";
+import Link from "next/link"
+import Badge from '@mui/joy/Badge';
 
 export default function Sidebar(props: {
-    setCurrentComponent: React.Dispatch<React.SetStateAction<DashboardItems>>
-    currentComponent: DashboardItems
-    user: User
+    setCurrentComponent: Dispatch<SetStateAction<DashboardItems>>;
+    currentComponent: DashboardItems;
+    user: User;
+    userRole: UserRole // to custom the links per userRole
 }) {
+    const [query, setQuery] = useState("");
+    const [projectsTab, setProjectsTabsOpen] = useState(false);
+    const [contractsTab, setContractsTabOpen] = useState(false);
+
+    // const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    //     setQuery(event.target.value);//todo filter tabs
+    // };
+
+
     return (
         <Sheet
             className="Sidebar"
@@ -41,7 +63,7 @@ export default function Sidebar(props: {
                     md: "none",
                 },
                 transition: "transform 0.4s, width 0.4s",
-                zIndex: 10000,
+                zIndex: 1000,
                 height: "100dvh",
                 width: "var(--Sidebar-width)",
                 top: 0,
@@ -85,14 +107,26 @@ export default function Sidebar(props: {
                 onClick={() => closeSidebar()}
             />
             <Box sx={{display: "flex", gap: 1, alignItems: "center"}}>
-                {/* <MuiLogo /> */}
-                <Typography fontWeight="xl">Bricoll</Typography>
-                <ColorSchemeToggle sx={{ml: "auto"}}/>
+
+                {/*<Avatar src={logo} sx={{width: 40, height: 40}}/>*/}
+                <Link href="/">
+                    {/*<Typography sx={{ fontWeight: 'medium' }}>Bricoll</Typography>*/}
+                    <Image alt={"logo"} src={logo} width={"24"} height={"24"}/>
+                </Link>
+                <ColorSchemeToggleButton sx={{ml: "auto"}}/>
             </Box>
-            <Input
-                startDecorator={<i data-feather="search"/>}
-                placeholder="Search"
-            />
+            {/*<Input*/}
+            {/*    startDecorator={<SearchIcon/>}*/}
+            {/*    placeholder="Search"*/}
+            {/*    value={query}*/}
+            {/*    onChange={handleSearch}*/}
+            {/*    onKeyPress={(event) => {*/}
+            {/*        if (event.key === "Enter") {*/}
+            {/*            // performSearch();*/}
+            {/*        }*/}
+            {/*    }}*/}
+            {/*/>*/}
+            {/*<button onClick={performSearch}>Search</button>*/}
             <Box
                 sx={{
                     minHeight: 0,
@@ -102,7 +136,6 @@ export default function Sidebar(props: {
                     flexDirection: "column",
                 }}
             >
-
                 {/*<ListItem>*/}
                 {/*    <ListItemButton>*/}
                 {/*        <ListItemDecorator>*/}
@@ -114,78 +147,223 @@ export default function Sidebar(props: {
                 {/*</ListItem>*/}
 
                 {/*<ListItem>*/}
-                {/*    <ListItemButton>*/}
-                {/*        <ListItemDecorator>*/}
-                {/*            <i data-feather="check-square"/>*/}
-                {/*        </ListItemDecorator>*/}
-                {/*        <ListItemContent>Tasks</ListItemContent>*/}
-                {/*        <Dropdown data-feather="chevron-down"/>*/}
-                {/*    </ListItemButton>*/}
-                {/*</ListItem>*/}
-                {/*<ListItem>*/}
-                {/*    <ListItemButton>*/}
-                {/*        <ListItemDecorator>*/}
-                {/*            <i data-feather="flag"/>*/}
-                {/*        </ListItemDecorator>*/}
-                {/*        <ListItemContent>Reporting</ListItemContent>*/}
-                {/*        <Dropdown data-feather="chevron-down"/>*/}
-                {/*    </ListItemButton>*/}
-                {/*</ListItem>*/}
-                {/*<ListItem>*/}
-                {/*<ListItemButton>*/}
-                {/*    <ListItemDecorator>*/}
-                {/*        <i data-feather="bar-chart-2"/>*/}
-                {/*    </ListItemDecorator>*/}
-                {/*    <ListItemContent>Users</ListItemContent>*/}
-                {/*    <i data-feather="chevron-up"/>*/}
-                {/*</ListItemButton>*/}
-                {/*<List>*/}
                 <List
                     sx={{
+                        flexGrow: 0,
                         "--ListItem-radius": "8px",
-                        "--List-gap": "4px",
-                        "--List-nestedInsetStart": "40px",
+                        "--List-gap": "8px",
                     }}
                 >
+                    <ListItem>
+                        <ListItemButton
+                            selected={props.currentComponent === DashboardItems.Home}
+                            variant={
+                                props.currentComponent === DashboardItems.Home
+                                    ? "soft"
+                                    : "plain"
+                            }
+                        >
+                            <ListItemDecorator>
 
-                    {/*<ListItem>*/}
-                    <ListItem>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.Home}
-                                        variant={props.currentComponent === DashboardItems.Home ? "soft" : "plain"}>
-                            <ListItemDecorator>
-                                <i data-feather="home"/>
+
+                                <OtherHousesOutlinedIcon/>
+
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.Home)}>Home</ListItemContent>
+                                onClick={() => props.setCurrentComponent(DashboardItems.Home)}
+                            >
+                                Home
+                            </ListItemContent>
                         </ListItemButton>
                     </ListItem>
                     <ListItem>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.MyProfile}
-                                        variant={props.currentComponent === DashboardItems.MyProfile ? "soft" : "plain"}>
+                        <ListItemButton
+                            selected={props.currentComponent === DashboardItems.MyProfile}
+                            variant={
+                                props.currentComponent === DashboardItems.MyProfile
+                                    ? "soft"
+                                    : "plain"
+                            }
+                        >
                             <ListItemDecorator>
-                                <i data-feather="chevron-up" />
+                                {/* <i data-feather="chevron-up" /> */}
+                                <AccountCircleOutlinedIcon/>
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.MyProfile)}>MyProfile</ListItemContent>
+                                onClick={() =>
+                                    props.setCurrentComponent(DashboardItems.MyProfile)
+                                }
+                            >
+                                My Profile
+                            </ListItemContent>
                         </ListItemButton>
                     </ListItem>
-                    <ListItem>
-                        <ListItemButton selected={props.currentComponent === DashboardItems.Projects}
-                                        variant={props.currentComponent === DashboardItems.Projects ? "soft" : "plain"}>
+                    {/*only clients*/}
+                    {props.userRole === UserRole.Client && (
+                        <ListItem nested>
+                            <ListItemButton
+                                onClick={() => setProjectsTabsOpen(!projectsTab)}
+                                selected={props.currentComponent === DashboardItems.Projects}
+                                variant={
+                                    props.currentComponent === DashboardItems.Projects
+                                        ? "soft"
+                                        : "plain"
+                                }
+                            >
+                                <ListItemDecorator>
+                                    {/* <i data-feather="layers" /> */}
+                                    <Badge size="sm" badgeContent={props.user.projects.length}>
+                                        <ListAltOutlinedIcon/>
+                                    </Badge>
+                                </ListItemDecorator>
+                                <ListItemContent
+                                    onClick={() =>
+                                        props.setCurrentComponent(DashboardItems.Projects)
+                                    }
+                                >
+
+                                    Projects
+
+                                </ListItemContent>
+                                {projectsTab ? (
+
+                                    <ExpandLessOutlinedIcon/>
+
+                                ) : (
+                                    <KeyboardArrowDownOutlinedIcon/>
+                                )}
+                            </ListItemButton>
+                            {projectsTab && (
+                                <ListItem nested>
+                                    <ListItemButton
+                                        selected={
+                                            props.currentComponent === DashboardItems.CreateProject
+                                        }
+                                        variant={
+                                            props.currentComponent === DashboardItems.CreateProject
+                                                ? "soft"
+                                                : "plain"
+                                        }
+                                    >
+                                        <ListItemDecorator>
+                                            {/* <i data-feather="layers" /> */}
+                                            <AddBoxOutlinedIcon/>
+                                        </ListItemDecorator>
+                                        <ListItemContent
+                                            onClick={() =>
+                                                props.setCurrentComponent(DashboardItems.CreateProject)
+                                            }
+                                        >
+                                            Create Project
+                                        </ListItemContent>
+                                    </ListItemButton>
+                                </ListItem>
+                            )}
+                        </ListItem>
+                    )}
+
+
+                    {/*only freelancer*/}
+                    {/*{props.userRole === UserRole.Freelancer && */}
+                    <ListItem nested>
+                        <ListItemButton
+                            selected={props.currentComponent === DashboardItems.Proposals}
+                            variant={
+                                props.currentComponent === DashboardItems.Proposals
+                                    ? "soft"
+                                    : "plain"
+                            }
+                        >
                             <ListItemDecorator>
-                                <i data-feather="layers" />
+                                {/* <i data-feather="layers" /> */}
+                                <Badge size="sm" badgeContent={props.user.proposals.length}>
+                                    <SplitscreenOutlinedIcon/>
+                                </Badge>
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.Projects)}>Projects</ListItemContent>
+                                onClick={() =>
+                                    props.setCurrentComponent(DashboardItems.Proposals)
+                                }
+                            >
+                                Proposals
+                            </ListItemContent>
                         </ListItemButton>
-                    </ListItem> {/*<ListItemButton>New user</ListItemButton>*/}
-                    {/*</ListItem>*/}
-                    {/*<ListItem>*/}
-                    {/*<ListItemButton>Role & Permission</ListItemButton>*/}
-                    {/*</ListItem>*/}
-                    {/*</List>*/}
-                    {/*</ListItem>*/}
+                        {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
+                        {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
+                        {/*    <ListItemDecorator>*/}
+                        {/*        <i data-feather="layers"/>*/}
+                        {/*    </ListItemDecorator>*/}
+                        {/*    <ListItemContent*/}
+                        {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
+                        {/*        Project</ListItemContent>*/}
+                        {/*</ListItemButton>*/}
+                    </ListItem>
+
+                    {/*contracts*/}
+
+                    <ListItem nested>
+                        <ListItemButton
+                            onClick={() => setContractsTabOpen(!contractsTab)}
+                            selected={props.currentComponent === DashboardItems.Contracts}
+                            variant={
+                                props.currentComponent === DashboardItems.Contracts
+                                    ? "soft"
+                                    : "plain"
+                            }
+                        >
+                            <ListItemDecorator>
+                                <Badge size="sm"  badgeContent={props.user.contracts.length}>
+                                    <GavelIcon/>
+                                </Badge>
+                            </ListItemDecorator>
+                            <ListItemContent
+                                onClick={() =>
+                                    props.setCurrentComponent(DashboardItems.Contracts)
+                                }
+                            >
+                                Contracts
+                            </ListItemContent>
+                            {contractsTab ? (
+                                <KeyboardArrowDownOutlinedIcon/>
+                            ) : (
+                                <ExpandLessOutlinedIcon/>
+                            )}
+                        </ListItemButton>
+                        {contractsTab && (
+                            <ListItem nested>
+                                <ListItemButton
+                                    selected={
+                                        props.currentComponent === DashboardItems.SubmissionReviews
+                                    }
+                                    variant={
+                                        props.currentComponent === DashboardItems.SubmissionReviews
+                                            ? "soft"
+                                            : "plain"
+                                    }
+                                >
+                                    <ListItemDecorator>
+                                        {/* <i data-feather="layers" /> */}
+                                        <AddBoxOutlinedIcon/>
+                                    </ListItemDecorator>
+                                    <ListItemContent
+                                        onClick={() =>
+                                            props.setCurrentComponent(DashboardItems.SubmissionReviews)
+                                        }
+                                    >Submissions
+                                    </ListItemContent>
+                                </ListItemButton>
+                            </ListItem>
+                        )}
+                    </ListItem>
                 </List>
+                {/*<ListItemButton>New users</ListItemButton>*/}
+                {/*</ListItem>*/}
+                {/*<ListItem>*/}
+                {/*<ListItemButton>Role & Permission</ListItemButton>*/}
+                {/*</ListItem>*/}
+                {/*</List>*/}
+                {/*</ListItem>*/}
+                {/*</List>*/}
                 {/*</ListItem>*/}
                 <List
                     sx={{
@@ -198,7 +376,7 @@ export default function Sidebar(props: {
                     <ListItem>
                         <ListItemButton>
                             <ListItemDecorator>
-                                <i data-feather="life-buoy"/>
+                                <HelpOutlineOutlinedIcon/>
                             </ListItemDecorator>
                             <ListItemContent>Supports</ListItemContent>
                         </ListItemButton>
@@ -206,7 +384,7 @@ export default function Sidebar(props: {
                     <ListItem>
                         <ListItemButton>
                             <ListItemDecorator>
-                                <i data-feather="settings"/>
+                                <SettingsOutlinedIcon/>
                             </ListItemDecorator>
                             <ListItemContent>Settings</ListItemContent>
                         </ListItemButton>
@@ -237,18 +415,33 @@ export default function Sidebar(props: {
                 {/*</Card>*/}
             </Box>
             <Divider/>
-            <Box sx={{display: "flex", gap: 1, alignItems: "center"}}>
-                <Avatar variant="outlined" src="/static/images/avatar/3.jpg"/>
+
+            <Stack direction={"row"} spacing={"1"}>
+                {props.user.image && (
+                    <Avatar variant="outlined" alt={props.user.username} src={props.user.image}/>
+                )}
                 <Box sx={{minWidth: 0, flex: 1}}>
-                    <Typography fontSize="sm" fontWeight="lg">
-                        {props.user.name}
-                    </Typography>
+                    <Stack direction="row" alignItems="center">
+                        <Typography fontSize="sm" fontWeight="lg">
+                            {props.user.username}
+                        </Typography>
+                        <IconButton variant="plain" color="neutral">
+                            <LogoutIcon onClick={() => {
+                                signOut();
+                            }}/>
+                        </IconButton>
+                    </Stack>
                     <Typography level="body3"> {props.user.email}</Typography>
                 </Box>
-                <IconButton variant="plain" color="neutral">
-                    <i data-feather="log-out"/>
-                </IconButton>
-            </Box>
+                {/*<Box sx={{minWidth: 0, flex: 1}}>*/}
+                {/*    <IconButton variant="plain" color="neutral">*/}
+                {/*        <LogoutIcon onClick={() => {*/}
+                {/*            signOut();*/}
+                {/*        }}/>*/}
+                {/*    </IconButton>*/}
+                {/*</Box>*/}
+
+            </Stack>
         </Sheet>
     );
 }

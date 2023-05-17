@@ -1,16 +1,13 @@
-enum AttachmentType {
-  IMAGE
-  VIDEO
-  DOCUMENT
-}
+
 
 type Attachment {
-  url: URL
-  type: AttachmentType
-  name: String
+  url: URL!
+  name:String!
+  type:String!
 }
 
 input AttachmentInput {
-  type: AttachmentType
-    name: String
+  url: URL!
+  name:String!
+  type:String!
 }

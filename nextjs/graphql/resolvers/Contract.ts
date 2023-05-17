@@ -2,12 +2,12 @@ import {ObjectId, TransactionOptions} from "mongodb";
 import db, {clientPromise} from "../../lib/mongodb";
 import {
     Contract,
-    ContractStatus,
+    Contract_Status,
     EarningsStatus,
     Proposal_Status,
     Resolvers,
     Submission_Review,
-    SubmissionReviewStatus,
+    Submission_Review_Status,
     UserRole
 } from "../../types/resolvers";
 import {GraphQLError} from "graphql";
@@ -23,7 +23,7 @@ import {
     onRequestProjectSubmissionReview
 } from "../../email/notifyEmail";
 
-const contractCollection = db.collection("contract")
+const contractCollection = db.collection("contracts")
 const projectsCollection = db.collection("projects")
 const proposalsCollection = db.collection("proposals")
 const usersCollection = db.collection("users")
@@ -62,15 +62,16 @@ export const ContractResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
                 // @ts-ignore
                 freelancer_id: new ObjectId(context.user.id),
+                status: Contract_Status.Pending
 
-            }, {$set: {status: ContractStatus.Accepted, updated_at: new Date()}}, {
+            }, {$set: {status: Contract_Status.Accepted, updated_at: new Date()}}, {
                 returnDocument: "after"
             });
 
-            if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The Contract no longer exists");
+            if (!updatedContract.value) throw new Error("The Contract no longer exists");
             //return the value (the updated proposals)
             // send email to the client
-            onAcceptContract(updatedContract.value.client_id as ObjectId)
+            await onAcceptContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
 
         },
@@ -79,10 +80,10 @@ export const ContractResolvers: Resolvers = {
             authenticatedMiddleware(context)
 
             const updatedContract = await contractCollection.findOneAndUpdate({
-                $and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]
+                $and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}, {status: Contract_Status.Pending}]
             }, {
                 $set: {
-                    status: context.user?.userRole === UserRole.Client ? ContractStatus.CancelledByClient : ContractStatus.CancelledByFreelancer,
+                    status: context.user?.userRole === UserRole.Client ? Contract_Status.CancelledByClient : Contract_Status.CancelledByFreelancer,
                     updated_at: new Date()
                 }
             }, {
@@ -90,7 +91,7 @@ export const ContractResolvers: Resolvers = {
             });
             if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
             //return the value (the updated proposals)
-            onCancelContract(updatedContract.value.client_id as ObjectId)
+            await onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
         createContract: async (parent, args, context, info) => {
@@ -101,7 +102,7 @@ export const ContractResolvers: Resolvers = {
             // check if a contract already exists
             // the same freelancer and the same project and the same proposals and the same client are not allowed to have more than one contract and pending they may create another one after changing the status of the first one\
             // index on project id
-            const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: ContractStatus.Pending}]}, {projection: {_id: 1}})
+            const AnExistingContract = await contractCollection.findOne({$and: [{project_id: new ObjectId(args.project_id)}, {freelancer_id: new ObjectId(args.freelancer_id)}, {proposal_id: new ObjectId(args.proposal_id)}, {client_id: new ObjectId(context.user?.id)}, {status: Contract_Status.Pending}]}, {projection: {_id: 1}})
             if (AnExistingContract) throw new GraphQLError("You already have a pending contract with this freelancer on this project please complete it first",
                 {
                     extensions: {
@@ -146,12 +147,13 @@ export const ContractResolvers: Resolvers = {
                     },
                 });
 
+
             const contract: Contract = {
                 _id: new ObjectId(),
                 freelancer_id: new ObjectId(args.freelancer_id),
                 project_id: new ObjectId(args.project_id),
                 proposal_id: new ObjectId(args.proposal_id),
-                status: ContractStatus.Pending,
+                status: Contract_Status.Pending,
                 // @ts-ignore
                 client_id: new ObjectId(context.user.id),
                 duration: args.duration,
@@ -159,7 +161,7 @@ export const ContractResolvers: Resolvers = {
                 created_at: new Date(),
                 updated_at: new Date(),
                 submission_reviews: [],
-                terms: args.terms,
+                terms: args.terms || [] as string[],
                 fees: args.price * 0.05, // 5% of the price for the platform fees (both client and freelancer will pay 5% of the price)
                 // further explanation about the fees
                 // the client will pay 5% of the price to the platform (price + fees = 105% of the price)
@@ -188,7 +190,7 @@ export const ContractResolvers: Resolvers = {
             //     because the args contain the id of the project ,and we don't want to update it
 
             const updatedContract = await contractCollection.findOneAndUpdate({
-                _id: new ObjectId(args.id), client_id: new ObjectId(context.user?.id), status: ContractStatus.Pending
+                _id: new ObjectId(args.id), client_id: new ObjectId(context.user?.id), status: Contract_Status.Pending
             }, {
                 $set: updatedFields
             }, {
@@ -214,13 +216,13 @@ export const ContractResolvers: Resolvers = {
                 attachments: args.attachments || [],
                 description: args.description,
                 title: args.title,
-                status: SubmissionReviewStatus.Pending,
+                status: Submission_Review_Status.Pending,
             }
             const contract = await contractCollection.findOneAndUpdate({
                     _id: new ObjectId(args.contract_id),
                     // @ts-ignore
                     freelancer_id: new ObjectId(context.user.id),
-                    status: ContractStatus.Completed,
+                    status: Contract_Status.Completed,
                 },
                 {
                     // @ts-ignore
@@ -264,13 +266,13 @@ export const ContractResolvers: Resolvers = {
                         $and: [
                             {_id: new ObjectId(args.contract_id)},
                             {client_id: new ObjectId(context.user?.id)},
-                            {status: ContractStatus.Completed},
+                            {status: Contract_Status.Completed},
                             {
                                 submission_reviews:
                                     {
                                         $elemMatch: {
                                             "_id": new ObjectId(args.submission_review_id),
-                                            "status": SubmissionReviewStatus.Pending
+                                            "status": Submission_Review_Status.Pending
                                         }
                                     }
                             }
@@ -280,9 +282,9 @@ export const ContractResolvers: Resolvers = {
                     {
                         $set: {
                             "submission_reviews.$.status":
-                            SubmissionReviewStatus.Accepted,
+                            Submission_Review_Status.Accepted,
                             "submission_reviews.$.updated_at": new Date(),
-                            "status": ContractStatus.Paid,
+                            "status": Contract_Status.Paid,
                         }
                     },
                     {
@@ -296,12 +298,12 @@ export const ContractResolvers: Resolvers = {
 
                 const freelancer = await usersCollection.updateOne({_id: contract.value.freelancer_id}, {
                         $push: {
-                            earnings: {
+                            payments: {
                                 contract_id: new ObjectId(args.contract_id),
                                 amount: contract.value.price - contract.value.fees,
                                 created_at: new Date(),
                                 currency: "usd",
-                                description: "Payment for the contract " + args.contract_id,
+                                description: "Payment for the contract",
                                 status: EarningsStatus.Pending,
                             }
                         }
@@ -352,13 +354,13 @@ export const ContractResolvers: Resolvers = {
                     $and: [
                         {_id: new ObjectId(args.contract_id)},
                         {client_id: new ObjectId(context.user?.id)},
-                        {status: ContractStatus.Completed},
+                        {status: Contract_Status.Completed},
                         {
                             submission_reviews:
                                 {
                                     $elemMatch: {
                                         "_id": new ObjectId(args.submission_review_id),
-                                        "status": SubmissionReviewStatus.Pending
+                                        "status": Submission_Review_Status.Pending
                                     }
                                 }
                         }
@@ -368,7 +370,7 @@ export const ContractResolvers: Resolvers = {
                 {
                     $set: {
                         "submission_reviews.$.status":
-                        SubmissionReviewStatus.Declined,
+                        Submission_Review_Status.Declined,
                         "submission_reviews.$.updated_at":
                             new Date()
                     }
@@ -398,13 +400,13 @@ export const ContractResolvers: Resolvers = {
                     $and: [
                         {_id: new ObjectId(args.contract_id)},
                         {freelancer_id: new ObjectId(context.user?.id)},
-                        {status: ContractStatus.Completed},
+                        {status: Contract_Status.Completed},
                         {
                             submission_reviews:
                                 {
                                     $elemMatch: {
                                         "_id": new ObjectId(args.submission_review_id),
-                                        "status": SubmissionReviewStatus.Pending
+                                        "status": Submission_Review_Status.Pending
                                     }
                                 }
                         }
@@ -414,7 +416,7 @@ export const ContractResolvers: Resolvers = {
                 {
                     $set: {
                         "submission_reviews.$.status":
-                        SubmissionReviewStatus.Cancelled,
+                        Submission_Review_Status.Cancelled,
                         "submission_reviews.$.updated_at":
                             new Date(),
                         "submission_reviews.$.cancelled_at":
