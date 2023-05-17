@@ -1,5 +1,4 @@
 import {DocumentNode, useMutation} from "@apollo/client";
-import Box from "@mui/joy/Box";
 import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
 import Textarea from '@mui/joy/Textarea';
@@ -144,82 +143,81 @@ export default function ProjectForm(props: {
 
     return (
         /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        <Box
-            sx={{
-                py: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 2,
-                alignItems: 'center',
-                flexWrap: 'wrap',
-            }}
-        >
+        // <Box
+        //     sx={{
+        //         py: 1,
+        //         display: 'flex',
+        //         flexDirection: 'column',
+        //         gap: 2,
+        //         alignItems: 'center',
+        //         flexWrap: 'wrap',
+        //     }}
+        // >
 
-            <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{width: "100%"}}>
+            <Stack spacing={1} sx={{width: "100%"}}>
+                {props.label && <Typography level="h4">{props.label}</Typography>}
+                <Textarea placeholder="Title" defaultValue={defaultState.title} required maxRows={4}
+                          onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
-                <Stack spacing={1}>
-                    {props.label && <Typography level="h4">{props.label}</Typography>}
-                    <Textarea placeholder="Title" defaultValue={defaultState.title} required maxRows={4}
-                              onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
+                <Stack spacing={1} direction="row" justifyContent="space-between"
+                       divider={<Divider orientation="vertical"/>}>
+                    <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
 
-                    <Stack spacing={1} direction="row" justifyContent="space-between"
-                           divider={<Divider orientation="vertical"/>}>
-                        <PriceInput value={price} onChange={(e) => setPrice(() => e.target.value)}/>
+                    <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
-                        <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
-
-
-                    </Stack>
-
-
-                    <Stack spacing={1} direction="row" justifyContent="space-between"
-                           divider={<Divider orientation="vertical"/>}>
-                        <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
-                                                      placeholder="Level of expertise"
-                                                      parentRef={levelOfExpertiseAutoComplete}/>
-
-                        <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
-                                                 parentRef={projectSizeAutocompleteRef}/>
-
-                    </Stack>
-
-                    {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
-                    <CategoriesAutocomplete defaultValue={defaultState.category}
-                                            parentRef={categoriesAutocompleteRef}/>
-
-                    {/*</Stack>*/}
-                    <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
-
-                    <Textarea defaultValue={defaultState.description} placeholder="Description"
-                              maxRows={4}
-                              required
-                              onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
-
-
-                    {/*<Stack direction={"row"} alignItems={"center"}>*/}
-                    <Stack spacing={1} direction="row" justifyContent="space-between">
-                        <Button
-                            component="label"
-                            color="neutral"
-
-                        >
-                            <input onChange={(e) => setUploadedFilesList(e.target.files)} hidden accept="*"
-                                   multiple
-                                   type="file"/>
-                            Add attachments
-                            <FileUploadIcon/>
-                        </Button>
-
-                        {/*</Stack>*/}
-                        <Button disabled={loading} type=" submit"> Submit</Button>
-                    </Stack>
 
                 </Stack>
 
 
-            </form>
+                <Stack spacing={1} direction="row" justifyContent="space-between"
+                       divider={<Divider orientation="vertical"/>}>
+                    <LevelOfExpertiseAutoComplete defaultValue={defaultState.levelOfExpertise}
+                                                  placeholder="Level of expertise"
+                                                  parentRef={levelOfExpertiseAutoComplete}/>
 
-        </Box>
+                    <ProjectSizeAutoComplete defaultValue={defaultState.projectSize} placeholder="Project size"
+                                             parentRef={projectSizeAutocompleteRef}/>
+
+                </Stack>
+
+                {/*<Stack spacing={1} direction="row"   justifyContent="spcenterace-between"  divider={<Divider orientation="vertical" />}>*/}
+                <CategoriesAutocomplete defaultValue={defaultState.category}
+                                        parentRef={categoriesAutocompleteRef}/>
+
+                {/*</Stack>*/}
+                <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
+
+                <Textarea defaultValue={defaultState.description} placeholder="Description"
+                          maxRows={4}
+                          required
+                          onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
+
+
+                {/*<Stack direction={"row"} alignItems={"center"}>*/}
+                <Stack spacing={1} direction="row" justifyContent="space-between">
+                    <Button
+                        component="label"
+                        color="neutral"
+
+                    >
+                        <input onChange={(e) => setUploadedFilesList(e.target.files)} hidden accept="*"
+                               multiple
+                               type="file"/>
+                        Add attachments
+                        <FileUploadIcon/>
+                    </Button>
+
+                    {/*</Stack>*/}
+                    <Button disabled={loading} type=" submit"> Submit</Button>
+                </Stack>
+
+            </Stack>
+
+
+        </form>
+
+        // </Box>
     )
         ;
 }

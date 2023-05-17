@@ -1,9 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 
-// todo fix the types error
-// DONE
 
-type UserData = Record<string, unknown>; 
+type UserData = Record<string, string>;
 
 type MultiStepContext = {
   currentStep: number;
