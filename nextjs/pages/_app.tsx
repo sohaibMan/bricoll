@@ -1,4 +1,5 @@
 import {SessionProvider} from "next-auth/react";
+
 import "../styles/styles.css";
 import type {AppProps} from "next/app";
 import type {Session} from "next-auth";
@@ -20,6 +21,7 @@ import {StepContextProvider} from "../components/auth/registration/stepContext";
 //     },
 // });
 
+
 const client = new ApolloClient({
     uri: "http://localhost:3000/api/graphql",
     cache: new InMemoryCache(),
@@ -28,6 +30,7 @@ const client = new ApolloClient({
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
 export default function App({
+
                                 Component,
                                 pageProps: {session, ...pageProps},
                             }: AppProps<{ session: Session }>) {
@@ -50,4 +53,5 @@ export default function App({
             </ApolloProvider>
         </SessionProvider>
     );
+
 }
