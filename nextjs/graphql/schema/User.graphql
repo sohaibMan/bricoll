@@ -4,15 +4,13 @@ enum StatusEnum {
 }
 
 enum userRole {
-    Guest
     Client
     Freelancer
-    Admin
 }
 
 type User {
     _id: ObjectID!
-    name: String!
+    username: String!
     email: String!
     role: String!
     phone: String
@@ -27,7 +25,6 @@ type User {
     language: String
     profileTitle: String
     portfolio: String
-    #   stripe_account_link: String
     payments: [payments!]!
     reviews: [Review]
     proposals: [Proposal!]!
@@ -53,31 +50,7 @@ type ProfileMetaData{
     image: String!
 }
 
-#input userData {
-#  name: String!
-#  email: String!
-#  password: String!
-#  role: userRole!
-#}
-#
-#type companyDetails {
-#  _id: ID
-#  name: String!
-#  website: String!
-#  industry: String
-#  size: Int!
-#  tagline: String
-#  description: String
-#}
-#
-#type clientProfile {
-#  _id: ID
-#  image: String
-#  contact: User
-#  status: StatusEnum
-#  company: companyDetails!
-#  reviews: [Review]
-#}
+
 
 type payments {
     contract_id: ObjectID!

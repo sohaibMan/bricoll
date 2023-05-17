@@ -25,7 +25,7 @@ export const ProposalResolvers: Resolvers = {
                 //? the freelance have access only to his proposals...
                 // to create scrolling pagination
                 // index scan on id
-                authenticatedMiddleware(context);// throws a graphql error if the user is not authenticated
+                authenticatedMiddleware(context);// throws a graphql error if the users is not authenticated
                 const proposals = await proposalsCollection.findOne({$and: [{_id: new ObjectId(args.id)}, {$or: [{client_id: new ObjectId(context.user?.id)}, {freelancer_id: new ObjectId(context.user?.id)}]}]}) as unknown as Proposal | null;
                 if (!proposals) throw new GraphQLError("The proposals no longer exists",
                     {
@@ -63,7 +63,7 @@ export const ProposalResolvers: Resolvers = {
                 freelancer_id: new ObjectId(context.user?.id),
                 status: {$nin: [Proposal_Status.Canceled]}
             })
-            // const submitProposal = await projectsCollection.findOne({ freelancer_id: context.user.id, project_id: args.project_id, status: { $nin: [Proposal_Status.Canceled] } })
+            // const submitProposal = await projectsCollection.findOne({ freelancer_id: context.users.id, project_id: args.project_id, status: { $nin: [Proposal_Status.Canceled] } })
             if (submitProposal) throw new GraphQLError("You already submit a proposals for this project",
 
                 {
@@ -97,7 +97,7 @@ export const ProposalResolvers: Resolvers = {
         editProposal: async (parent, args, context, _) => {
 
             // only the freelancer can edit his proposals
-            freelancerMiddleware(context);//=> check if the user is authenticated as freelancer (->stop the execution with an error if not authenticated as freelancer)
+            freelancerMiddleware(context);//=> check if the users is authenticated as freelancer (->stop the execution with an error if not authenticated as freelancer)
             // the context is not null here
             let updatedFields = Object.assign({}, args);
             delete updatedFields.id;// it will contain all the updated fields without the id

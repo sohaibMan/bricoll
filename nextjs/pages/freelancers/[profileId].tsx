@@ -72,7 +72,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const { profileId } = router.query;
 
-  // TODO: -> Checking if the user is authenticated : but we can remove this condition
+  // TODO: -> Checking if the users is authenticated : but we can remove this condition
 
   // TODO: -> Linking the reviews with projects to get the rating
   // TODO: OPTIONAL -> Implementing the logic of followers
@@ -80,11 +80,11 @@ export default function ProfilePage() {
   // console.log("profileId : ", profileId);
 
   // if(!profileId) {
-  //   profileId = JSON.stringify(session?.user.id)
+  //   profileId = JSON.stringify(session?.users.id)
   //   router.push(`/freelancers/${profileId}`)
   // }
 
-  // console.log("session data : ", session?.user.id);
+  // console.log("session data : ", session?.users.id);
 
   const { loading, error, data } = useQuery<{ ProfileById: User }>(
     USER_PROFILE,
@@ -259,7 +259,7 @@ export default function ProfilePage() {
                   </MDBCol>
                   <MDBCol sm="9">
                     <MDBCardText className="text-muted">
-                      {data?.ProfileById.name}
+                      {data?.ProfileById.username}
                     </MDBCardText>
                   </MDBCol>
                 </MDBRow>

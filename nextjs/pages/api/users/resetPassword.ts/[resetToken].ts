@@ -14,7 +14,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // ? Get user based on the token
+    // ? Get users based on the token
     const resetToken: any = req.query["resetToken"]?.toString();
     const hashedToken = crypto
       .createHash("sha256")
@@ -27,7 +27,7 @@ export default async function handler(
     });
 
     
-    // ? If token has not expired, and there is user, set the new password
+    // ? If token has not expired, and there is users, set the new password
     if (!user) {
       return res.status(400).json({
         status: "failed",

@@ -12,7 +12,7 @@ export const HomeItem = (props: {
     console.log(props.profile.projects[0].stats)
     return (
         <>
-            <Typography>welcome {props.profile.name}</Typography>
+            <Typography>welcome {props.profile.username}</Typography>
             {/*<Divider sx={{margin: "10px"}}/>*/}
             <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
                 Project Statistics

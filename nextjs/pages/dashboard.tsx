@@ -28,7 +28,7 @@ const USER_PROFILE = gql`
     query Profile {
         Profile {
             _id
-            name
+            username
             email
             # role
             image
@@ -202,9 +202,9 @@ export default function Index() {
             </Box>
         );
 
-    if (!session.data?.user?.userRole) return <h1>not auth</h1>; // todo add a middlware instead/add userRole to the user data
+    if (!session.data?.user?.userRole) return <h1>not auth</h1>; // todo add a middlware instead/add userRole to the users data
     const userRole = session.data?.user.userRole;
-    // todo :fix this crap
+    // todo :fix this mess
     if (error || !data || !data.Profile || !data.Profile.projects || !data.Profile.proposals || !data.Profile.contracts)
         return (
             <h1>

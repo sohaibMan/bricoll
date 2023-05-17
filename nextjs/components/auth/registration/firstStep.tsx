@@ -74,22 +74,17 @@ export default function FirstStep() {
                     onChange={(e) => setUserData({...userData, city: e.target.value})}
                 />
                 {/*<Divider orientation="vertical"/>*/}
-                {/*<Input*/}
-                {/*    sx={{width: "100%"}}*/}
-                {/*    placeholder="Country"*/}
-                {/*    // margin="normal"*/}
-                {/*    // variant="outlined"*/}
-                {/*    // color="primary"*/}
-                {/*    // name="country"*/}
-                {/*    value={userData["country"]}*/}
-                {/*    onChange={(e) =>*/}
-                {/*        setUserData({...userData, country: e.target.value})*/}
-                {/*    }*/}
-                {/*/>*/}
+                <Input
+                  sx={{width: "100%"}}
+                  placeholder="Country"
+                  value={userData["country"]}
+                  onChange={(e) =>
+                      setUserData({...userData, country: e.target.value})
+                  }
+                />
 
-                {/*<CountrySelector onChange={(e) =>*/}
-                {/*    console.log(e)*/}
-                {/*}/>*/}
+                {/*<CountrySelector>*/}
+
             </Stack>
 
 

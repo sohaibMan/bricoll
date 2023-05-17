@@ -16,7 +16,7 @@ async function fetchData(email: string){
   // fetching the data from MongoDB
   const user = await db.collection("users").findOne({ email });
 
-  // ? Caching the user data 
+  // ? Caching the users data
   await redis.set('email', JSON.stringify(user))
 
   return user as User | null
@@ -27,12 +27,12 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-    // ? Get user based on posted email
+    // ? Get users based on posted email
     const user =await fetchData(req.body.email);
     if (!user) {
       return res.status(404).json({
         status: "failed",
-        message: "There is no user with this email address!",
+        message: "There is no users with this email address!",
       });
     }
 
@@ -43,7 +43,7 @@ export default async function handler(
       .update(resetToken)
       .digest("hex");
 
-    // console.log({ resetToken }, user.passwordResetToken);
+    // console.log({ resetToken }, users.passwordResetToken);
 
     user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
@@ -56,7 +56,7 @@ export default async function handler(
       }
     );
 
-    // ? Send the token to user's email
+    // ? Send the token to users's email
     const resetURL = `http://localhost:3000/api/v1/users/resetPassword/${resetToken}`;
 
     const text = `Forgot your password ? Submit a PATCH request with your new password and passwordConfirm to: <a href="${resetURL}">Click me</a>.\nIf you didn't forget your password, please ignore this email!`;

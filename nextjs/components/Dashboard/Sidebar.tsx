@@ -356,7 +356,7 @@ export default function Sidebar(props: {
                         )}
                     </ListItem>
                 </List>
-                {/*<ListItemButton>New user</ListItemButton>*/}
+                {/*<ListItemButton>New users</ListItemButton>*/}
                 {/*</ListItem>*/}
                 {/*<ListItem>*/}
                 {/*<ListItemButton>Role & Permission</ListItemButton>*/}
@@ -418,12 +418,12 @@ export default function Sidebar(props: {
 
             <Stack direction={"row"} spacing={"1"}>
                 {props.user.image && (
-                    <Avatar variant="outlined" alt={props.user.name} src={props.user.image}/>
+                    <Avatar variant="outlined" alt={props.user.username} src={props.user.image}/>
                 )}
                 <Box sx={{minWidth: 0, flex: 1}}>
                     <Stack direction="row" alignItems="center">
                         <Typography fontSize="sm" fontWeight="lg">
-                            {props.user.name}
+                            {props.user.username}
                         </Typography>
                         <IconButton variant="plain" color="neutral">
                             <LogoutIcon onClick={() => {

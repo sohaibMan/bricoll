@@ -29,7 +29,7 @@ export const ProjectResolvers: Resolvers = {
             return project as Project;
         },
         Projects: async (parent, args, context, info) => {
-            // if the user doesn't provide a query, we will return 20 random projects
+            // if the users doesn't provide a query, we will return 20 random projects
             freelancerMiddleware(context)
             const aggregation: any = []
             if (args.query) aggregation.push({
@@ -142,7 +142,7 @@ export const ProjectResolvers: Resolvers = {
         createProject: async (parent, args, context, info) => {
             // ? private
             // only the account of type client can create a project
-            clientMiddleware(context);// it throws an error if the user is not authenticated as client
+            clientMiddleware(context);// it throws an error if the users is not authenticated as client
 
 
             const project: Project = {
@@ -150,7 +150,7 @@ export const ProjectResolvers: Resolvers = {
                 description: args.description,
                 price: args.price,
                 skills: args.skills,
-                // because I've used the middleware function that will throw an error if the context.user is null which not inferred by typescript
+                // because I've used the middleware function that will throw an error if the context.users is null which not inferred by typescript
                 // @ts-ignore
                 client_id: new ObjectId(context.user.id),
                 reactions: [],
@@ -171,7 +171,7 @@ export const ProjectResolvers: Resolvers = {
             delete updatedFields.id;
             //     because the args contain the id of the project ,and we don't want to update it
             const updateProject = await projectsCollection.findOneAndUpdate(
-                // because I've used the middleware function that will throw an error if the context.user is null which not inferred by typescript
+                // because I've used the middleware function that will throw an error if the context.users is null which not inferred by typescript
 
                 {_id: new ObjectId(args.id), client_id: new ObjectId(context.user?.id)},
                 {
@@ -269,7 +269,7 @@ export const ProjectResolvers: Resolvers = {
             // private
             // only the account of type freelancer can dislike a project
             freelancerMiddleware(context);
-            // console.log(context.user?.id)
+            // console.log(context.users?.id)
             const project = await projectsCollection.updateOne(
                 {_id: new ObjectId(args.id)},
                 {
