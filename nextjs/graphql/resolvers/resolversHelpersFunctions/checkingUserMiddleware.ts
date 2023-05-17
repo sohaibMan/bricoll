@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 export const checkingUserMiddleware = (context: ServerContext) => {
   // const router = useRouter();
 
-  // this middleware is used to check if the user is authenticated as freelancer
+  // this middleware is used to check if the users is authenticated as freelancer
   if (!context.user?.isCompleted) {
     throw new GraphQLError(
       "You are unauthorized, Try to complete your profile information!",

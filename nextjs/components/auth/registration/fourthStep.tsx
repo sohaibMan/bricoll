@@ -59,7 +59,7 @@ export default function FourthStep() {
         // console.log("language ", language);
         // console.log("portf ", portfolio);
 
-        const response = await fetch(`/api/auth/createProfile`, {
+        const response = await fetch(`/api/users/createProfile`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -102,7 +102,7 @@ export default function FourthStep() {
                         setUserData({...userData, portfolio: e.target.value})
                     }
                 />
-                <FormLabel>message</FormLabel>
+
                 <DropZone uploadHandler={(url) => setUserData({...userData, image: url})}/>
 
                 <div>

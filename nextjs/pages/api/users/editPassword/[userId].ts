@@ -50,7 +50,7 @@ export default async function handler(
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        // ? Updating the user password
+        // ? Updating the users password
         const newUserData = await db.collection("users").findOneAndUpdate(
             {_id: user?._id},
             {

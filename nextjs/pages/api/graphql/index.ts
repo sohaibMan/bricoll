@@ -49,7 +49,7 @@ export default startServerAndCreateNextHandler(server,
             // the users that sign with a provider (google or facebook ) will have a session with this info
             if (!token || !token.sub) return {user: null}
 
-            // to prevent the user from accessing our website if he didn't complete his profile
+            // to prevent the users from accessing our website if he didn't complete his profile
             if (token && token.isCompleted === false) res.redirect("/complete-profile");
 
             return {

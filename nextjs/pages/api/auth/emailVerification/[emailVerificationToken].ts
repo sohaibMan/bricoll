@@ -22,7 +22,7 @@ export default async function handler(
         const jwtTokenDecoded = jwt.verify(jwtToken, process.env.NEXTAUTH_SECRET) as { user_id: string };
         const userId = jwtTokenDecoded.user_id;
 
-        // ? Getting the user data 
+        // ? Getting the users data
         const user = await db.collection("users").findOne({_id: new ObjectId(userId)});
 
         // index scan

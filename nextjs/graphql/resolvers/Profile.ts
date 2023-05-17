@@ -50,7 +50,7 @@ export const ProfileResolvers: Resolvers = {
         },
         projects: async (parent, args, context, info) => {
             // clientMiddleware(context);
-            if (context.user?.userRole === UserRole.Freelancer) return []; // the user has no projects
+            if (context.user?.userRole === UserRole.Freelancer) return []; // the users has no projects
 
             return await projects
                 .find({
@@ -140,8 +140,8 @@ export const ProfileResolvers: Resolvers = {
         addReview: async (parent, args, context, info) => {
 
 
-            // const user = users.findOne({_id: })
-            // client_id = (context.user?.userRole === "Client") ? context.user?.
+            // const users = users.findOne({_id: })
+            // client_id = (context.users?.userRole === "Client") ? context.users?.
 
             authenticatedMiddleware(context);
 

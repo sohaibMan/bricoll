@@ -410,7 +410,6 @@ export type User = {
   image?: Maybe<Scalars['String']>;
   jobTitle?: Maybe<Scalars['String']>;
   language?: Maybe<Scalars['String']>;
-  name: Scalars['String'];
   payments: Array<Payments>;
   phone?: Maybe<Scalars['String']>;
   portfolio?: Maybe<Scalars['String']>;
@@ -422,6 +421,7 @@ export type User = {
   role: Scalars['String'];
   skills?: Maybe<Scalars['String']>;
   status?: Maybe<StatusEnum>;
+  username: Scalars['String'];
 };
 
 export type FilterOptionsInput = {
@@ -470,10 +470,8 @@ export enum Size_Of_Project {
 }
 
 export enum UserRole {
-  Admin = 'Admin',
   Client = 'Client',
-  Freelancer = 'Freelancer',
-  Guest = 'Guest'
+  Freelancer = 'Freelancer'
 }
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -809,7 +807,6 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   image?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   jobTitle?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   language?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   payments?: Resolver<Array<ResolversTypes['payments']>, ParentType, ContextType>;
   phone?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   portfolio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -821,6 +818,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

@@ -25,7 +25,7 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import uploadFilesToBlob from "../../../utils/azure-storage-blob";
 //TODO ADD ATTACHMENTS TO PROJECT
 //TODO make this request idempotent
-//TODO the freelancer and Unauthorized user can't create a project
+//TODO the freelancer and Unauthorized users can't create a project
 
 export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
 // import ObjectID from "bson-objectid"

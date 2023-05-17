@@ -7,7 +7,7 @@ export default function linkAccountPage() {
 
     return (
         <Layout>
-            <form action="api/user/link_account" method="POST">
+            <form action="api/users/link_account" method="POST">
                 <section>
 
                     <Button role="link" size="md" type="submit" variant="solid">Link your account</Button>

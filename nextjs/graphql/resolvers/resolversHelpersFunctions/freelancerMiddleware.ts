@@ -3,7 +3,7 @@ import { GraphQLError } from 'graphql';
 import { ServerContext } from '../../../types/server-context';
 
 export const freelancerMiddleware = (context: ServerContext) => {
-    // this middleware is used to check if the user is authenticated as freelancer
+    // this middleware is used to check if the users is authenticated as freelancer
     if (!context.user)
         throw new GraphQLError("You are unauthorized",
             {
@@ -12,7 +12,7 @@ export const freelancerMiddleware = (context: ServerContext) => {
                     http: { status: 401 },
                 },
             });
-    // if the user is not a client
+    // if the users is not a client
     if (context.user.userRole !== UserRole.Freelancer)
         throw new GraphQLError("You are not authenticated as freelancer",
             {

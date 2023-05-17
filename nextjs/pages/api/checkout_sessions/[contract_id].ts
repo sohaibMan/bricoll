@@ -17,7 +17,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             if (!contract_id) return res.status(400).json({
                 messaage: "bad request , provide the contract id "
             });
-            // get the user id from the token
+            // get the users id from the token
             const userToken = await getToken({req});
             if (!
                 userToken || !userToken.sub

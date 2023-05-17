@@ -7,7 +7,7 @@ interface UserInterface {
   isCompleted: boolean;
 }
 export type ServerContext = {
-  // we'd define the properties a user should have
-  // in a separate user interface (e.g., email, id, url, etc.)
+  // we'd define the properties a users should have
+  // in a separate users interface (e.g., email, id, url, etc.)
   user: UserInterface | null;
 };

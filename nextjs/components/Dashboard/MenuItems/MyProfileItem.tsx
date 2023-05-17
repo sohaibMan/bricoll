@@ -30,14 +30,14 @@ export const MyProfileItem = (props: {
     user: User;
     currentComponent: DashboardItems;
 }) => {
-    const [nameState, setNameState] = useState(props.user.name);
+    const [usernameState, setNameState] = useState(props.user.username);
     const [emailState, setEmailState] = useState(props.user.email);
     const [imageLinkState, setImageLinkState] = useState(props.user.image);
     const [currentTab, setCurrentTab] = useState<currentTabEnum>(
         currentTabEnum.AccountSetting
     );
     const isSameState =
-        nameState === props.user.name &&
+        usernameState === props.user.username &&
         emailState === props.user.email &&
         imageLinkState === props.user.image;
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
@@ -47,7 +47,7 @@ export const MyProfileItem = (props: {
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (!nameState) return toast.error("The name is empty, try to insert it!");
+        if (!usernameState) return toast.error("The username is empty, try to insert it!");
         if (!emailState)
             return toast.error("The email is empty, try to insert it!");
         // // if(!emailState.includes('@')) return toast.error("Invalid Email Format!")
@@ -60,7 +60,7 @@ export const MyProfileItem = (props: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                name: nameState,
+                username: usernameState,
                 email: emailState,
                 image: imageLinkState,
                 // image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageLinkState}`,
@@ -72,7 +72,7 @@ export const MyProfileItem = (props: {
         if (res.status != "success") toast.error("oops an error has occurred");
 
         // setImageLinkState(
-        //     `https://${nextpublicazurestorageaccountname}.blob.core.windows.net/${containerName}/${imageLinkState}`
+        //     `https://${nextpublicazurestorageaccountusername}.blob.core.windows.net/${containerName}/${imageLinkState}`
         // );
         toast.success("The profile is updated successfully ");
     }
@@ -80,7 +80,7 @@ export const MyProfileItem = (props: {
     function cancelHandling() {
         // e.preventDefault()
         setEmailState(props.user.email);
-        setNameState(props.user.name);
+        setNameState(props.user.username);
         setImageLinkState(props.user.image);
     }
 
@@ -225,20 +225,20 @@ export const MyProfileItem = (props: {
                         <Box sx={{display: {xs: "contents", sm: "flex"}, gap: 2}}>
                             <FormControl sx={{flex: 1}}>
                                 <FormLabel sx={{display: {sm: "none"}}}>
-                                    First name
+                                    First username
                                 </FormLabel>
                                 <Input
                                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                                         setNameState(() => event.target.value);
                                     }}
-                                    placeholder="first name"
-                                    // value={data.Profile.name}
-                                    value={nameState}
+                                    placeholder="first username"
+                                    // value={data.Profile.username}
+                                    value={usernameState}
                                 />
                             </FormControl>
                             {/* <FormControl sx={{ flex: 1 }}>
-              <FormLabel sx={{ display: { sm: "none" } }}>Last name</FormLabel>
-              <Input placeholder="last name" value="" />
+              <FormLabel sx={{ display: { sm: "none" } }}>Last username</FormLabel>
+              <Input placeholder="last username" value="" />
             </FormControl> */}
                         </Box>
 
@@ -279,7 +279,7 @@ export const MyProfileItem = (props: {
                                     size="lg"
                                     src={imageLinkState}
                                     sx={{"--Avatar-size": "64px"}}
-                                    // value={props.user.image}
+                                    // value={props.users.image}
                                 />
                             )}
 
