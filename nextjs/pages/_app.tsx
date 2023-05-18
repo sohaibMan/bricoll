@@ -8,6 +8,8 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {Toaster} from "react-hot-toast";
 import CssBaseline from "@mui/material/CssBaseline";
 import {StepContextProvider} from "../components/auth/registration/stepContext";
+import '../styles/globals.css'
+
 
 
 // const theme = createTheme({
@@ -43,7 +45,7 @@ export default function App({
                 <StepContextProvider>
 
                     {/* <!--             <ThemeProvider theme={theme}> --> */}
-                    <CssBaseline/>
+                    {/* <CssBaseline/> */}
                     {/* <Layout> */}
                     <Toaster/>
                     <Component {...pageProps} />
