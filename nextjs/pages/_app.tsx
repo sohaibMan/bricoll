@@ -6,7 +6,21 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {Toaster} from "react-hot-toast";
 import CssBaseline from "@mui/material/CssBaseline";
 import {StepContextProvider} from "../components/auth/registration/stepContext";
-// import "../styles/globals.css" // this will break the dashboard styles
+import '../styles/globals.css'
+
+
+
+// const theme = createTheme({
+//     palette: {
+//         primary: {
+//             //   main: "#e3f2fd",
+//             main: "#ffffff",
+//         },
+//         secondary: {
+//             main: "#66bb6a",
+//         },
+//     },
+// });
 
 
 const client = new ApolloClient({
@@ -29,7 +43,7 @@ export default function App({
                 <StepContextProvider>
 
                     {/* <!--             <ThemeProvider theme={theme}> --> */}
-                    <CssBaseline/>
+                    {/* <CssBaseline/> */}
                     {/* <Layout> */}
                     <Toaster/>
                     <Component {...pageProps} />
