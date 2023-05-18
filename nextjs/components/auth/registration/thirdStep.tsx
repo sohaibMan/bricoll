@@ -15,7 +15,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData["city"]}
+//           defaultValue={userData["city"]}
 //           onChange={(e) => setUserData({ ...userData, city: e.target.value })}
 //         />
 //       </div>
@@ -26,7 +26,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData["landmark"]}
+//           defaultValue={userData["landmark"]}
 //           onChange={(e) =>
 //             setUserData({ ...userData, landmark: e.target.value })
 //           }
@@ -39,7 +39,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData["codepostal"]}
+//           defaultValue={userData["codepostal"]}
 //           onChange={(e) =>
 //             setUserData({ ...userData, codepostal: e.target.value })
 //           }
@@ -204,7 +204,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.email}
+//           defaultValue={userData.email}
 //           onChange={handleEmailChange}
 //           error={Boolean(emailError)}
 //           helperText={emailError}
@@ -217,7 +217,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.experienceLevel}
+//           defaultValue={userData.experienceLevel}
 //           onChange={(e) =>
 //             setUserData({ ...userData, experienceLevel: e.target.value })
 //           }
@@ -230,7 +230,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.district}
+//           defaultValue={userData.district}
 //           onChange={(e) =>
 //             setUserData({ ...userData, district: e.target.value })
 //           }
@@ -313,7 +313,7 @@ export default function FirstStep() {
                     variant="outlined"
                     color="primary"
                     name="jobTitle"
-                    value={userData["jobTitle"]}
+                    defaultValue={userData["jobTitle"]}
                     onChange={(e) =>
                         setUserData({...userData, jobTitle: e.target.value})
                     }
@@ -327,7 +327,7 @@ export default function FirstStep() {
                     variant="outlined"
                     color="primary"
                     name="company"
-                    value={userData["company"]}
+                    defaultValue={userData["company"]}
                     onChange={(e) =>
                         setUserData({...userData, company: e.target.value})
                     }
@@ -341,7 +341,7 @@ export default function FirstStep() {
                     variant="outlined"
                     color="primary"
                     name="educationLevel"
-                    value={userData["educationLevel"]}
+                    defaultValue={userData["educationLevel"]}
                     onChange={(e) =>
                         setUserData({...userData, educationLevel: e.target.value})
                     }

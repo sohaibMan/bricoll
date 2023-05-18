@@ -13,25 +13,36 @@ type User {
     username: String!
     email: String!
     role: String!
-    phone: String
-    address: String
-    bio: String
-    image: String
+    phone: String!
+    address: String!
+    bio: String!
+    image: String!
     status: StatusEnum
-    # skills: [String!]
-    skills: String
-    jobTitle: String
-    experienceLevel: String
-    language: String
-    profileTitle: String
-    portfolio: String
+    skills: [String!]!
+    jobTitle: String!
+    country: String!
+    city: String!
+    category: String!
+    company: String!
+    educationLevel: String!
+    experienceLevel: String!
+    language: String!
+    profileTitle: String!
+    portfolio: String!
     payments: [payments!]!
-    reviews: [Review]
+    reviews: [Review]!
     proposals: [Proposal!]!
     projects: [Project!]!
     contracts: [Contract!]!
+    projects_stats: [Project_stats_per_month!]!
     proposals_stats: [Proposals_stats]!
     contracts_stats: [Contract_stats]!
+}
+
+
+type Project_stats_per_month{
+    count:Int!
+    month:Int!
 }
 
 type Proposals_stats{

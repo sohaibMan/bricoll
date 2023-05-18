@@ -34,7 +34,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.email}
+//           defaultValue={userData.email}
 //           onChange={handleEmailChange}
 //           error={Boolean(emailError)}
 //           helperText={emailError}
@@ -47,7 +47,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.experienceLevel}
+//           defaultValue={userData.experienceLevel}
 //           onChange={(e) =>
 //             setUserData({ ...userData, experienceLevel: e.target.value })
 //           }
@@ -60,7 +60,7 @@
 //           margin="normal"
 //           variant="outlined"
 //           color="secondary"
-//           value={userData.district}
+//           defaultValue={userData.district}
 //           onChange={(e) =>
 //             setUserData({ ...userData, district: e.target.value })
 //           }
@@ -141,7 +141,7 @@ export default function SecondStep() {
           variant="outlined"
           color="primary"
           name="profileTitle"
-          value={userData["profileTitle"]}
+          defaultValue={userData["profileTitle"]}
           onChange={(e) =>
             setUserData({ ...userData, profileTitle: e.target.value })
           }
@@ -155,7 +155,7 @@ export default function SecondStep() {
           variant="outlined"
           color="primary"
           name="experienceLevel"
-          value={userData["experienceLevel"]}
+          defaultValue={userData["experienceLevel"]}
           onChange={(e) =>
             setUserData({ ...userData, experienceLevel: e.target.value })
           }
@@ -169,7 +169,7 @@ export default function SecondStep() {
           variant="outlined"
           color="primary"
           name="category"
-          value={userData["category"]}
+          defaultValue={userData["category"]}
           onChange={(e) =>
             setUserData({ ...userData, category: e.target.value })
           }

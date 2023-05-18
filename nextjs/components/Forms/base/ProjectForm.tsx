@@ -51,7 +51,7 @@ export default function ProjectForm(props: {
         levelOfExpertise: props.project?.projectScope.level_of_expertise.split("_").join(" ").toLowerCase() || ""
     }
 
-    const [mutationProject, {data, loading, error}] = useMutation(props.PROJECT_MUTATION)
+    const [mutationProject, { loading, error}] = useMutation(props.PROJECT_MUTATION)
 
 
     const [price, setPrice] = useState<string>(defaultState.price.toString());
@@ -96,7 +96,6 @@ export default function ProjectForm(props: {
 
         if (uploadedFilesList) {
             await toast.promise((async () => {
-                const files = uploadedFilesList[0]
                 mutationProjectArgs.attachments = await uploadFilesToBlob(Array.from(uploadedFilesList))
 
             })(), {
@@ -209,7 +208,7 @@ export default function ProjectForm(props: {
                     </Button>
 
                     {/*</Stack>*/}
-                    <Button disabled={loading} type=" submit"> Submit</Button>
+                    <Button disabled={loading} type="submit"> Submit</Button>
                 </Stack>
 
             </Stack>

@@ -6,6 +6,7 @@ import google from "../public/google.png";
 import fst from "../public/fst.png";
 import microsoft from "../public/microsoft.png";
 
+
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);
 

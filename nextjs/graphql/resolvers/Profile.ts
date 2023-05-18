@@ -4,6 +4,7 @@ import {
     Contract_Stats,
     Contract_Status,
     Project,
+    Project_Stats_Per_Month,
     Proposal,
     Proposals_Stats,
     Resolvers,
@@ -20,7 +21,7 @@ const projects = db.collection("projects");
 const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
-        ProfileById: async (parent, args, context, info) => {
+        ProfileById: async (parent, args, context, _) => {
             console.log("context: ", context);
             authenticatedMiddleware(context);
 
@@ -28,7 +29,7 @@ export const ProfileResolvers: Resolvers = {
                 _id: new ObjectId(args.id),
             }) as unknown as User;
         },
-        Profile: async (parent, args, context, info) => {
+        Profile: async (parent, args, context, _) => {
             // console.log(context)
             authenticatedMiddleware(context);
 
@@ -38,7 +39,7 @@ export const ProfileResolvers: Resolvers = {
         },
     },
     User: {
-        proposals: async (parent, args, context, info) => {
+        proposals: async (parent, args, context, _) => {
             return await proposals
                 .find({
                     $or: [
@@ -48,7 +49,7 @@ export const ProfileResolvers: Resolvers = {
                 })
                 .limit(20).toArray() as unknown as [Proposal];
         },
-        projects: async (parent, args, context, info) => {
+        projects: async (parent, args, context, _) => {
             // clientMiddleware(context);
             if (context.user?.userRole === UserRole.Freelancer) return []; // the users has no projects
 
@@ -59,7 +60,7 @@ export const ProfileResolvers: Resolvers = {
                 .limit(20).toArray() as unknown as [Project]; // Todo: fixing the pagination limit
 
         },
-        contracts: async (parent, args, context, info) => {
+        contracts: async (parent, args, context, _) => {
             return await contracts
                 .find({
                     $or: [
@@ -69,7 +70,7 @@ export const ProfileResolvers: Resolvers = {
                 })
                 .limit(20).toArray() as unknown as [Contract];
         },
-        proposals_stats: async (parent, args, context, info) => {
+        proposals_stats: async (parent, args, context, _) => {
             const proposalsStats = await proposals.aggregate([
                 {
                     $match: {
@@ -101,7 +102,7 @@ export const ProfileResolvers: Resolvers = {
                 proposalsStats
             } as unknown as [Proposals_Stats]
         },
-        contracts_stats: async (parent, args, context, info) => {
+        contracts_stats: async (parent, args, context, _) => {
             const contractsStats = await contracts.aggregate([
                 {
                     $match: {
@@ -133,11 +134,40 @@ export const ProfileResolvers: Resolvers = {
                 contractsStats
             } as unknown as [Contract_Stats]
         },
+        projects_stats: async (parent, args, context, _) => {
+            const aggregation = [{
+                $match: {
+                    client_id: new ObjectId(
+                        context.user?.id
+                    ),
+                },
+            },
+                {
+                    $group: {
+                        _id: {$month: "$created_at"},
+                        count: {
+                            $sum: 1
+                        }
+                    }
+                },
+                {
+                    $project: {
+                        _id: 0,
+                        count: 1,
+                        month: "$_id"
+                    }
+                }
+            ]
+
+            const test = await projects.aggregate(aggregation).toArray() as unknown as [Project_Stats_Per_Month]
+            console.log(test)
+            return test;
+        }
 
     },
 
     Mutation: {
-        addReview: async (parent, args, context, info) => {
+        addReview: async (parent, args, context, _) => {
 
 
             // const users = users.findOne({_id: })
@@ -166,7 +196,7 @@ export const ProfileResolvers: Resolvers = {
 
 
         },
-        editReview: async (parent, args, context, info) => {
+        editReview: async (parent, args, context, _) => {
             authenticatedMiddleware(context);
 
             const review: Review = {
@@ -191,7 +221,7 @@ export const ProfileResolvers: Resolvers = {
                 _id: args.id
             }
         },
-        removeReview: async (parent, args, context, info) => {
+        removeReview: async (parent, args, context, _) => {
 
             authenticatedMiddleware(context);
 

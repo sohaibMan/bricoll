@@ -13,6 +13,7 @@ import {UserRole} from "../../../types/resolvers";
 import {createApollo4QueryValidationPlugin} from "graphql-constraint-directive/apollo4";
 import depthLimit from 'graphql-depth-limit'
 import {ProfileResolvers} from "../../../graphql/resolvers/Profile";
+import {GraphQLError} from "graphql";
 
 // path to those folders
 const rootPath = path.join(__dirname, "../../../../");
@@ -42,7 +43,7 @@ const server = new ApolloServer<ServerContext>({
 
 export default startServerAndCreateNextHandler(server,
     {
-        context: async (req, res) => {
+        context: async (req) => {
             //
             const token = await getToken({req});
 
@@ -50,7 +51,14 @@ export default startServerAndCreateNextHandler(server,
             if (!token || !token.sub) return {user: null}
 
             // to prevent the users from accessing our website if he didn't complete his profile
-            if (token && token.isCompleted === false) res.redirect("/complete-profile");
+            // if (token && token.isCompleted === false) return {user: null};
+            if (token && token.isCompleted === false) throw new GraphQLError("Please complete your profile first !", {
+                extensions: {
+                    code: 'Unauthorized',
+                    http: {status: 401},
+                },
+            });
+
 
             return {
                 user: {

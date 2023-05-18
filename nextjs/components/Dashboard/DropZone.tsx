@@ -6,11 +6,10 @@ import Upload from "../Buttons/Upload";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 interface propsType extends CardProps {
-    uploadHandler: React.Dispatch<React.SetStateAction<string| null | undefined>>
+    uploadHandler: React.Dispatch<React.SetStateAction<string>>
 }
 
 export default function DropZone({sx, ...props}: propsType) {
-    // {...props}
     return (
         <Card
             variant="outlined"
