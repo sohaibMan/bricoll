@@ -1,45 +1,42 @@
-import { createContext, ReactNode, useState } from "react";
+import {createContext, ReactNode, useState} from "react";
 
 
 type UserData = Record<string, string>;
 
 type MultiStepContext = {
-  currentStep: number;
-  setStep: (step: number) => void;
-  userData: UserData;
-  setUserData: (data: UserData) => void;
-  finalData: UserData[];
-  setFinalData: (data: UserData[]) => void;
-  submitData: () => void;
+    currentStep: number;
+    setStep: (step: number) => void;
+    userData: UserData;
+    setUserData: (data: UserData) => void;
+    // finalData: UserData[];
+    resetForm: () => void;
 };
 
 export const multiStepContext = createContext<MultiStepContext>(
-  {} as MultiStepContext
+    {} as MultiStepContext
 );
 
 export const StepContextProvider = (props: { children: ReactNode }) => {
-  const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState<UserData>({});
-  const [finalData, setFinalData] = useState<UserData[]>([]);
+    const [currentStep, setStep] = useState(1);
+    const [userData, setUserData] = useState<UserData>({});
 
-  function submitData() {
-    setFinalData((finalData) => [...finalData, userData]);
-    setUserData({});
-  }
+    function resetForm() {
 
-  const contextValues: MultiStepContext = {
-    currentStep,
-    setStep,
-    userData,
-    setUserData,
-    finalData,
-    setFinalData,
-    submitData,
-  };
+        setUserData({});
+    }
 
-  return (
-    <multiStepContext.Provider value={contextValues}>
-      {props.children}
-    </multiStepContext.Provider>
-  );
+    const contextValues: MultiStepContext = {
+        currentStep,
+        setStep,
+        userData,
+        setUserData,
+
+        resetForm,
+    };
+
+    return (
+        <multiStepContext.Provider value={contextValues}>
+            {props.children}
+        </multiStepContext.Provider>
+    );
 };

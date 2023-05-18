@@ -41,22 +41,14 @@ export default function FirstStep() {
                 <Input
                     sx={{width: "100%"}}
                     placeholder="Phone"
-                    // margin="normal"
-                    // variant="outlined"
-                    // color="primary"
-                    // name="phone"
-                    value={userData["phone"]}
+                    defaultValue={userData["phone"]}
                     onChange={(e) => setUserData({...userData, phone: e.target.value})}
                 />
                 <Divider orientation="vertical"/>
                 <Input
                     sx={{width: "100%"}}
                     placeholder="Language"
-                    // margin="normal"
-                    // variant="outlined"
-                    // color="primary"
-                    // name="language"
-                    value={userData["language"]}
+                    defaultValue={userData["language"]}
                     onChange={(e) => {
                         setUserData({...userData, language: e.target.value});
                     }}
@@ -66,21 +58,17 @@ export default function FirstStep() {
                 <Input
                     sx={{width: "100%"}}
                     placeholder="City"
-                    // margin="normal"
-                    // variant="outlined"
-                    // color="primary"
-                    // name="city"
-                    value={userData["city"]}
+                    defaultValue={userData["city"]}
                     onChange={(e) => setUserData({...userData, city: e.target.value})}
                 />
                 {/*<Divider orientation="vertical"/>*/}
                 <Input
-                  sx={{width: "100%"}}
-                  placeholder="Country"
-                  value={userData["country"]}
-                  onChange={(e) =>
-                      setUserData({...userData, country: e.target.value})
-                  }
+                    sx={{width: "100%"}}
+                    placeholder="Country"
+                    defaultValue={userData["country"]}
+                    onChange={(e) =>
+                        setUserData({...userData, country: e.target.value})
+                    }
                 />
 
                 {/*<CountrySelector>*/}
@@ -91,11 +79,7 @@ export default function FirstStep() {
             <Input
                 sx={{width: "100%"}}
                 placeholder="Address"
-                // margin="normal"
-                // variant="outlined"
-                // color="primary"
-                // name="address"
-                value={userData["address"]}
+                defaultValue={userData["address"]}
                 onChange={(e) => {
                     setUserData({...userData, address: e.target.value});
                 }}
@@ -103,14 +87,10 @@ export default function FirstStep() {
 
 
             <Textarea
-                // placeholder="Bio"
-                // margin="normal"
-                // variant="outlined"
-                // color="primary"
                 sx={{width: "100%"}}
                 minRows={4}
                 placeholder="bio"
-                // value={userData["bio"]}
+                defaultValue={userData["bio"]}
                 onChange={(e) => setUserData({...userData, bio: e.target.value})}
             />
 

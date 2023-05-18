@@ -5,7 +5,7 @@ import heroImage from "../public/heroImage.jpg";
 import google from "../public/google.png";
 import fst from "../public/fst.png";
 import microsoft from "../public/microsoft.png";
-import logo from "../public/logo.png";
+import "../styles/globals.css"
 
 const Home = () => {
     const [isOpen, setIsOpen] = useState(false);

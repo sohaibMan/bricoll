@@ -66,7 +66,6 @@ export const authOptions: NextAuthOptions = {
                     const cacheResults = await redis.get(credentials.email);
                     if (cacheResults) {
                         user = JSON.parse(cacheResults);
-
                         // console.log("queried data from Redis Database ...",users)
                         // console.log("verfication",await verifyUserData(users, credentials.password))
 
@@ -108,7 +107,7 @@ export const authOptions: NextAuthOptions = {
             return token;
         },
 
-        async session({session, token, user}) {
+        async session({session, token}) {
 
             // to be in
             session.user.id = token.sub;

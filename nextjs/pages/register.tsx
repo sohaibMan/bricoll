@@ -6,7 +6,7 @@ import FourthStep from "../components/auth/registration/fourthStep";
 
 import {Step, StepLabel, Stepper} from "@mui/material";
 
-import {multiStepContext, StepContextProvider} from "../components/auth/registration/stepContext";
+import {multiStepContext} from "../components/auth/registration/stepContext";
 import Typography from "@mui/joy/Typography";
 
 
@@ -25,6 +25,7 @@ export default function Register() {
      * make the langues as the skills array
      * redirection after submit
      */
+    // todo preserve the data in the context after refresh and between the steps
 
 
     function showStep(step: any) {
@@ -45,24 +46,24 @@ export default function Register() {
 
     return (
         // <StepContextProvider>
-            <div style={{textAlign: "center"}}>
-                <Typography level="h2" color={"primary"} sx={{marginY: "1rem"}}>
-                    Registration steps
-                </Typography>
-                <div style={{display: "flex", justifyContent: "center"}}>
-                    <Stepper
-                        activeStep={currentStep - 1}
-                        alternativeLabel
-                    >
-                        {steps.map((label) => (
-                            <Step key={label}>
-                                <StepLabel>{label}</StepLabel>
-                            </Step>
-                        ))}
-                    </Stepper>
-                </div>
-                {showStep(currentStep)}
+        <div style={{textAlign: "center"}}>
+            <Typography level="h2" color={"primary"} sx={{marginY: "1rem"}}>
+                Registration steps
+            </Typography>
+            <div style={{display: "flex", justifyContent: "center"}}>
+                <Stepper
+                    activeStep={currentStep - 1}
+                    alternativeLabel
+                >
+                    {steps.map((label) => (
+                        <Step key={label}>
+                            <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                </Stepper>
             </div>
+            {showStep(currentStep)}
+        </div>
         // </StepContextProvider>
 
     );

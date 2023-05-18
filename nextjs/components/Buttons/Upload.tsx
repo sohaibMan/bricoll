@@ -2,9 +2,10 @@ import React, {ChangeEvent, Dispatch, useState} from "react";
 import uploadFilesToBlob from "../../utils/azure-storage-blob";
 import Button from "@mui/joy/Button";
 import {Stack} from "@mui/joy";
+import toast from "react-hot-toast";
 
 const Upload = (props: {
-    uploadHandler: Dispatch<React.SetStateAction<string | null | undefined>>;
+    uploadHandler: Dispatch<React.SetStateAction<string>>;
 }) => {
 
     // // current file to upload into container
@@ -20,6 +21,11 @@ const Upload = (props: {
 
     const onFileChange = (event: ChangeEvent<HTMLInputElement> | undefined) => {
         if (!event || !event.target.files) return;
+
+        if (event.target.files[0].size > 2097152) {
+            toast.error("File is too big!");
+            event.target.value = "";
+        }
         // file.name=fileName;
         setFileSelected(event.target.files[0]);
     };
@@ -60,6 +66,7 @@ const Upload = (props: {
             </label>
             <Button
                 color="primary"
+                disabled={!fileSelected}
                 onClick={onFileUpload}
                 // sx={{width: "150px", height: "40px", padding: "10px"}}
             >
