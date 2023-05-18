@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import ProfileTypeStep from '../components/auth/signup/ProfileTypeStep';
-import SignupForm from "../components/auth/signup/SignupForm"
 import Link from "next/link";
 import google from "../public/google.png";
+import SignupForm from "../components/auth/signup/legalTerms";
 
 const SignupPage = () => {
   const [profileType, setProfileType] = useState('');
@@ -21,7 +21,8 @@ const SignupPage = () => {
 
   const handleSignup = (formData: any) => {
     console.log(formData);
-    router.push('/');
+    // todo call our api with the data
+    router.push('/register');
   };
 
   return (

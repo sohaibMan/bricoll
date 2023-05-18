@@ -133,6 +133,10 @@ export const authOptions: NextAuthOptions = {
         // Set to jwt in order to CredentialsProvider works properly
         strategy: "jwt",
     },
+    pages: {
+        signIn: '/signin',
+        newUser: '/register'
+    }
 };
 
 export default NextAuth(authOptions);
