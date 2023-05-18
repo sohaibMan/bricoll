@@ -297,6 +297,12 @@ export type ProjectStats = {
   in_progress_count: Scalars['Int'];
 };
 
+export type Project_Stats_Per_Month = {
+  __typename?: 'Project_stats_per_month';
+  count: Scalars['Int'];
+  month: Scalars['Int'];
+};
+
 export type Proposal = {
   __typename?: 'Proposal';
   _id?: Maybe<Scalars['ObjectID']>;
@@ -420,6 +426,7 @@ export type User = {
   portfolio: Scalars['String'];
   profileTitle: Scalars['String'];
   projects: Array<Project>;
+  projects_stats: Array<Project_Stats_Per_Month>;
   proposals: Array<Proposal>;
   proposals_stats: Array<Maybe<Proposals_Stats>>;
   reviews: Array<Maybe<Review>>;
@@ -569,6 +576,7 @@ export type ResolversTypes = ResolversObject<{
   ProjectScopeInput: ProjectScopeInput;
   ProjectScopeOutput: ResolverTypeWrapper<ProjectScopeOutput>;
   ProjectStats: ResolverTypeWrapper<ProjectStats>;
+  Project_stats_per_month: ResolverTypeWrapper<Project_Stats_Per_Month>;
   Proposal: ResolverTypeWrapper<Proposal>;
   Proposal_status: Proposal_Status;
   Proposals_stats: ResolverTypeWrapper<Proposals_Stats>;
@@ -607,6 +615,7 @@ export type ResolversParentTypes = ResolversObject<{
   ProjectScopeInput: ProjectScopeInput;
   ProjectScopeOutput: ProjectScopeOutput;
   ProjectStats: ProjectStats;
+  Project_stats_per_month: Project_Stats_Per_Month;
   Proposal: Proposal;
   Proposals_stats: Proposals_Stats;
   Query: {};
@@ -743,6 +752,12 @@ export type ProjectStatsResolvers<ContextType = ServerContext, ParentType extend
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type Project_Stats_Per_MonthResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Project_stats_per_month'] = ResolversParentTypes['Project_stats_per_month']> = ResolversObject<{
+  count?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  month?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
 export type ProposalResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['Proposal'] = ResolversParentTypes['Proposal']> = ResolversObject<{
   _id?: Resolver<Maybe<ResolversTypes['ObjectID']>, ParentType, ContextType>;
   attachments?: Resolver<Maybe<Array<ResolversTypes['Attachment']>>, ParentType, ContextType>;
@@ -822,6 +837,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   portfolio?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   profileTitle?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
+  projects_stats?: Resolver<Array<ResolversTypes['Project_stats_per_month']>, ParentType, ContextType>;
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
   proposals_stats?: Resolver<Array<Maybe<ResolversTypes['Proposals_stats']>>, ParentType, ContextType>;
   reviews?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
@@ -864,6 +880,7 @@ export type Resolvers<ContextType = ServerContext> = ResolversObject<{
   Project?: ProjectResolvers<ContextType>;
   ProjectScopeOutput?: ProjectScopeOutputResolvers<ContextType>;
   ProjectStats?: ProjectStatsResolvers<ContextType>;
+  Project_stats_per_month?: Project_Stats_Per_MonthResolvers<ContextType>;
   Proposal?: ProposalResolvers<ContextType>;
   Proposals_stats?: Proposals_StatsResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;

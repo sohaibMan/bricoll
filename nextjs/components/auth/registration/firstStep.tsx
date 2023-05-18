@@ -1,6 +1,5 @@
 import React, {useContext} from "react";
-import {Button} from "@mui/material";
-// import { multiStepContext } from "./stepContext";
+import Button from "@mui/joy/Button";
 import {toast} from "react-hot-toast";
 import {multiStepContext} from "./stepContext";
 import {Divider, Stack} from "@mui/joy";
@@ -97,11 +96,12 @@ export default function FirstStep() {
 
             {/*</Stack>*/}
             <Button
-                variant="contained"
-                // color="success"
+                // variant="contained"
+                color="primary"
                 type="submit"
                 onClick={handleSubmit}
             >
+
 
                 Next
             </Button>

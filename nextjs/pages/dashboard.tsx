@@ -32,6 +32,10 @@ const USER_PROFILE = gql`
             email
             # role
             image
+            projects_stats {
+                month
+                count
+            }
 #            proposals_stats {
 #                count
 #                status

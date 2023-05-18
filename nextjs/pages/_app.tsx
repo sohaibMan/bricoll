@@ -1,5 +1,4 @@
 import {SessionProvider} from "next-auth/react";
-
 import "../styles/styles.css";
 import type {AppProps} from "next/app";
 import type {Session} from "next-auth";
@@ -7,19 +6,7 @@ import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {Toaster} from "react-hot-toast";
 import CssBaseline from "@mui/material/CssBaseline";
 import {StepContextProvider} from "../components/auth/registration/stepContext";
-
-
-// const theme = createTheme({
-//     palette: {
-//         primary: {
-//             //   main: "#e3f2fd",
-//             main: "#ffffff",
-//         },
-//         secondary: {
-//             main: "#66bb6a",
-//         },
-//     },
-// });
+// import "../styles/globals.css" // this will break the dashboard styles
 
 
 const client = new ApolloClient({
