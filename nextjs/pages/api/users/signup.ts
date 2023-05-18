@@ -27,6 +27,8 @@ export default async function handler(
         // const userRole = getCookie("userRole", {req, res});
         const parsedBody = JSON.parse(req.body);
 
+        console.log("req.body ", parsedBody);
+        
 
         const email = parsedBody.email;
         const username = parsedBody.username;
