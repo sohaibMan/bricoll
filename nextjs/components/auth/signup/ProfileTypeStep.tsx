@@ -75,7 +75,7 @@ const ProfileTypeStep = ({ onSelect }: ProfileTypeStepProps) => {
       </div>
       <div className="my-12">
       <button
-        className="py-1 px-20 rounded-full font-medium text-lg text-white bg-primary"
+        className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
         onClick={handleNext}
         disabled={buttonDisabled}
       >

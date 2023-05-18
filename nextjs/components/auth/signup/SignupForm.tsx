@@ -22,11 +22,12 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
 
     if (!username || !email || !password || !passwordConfirm) {
       // console.log('Please fill in all fields');
-      toast.error("Please fill in all fields");
+
+      return toast.error("Please fill in all fields");
     }
 
     if (password !== passwordConfirm) {
-      toast.error("Password and password confirmation do not match");
+      return toast.error("Password and password confirmation do not match");
     }
 
     const formData = {
@@ -70,18 +71,21 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
           alt="google"
           style={{ width: "35px", height: "35px" }}
         />
-        <button className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white">
+        <Link
+          href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=932659660327-umv57v7u0698dfaqpanb05t927p66go8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=wf62W3NNLndEjY9sIFzeywBl0-yGakHfsLL8xgPcLPE&code_challenge=ngv7RLBjO35eHngZ0pw36GqGkhC8sHZNrA5dqXOU9YY&code_challenge_method=S256&service=lso&o2v=2&flowName=GeneralOAuthFlow"
+          className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
+        >
           Continue with Google
-        </button>
+        </Link>
       </div>
-        <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
+      <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
       <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="px-4 py-2 rounded border border-gray-300"
+          className="px-4 py-2 rounded border border-gray"
         />
         <input
           type="email"
@@ -105,7 +109,7 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
             setPassword(e.target.value);
             validatePassword(e.target.value);
           }}
-          className={`px-4 py-2 rounded border border-second ${
+          className={`px-4 py-2 rounded border  border-gray ${
             passwordError ? "border-red-500" : ""
           }`}
         />
@@ -117,7 +121,7 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
           placeholder="Confirm Password"
           value={passwordConfirm}
           onChange={(e) => setPasswordConfirm(e.target.value)}
-          className="px-4 py-2 rounded border border-gray-300"
+          className="px-4 py-2 rounded border  border-gray"
         />
         <div className="flex space-x-2" style={{ width: "500px" }}>
           <input
@@ -125,9 +129,15 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
             id="termsCheckbox"
             className="rounded border border-gray-300"
           />
-          <label htmlFor="termsCheckbox" className="text-gray-500 font-normal text-sm">
-            Yes, I understand and agree to the <Link href="/legalTerms" className="text-primary">Bricol Terms of Service</Link>,
-            including the User Agreement and Privacy Policy
+          <label
+            htmlFor="termsCheckbox"
+            className="text-gray-500 font-normal text-sm"
+          >
+            Yes, I understand and agree to the{" "}
+            <Link href="/legalTerms" className="text-primary">
+              Bricol Terms of Service
+            </Link>
+            , including the User Agreement and Privacy Policy
           </label>
         </div>
         {/* <div className="my-2"> */}
@@ -138,7 +148,10 @@ const SignupForm = ({ profileType, onSubmit }: SignupFormProps) => {
           Create my account
         </button>
         <p className="font-normal my-2 mx-32 text-second">
-          Already have an account ? <Link href="/api/auth/signin" className="text-primary">Log In</Link>
+          Already have an account ?{" "}
+          <Link href="/api/auth/signin" className="text-primary">
+            Log In
+          </Link>
         </p>
         {/* </div> */}
       </form>
