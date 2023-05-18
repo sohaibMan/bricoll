@@ -21,7 +21,7 @@ const SignupPage = () => {
 
   const handleSignup = (formData: any) => {
     console.log(formData);
-    router.push('/');
+    router.push('/register');
   };
 
   return (
