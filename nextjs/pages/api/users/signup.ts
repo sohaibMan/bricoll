@@ -126,13 +126,12 @@ export default async function handler(
 
 
         // ? Sending the email to verify the account
-        const emailVerificationLink = `${process.env.NEXTAUTH_URL}/api/auth/emailVerification/${token}`;
+        const emailVerificationLink = `${process.env.NEXTAUTH_URL}/users/emailverification/${token}`;
 
         await sendEmailVerification(email, username, emailVerificationLink);
 
 
         // ? sending the success response
-        // TODO : Redirection to '/api/auth/emailVerification' then '/api/auth/createProfile' route after the registration
         return res.status(201).json({
             status: "success",
             message: "profile create successfully"
