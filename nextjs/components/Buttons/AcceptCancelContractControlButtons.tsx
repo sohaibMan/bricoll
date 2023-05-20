@@ -11,7 +11,7 @@ export function AcceptCancelContractControlButtons(props: {
     setContracts: React.Dispatch<React.SetStateAction<Contract[]>>
 }) {
 
-    const ACCEPET_CONTRACT = gql`
+    const ACCEPT_CONTRACT = gql`
         mutation AcceptContract($acceptContractId: ObjectID!) {
             acceptContract(id: $acceptContractId) {
                 _id
@@ -29,7 +29,7 @@ export function AcceptCancelContractControlButtons(props: {
             }
         }`
 
-    const [acceptContract, {error: acceptError}] = useMutation<{ acceptContract: Contract }>(ACCEPET_CONTRACT,
+    const [acceptContract, {error: acceptError}] = useMutation<{ acceptContract: Contract }>(ACCEPT_CONTRACT,
         {
             variables: {
                 acceptContractId: props.contract._id
@@ -43,7 +43,7 @@ export function AcceptCancelContractControlButtons(props: {
                 acceptContract(),
                 {
                     loading: 'Accepting...',
-                    success: <b>Contract has been Declined successfully!</b>,
+                    success: <b>Contract has been Accepted successfully!</b>,
                     error: <b>Could not save. {acceptError?.message}</b>,
                 }
             ).then(({data}) => {

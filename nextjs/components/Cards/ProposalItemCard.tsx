@@ -54,9 +54,9 @@ export default function ProposalItemCard({proposal, children}: {
                             <Chip
                                 color="neutral"
                                 variant="outlined"
-                                startDecorator={<Avatar alt={proposal.user.name} src={proposal.user.image}/>}
+                                startDecorator={<Avatar alt={proposal.user.username} src={proposal.user.image}/>}
                             >
-                                {proposal.user.name}
+                                {proposal.user.username}
                             </Chip>
                         </Stack>
                     </CustomLink>

@@ -1,12 +1,12 @@
 import {useState} from "react";
 import Link from "next/link";
-import Image from "next/image";
+import Image, {StaticImageData} from "next/image";
 import clientImage from "../../../public/client.png";
 import freelancerImage from "../../../public/freelancer.png";
 
 type CardProps = {
     label: string;
-    imageSrc: string;
+    imageSrc: StaticImageData;
     selected: boolean;
     onClick: () => void;
 };

@@ -57,7 +57,7 @@ type Contract_stats{
 
 type ProfileMetaData{
     _id: ObjectID!
-    name: String!
+    username: String!
     image: String!
 }
 

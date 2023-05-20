@@ -185,7 +185,7 @@ export type MutationEditContractArgs = {
   duration?: InputMaybe<Scalars['Int']>;
   id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
-  terms?: InputMaybe<Scalars['String']>;
+  terms: Array<Scalars['String']>;
 };
 
 
@@ -246,7 +246,7 @@ export type ProfileMetaData = {
   __typename?: 'ProfileMetaData';
   _id: Scalars['ObjectID'];
   image: Scalars['String'];
-  name: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type Project = {
@@ -699,7 +699,7 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   declineProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationDeclineProposalArgs, 'id'>>;
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
-  editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id'>>;
+  editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id' | 'terms'>>;
   editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
   editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
   editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'project_id' | 'rating'>>;
@@ -716,7 +716,7 @@ export interface ObjectIdScalarConfig extends GraphQLScalarTypeConfig<ResolversT
 export type ProfileMetaDataResolvers<ContextType = ServerContext, ParentType extends ResolversParentTypes['ProfileMetaData'] = ResolversParentTypes['ProfileMetaData']> = ResolversObject<{
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   image?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

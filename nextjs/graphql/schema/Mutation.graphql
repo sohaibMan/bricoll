@@ -1,86 +1,86 @@
 type Mutation {
-  #    Cards (client)
-  createProject(
-    title: String! @constraint(minLength: 5, maxLength: 100)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-    price: Float! @constraint(min: 1, max: 100000)
-    skills: [String!]! @constraint(maxItems: 5)
-    projectScope: ProjectScopeInput!
-    category: ProjectCategoriesEnum!
-    attachments: [AttachmentInput!]
-  ): Project
-  editProject(
-    id: ObjectID!
-    title: String @constraint(minLength: 5, maxLength: 100)
-    description: String @constraint(minLength: 5, maxLength: 1000)
-    price: Float @constraint(min: 1, max: 100000)
-    skills: [String!] @constraint(maxItems: 15)
-    projectScope: ProjectScopeInput
-    category: ProjectCategoriesEnum
-    attachments: [AttachmentInput!]
-  ): Project
-  deleteProject(id: ObjectID!): queryResult
-  reactToProject(id: ObjectID!, reaction_type: reaction_type!): queryResult # likeProject LoveProject
-  undoReactToProject(id: ObjectID!, reaction_type: reaction_type!): queryResult #unDislikeProject , unLoveProject
-  #    Proposal
-  createProposal(
-    project_id: ObjectID!
-    price: Float! @constraint(min: 1, max: 10000)
-    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    description: String! @constraint(minLength: 5, maxLength: 1000)
-    cover_letter: String! @constraint(minLength: 5, maxLength: 100000)
-    attachments: [AttachmentInput!]
-  ): Proposal!
-  editProposal(
-    id: ObjectID!
-    price: Float @constraint(min: 1, max: 10000)
-    duration: Int @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    description: String @constraint(minLength: 5, maxLength: 1000)
-    cover_letter: String @constraint(minLength: 5, maxLength: 100000)
-  ): Proposal
-  declineProposal(id: ObjectID!): Proposal
-  # by the client
-  cancelProposal(id: ObjectID!): Proposal
-  # by the freelancer
-  acceptProposal(id: ObjectID!): Proposal
-  # by the client
-  #by the freelancer and the client
-  # contract
-  # the client creates a contract (hire a freelancer)
-  createContract(
-    freelancer_id: ObjectID!
-    project_id: ObjectID!
-    proposal_id: ObjectID!
-    price: Float! @constraint(min: 1, max: 10000)
-    duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    terms: [String!]! @constraint(minLength: 5, maxLength: 100000)
-  ): Contract
+    #    Cards (client)
+    createProject(
+        title: String! @constraint(minLength: 5, maxLength: 100)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+        price: Float! @constraint(min: 1, max: 100000)
+        skills: [String!]! @constraint(maxItems: 5)
+        projectScope: ProjectScopeInput!
+        category: ProjectCategoriesEnum!
+        attachments: [AttachmentInput!]
+    ): Project
+    editProject(
+        id: ObjectID!
+        title: String @constraint(minLength: 5, maxLength: 100)
+        description: String @constraint(minLength: 5, maxLength: 1000)
+        price: Float @constraint(min: 1, max: 100000)
+        skills: [String!] @constraint(maxItems: 15)
+        projectScope: ProjectScopeInput
+        category: ProjectCategoriesEnum
+        attachments: [AttachmentInput!]
+    ): Project
+    deleteProject(id: ObjectID!): queryResult
+    reactToProject(id: ObjectID!, reaction_type: reaction_type!): queryResult # likeProject LoveProject
+    undoReactToProject(id: ObjectID!, reaction_type: reaction_type!): queryResult #unDislikeProject , unLoveProject
+    #    Proposal
+    createProposal(
+        project_id: ObjectID!
+        price: Float! @constraint(min: 1, max: 10000)
+        duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        description: String! @constraint(minLength: 5, maxLength: 1000)
+        cover_letter: String! @constraint(minLength: 5, maxLength: 100000)
+        attachments: [AttachmentInput!]
+    ): Proposal!
+    editProposal(
+        id: ObjectID!
+        price: Float @constraint(min: 1, max: 10000)
+        duration: Int @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        description: String @constraint(minLength: 5, maxLength: 1000)
+        cover_letter: String @constraint(minLength: 5, maxLength: 100000)
+    ): Proposal
+    declineProposal(id: ObjectID!): Proposal
+    # by the client
+    cancelProposal(id: ObjectID!): Proposal
+    # by the freelancer
+    acceptProposal(id: ObjectID!): Proposal
+    # by the client
+    #by the freelancer and the client
+    # contract
+    # the client creates a contract (hire a freelancer)
+    createContract(
+        freelancer_id: ObjectID!
+        project_id: ObjectID!
+        proposal_id: ObjectID!
+        price: Float! @constraint(min: 1, max: 10000)
+        duration: Int! @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        terms: [String!]! @constraint(maxItems: 5,minLength: 3, maxLength: 100000)
+    ): Contract
 
-  editContract(
-    id: ObjectID!
-    price: Float @constraint(min: 1, max: 10000)
-    duration: Int @constraint(exclusiveMin: 0, exclusiveMax: 90)
-    terms: String @constraint(minLength: 5, maxLength: 100000)
-  ): Contract ### you can only edit the in progress contracts
-  #    the id is of the submission id
-  requestProjectSubmissionReview(
-    contract_id: ObjectID!
-    title: String!
-    description: String!
-    attachments: [AttachmentInput!]
-  ): queryResult # reviews will be added inside the contract as an array of reviews
-  acceptRequestProjectSubmissionReview(
-    contract_id: ObjectID!
-    submission_review_id: ObjectID!
-  ): queryResult
-  declineRequestProjectSubmissionReview(
-    contract_id: ObjectID!
-    submission_review_id: ObjectID!
-  ): queryResult
-  cancelRequestProjectSubmissionReview(
-    contract_id: ObjectID!
-    submission_review_id: ObjectID!
-  ): queryResult
+    editContract(
+        id: ObjectID!
+        price: Float @constraint(min: 1, max: 10000)
+        duration: Int @constraint(exclusiveMin: 0, exclusiveMax: 90)
+        terms:  [String!]! @constraint(maxItems: 5,minLength: 3, maxLength: 10)
+    ): Contract ### you can only edit the in progress contracts
+    #    the id is of the submission id
+    requestProjectSubmissionReview(
+        contract_id: ObjectID!
+        title: String!
+        description: String!
+        attachments: [AttachmentInput!]
+    ): queryResult # reviews will be added inside the contract as an array of reviews
+    acceptRequestProjectSubmissionReview(
+        contract_id: ObjectID!
+        submission_review_id: ObjectID!
+    ): queryResult
+    declineRequestProjectSubmissionReview(
+        contract_id: ObjectID!
+        submission_review_id: ObjectID!
+    ): queryResult
+    cancelRequestProjectSubmissionReview(
+        contract_id: ObjectID!
+        submission_review_id: ObjectID!
+    ): queryResult
 
     #   only the freelancer can accept a contract or deny it ( the freelancer accepts by default after he creates it)
     acceptContract(id: ObjectID!): Contract

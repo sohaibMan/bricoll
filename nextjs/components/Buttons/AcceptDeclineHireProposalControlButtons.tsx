@@ -70,7 +70,7 @@ export function AcceptDeclineHireProposalControlButtons(props: {
                 acceptProposal(),
                 {
                     loading: 'Accepting...',
-                    success: <b>Proposal has been Declined successfully!</b>,
+                    success: <b>Proposal has been Accepted successfully!</b>,
                     error: <b>Could not save. {acceptError?.message}</b>,
                 }
             ).then(() => {

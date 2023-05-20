@@ -95,7 +95,7 @@ const USER_PROFILE = gql`
                 }
                 user {
                     _id
-                    name
+                    username
                     image
                 }
             }

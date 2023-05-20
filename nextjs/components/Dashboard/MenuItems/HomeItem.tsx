@@ -18,14 +18,13 @@ export const HomeItem = (props: {
 
             {props.userRole === UserRole.Client && props.profile.projects_stats &&
                 <Box sx={{width: "100%", height: "20rem"}}>
-                    {/*<ProjectStatsBarChart stats={props.profile.projects.map(project=>{}).stats}/>?*/}
                     <Stack>
                         <Box>
-                            <ProjectStatsBarChartPerMonth stats={props.profile.projects_stats}/>
-                            {/*<ProjectStatsBarChart stats={props.profile.projects_stats}/>*/}
+                            {props.userRole === UserRole.Client &&
+                                <ProjectStatsBarChartPerMonth stats={props.profile.projects_stats}/>}
                         </Box>
                         <Box>
-                            {JSON.stringify(props.profile.proposals_stats)}
+                            {/*{JSON.stringify(props.profile.projects_stats)}*/}
                         </Box>
                     </Stack>
                 </Box>}

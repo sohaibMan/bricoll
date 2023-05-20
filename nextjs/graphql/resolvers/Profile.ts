@@ -135,6 +135,7 @@ export const ProfileResolvers: Resolvers = {
             } as unknown as [Contract_Stats]
         },
         projects_stats: async (parent, args, context, _) => {
+            if (context.user?.userRole === UserRole.Freelancer) return []
             const aggregation = [{
                 $match: {
                     client_id: new ObjectId(

@@ -234,7 +234,7 @@ export const ProposalResolvers: Resolvers = {
             // if I am a client, give me the freelancer metadata and the opposite
             return await usersCollection.findOne({_id: new ObjectId(context.user?.userRole === UserRole.Client ? parent.freelancer_id : parent.client_id)}, {
                 projection: {
-                    name: 1,
+                    username: 1,
                     image: 1,
                 }
             }) as unknown as ProfileMetaData;
