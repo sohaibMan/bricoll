@@ -14,6 +14,7 @@ import {ProjectStatsBarChart} from "../../Charts/ProjectStats";
 import Box from "@mui/joy/Box";
 import IconButton from "@mui/joy/IconButton";
 import {KeyboardArrowDown} from "@mui/icons-material";
+import {Collapse} from "@mantine/core";
 
 
 function ProjectItemsDetails(props: { project: Project }) {
@@ -24,7 +25,7 @@ function ProjectItemsDetails(props: { project: Project }) {
                 variant="plain"
                 size="sm"
                 color="neutral"
-                onClick={()=>setOpen(prv=>!prv)}
+                onClick={() => setOpen(prv => !prv)}
             >
                 <KeyboardArrowDown
                     sx={{transform: open ? "initial" : "rotate(-90deg)"}}
@@ -33,7 +34,7 @@ function ProjectItemsDetails(props: { project: Project }) {
             </IconButton>
         </Box>
 
-        {open && <>
+        <Collapse in={open}>
             <Divider sx={{margin: "10px"}}/>
 
             <Typography level="h1" sx={{fontSize: "md", fontWeight: "bold", color: "#495057"}} mb={0.5}>
@@ -55,7 +56,7 @@ function ProjectItemsDetails(props: { project: Project }) {
                 <ProjectStatsBarChart stats={props.project.stats}/></Box>
 
             }
-        </>}
+        </Collapse>
     </>;
 }
 
@@ -70,7 +71,6 @@ export default function DashBoardProjects(props: {
 
 
     const filteredProjects = query ? props.projects.filter(project => project.category.split("_").join(" ").toLowerCase() === query) : props.projects;
-
 
 
     if (props.currentComponent === DashboardItems.Projects) return <Stack spacing={2}>

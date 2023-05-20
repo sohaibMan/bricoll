@@ -66,14 +66,14 @@ export function NavBar() {
                 </div>
                 <div className="hidden mx-72 md:flex px-4">
                     <Link
-                        href="/app/signin/page"
+                        href="/signin"
                         passHref
                         className="py-2 text-lg font-sans px-6 text-primary_2 hover:text-primary"
                     >
                         Login
                     </Link>
                     <Link
-                        href="/app/signup/page"
+                        href="/signup"
                         passHref
                         className="py-2 px-5 rounded-full font-medium text-lg text-white bg-primary"
                     >
