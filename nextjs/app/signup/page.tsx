@@ -1,11 +1,11 @@
+"use client"
 import {useState} from 'react';
-import {useRouter} from 'next/router';
-import ProfileTypeStep from '../components/auth/signup/ProfileTypeStep';
-import SignupForm from "../components/auth/signup";
+import ProfileTypeStep from '../../components/auth/signup/ProfileTypeStep';
+import SignupForm from "../../components/auth/signup";
 
 const SignupPage = () => {
     const [profileType, setProfileType] = useState('');
-    const router = useRouter();
+    // const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleNavbar = () => {
@@ -20,7 +20,7 @@ const SignupPage = () => {
     const handleSignup = (formData: any) => {
         console.log(formData);
         // todo call our api with the data
-        router.push('/register');
+        // router.push('/register');
     };
 
     return (

@@ -159,9 +159,8 @@ export const ProfileResolvers: Resolvers = {
                 }
             ]
 
-            const test = await projects.aggregate(aggregation).toArray() as unknown as [Project_Stats_Per_Month]
-            console.log(test)
-            return test;
+            return await projects.aggregate(aggregation).toArray() as unknown as [Project_Stats_Per_Month]
+
         }
 
     },

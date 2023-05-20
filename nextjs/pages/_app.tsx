@@ -4,10 +4,7 @@ import type {AppProps} from "next/app";
 import type {Session} from "next-auth";
 import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
 import {Toaster} from "react-hot-toast";
-import CssBaseline from "@mui/material/CssBaseline";
 import {StepContextProvider} from "../components/auth/registration/stepContext";
-import '../styles/globals.css'
-
 
 
 // const theme = createTheme({

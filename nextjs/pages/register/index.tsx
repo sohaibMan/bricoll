@@ -1,18 +1,16 @@
 import React, {useContext} from "react";
-import FirstStep from "../components/auth/registration/firstStep";
-import SecondStep from "../components/auth/registration/secondStep";
-import ThirdStep from "../components/auth/registration/thirdStep";
-import FourthStep from "../components/auth/registration/fourthStep";
-
+import FirstStep from "../../components/auth/registration/firstStep";
+import SecondStep from "../../components/auth/registration/secondStep";
+import ThirdStep from "../../components/auth/registration/thirdStep";
+import FourthStep from "../../components/auth/registration/fourthStep";
 import {Step, StepLabel, Stepper} from "@mui/material";
-
-import {multiStepContext} from "../components/auth/registration/stepContext";
+import {multiStepContext} from "../../components/auth/registration/stepContext";
 import Typography from "@mui/joy/Typography";
 
 
 const steps = ["Overview", "Skills", "Experiences", "Complete Profile"];
 
-export default function Register() {
+export default function Index() {
     const {currentStep} = useContext(multiStepContext);
 
 

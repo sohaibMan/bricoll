@@ -6,44 +6,27 @@ import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
 
-type SignupFormProps = {
-    profileType: string;
-    onSubmit: (formData: any) => void;
-};
 
-const SignupForm = ({profileType, onSubmit}: SignupFormProps) => {
-    const [username, setUsername] = useState("");
+const SignupForm = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [passwordConfirm, setPasswordConfirm] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
-    const [acceptTerms, setAcceptTerms] = useState(false);
+    // const router = useRouter()
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
-        if (!acceptTerms) {
-            return toast.error("Please accept our terms first")
-        }
 
-        if (!username || !email || !password || !passwordConfirm) {
-            // console.log('Please fill in all fields');
 
+        if (!email || !password) {
             return toast.error("Please fill in all fields");
         }
+        // tmp callback
 
-        if (password !== passwordConfirm) {
-            return toast.error("Password and password confirmation do not match");
-        }
+        signIn("credentials", {
+            email, password, callbackUrl: "/dashboard"
+        })
 
-        const formData = {
-            username,
-            email,
-            password,
-            profileType,
-        };
-
-        onSubmit(formData);
     };
 
     const validateEmail = (value: string) => {
@@ -99,13 +82,6 @@ const SignupForm = ({profileType, onSubmit}: SignupFormProps) => {
             <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
             <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
                 <input
-                    type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="px-4 py-2 rounded border border-gray"
-                />
-                <input
                     type="email"
                     placeholder="Email"
                     value={email}
@@ -134,44 +110,16 @@ const SignupForm = ({profileType, onSubmit}: SignupFormProps) => {
                 {passwordError && (
                     <p className="text-red-500 text-sm">{passwordError}</p>
                 )}
-                <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    value={passwordConfirm}
-                    onChange={(e) => setPasswordConfirm(e.target.value)}
-                    className="px-4 py-2 rounded border  border-gray"
-                />
-                <div className="flex space-x-2" style={{width: "500px"}}>
-                    <input
-                        type="checkbox"
-                        id="termsCheckbox"
-                        className="rounded border border-gray-300"
-                        onClick={() => {
-                            setAcceptTerms(prv => !prv)
-                        }}
-                    />
-                    <label
-                        htmlFor="termsCheckbox"
-                        className="text-gray-500 font-normal text-sm"
-                    >
-                        Yes, I understand and agree to the{" "}
-                        <Link href="/app/legalTerms" className="text-primary">
-                            Bricol Terms of Service
-                        </Link>
-                        , including the User Agreement and Privacy Policy
-                    </label>
-                </div>
-                {/* <div className="my-2"> */}
                 <button
                     type="submit"
                     className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
                 >
-                    Create my account
+                    Log in
                 </button>
                 <p className="font-normal my-2 mx-32 text-second">
-                    Already have an account ?{" "}
-                    <Link href="/app/signin/page" className="text-primary">
-                        Log In
+                    Don't have an account ?{" "}
+                    <Link href="/app/signup/page" className="text-primary">
+                        Sign Up
                     </Link>
                 </p>
                 {/* </div> */}
