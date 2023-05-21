@@ -25,15 +25,11 @@ export default withAuth({
                 return token?.userRole === UserRole.Client || token?.userRole === UserRole.Freelancer;
             }
 
-            if (req.nextUrl.pathname === "/freelancers") {
-                return token?.userRole === UserRole.Client;
-            }
-
             return !!token;
         },
     },
 });
 
 export const config = {
-    matcher: ["/projects", "/dashboard", "/freelancers", "/register"],
+    matcher: ["/projects", "/dashboard/", "/freelancers/:path*", "/register"],
 };
