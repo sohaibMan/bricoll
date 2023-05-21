@@ -18,12 +18,11 @@ export default function Index() {
      * todo add  a country selector
      * add a skills array (check the auto complete skills for more details)
      * make the layout unified
-     * add validation in the last step
      * make the portfolio link optional
-     * make the langues as the skills array
+     * make the languages as the skills array
      * redirection after submit
      */
-    // todo preserve the data in the context after refresh and between the steps
+    //save steps to localstorage after each step so if the user leaves the pages and back he will find the old data
 
 
     function showStep(step: any) {

@@ -28,11 +28,10 @@ export default async function handler(
         const company: string = req.body.company
         const educationLevel: string = req.body.educationLevel
         const portfolio: string = req.body.portfolio
-        // const skills: string[] = req.body.skills
+        const skills: string[] = req.body.skills
 
-        if (!bio || !country || !city || !phone || !address || !language || !image || !profileTitle || !experienceLevel || !category || !jobTitle || !company || !educationLevel || !portfolio)
-            //|| !skills)
-        {
+        if (!bio || !country || !city || !phone || !address || !language || !image || !profileTitle || !experienceLevel || !category || !jobTitle || !company || !educationLevel || !portfolio || !skills
+        ) {
             const errors = [];
             if (!bio) errors.push("bio");
             if (!country) errors.push("country");
@@ -48,7 +47,7 @@ export default async function handler(
             if (!company) errors.push("company");
             if (!educationLevel) errors.push("educationLevel");
             if (!portfolio) errors.push("portfolio");
-            // if (!skills) errors.push("skills");
+            if (!skills) errors.push("skills");
 
             return res.status(400).json({
                 status: "failed",
@@ -71,7 +70,7 @@ export default async function handler(
             company,
             educationLevel,
             portfolio,
-            // skills,
+            skills,
             reviews: [],
             payments: []
         }

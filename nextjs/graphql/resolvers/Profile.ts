@@ -22,11 +22,23 @@ const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, _) => {
-            console.log("context: ", context);
             authenticatedMiddleware(context);
-
+            // the project is necessary to  prevent data leaks
             return await users.findOne({
                 _id: new ObjectId(args.id),
+            }, {
+                projection: {
+                    username: 1,
+                    email: 1,
+                    image: 1,
+                    phone: 1,
+                    address: 1,
+                    jobTitle: 1,
+                    skills: 1,
+                    portfolio: 1,
+                    bio: 1,
+                    reviews: 1
+                }
             }) as unknown as User;
         },
         Profile: async (parent, args, context, _) => {

@@ -20,7 +20,7 @@ import {StepContextProvider} from "../components/auth/registration/stepContext";
 // });
 
 
-const client = new ApolloClient({
+export const client = new ApolloClient({
     uri: "http://localhost:3000/api/graphql",
     cache: new InMemoryCache(),
 });
