@@ -1,4 +1,4 @@
-import {ChangeEvent, Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import {signOut} from "next-auth/react"
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
@@ -6,7 +6,6 @@ import Box from "@mui/joy/Box";
 import Stack from "@mui/joy/Stack";
 import Divider from "@mui/joy/Divider";
 import IconButton from "@mui/joy/IconButton";
-import Input from "@mui/joy/Input";
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
@@ -27,7 +26,6 @@ import SplitscreenOutlinedIcon from "@mui/icons-material/SplitscreenOutlined";
 import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import SearchIcon from '@mui/icons-material/Search';
 import GavelIcon from '@mui/icons-material/Gavel';
 import LogoutIcon from '@mui/icons-material/Logout';
 import Image from "next/image";
@@ -35,11 +33,15 @@ import logo from "../../public/logo.png";
 import Link from "next/link"
 import Badge from '@mui/joy/Badge';
 
+
 export default function Sidebar(props: {
     setCurrentComponent: Dispatch<SetStateAction<DashboardItems>>;
     currentComponent: DashboardItems;
     user: User;
     userRole: UserRole // to custom the links per userRole
+    projectsCount: number
+    proposalsCount: number
+    contractsCount: number
 }) {
     const [query, setQuery] = useState("");
     const [projectsTab, setProjectsTabsOpen] = useState(false);
@@ -156,6 +158,7 @@ export default function Sidebar(props: {
                 >
                     <ListItem>
                         <ListItemButton
+                            onClick={() => props.setCurrentComponent(DashboardItems.Home)}
                             selected={props.currentComponent === DashboardItems.Home}
                             variant={
                                 props.currentComponent === DashboardItems.Home
@@ -170,7 +173,7 @@ export default function Sidebar(props: {
 
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() => props.setCurrentComponent(DashboardItems.Home)}
+
                             >
                                 Home
                             </ListItemContent>
@@ -184,15 +187,16 @@ export default function Sidebar(props: {
                                     ? "soft"
                                     : "plain"
                             }
+                            onClick={() =>
+                                props.setCurrentComponent(DashboardItems.MyProfile)
+                            }
                         >
                             <ListItemDecorator>
                                 {/* <i data-feather="chevron-up" /> */}
                                 <AccountCircleOutlinedIcon/>
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() =>
-                                    props.setCurrentComponent(DashboardItems.MyProfile)
-                                }
+
                             >
                                 My Profile
                             </ListItemContent>
@@ -202,7 +206,10 @@ export default function Sidebar(props: {
                     {props.userRole === UserRole.Client && (
                         <ListItem nested>
                             <ListItemButton
-                                onClick={() => setProjectsTabsOpen(!projectsTab)}
+                                onClick={() => {
+                                    setProjectsTabsOpen(!projectsTab)
+                                    props.setCurrentComponent(DashboardItems.Projects)
+                                }}
                                 selected={props.currentComponent === DashboardItems.Projects}
                                 variant={
                                     props.currentComponent === DashboardItems.Projects
@@ -212,14 +219,12 @@ export default function Sidebar(props: {
                             >
                                 <ListItemDecorator>
                                     {/* <i data-feather="layers" /> */}
-                                    <Badge size="sm" badgeContent={props.user.projects.length}>
+                                    <Badge size="sm" badgeContent={props.projectsCount}>
                                         <ListAltOutlinedIcon/>
                                     </Badge>
                                 </ListItemDecorator>
                                 <ListItemContent
-                                    onClick={() =>
-                                        props.setCurrentComponent(DashboardItems.Projects)
-                                    }
+
                                 >
 
                                     Projects
@@ -236,6 +241,10 @@ export default function Sidebar(props: {
                             {projectsTab && (
                                 <ListItem nested>
                                     <ListItemButton
+
+                                        onClick={() =>
+                                            props.setCurrentComponent(DashboardItems.CreateProject)
+                                        }
                                         selected={
                                             props.currentComponent === DashboardItems.CreateProject
                                         }
@@ -250,9 +259,6 @@ export default function Sidebar(props: {
                                             <AddBoxOutlinedIcon/>
                                         </ListItemDecorator>
                                         <ListItemContent
-                                            onClick={() =>
-                                                props.setCurrentComponent(DashboardItems.CreateProject)
-                                            }
                                         >
                                             Create Project
                                         </ListItemContent>
@@ -273,17 +279,18 @@ export default function Sidebar(props: {
                                     ? "soft"
                                     : "plain"
                             }
+                            onClick={() =>
+                                props.setCurrentComponent(DashboardItems.Proposals)
+                            }
                         >
                             <ListItemDecorator>
                                 {/* <i data-feather="layers" /> */}
-                                <Badge size="sm" badgeContent={props.user.proposals.length}>
+                                <Badge size="sm" badgeContent={props.proposalsCount}>
                                     <SplitscreenOutlinedIcon/>
                                 </Badge>
                             </ListItemDecorator>
                             <ListItemContent
-                                onClick={() =>
-                                    props.setCurrentComponent(DashboardItems.Proposals)
-                                }
+
                             >
                                 Proposals
                             </ListItemContent>
@@ -303,7 +310,10 @@ export default function Sidebar(props: {
 
                     <ListItem nested>
                         <ListItemButton
-                            onClick={() => setContractsTabOpen(!contractsTab)}
+                            onClick={() => {
+                                setContractsTabOpen(!contractsTab)
+                                props.setCurrentComponent(DashboardItems.Contracts)
+                            }}
                             selected={props.currentComponent === DashboardItems.Contracts}
                             variant={
                                 props.currentComponent === DashboardItems.Contracts
@@ -312,15 +322,11 @@ export default function Sidebar(props: {
                             }
                         >
                             <ListItemDecorator>
-                                <Badge size="sm"  badgeContent={props.user.contracts.length}>
+                                <Badge size="sm" badgeContent={props.contractsCount}>
                                     <GavelIcon/>
                                 </Badge>
                             </ListItemDecorator>
-                            <ListItemContent
-                                onClick={() =>
-                                    props.setCurrentComponent(DashboardItems.Contracts)
-                                }
-                            >
+                            <ListItemContent>
                                 Contracts
                             </ListItemContent>
                             {contractsTab ? (
@@ -332,6 +338,9 @@ export default function Sidebar(props: {
                         {contractsTab && (
                             <ListItem nested>
                                 <ListItemButton
+                                    onClick={() =>
+                                        props.setCurrentComponent(DashboardItems.SubmissionReviews)
+                                    }
                                     selected={
                                         props.currentComponent === DashboardItems.SubmissionReviews
                                     }
@@ -346,9 +355,7 @@ export default function Sidebar(props: {
                                         <AddBoxOutlinedIcon/>
                                     </ListItemDecorator>
                                     <ListItemContent
-                                        onClick={() =>
-                                            props.setCurrentComponent(DashboardItems.SubmissionReviews)
-                                        }
+
                                     >Submissions
                                     </ListItemContent>
                                 </ListItemButton>

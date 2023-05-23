@@ -2,14 +2,14 @@
 import {Redis} from "ioredis"
 
 const getRedisUrl = () => {
-  if(process.env.REDIS_URL) return process.env.REDIS_URL;
+    if (process.env.REDIS_URL) return process.env.REDIS_URL;
 
-  throw new Error("REDIS_URL is not defined!")
+    throw new Error("REDIS_URL is not defined!")
 }
 
 
 export const redis = new Redis(getRedisUrl())
-
+//todo singelton
 
 // const client = createClient();
 

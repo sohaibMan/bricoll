@@ -1,22 +1,32 @@
 import React from 'react'
-import { Skeleton } from '@mui/material'
-import Grid from '@mui/material'
-// import styled from "styled-components"
-import styled from 'styled-components';
+import Box from "@mui/joy/Box";
+import Link from "@mui/joy/Link";
+import CircularProgress from "@mui/joy/CircularProgress";
 
-function Loading(props: any){
-  const LoadingBox = styled(Skeleton)`
-    margin-bottom: 7px;
-  `
-
-  return (
-    <div style={{padding: '7px'}}>
-      <div style={{paddingBottom: '50px'}}>
-      <LoadingBox />
-
-      </div>
-    </div>
-  )
+export function LoadingDashboard() {
+    return <Box
+        sx={{
+            justifyContent: "center",
+            display: "flex",
+            gap: 2,
+            alignItems: "center",
+            flexWrap: "wrap",
+            marginTop: "350px",
+        }}
+    >
+        <Link
+            component="button"
+            variant="outlined"
+            startDecorator={
+                <CircularProgress
+                    variant="plain"
+                    thickness={2}
+                    sx={{"--CircularProgress-size": "16px"}}
+                />
+            }
+            sx={{p: 1}}
+        >
+            Loading...
+        </Link>
+    </Box>;
 }
-
-export default Loading

@@ -22,11 +22,13 @@ const contracts = db.collection("contracts");
 export const ProfileResolvers: Resolvers = {
     Query: {
         ProfileById: async (parent, args, context, _) => {
-            // we gonna make this public
+            // we're going to make this public
             // authenticatedMiddleware(context);
+            // let  user=await redis.get()
             // the project is necessary to  prevent data leaks
-            return await users.findOne({
+            const user = await users.findOne({
                 _id: new ObjectId(args.id),
+                isCompleted: true
             }, {
                 projection: {
                     username: 1,
@@ -41,6 +43,8 @@ export const ProfileResolvers: Resolvers = {
                     reviews: 1
                 }
             }) as unknown as User;
+
+            return user;
         },
         Profile: async (parent, args, context, _) => {
             // console.log(context)

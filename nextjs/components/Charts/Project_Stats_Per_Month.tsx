@@ -4,7 +4,7 @@ import {Line} from "react-chartjs-2";
 
 
 export const ProjectStatsBarChartPerMonth = (props: { stats: Project_Stats_Per_Month[] }) => {
-    console.log(props.stats)
+
 
     const labels = props.stats.map((key) => moment(key.month, 'MM').format("MMMM"))
 

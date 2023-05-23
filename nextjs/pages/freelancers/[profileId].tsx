@@ -26,6 +26,7 @@ import {User, UserRole} from "../../types/resolvers";
 import {client} from "../_app";
 import db from "../../lib/mongodb";
 import type {GetStaticPaths,} from 'next';
+import CustomLink from "../../components/CustomLinks/CustomLink";
 
 
 const usersCollection = db.collection("users")
@@ -36,9 +37,11 @@ const usersCollection = db.collection("users")
 
 export async function getStaticProps({params}: { params: { profileId: string } }) {
 
-    const profileId = params.profileId?.toString();
+    const profileId = params.profileId;
 
-    if (!profileId) throw new Error("to be handled not found")
+    if (!profileId) return {
+        notFound: true
+    }
 
 
     const {data} = await client.query<{ ProfileById: User }>({
@@ -50,7 +53,10 @@ export async function getStaticProps({params}: { params: { profileId: string } }
     });
     const {ProfileById: profile} = data;
 
-    if (!profile) throw new Error("to be handled not found")
+
+    if (!profile) return {
+        notFound: true
+    }
 
 
     return {
@@ -77,7 +83,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
         params: {profileId: doc._id.toString()},
     }))
     return {
-        paths, fallback: true
+        paths, fallback: "blocking"
 
     }
 
@@ -111,6 +117,7 @@ const USER_PROFILE = gql`
 `;
 
 export default function ProfilePage({profile}: { profile: User }) {
+
     // const {data: session} = useSession();
     // const router = useRouter();
     // const {profileId} = router.query;
@@ -187,7 +194,6 @@ export default function ProfilePage({profile}: { profile: User }) {
     //
     // if (error) return <h1>{error.message}</h1>;
 
-
     return (
         <section style={{backgroundColor: "#eee"}}>
             <MDBContainer className="py-5">
@@ -195,10 +201,10 @@ export default function ProfilePage({profile}: { profile: User }) {
                     <MDBCol>
                         <MDBBreadcrumb className="bg-light rounded-3 p-3 mb-4">
                             <MDBBreadcrumbItem>
-                                <a href="/">Home</a>
+                                <CustomLink href="/">Home</CustomLink>
                             </MDBBreadcrumbItem>
                             <MDBBreadcrumbItem>
-                                <a href="/freelancers">freelancers</a>
+                                <CustomLink href="/freelancers">freelancers</CustomLink>
                             </MDBBreadcrumbItem>
                             <MDBBreadcrumbItem active>User Profile</MDBBreadcrumbItem>
                         </MDBBreadcrumb>
@@ -253,7 +259,7 @@ export default function ProfilePage({profile}: { profile: User }) {
 
                         <MDBCard className="mb-4 mb-lg-0">
                             <MDBCardBody className="p-0">
-                                <MDBListGroup flush className="rounded-3">
+                                <MDBListGroup flush={"true"} className="rounded-3">
                                     {/* <br /> */}
                                     <div style={{padding: "20px"}}>
                                         <h3>Bio</h3>
@@ -270,7 +276,7 @@ export default function ProfilePage({profile}: { profile: User }) {
 
                         <MDBCard className="mb-4 mb-lg-0">
                             <MDBCardBody className="p-0">
-                                <MDBListGroup flush className="rounded-3">
+                                <MDBListGroup flush={"true"} className="rounded-3">
                                     {/* <br /> */}
                                     <div style={{padding: "20px"}}>
                                         <h3>Portfolio</h3>
@@ -284,7 +290,7 @@ export default function ProfilePage({profile}: { profile: User }) {
                                         />
                                         <MDBCardText>
                                             {profile.portfolio && (
-                                                <a href={profile.portfolio}>Github</a>
+                                                <CustomLink href={profile.portfolio}>Github</CustomLink>
                                             )}
                                         </MDBCardText>
                                     </MDBListGroupItem>
@@ -387,9 +393,8 @@ export default function ProfilePage({profile}: { profile: User }) {
                                 <MDBRow>
                                     {/* <MDBCol sm="3"> */}
                                     {profile.projects?.map((project) => {
-                                        let count = 0;
                                         return (
-                                            <>
+                                            <div key={project._id}>
                                                 <div className="card">
                                                     {/*<div className="card-header text-center">*/}
                                                     {/*    Featured*/}
@@ -430,7 +435,7 @@ export default function ProfilePage({profile}: { profile: User }) {
                                                     </div>
                                                     <hr/>
                                                 </div>
-                                            </>
+                                            </div>
                                         );
                                     })}
 
