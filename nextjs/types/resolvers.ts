@@ -429,7 +429,7 @@ export type User = {
   projects_stats: Array<Project_Stats_Per_Month>;
   proposals: Array<Proposal>;
   proposals_stats: Array<Maybe<Proposals_Stats>>;
-  reviews: Array<Maybe<Review>>;
+  reviews: Array<Review>;
   role: Scalars['String'];
   skills: Array<Scalars['String']>;
   status?: Maybe<StatusEnum>;
@@ -840,7 +840,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   projects_stats?: Resolver<Array<ResolversTypes['Project_stats_per_month']>, ParentType, ContextType>;
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
   proposals_stats?: Resolver<Array<Maybe<ResolversTypes['Proposals_stats']>>, ParentType, ContextType>;
-  reviews?: Resolver<Array<Maybe<ResolversTypes['Review']>>, ParentType, ContextType>;
+  reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
