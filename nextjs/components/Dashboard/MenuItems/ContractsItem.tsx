@@ -6,8 +6,7 @@ import ContractStatusAutocomplete from "../../AutoCompletes/ContractStatusAutoco
 import Typography from '@mui/joy/Typography';
 import {AcceptCancelContractControlButtons} from "../../Buttons/AcceptCancelContractControlButtons";
 import {CancelPayContractControlButtons} from "../../Buttons/CancelPayContractControlButtons";
-import {Dispatch, useState,SetStateAction} from "react";
-
+import {Dispatch, SetStateAction, useState} from "react";
 
 
 export const ContractsItem = (props: {
@@ -22,26 +21,23 @@ export const ContractsItem = (props: {
     const filteredContracts = query ? props.contracts.filter(contract => contract.status.split("_").join(" ").toLowerCase() === query) : props.contracts;
 
     if (!props.contracts) return <></>;
-    if (props.currentComponent === DashboardItems.Contracts) { // @ts-ignore
+    if (props.currentComponent === DashboardItems.Contracts) {
         return (
             <Stack spacing={2}>
                 <ContractStatusAutocomplete changeHandler={(event, value) => setQuery(() => value)}/>
                 {filteredContracts.length == 0 && <Typography level="h3">No contracts found</Typography>}
                 {filteredContracts.map((contract) =>
-                    <>
-
-                        <ContractItemCard
-                            key={contract._id.toString()} contract={contract}>
-                            {/*freelancer only*/}
-                            {props.userRole === UserRole.Freelancer && contract.status === Contract_Status.Pending &&
-                                <AcceptCancelContractControlButtons contract={contract}
-                                                                    setContracts={props.setContracts}/>}
-                            {/*client only*/}
-                            {props.userRole === UserRole.Client && (contract.status === Contract_Status.Pending || contract.status === Contract_Status.Accepted) &&
-                                <CancelPayContractControlButtons contract={contract}
-                                                                 setContracts={props.setContracts}/>}
-                        </ContractItemCard>
-                    </>
+                    <ContractItemCard
+                        key={contract._id.toString()} contract={contract}>
+                        {/*freelancer only*/}
+                        {props.userRole === UserRole.Freelancer && contract.status === Contract_Status.Pending &&
+                            <AcceptCancelContractControlButtons contract={contract}
+                                                                setContracts={props.setContracts}/>}
+                        {/*client only*/}
+                        {props.userRole === UserRole.Client && (contract.status === Contract_Status.Pending || contract.status === Contract_Status.Accepted) &&
+                            <CancelPayContractControlButtons contract={contract}
+                                                             setContracts={props.setContracts}/>}
+                    </ContractItemCard>
                 )}</Stack>
         )
     }
