@@ -43,11 +43,15 @@ jobs:
             password: ${
       - run: |
             docker compose up --build
-            docker tag bricoll_nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nginx:${{ github.sha }}
-            docker tag bricoll_nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nextjs:${{ github.sha }}
-            docker tag bricoll_mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_mongo:${{ github.sha }}
-            docker tag bricoll_redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_redis:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nextjs:${{ github.sha }}
+            docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+            docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+            docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+           
        
             
 
