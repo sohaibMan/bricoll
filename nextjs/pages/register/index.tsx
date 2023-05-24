@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 
 const freelancerSteps = ["Overview", "Skills", "Experiences", "Complete Profile"];
-const clientSteps = ["Personal Information", "Company Information", "Skills", "Experiences", "Additional Information"];
+const clientSteps = ["Personal Information", "Company Information", "Skills", "Complete Profile"];
 
 export default function Index() {
     const {currentStep} = useContext(multiStepContext);
