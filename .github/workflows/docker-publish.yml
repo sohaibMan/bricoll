@@ -40,13 +40,16 @@ jobs:
         with:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.REGISTRY_USERNAME }}
-            password: ${{ secrets.REGISTRY_PASSWORD }}
-             # docker compose -f compose.yaml build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            password: ${
       - run: |
-            docker run --name mongo -d mongo:latest -t mongo:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            docker compose up --build
+            docker tag bricoll_nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nginx:${{ github.sha }}
+            docker tag bricoll_nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nextjs:${{ github.sha }}
+            docker tag bricoll_mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_mongo:${{ github.sha }}
+            docker tag bricoll_redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_redis:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll_nextjs:${{ github.sha }}
+       
             
-  
 
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
