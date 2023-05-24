@@ -192,7 +192,7 @@ export type MutationEditContractArgs = {
 export type MutationEditProjectArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
   category?: InputMaybe<ProjectCategoriesEnum>;
-  description?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
   id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
   projectScope?: InputMaybe<ProjectScopeInput>;
@@ -203,7 +203,7 @@ export type MutationEditProjectArgs = {
 
 export type MutationEditProposalArgs = {
   cover_letter?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
   duration?: InputMaybe<Scalars['Int']>;
   id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
@@ -700,8 +700,8 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
   editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id' | 'terms'>>;
-  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
-  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
+  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'description' | 'id'>>;
+  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'id'>>;
   editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'project_id' | 'rating'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
   removeReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRemoveReviewArgs, 'id'>>;

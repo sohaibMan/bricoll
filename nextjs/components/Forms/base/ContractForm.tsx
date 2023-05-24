@@ -91,8 +91,6 @@ export default function ContractForm(props: {
                         <DurationInput value={duration} onChange={(e) => setDuration(() => e.target.value)}/>
 
 
-                        {/*<Textarea placeholder="description" value={description} required*/}
-                        {/*          onChange={(e) => setDescription(() => e.target.value)} minRows={2}/>*/}
                     </Stack>
                     <TermsAutocomplete terms={terms} setTerms={setTerms}/>
                     <Stack spacing={2}>
