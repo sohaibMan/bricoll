@@ -41,8 +41,9 @@ jobs:
             login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
             username: ${{ secrets.REGISTRY_USERNAME }}
             password: ${{ secrets.REGISTRY_PASSWORD }}
+             # docker compose -f compose.yaml build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
       - run: |
-            docker compose -f compose.yaml build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            docker build ./nginx/Dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
             docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
             
             
