@@ -35,8 +35,8 @@ type User {
     projects: [Project!]!
     contracts: [Contract!]!
     projects_stats: [Project_stats_per_month!]!
-    proposals_stats: [Proposals_stats]!
-    contracts_stats: [Contract_stats]!
+    proposals_stats: [Proposals_stats!]!
+    contracts_stats: [Contract_stats!]!
 }
 
 

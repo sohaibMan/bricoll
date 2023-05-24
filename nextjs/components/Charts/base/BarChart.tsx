@@ -1,12 +1,9 @@
 import {Pie} from "react-chartjs-2";
-import {ProjectStats} from "../../types/resolvers";
 import {CategoryScale} from "chart.js";
 import Chart from "chart.js/auto";
 
 Chart.register(CategoryScale);
-export const BarChart = (props: { labels: string[],values:number[] }) => {
-
-
+export const BarChart = (props: { labels: string[], values: number[] }) => {
 
 
     const data = {

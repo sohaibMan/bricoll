@@ -1,4 +1,4 @@
-import {Project_Stats_Per_Month} from "../../types/resolvers";
+import {Project_Stats_Per_Month} from "../../../types/resolvers";
 import moment from "moment";
 import {Line} from "react-chartjs-2";
 
@@ -9,7 +9,6 @@ export const ProjectStatsBarChartPerMonth = (props: { stats: Project_Stats_Per_M
     const labels = props.stats.map((key) => moment(key.month, 'MM').format("MMMM"))
 
     const values = props.stats.map((key => key.count))
-
 
 
     const data = {
@@ -42,6 +41,16 @@ export const ProjectStatsBarChartPerMonth = (props: { stats: Project_Stats_Per_M
 
 
     return (
-        <Line data={data}/>)
+        <Line data={data} options={{
+            scales: {
+                y: {
+                ticks: {
+                    precision: 0,
+                }
+                }
+            }
+        }
+        }
+        />)
 
 }

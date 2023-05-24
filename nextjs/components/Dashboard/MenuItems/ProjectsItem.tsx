@@ -9,7 +9,7 @@ import Typography from "@mui/joy/Typography";
 import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";
 import Attachments from "../../ListItems/Attachments";
 import {Divider} from "@mui/joy";
-import {ProjectStatsBarChart} from "../../Charts/ProjectStats";
+import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
 import Box from "@mui/joy/Box";
 import IconButton from "@mui/joy/IconButton";
 import {KeyboardArrowDown} from "@mui/icons-material";

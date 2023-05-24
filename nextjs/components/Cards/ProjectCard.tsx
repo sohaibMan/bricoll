@@ -6,7 +6,7 @@ import {Project} from "../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../ListItems/Attachments";
-import {ProjectStatsBarChart} from "../Charts/ProjectStats";
+import {ProjectStatsBarChart} from "../Charts/wrappers/ProjectStats";
 
 import {RichTextEditor} from "../Inputs/RichTextEditor";
 
