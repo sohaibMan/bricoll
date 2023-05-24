@@ -2,11 +2,11 @@ name: Bricoll Docker Image Publish
 
 on:
   push:
-    branches: ["main"]
+    branches: ["Main"]
     # Publish semver tags as releases.
     tags: ["v*.*.*"]
   pull_request:
-    branches: ["main"]
+    branches: ["Main"]
 
 env:
   # Use docker.io for Docker Hub if empty
