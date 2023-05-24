@@ -3,8 +3,6 @@ name: Bricoll Docker Image Publish
 on:
   push:
     branches: ["Main"]
-    # Publish semver tags as releases.
-    tags: ["v*.*.*"]
   pull_request:
     branches: ["Main"]
 permissions:
