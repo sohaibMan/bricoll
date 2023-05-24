@@ -9,6 +9,8 @@ import CustomLink from "../CustomLinks/CustomLink";
 import Attachments from "../ListItems/Attachments";
 import Avatar from "@mui/joy/Avatar";
 
+import {RichTextEditor} from "../Inputs/RichTextEditor";
+
 
 export default function ProposalItemCard({proposal, children}: {
     proposal: Proposal,
@@ -68,9 +70,10 @@ export default function ProposalItemCard({proposal, children}: {
                 </Typography>
                 {/*{proposal.cover_letter}/*/}
 
-                <Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>
-                    {proposal.cover_letter}
-                </Typography>
+                {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
+                {/*    {proposal.cover_letter}*/}
+                {/*</Typography>*/}
+                <RichTextEditor readOnly={true} value={proposal.cover_letter} theme="bubble"/>
 
                 <Stack
                     direction="row"

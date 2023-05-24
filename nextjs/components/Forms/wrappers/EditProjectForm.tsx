@@ -5,7 +5,7 @@ import * as React from "react";
 
 
 const EDIT_PROJECT_MUTATION = gql`
-    mutation EditProject($id: ObjectID!, $title: String, $description: String, $price: Float, $skills: [String!], $projectScope: ProjectScopeInput, $category: ProjectCategoriesEnum) {
+    mutation EditProject($id: ObjectID!, $title: String, $description: String!, $price: Float, $skills: [String!], $projectScope: ProjectScopeInput, $category: ProjectCategoriesEnum) {
         editProject(id: $id, title: $title, description: $description, price: $price, skills: $skills, projectScope: $projectScope, category: $category) {
             _id
         }

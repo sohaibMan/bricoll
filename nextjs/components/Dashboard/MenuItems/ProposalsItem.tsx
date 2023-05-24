@@ -2,27 +2,29 @@ import {Contract, Proposal, Proposal_Status, UserRole} from "../../../types/reso
 import {DashboardItems} from "../../../pages/dashboard";
 import Stack from "@mui/joy/Stack";
 import * as React from "react";
-import {Dispatch, useState} from "react";
+import {Dispatch, useContext, useState} from "react";
 import ProposalItemCard from "../../Cards/ProposalItemCard";
 import {EditCancelProposalControlButtons} from "../../Buttons/EditCancelProposalControlButtons";
 import {AcceptDeclineHireProposalControlButtons} from "../../Buttons/AcceptDeclineHireProposalControlButtons";
 import ProposalStatusAutocomplete from "../../AutoCompletes/ProposalStatusAutocomplete";
 import Typography from "@mui/joy/Typography";
+import {currentComponentContext} from "../DashBoardWrapper";
 
 
 export const ProposalsItem = (props: {
     proposals: Array<Proposal>,
     setProposals: Dispatch<React.SetStateAction<Proposal[]>>
     setContracts: Dispatch<React.SetStateAction<Contract[]>>
-    currentComponent: DashboardItems,
     userRole: UserRole
 }) => {
     const [query, setQuery] = useState<string | null>("")
+    const {currentComponent} = useContext(currentComponentContext)
+
 
     const filteredProposals = query ? props.proposals.filter(proposal => proposal.status.split("_").join(" ").toLowerCase() === query) : props.proposals;
 
     if (!props.proposals) return <></>;
-    if (props.currentComponent === DashboardItems.Proposals) return (
+    if (currentComponent === DashboardItems.Proposals) return (
         <Stack spacing={2}>
             <ProposalStatusAutocomplete changeHandler={(event, value) => setQuery(() => value)}/>
             {filteredProposals.length == 0 && <Typography level="h3">No Proposal found</Typography>}

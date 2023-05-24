@@ -5,7 +5,7 @@ import * as React from "react";
 
 
 const EDIT_PROPOSAL_MUTATION = gql`
-    mutation EditProposal($id: ObjectID!, $price: Float, $description: String, $coverLetter: String, $duration: Int) {
+    mutation EditProposal($id: ObjectID!, $price: Float, $description: String!, $coverLetter: String, $duration: Int) {
         editProposal(id: $id, price: $price, description: $description, cover_letter: $coverLetter, duration: $duration) {
             _id
             status

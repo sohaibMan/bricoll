@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {ReactNode} from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
@@ -8,12 +7,13 @@ import {Project} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
 
+import {RichTextEditor} from "../Inputs/RichTextEditor";
+
 
 export default function ProjectItemCard({project, children}: {
     project: Project,
     children: ReactNode
 }) {
-    // todo :try to refactore the card
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -53,9 +53,11 @@ export default function ProjectItemCard({project, children}: {
                     Level {project.projectScope.level_of_expertise.toLowerCase()} | {" "}
                     Posted {moment(project.created_at).fromNow()}
                 </Typography>
-                <Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>
-                    {project.description}
-                </Typography>
+                {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
+                {/*    {project.description}*/}
+                {/*</Typography>*/}
+
+                <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
 
                 <Stack
                     direction="row"

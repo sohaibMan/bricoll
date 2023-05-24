@@ -15,6 +15,11 @@ import {
 import {DurationInput} from "../../Inputs/DurationInput";
 import {PriceInput} from "../../Inputs/PriceInput";
 import Typography from "@mui/joy/Typography";
+import dynamic from "next/dynamic";
+
+import {RichTextEditor} from "../../Inputs/RichTextEditor";
+
+
 
 
 // TODO - ADD OTHER FIELDS AND CUSTOMIZE THE FUNCTION
@@ -46,7 +51,7 @@ export default function ProposalForm(props: {
         if (+price <= 0) return toast.error("Price can't be negative")
         if (+duration <= 0 || +duration >= 90) return toast.error("Duration should be between 1 and 90 days")
         if (+description.length >= 10000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
-        if (+coverLetter.length >= 10000 || +coverLetter.length <= 5) return toast.error("Cover Letter should be between 5 and 1000")
+        if (+coverLetter.length >= 100000 || +coverLetter.length <= 5) return toast.error("Cover Letter should be between 5 and 100000")
         const mutationCreateProposalArgs: MutationCreateProposalArgs | MutationEditProposalArgs = {
             id: props.proposal?._id, // needed in the edit proposals only
             project_id: props.project_id, // needed in the created project and the edit project
@@ -118,8 +123,13 @@ export default function ProposalForm(props: {
                     <Textarea placeholder="description" value={description} required maxRows={5}
                               onChange={(e) => setDescription(() => e.target.value)} minRows={2}/>
 
-                    <Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}
-                              onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>
+                    {/*<Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}*/}
+                    {/*          onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>*/}
+
+                    <RichTextEditor defaultValue={coverLetter}
+                                       onChange={(input) => setCoverLetter(() => input)}
+                                       theme="snow"/>
+
 
                     <Button disabled={loading} type=" submit"> Submit</Button>
 

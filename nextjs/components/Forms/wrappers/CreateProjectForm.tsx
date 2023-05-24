@@ -2,7 +2,10 @@ import ProjectForm from "../base/ProjectForm";
 import {gql} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
+import {useContext} from "react";
 import {Project} from "../../../types/resolvers";
+import {currentComponentContext} from "../../Dashboard/DashBoardWrapper";
+import {DashboardItems} from "../../../pages/dashboard";
 
 const CREATE_PROJECT_MUTATION = gql`
     mutation CreateProject($title: String!, $description: String!, $price: Float!, $skills: [String!]!, $projectScope: ProjectScopeInput!, $category: ProjectCategoriesEnum!,$attachments: [AttachmentInput!]) {
@@ -35,11 +38,13 @@ const CREATE_PROJECT_MUTATION = gql`
 export default function CreateProjectForm(props: {
     setProjects: React.Dispatch<React.SetStateAction<Project[]>>
 }) {
+    const {setCurrentComponent} = useContext(currentComponentContext)
 
     return <Box sx={{width: "90%", margin: "auto", height: "100%"}}><ProjectForm label="Add a new Project"
                                                                                  PROJECT_MUTATION={CREATE_PROJECT_MUTATION}
                                                                                  onSubmitProjectHandler={(project) => {
                                                                                      props.setProjects(prv => [...prv, project])
+                                                                                     setCurrentComponent(DashboardItems.Projects)
                                                                                  }}/>
     </Box>
 };
