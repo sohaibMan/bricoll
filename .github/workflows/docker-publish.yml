@@ -3,6 +3,7 @@ name: Bricoll Docker Image Publish
 on:
   push:
     branches: ["Main"]
+    tags: ['v*.*.*']
   pull_request:
     branches: ["Main"]
 permissions:
