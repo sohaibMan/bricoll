@@ -46,10 +46,5 @@ jobs:
         uses: docker/metadata-action@v4.4.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Build and push Docker images from docker compose
-        uses: pennsignals/publish_docker-compose@v0.1.0
-        with:
-          version: '0.2.6-rc.1' # optional
-          docker_compose: 'compose.yaml' # required
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+    
 
