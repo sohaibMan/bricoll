@@ -46,5 +46,7 @@ jobs:
         uses: docker/metadata-action@v4.4.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      - name: Build Compose Images
+        run: docker compose -f compose.yaml build
     
 
