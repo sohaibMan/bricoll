@@ -42,7 +42,7 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-          docker compose up --build
+          docker compose up --build -d
           docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
         #          docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}

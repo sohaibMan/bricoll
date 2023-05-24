@@ -27,7 +27,7 @@ services:
   #    container_name: bricoll_nextjs
   bricoll_mongo:
     image: mongo
-    restart: on-failure
+#    restart: on-failure
     volumes:
       - /data/db
     hostname: bricoll_mongo
