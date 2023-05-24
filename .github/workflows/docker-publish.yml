@@ -11,8 +11,6 @@ permissions:
     contents: read
 
 env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
   IMAGE_NAME: bricoll
 
@@ -32,22 +30,43 @@ jobs:
           cosign-release: "v1.11.0"
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
-        if: github.event_name != 'pull_request'
-        uses: docker/login-action@v2.1.0
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
         with:
-          registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      # Extract metadata (tags, labels) for Docker
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            username: ${{ secrets.REGISTRY_USERNAME }}
+            password: ${{ secrets.REGISTRY_PASSWORD }}
+      - run: |
+            docker compose -f compose.yaml build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            
+            
+          # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v4.4.0
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
-      - name: Build Compose Images
-        run: docker compose -f compose.yaml build
+
+
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: bricoll
+            location: 'west us'
+
+    
     
 
