@@ -87,7 +87,7 @@ export default function SecondStep() {
         </>
       ) : (
         <>
-        <div>
+          <div>
             <TextField
               style={{ width: "30%" }}
               label="Company Name"

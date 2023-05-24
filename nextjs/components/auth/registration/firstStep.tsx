@@ -27,7 +27,6 @@ export default function FirstStep() {
       "address",
       "country",
       "city",
-      // "ZIP/Postal Code",
       "postalCode",
       "phone",
       "language",
