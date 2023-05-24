@@ -3,7 +3,7 @@ name: Bricoll Docker Image Publish
 on:
   push:
     branches: [ "Production" ]
-    tags: [ 'v*.*.*' ]
+    tags: [ "v*.*.*" ]
   pull_request:
     branches: [ "Production" ]
 permissions:
@@ -30,19 +30,19 @@ jobs:
           cosign-release: "v1.11.0"
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: 'Login via Azure CLI'
+      - name: "Login via Azure CLI"
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: 'Build and push image'
+      - name: "Build and push image"
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-               docker compose up --build
+          docker compose up --build
           docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
         #          docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
@@ -52,11 +52,8 @@ jobs:
         #            docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
         #            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
 
-
-
-
-      - name: 'Deploy to Azure Container Instances'
-        uses: 'azure/aci-deploy@v1'
+      - name: "Deploy to Azure Container Instances"
+        uses: "azure/aci-deploy@v1"
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
           dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
@@ -65,8 +62,4 @@ jobs:
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: bricoll
-          location: 'west us'
-
-    
-    
-
+          location: "west us"
