@@ -2,13 +2,13 @@ name: Bricoll Docker Image Publish
 
 on:
   push:
-    branches: ["Main"]
-    tags: ['v*.*.*']
+    branches: [ "Production" ]
+    tags: [ 'v*.*.*' ]
   pull_request:
-    branches: ["Main"]
+    branches: [ "Production" ]
 permissions:
-    packages: write
-    contents: read
+  packages: write
+  contents: read
 
 env:
   # github.repository as <account>/<repo>
@@ -33,39 +33,39 @@ jobs:
       - name: 'Login via Azure CLI'
         uses: azure/login@v1
         with:
-            creds: ${{ secrets.AZURE_CREDENTIALS }}
-        
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: 'Build and push image'
         uses: azure/docker-login@v1
         with:
-            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            username: ${{ secrets.REGISTRY_USERNAME }}
-            password: ${
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${
       - run: |
-            docker compose up --build
-            docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-            docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-            docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
-            docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
-            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
-           
-       
-            
+               docker compose up --build
+        #          docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+        #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+        #          docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+        #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+               docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+               docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+      #          docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+      #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+
+
+
 
       - name: 'Deploy to Azure Container Instances'
         uses: 'azure/aci-deploy@v1'
         with:
-            resource-group: ${{ secrets.RESOURCE_GROUP }}
-            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
-            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-            registry-username: ${{ secrets.REGISTRY_USERNAME }}
-            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-            name: bricoll
-            location: 'west us'
+          resource-group: ${{ secrets.RESOURCE_GROUP }}
+          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: bricoll
+          location: 'west us'
 
     
     
