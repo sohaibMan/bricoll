@@ -413,7 +413,7 @@ export type User = {
   city: Scalars['String'];
   company: Scalars['String'];
   contracts: Array<Contract>;
-  contracts_stats: Array<Maybe<Contract_Stats>>;
+  contracts_stats: Array<Contract_Stats>;
   country: Scalars['String'];
   educationLevel: Scalars['String'];
   email: Scalars['String'];
@@ -428,7 +428,7 @@ export type User = {
   projects: Array<Project>;
   projects_stats: Array<Project_Stats_Per_Month>;
   proposals: Array<Proposal>;
-  proposals_stats: Array<Maybe<Proposals_Stats>>;
+  proposals_stats: Array<Proposals_Stats>;
   reviews: Array<Review>;
   role: Scalars['String'];
   skills: Array<Scalars['String']>;
@@ -824,7 +824,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   company?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
-  contracts_stats?: Resolver<Array<Maybe<ResolversTypes['Contract_stats']>>, ParentType, ContextType>;
+  contracts_stats?: Resolver<Array<ResolversTypes['Contract_stats']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   educationLevel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -839,7 +839,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
   projects_stats?: Resolver<Array<ResolversTypes['Project_stats_per_month']>, ParentType, ContextType>;
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
-  proposals_stats?: Resolver<Array<Maybe<ResolversTypes['Proposals_stats']>>, ParentType, ContextType>;
+  proposals_stats?: Resolver<Array<ResolversTypes['Proposals_stats']>, ParentType, ContextType>;
   reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
