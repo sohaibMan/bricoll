@@ -6,6 +6,7 @@ import { Divider, Stack } from "@mui/joy";
 import Textarea from "@mui/joy/Textarea";
 import Input from "@mui/joy/Input";
 import { useSession } from "next-auth/react";
+import CountrySelector from "../../AutoCompletes/CountrySelector";
 
 export default function FirstStep() {
   const { setStep, userData, setUserData } = useContext(multiStepContext);
@@ -49,8 +50,12 @@ export default function FirstStep() {
     }
   }
 
+  const handleCountryChange = (selectedCountry: string) => {
+    setUserData({ ...userData, country: selectedCountry });
+  };
+
   return (
-    <Stack spacing={2} sx={{ width: "50%", margin: "auto"}}>
+    <Stack spacing={2} sx={{ width: "50%", margin: "auto" }}>
       {/*<Stack direction={"row"} spacing={2} sx={{paddingX: "10%"}}>*/}
 
       {session?.user.userRole === "Freelancer" ? (
@@ -75,14 +80,14 @@ export default function FirstStep() {
             />
           </Stack>
           <Stack spacing={1} direction={"row"}>
-            <Input
+            {/* <Input
               sx={{ width: "100%" }}
               placeholder="Country"
               defaultValue={userData["country"]}
               onChange={(e) =>
                 setUserData({ ...userData, country: e.target.value })
               }
-            />
+            /> */}
 
             <Input
               sx={{ width: "100%" }}
@@ -92,9 +97,9 @@ export default function FirstStep() {
                 setUserData({ ...userData, city: e.target.value })
               }
             />
-            {/*<Divider orientation="vertical"/>*/}
+            <Divider orientation="vertical" />
 
-            {/*<CountrySelector>*/}
+            <CountrySelector onCountryChange={handleCountryChange} />
           </Stack>
 
           <Input
@@ -136,14 +141,17 @@ export default function FirstStep() {
             />
           </Stack>
           <Stack spacing={1} direction={"row"}>
-            <Input
+            {/* <Input
               sx={{ width: "100%" }}
               placeholder="Country"
               defaultValue={userData["country"]}
               onChange={(e) =>
                 setUserData({ ...userData, country: e.target.value })
               }
-            />
+            /> */}
+            <Divider orientation="vertical" />
+
+            <CountrySelector onCountryChange={handleCountryChange} />
             <Input
               sx={{ width: "100%" }}
               placeholder="City"
@@ -152,8 +160,6 @@ export default function FirstStep() {
                 setUserData({ ...userData, city: e.target.value })
               }
             />
-            {/*<Divider orientation="vertical"/>*/}
-            {/*<CountrySelector>*/}
           </Stack>
 
           <Input

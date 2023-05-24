@@ -13,11 +13,9 @@ export default async function handler(
   try {
     // ? Checking if the
 
-
-    const token = await getToken({req})
+    const token = await getToken({ req });
 
     console.log("token ", token);
-    
 
     const bio: string = req.body.bio;
     const country: string = req.body.country;
@@ -46,88 +44,86 @@ export default async function handler(
     const specificSkills: string = req.body.specificSkills;
     const skillsLevel: string = req.body.skillsLevel;
 
-    
+    if (token?.userRole === "Freelancer") {
+      if (
+        !bio ||
+        !country ||
+        !city ||
+        !phone ||
+        !address ||
+        !language ||
+        !image ||
+        !jobTitle ||
+        !educationLevel ||
+        !skills
+      ) {
+        const errors = [];
+        if (!bio) errors.push("bio");
+        if (!country) errors.push("country");
+        if (!city) errors.push("city");
+        if (!phone) errors.push("phone");
+        if (!address) errors.push("address");
+        if (!language) errors.push("language");
+        if (!image) errors.push("image");
+        if (!profileTitle) errors.push("profileTitle");
+        if (!experienceLevel) errors.push("experienceLevel");
+        if (!category) errors.push("category");
+        if (!jobTitle) errors.push("jobTitle");
+        if (!company) errors.push("company");
+        if (!educationLevel) errors.push("educationLevel");
+        if (!portfolio) errors.push("portfolio");
 
-    if(token?.userRole === "Freelancer"){
-        if (
-            !bio ||
-            !country ||
-            !city ||
-            !phone ||
-            !address ||
-            !language ||
-            !image ||
-            !jobTitle ||
-            !educationLevel ||
-            !skills
-          ) {
-            const errors = [];
-            if (!bio) errors.push("bio");
-            if (!country) errors.push("country");
-            if (!city) errors.push("city");
-            if (!phone) errors.push("phone");
-            if (!address) errors.push("address");
-            if (!language) errors.push("language");
-            if (!image) errors.push("image");
-            if (!profileTitle) errors.push("profileTitle");
-            if (!experienceLevel) errors.push("experienceLevel");
-            if (!category) errors.push("category");
-            if (!jobTitle) errors.push("jobTitle");
-            if (!company) errors.push("company");
-            if (!educationLevel) errors.push("educationLevel");
-            if (!portfolio) errors.push("portfolio");
-      
-            return res.status(400).json({
-              status: "failed",
-              message: "Please fill all the fields! " + errors.join(", "),
-            });
-          }
+        return res.status(400).json({
+          status: "failed",
+          message: "Please fill all the fields! " + errors.join(", "),
+        });
+      }
     }
 
-    if(token?.userRole === "Client"){
-        if (
-            !bio ||
-            !country ||
-            !city ||
-            !phone ||
-            !address ||
-            !language ||
-            !image ||
-            !postalCode ||
-            !timeZone ||
-            !companyName ||
-            !website ||
-            !industry ||
-            !yearFounded ||
-            !ownershipType ||
-            !skillsCategories ||
-            !specificSkills ||
-            !skillsLevel
-          ) {
-            const errors = [];
-            if (!bio) errors.push("bio");
-            if (!country) errors.push("country");
-            if (!city) errors.push("city");
-            if (!phone) errors.push("phone");
-            if (!address) errors.push("address");
-            if (!language) errors.push("language");
-            if (!image) errors.push("image");
-            if (!postalCode) errors.push("postalCode");
-            if (!timeZone) errors.push("timeZone");
-            if (!companyName) errors.push("companyName");
-            if (!website) errors.push("website");
-            if (!industry) errors.push("industry");
-            if (!yearFounded) errors.push("yearFounded");
-            if (!ownershipType) errors.push("ownershipType");
-            if (!skillsCategories) errors.push("skillsCategories");
-            if (!specificSkills) errors.push("specificSkills");
-            if (!skillsLevel) errors.push("skillsLevel");
-      
-            return res.status(400).json({
-              status: "failed",
-              message: "Please fill all the fields! " + errors.join(", "),
-            });
-          }
+    if (token?.userRole === "Client") {
+      if (
+        !bio ||
+        !country ||
+        !city ||
+        !phone ||
+        !address ||
+        !language ||
+        !image ||
+        !postalCode ||
+        !timeZone ||
+        !companyName ||
+        !website ||
+        !industry ||
+        !yearFounded ||
+        !ownershipType ||
+        !skillsCategories ||
+        !specificSkills ||
+        !skillsLevel
+      ) {
+        const errors = [];
+        if (!bio) errors.push("bio");
+        if (!country) errors.push("country");
+        if (!city) errors.push("city");
+        if (!phone) errors.push("phone");
+        if (!address) errors.push("address");
+        if (!language) errors.push("language");
+        if (!image) errors.push("image");
+        if (!postalCode) errors.push("postalCode");
+        if (!timeZone) errors.push("timeZone");
+        if (!companyName) errors.push("companyName");
+        if (!website) errors.push("website");
+        if (!industry) errors.push("industry");
+        if (!yearFounded) errors.push("yearFounded");
+        if (!ownershipType) errors.push("ownershipType");
+        if (!skillsCategories) errors.push("skillsCategories");
+        if (!specificSkills) errors.push("specificSkills");
+        if (!skillsLevel) errors.push("skillsLevel");
+
+        return res.status(400).json({
+          status: "failed",
+          message: "Please fill all the fields! " + errors.join(", "),
+        });
+      }
     }
 
     const newUser = {
