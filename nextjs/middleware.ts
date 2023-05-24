@@ -33,3 +33,5 @@ export default withAuth({
 export const config = {
     matcher: ["/projects", "/dashboard/", "/register"],
 };
+
+export const runtime = 'nodejs';
