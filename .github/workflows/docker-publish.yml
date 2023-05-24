@@ -2,10 +2,10 @@ name: Bricoll Docker Image Publish
 
 on:
   push:
-    branches: [ "Production" ]
+    branches: [ "Main" ]
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ "Production" ]
+    branches: [ "Main" ]
 permissions:
   packages: write
   contents: read
@@ -40,18 +40,18 @@ jobs:
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${
+          password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
-               docker compose up --build
-        #          docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-        #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-        #          docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-        #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-               docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
-               docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
-      #          docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
-      #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
-
+          docker compose up --build
+          docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+        #            docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+        #            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+        #            docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+        #            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+        #            docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+        #            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+           
 
 
 
