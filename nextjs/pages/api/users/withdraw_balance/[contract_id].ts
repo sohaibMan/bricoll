@@ -79,7 +79,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
     await session.commitTransaction();
     await session.endSession();
-    OnPaymentReceive(freelancer_id, contract_id, amount);
+    await OnPaymentReceive(freelancer_id, contract_id, amount);
     res.status(200).json({message: "success"})
 
 }

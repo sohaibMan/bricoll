@@ -32,7 +32,7 @@ const Home = () => {
                             Elevate Your Business with Professional Freelancers
                         </h2>
                         <Link
-                            href="/app/signup/page"
+                            href="/signup"
                             passHref
                             className="py-2 px-5 rounded-full self-center md:self-start font-medium text-xl  text-white bg-primary hover:text-second"
                         >
