@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="set username and password to mongodb">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="remove portainer from pipeline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,14 +190,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="33484000" />
-    </task>
-    <task id="LOCAL-00037" summary="stop restarting the containers">
-      <created>1685011622166</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1685011622166</updated>
+      <workItem from="1685007611798" duration="34201000" />
     </task>
     <task id="LOCAL-00038" summary="run jobs in parallel">
       <created>1685012516688</created>
@@ -534,7 +528,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685048413983</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="remove portainer from pipeline">
+      <created>1685048656374</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1685048656374</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,7 +565,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="run the app in detached mode" />
     <MESSAGE value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="start without a build" />
@@ -589,7 +589,8 @@
     <MESSAGE value="export prot 3000" />
     <MESSAGE value="edit config" />
     <MESSAGE value="set username and password to mongodb" />
-    <option name="LAST_COMMIT_MESSAGE" value="set username and password to mongodb" />
+    <MESSAGE value="remove portainer from pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove portainer from pipeline" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
