@@ -20,15 +20,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
-
-      # Install the cosign tool except on PR
-      # https://github.com/sigstore/cosign-installer
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v3.0.5
-        with:
-          cosign-release: "v1.11.0"
-      # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: "Login via Azure CLI"
         uses: azure/login@v1
@@ -53,10 +44,12 @@ jobs:
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
           docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-      
-      
-      
 
+  deploy_mongodb_db:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
       - name: "Deploy Mongo to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
@@ -68,7 +61,11 @@ jobs:
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: bricoll
           location: "East US"
-
+  deploy_redis_db:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
       - name: "Deploy Redis to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
@@ -80,25 +77,35 @@ jobs:
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: bricoll
           location: "East US"
-
-      - name: "Deploy Nginx to Azure Container Instances"
-        uses: "azure/aci-deploy@v1"
-        with:
-          resource-group: ${{ secrets.RESOURCE_GROUP }}
-          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
-          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          registry-username: ${{ secrets.REGISTRY_USERNAME }}
-          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-          name: bricoll
-          location: "East US"
-
+  deploy_app:
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
       - name: "Deploy NextJs to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
           resource-group: ${{ secrets.RESOURCE_GROUP }}
           dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
           image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+          registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          name: bricoll
+          location: "East US"
+
+  deploy_nginx_loadbalncer:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+      - deploy_app
+    steps:
+      - name: "Deploy Nginx to Azure Container Instances"
+        uses: "azure/aci-deploy@v1"
+        with:
+          resource-group: ${{ secrets.RESOURCE_GROUP }}
+          dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+          image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
           registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
