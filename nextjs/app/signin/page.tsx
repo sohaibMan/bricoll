@@ -11,11 +11,6 @@ const SigninPage = () => {
     };
 
 
-    // const handleSignin = (formData: any) => {
-    //     // todo call our api with the data
-    //     router.push('/register');
-    // };
-
     return (
         <>
             <nav className="container mx-auto p-6">
