@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -188,21 +186,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="18948000" />
-    </task>
-    <task id="LOCAL-00013" summary="add the project editor for dashboard">
-      <created>1683664029689</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1683664029689</updated>
-    </task>
-    <task id="LOCAL-00014" summary="add the project editor for dashboard">
-      <created>1683664691970</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1683664691970</updated>
+      <workItem from="1685007611798" duration="19313000" />
     </task>
     <task id="LOCAL-00015" summary="adjust the dashboard menu with 3 options and make the sidebar interactive">
       <created>1683674105443</created>
@@ -533,7 +517,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685028307040</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="re run">
+      <created>1685030182798</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030182798</updated>
+    </task>
+    <task id="LOCAL-00063" summary="re run">
+      <created>1685030401565</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030401565</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
