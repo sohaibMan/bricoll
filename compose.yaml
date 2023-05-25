@@ -11,7 +11,7 @@ services:
       - "80:80"
     depends_on:
       - bricoll_nextjs
-    restart: on-failure
+#    restart: on-failure
     hostname: bricoll_nginx
     container_name: bricoll_nginx
   bricoll_nextjs:
@@ -19,7 +19,7 @@ services:
     build: ./nextjs
     volumes:
       - ./nextjs:/app
-    restart: on-failure
+    #    restart: on-failure
     depends_on:
       - bricoll_mongo
     hostname: bricoll_nextjs
@@ -32,7 +32,7 @@ services:
     container_name: bricoll_mongo
   bricoll_redis:
     image: redis
-    restart: on-failure
+    #    restart: on-failure
     hostname: bricoll_redis
     container_name: bricoll_redis
     volumes:
