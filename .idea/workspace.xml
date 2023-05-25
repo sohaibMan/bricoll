@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="fix some errors">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="rebuild">
       <change beforePath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +188,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="9620000" />
+      <workItem from="1685007611798" duration="10086000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -526,7 +526,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685017428334</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="rebuild">
+      <created>1685019043488</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1685019043488</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -556,7 +563,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
     <MESSAGE value="add a proposal status filter in the dashboard" />
@@ -581,7 +587,8 @@
     <MESSAGE value="add other containers&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="fix some erros" />
     <MESSAGE value="fix some errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix some errors" />
+    <MESSAGE value="rebuild" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebuild" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
