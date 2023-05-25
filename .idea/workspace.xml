@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="rebuild">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run">
       <change beforePath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,28 +188,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="10086000" />
-    </task>
-    <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
-      <created>1683310064878</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1683310064878</updated>
-    </task>
-    <task id="LOCAL-00002" summary="add attachments to projects #74">
-      <created>1683320803741</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1683320803741</updated>
-    </task>
-    <task id="LOCAL-00003" summary="update project card skeleton">
-      <created>1683373560131</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1683373560131</updated>
+      <workItem from="1685007611798" duration="10604000" />
     </task>
     <task id="LOCAL-00004" summary="add a submit proposal form">
       <created>1683384484908</created>
@@ -533,7 +512,28 @@
       <option name="project" value="LOCAL" />
       <updated>1685019043488</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="re run">
+      <created>1685019536743</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1685019536744</updated>
+    </task>
+    <task id="LOCAL-00051" summary="re run">
+      <created>1685019668498</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1685019668498</updated>
+    </task>
+    <task id="LOCAL-00052" summary="re run">
+      <created>1685020014071</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1685020014071</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -563,7 +563,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
     <MESSAGE value="add a proposal status filter in the dashboard" />
     <MESSAGE value="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )" />
@@ -588,7 +587,8 @@
     <MESSAGE value="fix some erros" />
     <MESSAGE value="fix some errors" />
     <MESSAGE value="rebuild" />
-    <option name="LAST_COMMIT_MESSAGE" value="rebuild" />
+    <MESSAGE value="re run" />
+    <option name="LAST_COMMIT_MESSAGE" value="re run" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
