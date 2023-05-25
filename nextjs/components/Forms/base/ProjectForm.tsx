@@ -1,5 +1,4 @@
 import {DocumentNode, useMutation} from "@apollo/client";
-import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
 import Textarea from '@mui/joy/Textarea';
 import {Divider, Stack} from "@mui/joy";
@@ -11,8 +10,6 @@ import ProjectSizeAutoComplete from "../../AutoCompletes/ProjectSizeAutoComplete
 import LevelOfExpertiseAutoComplete from "../../AutoCompletes/LevelOfExpertiseAutoComplete";
 import {
     Level_Of_Expertise,
-    MutationCreateProjectArgs,
-    MutationEditProjectArgs,
     Project,
     ProjectCategoriesEnum,
     ProjectScopeInput,
@@ -23,12 +20,10 @@ import {DurationInput} from "../../Inputs/DurationInput";
 import Typography from '@mui/joy/Typography';
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import uploadFilesToBlob from "../../../utils/azure-storage-blob";
-//TODO ADD ATTACHMENTS TO PROJECT
-//TODO make this request idempotent
-//TODO the freelancer and Unauthorized users can't create a project
 
-export type MutationProjectArgs = MutationCreateProjectArgs | MutationEditProjectArgs;
-// import ObjectID from "bson-objectid"
+import 'react-quill/dist/quill.snow.css'
+import "../../../styles/quill.css"
+import {RichTextEditor} from "../../Inputs/RichTextEditor";
 
 
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
@@ -51,17 +46,19 @@ export default function ProjectForm(props: {
         levelOfExpertise: props.project?.projectScope.level_of_expertise.split("_").join(" ").toLowerCase() || ""
     }
 
-    const [mutationProject, { loading, error}] = useMutation(props.PROJECT_MUTATION)
-
 
     const [price, setPrice] = useState<string>(defaultState.price.toString());
     const [duration, setDuration] = useState<string>(defaultState.duration.toString());
     const [description, setDescription] = useState<string>(defaultState.description);
-    const [skills, setSkills] = React.useState<string[]>(defaultState.skills);
+    const [skills, setSkills] = useState<string[]>(defaultState.skills);
     const [title, setTitle] = useState<string>(defaultState.title);
     const categoriesAutocompleteRef = useRef<HTMLInputElement>(null);
     const levelOfExpertiseAutoComplete = useRef<HTMLInputElement>(null);
     const projectSizeAutocompleteRef = useRef<HTMLInputElement>(null);
+
+    const [mutationProject, {loading, error}] = useMutation(props.PROJECT_MUTATION)
+
+
     const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -72,7 +69,7 @@ export default function ProjectForm(props: {
         if (!levelOfExpertiseAutoComplete.current?.value) return toast.error("Please select a level of expertise")
         if (!projectSizeAutocompleteRef.current?.value) return toast.error("Please select a project size")
         if (skills.length > 5) return toast.error("Max 5 skills")
-        if (+description.length >= 1000 || +description.length <= 5) return toast.error("Description should be between 5 and 1000")
+        if (+description.length >= 100000 || +description.length <= 5) return toast.error("Description should be between 5 and 100000")
         if (uploadedFilesList && uploadedFilesList.length >= 6) return toast.error("You can't upload more than 5 files")
 
 
@@ -141,17 +138,6 @@ export default function ProjectForm(props: {
 
 
     return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
-        // <Box
-        //     sx={{
-        //         py: 1,
-        //         display: 'flex',
-        //         flexDirection: 'column',
-        //         gap: 2,
-        //         alignItems: 'center',
-        //         flexWrap: 'wrap',
-        //     }}
-        // >
 
         <form onSubmit={handleSubmit} style={{width: "100%"}}>
             <Stack spacing={1} sx={{width: "100%"}}>
@@ -187,10 +173,10 @@ export default function ProjectForm(props: {
                 {/*</Stack>*/}
                 <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
-                <Textarea defaultValue={defaultState.description} placeholder="Description"
-                          maxRows={4}
-                          required
-                          onChange={(e) => setDescription(() => e.target.value)} minRows={4}/>
+
+                <RichTextEditor defaultValue={description}
+                                onChange={(input) => setDescription(() => input)}
+                                theme="snow"/>
 
 
                 {/*<Stack direction={"row"} alignItems={"center"}>*/}

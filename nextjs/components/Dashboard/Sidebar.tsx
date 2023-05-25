@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useState} from "react";
+import {useContext, useState} from "react";
 import {signOut} from "next-auth/react"
 import GlobalStyles from "@mui/joy/GlobalStyles";
 import Avatar from "@mui/joy/Avatar";
@@ -32,24 +32,21 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import Link from "next/link"
 import Badge from '@mui/joy/Badge';
+import {currentComponentContext} from "./DashBoardWrapper";
 
 
 export default function Sidebar(props: {
-    setCurrentComponent: Dispatch<SetStateAction<DashboardItems>>;
-    currentComponent: DashboardItems;
     user: User;
     userRole: UserRole // to custom the links per userRole
     projectsCount: number
     proposalsCount: number
     contractsCount: number
 }) {
-    const [query, setQuery] = useState("");
+
     const [projectsTab, setProjectsTabsOpen] = useState(false);
     const [contractsTab, setContractsTabOpen] = useState(false);
+    const {currentComponent, setCurrentComponent} = useContext(currentComponentContext)
 
-    // const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    //     setQuery(event.target.value);//todo filter tabs
-    // };
 
 
     return (
@@ -158,10 +155,10 @@ export default function Sidebar(props: {
                 >
                     <ListItem>
                         <ListItemButton
-                            onClick={() => props.setCurrentComponent(DashboardItems.Home)}
-                            selected={props.currentComponent === DashboardItems.Home}
+                            onClick={() => setCurrentComponent(DashboardItems.Home)}
+                            selected={currentComponent === DashboardItems.Home}
                             variant={
-                                props.currentComponent === DashboardItems.Home
+                                currentComponent === DashboardItems.Home
                                     ? "soft"
                                     : "plain"
                             }
@@ -181,14 +178,14 @@ export default function Sidebar(props: {
                     </ListItem>
                     <ListItem>
                         <ListItemButton
-                            selected={props.currentComponent === DashboardItems.MyProfile}
+                            selected={currentComponent === DashboardItems.MyProfile}
                             variant={
-                                props.currentComponent === DashboardItems.MyProfile
+                                currentComponent === DashboardItems.MyProfile
                                     ? "soft"
                                     : "plain"
                             }
                             onClick={() =>
-                                props.setCurrentComponent(DashboardItems.MyProfile)
+                                setCurrentComponent(DashboardItems.MyProfile)
                             }
                         >
                             <ListItemDecorator>
@@ -208,11 +205,11 @@ export default function Sidebar(props: {
                             <ListItemButton
                                 onClick={() => {
                                     setProjectsTabsOpen(!projectsTab)
-                                    props.setCurrentComponent(DashboardItems.Projects)
+                                    setCurrentComponent(DashboardItems.Projects)
                                 }}
-                                selected={props.currentComponent === DashboardItems.Projects}
+                                selected={currentComponent === DashboardItems.Projects}
                                 variant={
-                                    props.currentComponent === DashboardItems.Projects
+                                    currentComponent === DashboardItems.Projects
                                         ? "soft"
                                         : "plain"
                                 }
@@ -243,13 +240,13 @@ export default function Sidebar(props: {
                                     <ListItemButton
 
                                         onClick={() =>
-                                            props.setCurrentComponent(DashboardItems.CreateProject)
+                                            setCurrentComponent(DashboardItems.CreateProject)
                                         }
                                         selected={
-                                            props.currentComponent === DashboardItems.CreateProject
+                                            currentComponent === DashboardItems.CreateProject
                                         }
                                         variant={
-                                            props.currentComponent === DashboardItems.CreateProject
+                                            currentComponent === DashboardItems.CreateProject
                                                 ? "soft"
                                                 : "plain"
                                         }
@@ -273,14 +270,14 @@ export default function Sidebar(props: {
                     {/*{props.userRole === UserRole.Freelancer && */}
                     <ListItem nested>
                         <ListItemButton
-                            selected={props.currentComponent === DashboardItems.Proposals}
+                            selected={currentComponent === DashboardItems.Proposals}
                             variant={
-                                props.currentComponent === DashboardItems.Proposals
+                                currentComponent === DashboardItems.Proposals
                                     ? "soft"
                                     : "plain"
                             }
                             onClick={() =>
-                                props.setCurrentComponent(DashboardItems.Proposals)
+                                setCurrentComponent(DashboardItems.Proposals)
                             }
                         >
                             <ListItemDecorator>
@@ -295,13 +292,13 @@ export default function Sidebar(props: {
                                 Proposals
                             </ListItemContent>
                         </ListItemButton>
-                        {/*<ListItemButton selected={props.currentComponent === DashboardItems.CreateProject}*/}
-                        {/*                variant={props.currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
+                        {/*<ListItemButton selected={currentComponent === DashboardItems.CreateProject}*/}
+                        {/*                variant={currentComponent === DashboardItems.CreateProject ? "soft" : "plain"}>*/}
                         {/*    <ListItemDecorator>*/}
                         {/*        <i data-feather="layers"/>*/}
                         {/*    </ListItemDecorator>*/}
                         {/*    <ListItemContent*/}
-                        {/*        onClick={() => props.setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
+                        {/*        onClick={() => setCurrentComponent(DashboardItems.CreateProject)}>Create*/}
                         {/*        Project</ListItemContent>*/}
                         {/*</ListItemButton>*/}
                     </ListItem>
@@ -312,11 +309,11 @@ export default function Sidebar(props: {
                         <ListItemButton
                             onClick={() => {
                                 setContractsTabOpen(!contractsTab)
-                                props.setCurrentComponent(DashboardItems.Contracts)
+                                setCurrentComponent(DashboardItems.Contracts)
                             }}
-                            selected={props.currentComponent === DashboardItems.Contracts}
+                            selected={currentComponent === DashboardItems.Contracts}
                             variant={
-                                props.currentComponent === DashboardItems.Contracts
+                                currentComponent === DashboardItems.Contracts
                                     ? "soft"
                                     : "plain"
                             }
@@ -339,13 +336,13 @@ export default function Sidebar(props: {
                             <ListItem nested>
                                 <ListItemButton
                                     onClick={() =>
-                                        props.setCurrentComponent(DashboardItems.SubmissionReviews)
+                                        setCurrentComponent(DashboardItems.SubmissionReviews)
                                     }
                                     selected={
-                                        props.currentComponent === DashboardItems.SubmissionReviews
+                                        currentComponent === DashboardItems.SubmissionReviews
                                     }
                                     variant={
-                                        props.currentComponent === DashboardItems.SubmissionReviews
+                                        currentComponent === DashboardItems.SubmissionReviews
                                             ? "soft"
                                             : "plain"
                                     }

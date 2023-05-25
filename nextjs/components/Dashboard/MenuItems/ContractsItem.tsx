@@ -6,22 +6,22 @@ import ContractStatusAutocomplete from "../../AutoCompletes/ContractStatusAutoco
 import Typography from '@mui/joy/Typography';
 import {AcceptCancelContractControlButtons} from "../../Buttons/AcceptCancelContractControlButtons";
 import {CancelPayContractControlButtons} from "../../Buttons/CancelPayContractControlButtons";
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useContext, useState} from "react";
+import {currentComponentContext} from "../DashBoardWrapper";
 
 
 export const ContractsItem = (props: {
     contracts: Array<Contract>,
     setContracts: Dispatch<SetStateAction<Contract[]>>
-    currentComponent: DashboardItems,
     userRole: UserRole
 }) => {
 
     const [query, setQuery] = useState<string | null>("")
-
+    const {currentComponent} = useContext(currentComponentContext)
     const filteredContracts = query ? props.contracts.filter(contract => contract.status.split("_").join(" ").toLowerCase() === query) : props.contracts;
 
     if (!props.contracts) return <></>;
-    if (props.currentComponent === DashboardItems.Contracts) {
+    if (currentComponent === DashboardItems.Contracts) {
         return (
             <Stack spacing={2}>
                 <ContractStatusAutocomplete changeHandler={(event, value) => setQuery(() => value)}/>

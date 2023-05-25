@@ -88,7 +88,7 @@ export const ProfileResolvers: Resolvers = {
                 .limit(20).toArray() as unknown as [Contract];
         },
         proposals_stats: async (parent, args, context, _) => {
-            const proposalsStats = await proposals.aggregate([
+           return await proposals.aggregate([
                 {
                     $match: {
                         $or: [
@@ -112,15 +112,10 @@ export const ProfileResolvers: Resolvers = {
                         count: 1,
                     }
                 }
-            ]).toArray()
-
-
-            return {
-                proposalsStats
-            } as unknown as [Proposals_Stats]
+            ]).toArray() as unknown as [Proposals_Stats]
         },
         contracts_stats: async (parent, args, context, _) => {
-            const contractsStats = await contracts.aggregate([
+        return await contracts.aggregate([
                 {
                     $match: {
                         $or: [
@@ -144,12 +139,9 @@ export const ProfileResolvers: Resolvers = {
                         count: 1,
                     }
                 }
-            ]).toArray() as unknown as [{ status: Contract_Status; count: number }];
+            ]).toArray() as unknown as [Contract_Stats]
 
 
-            return {
-                contractsStats
-            } as unknown as [Contract_Stats]
         },
         projects_stats: async (parent, args, context, _) => {
             if (context.user?.userRole === UserRole.Freelancer) return []

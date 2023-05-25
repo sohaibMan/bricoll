@@ -26,14 +26,14 @@ const USER_PROFILE = gql`
                 month
                 count
             }
-            #            proposals_stats {
-            #                count
-            #                status
-            #            }
-            #            contracts_stats {
-            #                count
-            #                status
-            #            }
+                        proposals_stats {
+                            count
+                            status
+                        }
+                        contracts_stats {
+                            count
+                            status
+                        }
             payments {
                 currency
                 amount
@@ -101,20 +101,20 @@ const USER_PROFILE = gql`
                 created_at
                 updated_at
                 terms
-                #                submission_reviews {
-                #                    _id
-                #                    attachments {
-                #                        url
-                #                        type
-                #                        name
-                #                    }
-                #                    title
-                #                    description
-                #                    created_at
-                #                    updated_at
-                #                    accepted_at
-                #                    status
-                #                }
+                                submission_reviews {
+                                    _id
+                                    attachments {
+                                        url
+                                        type
+                                        name
+                                    }
+                                    title
+                                    description
+                                    created_at
+                                    updated_at
+                                    accepted_at
+                                    status
+                                }
                 fees
             }
 

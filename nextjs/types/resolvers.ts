@@ -192,7 +192,7 @@ export type MutationEditContractArgs = {
 export type MutationEditProjectArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
   category?: InputMaybe<ProjectCategoriesEnum>;
-  description?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
   id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
   projectScope?: InputMaybe<ProjectScopeInput>;
@@ -203,7 +203,7 @@ export type MutationEditProjectArgs = {
 
 export type MutationEditProposalArgs = {
   cover_letter?: InputMaybe<Scalars['String']>;
-  description?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
   duration?: InputMaybe<Scalars['Int']>;
   id: Scalars['ObjectID'];
   price?: InputMaybe<Scalars['Float']>;
@@ -413,7 +413,7 @@ export type User = {
   city: Scalars['String'];
   company: Scalars['String'];
   contracts: Array<Contract>;
-  contracts_stats: Array<Maybe<Contract_Stats>>;
+  contracts_stats: Array<Contract_Stats>;
   country: Scalars['String'];
   educationLevel: Scalars['String'];
   email: Scalars['String'];
@@ -428,7 +428,7 @@ export type User = {
   projects: Array<Project>;
   projects_stats: Array<Project_Stats_Per_Month>;
   proposals: Array<Proposal>;
-  proposals_stats: Array<Maybe<Proposals_Stats>>;
+  proposals_stats: Array<Proposals_Stats>;
   reviews: Array<Review>;
   role: Scalars['String'];
   skills: Array<Scalars['String']>;
@@ -700,8 +700,8 @@ export type MutationResolvers<ContextType = ServerContext, ParentType extends Re
   declineRequestProjectSubmissionReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeclineRequestProjectSubmissionReviewArgs, 'contract_id' | 'submission_review_id'>>;
   deleteProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationDeleteProjectArgs, 'id'>>;
   editContract?: Resolver<Maybe<ResolversTypes['Contract']>, ParentType, ContextType, RequireFields<MutationEditContractArgs, 'id' | 'terms'>>;
-  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'id'>>;
-  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'id'>>;
+  editProject?: Resolver<Maybe<ResolversTypes['Project']>, ParentType, ContextType, RequireFields<MutationEditProjectArgs, 'description' | 'id'>>;
+  editProposal?: Resolver<Maybe<ResolversTypes['Proposal']>, ParentType, ContextType, RequireFields<MutationEditProposalArgs, 'description' | 'id'>>;
   editReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationEditReviewArgs, 'description' | 'id' | 'project_id' | 'rating'>>;
   reactToProject?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationReactToProjectArgs, 'id' | 'reaction_type'>>;
   removeReview?: Resolver<Maybe<ResolversTypes['queryResult']>, ParentType, ContextType, RequireFields<MutationRemoveReviewArgs, 'id'>>;
@@ -824,7 +824,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   company?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   contracts?: Resolver<Array<ResolversTypes['Contract']>, ParentType, ContextType>;
-  contracts_stats?: Resolver<Array<Maybe<ResolversTypes['Contract_stats']>>, ParentType, ContextType>;
+  contracts_stats?: Resolver<Array<ResolversTypes['Contract_stats']>, ParentType, ContextType>;
   country?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   educationLevel?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -839,7 +839,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   projects?: Resolver<Array<ResolversTypes['Project']>, ParentType, ContextType>;
   projects_stats?: Resolver<Array<ResolversTypes['Project_stats_per_month']>, ParentType, ContextType>;
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
-  proposals_stats?: Resolver<Array<Maybe<ResolversTypes['Proposals_stats']>>, ParentType, ContextType>;
+  proposals_stats?: Resolver<Array<ResolversTypes['Proposals_stats']>, ParentType, ContextType>;
   reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
   role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;

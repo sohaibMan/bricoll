@@ -1,5 +1,5 @@
-import {BarChart} from "./BarChart";
-import {ProjectStats} from "../../types/resolvers";
+import {BarChart} from "../base/BarChart";
+import {ProjectStats} from "../../../types/resolvers";
 import Typography from "@mui/joy/Typography";
 
 

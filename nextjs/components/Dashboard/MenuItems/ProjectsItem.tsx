@@ -1,6 +1,5 @@
 import {Project} from "../../../types/resolvers";
-import * as React from "react";
-import {Dispatch, useState} from "react";
+import {Dispatch, useContext, useState} from "react";
 import Stack from "@mui/joy/Stack";
 import ProjectItemCard from "../../Cards/ProjectItemCard";
 import {EditDeleteProjectControlButtons} from "../../Buttons/EditDeleteProjectControlButtons";
@@ -10,11 +9,12 @@ import Typography from "@mui/joy/Typography";
 import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";
 import Attachments from "../../ListItems/Attachments";
 import {Divider} from "@mui/joy";
-import {ProjectStatsBarChart} from "../../Charts/ProjectStats";
+import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
 import Box from "@mui/joy/Box";
 import IconButton from "@mui/joy/IconButton";
 import {KeyboardArrowDown} from "@mui/icons-material";
 import {Collapse} from "@mantine/core";
+import {currentComponentContext} from "../DashBoardWrapper";
 
 
 function ProjectItemsDetails(props: { project: Project }) {
@@ -63,17 +63,17 @@ function ProjectItemsDetails(props: { project: Project }) {
 export default function DashBoardProjects(props: {
     projects: Array<Project>,
     setProjects: Dispatch<React.SetStateAction<Project[]>>,
-    currentComponent: DashboardItems
 }) {
 
 
     const [query, setQuery] = useState<string | null>("")
+    const {currentComponent, setCurrentComponent} = useContext(currentComponentContext)
 
 
     const filteredProjects = query ? props.projects.filter(project => project.category.split("_").join(" ").toLowerCase() === query) : props.projects;
 
 
-    if (props.currentComponent === DashboardItems.Projects) return <Stack spacing={2}>
+    if (currentComponent === DashboardItems.Projects) return <Stack spacing={2}>
         <CategoriesAutocomplete changeHandler={(event, value) => setQuery(() => value)}/>
         {filteredProjects.length == 0 && <Typography level="h3">No Projects found</Typography>}
         {filteredProjects.map((project) =>
@@ -83,7 +83,7 @@ export default function DashBoardProjects(props: {
 
                 <Stack spacing={2} sx={{width: "100%"}}>
 
-                    <Stack spacing={1} direction="row">
+                    <Stack spacing={1} direction="row" >
                         <EditDeleteProjectControlButtons project={project} setProjects={props.setProjects}/>
                     </Stack>
 
@@ -94,7 +94,7 @@ export default function DashBoardProjects(props: {
             </ProjectItemCard>
         )}</Stack>
 
-    if (props.currentComponent === DashboardItems.CreateProject) return <CreateProjectForm
+    if (currentComponent === DashboardItems.CreateProject) return <CreateProjectForm
         setProjects={props.setProjects}/>
 
 

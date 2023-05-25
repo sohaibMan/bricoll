@@ -104,7 +104,7 @@ export function AcceptDeclineHireProposalControlButtons(props: {
             <ModalDialog
                 aria-labelledby="basic-modal-dialog-title"
                 aria-describedby="basic-modal-dialog-description"
-                sx={{minWidth: "50%"}}
+                sx={{minWidth: "50%", overflowY: "auto"}}
             >
                 <ModalClose/>
                 <CreateContractForm

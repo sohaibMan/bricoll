@@ -1,0 +1,72 @@
+name: Bricoll Docker Image Publish
+
+on:
+  push:
+    branches: ["Main"]
+    tags: ['v*.*.*']
+  pull_request:
+    branches: ["Main"]
+permissions:
+    packages: write
+    contents: read
+
+env:
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: bricoll
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3.5.2
+
+      # Install the cosign tool except on PR
+      # https://github.com/sigstore/cosign-installer
+      - name: Install cosign
+        if: github.event_name != 'pull_request'
+        uses: sigstore/cosign-installer@v3.0.5
+        with:
+          cosign-release: "v1.11.0"
+      # Login against a Docker registry except on PR
+      # https://github.com/docker/login-action
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v1
+        with:
+            creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      - name: 'Build and push image'
+        uses: azure/docker-login@v1
+        with:
+            login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            username: ${{ secrets.REGISTRY_USERNAME }}
+            password: ${
+      - run: |
+            docker compose up --build
+            docker tag nginx ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
+            docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+            docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+            docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+           
+       
+            
+
+      - name: 'Deploy to Azure Container Instances'
+        uses: 'azure/aci-deploy@v1'
+        with:
+            resource-group: ${{ secrets.RESOURCE_GROUP }}
+            dns-name-label: ${{ secrets.RESOURCE_GROUP }}${{ github.run_number }}
+            image: ${{ secrets.REGISTRY_LOGIN_SERVER }}/bricoll:${{ github.sha }}
+            registry-login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+            registry-username: ${{ secrets.REGISTRY_USERNAME }}
+            registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+            name: bricoll
+            location: 'west us'
+
+    
+    
+

@@ -4,7 +4,7 @@ import {ContractsItem} from "./MenuItems/ContractsItem";
 import {DashboardItems} from "../../pages/dashboard";
 import {User, UserRole} from "../../types/resolvers";
 import * as React from "react";
-import {useEffect, useState} from "react";
+import {createContext, Dispatch, useEffect, useState} from "react";
 import {MyProfileItem} from "./MenuItems/MyProfileItem";
 import {HomeItem} from "./MenuItems/HomeItem";
 import {ProposalsItem} from "./MenuItems/ProposalsItem";
@@ -15,6 +15,8 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import customTheme from "../../utils/theme";
 import {CssBaseline, CssVarsProvider} from "@mui/joy";
 
+
+export const currentComponentContext = createContext({} as { currentComponent: DashboardItems ,setCurrentComponent:Dispatch<React.SetStateAction<DashboardItems>>})
 export const DashBoardWrapper = ({userRole, profile,}: {
     userRole: UserRole,
     profile: User,
@@ -38,6 +40,7 @@ export const DashBoardWrapper = ({userRole, profile,}: {
         defaultComponent
     );
 
+
     // sync the search parameter to url if the currentComponent changes
     useEffect(() => {
         const query = `?search=${currentComponent}`;
@@ -46,83 +49,80 @@ export const DashBoardWrapper = ({userRole, profile,}: {
 
 
     return (
-        <CssVarsProvider disableTransitionOnChange theme={customTheme}>
-            <CssBaseline/>
-        <Box sx={{display: "flex", minHeight: "100dvh"}}>
-            <Header/>
-            <Sidebar
-                projectsCount={projects.length}
-                proposalsCount={proposals.length}
-                contractsCount={contracts.length}
-                userRole={userRole}
-                currentComponent={currentComponent}
-                user={profile}
-                setCurrentComponent={setCurrentComponent}
-            />
-            <Box
-                component="main"
-                className="MainContent"
-                sx={(theme) => ({
-                    "--main-paddingTop": {
-                        xs: `calc(${theme.spacing(2)} + var(--Header-height, 0px))`,
-                        md: "32px",
-                    },
-                    px: {
-                        xs: 2,
-                        md: 3,
-                    },
-                    pt: "var(--main-paddingTop)",
-                    pb: {
-                        xs: 2,
-                        sm: 2,
-                        md: 3,
-                    },
-                    flex: 1,
-                    display: "flex",
-                    flexDirection: "column",
-                    minWidth: 0,
-                    height: "100dvh",
-                    gap: 1,
-                    overflow: "auto",
-                })}
-            >
+        <currentComponentContext.Provider value={{currentComponent, setCurrentComponent}}>
+            <CssVarsProvider disableTransitionOnChange theme={customTheme}>
+                <CssBaseline/>
+                <Box sx={{display: "flex", minHeight: "100dvh"}}>
+                    <Header/>
+                    <Sidebar
+                        projectsCount={projects.length}
+                        proposalsCount={proposals.length}
+                        contractsCount={contracts.length}
+                        userRole={userRole}
+                        user={profile}
+                    />
+                    <Box
+                        component="main"
+                        className="MainContent"
+                        sx={(theme) => ({
+                            "--main-paddingTop": {
+                                xs: `calc(${theme.spacing(2)} + var(--Header-height, 0px))`,
+                                md: "32px",
+                            },
+                            px: {
+                                xs: 2,
+                                md: 3,
+                            },
+                            pt: "var(--main-paddingTop)",
+                            pb: {
+                                xs: 2,
+                                sm: 2,
+                                md: 3,
+                            },
+                            flex: 1,
+                            display: "flex",
+                            flexDirection: "column",
+                            minWidth: 0,
+                            height: "100dvh",
+                            gap: 1,
+                            overflow: "auto",
+                        })}
+                    >
 
-                {currentComponent === DashboardItems.Home && <HomeItem userRole={userRole} profile={profile}/>}
+                        {currentComponent === DashboardItems.Home && <HomeItem userRole={userRole} profile={profile}/>}
 
-                <MyProfileItem currentComponent={currentComponent} user={profile}/>
-                <DashBoardProjects
-                    currentComponent={currentComponent}
-                    projects={projects
-                        .slice()
-                        .sort((a, b) =>
-                            moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                        )}
-                    setProjects={setProjects}
+                        <MyProfileItem currentComponent={currentComponent} user={profile}/>
+                        <DashBoardProjects
+                            projects={projects
+                                .slice()
+                                .sort((a, b) =>
+                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                )}
+                            setProjects={setProjects}
 
-                />
-                <ProposalsItem
-                    userRole={userRole}
-                    currentComponent={currentComponent}
-                    proposals={proposals
-                        .slice()
-                        .sort((a, b) =>
-                            moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                        )}
-                    setProposals={setProposals}
-                    setContracts={setContracts}
-                />
-                <ContractsItem
-                    userRole={userRole}
-                    currentComponent={currentComponent}
-                    contracts={contracts
-                        .slice()
-                        .sort((a, b) =>
-                            moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                        )}
-                    setContracts={setContracts}
-                />
-            </Box>
-        </Box>
-        </CssVarsProvider>
+                        />
+                        <ProposalsItem
+                            userRole={userRole}
+                            proposals={proposals
+                                .slice()
+                                .sort((a, b) =>
+                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                )}
+                            setProposals={setProposals}
+                            setContracts={setContracts}
+                        />
+                        <ContractsItem
+                            userRole={userRole}
+                            contracts={contracts
+                                .slice()
+                                .sort((a, b) =>
+                                    moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                )}
+                            setContracts={setContracts}
+                        />
+                    </Box>
+                </Box>
+            </CssVarsProvider>
+        </currentComponentContext.Provider>
     );
 };

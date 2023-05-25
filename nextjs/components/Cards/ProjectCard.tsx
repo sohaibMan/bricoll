@@ -6,7 +6,9 @@ import {Project} from "../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../ListItems/Attachments";
-import {ProjectStatsBarChart} from "../Charts/ProjectStats";
+import {ProjectStatsBarChart} from "../Charts/wrappers/ProjectStats";
+
+import {RichTextEditor} from "../Inputs/RichTextEditor";
 
 
 export default function ProjectCard({project}: { project: Project }) {
@@ -46,9 +48,11 @@ export default function ProjectCard({project}: { project: Project }) {
                     Level {project.projectScope.level_of_expertise.toLowerCase()} | {" "}
                     Posted {moment(project.created_at).fromNow()}
                 </Typography>
-                <Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>
-                    {project.description}
-                </Typography>
+                {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
+                {/*    {project.description}*/}
+                {/*</Typography>*/}
+                <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
+
 
                 <Stack
                     direction="row"
