@@ -21,14 +21,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
 
-      # Install the cosign tool except on PR
-      # https://github.com/sigstore/cosign-installer
-      - name: Install cosign
-        if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v3.0.5
-        with:
-          cosign-release: "v1.11.0"
-      # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: "Login via Azure CLI"
         uses: azure/login@v1
@@ -41,8 +33,7 @@ jobs:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-          #          docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-          #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+
       - run: |
           docker compose up --build -d
           docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
