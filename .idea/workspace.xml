@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,21 +189,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="22295000" />
-    </task>
-    <task id="LOCAL-00023" summary="add a proposal status filter in the dashboard">
-      <created>1683824351807</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1683824351807</updated>
-    </task>
-    <task id="LOCAL-00024" summary="add the billing tab">
-      <created>1684096111504</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1684096111505</updated>
+      <workItem from="1685007611798" duration="22763000" />
     </task>
     <task id="LOCAL-00025" summary="run the app in detached mode">
       <created>1684972067999</created>
@@ -534,7 +520,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685033695809</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="re run">
+      <created>1685033860233</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033860234</updated>
+    </task>
+    <task id="LOCAL-00073" summary="re run">
+      <created>1685034163888</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1685034163888</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
