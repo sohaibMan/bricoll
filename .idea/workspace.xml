@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="Merge remote-tracking branch 'origin/Production' into Production">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/public/sw.js" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="fix some errors">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,7 +49,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -62,27 +59,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Production&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/sohaib/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Production",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -120,6 +118,23 @@
       <deployment type="dockerfile" />
       <method v="2" />
     </configuration>
+    <configuration name="nextjs/Dockerfile builder" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="base_builder" />
+          <option name="buildCliOptions" value="--target builder" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="nextjs/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.nextjs/Dockerfile builder" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -173,6 +188,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
+      <workItem from="1685007611798" duration="9620000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -398,7 +414,119 @@
       <option name="project" value="LOCAL" />
       <updated>1684975540946</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685007681549</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1685007681549</updated>
+    </task>
+    <task id="LOCAL-00034" summary="start without a build">
+      <created>1685008638520</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1685008638521</updated>
+    </task>
+    <task id="LOCAL-00035" summary="start without a build&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685008879477</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1685008879477</updated>
+    </task>
+    <task id="LOCAL-00036" summary="deployment succeeded try to deploy all containers in dev mode">
+      <created>1685009405753</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1685009405753</updated>
+    </task>
+    <task id="LOCAL-00037" summary="stop restarting the containers">
+      <created>1685011622166</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1685011622166</updated>
+    </task>
+    <task id="LOCAL-00038" summary="run jobs in parallel">
+      <created>1685012516688</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1685012516688</updated>
+    </task>
+    <task id="LOCAL-00039" summary="add azure login before deployement">
+      <created>1685012744921</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1685012744921</updated>
+    </task>
+    <task id="LOCAL-00040" summary="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685012857418</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1685012857418</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Merge remote-tracking branch 'origin/Production' into Production">
+      <created>1685012929095</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1685012929095</updated>
+    </task>
+    <task id="LOCAL-00042" summary="login in each step">
+      <created>1685013328007</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1685013328007</updated>
+    </task>
+    <task id="LOCAL-00043" summary="login to azure cli">
+      <created>1685013778830</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1685013778830</updated>
+    </task>
+    <task id="LOCAL-00044" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685014061078</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1685014061078</updated>
+    </task>
+    <task id="LOCAL-00045" summary="Revert &quot;deployment succeeded try to deploy all containers in dev mode&quot;&#10;&#10;This reverts commit 56ba085f">
+      <created>1685014576938</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1685014576938</updated>
+    </task>
+    <task id="LOCAL-00046" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685014636150</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1685014636150</updated>
+    </task>
+    <task id="LOCAL-00047" summary="add other containers&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685015080028</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1685015080028</updated>
+    </task>
+    <task id="LOCAL-00048" summary="fix some errors">
+      <created>1685017428334</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1685017428334</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -428,22 +556,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="add attachments to projects #74" />
-    <MESSAGE value="update project card skeleton" />
-    <MESSAGE value="add a submit proposal form" />
-    <MESSAGE value="add some check to submit a proposal form" />
-    <MESSAGE value="add CreateProjectForm page and code refactoring" />
-    <MESSAGE value="add edit project form" />
-    <MESSAGE value=" I've added edit project form" />
-    <MESSAGE value="I've moved the components folder to the nextjs folder and the graphql schemas and the resolvers to the nextjs folder, so they won't be treated as endpoints." />
-    <MESSAGE value="refactore the mail service" />
-    <MESSAGE value="add contract form and fix some problems in the resolvers" />
-    <MESSAGE value="add the project editor for dashboard" />
-    <MESSAGE value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
-    <MESSAGE value="adding an edit project to the dashboard" />
-    <MESSAGE value="create project is added to the dashboard" />
-    <MESSAGE value="comeplete the project dashbaord" />
-    <MESSAGE value="custom  dashboard per userRole" />
     <MESSAGE value="add edit prposal mangement" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
@@ -452,8 +564,24 @@
     <MESSAGE value="add the billing tab" />
     <MESSAGE value="run the app in detached mode" />
     <MESSAGE value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="start without a build" />
+    <MESSAGE value="start without a build&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="deployment succeeded try to deploy all containers in dev mode" />
+    <MESSAGE value="stop restarting the containers" />
+    <MESSAGE value="run jobs in parallel" />
+    <MESSAGE value="add azure login before deployement" />
+    <MESSAGE value="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/Production' into Production" />
+    <MESSAGE value="login in each step" />
+    <MESSAGE value="login to azure cli" />
+    <MESSAGE value="login to azure cli instead" />
+    <MESSAGE value="Revert &quot;deployment succeeded try to deploy all containers in dev mode&quot;&#10;&#10;This reverts commit 56ba085f" />
+    <MESSAGE value="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="add other containers&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="fix some erros" />
+    <MESSAGE value="fix some errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix some errors" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
