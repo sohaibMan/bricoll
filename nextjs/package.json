@@ -7,7 +7,8 @@
     "nextdev": "next",
     "build": "next build",
     "start": "next start",
-    "generate": "graphql-codegen --watch"
+    "generate": "graphql-codegen --watch",
+    "simple-dev": "next dev"
   },
   "dependencies": {
     "@apollo/client": "^3.7.12",

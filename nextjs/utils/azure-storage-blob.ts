@@ -28,26 +28,7 @@ const containerClient: ContainerClient =
 
 // <snippet_getBlobsInContainer>
 // return list of blobs in container to display
-export const getBlobInContainer = async () => {
 
-
-    // get list of blobs in container
-    // eslint-disable-next-line
-    // for await (const blob of containerClient.listBlobsFlat()) {
-    // console.log(`${blob.name}`);
-
-    // const blobItem = {
-    //     url: `https://${storageAccountName}.blob.core.windows.net/${containerName}/${blob.name}?${sasToken}`,
-    //     name: blob.name
-    // }
-    // console.log(blobItem.url)
-
-    // if image is public, just construct URL
-    // returnedBlobUrls.push(blobItem);
-    // }
-
-    // return returnedBlobUrls;
-};
 // </snippet_getBlobsInContainer>
 
 // <snippet_createBlobInContainer>

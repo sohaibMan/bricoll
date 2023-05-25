@@ -82,8 +82,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const paths = freelancers.map(doc => ({
         params: {profileId: doc._id.toString()},
     }))
+    // temporary don't generate any path
     return {
-        paths, fallback: "blocking"
+        paths: [], fallback: "blocking"
 
     }
 

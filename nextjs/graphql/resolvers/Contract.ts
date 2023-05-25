@@ -31,7 +31,7 @@ const usersCollection = db.collection("users")
 export const ContractResolvers: Resolvers = {
     Query: {
         Contract:
-            async (parent, args, context, info) => {
+            async (parent, args, context, _) => {
                 //? the client have access related to him project
                 //? the freelance have access only to his proposals
                 // to create scrolling pagination
@@ -53,7 +53,7 @@ export const ContractResolvers: Resolvers = {
             },
     },
     Mutation: {
-        acceptContract: async (parent, args, context, info) => {
+        acceptContract: async (parent, args, context, _) => {
             // the contract status is accepted (by freelancer)
             // you must be a freelancer to accept a contract that is created by a client
             freelancerMiddleware(context)
@@ -75,7 +75,7 @@ export const ContractResolvers: Resolvers = {
             return updatedContract.value as unknown as Contract;
 
         },
-        cancelContract: async (parent, args, context, info) => {
+        cancelContract: async (parent, args, context, _) => {
             // both the client and the freelancer can cancel the contract
             authenticatedMiddleware(context)
 
@@ -94,7 +94,7 @@ export const ContractResolvers: Resolvers = {
             await onCancelContract(updatedContract.value.client_id as ObjectId)
             return updatedContract.value as unknown as Contract;
         },
-        createContract: async (parent, args, context, info) => {
+        createContract: async (parent, args, context, _) => {
             // the contract status is Pending( by client)
             //? you must be authenticated to access this resource
             //? you should be a client to access this resource
@@ -178,11 +178,11 @@ export const ContractResolvers: Resolvers = {
                 },
             )
 
-            onCreateContract(contract.freelancer_id)
+            await onCreateContract(contract.freelancer_id)
             return contract;
 
         },
-        editContract: async (parent, args, context, info) => {
+        editContract: async (parent, args, context, _) => {
             clientMiddleware(context);
 
             let updatedFields = Object.assign({}, args);
@@ -202,7 +202,7 @@ export const ContractResolvers: Resolvers = {
             return updatedContract.value as unknown as Contract;
 
         },
-        requestProjectSubmissionReview: async (parent, args, context, info) => {
+        requestProjectSubmissionReview: async (parent, args, context, _) => {
             //     rules : only client can request a review
             //     rules : the contract status must be completed
             //     rules : the contract must be paid
@@ -239,13 +239,13 @@ export const ContractResolvers: Resolvers = {
                     http: {status: 404},
                 }
             })
-            onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
+            await onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
             return {
                 acknowledgement: true,
                 _id: submission_review._id
             };
         },
-        acceptRequestProjectSubmissionReview: async (parent, args, context, info) => {
+        acceptRequestProjectSubmissionReview: async (parent, args, context, _) => {
             clientMiddleware(context);
             // because we will handle payment here the client can accept only one submission review
             // irreversible action (idempotent request) (status change from completed to paid once and only once)
@@ -338,7 +338,7 @@ export const ContractResolvers: Resolvers = {
             await session.commitTransaction();
             await session.endSession();
 
-            onAcceptRequestProjectSubmissionReview(contract.value.freelancer_id);
+            await onAcceptRequestProjectSubmissionReview(contract.value.freelancer_id);
 
             return {
                 acknowledgement: true,
@@ -347,7 +347,7 @@ export const ContractResolvers: Resolvers = {
 
 
         },
-        declineRequestProjectSubmissionReview: async (parent, args, context, info) => {
+        declineRequestProjectSubmissionReview: async (parent, args, context, _) => {
             clientMiddleware(context);
             const contract = await contractCollection.findOneAndUpdate(
                 {
@@ -385,7 +385,7 @@ export const ContractResolvers: Resolvers = {
                     http: {status: 404},
                 }
             })
-            onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
+            await onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
 
             return {
                 acknowledgement: contract.ok === 1,
@@ -393,7 +393,7 @@ export const ContractResolvers: Resolvers = {
             }
 
         },
-        cancelRequestProjectSubmissionReview: async (parent, args, context, info) => {
+        cancelRequestProjectSubmissionReview: async (parent, args, context, _) => {
             freelancerMiddleware(context);
             const contract = await contractCollection.updateOne(
                 {

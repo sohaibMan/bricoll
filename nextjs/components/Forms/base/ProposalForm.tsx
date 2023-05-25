@@ -15,14 +15,8 @@ import {
 import {DurationInput} from "../../Inputs/DurationInput";
 import {PriceInput} from "../../Inputs/PriceInput";
 import Typography from "@mui/joy/Typography";
-import dynamic from "next/dynamic";
 
 import {RichTextEditor} from "../../Inputs/RichTextEditor";
-
-
-
-
-// TODO - ADD OTHER FIELDS AND CUSTOMIZE THE FUNCTION
 
 
 export default function ProposalForm(props: {
@@ -41,7 +35,7 @@ export default function ProposalForm(props: {
         coverLetter: props.proposal?.cover_letter || "",
     }
 
-    const [createProposal, {data, loading, error}] = useMutation(props.PROPOSAL_MUTATION);
+    const [createProposal, {loading, error}] = useMutation(props.PROPOSAL_MUTATION);
     const [price, setPrice] = useState<string>(defaultState.price);
     const [duration, setDuration] = useState<string>(defaultState.duration);
     const [description, setDescription] = useState<string>(defaultState.description);
@@ -127,8 +121,8 @@ export default function ProposalForm(props: {
                     {/*          onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>*/}
 
                     <RichTextEditor defaultValue={coverLetter}
-                                       onChange={(input) => setCoverLetter(() => input)}
-                                       theme="snow"/>
+                                    onChange={(input) => setCoverLetter(() => input)}
+                                    theme="snow"/>
 
 
                     <Button disabled={loading} type=" submit"> Submit</Button>

@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="add the billing tab">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="edit config">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/Upload.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DropZone.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DropZone.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MyProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +30,7 @@
         <option value="Sohaib manah &lt;96356071+sohaibman@users.noreply.github.com&gt;" />
       </list>
     </option>
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
@@ -56,7 +52,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -66,27 +62,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;ShowUsagesActions.previewPropertyKey&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Cards&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;/home/sohaib/.nvm/versions/node/v20.0.0/bin/node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ShowUsagesActions.previewPropertyKey": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Production",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.standard": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.standard": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "/home/sohaib/.nvm/versions/node/v20.0.0/bin/node",
+    "nodejs_package_manager_path": "npm",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -118,6 +115,29 @@
       <recent name="$PROJECT_DIR$/nextjs/pages/Components/Inputs/PriceInput.tsx" />
       <recent name="$PROJECT_DIR$/nextjs/pages/Components/Inputs/DurationInput.tsx" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
+      <deployment type="dockerfile" />
+      <method v="2" />
+    </configuration>
+    <configuration name="nextjs/Dockerfile builder" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
+      <deployment type="dockerfile">
+        <settings>
+          <option name="imageTag" value="base_builder" />
+          <option name="buildCliOptions" value="--target builder" />
+          <option name="buildKitEnabled" value="true" />
+          <option name="buildOnly" value="true" />
+          <option name="sourceFilePath" value="nextjs/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.nextjs/Dockerfile builder" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -170,176 +190,353 @@
       <workItem from="1684070159685" duration="9402000" />
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
+      <workItem from="1684971993273" duration="4971000" />
+      <workItem from="1685007611798" duration="31723000" />
     </task>
-    <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
-      <created>1683310064878</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00034" summary="start without a build">
+      <created>1685008638520</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1683310064878</updated>
+      <updated>1685008638521</updated>
     </task>
-    <task id="LOCAL-00002" summary="add attachments to projects #74">
-      <created>1683320803741</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00035" summary="start without a build&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685008879477</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1683320803741</updated>
+      <updated>1685008879477</updated>
     </task>
-    <task id="LOCAL-00003" summary="update project card skeleton">
-      <created>1683373560131</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00036" summary="deployment succeeded try to deploy all containers in dev mode">
+      <created>1685009405753</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1683373560131</updated>
+      <updated>1685009405753</updated>
     </task>
-    <task id="LOCAL-00004" summary="add a submit proposal form">
-      <created>1683384484908</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00037" summary="stop restarting the containers">
+      <created>1685011622166</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1683384484908</updated>
+      <updated>1685011622166</updated>
     </task>
-    <task id="LOCAL-00005" summary="add some check to submit a proposal form">
-      <created>1683475757598</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+    <task id="LOCAL-00038" summary="run jobs in parallel">
+      <created>1685012516688</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
       <option name="project" value="LOCAL" />
-      <updated>1683475757598</updated>
+      <updated>1685012516688</updated>
     </task>
-    <task id="LOCAL-00006" summary="add some check to submit a proposal form">
-      <created>1683476153434</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+    <task id="LOCAL-00039" summary="add azure login before deployement">
+      <created>1685012744921</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
       <option name="project" value="LOCAL" />
-      <updated>1683476153434</updated>
+      <updated>1685012744921</updated>
     </task>
-    <task id="LOCAL-00007" summary="add CreateProjectForm page and code refactoring">
-      <created>1683484173974</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+    <task id="LOCAL-00040" summary="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685012857418</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
       <option name="project" value="LOCAL" />
-      <updated>1683484173974</updated>
+      <updated>1685012857418</updated>
     </task>
-    <task id="LOCAL-00008" summary=" I've added edit project form">
-      <created>1683557312687</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+    <task id="LOCAL-00041" summary="Merge remote-tracking branch 'origin/Production' into Production">
+      <created>1685012929095</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
       <option name="project" value="LOCAL" />
-      <updated>1683557312687</updated>
+      <updated>1685012929095</updated>
     </task>
-    <task id="LOCAL-00009" summary=" I've added edit project form">
-      <created>1683565995199</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+    <task id="LOCAL-00042" summary="login in each step">
+      <created>1685013328007</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1683565995200</updated>
+      <updated>1685013328007</updated>
     </task>
-    <task id="LOCAL-00010" summary="I've moved the components folder to the nextjs folder and the graphql schemas and the resolvers to the nextjs folder, so they won't be treated as endpoints.">
-      <created>1683567342847</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+    <task id="LOCAL-00043" summary="login to azure cli">
+      <created>1685013778830</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1683567342847</updated>
+      <updated>1685013778830</updated>
     </task>
-    <task id="LOCAL-00011" summary="refactore the mail service">
-      <created>1683574333302</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+    <task id="LOCAL-00044" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685014061078</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1683574333302</updated>
+      <updated>1685014061078</updated>
     </task>
-    <task id="LOCAL-00012" summary="add contract form and fix some problems in the resolvers">
-      <created>1683581110205</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+    <task id="LOCAL-00045" summary="Revert &quot;deployment succeeded try to deploy all containers in dev mode&quot;&#10;&#10;This reverts commit 56ba085f">
+      <created>1685014576938</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1683581110205</updated>
+      <updated>1685014576938</updated>
     </task>
-    <task id="LOCAL-00013" summary="add the project editor for dashboard">
-      <created>1683664029689</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+    <task id="LOCAL-00046" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685014636150</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1683664029689</updated>
+      <updated>1685014636150</updated>
     </task>
-    <task id="LOCAL-00014" summary="add the project editor for dashboard">
-      <created>1683664691970</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+    <task id="LOCAL-00047" summary="add other containers&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685015080028</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1683664691970</updated>
+      <updated>1685015080028</updated>
     </task>
-    <task id="LOCAL-00015" summary="adjust the dashboard menu with 3 options and make the sidebar interactive">
-      <created>1683674105443</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+    <task id="LOCAL-00048" summary="fix some errors">
+      <created>1685017428334</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1683674105443</updated>
+      <updated>1685017428334</updated>
     </task>
-    <task id="LOCAL-00016" summary="adding an edit project to the dashboard">
-      <created>1683678796675</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+    <task id="LOCAL-00049" summary="rebuild">
+      <created>1685019043488</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1683678796675</updated>
+      <updated>1685019043488</updated>
     </task>
-    <task id="LOCAL-00017" summary="create project is added to the dashboard">
-      <created>1683730586166</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+    <task id="LOCAL-00050" summary="re run">
+      <created>1685019536743</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1683730586166</updated>
+      <updated>1685019536744</updated>
     </task>
-    <task id="LOCAL-00018" summary="comeplete the project dashbaord">
-      <created>1683737148236</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+    <task id="LOCAL-00051" summary="re run">
+      <created>1685019668498</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
       <option name="project" value="LOCAL" />
-      <updated>1683737148236</updated>
+      <updated>1685019668498</updated>
     </task>
-    <task id="LOCAL-00019" summary="custom  dashboard per userRole">
-      <created>1683760230330</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+    <task id="LOCAL-00052" summary="re run">
+      <created>1685020014071</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1683760230330</updated>
+      <updated>1685020014071</updated>
     </task>
-    <task id="LOCAL-00020" summary="add edit prposal mangement">
-      <created>1683807631082</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+    <task id="LOCAL-00053" summary="re run">
+      <created>1685020423734</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
       <option name="project" value="LOCAL" />
-      <updated>1683807631083</updated>
+      <updated>1685020423735</updated>
     </task>
-    <task id="LOCAL-00021" summary="update dashboard layout">
-      <created>1683813107995</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+    <task id="LOCAL-00054" summary="re run">
+      <created>1685020450940</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
       <option name="project" value="LOCAL" />
-      <updated>1683813107995</updated>
+      <updated>1685020450940</updated>
     </task>
-    <task id="LOCAL-00022" summary="add edit/accept project to proposal for clients in the dashboar">
-      <created>1683816560692</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
+    <task id="LOCAL-00055" summary="re run">
+      <created>1685020528854</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
       <option name="project" value="LOCAL" />
-      <updated>1683816560692</updated>
+      <updated>1685020528855</updated>
     </task>
-    <task id="LOCAL-00023" summary="add a proposal status filter in the dashboard">
-      <created>1683824351807</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
+    <task id="LOCAL-00056" summary="re run">
+      <created>1685021423816</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
       <option name="project" value="LOCAL" />
-      <updated>1683824351807</updated>
+      <updated>1685021423816</updated>
     </task>
-    <task id="LOCAL-00024" summary="add the billing tab">
-      <created>1684096111504</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
+    <task id="LOCAL-00057" summary="re run">
+      <created>1685021675142</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
       <option name="project" value="LOCAL" />
-      <updated>1684096111505</updated>
+      <updated>1685021675143</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00058" summary="re run">
+      <created>1685022513118</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1685022513118</updated>
+    </task>
+    <task id="LOCAL-00059" summary="re run">
+      <created>1685023318119</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1685023318119</updated>
+    </task>
+    <task id="LOCAL-00060" summary="re run">
+      <created>1685027299413</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1685027299413</updated>
+    </task>
+    <task id="LOCAL-00061" summary="re run">
+      <created>1685028307040</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1685028307040</updated>
+    </task>
+    <task id="LOCAL-00062" summary="re run">
+      <created>1685030182798</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030182798</updated>
+    </task>
+    <task id="LOCAL-00063" summary="re run">
+      <created>1685030401565</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030401565</updated>
+    </task>
+    <task id="LOCAL-00064" summary="re run">
+      <created>1685030699565</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1685030699565</updated>
+    </task>
+    <task id="LOCAL-00065" summary="re run">
+      <created>1685031791360</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1685031791361</updated>
+    </task>
+    <task id="LOCAL-00066" summary="re run">
+      <created>1685031943974</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1685031943974</updated>
+    </task>
+    <task id="LOCAL-00067" summary="re run">
+      <created>1685032038511</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1685032038511</updated>
+    </task>
+    <task id="LOCAL-00068" summary="re run">
+      <created>1685032128293</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1685032128293</updated>
+    </task>
+    <task id="LOCAL-00069" summary="re run">
+      <created>1685032490042</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1685032490042</updated>
+    </task>
+    <task id="LOCAL-00070" summary="re run">
+      <created>1685033387643</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033387643</updated>
+    </task>
+    <task id="LOCAL-00071" summary="re run">
+      <created>1685033695809</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033695809</updated>
+    </task>
+    <task id="LOCAL-00072" summary="re run">
+      <created>1685033860233</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033860234</updated>
+    </task>
+    <task id="LOCAL-00073" summary="re run">
+      <created>1685034163888</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1685034163888</updated>
+    </task>
+    <task id="LOCAL-00074" summary="re run">
+      <created>1685034364661</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1685034364661</updated>
+    </task>
+    <task id="LOCAL-00075" summary="re run">
+      <created>1685034582946</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1685034582946</updated>
+    </task>
+    <task id="LOCAL-00076" summary="re run">
+      <created>1685035027094</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1685035027094</updated>
+    </task>
+    <task id="LOCAL-00077" summary="re run">
+      <created>1685035683518</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1685035683518</updated>
+    </task>
+    <task id="LOCAL-00078" summary="re run">
+      <created>1685040612873</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1685040612873</updated>
+    </task>
+    <task id="LOCAL-00079" summary="setup nginx and ssl certficate with let's encrypt">
+      <created>1685042457744</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1685042457744</updated>
+    </task>
+    <task id="LOCAL-00080" summary="setup nginx and ssl certficate with let's encrypt">
+      <created>1685042924985</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1685042924985</updated>
+    </task>
+    <task id="LOCAL-00081" summary="setup nginx and ssl certficate with let's encrypt">
+      <created>1685042939147</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1685042939148</updated>
+    </task>
+    <task id="LOCAL-00082" summary="export prot 3000">
+      <created>1685043153156</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1685043153156</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -369,30 +566,32 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="update the node modules and add a chart to the project by id and add some styles to the search bar" />
-    <MESSAGE value="add attachments to projects #74" />
-    <MESSAGE value="update project card skeleton" />
-    <MESSAGE value="add a submit proposal form" />
-    <MESSAGE value="add some check to submit a proposal form" />
-    <MESSAGE value="add CreateProjectForm page and code refactoring" />
-    <MESSAGE value="add edit project form" />
-    <MESSAGE value=" I've added edit project form" />
-    <MESSAGE value="I've moved the components folder to the nextjs folder and the graphql schemas and the resolvers to the nextjs folder, so they won't be treated as endpoints." />
-    <MESSAGE value="refactore the mail service" />
-    <MESSAGE value="add contract form and fix some problems in the resolvers" />
-    <MESSAGE value="add the project editor for dashboard" />
-    <MESSAGE value="adjust the dashboard menu with 3 options and make the sidebar interactive" />
-    <MESSAGE value="adding an edit project to the dashboard" />
-    <MESSAGE value="create project is added to the dashboard" />
-    <MESSAGE value="comeplete the project dashbaord" />
-    <MESSAGE value="custom  dashboard per userRole" />
-    <MESSAGE value="add edit prposal mangement" />
-    <MESSAGE value="update dashboard layout" />
-    <MESSAGE value="add edit/accept project to proposal for clients in the dashboar" />
-    <MESSAGE value="add a proposal status filter in the dashboard" />
-    <MESSAGE value="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )" />
     <MESSAGE value="add the billing tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="add the billing tab" />
+    <MESSAGE value="run the app in detached mode" />
+    <MESSAGE value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="start without a build" />
+    <MESSAGE value="start without a build&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="deployment succeeded try to deploy all containers in dev mode" />
+    <MESSAGE value="stop restarting the containers" />
+    <MESSAGE value="run jobs in parallel" />
+    <MESSAGE value="add azure login before deployement" />
+    <MESSAGE value="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production" />
+    <MESSAGE value="login in each step" />
+    <MESSAGE value="login to azure cli" />
+    <MESSAGE value="login to azure cli instead" />
+    <MESSAGE value="Revert &quot;deployment succeeded try to deploy all containers in dev mode&quot;&#10;&#10;This reverts commit 56ba085f" />
+    <MESSAGE value="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="add other containers&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="fix some erros" />
+    <MESSAGE value="fix some errors" />
+    <MESSAGE value="rebuild" />
+    <MESSAGE value="re run" />
+    <MESSAGE value="setup nginx and ssl certficate with let's encrypt" />
+    <MESSAGE value="export prot 3000" />
+    <MESSAGE value="edit config" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit config" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
