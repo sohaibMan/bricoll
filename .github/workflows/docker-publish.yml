@@ -25,15 +25,6 @@ jobs:
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: "Build and push image"
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-          #          docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-          #          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
       - run: |
           docker compose up --build -d
           docker tag mongo ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
@@ -45,9 +36,19 @@ jobs:
           docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
 
+  azure_login:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build and push image"
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
   deploy_mongodb_db:
     needs:
       - build
+      - azure_login
     runs-on: ubuntu-latest
     steps:
       - name: "Deploy Mongo to Azure Container Instances"
@@ -64,6 +65,7 @@ jobs:
   deploy_redis_db:
     needs:
       - build
+      - azure_login
     runs-on: ubuntu-latest
     steps:
       - name: "Deploy Redis to Azure Container Instances"
@@ -80,6 +82,7 @@ jobs:
   deploy_app:
     needs:
       - build
+      - azure_login
     runs-on: ubuntu-latest
     steps:
       - name: "Deploy NextJs to Azure Container Instances"
