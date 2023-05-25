@@ -189,14 +189,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="21986000" />
-    </task>
-    <task id="LOCAL-00022" summary="add edit/accept project to proposal for clients in the dashboar">
-      <created>1683816560692</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1683816560692</updated>
+      <workItem from="1685007611798" duration="22295000" />
     </task>
     <task id="LOCAL-00023" summary="add a proposal status filter in the dashboard">
       <created>1683824351807</created>
@@ -534,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685033387643</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="re run">
+      <created>1685033695809</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033695809</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
