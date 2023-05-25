@@ -15,7 +15,8 @@ env:
   IMAGE_NAME: bricoll
 
 jobs:
-  azure_login:
+
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: "Build and push image"
@@ -25,11 +26,6 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-  build:
-    runs-on: ubuntu-latest
-    needs:
-      - azure_login
-    steps:
       - name: Checkout repository
         uses: actions/checkout@v3.5.2
       # https://github.com/docker/login-action
@@ -50,9 +46,15 @@ jobs:
   deploy_mongodb_db:
     needs:
       - build
-      - azure_login
     runs-on: ubuntu-latest
     steps:
+      - name: "Build and push image"
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: "Deploy Mongo to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
@@ -67,9 +69,15 @@ jobs:
   deploy_redis_db:
     needs:
       - build
-      - azure_login
     runs-on: ubuntu-latest
     steps:
+      - name: "Build and push image"
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: "Deploy Redis to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
@@ -84,9 +92,15 @@ jobs:
   deploy_app:
     needs:
       - build
-      - azure_login
     runs-on: ubuntu-latest
     steps:
+      - name: "Build and push image"
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: "Deploy NextJs to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
@@ -105,6 +119,13 @@ jobs:
       - build
       - deploy_app
     steps:
+      - name: "Build and push image"
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
       - name: "Deploy Nginx to Azure Container Instances"
         uses: "azure/aci-deploy@v1"
         with:
