@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="setup nginx and ssl certficate with let's encrypt">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="edit config">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nginx/nginx.conf" beforeDir="false" afterPath="$PROJECT_DIR$/nginx/nginx.conf" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -189,21 +191,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="29653000" />
-    </task>
-    <task id="LOCAL-00032" summary="Merge remote-tracking branch 'origin/Production' into Production">
-      <created>1684975540946</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1684975540946</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1685007681549</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1685007681549</updated>
+      <workItem from="1685007611798" duration="31723000" />
     </task>
     <task id="LOCAL-00034" summary="start without a build">
       <created>1685008638520</created>
@@ -534,7 +522,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685042924985</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="setup nginx and ssl certficate with let's encrypt">
+      <created>1685042939147</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1685042939148</updated>
+    </task>
+    <task id="LOCAL-00082" summary="export prot 3000">
+      <created>1685043153156</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1685043153156</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -564,8 +566,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="add a proposal status filter in the dashboard" />
-    <MESSAGE value="add a file upload to create project so the client can attach some files to his projects (todo :add them to proposals )" />
     <MESSAGE value="add the billing tab" />
     <MESSAGE value="run the app in detached mode" />
     <MESSAGE value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
@@ -589,7 +589,9 @@
     <MESSAGE value="rebuild" />
     <MESSAGE value="re run" />
     <MESSAGE value="setup nginx and ssl certficate with let's encrypt" />
-    <option name="LAST_COMMIT_MESSAGE" value="setup nginx and ssl certficate with let's encrypt" />
+    <MESSAGE value="export prot 3000" />
+    <MESSAGE value="edit config" />
+    <option name="LAST_COMMIT_MESSAGE" value="edit config" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
