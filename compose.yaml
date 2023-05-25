@@ -20,6 +20,8 @@ services:
     ports:
       - "3000:3000"
     #    restart: on-failure
+    env_file:
+      - ./nextjs/.env.local
     depends_on:
       - bricoll_mongo
     hostname: bricoll_nextjs

@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="fix dep">
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="load env from docker env instead">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,35 +193,7 @@
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
       <workItem from="1685007611798" duration="35509000" />
-      <workItem from="1685054076494" duration="502000" />
-    </task>
-    <task id="LOCAL-00039" summary="add azure login before deployement">
-      <created>1685012744921</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1685012744921</updated>
-    </task>
-    <task id="LOCAL-00040" summary="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1685012857418</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1685012857418</updated>
-    </task>
-    <task id="LOCAL-00041" summary="Merge remote-tracking branch 'origin/Production' into Production">
-      <created>1685012929095</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1685012929095</updated>
-    </task>
-    <task id="LOCAL-00042" summary="login in each step">
-      <created>1685013328007</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1685013328007</updated>
+      <workItem from="1685054076494" duration="4153000" />
     </task>
     <task id="LOCAL-00043" summary="login to azure cli">
       <created>1685013778830</created>
@@ -536,7 +510,35 @@
       <option name="project" value="LOCAL" />
       <updated>1685049357451</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="fix dashboard">
+      <created>1685054704989</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1685054704990</updated>
+    </task>
+    <task id="LOCAL-00089" summary="fix dashboard">
+      <created>1685056531666</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1685056531667</updated>
+    </task>
+    <task id="LOCAL-00090" summary="update hard coded url in app">
+      <created>1685057706648</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
+      <option name="project" value="LOCAL" />
+      <updated>1685057706648</updated>
+    </task>
+    <task id="LOCAL-00091" summary="load env from docker env instead">
+      <created>1685058882730</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1685058882730</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -566,9 +568,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <MESSAGE value="start without a build" />
-    <MESSAGE value="start without a build&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="deployment succeeded try to deploy all containers in dev mode" />
     <MESSAGE value="stop restarting the containers" />
     <MESSAGE value="run jobs in parallel" />
@@ -591,7 +590,10 @@
     <MESSAGE value="set username and password to mongodb" />
     <MESSAGE value="remove portainer from pipeline" />
     <MESSAGE value="fix dep" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix dep" />
+    <MESSAGE value="fix dashboard" />
+    <MESSAGE value="update hard coded url in app" />
+    <MESSAGE value="load env from docker env instead" />
+    <option name="LAST_COMMIT_MESSAGE" value="load env from docker env instead" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
