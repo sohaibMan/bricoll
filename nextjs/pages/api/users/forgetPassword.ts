@@ -62,7 +62,6 @@ export default async function handler(
         }
       );
 
-    console.log("UserR, ", userR);
 
     // ? Send the token to users's email
     const resetURL = `http://localhost:3000/api/v1/users/resetPassword/${resetToken}`;

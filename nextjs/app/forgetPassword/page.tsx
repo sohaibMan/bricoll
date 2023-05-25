@@ -1,11 +1,13 @@
 "use client";
 import { useState } from "react";
 import ForgetPasswordForm from "../../components/auth/forgetPassword";
+import ResetPasswordSent from "../../components/auth/forgetPassword/ResetPasswordSent";
 import toast from "react-hot-toast";
 
 const forgetPasswordPage = () => {
   // const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isResetPasswordSent, setIsResetPasswordSent] = useState(false);
 
   const [email, setEmail] = useState("");
 
@@ -15,7 +17,7 @@ const forgetPasswordPage = () => {
 
   const handleForgetPassword = async (formData: any) => {
     console.log("formData, ", formData);
-    
+
     const response = await fetch(`/api/users/forgetPassword`, {
       method: "POST",
       headers: {
@@ -32,8 +34,8 @@ const forgetPasswordPage = () => {
 
     // alert(JSON.stringify(res));
     toast.success(res.message + " ✅");
-    // router.push('/register');
-};
+    setIsResetPasswordSent(true);
+  };
 
   return (
     <>
@@ -62,7 +64,11 @@ const forgetPasswordPage = () => {
         </div>
       </nav>
       <div className="flex flex-col items-center mt-8">
-        <ForgetPasswordForm onSubmit={handleForgetPassword} />
+        {isResetPasswordSent ? ( 
+          <ResetPasswordSent />
+        ) : (
+          <ForgetPasswordForm onSubmit={handleForgetPassword} />
+        )}
       </div>
     </>
   );
