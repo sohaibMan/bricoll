@@ -1,131 +1,56 @@
-// import React, { useContext, useState } from "react";
-// import { PayButton, TextField } from "@mui/material";
-// import { multiStepContext } from "./stepContext";
-
-// export default function SecondStep() {
-//   const { setStep, userData, setUserData }: any = useContext(multiStepContext);
-//   const [emailError, setEmailError] = useState("");
-
-//   const validateEmail = (email: string) => {
-//     // email validation criteria
-//     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
-
-//     if (!emailRegex.test(email)) {
-//       setEmailError("Invalid email address");
-//       return false;
-//     }
-
-//     setEmailError("");
-//     return true;
-//   };
-
-//   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-//     const email = e.target.value;
-//     validateEmail(email);
-//     setUserData({ ...userData, email });
-//   };
-
-//   return (
-//     <div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="Email"
-//           margin="normal"
-//           variant="outlined"
-//           color="secondary"
-//           defaultValue={userData.email}
-//           onChange={handleEmailChange}
-//           error={Boolean(emailError)}
-//           helperText={emailError}
-//         />
-//       </div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="experienceLevel"
-//           margin="normal"
-//           variant="outlined"
-//           color="secondary"
-//           defaultValue={userData.experienceLevel}
-//           onChange={(e) =>
-//             setUserData({ ...userData, experienceLevel: e.target.value })
-//           }
-//         />
-//       </div>
-//       <div>
-//         <TextField
-//           style={{ width: "30%" }}
-//           label="District"
-//           margin="normal"
-//           variant="outlined"
-//           color="secondary"
-//           defaultValue={userData.district}
-//           onChange={(e) =>
-//             setUserData({ ...userData, district: e.target.value })
-//           }
-//         />
-//       </div>
-//       <div>
-//         <PayButton
-//           style={{ marginRight: "80px", marginTop: "50px" }}
-//           variant="contained"
-//           color="secondary"
-//           onClick={() => setStep(1)}
-//         >
-//           {" "}
-//           Back{" "}
-//         </PayButton>{" "}
-//         <span></span>
-//         <PayButton
-//           style={{ marginLeft: "80px", marginTop: "50px" }}
-//           variant="contained"
-//           color="primary"
-//           onClick={() => {
-//             if (validateEmail(userData.email)) {
-//               setStep(3);
-//             }
-//           }}
-//         >
-//           {" "}
-//           Next{" "}
-//         </PayButton>
-//       </div>
-//     </div>
-//   );
-// }
-
-import React, {useContext} from "react";
-import {Button, TextField} from "@mui/material";
-import {multiStepContext} from "./stepContext";
-import {toast} from "react-hot-toast";
+import React, { useContext, useState } from "react";
+import { Button, TextField } from "@mui/material";
+import { multiStepContext } from "./stepContext";
+import { toast } from "react-hot-toast";
+import { useSession } from "next-auth/react";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function SecondStep() {
   const { setStep, userData, setUserData }: any = useContext(multiStepContext);
+  const { data: session } = useSession();
+  const [skills, setSkills] = useState<any>(userData.skills || []);
 
-  // const formik = useFormik({
-  //   initialValues: {
-  //     profileTitle: userData.profileTitle,
-  //     experienceLevel: userData.experienceLevel,
-  //     category: userData.category,
-  //   },
-  //   validationSchema: yup.object({
-  //     profileTitle: yup.string().required("Profile Title is required"),
-  //     experienceLevel: yup.string().required("Level experience is required"),
-  //     category: yup.string().required("Category name is required"),
-  //   }),
-  //   onSubmit: (values) => {
-  //     setUserData(values);
-  //     setStep(3);
-  //   },
-  // });
+  const handleSkillsChange = (newSkills: any) => {
+    setSkills(newSkills);
+    setUserData({ ...userData, skills: newSkills });
+  };
+
+  const popularSkills = [
+    "Web Development",
+    "Mobile Development",
+    "Video Editor",
+    "Graph Design",
+    "Social Media",
+    "Marketer",
+  ];
 
   function handleSubmit() {
-    const requiredFields = ["profileTitle", "experienceLevel", "category"];
-    const missingFields = requiredFields.filter(field => !userData[field]);
-  
+    const freelancerRequiredFields = [
+      "profileTitle",
+      "experienceLevel",
+      "category",
+      "skills",
+    ];
+    const clientRequiredFields = [
+      "companyName",
+      "website",
+      "industry",
+      "yearFounded",
+      "ownershipType",
+    ];
+
+    const requiredFields =
+      session?.user.userRole === "Freelancer"
+        ? freelancerRequiredFields
+        : clientRequiredFields;
+
+    const missingFields = requiredFields.filter((field) => !userData[field]);
+
     if (missingFields.length) {
-      toast.error(`Please fill in the following fields: ${missingFields.join(", ")}`);
+      toast.error(
+        `Please fill in the following fields: ${missingFields.join(", ")}`
+      );
     } else {
       setStep(3);
     }
@@ -133,48 +58,153 @@ export default function SecondStep() {
 
   return (
     <div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Profile Title"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="profileTitle"
-          defaultValue={userData["profileTitle"]}
-          onChange={(e) =>
-            setUserData({ ...userData, profileTitle: e.target.value })
-          }
-          />  
-      </div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Experience Level"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="experienceLevel"
-          defaultValue={userData["experienceLevel"]}
-          onChange={(e) =>
-            setUserData({ ...userData, experienceLevel: e.target.value })
-          }
-        />
-      </div>
-      <div>
-        <TextField
-          style={{ width: "30%" }}
-          label="Category"
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          name="category"
-          defaultValue={userData["category"]}
-          onChange={(e) =>
-            setUserData({ ...userData, category: e.target.value })
-          }
-        />
-      </div>
+      {session?.user.userRole === "Freelancer" ? (
+        <>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Profile Title"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="profileTitle"
+              defaultValue={userData["profileTitle"]}
+              onChange={(e) =>
+                setUserData({ ...userData, profileTitle: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Experience Level"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="experienceLevel"
+              defaultValue={userData["experienceLevel"]}
+              onChange={(e) =>
+                setUserData({ ...userData, experienceLevel: e.target.value })
+              }
+            />
+          </div>
+          <Autocomplete
+            multiple
+            id="tags-filled"
+            options={popularSkills}
+            defaultValue={skills}
+            freeSolo
+            onChange={(event, newSkills) => {
+              handleSkillsChange(newSkills);
+            }}
+            renderTags={(value: string[], getTagProps) =>
+              value.map((option: string, index: number) => (
+                <Chip
+                  variant="outlined"
+                  label={option}
+                  {...getTagProps({ index })}
+                />
+              ))
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Skills"
+                placeholder="add more skills..."
+              />
+            )}
+          />
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Category"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="category"
+              defaultValue={userData["category"]}
+              onChange={(e) =>
+                setUserData({ ...userData, category: e.target.value })
+              }
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Company Name"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="companyName"
+              defaultValue={userData["companyName"]}
+              onChange={(e) =>
+                setUserData({ ...userData, companyName: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Website"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="website"
+              placeholder="https://www.yourcompanywebsite.com"
+              defaultValue={userData["website"]}
+              onChange={(e) =>
+                setUserData({ ...userData, website: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Industry"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="industry"
+              defaultValue={userData["industry"]}
+              onChange={(e) =>
+                setUserData({ ...userData, industry: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Year Founded"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="yearFounded"
+              defaultValue={userData["yearFounded"]}
+              onChange={(e) =>
+                setUserData({ ...userData, yearFounded: e.target.value })
+              }
+            />
+          </div>
+          <div>
+            <TextField
+              style={{ width: "30%" }}
+              label="Ownership Type"
+              margin="normal"
+              variant="outlined"
+              color="primary"
+              name="ownershipType"
+              defaultValue={userData["ownershipType"]}
+              onChange={(e) =>
+                setUserData({ ...userData, ownershipType: e.target.value })
+              }
+            />
+          </div>
+        </>
+      )}
       <div>
         <Button
           style={{ marginRight: "80px", marginTop: "50px" }}
@@ -200,5 +230,3 @@ export default function SecondStep() {
     </div>
   );
 }
-
-

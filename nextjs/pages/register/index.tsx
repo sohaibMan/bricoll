@@ -5,14 +5,22 @@ import ThirdStep from "../../components/auth/registration/thirdStep";
 import FourthStep from "../../components/auth/registration/fourthStep";
 import {Step, StepLabel, Stepper} from "@mui/material";
 import {multiStepContext} from "../../components/auth/registration/stepContext";
-import Typography from "@mui/joy/Typography";
+import {Typography} from "@mui/joy";
+import { useSession } from "next-auth/react";
 
 
-const steps = ["Overview", "Skills", "Experiences", "Complete Profile"];
+const freelancerSteps = ["Overview", "Skills", "Experiences", "Complete Profile"];
+const clientSteps = ["Personal Information", "Company Information", "Skills", "Complete Profile"];
 
 export default function Index() {
     const {currentStep} = useContext(multiStepContext);
 
+    const {data: session} = useSession() 
+
+    const steps = (session?.user.userRole === "Freelancer") ? freelancerSteps : clientSteps
+
+    // console.log("session from registre ", session?.user.userRole);
+    
 
     /**
      * todo add  a country selector
@@ -52,7 +60,8 @@ export default function Index() {
                     activeStep={currentStep - 1}
                     alternativeLabel
                 >
-                    {steps.map((label) => (
+                    {
+                    steps.map((label) => (
                         <Step key={label}>
                             <StepLabel>{label}</StepLabel>
                         </Step>

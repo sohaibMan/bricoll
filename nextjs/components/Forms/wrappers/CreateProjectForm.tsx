@@ -1,5 +1,5 @@
 import ProjectForm from "../base/ProjectForm";
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
 import {useContext} from "react";
@@ -8,35 +8,51 @@ import {currentComponentContext} from "../../Dashboard/DashBoardWrapper";
 import {DashboardItems} from "../../../pages/dashboard";
 
 const CREATE_PROJECT_MUTATION = gql`
-    mutation CreateProject($title: String!, $description: String!, $price: Float!, $skills: [String!]!, $projectScope: ProjectScopeInput!, $category: ProjectCategoriesEnum!,$attachments: [AttachmentInput!]) {
-        createProject(title: $title, description: $description, price: $price, skills: $skills, projectScope: $projectScope, category: $category,attachments: $attachments) {
-            client_id
-            _id
-            title
-            description
-            price
-            skills
-            created_at
-            category
-            reactions {
-                freelancer_id
-                reaction_type
-            }
-            projectScope {
-                estimated_duration_in_days
-                level_of_expertise
-                size_of_project
-            }
-            attachments {
-                url
-                name
-                type
-            }
-        }
+  mutation CreateProject(
+    $title: String!
+    $description: String!
+    $price: Float!
+    $skills: [String!]!
+    $projectScope: ProjectScopeInput!
+    $category: ProjectCategoriesEnum!
+    $attachments: [AttachmentInput!]
+  ) {
+    createProject(
+      title: $title
+      description: $description
+      price: $price
+      skills: $skills
+      projectScope: $projectScope
+      category: $category
+      attachments: $attachments
+    ) {
+      client_id
+      _id
+      title
+      description
+      price
+      skills
+      created_at
+      category
+      reactions {
+        freelancer_id
+        reaction_type
+      }
+      projectScope {
+        estimated_duration_in_days
+        level_of_expertise
+        size_of_project
+      }
+      attachments {
+        url
+        name
+        type
+      }
     }
+  }
 `;
 export default function CreateProjectForm(props: {
-    setProjects: React.Dispatch<React.SetStateAction<Project[]>>
+  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
 }) {
     const {setCurrentComponent} = useContext(currentComponentContext)
 
@@ -47,4 +63,5 @@ export default function CreateProjectForm(props: {
                                                                                      setCurrentComponent(DashboardItems.Projects)
                                                                                  }}/>
     </Box>
-};
+  );
+}
