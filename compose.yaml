@@ -19,7 +19,6 @@ services:
     build: ./nextjs
     ports:
       - "3000:3000"
-
     #    restart: on-failure
     depends_on:
       - bricoll_mongo
@@ -31,6 +30,12 @@ services:
       - /data/db
     hostname: bricoll_mongo
     container_name: bricoll_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=bricoll
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD} # set in .env (set your own)
+    restart: unless-stopped
   bricoll_redis:
     image: redis
     #    restart: on-failure
