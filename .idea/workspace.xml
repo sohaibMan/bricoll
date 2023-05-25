@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,14 +189,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="21850000" />
-    </task>
-    <task id="LOCAL-00021" summary="update dashboard layout">
-      <created>1683813107995</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1683813107995</updated>
+      <workItem from="1685007611798" duration="21986000" />
     </task>
     <task id="LOCAL-00022" summary="add edit/accept project to proposal for clients in the dashboar">
       <created>1683816560692</created>
@@ -533,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685032490042</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="re run">
+      <created>1685033387643</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1685033387643</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
