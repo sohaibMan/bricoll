@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="Merge remote-tracking branch 'origin/Production' into Production">
+      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +27,7 @@
         <option value="Sohaib manah &lt;96356071+sohaibman@users.noreply.github.com&gt;" />
       </list>
     </option>
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
   </component>
@@ -163,7 +163,7 @@
       <workItem from="1684070159685" duration="9402000" />
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
-      <workItem from="1684971993273" duration="1842000" />
+      <workItem from="1684971993273" duration="2306000" />
     </task>
     <task id="LOCAL-00001" summary="update the node modules and add a chart to the project by id and add some styles to the search bar">
       <created>1683310064878</created>
@@ -347,7 +347,28 @@
       <option name="project" value="LOCAL" />
       <updated>1684973254145</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1684974099445</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1684974099445</updated>
+    </task>
+    <task id="LOCAL-00028" summary="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1684974220523</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1684974220523</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Merge remote-tracking branch 'origin/Production' into Production">
+      <created>1684974428103</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1684974428103</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +398,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="update the node modules and add a chart to the project by id and add some styles to the search bar" />
     <MESSAGE value="add attachments to projects #74" />
     <MESSAGE value="update project card skeleton" />
     <MESSAGE value="add a submit proposal form" />
@@ -402,7 +422,8 @@
     <MESSAGE value="add the billing tab" />
     <MESSAGE value="run the app in detached mode" />
     <MESSAGE value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="run the app in detached mode&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/Production' into Production" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
