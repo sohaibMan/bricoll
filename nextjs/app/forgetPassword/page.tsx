@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import ForgetPasswordForm from "../../components/auth/forgetPassword";
+import toast from "react-hot-toast";
 
 const forgetPasswordPage = () => {
   // const router = useRouter();
@@ -12,9 +13,25 @@ const forgetPasswordPage = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleForgetPassword = (formData: any) => {
+  const handleForgetPassword = async (formData: any) => {
     console.log("formData, ", formData);
-    // todo call our api with the data
+    
+    const response = await fetch(`/api/users/forgetPassword`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    const res = await response.json();
+
+    if (!response.ok) {
+      return toast.error(res.message);
+    }
+
+    // alert(JSON.stringify(res));
+    toast.success(res.message + " ✅");
     // router.push('/register');
 };
 

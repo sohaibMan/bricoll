@@ -17,8 +17,6 @@ const ForgetPasswordForm = ({onSubmit }: ForgetPasswordFormProps) => {
     e.preventDefault();
 
     if (!email) {
-      // console.log('Please fill in all fields');
-
       return toast.error(`Please fill the ${email} field!`);
     }
 
