@@ -53,7 +53,6 @@ jobs:
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_e571afc7bae74602a0ee32419b38f60a }}
           images: :${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
-
-#          images: ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
-#            ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
-#            ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+            ${{ secrets.REGISTRY_LOGIN_SERVER }}/mongo:${{ github.sha }}
+            ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+            ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}

@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="re run">
       <change beforePath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/Production_bricoll.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -188,14 +189,7 @@
       <workItem from="1684104970610" duration="1581000" />
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
-      <workItem from="1685007611798" duration="11040000" />
-    </task>
-    <task id="LOCAL-00006" summary="add some check to submit a proposal form">
-      <created>1683476153434</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1683476153434</updated>
+      <workItem from="1685007611798" duration="11940000" />
     </task>
     <task id="LOCAL-00007" summary="add CreateProjectForm page and code refactoring">
       <created>1683484173974</created>
@@ -533,7 +527,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685020450940</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="re run">
+      <created>1685020528854</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1685020528855</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
