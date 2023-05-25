@@ -6,7 +6,12 @@ import FormControl, {FormControlProps} from '@mui/joy/FormControl';
 import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Typography from '@mui/joy/Typography';
 
-export default function ContrySelector({ sx, ...props }: FormControlProps) {
+interface CountrySelectorProps {
+  sx: any;
+  onCountryChange: (selectedCountry: any) => void;
+}
+
+export default function ContrySelector({sx, onCountryChange, ...props }: CountrySelectorProps) {
   return (
     <FormControl
       {...props}
@@ -41,6 +46,9 @@ export default function ContrySelector({ sx, ...props }: FormControlProps) {
           input: {
             autoComplete: 'new-password', // disable autocomplete and autofill
           },
+        }}
+        onChange={(event, selectedOption) => {
+          onCountryChange(selectedOption);
         }}
       />
     </FormControl>
