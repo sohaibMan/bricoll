@@ -1,19 +1,19 @@
 version: '3'
 services:
-#  bricoll_nginx:
-  #    image: nginx
-  #    volumes:
-  #      - ./nginx/nginx.conf:/tmp/nginx.conf
-  #    environment:
-  #      - NEXTJS_SERVER_ADDR=bricoll_nextjs:3000
-  #    command: /bin/bash -c "envsubst < /tmp/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;';"
-  #    ports:
-  #      - 80:80
-  #    depends_on:
-  #      - bricoll_nextjs
-  #    restart: on-failure
-  #    hostname: bricoll_nginx
-  #    container_name: bricoll_nginx
+  bricoll_nginx:
+    image: nginx
+    volumes:
+      - ./nginx/nginx.conf:/tmp/nginx.conf
+    environment:
+      - NEXTJS_SERVER_ADDR=bricoll_nextjs:3000
+    command: /bin/bash -c "envsubst < /tmp/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;';"
+    ports:
+      - 80:80
+    depends_on:
+      - bricoll_nextjs
+    restart: on-failure
+    hostname: bricoll_nginx
+    container_name: bricoll_nginx
   #  bricoll_nextjs:
   #    image: nextjs
   #    build: ./nextjs
@@ -27,17 +27,17 @@ services:
   #    container_name: bricoll_nextjs
   bricoll_mongo:
     image: mongo
-#    restart: on-failure
+    #    restart: on-failure
     volumes:
       - /data/db
     hostname: bricoll_mongo
     container_name: bricoll_mongo
-#  bricoll_redis:
-#    image: redis
-#    restart: on-failure
-#    hostname: bricoll_redis
-#    container_name: bricoll_redis
-#    volumes:
-#      - /data
+  bricoll_redis:
+    image: redis
+    restart: on-failure
+    hostname: bricoll_redis
+    container_name: bricoll_redis
+    volumes:
+      - /data
 
 
