@@ -51,6 +51,8 @@ jobs:
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nginx:${{ github.sha }}
           docker tag redis ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
+          docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
       
       
       
@@ -65,4 +67,4 @@ jobs:
           registry-username: ${{ secrets.REGISTRY_USERNAME }}
           registry-password: ${{ secrets.REGISTRY_PASSWORD }}
           name: bricoll
-          location: "west us"
+          location: "East US"

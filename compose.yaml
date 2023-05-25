@@ -9,25 +9,23 @@ services:
     command: /bin/bash -c "envsubst < /tmp/nginx.conf > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;';"
     ports:
       - "80:80"
-    #    depends_on:
-    #      - bricoll_nextjs
+    depends_on:
+      - bricoll_nextjs
     restart: on-failure
     hostname: bricoll_nginx
     container_name: bricoll_nginx
-  #  bricoll_nextjs:
-  #    image: nextjs
-  #    build: ./nextjs
-  #    volumes:
-  #      - ./nextjs:/app
-  #
-  #    restart: on-failure
-  #    depends_on:
-  #      - bricoll_mongo
-  #    hostname: bricoll_nextjs
-  #    container_name: bricoll_nextjs
+  bricoll_nextjs:
+    image: nextjs
+    build: ./nextjs
+    volumes:
+      - ./nextjs:/app
+    restart: on-failure
+    depends_on:
+      - bricoll_mongo
+    hostname: bricoll_nextjs
+    container_name: bricoll_nextjs
   bricoll_mongo:
     image: mongo
-    #    restart: on-failure
     volumes:
       - /data/db
     hostname: bricoll_mongo
