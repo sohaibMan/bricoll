@@ -17,9 +17,9 @@ services:
   bricoll_nextjs:
     image: nextjs
     build: ./nextjs
-    volumes:
-      - ./nextjs:/app
-      - ./nextjs/node_modules
+    #    volumes:
+    #      - ./nextjs:/app
+    #      - ./nextjs/node_modules
     #    restart: on-failure
     depends_on:
       - bricoll_mongo
