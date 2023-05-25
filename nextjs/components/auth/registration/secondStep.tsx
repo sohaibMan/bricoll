@@ -1,18 +1,36 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button, TextField } from "@mui/material";
 import { multiStepContext } from "./stepContext";
 import { toast } from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function SecondStep() {
   const { setStep, userData, setUserData }: any = useContext(multiStepContext);
   const { data: session } = useSession();
+  const [skills, setSkills] = useState<any>(userData.skills || []);
+
+  const handleSkillsChange = (newSkills: any) => {
+    setSkills(newSkills);
+    setUserData({ ...userData, skills: newSkills });
+  };
+
+  const popularSkills = [
+    "Web Development",
+    "Mobile Development",
+    "Video Editor",
+    "Graph Design",
+    "Social Media",
+    "Marketer",
+  ];
 
   function handleSubmit() {
     const freelancerRequiredFields = [
       "profileTitle",
       "experienceLevel",
       "category",
+      "skills",
     ];
     const clientRequiredFields = [
       "companyName",
@@ -70,6 +88,33 @@ export default function SecondStep() {
               }
             />
           </div>
+          <Autocomplete
+            multiple
+            id="tags-filled"
+            options={popularSkills}
+            defaultValue={skills}
+            freeSolo
+            onChange={(event, newSkills) => {
+              handleSkillsChange(newSkills);
+            }}
+            renderTags={(value: string[], getTagProps) =>
+              value.map((option: string, index: number) => (
+                <Chip
+                  variant="outlined"
+                  label={option}
+                  {...getTagProps({ index })}
+                />
+              ))
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Skills"
+                placeholder="add more skills..."
+              />
+            )}
+          />
           <div>
             <TextField
               style={{ width: "30%" }}

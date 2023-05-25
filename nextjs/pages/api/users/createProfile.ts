@@ -52,9 +52,14 @@ export default async function handler(
         !phone ||
         !address ||
         !language ||
+        !profileTitle ||
+        !experienceLevel ||
+        !category ||
+        !company ||
         !image ||
         !jobTitle ||
         !educationLevel ||
+        !portfolio ||
         !skills
       ) {
         const errors = [];
@@ -126,7 +131,7 @@ export default async function handler(
       }
     }
 
-    const newUser = {
+    const newFreelancerUser = {
       address,
       jobTitle,
       bio,
@@ -142,6 +147,18 @@ export default async function handler(
       educationLevel,
       portfolio,
       skills,
+      reviews: [],
+      payments: [],
+    };
+
+    const newClientUser = {
+      address,
+      bio,
+      country,
+      city,
+      phone,
+      language,
+      image,
       postalCode,
       timeZone,
       companyName,
@@ -155,6 +172,8 @@ export default async function handler(
       reviews: [],
       payments: [],
     };
+
+    const newUser = (token?.userRole === "Freelancer") ? newFreelancerUser : newClientUser;
 
     // isCompleted: true,
 

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/joy/Button";
 import { toast } from "react-hot-toast";
 import { multiStepContext } from "./stepContext";
@@ -7,11 +7,23 @@ import Textarea from "@mui/joy/Textarea";
 import Input from "@mui/joy/Input";
 import { useSession } from "next-auth/react";
 import CountrySelector from "../../AutoCompletes/CountrySelector";
+import TagsInput from "react-tagsinput";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
+
+import "react-tagsinput/react-tagsinput.css";
 
 export default function FirstStep() {
   const { setStep, userData, setUserData } = useContext(multiStepContext);
+//   const [skills, setSkills] = useState<any>(userData.skills || []);
 
   const { data: session } = useSession();
+
+//   const handleSkillsChange = (newSkills: any) => {
+//     setSkills(newSkills);
+//     // setUserData({ ...userData, skills: newSkills });
+//   };
 
   function handleSubmit() {
     const freelancerRequiredFields = [
@@ -53,6 +65,15 @@ export default function FirstStep() {
   const handleCountryChange = (selectedCountry: string) => {
     setUserData({ ...userData, country: selectedCountry });
   };
+
+//   const popularSkills = [
+//     "Web Development",
+//     "Mobile Development",
+//     "Video Editor",
+//     "Graph Design",
+//     "Social Media",
+//     "Marketer",
+//   ];
 
   return (
     <Stack spacing={2} sx={{ width: "50%", margin: "auto" }}>
@@ -99,7 +120,10 @@ export default function FirstStep() {
             />
             <Divider orientation="vertical" />
 
-            <CountrySelector onCountryChange={handleCountryChange} />
+            <CountrySelector
+              onCountryChange={handleCountryChange}
+              sx={undefined}
+            />
           </Stack>
 
           <Input
@@ -151,7 +175,10 @@ export default function FirstStep() {
             /> */}
             <Divider orientation="vertical" />
 
-            <CountrySelector onCountryChange={handleCountryChange} />
+            <CountrySelector
+              onCountryChange={handleCountryChange}
+              sx={undefined}
+            />
             <Input
               sx={{ width: "100%" }}
               placeholder="City"
@@ -180,6 +207,59 @@ export default function FirstStep() {
             }}
           />
 
+          {/* <Autocomplete
+            multiple
+            id="tags-filled"
+            options={popularSkills}
+            defaultValue={skills}
+            freeSolo
+            onChange={(event, newSkills) => {
+              handleSkillsChange(newSkills);
+            }}
+            renderTags={(value: string[], getTagProps) =>
+              value.map((option: string, index: number) => (
+                <Chip
+                  variant="outlined"
+                  label={option}
+                  {...getTagProps({ index })}
+                />
+              ))
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Skills"
+                placeholder="add more skills..."
+              />
+            )}
+          /> */}
+
+          {/* <Autocomplete
+            multiple
+            id="tags-filled"
+            options={popularSkills.map((option) => option)}
+            defaultValue={[popularSkills[0]]}
+            freeSolo
+            renderTags={(value: readonly string[], getTagProps) =>
+              value.map((option: string, index: number) => (
+                <Chip
+                  variant="outlined"
+                  label={option}
+                  {...getTagProps({ index })}
+                />
+              ))
+            }
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant="filled"
+                label="Skills"
+                placeholder="add more skills..."
+              />
+            )}
+          /> */}
+
           <Input
             sx={{ width: "100%" }}
             placeholder="Time Zone"
@@ -196,6 +276,7 @@ export default function FirstStep() {
             defaultValue={userData["bio"]}
             onChange={(e) => setUserData({ ...userData, bio: e.target.value })}
           />
+          {/* <TagsInput value={skills} onChange={handleSkillsChange} /> */}
         </>
       )}
 
