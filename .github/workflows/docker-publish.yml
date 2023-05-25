@@ -47,7 +47,6 @@ jobs:
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/redis:${{ github.sha }}
           docker tag nextjs ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/nextjs:${{ github.sha }}
-
   deploy_mongodb_db:
     needs:
       - build
