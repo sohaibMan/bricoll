@@ -31,7 +31,7 @@
     "**/**/*.ts",
     "pages/freelancers/profile/index.jsx",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/users/resetPassword"  ],
   "exclude": [
     "node_modules"
   ]

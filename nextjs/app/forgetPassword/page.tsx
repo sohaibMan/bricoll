@@ -9,14 +9,13 @@ const forgetPasswordPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isResetPasswordSent, setIsResetPasswordSent] = useState(false);
 
-  const [email, setEmail] = useState("");
+  // const [email, setEmail] = useState("");
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
   const handleForgetPassword = async (formData: any) => {
-    console.log("formData, ", formData);
 
     const response = await fetch(`/api/users/forgetPassword`, {
       method: "POST",
@@ -31,6 +30,8 @@ const forgetPasswordPage = () => {
     if (!response.ok) {
       return toast.error(res.message);
     }
+
+    console.log("formData, ", formData);
 
     // alert(JSON.stringify(res));
     toast.success(res.message + " ✅");

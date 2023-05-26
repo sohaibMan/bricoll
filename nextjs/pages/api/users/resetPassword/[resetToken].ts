@@ -7,26 +7,29 @@ import { ObjectId } from "mongodb";
 import crypto from "crypto";
 import sgMail from "@sendgrid/mail";
 import bcrypt from "bcrypt";
-import { redis } from "../../../../lib/redis"
+import { redis } from "../../../../lib/redis";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   try {
-    // ? Get users based on the token
+    // ? Get users based on the tokens
     const resetToken: any = req.query["resetToken"]?.toString();
+    // const { resetToken }: any = req.query;
+
+    console.log("resetToken, ", resetToken);
+
     const hashedToken = crypto
       .createHash("sha256")
       .update(resetToken) // !!
       .digest("hex");
 
-     const user = await db.collection("users").findOne({ 
-        passwordResetToken: hashedToken,
-        passwordResetExpires: { $gt: Date.now() },
+    const user = await db.collection("users").findOne({
+      passwordResetToken: hashedToken,
+      passwordResetExpires: { $gt: Date.now() },
     });
 
-    
     // ? If token has not expired, and there is users, set the new password
     if (!user) {
       return res.status(400).json({
@@ -35,29 +38,25 @@ export default async function handler(
       });
     }
 
-    const newHashPassword = await bcrypt.hash(req.body.password, 10);
+    // const newHashPassword = await bcrypt.hash(req.body.password, 10);
 
-    const newUserData = await db.collection("users").findOneAndUpdate(
-      { email: user.email },
-      {
-        $set: {
-          hashedPassword: newHashPassword,
-          passwordResetToken: undefined,
-          passwordResetExpires: undefined
-        }
-      }
+    // const newUserData = await db.collection("users").findOneAndUpdate(
+    //   { email: user.email },
+    //   {
+    //     $set: {
+    //       hashedPassword: newHashPassword,
+    //       passwordResetToken: undefined,
+    //       passwordResetExpires: undefined
+    //     }
+    //   }
+    // );
+
+    // ? Caching the new data
+    // await redis.set(user.email, JSON.stringify(newUserData));
+
+    res.redirect(
+      `/resetPassword?userId=${user._id.toString()}&resetToken=${resetToken}`
     );
-
-    // ? Caching the new data  
-    await redis.set(user.email, JSON.stringify(newUserData));
-
-    // TODO:  Redirection to the signin page /api/auth/signin
-
-    res.status(201).json({
-      status: 'success',
-      message: 'Your password is updated successfuly !'
-    })
-
   } catch (error) {
     res.status(500).json({
       status: "failed",

@@ -16,14 +16,14 @@ import "react-tagsinput/react-tagsinput.css";
 
 export default function FirstStep() {
   const { setStep, userData, setUserData } = useContext(multiStepContext);
-//   const [skills, setSkills] = useState<any>(userData.skills || []);
+  //   const [skills, setSkills] = useState<any>(userData.skills || []);
 
   const { data: session } = useSession();
 
-//   const handleSkillsChange = (newSkills: any) => {
-//     setSkills(newSkills);
-//     // setUserData({ ...userData, skills: newSkills });
-//   };
+  //   const handleSkillsChange = (newSkills: any) => {
+  //     setSkills(newSkills);
+  //     // setUserData({ ...userData, skills: newSkills });
+  //   };
 
   function handleSubmit() {
     const freelancerRequiredFields = [
@@ -66,14 +66,14 @@ export default function FirstStep() {
     setUserData({ ...userData, country: selectedCountry });
   };
 
-//   const popularSkills = [
-//     "Web Development",
-//     "Mobile Development",
-//     "Video Editor",
-//     "Graph Design",
-//     "Social Media",
-//     "Marketer",
-//   ];
+  //   const popularSkills = [
+  //     "Web Development",
+  //     "Mobile Development",
+  //     "Video Editor",
+  //     "Graph Design",
+  //     "Social Media",
+  //     "Marketer",
+  //   ];
 
   return (
     <Stack spacing={2} sx={{ width: "50%", margin: "auto" }}>
