@@ -9,7 +9,7 @@ const EDIT_PROJECT_MUTATION = gql`
             _id
         }
     }
-  }
+
 `;
 
 export default function EditProjectForm(props: {

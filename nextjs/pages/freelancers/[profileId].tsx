@@ -22,20 +22,19 @@ import {
 } from "mdb-react-ui-kit";
 
 import {gql} from "@apollo/client";
-import {User, UserRole} from "../../types/resolvers";
+import {User} from "../../types/resolvers";
 import {client} from "../_app";
-import db from "../../lib/mongodb";
-import type {GetStaticPaths,} from 'next';
+// import db from "../../lib/mongodb";
 import CustomLink from "../../components/CustomLinks/CustomLink";
 
 
-const usersCollection = db.collection("users")
+// const usersCollection = db.collection("users")
 
 // todo make this page Incremental Static Regeneration for better seo
 // todo fix the static reviews count
 // todo hand user not found
 
-export async function getStaticProps({params}: { params: { profileId: string } }) {
+export async function getServerSideProps({params}: { params: { profileId: string } }) {
 
     const profileId = params.profileId;
 
@@ -67,28 +66,30 @@ export async function getStaticProps({params}: { params: { profileId: string } }
     };
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+// export const getStaticPaths: GetStaticPaths = async () => {
 //     paths
-    const freelancers = await usersCollection.find({
-            userRole: UserRole.Freelancer,
-            isCompleted: true,
-            // isEmailVerfied: true
-        },
-        {
-            projection: {
-                _id: 1
-            }
-        }).toArray()
-    const paths = freelancers.map(doc => ({
-        params: {profileId: doc._id.toString()},
-    }))
-    // temporary don't generate any path
-    return {
-        paths: [], fallback: "blocking"
 
-    }
+//     const freelancers = await usersCollection.find({
+//             userRole: UserRole.Freelancer,
+//             isCompleted: true,
+//             // isEmailVerfied: true
+//         },
+//         {
+//             projection: {
+//                 _id: 1
+//             }
+//         }).toArray()
+//     const paths = freelancers.map(doc => ({
+//         params: {profileId: doc._id.toString()},
+//     }))
+// temporary don't generate any path
+// return {
+//     paths: [], fallback: "blocking"
+//
+// }
+//
+// }
 
-}
 
 const USER_PROFILE = gql`
     query ProfileById($profileId: ObjectID!) {

@@ -11,7 +11,7 @@ class MongoClientConnection {
     private constructor() {
         // Create a MongoClient with a MongoClientOptions object to set the Stable API version
         MongoClientConnection._instance = new MongoClient(
-            process.env.MONGODB_URI || "mongodb://bricoll_mongo:27017/bricoll",
+            process.env.MONGODB_URI,
             {
                 // serverApi: {
                 //     version: ServerApiVersion.v1,
@@ -23,17 +23,17 @@ class MongoClientConnection {
     }
 
     static async getInstance() {
+
         if (this._instance) {
             await this._instance.connect();
             // Send a ping to confirm a successful connection
             await this._instance.db("admin").command({ping: 1});
-            console.log(
-                "Pinged your deployment. You successfully connected to MongoDB!"
-            );
+
             return this._instance;
         }
 
         new MongoClientConnection();
+
         return this._instance;
     }
 

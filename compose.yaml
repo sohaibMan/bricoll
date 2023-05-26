@@ -21,6 +21,9 @@ services:
       - "3000:3000"
 
     #    restart: on-failure
+    env_file:
+      - ./nextjs/.env.local
+
     depends_on:
       - bricoll_mongo
     hostname: bricoll_nextjs
@@ -31,6 +34,12 @@ services:
       - /data/db
     hostname: bricoll_mongo
     container_name: bricoll_mongo
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=bricoll
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD} # set in .env (set your own)
+    restart: unless-stopped
   bricoll_redis:
     image: redis
     #    restart: on-failure
@@ -38,14 +47,16 @@ services:
     container_name: bricoll_redis
     volumes:
       - /data
-  portainer:
-    image: portainer/portainer-ce:latest
-    ports:
-      - "9443:9443"
-    volumes:
-      - data:/data
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+
+#  portainer:
+#    image: portainer/portainer-ce:latest
+#    ports:
+#      - "9443:9443"
+#    volumes:
+#      - data:/data
+#      - /var/run/docker.sock:/var/run/docker.sock
+#    restart: unless-stopped
+
 
 
 

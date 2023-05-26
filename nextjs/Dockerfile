@@ -21,12 +21,15 @@ RUN \
 COPY . .
 
 
+RUN npm run build
 
-#ENV NODE_ENV production
+
+ENV NODE_ENV production
 
 
 #RUN addgroup --system --gid 1001 nodejs
 #RUN adduser --system --uid 1001 nextjs
+
 
 
 
@@ -36,4 +39,5 @@ EXPOSE 3000
 
 ENV PORT 3000
 
-CMD ["npm", "run","simple-dev"]
+
+CMD ["npm", "run","start"]

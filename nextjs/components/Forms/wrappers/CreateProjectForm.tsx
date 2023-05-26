@@ -63,5 +63,4 @@ export default function CreateProjectForm(props: {
                                                                                      setCurrentComponent(DashboardItems.Projects)
                                                                                  }}/>
     </Box>
-  );
 }
