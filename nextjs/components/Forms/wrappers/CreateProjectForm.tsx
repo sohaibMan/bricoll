@@ -1,5 +1,5 @@
 import ProjectForm from "../base/ProjectForm";
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
 import {useContext} from "react";

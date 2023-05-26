@@ -68,6 +68,7 @@ export async function getServerSideProps({params}: { params: { profileId: string
 
 // export const getStaticPaths: GetStaticPaths = async () => {
 //     paths
+
 //     const freelancers = await usersCollection.find({
 //             userRole: UserRole.Freelancer,
 //             isCompleted: true,
@@ -88,6 +89,7 @@ export async function getServerSideProps({params}: { params: { profileId: string
 // }
 //
 // }
+
 
 const USER_PROFILE = gql`
     query ProfileById($profileId: ObjectID!) {

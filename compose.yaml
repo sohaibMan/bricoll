@@ -19,9 +19,11 @@ services:
     build: ./nextjs
     ports:
       - "3000:3000"
+
     #    restart: on-failure
     env_file:
       - ./nextjs/.env.local
+
     depends_on:
       - bricoll_mongo
     hostname: bricoll_nextjs
@@ -45,6 +47,7 @@ services:
     container_name: bricoll_redis
     volumes:
       - /data
+
 #  portainer:
 #    image: portainer/portainer-ce:latest
 #    ports:
@@ -53,6 +56,7 @@ services:
 #      - data:/data
 #      - /var/run/docker.sock:/var/run/docker.sock
 #    restart: unless-stopped
+
 
 
 

@@ -1,6 +1,6 @@
 import ProjectForm from "../base/ProjectForm";
-import {gql} from "@apollo/client";
-import {Project} from "../../../types/resolvers";
+import { gql } from "@apollo/client";
+import { Project } from "../../../types/resolvers";
 import * as React from "react";
 
 const EDIT_PROJECT_MUTATION = gql`
@@ -9,6 +9,7 @@ const EDIT_PROJECT_MUTATION = gql`
             _id
         }
     }
+
 `;
 
 export default function EditProjectForm(props: {
