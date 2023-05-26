@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/logout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/logout.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/process.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/process.d.ts" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="turn of dev mode and run the production mode instead">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -192,14 +195,7 @@
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
       <workItem from="1685007611798" duration="35509000" />
-      <workItem from="1685054076494" duration="4863000" />
-    </task>
-    <task id="LOCAL-00044" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
-      <created>1685014061078</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1685014061078</updated>
+      <workItem from="1685054076494" duration="6549000" />
     </task>
     <task id="LOCAL-00045" summary="Revert &quot;deployment succeeded try to deploy all containers in dev mode&quot;&#10;&#10;This reverts commit 56ba085f">
       <created>1685014576938</created>
@@ -537,7 +533,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685058892469</updated>
     </task>
-    <option name="localTasksCounter" value="93" />
+    <task id="LOCAL-00093" summary="rename NEXTAUTH_URL to NEXT_PUBLIC_NEXTAUTH_URL">
+      <created>1685059922318</created>
+      <option name="number" value="00093" />
+      <option name="presentableId" value="LOCAL-00093" />
+      <option name="project" value="LOCAL" />
+      <updated>1685059922319</updated>
+    </task>
+    <option name="localTasksCounter" value="94" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -567,8 +570,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="stop restarting the containers" />
-    <MESSAGE value="run jobs in parallel" />
     <MESSAGE value="add azure login before deployement" />
     <MESSAGE value="add azure login before deployement&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <MESSAGE value="Merge remote-tracking branch 'origin/Production' into Production" />
@@ -592,7 +593,9 @@
     <MESSAGE value="update hard coded url in app" />
     <MESSAGE value="load env from docker env instead" />
     <MESSAGE value="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
-    <option name="LAST_COMMIT_MESSAGE" value="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <MESSAGE value="rename NEXTAUTH_URL to NEXT_PUBLIC_NEXTAUTH_URL" />
+    <MESSAGE value="turn of dev mode and run the production mode instead" />
+    <option name="LAST_COMMIT_MESSAGE" value="turn of dev mode and run the production mode instead" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

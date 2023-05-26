@@ -23,19 +23,17 @@ class MongoClientConnection {
     }
 
     static async getInstance() {
-        console.log("MongoClientConnection.getInstance start")
+
         if (this._instance) {
             await this._instance.connect();
             // Send a ping to confirm a successful connection
             await this._instance.db("admin").command({ping: 1});
-            console.log(
-                "Pinged your deployment. You successfully connected to MongoDB!"
-            );
+
             return this._instance;
         }
 
         new MongoClientConnection();
-        console.log("MongoClientConnection.getInstance done")
+
         return this._instance;
     }
 
@@ -50,7 +48,6 @@ const clientPromise = MongoClientConnection.getInstancePromise();
 //   resolve(client)
 // );
 
-console.log("clientPromise", clientPromise)
 
 const db = client.db("bricoll");
 export {clientPromise};

@@ -58,6 +58,7 @@
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-quill": "^2.0.0",
+    "react-tagsinput": "^3.20.1",
     "redis": "^4.6.5",
     "sharp": "^0.32.1",
     "stripe": "^12.2.0",
