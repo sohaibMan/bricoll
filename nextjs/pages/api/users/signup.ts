@@ -22,22 +22,25 @@ export default async function handler(
     }
 
     try {
-        // todos (validate users existence and create infos ...)
 
-        // const userRole = getCookie("userRole", {req, res});
-        const parsedBody = JSON.parse(req.body);
 
-        console.log("req.body ", parsedBody);
-        
+        const email =  req.body.email;
+        const username =  req.body.username;
+        const password =  req.body.password;
+        const userRole =  req.body.userRole;
+        const passwordConfirm =  req.body.passwordConfirm;
+        const acceptTerms =  req.body.acceptTerms;
 
-        const email = parsedBody.email;
-        const username = parsedBody.username;
-        const password = parsedBody.password;
-        const userRole = parsedBody.userRole;
-        const passwordConfirm = parsedBody.passwordConfirm;
+
+        if (!acceptTerms) {
+            return res.status(400).json({
+                status: "failed",
+                message: "You have to accept the terms and conditions !",
+            });
+        }
+
 
         if (!userRole) {
-            //todo redirect to the choose role page
             return res.status(400).json({
                 status: "failed",
                 message: "You are not allowed to create an account ! before choosing your role",
@@ -46,10 +49,10 @@ export default async function handler(
 
         // ? Verifying the incoming data from the users
         if (!email || !username || !password || !passwordConfirm) {
-            // throw new Error('There are some fields not filling them yet!')
             return res.status(400).json({message: "Missing fields"});
         }
         const emailValidation = await validate(email);
+
         if (!emailValidation.valid) {
             return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
         }
@@ -75,9 +78,7 @@ export default async function handler(
         }
 
 
-
         // ? Checking if the users's email is existed in DB
-        // index scan (email) (the
         const cachedUser = await redis.get(email);
         if (cachedUser) {
             return res.status(400).json({
@@ -94,10 +95,6 @@ export default async function handler(
         }
 
 
-        // ? Hashing the password
-        // if password is too short
-        // if username is too short
-        // if email already exists
         const hashedPassword = await bcrypt.hash(password, 10);
 
         // ? Inserting the users information into DB
@@ -139,6 +136,7 @@ export default async function handler(
             message: "profile create successfully"
         });
     } catch (error) {
+        console.error(error)
         res.status(500).json({
             status: "failed",
             message: error,

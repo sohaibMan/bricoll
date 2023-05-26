@@ -20,7 +20,7 @@ services:
     ports:
       - "3000:3000"
 
-    #    restart: on-failure
+    restart: always
     env_file:
       - ./nextjs/.env.local
 
@@ -39,14 +39,15 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=bricoll
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD} # set in .env (set your own)
-    restart: unless-stopped
+    restart: always
   bricoll_redis:
     image: redis
-    #    restart: on-failure
+    restart: always
     hostname: bricoll_redis
     container_name: bricoll_redis
     volumes:
       - /data
+
 
 #  portainer:
 #    image: portainer/portainer-ce:latest
