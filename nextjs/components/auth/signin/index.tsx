@@ -5,6 +5,7 @@ import facebook from "../../../public/facebook.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
+import {useRouter} from "next/navigation";
 
 
 const SignupForm = () => {
@@ -12,10 +13,10 @@ const SignupForm = () => {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
-    // const router = useRouter()
+    const router = useRouter()
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault()
 
 
         if (!email || !password) {
@@ -23,9 +24,29 @@ const SignupForm = () => {
         }
         // tmp callback
 
-        signIn("credentials", {
-            email, password, callbackUrl: "/dashboard"
+
+        await toast.promise(signIn<'credentials'>("credentials", {
+                email, password, redirect: false
+            }).then(res => {
+                if (!res || !res.ok) {
+                    throw Error(res?.error || "Email or password are not valid")
+                }
+                if (res.ok) {
+                    const callbackURL = decodeURIComponent(res.url && res.url.split("?")[1]?.split("=")[1] || "/")
+                    console.log(callbackURL)
+                    router.push(callbackURL)
+                }
+                return res
+            })
+            ,
+            {
+                loading: "Signing in...",
+                success: "Signed in successfully",
+                error: (err) => err.message
+            }).catch(err => {
+            console.error(err)
         })
+
 
     };
 
@@ -48,8 +69,8 @@ const SignupForm = () => {
 
     return (
         <div
-            className="flex flex-col items-center rounded-lg border border-newColor"
-            style={{width: "780px", height: "630px"}}
+            className="flex flex-col items-center rounded-lg border border-newColor p-4 "
+
         >
             <h2 className="text-3xl font-semibold text-second my-2 py-4 mb-4">
                 Sign up to find work you love
@@ -61,7 +82,7 @@ const SignupForm = () => {
                     style={{width: "35px", height: "35px"}}
                 />
                 <button
-                    onClick={() => signIn("google")}
+                    onClick={() => signIn<>("google",)}
                     className="w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
                 >Continue with Google
                 </button>
@@ -73,7 +94,7 @@ const SignupForm = () => {
                     style={{width: "35px", height: "35px"}}
                 />
                 <button
-                    onClick={() => signIn("facebook")}
+                    onClick={() => signIn("facebook",)}
                     className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
                 >
                     Continue with Facebook
@@ -110,6 +131,11 @@ const SignupForm = () => {
                 {passwordError && (
                     <p className="text-red-500 text-sm">{passwordError}</p>
                 )}
+                <p className="font-light text-base mx-45 text-second">
+                    <Link href="/forgetPassword" className="text-primary">
+                        Forget your password?
+                    </Link>
+                </p>
                 <button
                     type="submit"
                     className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"

@@ -24,12 +24,11 @@ export default async function handler(
     try {
 
 
-        const email =  req.body.email;
-        const username =  req.body.username;
-        const password =  req.body.password;
-        const userRole =  req.body.userRole;
-        const passwordConfirm =  req.body.passwordConfirm;
-        const acceptTerms =  req.body.acceptTerms;
+        const email = req.body.email;
+        const username = req.body.username;
+        const password = req.body.password;
+        const passwordConfirm = req.body.passwordConfirm;
+        const acceptTerms = req.body.acceptTerms;
 
 
         if (!acceptTerms) {
@@ -40,13 +39,6 @@ export default async function handler(
         }
 
 
-        if (!userRole) {
-            return res.status(400).json({
-                status: "failed",
-                message: "You are not allowed to create an account ! before choosing your role",
-            });
-        }
-
         // ? Verifying the incoming data from the users
         if (!email || !username || !password || !passwordConfirm) {
             return res.status(400).json({message: "Missing fields"});
@@ -54,7 +46,7 @@ export default async function handler(
         const emailValidation = await validate(email);
 
         if (!emailValidation.valid) {
-            return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
+            return res.status(400).json({message: 'Invalid email !'})
         }
 
         // ? Verifying if the password and passwordConfirm are the same
@@ -78,15 +70,18 @@ export default async function handler(
         }
 
 
-        // ? Checking if the users's email is existed in DB
+        // ? Checking if the user's email is existed in DB
         const cachedUser = await redis.get(email);
-        if (cachedUser) {
+
+        if (cachedUser !== "null") {
             return res.status(400).json({
                 status: "failed",
-                message: "This email is already exists !",
+                message: "This email is already exists1 !",
             });
         }
         const existedUser = await userCollection.findOne({email});
+
+
         if (existedUser) {
             return res.status(400).json({
                 status: "failed",
@@ -103,7 +98,6 @@ export default async function handler(
             email,
             username,
             hashedPassword,
-            userRole,
             isCompleted: false,
             created_at: new Date(),
             isEmailVerified: false,

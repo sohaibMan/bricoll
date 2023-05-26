@@ -1,3 +1,4 @@
+"use client"
 import {createContext, ReactNode, useState} from "react";
 
 
@@ -8,7 +9,6 @@ type MultiStepContext = {
     setStep: (step: number) => void;
     userData: UserData;
     setUserData: (data: UserData) => void;
-    // finalData: UserData[];
     resetForm: () => void;
 };
 
@@ -17,11 +17,11 @@ export const multiStepContext = createContext<MultiStepContext>(
 );
 
 export const StepContextProvider = (props: { children: ReactNode }) => {
-    const [currentStep, setStep] = useState(1);
-    const [userData, setUserData] = useState<UserData>({});
+    const [currentStep, setStep] = useState(0);
+    const [userData, setUserData] = useState<UserData>({} as UserData);
+
 
     function resetForm() {
-
         setUserData({});
     }
 
@@ -30,7 +30,6 @@ export const StepContextProvider = (props: { children: ReactNode }) => {
         setStep,
         userData,
         setUserData,
-
         resetForm,
     };
 

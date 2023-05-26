@@ -1,20 +1,15 @@
 "use client"
 import {useState} from 'react';
-import ProfileTypeStep from '../../components/auth/signup/ProfileTypeStep';
 import SignupForm from "../../components/auth/signup/SignupForm";
 
 const SignupPage = () => {
-    const [profileType, setProfileType] = useState('');
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
     };
 
-
-    const handleProfileTypeSelect = (type: string) => {
-        setProfileType(type);
-    };
 
 
     return (
@@ -44,11 +39,9 @@ const SignupPage = () => {
                 </div>
             </nav>
             <div className="flex flex-col items-center mt-8">
-                {profileType ? (
-                    <SignupForm profileType={profileType}/>
-                ) : (
-                    <ProfileTypeStep onSelect={handleProfileTypeSelect}/>
-                )}
+
+                <SignupForm/>
+
             </div>
         </>
     );
