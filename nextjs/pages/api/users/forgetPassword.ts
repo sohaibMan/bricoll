@@ -27,9 +27,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
-
     // console.log("email, ", req.body.email);
-    
 
     // ? Get users based on posted email
     const user = await fetchData(req.body.email);
@@ -42,29 +40,31 @@ export default async function handler(
 
     // ? Generate the random reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
-    user.passwordResetToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
+    // user.passwordResetToken = crypto
+    //   .createHash("sha256")
+    //   .update(resetToken)
+    //   .digest("hex");
+
+    user.passwordResetToken = resetToken;
 
     // console.log({ resetToken }, users.passwordResetToken);
 
     user.passwordResetExpires = Date.now() + 10 * 60 * 1000;
 
+    const userR = await db.collection("users").findOneAndUpdate(
+      { email: req.body.email },
+      {
+        $set: {
+          passwordResetToken: user.passwordResetToken,
+          passwordResetExpires: user.passwordResetExpires,
+        },
+      }
+    );
 
-    await db.collection("users").findOneAndUpdate(
-        { email: req.body.email },
-        {
-          $set: {
-            passwordResetToken: user.passwordResetToken,
-            passwordResetExpires: user.passwordResetExpires,
-          },
-        }
-      );
-
+    // console.log("UserR, ", userR);
 
     // ? Send the token to users's email
-    const resetURL = `http://localhost:3000/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `http://localhost:3000/api/users/resetPassword/${resetToken}`;
 
     const text = `Forgot your password ? Submit a PATCH request with your new password and passwordConfirm to: <a href="${resetURL}">Click me</a>.\nIf you didn't forget your password, please ignore this email!`;
 

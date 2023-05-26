@@ -30,7 +30,7 @@
     "**/*.ts",
     "**/**/*.ts",
     ".next/types/**/*.ts"
-  ],
+, "pages/api/users/resetPassword"  ],
   "exclude": [
     "node_modules"
   ]
