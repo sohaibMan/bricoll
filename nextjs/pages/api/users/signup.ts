@@ -128,7 +128,7 @@ export default async function handler(
 
 
         // ? Sending the email to verify the account
-        const emailVerificationLink = `${process.env.NEXTAUTH_URL}/users/emailverification/${token}`;
+        const emailVerificationLink = `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/users/emailverification/${token}`;
 
         await sendEmailVerification(email, username, emailVerificationLink);
 

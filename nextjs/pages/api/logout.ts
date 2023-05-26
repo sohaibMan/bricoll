@@ -14,7 +14,7 @@ export default async function logout(
         // });
 
         // TODO: Redirecting to the login page in client side
-        res.redirect(302, process.env.NEXTAUTH_URL)
+        res.redirect(302, process.env.NEXT_PUBLIC_NEXTAUTH_URL)
 
         // res.send("You're logout successfuly!");
     } catch (error) {

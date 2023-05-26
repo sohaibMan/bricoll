@@ -7,7 +7,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         props: {status: "failed", message: "no token was provided"}
     }
 
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/users/emailVerification/${emailVerificationToken}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/users/emailVerification/${emailVerificationToken}`);
     const data: { status: "success" | "failed", message: string } = await response.json();
 
     return {

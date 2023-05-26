@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="load env from docker env instead">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/compose.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/lib/mongodb.ts" afterDir="false" />
+    <list default="true" id="217ec684-ba15-4b93-9e3e-af398359e521" name="Changes" comment="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/logout.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/logout.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/process.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/process.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +50,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2PNOATCdeSXMmBkfk8dyuO7tY6p" />
   <component name="ProjectLevelVcsManager">
@@ -193,14 +192,7 @@
       <workItem from="1684106698863" duration="5000" />
       <workItem from="1684971993273" duration="4971000" />
       <workItem from="1685007611798" duration="35509000" />
-      <workItem from="1685054076494" duration="4153000" />
-    </task>
-    <task id="LOCAL-00043" summary="login to azure cli">
-      <created>1685013778830</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1685013778830</updated>
+      <workItem from="1685054076494" duration="4863000" />
     </task>
     <task id="LOCAL-00044" summary="login to azure cli&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
       <created>1685014061078</created>
@@ -538,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685058882730</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;">
+      <created>1685058892469</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1685058892469</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,7 +567,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
-    <MESSAGE value="deployment succeeded try to deploy all containers in dev mode" />
     <MESSAGE value="stop restarting the containers" />
     <MESSAGE value="run jobs in parallel" />
     <MESSAGE value="add azure login before deployement" />
@@ -593,7 +591,8 @@
     <MESSAGE value="fix dashboard" />
     <MESSAGE value="update hard coded url in app" />
     <MESSAGE value="load env from docker env instead" />
-    <option name="LAST_COMMIT_MESSAGE" value="load env from docker env instead" />
+    <MESSAGE value="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
+    <option name="LAST_COMMIT_MESSAGE" value="load env from docker env instead&#10;&#10;Signed-off-by: Sohaib Manah &lt;souhaibemanah@gmail.com&gt;" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

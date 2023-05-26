@@ -28,11 +28,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // if the client already has a stripe account redirect to him only(create account once)
     if (freelancer) {
        const accountLink= await stripe.accountLinks.create({
-            account: freelancer.stripe_account_id,
-            refresh_url: process.env.NEXTAUTH_URL,
-            return_url: process.env.NEXTAUTH_URL,
-            type: 'account_onboarding',
-        });
+           account: freelancer.stripe_account_id,
+           refresh_url: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+           return_url: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+           type: 'account_onboarding',
+       });
         res.redirect(303, accountLink.url);
         return;
     }
@@ -46,8 +46,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     // stripe_account_id:account.id
     const accountLink = await stripe.accountLinks.create({
         account: account.id,
-        refresh_url: process.env.NEXTAUTH_URL,
-        return_url: process.env.NEXTAUTH_URL,
+        refresh_url: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
+        return_url: process.env.NEXT_PUBLIC_NEXTAUTH_URL,
         type: 'account_onboarding',
     });
     // redirect the client to accountLink.url
