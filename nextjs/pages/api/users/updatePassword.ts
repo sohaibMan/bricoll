@@ -14,6 +14,8 @@ export default async function handler(
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // console.log("hashedToken, ", hashedPassword);
+
     const result = await db.collection("users").findOneAndUpdate(
       {
         _id: new ObjectId(userId),
@@ -21,12 +23,15 @@ export default async function handler(
       },
       {
         $set: {
-          hashedPassword,
+          hashedPassword: hashedPassword,
           passwordResetToken: null,
           passwordResetExpires: null,
         },
       }
     );
+
+    // console.log("result, ", result);
+    
 
     if (!result.value) {
       return res.status(400).json({

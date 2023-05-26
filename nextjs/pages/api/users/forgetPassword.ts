@@ -40,10 +40,12 @@ export default async function handler(
 
     // ? Generate the random reset token
     const resetToken = crypto.randomBytes(32).toString("hex");
-    user.passwordResetToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
+    // user.passwordResetToken = crypto
+    //   .createHash("sha256")
+    //   .update(resetToken)
+    //   .digest("hex");
+
+    user.passwordResetToken = resetToken;
 
     // console.log({ resetToken }, users.passwordResetToken);
 
@@ -59,7 +61,7 @@ export default async function handler(
       }
     );
 
-    console.log("UserR, ", userR);
+    // console.log("UserR, ", userR);
 
     // ? Send the token to users's email
     const resetURL = `http://localhost:3000/api/users/resetPassword/${resetToken}`;

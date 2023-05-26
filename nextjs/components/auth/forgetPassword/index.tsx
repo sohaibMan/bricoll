@@ -68,6 +68,7 @@ const ForgetPasswordForm = ({onSubmit }: ForgetPasswordFormProps) => {
           }`}
         />
         {emailError && <p className="text-red-500 m-12 text-sm">{emailError}</p>}
+        
         <button
           type="submit"
           className="py-2 px-8 m-12 rounded-full font-medium text-base text-white bg-primary"

@@ -3,6 +3,7 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import ResetPasswordForm from "../../components/auth/resetPassword";
 
+
 const resetPasswordPage = () => {
   // const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -14,28 +15,28 @@ const resetPasswordPage = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleForgetPassword = async (formData: any) => {
+  // const handleForgetPassword = async (formData: any) => {
 
-    const response = await fetch(`/api/users/forgetPassword`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
+  //   const response = await fetch(`/api/users/forgetPassword`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(formData),
+  //   });
 
-    const res = await response.json();
+  //   const res = await response.json();
 
-    if (!response.ok) {
-      return toast.error(res.message);
-    }
+  //   if (!response.ok) {
+  //     return toast.error(res.message);
+  //   }
 
-    console.log("formData, ", formData);
+  //   console.log("formData, ", formData);
 
-    // alert(JSON.stringify(res));
-    toast.success(res.message + " ✅");
-    setIsResetPasswordSent(true);
-  };
+  //   // alert(JSON.stringify(res));
+  //   toast.success(res.message + " ✅");
+  //   setIsResetPasswordSent(true);
+  // };
 
   return (
     <>
@@ -65,7 +66,7 @@ const resetPasswordPage = () => {
       </nav>
       <div className="flex flex-col items-center mt-8">
         
-          <ResetPasswordForm onSubmit={handleForgetPassword} />
+          <ResetPasswordForm />
 
       </div>
     </>

@@ -1,36 +1,79 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-hot-toast";
 import passwordIcon from "../../../public/tick.png";
 import Image from "next/image";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { useRouter, useSearchParams } from 'next/navigation';
+
 
 type ForgetPasswordFormProps = {
   onSubmit: (formData: any) => void;
 };
 
-const ResetPasswordForm = ({onSubmit }: ForgetPasswordFormProps) => {
+const ResetPasswordForm = () => {
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const router = useRouter();
+  
+  const searchParams = useSearchParams();
+  const userId = searchParams?.get('userId') as string;
+  const resetToken = searchParams?.get('resetToken') as string;
 
-  const handleSubmit = (e: FormEvent) => {
+  console.log("params, ", userId, " resetToken, ", resetToken);
+
+    useEffect(() => {
+    if (!userId || !resetToken) {
+      router.push("/forgetPassword");
+    }
+  }, [userId, resetToken]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!password) {
-      return toast.error(`Please fill the ${password} field!`);
+    if (password !== passwordConfirm) {
+      return toast.error("Passwords do not match");
+      // return;
     }
 
-    if (!passwordConfirm) {
-      return toast.error(`Please fill the ${passwordConfirm} field!`);
+    try {
+      const response = await fetch(`/api/users/updatePassword`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId, resetToken, password }),
+      });
+
+      // console.log("result, ", response);
+      
+      toast.success("Password reset successful");
+      router.push("/signin");
+    } catch (error) {
+      toast.error("Failed to reset password");
+      console.error(error);
     }
-
-    const formData = {
-      password,
-    };
-
-    
-    // onSubmit(formData);
   };
+
+  // const handleSubmit = (e: FormEvent) => {
+  //   e.preventDefault();
+
+  //   if (!password) {
+  //     return toast.error(`Please fill the ${password} field!`);
+  //   }
+
+  //   if (!passwordConfirm) {
+  //     return toast.error(`Please fill the ${passwordConfirm} field!`);
+  //   }
+
+  //   const formData = {
+  //     password,
+  //   };
+
+  //   console.log("formData, ", formData);
+
+  //   // onSubmit(formData);
+  // };
 
   return (
     <div
@@ -43,7 +86,7 @@ const ResetPasswordForm = ({onSubmit }: ForgetPasswordFormProps) => {
       </h2>
       <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
         <input
-          type="text"
+          type="password"
           placeholder="New Password"
           value={password}
           onChange={(e) => {
@@ -53,7 +96,7 @@ const ResetPasswordForm = ({onSubmit }: ForgetPasswordFormProps) => {
           className="px-4 py-2 rounded border border-gray"
         />
         <input
-          type="text"
+          type="password"
           placeholder="Confirm New Password"
           value={passwordConfirm}
           onChange={(e) => {

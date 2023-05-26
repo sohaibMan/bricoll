@@ -18,15 +18,16 @@ export default async function handler(
     const resetToken: any = req.query["resetToken"]?.toString();
     // const { resetToken }: any = req.query;
 
-    console.log("resetToken, ", resetToken);
+    // console.log("resetToken, ", resetToken);
 
-    const hashedToken = crypto
-      .createHash("sha256")
-      .update(resetToken) // !!
-      .digest("hex");
+    // const hashedToken = crypto
+    //   .createHash("sha256")
+    //   .update(resetToken) // !!
+    //   .digest("hex");
+    
 
     const user = await db.collection("users").findOne({
-      passwordResetToken: hashedToken,
+      passwordResetToken: resetToken,
       passwordResetExpires: { $gt: Date.now() },
     });
 
