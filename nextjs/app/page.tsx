@@ -5,12 +5,12 @@ import heroImage from "../public/heroImage.jpg";
 import google from "../public/google.png";
 import fst from "../public/fst.png";
 import devImage from "../public/dev.jpg";
-// import graphicImage from "../public/graphic.jpg";
+import graphicImage from "../public/graphic.jpg";
 import socialImage from "../public/social.jpg";
-import thumb from "../public/thumb.png";
+import thumb from "../public/thumb.jpg";
 import accept from "../public/accept.png";
 import men from "../public/man.jpg";
-import women from "../public/women.jpg";
+import women from "../public/woman.jpg";
 import quality from "../public/quality.png";
 import security from "../public/security.png";
 import trust from "../public/trust.png";
@@ -101,7 +101,7 @@ const Home = () => {
           <ExpertiseCard
             title="Graphic Design"
             description="We create bespoke designs that help businesses & individuals communicate effectively. From logos to brand identity, we create designs that stand out & reflect your unique style."
-            imageSrc={devImage}
+            imageSrc={graphicImage}
           />
           <ExpertiseCard
             title="Social Media"
