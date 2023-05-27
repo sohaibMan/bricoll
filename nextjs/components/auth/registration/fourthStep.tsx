@@ -55,13 +55,13 @@ export default function FourthStep() {
         // alert(JSON.stringify(res));
         toast.success(res.message + " ✅");
         resetForm();
-        router.push("/dashboard");
+        await router.push("/dashboard");
     }
 
     return (
         <Stack sx={{alignItems: "center", width: "100%"}}>
             <form onSubmit={profileHandling} style={{width: "50%"}}>
-                {session?.user.userRole === "Freelancer" ? (
+                {userRole === "Freelancer" ? (
                     <>
                         <TextField
                             sx={{width: "100%"}}

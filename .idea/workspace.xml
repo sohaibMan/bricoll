@@ -4,33 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="Add: Port Mapping to redis container&#10;Fix some types issue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/index.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/signup.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/signup.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/register/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/users/emailverification/[emailVerificationToken].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/users/emailverification/[emailVerificationToken]/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/services.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/tsconfig.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/next-auth.d.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +20,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="forgetPasswordPage" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -67,6 +47,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -112,17 +93,30 @@
       <workItem from="1685109306781" duration="24504000" />
       <workItem from="1685136815252" duration="4323000" />
       <workItem from="1685141376606" duration="1942000" />
+      <workItem from="1685193715457" duration="107000" />
+      <workItem from="1685201570211" duration="5029000" />
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
+      <created>1685208419627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685208419627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix sign up form" />
     <MESSAGE value="complete direction from signup to register" />
     <MESSAGE value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
+    <MESSAGE value="Add: Port Mapping to redis container&#10;Fix some types issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add: Port Mapping to redis container&#10;Fix some types issue" />
   </component>
 </project>

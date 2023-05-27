@@ -35,6 +35,8 @@ export default function Page() {
 
             case 4:
                 return <FourthStep/>;
+            default:
+                throw new Error("Unhandled case")
         }
     }
 

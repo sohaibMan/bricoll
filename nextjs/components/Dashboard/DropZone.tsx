@@ -6,7 +6,7 @@ import Upload from "../Buttons/Upload";
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 interface propsType extends CardProps {
-    uploadHandler: React.Dispatch<React.SetStateAction<string>>
+    uploadHandler: (arg0: string) => void
 }
 
 export default function DropZone({sx, ...props}: propsType) {

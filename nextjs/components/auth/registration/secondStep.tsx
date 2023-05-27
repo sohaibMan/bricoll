@@ -1,5 +1,5 @@
 "use client"
-import React, {useContext, useState} from "react";
+import React, {useContext} from "react";
 import {Button, TextField} from "@mui/material";
 import {multiStepContext} from "./stepContext";
 import {toast} from "react-hot-toast";
@@ -9,13 +9,13 @@ import {UserRole} from "../../../types/resolvers";
 
 export default function SecondStep() {
     const {setStep, userData, setUserData} = useContext(multiStepContext);
-    const [skills, setSkills] = useState(userData.skills || []);
+    // const [skills, setSkills] = useState(userData.skills || []);
     const userRole = userData.userRole as UserRole;
 
-    const handleSkillsChange = (newSkills) => {
-        setSkills(newSkills);
-        setUserData({...userData, skills: newSkills});
-    };
+    // const handleSkillsChange = (newSkill: string) => {
+        // setSkills(newSkills);
+        // setUserData({...userData, skills: [...userData.skills, newSkill]});
+    // };
 
     const popularSkills = [
         "Web Development",
@@ -93,10 +93,12 @@ export default function SecondStep() {
                         multiple
                         id="tags-filled"
                         options={popularSkills}
-                        defaultValue={skills}
+                        defaultValue={userData.skills as string[]}
                         freeSolo
-                        onChange={(event, newSkills) => {
-                            handleSkillsChange(newSkills);
+                        onChange={(event, newSkill) => {
+                            // handleSkillsChange(newSkills);
+                            setUserData({...userData, skills: [...userData.skills, newSkill]});
+
                         }}
                         renderTags={(value: string[], getTagProps) =>
                             value.map((option: string, index: number) => (
