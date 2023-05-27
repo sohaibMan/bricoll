@@ -1,4 +1,3 @@
-"use client"
 import ExpertiseCard from "../ExpertiseCard";
 import devImage from "../../public/dev.jpg";
 import graphicImage from "../../public/graphic.jpg";

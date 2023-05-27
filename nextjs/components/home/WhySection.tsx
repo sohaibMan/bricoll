@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import quality from "../../public/quality.png";
 import security from "../../public/security.png";

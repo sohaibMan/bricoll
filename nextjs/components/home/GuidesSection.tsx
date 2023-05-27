@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import thumb from "../../public/thumb.jpg";
 
