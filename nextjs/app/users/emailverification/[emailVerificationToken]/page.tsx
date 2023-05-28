@@ -1,22 +1,16 @@
-import {GetServerSideProps} from "next";
 import Link from "next/link";
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const emailVerificationToken = context?.params?.emailVerificationToken?.toString();
+
+export default async function Page({params}: { params: { emailVerificationToken: string } }) {
+
+    const emailVerificationToken = params?.emailVerificationToken?.toString();
     if (!emailVerificationToken) return {
         props: {status: "failed", message: "no token was provided"}
     }
 
     const response = await fetch(`${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/users/emailVerification/${emailVerificationToken}`);
-    const data: { status: "success" | "failed", message: string } = await response.json();
+    const {status, message}: { status: "success" | "failed", message: string } = await response.json();
 
-    return {
-        props: {status: data.status, message: data.message}
-    }
-}
-
-
-export default function EmailVerificationToken({status, message}: { status: "success" | "failed", message: string }) {
 
     return <div className="bg-gray-100 h-screen">
         <div className="bg-white p-6  md:mx-auto">

@@ -31,7 +31,7 @@ async function verifyUserData(
         id: user._id.toString(),
         userRole: user.userRole as UserRole,
         email: user.email,
-        name: user.name,
+        username: user.username,
         isCompleted: user.isCompleted as boolean,
         accessToken: user.accessToken,
     };
@@ -93,6 +93,7 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({token, user, account}) {
 
+
             if (user?.userRole) token.userRole = user.userRole;
             // console.log(users?.isCompleted)
             if (user?.isCompleted !== undefined)
@@ -108,27 +109,24 @@ export const authOptions: NextAuthOptions = {
         },
 
         async session({session, token}) {
+            if (!session.user) return session;
 
-            // to be in
             session.user.id = token.sub;
             session.user.accessToken = token.accessToken;
             session.user.userRole = token.userRole;
             session.user.isCompleted = token.isCompleted
 
 
+
+
             return session;
         },
-        // async signIn({ user, account, profile, email, credentials}) {
-        //     // return tok
-        //
-        //     return true;
-        // }
     },
-    // events: {
-    // signIn: ({isNewUser, user, account, profile}) => {
-    //     user.isCompleted = false;
-    // },
-    // },
+    events: {
+        // signIn: ({isNewUser, user, account, profile}) => {
+        //     console.log("signIn", isNewUser, user, account, profile);
+        // },
+    },
     session: {
         // Set to jwt in order to CredentialsProvider works properly
         strategy: "jwt",

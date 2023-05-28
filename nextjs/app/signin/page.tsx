@@ -13,7 +13,7 @@ const SigninPage = () => {
 
     return (
         <>
-            <nav className="container mx-auto p-6">
+            <nav className="container mx-auto p-6  bg-danger">
                 <div className="flex items-center justify-between">
                     <div>
                         <p className="text-primary font-bold text-2xl px-6">BRICOL</p>
@@ -37,7 +37,7 @@ const SigninPage = () => {
                     </div>
                 </div>
             </nav>
-            <div className="flex flex-col items-center mt-8">
+            <div className="flex  flex-col items-center">
                 <SigninForm/>
             </div>
         </>

@@ -1,8 +1,10 @@
-import {useState} from "react";
+import {useContext} from "react";
 import Link from "next/link";
 import Image, {StaticImageData} from "next/image";
-import clientImage from "../../../public/client.png";
-import freelancerImage from "../../../public/freelancer.png";
+import clientImage from "../../../assets/imgs/client.png";
+import freelancerImage from "../../../assets/imgs/freelancer.png";
+import {UserRole} from "../../../types/resolvers";
+import {multiStepContext} from "../registration/stepContext";
 
 type CardProps = {
     label: string;
@@ -32,65 +34,51 @@ const Card = ({label, imageSrc, selected, onClick}: CardProps) => {
     );
 };
 
-type ProfileTypeStepProps = {
-    onSelect: (type: string) => void;
-};
 
-const ProfileTypeStep = ({onSelect}: ProfileTypeStepProps) => {
-    const [profileType, setProfileType] = useState("");
-    const [buttonDisabled, setButtonDisabled] = useState(true);
+const ProfileTypeStep = () => {
 
-    const handleProfileTypeSelect = (type: string) => {
-        setProfileType(type);
-        setButtonDisabled(false);
-    };
+        const {setStep, userData, setUserData} = useContext(multiStepContext);
 
-    const handleNext = () => {
-        if (profileType) {
-            onSelect(profileType);
-        }
-    };
 
-  return (
-    <div
-      className="flex flex-col items-center my-14 rounded-lg border border-newColor"
-      style={{ width: "780px", height: "420px" }}
-    >
-      <h2 className="text-3xl font-semibold text-second my-6 py-4 mb-4">
-        Join as a client or freelancer
-      </h2>
-      <div className="flex space-x-4">
-        <Card
-          label="I’m a freelancer, looking for work"
-          imageSrc={freelancerImage}
-          selected={profileType === "freelancer"}
-          onClick={() => handleProfileTypeSelect("freelancer")}
-        />
-        <Card
-          label="I’m a client, hiring for a project"
-          imageSrc={clientImage}
-          selected={profileType === "client"}
-          onClick={() => handleProfileTypeSelect("client")}
-        />
-      </div>
-      <div className="my-12">
-      <button
-        className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
-        onClick={handleNext}
-        disabled={buttonDisabled}
-      >
-        {buttonDisabled
-          ? "Create Account"
-          : profileType === "freelancer"
-          ? "Apply as a Freelancer"
-          : "Join as a Client"}
-      </button>
-      <p className="font-normal my-2 mx-7 text-second">
-        Already have an account ? <Link href="/api/auth/signin" className="text-primary">Log In</Link>
-      </p>
-      </div>
-    </div>
-  );
-};
+        return (
+            <div
+                className="flex flex-col items-center  rounded-lg border border-newColor w-screen h-screen"
+            >
+                <div
+                    className="flex flex-col items-center mt-14 p-14 rounded-lg border border-newColor"
+                >
+                    <h2 className="text-3xl font-semibold text-second my-6 py-4 mb-4">
+                        Join as a client or freelancer
+                    </h2>
+                    <div className="flex space-x-4">
+                        <Card
+                            label="I’m a freelancer, looking for work"
+                            imageSrc={freelancerImage}
+                            selected={userData.userRole === UserRole.Freelancer}
+                            onClick={() => setUserData({...userData, userRole: UserRole.Freelancer})}
+                        />
+                        <Card
+                            label="I’m a client, hiring for a project"
+                            imageSrc={clientImage}
+                            selected={userData.userRole === UserRole.Client}
+                            onClick={() => setUserData({...userData, userRole: UserRole.Client})}
+                        />
+                    </div>
+                    <div className="my-12">
+                        <button
+                            className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
+                            onClick={() => setStep(1)}
+                        >
+                            Next
+                        </button>
+                        <p className="font-normal my-2 mx-7 text-second">
+                            Already have an account ? <Link href="/signin" className="text-primary">Log In</Link>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+;
 
 export default ProfileTypeStep;

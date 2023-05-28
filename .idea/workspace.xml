@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/accept.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/accept.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/client.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/client.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/dev.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/dev.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/facebook.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/facebook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/freelancer.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/freelancer.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/fst.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/fst.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/google.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/google.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/graphic.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/graphic.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/heroImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/heroImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/job.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/job.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/man.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/man.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/microsoft.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/microsoft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/quality.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/quality.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/reply.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/reply.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/security.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/security.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/social.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/social.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/thumb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/thumb.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/tick.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/trust.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/trust.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/woman.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/woman.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/target/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/target/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="forgetPasswordPage" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="autoscrollToSource" value="true" />
+  </component>
+  <component name="ProjectId" id="2QKjZSyVh7xdRblggmyQMwL8S1C" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="ReactBuddySettings">
+    <option name="extensionsIgnore" value="true" />
+  </component>
+  <component name="ReactDesignerToolWindowState">
+    <option name="myId2Visible">
+      <map>
+        <entry key="com.haulmont.rcb.reactComponents" value="false" />
+        <entry key="com.haulmont.rcb.reactInspector" value="false" />
+      </map>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/assets" />
+      <recent name="$PROJECT_DIR$/nextjs/static_assets" />
+      <recent name="$PROJECT_DIR$/nextjs/app/users" />
+      <recent name="$PROJECT_DIR$/nextjs/app" />
+      <recent name="$PROJECT_DIR$/nextjs/app/emailverification" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="fix sign up form">
+      <created>1685104014346</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1685104014347</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix sign up form" />
+      <created>1685109301070</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1685109301070</updated>
+      <workItem from="1685109306781" duration="24504000" />
+      <workItem from="1685136815252" duration="4323000" />
+      <workItem from="1685141376606" duration="1942000" />
+      <workItem from="1685193715457" duration="107000" />
+      <workItem from="1685201570211" duration="5029000" />
+      <workItem from="1685216370090" duration="51000" />
+      <workItem from="1685228201590" duration="4477000" />
+    </task>
+    <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
+      <created>1685208419627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1685208419627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fix sign up form" />
+    <MESSAGE value="complete direction from signup to register" />
+    <MESSAGE value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
+    <MESSAGE value="Add: Port Mapping to redis container&#10;Fix some types issue" />
+    <MESSAGE value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
+    <option name="LAST_COMMIT_MESSAGE" value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
+  </component>
+</project>

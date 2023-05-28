@@ -1,11 +1,9 @@
 "use client"
 import {useState} from 'react';
-import ProfileTypeStep from '../../components/auth/signup/ProfileTypeStep';
-import SignupForm from "../../components/auth/signup";
+import SignupForm from "../../components/auth/signup/SignupForm";
 
 const SignupPage = () => {
-    const [profileType, setProfileType] = useState('');
-    // const router = useRouter();
+
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleNavbar = () => {
@@ -13,15 +11,6 @@ const SignupPage = () => {
     };
 
 
-    const handleProfileTypeSelect = (type: string) => {
-        setProfileType(type);
-    };
-
-    const handleSignup = (formData: any) => {
-        console.log(formData);
-        // todo call our api with the data
-        // router.push('/register');
-    };
 
     return (
         <>
@@ -50,11 +39,9 @@ const SignupPage = () => {
                 </div>
             </nav>
             <div className="flex flex-col items-center mt-8">
-                {profileType ? (
-                    <SignupForm profileType={profileType} onSubmit={handleSignup}/>
-                ) : (
-                    <ProfileTypeStep onSelect={handleProfileTypeSelect}/>
-                )}
+
+                <SignupForm/>
+
             </div>
         </>
     );
