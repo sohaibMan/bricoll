@@ -25,9 +25,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     text,
     createdAt: new Date()
   };
-  console.log(`private-chat-${message.senderUserId.toString()}-${message.receiverUserId.toString()}`)
+  // console.log(`private-chat-1`)
 
- await pusher.trigger(`private-chat-${message.senderUserId.toString()}-${message.receiverUserId.toString()}`, 'new-message', message);
+ await pusher.trigger(`private-chat-1`, 'new-message', message);
 
   res.status(200).json(message);
 }
