@@ -25,6 +25,7 @@ type User {
     category: String!
     company: String!
     educationLevel: String!
+    birthday:Date!
     experienceLevel: String!
     language: String!
     profileTitle: String!

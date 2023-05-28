@@ -411,6 +411,7 @@ export type User = {
   _id: Scalars['ObjectID']['output'];
   address: Scalars['String']['output'];
   bio: Scalars['String']['output'];
+  birthday: Scalars['Date']['output'];
   category: Scalars['String']['output'];
   city: Scalars['String']['output'];
   company: Scalars['String']['output'];
@@ -822,6 +823,7 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   _id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   address?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   bio?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  birthday?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   category?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   city?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   company?: Resolver<ResolversTypes['String'], ParentType, ContextType>;

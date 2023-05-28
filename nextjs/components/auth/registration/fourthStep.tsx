@@ -1,21 +1,18 @@
 "use client"
 import React, {ChangeEvent, useContext, useState} from "react";
-import {Button, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 import {multiStepContext} from "./stepContext";
 import {toast} from "react-hot-toast";
 import DropZone from "../../Dashboard/DropZone";
-import {Stack} from "@mui/joy";
-import {useRouter} from "next/router";
-import {UserRole} from "../../../types/resolvers";
+import {useRouter} from "next/navigation";
 
 export default function FourthStep() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    // remove the any type !!!
 
 
-    const {setStep, userData, setUserData, resetForm} = useContext(multiStepContext);
-    const userRole = userData.userRole as UserRole;
+    const {setStep, userData, userRole} = useContext(multiStepContext);
+
 
     async function profileHandling(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -54,90 +51,87 @@ export default function FourthStep() {
 
         // alert(JSON.stringify(res));
         toast.success(res.message + " ✅");
-        resetForm();
         await router.push("/dashboard");
     }
 
     return (
-        <Stack sx={{alignItems: "center", width: "100%"}}>
-            <form onSubmit={profileHandling} style={{width: "50%"}}>
-                {userRole === "Freelancer" ? (
-                    <>
-                        <TextField
-                            sx={{width: "100%"}}
-                            label="Portfolio Link"
-                            margin="normal"
-                            variant="outlined"
-                            color="primary"
-                            name="portfolio"
-                            defaultValue={userData["portfolio"]}
-                            onChange={(e) =>
-                                setUserData({...userData, portfolio: e.target.value})
-                            }
-                        />
-
-                        <DropZone
-                            uploadHandler={(url) => setUserData({...userData, image: url})}
-                        />
-                    </>
-                ) : (
-                    <>
-                        <TextField
-                            sx={{width: "100%"}}
-                            label="Job Title"
-                            margin="normal"
-                            variant="outlined"
-                            color="primary"
-                            name="jobTitle"
-                            defaultValue={userData["jobTitle"]}
-                            onChange={(e) =>
-                                setUserData({...userData, jobTitle: e.target.value})
-                            }
-                        />
-
-                        <TextField
-                            sx={{width: "100%"}}
-                            label="Education Level"
-                            margin="normal"
-                            variant="outlined"
-                            color="primary"
-                            name="educationLevel"
-                            defaultValue={userData["educationLevel"]}
-                            onChange={(e) =>
-                                setUserData({...userData, educationLevel: e.target.value})
-                            }
-                        />
-
-                        <DropZone
-                            uploadHandler={(url) => setUserData({...userData, image: url})}
-                        />
-                    </>
-                )}
-
-                <div>
-                    <Button
-                        style={{marginRight: "80px", marginTop: "50px"}}
-                        variant="contained"
+        <form onSubmit={profileHandling} style={{alignItems: "center", width: "50%"}}>
+            {userRole === "Freelancer" ? (
+                <>
+                    <TextField
+                        sx={{width: "100%"}}
+                        label="Portfolio Link"
+                        margin="normal"
+                        variant="outlined"
                         color="primary"
-                        onClick={() => setStep(3)}
+                        name="portfolio"
+                        defaultValue={userData["portfolio"]}
+                        onChange={(e) =>
+                            userData.portfolio = e.target.value
+                        }
+                    />
+
+                    <DropZone
+                        uploadHandler={(url) => userData.image = url}
+                    />
+                </>
+            ) : (
+                <>
+                    <TextField
+                        sx={{width: "100%"}}
+                        label="Job Title"
+                        margin="normal"
+                        variant="outlined"
+                        color="primary"
+                        name="jobTitle"
+                        defaultValue={userData["jobTitle"]}
+                        onChange={(e) =>
+                            userData.jobTitle = e.target.value
+                        }
+                    />
+
+                    <TextField
+                        sx={{width: "100%"}}
+                        label="Education Level"
+                        margin="normal"
+                        variant="outlined"
+                        color="primary"
+                        name="educationLevel"
+                        defaultValue={userData["educationLevel"]}
+                        onChange={(e) =>
+                            userData.educationLevel = e.target.value
+                        }
+                    />
+
+                    <DropZone
+                        uploadHandler={(url) => userData.image = url}
+                    />
+                </>
+            )}
+
+
+            <div className={"flex gap-2 flex-col mt-4"}>
+
+                <button
+                    className="py-2 px-20 rounded-full font-medium text-base text-white bg-red-300"
+
+                    onClick={() => setStep(3)}
+                >
+                    Prev
+                </button>
+
+                {!loading && (
+                    <button
+                        type="submit"
+                        className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
                     >
-                        {" "}
-                        Back{" "}
-                    </Button>{" "}
-                    {!loading && (
-                        <Button
-                            style={{marginTop: "50px"}}
-                            variant="contained"
-                            color="success"
-                            type="submit"
-                        >
-                            {" "}
-                            Next{" "}
-                        </Button>
-                    )}
-                    {loading && <p>loading...</p>}
-                </div>
-            </form>
-        </Stack>
+                        Next
+                    </button>
+
+
+                )}
+                {loading && <p>loading...</p>}
+            </div>
+        </form>
     );
 }
