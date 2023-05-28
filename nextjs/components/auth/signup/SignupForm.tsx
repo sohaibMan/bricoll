@@ -1,11 +1,11 @@
 import {useState} from "react";
 import {toast} from "react-hot-toast";
-import google from "../../../public/google.png";
+import google from "../../../assets/imgs/google.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
 import {useRouter} from "next/navigation";
-import facebook from "../../../public/facebook.png";
+import facebook from "../../../assets/imgs/facebook.png";
 
 
 const SignupForm = () => {

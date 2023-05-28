@@ -1,8 +1,8 @@
 import {useContext} from "react";
 import Link from "next/link";
 import Image, {StaticImageData} from "next/image";
-import clientImage from "../../../public/client.png";
-import freelancerImage from "../../../public/freelancer.png";
+import clientImage from "../../../assets/imgs/client.png";
+import freelancerImage from "../../../assets/imgs/freelancer.png";
 import {UserRole} from "../../../types/resolvers";
 import {multiStepContext} from "../registration/stepContext";
 

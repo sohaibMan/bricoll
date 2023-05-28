@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
 import {toast} from "react-hot-toast";
-import google from "../../../public/google.png";
-import facebook from "../../../public/facebook.png";
+import google from "../../../assets/imgs/google.png";
+import facebook from "../../../assets/imgs/facebook.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";

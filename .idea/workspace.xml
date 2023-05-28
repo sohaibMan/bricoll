@@ -4,8 +4,45 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="Add: Port Mapping to redis container&#10;Fix some types issue">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/accept.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/accept.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/client.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/client.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/dev.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/dev.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/facebook.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/facebook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/freelancer.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/freelancer.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/fst.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/fst.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/google.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/google.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/graphic.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/graphic.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/heroImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/heroImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/job.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/job.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/man.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/man.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/microsoft.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/microsoft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/quality.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/quality.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/reply.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/reply.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/security.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/security.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/social.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/social.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/thumb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/thumb.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/tick.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/trust.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/trust.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/woman.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/woman.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/target/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/target/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +106,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/assets" />
+      <recent name="$PROJECT_DIR$/nextjs/static_assets" />
       <recent name="$PROJECT_DIR$/nextjs/app/users" />
       <recent name="$PROJECT_DIR$/nextjs/app" />
       <recent name="$PROJECT_DIR$/nextjs/app/emailverification" />
-      <recent name="$PROJECT_DIR$/nextjs/app/[emailVerificationToken]" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -95,6 +133,8 @@
       <workItem from="1685141376606" duration="1942000" />
       <workItem from="1685193715457" duration="107000" />
       <workItem from="1685201570211" duration="5029000" />
+      <workItem from="1685216370090" duration="51000" />
+      <workItem from="1685228201590" duration="4477000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>
@@ -117,6 +157,7 @@
     <MESSAGE value="complete direction from signup to register" />
     <MESSAGE value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
     <MESSAGE value="Add: Port Mapping to redis container&#10;Fix some types issue" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add: Port Mapping to redis container&#10;Fix some types issue" />
+    <MESSAGE value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
+    <option name="LAST_COMMIT_MESSAGE" value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
   </component>
 </project>

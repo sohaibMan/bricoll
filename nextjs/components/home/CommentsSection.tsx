@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
-import men from "../../public/man.jpg";
-import women from "../../public/woman.jpg";
+import men from "../../assets/imgs/man.jpg";
+import women from "../../assets/imgs/woman.jpg";
 import { useState } from "react";
 
 export function CommentsSection() {

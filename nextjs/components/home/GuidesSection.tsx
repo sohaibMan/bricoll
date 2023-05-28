@@ -1,6 +1,6 @@
-"use client";
+
 import Image from "next/image";
-import thumb from "../../public/thumb.jpg";
+import thumb from "../../assets/imgs/thumb.jpg";
 
 export function GuidesSection() {
   return (
