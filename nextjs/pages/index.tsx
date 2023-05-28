@@ -22,20 +22,14 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState("");
   const receiverUser: User = {
-    id: "643eb75439eae20fa6adb475",
+    id: "646509dfc0edd86d1253454e",
     name: "anas zn",
     email: "anas.zn@example.com",
   };
 
-  useEffect(() => {
-    // beamsClient
-    //   .start()
-    //   .then((beamsClient) => beamsClient.getDeviceId())
-    //   .then((deviceId) =>
-    //     console.log("Successfully registered with Beams. Device ID:", deviceId)
-    //   )
-    //   .catch(console.error);
+  console.log("Session, ", session);
 
+  useEffect(() => {
     if (!session) return;
 
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_KEY, {
@@ -48,13 +42,17 @@ export default function Chat() {
       },
     });
 
+    // console.log("pusher, ", pusher);
+
     const channel = pusher.subscribe(`private-chat-1`);
 
-    console.log(`private-chat-1`);
+    // console.log("channel, ", channel);
 
     channel.bind("new-message", (message: Message) => {
       setMessages((prevMessages) => [...prevMessages, message]);
     });
+
+    // console.log("Messages, ", messages);
 
     return () => {
       pusher.unsubscribe(`private-chat-1`);
@@ -82,7 +80,7 @@ export default function Chat() {
       }),
     });
 
-    // console.log("response: ", response);
+    console.log("response: ", response);
 
     if (response.ok) {
       setNewMessage("");
