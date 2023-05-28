@@ -5,54 +5,52 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
-export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string | number; output: string; }
-  String: { input: string; output: string; }
-  Boolean: { input: boolean; output: boolean; }
-  Int: { input: number; output: number; }
-  Float: { input: number; output: number; }
-  Date: { input: any; output: any; }
-  ObjectID: { input: any; output: any; }
-  URL: { input: any; output: any; }
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  Date: any;
+  ObjectID: any;
+  URL: any;
 };
 
 export type Attachment = {
   __typename?: 'Attachment';
-  name: Scalars['String']['output'];
-  type: Scalars['String']['output'];
-  url: Scalars['URL']['output'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type AttachmentInput = {
-  name: Scalars['String']['input'];
-  type: Scalars['String']['input'];
-  url: Scalars['URL']['input'];
+  name: Scalars['String'];
+  type: Scalars['String'];
+  url: Scalars['URL'];
 };
 
 export type Contract = {
   __typename?: 'Contract';
-  _id: Scalars['ObjectID']['output'];
-  client_id: Scalars['ObjectID']['output'];
-  created_at: Scalars['Date']['output'];
-  duration: Scalars['Int']['output'];
-  fees: Scalars['Float']['output'];
-  freelancer_id: Scalars['ObjectID']['output'];
-  price: Scalars['Float']['output'];
-  project_id: Scalars['ObjectID']['output'];
-  proposal_id: Scalars['ObjectID']['output'];
+  _id: Scalars['ObjectID'];
+  client_id: Scalars['ObjectID'];
+  created_at: Scalars['Date'];
+  duration: Scalars['Int'];
+  fees: Scalars['Float'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  proposal_id: Scalars['ObjectID'];
   status: Contract_Status;
   submission_reviews: Array<Maybe<Submission_Review>>;
-  terms: Array<Scalars['String']['output']>;
-  updated_at: Scalars['Date']['output'];
+  terms: Array<Scalars['String']>;
+  updated_at: Scalars['Date'];
 };
 
 export type Contract_Stats = {
   __typename?: 'Contract_stats';
-  count: Scalars['Int']['output'];
+  count: Scalars['Int'];
   status: Contract_Status;
 };
 
@@ -97,175 +95,175 @@ export type Mutation = {
 
 
 export type MutationAcceptContractArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationAcceptProposalArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationAcceptRequestProjectSubmissionReviewArgs = {
-  contract_id: Scalars['ObjectID']['input'];
-  submission_review_id: Scalars['ObjectID']['input'];
+  contract_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
 };
 
 
 export type MutationAddReviewArgs = {
-  description: Scalars['String']['input'];
-  project_id: Scalars['ObjectID']['input'];
-  rating: Scalars['Float']['input'];
-  user_id: Scalars['ObjectID']['input'];
+  description: Scalars['String'];
+  project_id: Scalars['ObjectID'];
+  rating: Scalars['Float'];
+  user_id: Scalars['ObjectID'];
 };
 
 
 export type MutationCancelContractArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationCancelProposalArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationCancelRequestProjectSubmissionReviewArgs = {
-  contract_id: Scalars['ObjectID']['input'];
-  submission_review_id: Scalars['ObjectID']['input'];
+  contract_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
 };
 
 
 export type MutationCreateContractArgs = {
-  duration: Scalars['Int']['input'];
-  freelancer_id: Scalars['ObjectID']['input'];
-  price: Scalars['Float']['input'];
-  project_id: Scalars['ObjectID']['input'];
-  proposal_id: Scalars['ObjectID']['input'];
-  terms: Array<Scalars['String']['input']>;
+  duration: Scalars['Int'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
+  proposal_id: Scalars['ObjectID'];
+  terms: Array<Scalars['String']>;
 };
 
 
 export type MutationCreateProjectArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
   category: ProjectCategoriesEnum;
-  description: Scalars['String']['input'];
-  price: Scalars['Float']['input'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
   projectScope: ProjectScopeInput;
-  skills: Array<Scalars['String']['input']>;
-  title: Scalars['String']['input'];
+  skills: Array<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 
 export type MutationCreateProposalArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
-  cover_letter: Scalars['String']['input'];
-  description: Scalars['String']['input'];
-  duration: Scalars['Int']['input'];
-  price: Scalars['Float']['input'];
-  project_id: Scalars['ObjectID']['input'];
+  cover_letter: Scalars['String'];
+  description: Scalars['String'];
+  duration: Scalars['Int'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
 };
 
 
 export type MutationDeclineProposalArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationDeclineRequestProjectSubmissionReviewArgs = {
-  contract_id: Scalars['ObjectID']['input'];
-  submission_review_id: Scalars['ObjectID']['input'];
+  contract_id: Scalars['ObjectID'];
+  submission_review_id: Scalars['ObjectID'];
 };
 
 
 export type MutationDeleteProjectArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationEditContractArgs = {
-  duration?: InputMaybe<Scalars['Int']['input']>;
-  id: Scalars['ObjectID']['input'];
-  price?: InputMaybe<Scalars['Float']['input']>;
-  terms: Array<Scalars['String']['input']>;
+  duration?: InputMaybe<Scalars['Int']>;
+  id: Scalars['ObjectID'];
+  price?: InputMaybe<Scalars['Float']>;
+  terms: Array<Scalars['String']>;
 };
 
 
 export type MutationEditProjectArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
   category?: InputMaybe<ProjectCategoriesEnum>;
-  description: Scalars['String']['input'];
-  id: Scalars['ObjectID']['input'];
-  price?: InputMaybe<Scalars['Float']['input']>;
+  description: Scalars['String'];
+  id: Scalars['ObjectID'];
+  price?: InputMaybe<Scalars['Float']>;
   projectScope?: InputMaybe<ProjectScopeInput>;
-  skills?: InputMaybe<Array<Scalars['String']['input']>>;
-  title?: InputMaybe<Scalars['String']['input']>;
+  skills?: InputMaybe<Array<Scalars['String']>>;
+  title?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationEditProposalArgs = {
-  cover_letter?: InputMaybe<Scalars['String']['input']>;
-  description: Scalars['String']['input'];
-  duration?: InputMaybe<Scalars['Int']['input']>;
-  id: Scalars['ObjectID']['input'];
-  price?: InputMaybe<Scalars['Float']['input']>;
+  cover_letter?: InputMaybe<Scalars['String']>;
+  description: Scalars['String'];
+  duration?: InputMaybe<Scalars['Int']>;
+  id: Scalars['ObjectID'];
+  price?: InputMaybe<Scalars['Float']>;
 };
 
 
 export type MutationEditReviewArgs = {
-  description: Scalars['String']['input'];
-  id: Scalars['ObjectID']['input'];
-  project_id: Scalars['ObjectID']['input'];
-  rating: Scalars['Float']['input'];
+  description: Scalars['String'];
+  id: Scalars['ObjectID'];
+  project_id: Scalars['ObjectID'];
+  rating: Scalars['Float'];
 };
 
 
 export type MutationReactToProjectArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
   reaction_type: Reaction_Type;
 };
 
 
 export type MutationRemoveReviewArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type MutationRequestProjectSubmissionReviewArgs = {
   attachments?: InputMaybe<Array<AttachmentInput>>;
-  contract_id: Scalars['ObjectID']['input'];
-  description: Scalars['String']['input'];
-  title: Scalars['String']['input'];
+  contract_id: Scalars['ObjectID'];
+  description: Scalars['String'];
+  title: Scalars['String'];
 };
 
 
 export type MutationUndoReactToProjectArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
   reaction_type: Reaction_Type;
 };
 
 export type ProfileMetaData = {
   __typename?: 'ProfileMetaData';
-  _id: Scalars['ObjectID']['output'];
-  image: Scalars['String']['output'];
-  username: Scalars['String']['output'];
+  _id: Scalars['ObjectID'];
+  image: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type Project = {
   __typename?: 'Project';
-  _id?: Maybe<Scalars['ObjectID']['output']>;
+  _id?: Maybe<Scalars['ObjectID']>;
   attachments: Array<Attachment>;
   category: ProjectCategoriesEnum;
-  client_id?: Maybe<Scalars['ObjectID']['output']>;
-  created_at: Scalars['Date']['output'];
-  description: Scalars['String']['output'];
-  price: Scalars['Float']['output'];
+  client_id?: Maybe<Scalars['ObjectID']>;
+  created_at: Scalars['Date'];
+  description: Scalars['String'];
+  price: Scalars['Float'];
   projectScope: ProjectScopeOutput;
   proposals?: Maybe<Array<Proposal>>;
   reactions: Array<Reactions>;
-  skills: Array<Scalars['String']['output']>;
+  skills: Array<Scalars['String']>;
   stats?: Maybe<ProjectStats>;
-  title: Scalars['String']['output'];
+  title: Scalars['String'];
 };
 
 export enum ProjectCategoriesEnum {
@@ -279,46 +277,46 @@ export enum ProjectCategoriesEnum {
 }
 
 export type ProjectScopeInput = {
-  estimated_duration_in_days: Scalars['Int']['input'];
+  estimated_duration_in_days: Scalars['Int'];
   level_of_expertise: Level_Of_Expertise;
   size_of_project: Size_Of_Project;
 };
 
 export type ProjectScopeOutput = {
   __typename?: 'ProjectScopeOutput';
-  estimated_duration_in_days: Scalars['Int']['output'];
+  estimated_duration_in_days: Scalars['Int'];
   level_of_expertise: Level_Of_Expertise;
   size_of_project: Size_Of_Project;
 };
 
 export type ProjectStats = {
   __typename?: 'ProjectStats';
-  approved_count: Scalars['Int']['output'];
-  completed_count: Scalars['Int']['output'];
-  declined_count: Scalars['Int']['output'];
-  in_progress_count: Scalars['Int']['output'];
+  approved_count: Scalars['Int'];
+  completed_count: Scalars['Int'];
+  declined_count: Scalars['Int'];
+  in_progress_count: Scalars['Int'];
 };
 
 export type Project_Stats_Per_Month = {
   __typename?: 'Project_stats_per_month';
-  count: Scalars['Int']['output'];
-  month: Scalars['Int']['output'];
+  count: Scalars['Int'];
+  month: Scalars['Int'];
 };
 
 export type Proposal = {
   __typename?: 'Proposal';
-  _id?: Maybe<Scalars['ObjectID']['output']>;
+  _id?: Maybe<Scalars['ObjectID']>;
   attachments?: Maybe<Array<Attachment>>;
-  client_id: Scalars['ObjectID']['output'];
-  cover_letter: Scalars['String']['output'];
-  created_at: Scalars['Date']['output'];
-  description: Scalars['String']['output'];
-  duration: Scalars['Int']['output'];
-  freelancer_id: Scalars['ObjectID']['output'];
-  price: Scalars['Float']['output'];
-  project_id: Scalars['ObjectID']['output'];
+  client_id: Scalars['ObjectID'];
+  cover_letter: Scalars['String'];
+  created_at: Scalars['Date'];
+  description: Scalars['String'];
+  duration: Scalars['Int'];
+  freelancer_id: Scalars['ObjectID'];
+  price: Scalars['Float'];
+  project_id: Scalars['ObjectID'];
   status: Proposal_Status;
-  updated_at: Scalars['Date']['output'];
+  updated_at: Scalars['Date'];
   user: ProfileMetaData;
 };
 
@@ -332,7 +330,7 @@ export enum Proposal_Status {
 
 export type Proposals_Stats = {
   __typename?: 'Proposals_stats';
-  count: Scalars['Int']['output'];
+  count: Scalars['Int'];
   status: Proposal_Status;
 };
 
@@ -348,38 +346,38 @@ export type Query = {
 
 
 export type QueryContractArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type QueryProfileByIdArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type QueryProjectArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 
 export type QueryProjectsArgs = {
   filter?: InputMaybe<FilterOptionsInput>;
-  query?: InputMaybe<Scalars['String']['input']>;
+  query?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryProposalArgs = {
-  id: Scalars['ObjectID']['input'];
+  id: Scalars['ObjectID'];
 };
 
 export type Review = {
   __typename?: 'Review';
-  _id: Scalars['ObjectID']['output'];
-  createdAt: Scalars['Date']['output'];
-  description: Scalars['String']['output'];
-  project_id: Scalars['ObjectID']['output'];
-  rating: Scalars['Float']['output'];
-  reviewer_id: Scalars['ObjectID']['output'];
+  _id: Scalars['ObjectID'];
+  createdAt: Scalars['Date'];
+  description: Scalars['String'];
+  project_id: Scalars['ObjectID'];
+  rating: Scalars['Float'];
+  reviewer_id: Scalars['ObjectID'];
 };
 
 export enum StatusEnum {
@@ -389,14 +387,14 @@ export enum StatusEnum {
 
 export type Submission_Review = {
   __typename?: 'Submission_review';
-  _id: Scalars['ObjectID']['output'];
-  accepted_at?: Maybe<Scalars['Date']['output']>;
+  _id: Scalars['ObjectID'];
+  accepted_at?: Maybe<Scalars['Date']>;
   attachments: Array<Attachment>;
-  created_at: Scalars['Date']['output'];
-  description: Scalars['String']['output'];
+  created_at: Scalars['Date'];
+  description: Scalars['String'];
   status: Submission_Review_Status;
-  title: Scalars['String']['output'];
-  updated_at: Scalars['Date']['output'];
+  title: Scalars['String'];
+  updated_at: Scalars['Date'];
 };
 
 export enum Submission_Review_Status {
@@ -408,41 +406,41 @@ export enum Submission_Review_Status {
 
 export type User = {
   __typename?: 'User';
-  _id: Scalars['ObjectID']['output'];
-  address: Scalars['String']['output'];
-  bio: Scalars['String']['output'];
-  category: Scalars['String']['output'];
-  city: Scalars['String']['output'];
-  company: Scalars['String']['output'];
+  _id: Scalars['ObjectID'];
+  address: Scalars['String'];
+  bio: Scalars['String'];
+  category: Scalars['String'];
+  city: Scalars['String'];
+  company: Scalars['String'];
   contracts: Array<Contract>;
   contracts_stats: Array<Contract_Stats>;
-  country: Scalars['String']['output'];
-  educationLevel: Scalars['String']['output'];
-  email: Scalars['String']['output'];
-  experienceLevel: Scalars['String']['output'];
-  image: Scalars['String']['output'];
-  jobTitle: Scalars['String']['output'];
-  language: Scalars['String']['output'];
+  country: Scalars['String'];
+  educationLevel: Scalars['String'];
+  email: Scalars['String'];
+  experienceLevel: Scalars['String'];
+  image: Scalars['String'];
+  jobTitle: Scalars['String'];
+  language: Scalars['String'];
   payments: Array<Payments>;
-  phone: Scalars['String']['output'];
-  portfolio: Scalars['String']['output'];
-  profileTitle: Scalars['String']['output'];
+  phone: Scalars['String'];
+  portfolio: Scalars['String'];
+  profileTitle: Scalars['String'];
   projects: Array<Project>;
   projects_stats: Array<Project_Stats_Per_Month>;
   proposals: Array<Proposal>;
   proposals_stats: Array<Proposals_Stats>;
   reviews: Array<Review>;
-  role: Scalars['String']['output'];
-  skills: Array<Scalars['String']['output']>;
+  role: Scalars['String'];
+  skills: Array<Scalars['String']>;
   status?: Maybe<StatusEnum>;
-  username: Scalars['String']['output'];
+  username: Scalars['String'];
 };
 
 export type FilterOptionsInput = {
   category?: InputMaybe<ProjectCategoriesEnum>;
-  priceMax?: InputMaybe<Scalars['Float']['input']>;
-  priceMin?: InputMaybe<Scalars['Float']['input']>;
-  skills?: InputMaybe<Array<Scalars['String']['input']>>;
+  priceMax?: InputMaybe<Scalars['Float']>;
+  priceMin?: InputMaybe<Scalars['Float']>;
+  skills?: InputMaybe<Array<Scalars['String']>>;
 };
 
 export enum Level_Of_Expertise {
@@ -453,17 +451,17 @@ export enum Level_Of_Expertise {
 
 export type Payments = {
   __typename?: 'payments';
-  amount: Scalars['Float']['output'];
-  contract_id: Scalars['ObjectID']['output'];
-  created_at: Scalars['Date']['output'];
-  currency: Scalars['String']['output'];
-  description: Scalars['String']['output'];
+  amount: Scalars['Float'];
+  contract_id: Scalars['ObjectID'];
+  created_at: Scalars['Date'];
+  currency: Scalars['String'];
+  description: Scalars['String'];
 };
 
 export type QueryResult = {
   __typename?: 'queryResult';
-  _id: Scalars['ObjectID']['output'];
-  acknowledgement: Scalars['Boolean']['output'];
+  _id: Scalars['ObjectID'];
+  acknowledgement: Scalars['Boolean'];
 };
 
 export enum Reaction_Type {
@@ -473,7 +471,7 @@ export enum Reaction_Type {
 
 export type Reactions = {
   __typename?: 'reactions';
-  freelancer_id: Scalars['ObjectID']['output'];
+  freelancer_id: Scalars['ObjectID'];
   reaction_type: Reaction_Type;
 };
 
@@ -562,16 +560,16 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = ResolversObject<{
   Attachment: ResolverTypeWrapper<Attachment>;
   AttachmentInput: AttachmentInput;
-  Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
+  Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Contract: ResolverTypeWrapper<Contract>;
   Contract_stats: ResolverTypeWrapper<Contract_Stats>;
   Contract_status: Contract_Status;
-  Date: ResolverTypeWrapper<Scalars['Date']['output']>;
+  Date: ResolverTypeWrapper<Scalars['Date']>;
   EarningsStatus: EarningsStatus;
-  Float: ResolverTypeWrapper<Scalars['Float']['output']>;
-  Int: ResolverTypeWrapper<Scalars['Int']['output']>;
+  Float: ResolverTypeWrapper<Scalars['Float']>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
-  ObjectID: ResolverTypeWrapper<Scalars['ObjectID']['output']>;
+  ObjectID: ResolverTypeWrapper<Scalars['ObjectID']>;
   ProfileMetaData: ResolverTypeWrapper<ProfileMetaData>;
   Project: ResolverTypeWrapper<Project>;
   ProjectCategoriesEnum: ProjectCategoriesEnum;
@@ -585,10 +583,10 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   Review: ResolverTypeWrapper<Review>;
   StatusEnum: StatusEnum;
-  String: ResolverTypeWrapper<Scalars['String']['output']>;
+  String: ResolverTypeWrapper<Scalars['String']>;
   Submission_review: ResolverTypeWrapper<Submission_Review>;
   Submission_review_status: Submission_Review_Status;
-  URL: ResolverTypeWrapper<Scalars['URL']['output']>;
+  URL: ResolverTypeWrapper<Scalars['URL']>;
   User: ResolverTypeWrapper<User>;
   filterOptionsInput: FilterOptionsInput;
   level_of_expertise: Level_Of_Expertise;
@@ -604,14 +602,14 @@ export type ResolversTypes = ResolversObject<{
 export type ResolversParentTypes = ResolversObject<{
   Attachment: Attachment;
   AttachmentInput: AttachmentInput;
-  Boolean: Scalars['Boolean']['output'];
+  Boolean: Scalars['Boolean'];
   Contract: Contract;
   Contract_stats: Contract_Stats;
-  Date: Scalars['Date']['output'];
-  Float: Scalars['Float']['output'];
-  Int: Scalars['Int']['output'];
+  Date: Scalars['Date'];
+  Float: Scalars['Float'];
+  Int: Scalars['Int'];
   Mutation: {};
-  ObjectID: Scalars['ObjectID']['output'];
+  ObjectID: Scalars['ObjectID'];
   ProfileMetaData: ProfileMetaData;
   Project: Project;
   ProjectScopeInput: ProjectScopeInput;
@@ -622,9 +620,9 @@ export type ResolversParentTypes = ResolversObject<{
   Proposals_stats: Proposals_Stats;
   Query: {};
   Review: Review;
-  String: Scalars['String']['output'];
+  String: Scalars['String'];
   Submission_review: Submission_Review;
-  URL: Scalars['URL']['output'];
+  URL: Scalars['URL'];
   User: User;
   filterOptionsInput: FilterOptionsInput;
   payments: Payments;
@@ -633,22 +631,22 @@ export type ResolversParentTypes = ResolversObject<{
 }>;
 
 export type ConstraintDirectiveArgs = {
-  contains?: Maybe<Scalars['String']['input']>;
-  endsWith?: Maybe<Scalars['String']['input']>;
-  exclusiveMax?: Maybe<Scalars['Float']['input']>;
-  exclusiveMin?: Maybe<Scalars['Float']['input']>;
-  format?: Maybe<Scalars['String']['input']>;
-  max?: Maybe<Scalars['Float']['input']>;
-  maxItems?: Maybe<Scalars['Int']['input']>;
-  maxLength?: Maybe<Scalars['Int']['input']>;
-  min?: Maybe<Scalars['Float']['input']>;
-  minItems?: Maybe<Scalars['Int']['input']>;
-  minLength?: Maybe<Scalars['Int']['input']>;
-  multipleOf?: Maybe<Scalars['Float']['input']>;
-  notContains?: Maybe<Scalars['String']['input']>;
-  pattern?: Maybe<Scalars['String']['input']>;
-  startsWith?: Maybe<Scalars['String']['input']>;
-  uniqueTypeName?: Maybe<Scalars['String']['input']>;
+  contains?: Maybe<Scalars['String']>;
+  endsWith?: Maybe<Scalars['String']>;
+  exclusiveMax?: Maybe<Scalars['Float']>;
+  exclusiveMin?: Maybe<Scalars['Float']>;
+  format?: Maybe<Scalars['String']>;
+  max?: Maybe<Scalars['Float']>;
+  maxItems?: Maybe<Scalars['Int']>;
+  maxLength?: Maybe<Scalars['Int']>;
+  min?: Maybe<Scalars['Float']>;
+  minItems?: Maybe<Scalars['Int']>;
+  minLength?: Maybe<Scalars['Int']>;
+  multipleOf?: Maybe<Scalars['Float']>;
+  notContains?: Maybe<Scalars['String']>;
+  pattern?: Maybe<Scalars['String']>;
+  startsWith?: Maybe<Scalars['String']>;
+  uniqueTypeName?: Maybe<Scalars['String']>;
 };
 
 export type ConstraintDirectiveResolver<Result, Parent, ContextType = ServerContext, Args = ConstraintDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
