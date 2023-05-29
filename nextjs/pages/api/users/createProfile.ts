@@ -192,6 +192,7 @@ export default async function handler(
             birthday
         };
 
+
         const newUser = (userRole === UserRole.Freelancer) ? newFreelancerUser : newClientUser;
 
 
@@ -216,10 +217,19 @@ export default async function handler(
             {_id: new ObjectId(user_id)},
             {
                 $set: {...newUser, isCompleted: true, access_token: getCookie("jwt")},
+            }, {
+                returnDocument: "after"
             }
         );
 
-        // console.log("newUserInfo: ", newUserData);
+
+
+        if (!newUserData.value) {
+            return res.status(400).json({
+                status: "failed",
+                message: "User not found!"
+            })
+        }
 
         // ? Caching the data
         await redis.set(email, JSON.stringify(newUserData.value));
@@ -230,6 +240,7 @@ export default async function handler(
 
         // console.log("decoded : ", decoded);
     } catch (error) {
+        console.log("error: ", error)
         res.status(500).json({
             status: "failed",
             message: error,

@@ -15,6 +15,7 @@ const CountrySelector = memo(() => {
         <FormControl
         >
             <Autocomplete
+                defaultValue={userData.country}
                 autoHighlight
                 placeholder={"Country"}
                 isOptionEqualToValue={(option, value) => option.code === value.code}
@@ -230,7 +231,6 @@ const countries: readonly CountryType[] = [
     {code: 'HU', label: 'Hungary', phone: '36'},
     {code: 'ID', label: 'Indonesia', phone: '62'},
     {code: 'IE', label: 'Ireland', phone: '353'},
-    {code: 'IL', label: 'Israel', phone: '972'},
     {code: 'IM', label: 'Isle of Man', phone: '44'},
     {code: 'IN', label: 'India', phone: '91'},
     {

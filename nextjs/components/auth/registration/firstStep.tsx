@@ -40,18 +40,13 @@ export default function FirstStep() {
         const missingFields = requiredFields.filter((field: string) => !userData[field as keyof UserData]);
 
 
-        if (missingFields.length) {
-            toast.error(
-                `Please fill in the following fields: ${missingFields.join(", ")}`
-            );
-        } else {
-            setStep(2);
-        }
-    }
+        if (missingFields.length) return toast.error(
+            `Please fill in the following fields: ${missingFields.join(", ")}`
+        );
+        else if (userData.bio.length < 100) return toast.error("Bio must be at least 100 characters")
+        else setStep(2);
 
-    // const handleCountryChange = (selectedCountry: string) => {
-    //     userData.country = selectedCountry
-    // };
+    }
 
 
     return (
@@ -70,6 +65,7 @@ export default function FirstStep() {
                 <Divider orientation="vertical"/>
                 <Input
                     sx={{width: "100%"}}
+                    type={"text"}
                     placeholder="Language"
                     defaultValue={userData["language"]}
                     onChange={(e) => {
@@ -107,7 +103,7 @@ export default function FirstStep() {
             <Input
                 sx={{width: "100%"}}
                 placeholder="Address"
-                defaultValue={userData["address"]}
+                defaultValue={userData.address}
                 onChange={(e) => {
                     userData.address = e.target.value
                 }}
@@ -115,12 +111,11 @@ export default function FirstStep() {
             <Stack direction={"row"} spacing={1}>
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
+                            disableFuture
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {
-                                if (value & $ value.$d
-                            )
-                                userData.birthday = value.$d
+                                if (value && value.$d) userData.birthday = value.$d
                             }}/>
 
 
@@ -130,7 +125,7 @@ export default function FirstStep() {
                 <Input
                     sx={{width: "100%"}}
                     placeholder="Time Zone"
-                    // defaultValue={userData["timeZone"]}
+                    defaultValue={userData.timeZone}
                     onChange={(e) => {
                         userData.timeZone = e.target.value
                     }}

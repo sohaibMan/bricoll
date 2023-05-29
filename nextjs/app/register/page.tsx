@@ -1,5 +1,5 @@
 "use client"
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import SecondStep from "../../components/auth/registration/secondStep";
 import ThirdStep from "../../components/auth/registration/thirdStep";
 import FourthStep from "../../components/auth/registration/fourthStep";
@@ -12,9 +12,8 @@ import HandymanIcon from '@mui/icons-material/Handyman';
 import WorkHistoryIcon from '@mui/icons-material/WorkHistory';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import {Step, StepIconProps, StepLabel, Stepper} from "@mui/material";
-import { styled } from '@mui/material/styles';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
-
+import {styled} from '@mui/material/styles';
+import StepConnector, {stepConnectorClasses} from '@mui/material/StepConnector';
 
 
 const freelancerSteps = [{
@@ -39,9 +38,25 @@ const clientSteps = [{
 
 
 export default function Page() {
-    const {currentStep, userRole} = useContext(multiStepContext);
+    let {currentStep, userRole, userData, setStep} = useContext(multiStepContext);
     const steps = (userRole === UserRole.Freelancer) ? freelancerSteps : clientSteps
 
+
+    useEffect(() => {
+        // sync userData with localStorage
+        const userDataFromLocalStorage = localStorage.getItem("userData")
+        if (userDataFromLocalStorage) {
+            userData = JSON.parse(userDataFromLocalStorage)
+        }
+        window.onbeforeunload = confirmExit;
+        window.onunload = confirmExit;
+
+        function confirmExit() {
+            localStorage.setItem("userData", JSON.stringify(userData))
+            // todo sync it to the state
+            return "You have attempted to leave this page. Are you sure?";
+        }
+    }, [])
 
     function CurrentStepComponent({step}: { step: number }) {
         switch (step) {
@@ -63,7 +78,7 @@ export default function Page() {
         }
     }
 
-    const ColorlibConnector = styled(StepConnector)(({ theme }) => ({
+    const ColorlibConnector = styled(StepConnector)(({theme}) => ({
         [`&.${stepConnectorClasses.alternativeLabel}`]: {
             top: 22,
         },
@@ -89,10 +104,9 @@ export default function Page() {
     }));
 
 
-
     const ColorlibStepIconRoot = styled('div')<{
         ownerState: { completed?: boolean; active?: boolean };
-    }>(({ theme, ownerState }) => ({
+    }>(({theme, ownerState}) => ({
         backgroundColor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : '#ccc',
         zIndex: 1,
         color: '#fff',
@@ -114,17 +128,17 @@ export default function Page() {
     }));
 
     function ColorlibStepIcon(props: StepIconProps) {
-        const { active, completed, className } = props;
+        const {active, completed, className} = props;
 
         const icons: { [index: string]: React.ReactElement } = {
-            1: <ContactEmergencyIcon />,
-            2: <HandymanIcon />,
-            3: <WorkHistoryIcon />,
-            4: <AccountBoxIcon />,
+            1: <ContactEmergencyIcon/>,
+            2: <HandymanIcon/>,
+            3: <WorkHistoryIcon/>,
+            4: <AccountBoxIcon/>,
         };
 
         return (
-            <ColorlibStepIconRoot ownerState={{ completed, active }} className={className}>
+            <ColorlibStepIconRoot ownerState={{completed, active}} className={className}>
                 {icons[String(props.icon)]}
             </ColorlibStepIconRoot>
         );
@@ -139,8 +153,8 @@ export default function Page() {
                     <div className={"my-4"} style={{display: "flex", justifyContent: "center"}}>
 
 
-                        <Stepper alternativeLabel activeStep={currentStep - 1} connector={<ColorlibConnector />}>
-                            {steps.map(({label}) => (
+                        <Stepper alternativeLabel activeStep={currentStep - 1} connector={<ColorlibConnector/>}>
+                            {steps.map(({label}, i) => (
                                 <Step key={label}>
                                     <StepLabel StepIconComponent={ColorlibStepIcon}>{label}</StepLabel>
                                 </Step>

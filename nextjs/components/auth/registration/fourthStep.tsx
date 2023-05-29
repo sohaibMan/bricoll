@@ -5,13 +5,13 @@ import {multiStepContext, UserData} from "./stepContext";
 import {toast} from "react-hot-toast";
 import DropZone from "../../Dashboard/DropZone";
 import {useRouter} from "next/navigation";
+import Avatar from "@mui/joy/Avatar";
+import {Box, Stack} from "@mui/joy";
 
 export default function FourthStep() {
     const router = useRouter();
-    const [loading, setLoading] = useState(false);
-
-
-    const {setStep, userData, userRole} = useContext(multiStepContext);
+    const {userData, setStep, userRole} = useContext(multiStepContext);
+    const [imageLinkState, setImageLinkState] = useState(userData.image || "");
 
 
     async function profileHandling(e: ChangeEvent<HTMLFormElement>) {
@@ -33,25 +33,35 @@ export default function FourthStep() {
             );
         }
 
-        setLoading(true);
 
-        const response = await fetch(`/api/users/createProfile`, {
+        await toast.promise(fetch(`/api/users/createProfile`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(userData),
-        });
+        }).then((res) => {
+            return res.json();
+        }).then((data) => {
+            if (data.status === "failed") {
+                throw new Error(data.message);
+            }
+            return data;
+        }), {
+            loading: "Creating profile...",
+            success: (data: { message: string }) => {
+                if (userRole === "Freelancer") {
+                    router.push("/find-work");
+                } else {
+                    router.push("/dashboard");
+                }
+                return data.message;
+            },
+            error: (err) => {
+                return err.message;
+            }
 
-        const res = await response.json();
-
-        if (!response.ok) {
-            return toast.error(res.message);
-        }
-
-        // alert(JSON.stringify(res));
-        toast.success(res.message + " ✅");
-        await router.push("/dashboard");
+        }).catch(e => console.error(e));
     }
 
     return (
@@ -103,9 +113,21 @@ export default function FourthStep() {
                         }
                     />
 
-                    <DropZone
-                        uploadHandler={(url) => userData.image = url}
-                    />
+                    <Stack sx={{alignItems: "center"}} spacing={4} direction={"column"}>
+                        <Avatar
+                            size="lg"
+                            src={imageLinkState}
+                            sx={{"--Avatar-size": "64px", marginTop: "1rem"}}
+                        />
+                        <Box sx={{width: "100%"}}>
+                            <DropZone
+                                uploadHandler={(url => {
+                                    setImageLinkState(url);
+                                    userData.image = url
+                                })}
+                            />
+                        </Box>
+                    </Stack>
                 </>
             )}
 
@@ -120,17 +142,18 @@ export default function FourthStep() {
                     Prev
                 </button>
 
-                {!loading && (
+                {
                     <button
                         type="submit"
                         className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
                     >
-                        Next
+
+                        Submit
                     </button>
 
 
-                )}
-                {loading && <p>loading...</p>}
+                }
+
             </div>
         </form>
     );

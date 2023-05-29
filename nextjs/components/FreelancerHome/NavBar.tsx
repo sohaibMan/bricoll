@@ -7,7 +7,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import LogoutIcon from "@mui/icons-material/Logout";
 import Image from "next/image";
-import man from "../../public/man.jpg";
+import man from "../../assets/imgs/man.jpg"
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import Link from "next/link";
 import Image, {StaticImageData} from "next/image";
 import freelancerImage from "../../../assets/imgs/freelancer.png";
@@ -37,7 +37,12 @@ const Card = ({label, imageSrc, selected, onClick}: CardProps) => {
 
 const ProfileTypeStep = () => {
 
-        const {setStep, userRole, setUserRole} = useContext(multiStepContext);
+        const {setStep, userRole, setUserRole, userData} = useContext(multiStepContext);
+
+        useEffect(() => {
+            //    set the user role in the userData object
+            userData.userRole = userRole
+        }, [userRole])
 
 
         return (

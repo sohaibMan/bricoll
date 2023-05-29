@@ -1,5 +1,5 @@
 "use client"
-import {createContext, ReactNode, useState} from "react";
+import {createContext, ReactNode, useEffect, useState} from "react";
 import {UserRole} from "../../../types/resolvers";
 
 
@@ -32,13 +32,14 @@ export interface UserData {
     specificSkills: string[];
     skillsLevel: string [];
     birthday: Date;
+    userRole: UserRole;
 }
 
 type MultiStepContext = {
     currentStep: number;
     setStep: (step: number) => void;
     userData: UserData;
-    userRole: UserRole | null,
+    userRole: UserRole,
     setUserRole: (arg0: UserRole) => void
 };
 
@@ -50,8 +51,6 @@ export const multiStepContext = createContext<MultiStepContext>(
 
 export const StepContextProvider = (props: { children: ReactNode }) => {
     const [currentStep, setStep] = useState(0);
-
-
     const [userRole, setUserRole] = useState<UserRole>(UserRole.Client)
 
 
@@ -62,6 +61,8 @@ export const StepContextProvider = (props: { children: ReactNode }) => {
         setUserRole,
         userData,
     };
+
+
 
     return (
         <multiStepContext.Provider value={contextValues}>
