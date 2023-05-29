@@ -1,7 +1,7 @@
 import ExpertiseCard from "../ExpertiseCard";
-import devImage from "../../public/dev.jpg";
-import graphicImage from "../../public/graphic.jpg";
-import socialImage from "../../public/social.jpg";
+import devImage from "../../assets/imgs/dev.jpg";
+import graphicImage from "../../assets/imgs/graphic.jpg";
+import socialImage from "../../assets/imgs/social.jpg";
 
 export function ExpertiseSection() {
 

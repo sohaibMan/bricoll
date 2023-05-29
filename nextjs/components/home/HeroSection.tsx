@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import heroImage from "../../public/heroImage.jpg";
-import google from "../../public/google.png";
-import fst from "../../public/fst.png";
-import microsoft from "../../public/microsoft.png";
+import heroImage from "../../assets/imgs/heroImage.jpg";
+import google from "../../assets/imgs/google.png";
+import fst from "../../assets/imgs/fst.png";
+import microsoft from "../../assets/imgs/microsoft.png";
 
 export function HeroSection() {
 
@@ -26,7 +26,7 @@ export function HeroSection() {
               Elevate Your Business with Professional Freelancers
             </h2>
             <Link
-              href="/app/signup/page"
+              href="signup"
               passHref
               className="py-2 px-5 rounded-full self-center md:self-start font-medium text-xl  text-white bg-primary hover:text-second"
             >

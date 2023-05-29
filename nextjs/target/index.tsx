@@ -1,10 +1,10 @@
 import Link from "next/link";
 import {useState} from "react";
 import Image from "next/image";
-import heroImage from "../public/heroImage.jpg";
-import google from "../public/google.png";
-import fst from "../public/fst.png";
-import microsoft from "../public/microsoft.png";
+import heroImage from "../assets/imgs/heroImage.jpg";
+import google from "../assets/imgs/google.png";
+import fst from "../assets/imgs/fst.png";
+import microsoft from "../assets/imgs/microsoft.png";
 
 
 const Home = () => {
@@ -77,7 +77,7 @@ const Home = () => {
                         </div>
                         <div className="hidden mx-72 md:flex px-4">
                             <Link
-                                href="/api/auth/login"
+                                href="/login"
                                 passHref
                                 className="py-2 text-lg font-sans px-6 text-primary_2 hover:text-primary"
                             >

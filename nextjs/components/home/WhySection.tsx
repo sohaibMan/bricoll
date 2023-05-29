@@ -1,9 +1,9 @@
 import Image from "next/image";
-import quality from "../../public/quality.png";
-import security from "../../public/security.png";
-import trust from "../../public/trust.png";
-import job from "../../public/job.png";
-import accept from "../../public/accept.png";
+import quality from "../../assets/imgs/quality.png";
+import security from "../../assets/imgs/security.png";
+import trust from "../../assets/imgs/trust.png";
+import job from "../../assets/imgs/job.png";
+import accept from "../../assets/imgs/accept.png";
 
 export function WhySection() {
   return (

@@ -11,7 +11,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     try {
-        // ? Checking if the
+
 
         const token = await getToken({req});
 
@@ -46,15 +46,16 @@ export default async function handler(
         const skills: string[] = req.body.skills;
 
         const postalCode: number = req.body.postalCode;
-        const timeZone: Date = req.body.timeZone;
+        const timeZone: string = req.body.timeZone;
         const companyName: string = req.body.companyName;
         const website: string = req.body.website;
         const industry: string = req.body.industry;
-        const yearFounded: Date = req.body.yearFounded;
+        const yearFounded: number = req.body.yearFounded;
         const ownershipType: string = req.body.ownershipType;
-        const skillsCategories: string = req.body.skillsCategories;
-        const specificSkills: string = req.body.specificSkills;
-        const skillsLevel: string = req.body.skillsLevel;
+        const skillsCategories: string[] = req.body.skillsCategories;
+        const specificSkills: string[] = req.body.specificSkills;
+        const skillsLevel: string[] = req.body.skillsLevel;
+        const birthday: string = req.body.birthday;
 
 
         const errors = [];
@@ -66,6 +67,7 @@ export default async function handler(
         if (!address) errors.push("address");
         if (!language) errors.push("language");
         if (!image) errors.push("image");
+        if (!birthday) errors.push("birthday");
 
         if (userRole === UserRole.Freelancer) {
             if (
@@ -83,7 +85,8 @@ export default async function handler(
                 !jobTitle ||
                 !educationLevel ||
                 !portfolio ||
-                !skills
+                !skills ||
+                !birthday
             ) {
 
 
@@ -160,7 +163,9 @@ export default async function handler(
             skills,
             reviews: [],
             payments: [],
-            userRole
+            userRole,
+            birthday,
+
         };
 
         const newClientUser = {
@@ -183,7 +188,8 @@ export default async function handler(
             skillsLevel,
             reviews: [],
             payments: [],
-            userRole
+            userRole,
+            birthday
         };
 
         const newUser = (userRole === UserRole.Freelancer) ? newFreelancerUser : newClientUser;

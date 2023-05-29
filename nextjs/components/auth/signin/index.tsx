@@ -1,7 +1,7 @@
 import {FormEvent, useState} from "react";
 import {toast} from "react-hot-toast";
-import google from "../../../public/google.png";
-import facebook from "../../../public/facebook.png";
+import google from "../../../assets/imgs/google.png";
+import facebook from "../../../assets/imgs/facebook.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
@@ -31,12 +31,12 @@ const SignupForm = () => {
                 if (!res || !res.ok) {
                     throw Error(res?.error || "Email or password are not valid")
                 }
-                if (res.ok) {
+                // if (res.ok) {
                     const callbackURL = decodeURIComponent(res.url && res.url.split("?")[1]?.split("=")[1] || "/")
                     console.log(callbackURL)
                     router.push(callbackURL)
-                }
-                return res
+                // }
+                // return res
             })
             ,
             {
