@@ -5,7 +5,7 @@ import {UserRole} from "../../../types/resolvers";
 
 // type UserData = Record<string, string | string[]>;
 
-interface UserData {
+export interface UserData {
     bio: string;
     country: string;
     city: string;
@@ -28,9 +28,9 @@ interface UserData {
     industry: string;
     yearFounded: number;
     ownershipType: string;
-    skillsCategories: string;
-    specificSkills: string;
-    skillsLevel: string;
+    skillsCategories: string[];
+    specificSkills: string[];
+    skillsLevel: string [];
     birthday: Date;
 }
 
@@ -38,7 +38,7 @@ type MultiStepContext = {
     currentStep: number;
     setStep: (step: number) => void;
     userData: UserData;
-    userRole: UserRole,
+    userRole: UserRole | null,
     setUserRole: (arg0: UserRole) => void
 };
 
@@ -52,7 +52,7 @@ export const StepContextProvider = (props: { children: ReactNode }) => {
     const [currentStep, setStep] = useState(0);
 
 
-    const [userRole, setUserRole] = useState<UserRole>(null)
+    const [userRole, setUserRole] = useState<UserRole | null>(null)
 
 
     const contextValues: MultiStepContext = {

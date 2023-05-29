@@ -1,7 +1,7 @@
 "use client"
 import React, {useContext, useState} from "react";
 import {TextField} from "@mui/material";
-import {multiStepContext} from "./stepContext";
+import {multiStepContext, UserData} from "./stepContext";
 import Chip from "@mui/material/Chip";
 import {UserRole} from "../../../types/resolvers";
 import Autocomplete from "@mui/joy/Autocomplete";
@@ -11,24 +11,24 @@ export default function FirstStep() {
     const {setStep, userData, userRole} = useContext(multiStepContext);
 
     const [skillCategories, setSkillCategories] = useState(
-        userData.skillsCategories || []
+        userData.skillsCategories || [] as string[]
     );
     const [specificSkills, setSpecificSkills] = useState(
-        userData.specificSkills || []
+        userData.specificSkills || [] as string[]
     );
 
     const [skillLevel, setSkillsLevel] = useState(
-        userData.skillsLevel || []);
+        userData.skillsLevel || [] as string[]);
 
 
-    const handleSpecificSkills = (skill) => {
-        setSpecificSkills(skill);
-        userData.specificSkills = skill
+    const handleSpecificSkills = (skill: string) => {
+        setSpecificSkills((prv) => [...prv, skill]);
+        userData.specificSkills = specificSkills;
     };
 
-    const handleSkillsLevel = (level: any) => {
-        setSkillsLevel(level);
-        userData.skillsLevel = level
+    const handleSkillsLevel = (level: string) => {
+        setSkillsLevel(prv => [...prv, level]);
+        userData.skillsLevel = skillLevel
     };
 
     const popularSkillsCategories = [
@@ -66,7 +66,7 @@ export default function FirstStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
 
 
         if (missingFields.length) {
@@ -128,6 +128,7 @@ export default function FirstStep() {
             ) : (
                 <>
                     <div style={{marginBottom: "10px", marginTop: "20px"}}>
+
                         <Autocomplete
                             placeholder={"Enter the skills you search for"}
                             multiple
@@ -136,15 +137,16 @@ export default function FirstStep() {
                             options={popularSkillsCategories}
                             defaultValue={skillCategories}
                             freeSolo
-                            onChange={(event, newSkills: string) => {
-                                handleSpecificSkills(newSkills);
+                            onChange={(event, newSkills) => {
+                                handleSpecificSkills(newSkills as unknown as string);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }
@@ -174,9 +176,10 @@ export default function FirstStep() {
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }
@@ -200,14 +203,15 @@ export default function FirstStep() {
                             defaultValue={skillLevel}
                             freeSolo
                             onChange={(event, newSkills) => {
-                                handleSkillsLevel(newSkills);
+                                handleSkillsLevel(newSkills as unknown as string);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }

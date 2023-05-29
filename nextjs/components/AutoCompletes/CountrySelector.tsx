@@ -43,8 +43,8 @@ const CountrySelector = memo(() => {
                         autoComplete: 'new-password', // disable autocomplete and autofill
                     },
                 }}
-                onChange={(event, selectedOption: string) => {
-                    userData.country = selectedOption;
+                onChange={(event, selectedOption) => {
+                    userData.country = selectedOption as unknown as string;
                 }}
             />
         </FormControl>

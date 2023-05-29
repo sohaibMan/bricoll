@@ -26,6 +26,7 @@ import {User} from "../../types/resolvers";
 import {client} from "../_app";
 // import db from "../../lib/mongodb";
 import CustomLink from "../../components/CustomLinks/CustomLink";
+import {RichTextEditor} from "../../components/Inputs/RichTextEditor";
 
 
 // const usersCollection = db.collection("users")
@@ -268,7 +269,8 @@ export default function ProfilePage({profile}: { profile: User }) {
                                     </div>
 
                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        <MDBCardText>{profile.bio}</MDBCardText>
+                                        {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
+                                        <RichTextEditor readOnly={true} value={profile.bio} theme="bubble"/>
                                     </MDBListGroupItem>
                                 </MDBListGroup>
                             </MDBCardBody>

@@ -1,9 +1,10 @@
 "use client"
 import React, {useContext} from "react";
 import {TextField} from "@mui/material";
-import {multiStepContext} from "./stepContext";
+import {multiStepContext, UserData} from "./stepContext";
 import {toast} from "react-hot-toast";
-import Chip from "@mui/joy/Chip";
+import Chip from "@mui/material/Chip";
+import Autocomplete from "@mui/material/Autocomplete";
 
 export default function SecondStep() {
     const {setStep, userData, userRole} = useContext(multiStepContext);
@@ -38,8 +39,7 @@ export default function SecondStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => !userData[field]);
-
+        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
 
 
         if (missingFields.length) {
@@ -89,19 +89,19 @@ export default function SecondStep() {
                         options={popularSkills}
                         // defaultValue={userData.skills}
                         freeSolo
-                        onChange={(event, newSkill: string) => {
+                        onChange={(event, newSkill) => {
                             if (!userData.skills) {
                                 userData.skills = []
                             }
-                            userData.skills.push(newSkill)
+                            userData.skills.push(newSkill as unknown as string)
                         }}
                         renderTags={(value: string[], getTagProps) =>
                             value.map((option: string, index: number) => (
                                 <Chip
+                                    {...getTagProps({index})}
                                     key={index}
                                     variant="outlined"
                                     label={option}
-                                    {...getTagProps}
                                 />
                             ))
                         }

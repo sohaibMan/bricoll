@@ -52,9 +52,9 @@ export default async function handler(
         const industry: string = req.body.industry;
         const yearFounded: number = req.body.yearFounded;
         const ownershipType: string = req.body.ownershipType;
-        const skillsCategories: string = req.body.skillsCategories;
-        const specificSkills: string = req.body.specificSkills;
-        const skillsLevel: string = req.body.skillsLevel;
+        const skillsCategories: string[] = req.body.skillsCategories;
+        const specificSkills: string[] = req.body.specificSkills;
+        const skillsLevel: string[] = req.body.skillsLevel;
         const birthday: string = req.body.birthday;
 
 

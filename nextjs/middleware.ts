@@ -12,11 +12,17 @@ export default withAuth({
                 // so we redirect him to the register page
                 return false;
             }
+            if (token && token.isCompleted === false && req.nextUrl.pathname === "/register") {
+                // the user is not authorized to access the website if he didn't complete his profile,
+                // so we redirect him to the register page
+                return true;
+            }
             if (token && token.isCompleted === true && req.nextUrl.pathname === "/register") {
                 // the user is not authorized to access the website if he didn't complete his profile,
                 // so we redirect him to the register page
                 return false;
             }
+
 
             if (req.nextUrl.pathname === "/projects") {
                 return token?.userRole === UserRole.Freelancer;

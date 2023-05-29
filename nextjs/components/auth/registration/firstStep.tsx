@@ -1,6 +1,6 @@
 "use client"
 import React, {useContext} from "react";
-import {multiStepContext} from "./stepContext";
+import {multiStepContext, UserData} from "./stepContext";
 import {Divider, Stack} from "@mui/joy";
 import Input from "@mui/joy/Input";
 import CountrySelector from "../../AutoCompletes/CountrySelector";
@@ -37,7 +37,7 @@ export default function FirstStep() {
         ];
 
 
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field: string) => !userData[field as keyof UserData]);
 
 
         if (missingFields.length) {
@@ -49,9 +49,9 @@ export default function FirstStep() {
         }
     }
 
-    const handleCountryChange = (selectedCountry: string) => {
-        userData.country = selectedCountry
-    };
+    // const handleCountryChange = (selectedCountry: string) => {
+    //     userData.country = selectedCountry
+    // };
 
 
     return (
@@ -79,9 +79,7 @@ export default function FirstStep() {
             </Stack>
 
 
-            <CountrySelector
-                onCountryChange={handleCountryChange}
-            />
+            <CountrySelector/>
 
             <Stack direction={"row"} spacing={1}>
                 <Input
@@ -98,8 +96,9 @@ export default function FirstStep() {
                     sx={{width: "50%"}}
                     placeholder="ZIP/Postal Code"
                     defaultValue={userData["postalCode"]}
+                    type={"number"}
                     onChange={(e) => {
-                        userData.postalCode = e.target.value
+                        userData.postalCode = +e.target.value
                     }}
                 />
 
@@ -116,9 +115,13 @@ export default function FirstStep() {
             <Stack direction={"row"} spacing={1}>
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
-                            onChange={(newValue: {
-                                $d: Date
-                            }) => userData.birthday = newValue.$d}/>
+                            onChange={(value: {
+                                $d: Date | null
+                            } | null) => {
+                                if (value & $ value.$d
+                            )
+                                userData.birthday = value.$d
+                            }}/>
 
 
                 <Divider orientation="vertical"/>

@@ -1,7 +1,7 @@
 "use client"
 import React, {ChangeEvent, useContext, useState} from "react";
 import {TextField} from "@mui/material";
-import {multiStepContext} from "./stepContext";
+import {multiStepContext, UserData} from "./stepContext";
 import {toast} from "react-hot-toast";
 import DropZone from "../../Dashboard/DropZone";
 import {useRouter} from "next/navigation";
@@ -25,7 +25,7 @@ export default function FourthStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
 
         if (missingFields.length) {
             return toast.error(
