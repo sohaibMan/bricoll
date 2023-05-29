@@ -4,18 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix the register ui and steps and add a connector between steps and fix the type system">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CountrySelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CountrySelector.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/public/sw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/register/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +111,8 @@
       <workItem from="1685283961846" duration="614000" />
       <workItem from="1685284884994" duration="9299000" />
       <workItem from="1685296653799" duration="5000" />
-      <workItem from="1685359558568" duration="9829000" />
+      <workItem from="1685359558568" duration="10378000" />
+      <workItem from="1685373869454" duration="1831000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>
@@ -132,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685294440146</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="fix types">
+      <created>1685373097234</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685373097234</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +150,7 @@
     <MESSAGE value="Add: Port Mapping to redis container&#10;Fix some types issue" />
     <MESSAGE value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
     <MESSAGE value="fix the register ui and steps and add a connector between steps and fix the type system" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix the register ui and steps and add a connector between steps and fix the type system" />
+    <MESSAGE value="fix types" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix types" />
   </component>
 </project>

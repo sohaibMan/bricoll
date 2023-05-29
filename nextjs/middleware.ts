@@ -24,7 +24,7 @@ export default withAuth({
             }
 
 
-            if (req.nextUrl.pathname === "/projects") {
+            if (req.nextUrl.pathname === "/find-work") {
                 return token?.userRole === UserRole.Freelancer;
             }
 
@@ -39,7 +39,7 @@ export default withAuth({
 
 
 export const config = {
-    matcher: ["/projects", "/dashboard/", "/register"],
+    matcher: ["/find-work", "/dashboard/", "/register"],
 };
 
 // export const runtime = 'nodejs';

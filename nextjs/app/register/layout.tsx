@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import {StepContextProvider} from "../../components/auth/registration/stepContext";
-import {SessionProvider} from "next-auth/react";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 
@@ -13,13 +12,12 @@ export default function RegisterLayout({
     return (
         <section>
             {/* Include shared UI here e.g. a header or sidebar */}
-            <SessionProvider>
-                <StepContextProvider>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        {children}
-                    </LocalizationProvider>
-                </StepContextProvider>
-            </SessionProvider>
+            <StepContextProvider>
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {children}
+                </LocalizationProvider>
+            </StepContextProvider>
+
         </section>
     );
 }

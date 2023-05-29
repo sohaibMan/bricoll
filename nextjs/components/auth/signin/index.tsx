@@ -31,12 +31,12 @@ const SignupForm = () => {
                 if (!res || !res.ok) {
                     throw Error(res?.error || "Email or password are not valid")
                 }
-                if (res.ok) {
+                // if (res.ok) {
                     const callbackURL = decodeURIComponent(res.url && res.url.split("?")[1]?.split("=")[1] || "/")
                     console.log(callbackURL)
                     router.push(callbackURL)
-                }
-                return res
+                // }
+                // return res
             })
             ,
             {
