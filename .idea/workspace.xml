@@ -6,11 +6,67 @@
   <component name="ChangeListManager">
     <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix types">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/app/register/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signup/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/Autocomplete.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CountrySelector.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/AutoCompletes/CountrySelector.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/stepContext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/middleware.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/middleware.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/createProfile.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/resetPassword/[resetToken].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/resetPassword/[resetToken].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/freelancers/[profileId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/projects/[project_id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/[project_id]/proposals/create.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/projects/[project_id]/proposals/create.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/projects/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/projects/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/accept.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/accept.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/client.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/client.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/dev.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/dev.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/facebook.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/facebook.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/freelancer.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/freelancer.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/fst.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/fst.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/google.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/google.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/graphic.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/graphic.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/heroImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/heroImage.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/job.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/job.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/man.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/man.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/microsoft.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/microsoft.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/quality.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/quality.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/reply.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/reply.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/security.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/security.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/social.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/social.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/public/sw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/thumb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/thumb.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/tick.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/trust.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/trust.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/woman.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/woman.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/public/workbox-588899ac.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/target/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/target/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,23 +103,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging findWorkPage",
+    "last_opened_file_path": "/home/sohaib/Desktop/graph_theory_project",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>

@@ -52,7 +52,7 @@ export const StepContextProvider = (props: { children: ReactNode }) => {
     const [currentStep, setStep] = useState(0);
 
 
-    const [userRole, setUserRole] = useState<UserRole | null>(null)
+    const [userRole, setUserRole] = useState<UserRole>(UserRole.Client)
 
 
     const contextValues: MultiStepContext = {
