@@ -14,14 +14,14 @@ export function ProjectCardControlButtons(props: {
     return <>
         <ReactionButton project_id={props.projectId} reactions={props.reactions}
                         reaction_type={Reaction_Type.Love}
-                        active_icon={<FavoriteIcon color="primary"/>}
-                        inactive_icon={<FavoriteBorderRoundedIcon color="primary"/>}
+                        active_icon={<FavoriteIcon color="success"/>}
+                        inactive_icon={<FavoriteBorderRoundedIcon color="success"/>}
         />
 
         <ReactionButton project_id={props.projectId} reactions={props.reactions}
                         reaction_type={Reaction_Type.Dislike}
-                        active_icon={<ThumbDownIcon color="primary"/>}
-                        inactive_icon={<ThumbDownOffAltRoundedIcon color="primary"/>}
+                        active_icon={<ThumbDownIcon color="success"/>}
+                        inactive_icon={<ThumbDownOffAltRoundedIcon color="success"/>}
         />
     </>;
 }

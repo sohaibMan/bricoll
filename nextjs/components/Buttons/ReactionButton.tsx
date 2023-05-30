@@ -53,7 +53,9 @@ export function ReactionButton(props: {
     }
 
     return <Badge
-        badgeContent={reactionCount}>
+        badgeContent={reactionCount}
+        color={"success"}
+    >
         <IconButton
             disabled={!data} // if the users is not logged in ( he can't react to a project )
             size="sm"

@@ -132,6 +132,8 @@ export default function Project() {
         </div>
       </section>
       <FooterSection />
+
+
     </>
   );
 }

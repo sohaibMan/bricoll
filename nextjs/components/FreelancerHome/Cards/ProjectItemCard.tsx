@@ -66,6 +66,8 @@ export default function ProjectItemCard({project, children}: {
                     <Chip sx={{backgroundColor: "#73bb44", color: "#fff"}} size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
 
+                {children}
+
             </Card>
         </Box>
     );

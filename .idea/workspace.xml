@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="restore sign in page from new Main branch">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix package.json peer dependency problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +123,9 @@
       <workItem from="1685461519818" duration="1149000" />
       <workItem from="1685469381516" duration="3546000" />
       <workItem from="1685475544567" duration="109000" />
-      <workItem from="1685476502212" duration="336000" />
+      <workItem from="1685476502212" duration="507000" />
+      <workItem from="1685477404221" duration="1238000" />
+      <workItem from="1685478826783" duration="676000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>
@@ -156,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685459080177</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="fix package.json peer dependency problem">
+      <created>1685476998627</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685476998627</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +209,7 @@
     <MESSAGE value="fix types" />
     <MESSAGE value="fix steps and move projects folder" />
     <MESSAGE value="restore sign in page from new Main branch" />
-    <option name="LAST_COMMIT_MESSAGE" value="restore sign in page from new Main branch" />
+    <MESSAGE value="fix package.json peer dependency problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix package.json peer dependency problem" />
   </component>
 </project>
