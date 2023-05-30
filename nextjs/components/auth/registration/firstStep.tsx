@@ -10,6 +10,7 @@ import "../../../styles/quill.css"
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import ReactQuill from "react-quill";
 import {toast} from "react-hot-toast";
+import dayjs from "dayjs";
 
 
 // shared between forms
@@ -36,8 +37,8 @@ export default function FirstStep() {
             "timeZone",
         ];
 
-
-        const missingFields = requiredFields.filter((field: string) => !userData[field as keyof UserData]);
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
 
         if (missingFields.length) return toast.error(
@@ -112,6 +113,7 @@ export default function FirstStep() {
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
                             disableFuture
+                            defaultValue={userData.birthday && dayjs(userData.birthday)}
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {

@@ -70,8 +70,8 @@ export default function FirstStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
         if (missingFields.length) {
             toast.error(
@@ -133,12 +133,12 @@ export default function FirstStep() {
                 <>
                     <div style={{marginBottom: "10px"}}>
                         <Autocomplete
+                            defaultValue={userData["skillCategories"]}
                             placeholder={"Choose desired categories"}
                             multiple
                             id="tags-filled"
                             style={{width: "100%", margin: "auto"}}
                             options={popularSkillsCategories}
-                            defaultValue={skillCategories}
                             freeSolo
                             onChange={(event, categorie) => {
                                 handleskillsCategories(categorie as unknown as string);

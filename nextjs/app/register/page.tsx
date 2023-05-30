@@ -42,21 +42,21 @@ export default function Page() {
     const steps = (userRole === UserRole.Freelancer) ? freelancerSteps : clientSteps
 
 
-    useEffect(() => {
-        // sync userData with localStorage
-        const userDataFromLocalStorage = localStorage.getItem("userData")
-        if (userDataFromLocalStorage) {
-            userData = JSON.parse(userDataFromLocalStorage)
-        }
-        window.onbeforeunload = confirmExit;
-        window.onunload = confirmExit;
-
-        function confirmExit() {
-            localStorage.setItem("userData", JSON.stringify(userData))
-            // todo sync it to the state
-            return "You have attempted to leave this page. Are you sure?";
-        }
-    }, [])
+    // useEffect(() => {
+    //     // sync userData with localStorage
+    //     const userDataFromLocalStorage = localStorage.getItem("userData")
+    //     if (userDataFromLocalStorage) {
+    //         userData = JSON.parse(userDataFromLocalStorage)
+    //     }
+    //     window.onbeforeunload = confirmExit;
+    //     window.onunload = confirmExit;
+    //
+    //     function confirmExit() {
+    //         localStorage.setItem("userData", JSON.stringify(userData))
+    //         // todo sync it to the state
+    //         return "You have attempted to leave this page. Are you sure?";
+    //     }
+    // }, [])
 
     function CurrentStepComponent({step}: { step: number }) {
         switch (step) {
