@@ -98,12 +98,11 @@ import SearchInput from "../../Inputs/SearchInput";
 import CategoriesAutocomplete from "../../AutoCompletes/CategoriesAutocomplete";
 import MoneyInput from "../../Inputs/MoneyInput";
 import SkillsAutocomplete from "../../AutoCompletes/SkillsAutocomplete";
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export function SearchForm(props: {
   onRefetch: (variables?: Partial<OperationVariables>) => void;
 }) {
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 },
@@ -217,8 +216,11 @@ export function SearchForm(props: {
             alignSelf: "flex-start",
             backgroundColor: "#73bb44",
             borderColor: "#73bb44",
+            borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
+            paddingRight: "1.5%",
+            paddingLeft: "1.5%",
           }}
         >
           {isOpen ? "Hide Filters" : "Show Filters"}
@@ -230,8 +232,11 @@ export function SearchForm(props: {
             alignSelf: "flex-start",
             backgroundColor: "#73bb44",
             borderColor: "#73bb44",
+            borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
+            paddingRight: "1.5%",
+            paddingLeft: "1.5%",
           }}
           onClick={searchOnClickHandler}
           endIcon={<SearchIcon />}
@@ -246,8 +251,11 @@ export function SearchForm(props: {
             alignSelf: "flex-start",
             backgroundColor: "#73bb44",
             borderColor: "#73bb44",
+            borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
+            paddingRight: "1.5%",
+            paddingLeft: "1.5%",
           }}
           endIcon={<SearchIcon />}
         >
