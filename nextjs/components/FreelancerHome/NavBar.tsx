@@ -1,17 +1,19 @@
-
 import { useState } from "react";
 import Link from "next/link";
-import QuestionMarkOutlinedIcon from '@mui/icons-material/QuestionMarkOutlined';
-import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import QuestionMarkOutlinedIcon from "@mui/icons-material/QuestionMarkOutlined";
+import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import Image from "next/image";
-import man from "../../assets/imgs/man.jpg"
+import man from "../../assets/imgs/man.jpg";
+import { Avatar } from "@mui/material";
+import { signOut, useSession } from "next-auth/react";
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const { data: session } = useSession();
 
   const toggleProfileMenu = () => {
     setIsProfileOpen((prev) => !prev);
@@ -41,7 +43,9 @@ export function NavBar() {
           </button>
         </div>
         <div
-          className={`md:flex space-x-6 px-6 ${isOpen ? "block" : "hidden"} md:block`}
+          className={`md:flex space-x-6 px-6 ${
+            isOpen ? "block" : "hidden"
+          } md:block`}
         >
           <div className="hidden md:flex mx-72 space-x-6 py-2">
             <Link
@@ -73,7 +77,10 @@ export function NavBar() {
               About Us
             </Link>
           </div>
-          <div style={{ marginRight: "20px" }} className="flex items-center space-x-4">
+          <div
+            style={{ marginRight: "20px" }}
+            className="flex items-center space-x-4"
+          >
             <button
               className="text-gray-500 hover:text-gray-600 focus:outline-none"
               title="Help and Support"
@@ -93,7 +100,21 @@ export function NavBar() {
                 onClick={toggleProfileMenu}
               >
                 <div className="rounded-full overflow-hidden">
-                  <Image src={man} alt="user" width={32} height={32} />
+                  {session?.user.image && (
+                    <Avatar
+                      style={{ width: "35px", height: "35px" }}
+                      alt={session.user.username}
+                      src={session.user.image}
+                    />
+                    // <Image
+                    //   src={session?.user.image}
+                    //   alt="User"
+                    //   width={50}
+                    //   height={50}
+                    //   className="object-cover w-full h-full"
+                    // />
+                  )}
+                  {/* <Image src={man} alt="user" width={32} height={32} /> */}
                 </div>
               </button>
               {isProfileOpen && (
@@ -110,7 +131,9 @@ export function NavBar() {
                       onClick={toggleProfileMenu}
                     >
                       <SettingsOutlinedIcon />
-                      <span className="mx-4">Settings</span>
+                      <Link href="/dashboard" className="mx-4">
+                        Settings
+                      </Link>
                     </button>
                     <button
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 w-full text-left"
@@ -118,7 +141,14 @@ export function NavBar() {
                       onClick={toggleProfileMenu}
                     >
                       <LogoutIcon />
-                      <span className="mx-2">Log Out</span>
+                      <span
+                        onClick={() => {
+                          signOut();
+                        }}
+                        className="mx-2"
+                      >
+                        Log Out
+                      </span>
                     </button>
                   </div>
                 </div>
@@ -128,7 +158,5 @@ export function NavBar() {
         </div>
       </div>
     </nav>
-    
   );
 }
-

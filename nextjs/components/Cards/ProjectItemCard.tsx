@@ -53,9 +53,6 @@ export default function ProjectItemCard({project, children}: {
                     Level {project.projectScope.level_of_expertise.toLowerCase()} | {" "}
                     Posted {moment(project.created_at).fromNow()}
                 </Typography>
-                {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
-                {/*    {project.description}*/}
-                {/*</Typography>*/}
 
                 <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
 
@@ -68,35 +65,6 @@ export default function ProjectItemCard({project, children}: {
                     {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
                     <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
-
-                {/*<Box sx={{width: "100%"}}>*/}
-                {/*<Divider sx={{margin: "10px"}}/>*/}
-
-                {/*<Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>*/}
-                {/*    Project Attachments*/}
-                {/*</Typography>*/}
-
-                {/*{project.attachments && project.attachments.length > 0 ?*/}
-                {/*    <Attachments attachments={project.attachments}/> : <Typography>No Attachments</Typography>*/}
-                {/*}*/}
-                {/*</Box>*/}
-
-                {children}
-                {/*<Box*/}
-                {/*    sx={{*/}
-                {/*        display: 'flex',*/}
-                {/*        flexDirection: 'column',*/}
-                {/*        gap: 2,*/}
-                {/*        width:"100%"*/}
-                {/*        // maxWidth: 200,*/}
-                {/*    }}*/}
-                {/*>*/}
-                {/*    {children &&*/}
-                {/*        <Box sx={{display: 'flex', gap: 1}}>*/}
-                {/*            {children}*/}
-                {/*        </Box>}*/}
-                {/*</Box>*/}
-
 
             </Card>
         </Box>

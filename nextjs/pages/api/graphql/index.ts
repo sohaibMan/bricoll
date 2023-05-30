@@ -65,7 +65,7 @@ export default startServerAndCreateNextHandler(server,
                     id: token.sub.toString(),
                     userRole: token.userRole as UserRole,
                     accessToken: token.accessToken,
-                    isCompleted: token.isCompleted
+                    isCompleted: token.isCompleted,
                 }
             }
 
