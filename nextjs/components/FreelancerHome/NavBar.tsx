@@ -23,7 +23,7 @@ export function NavBar() {
     <nav className="container mx-auto p-6">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-primary font-bold text-2xl px-6">BRICOL</p>
+        <p ><Link href="/" className="text-primary font-bold text-2xl px-6">BRICOL</Link></p>
         </div>
         <div className="md:hidden">
           <button

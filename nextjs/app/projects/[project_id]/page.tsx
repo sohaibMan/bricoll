@@ -5,7 +5,6 @@ import ProjectCardSkeleton from "../../../components/Skeletons/ProjectCardSkelet
 import { Project } from "../../../types/resolvers";
 import ProjectCard from "../../../components/Cards/ProjectCard";
 import * as React from "react";
-import CustomLink from "../../../components/CustomLinks/CustomLink";
 import Typography from "@mui/joy/Typography";
 import { NavBar } from "../../../components/FreelancerHome/NavBar";
 import { LoadingDashboard } from "../../../components/Dashboard/LoadingDashboard";
@@ -14,6 +13,7 @@ import Image from "next/image";
 import { Avatar } from "@mui/material";
 import Link from "next/link";
 import { FooterSection } from "../../../components/FreelancerHome/Footer";
+import CustomLink from "../../../components/FreelancerHome/Cards/CustomLink";
 
 const GET_PROJECT = gql`
   query Project($projectId: ObjectID!) {
@@ -72,7 +72,7 @@ export default function Project() {
         <div className="container mx-auto my-16 grid gap-6 grid-cols-1 md:grid-cols-12">
           {/* Left Sidebar */}
           <div
-            style={{ marginLeft: "10%", marginRight: "10%", marginTop: "3%" }}
+            style={{ marginLeft: "10%", marginRight: "3%", marginTop: "3%" }}
             className={`md:col-span-8 lg:col-span-9 bg-gray-200 overflow-hidden transition-all duration-300`}
           >
             <ProjectCard project={data.Project} />
@@ -81,7 +81,8 @@ export default function Project() {
                 You already submitted a proposal
               </Typography>
             ) : (
-              <div className=" my-8 mx-96">
+              // style={{backgroundColor: "#73bb44"}}
+              <div  className=" my-8 mx-96">
                 <CustomLink
                   href={`projects/${data.Project._id}/proposals/create`}
                 >
@@ -92,7 +93,7 @@ export default function Project() {
           </div>
           {/* Right Side */}
           <div
-            style={{ marginTop: "10%", marginRight: "10%" }}
+            style={{ marginTop: "10%", marginRight: "13%" }}
             className="hidden md:block md:col-span-4 lg:col-span-3 bg-gray-100"
           >
             {/* User Card */}
