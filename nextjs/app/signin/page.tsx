@@ -1,28 +1,15 @@
 "use client"
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import SigninForm from "../../components/auth/signin";
-import {useRouter} from "next/navigation";
-import {useSession} from "next-auth/react";
-import {UserRole} from "../../types/resolvers";
 
 const SigninPage = () => {
     // const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
-    const {data: session} = useSession()
-    const router = useRouter()
 
     const toggleNavbar = () => {
         setIsOpen(!isOpen);
     };
 
-    useEffect(() => {
-        // if the user is logged in and has not completed his profile, redirect him to the profile page
-        if (session && !session.user.isCompleted) router.push('/register')
-        // if the client is logged in and has completed his profile, redirect him to the dashboard page
-        if (session && session.user.userRole === UserRole.Client && session.user.isCompleted) router.push('/dashboard')
-        // if the freelancer is logged in and has completed his profile, redirect him to the find-work page
-        if (session && session.user.userRole === UserRole.Freelancer && session.user.isCompleted) router.push('/find-work')
-    }, [session])
 
     return (
         <>
