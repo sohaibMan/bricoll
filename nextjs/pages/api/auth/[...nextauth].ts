@@ -8,6 +8,7 @@ import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import { UserRole } from "../../../types/resolvers";
 import { redis } from "../../../lib/redis";
 
+
 async function verifyUserData(
   user: any,
   credentialPassword: string
@@ -91,26 +92,38 @@ export const authOptions: NextAuthOptions = {
   theme: {
     colorScheme: "light",
   },
-  callbacks: {
-    async jwt({ token, user, account }) {
-      if (user?.userRole) token.userRole = user.userRole;
-      // console.log(users?.isCompleted)
-      if (user?.isCompleted !== undefined)
-        token.isCompleted = user?.isCompleted;
+ callbacks: {
+        async jwt({token, user, account, profile, trigger}) {
 
-      if (account && account.access_token) {
-        token.accessToken = account.access_token;
-      }
+            console.log(profile,user,account,token)
 
-    //  if(token.name) token.name = account?.name;
-      token.username = user?.username;
-    //   token.jobTitle = user?.jobTitle
+            if (trigger === "update" && token && token.email) {
+                const cacheResults = await redis.get(token.email);
+                console.log(cacheResults, JSON.parse(cacheResults))
+                if (JSON.parse(cacheResults)) {
+                    console.log("cache hit ...", JSON.parse(cacheResults))
+                    token.isCompleted = JSON.parse(cacheResults).isCompleted;
+                    token.userRole = JSON.parse(cacheResults).userRole
+                } else {
+                    console.log("cache miss ...")
+                    const user = await db
+                        .collection("users")
+                        .findOne({email: token.email});
+                    console.log(user)
+                    await redis.set(token.email, JSON.stringify(user));
+                    token.isCompleted = user?.isCompleted;
+                    token.userRole = user?.userRole;
+                }
+            }
+
+            if (user?.userRole) token.userRole = user.userRole;
+            // console.log(users?.isCompleted)
+            if (user?.isCompleted !== undefined) token.isCompleted = user?.isCompleted;
 
 
 
       return token;
     },
-
     async session({ session, token }) {
       if (!session.user) return session;
 
@@ -128,7 +141,6 @@ export const authOptions: NextAuthOptions = {
       session.user.image = userData?.image;
 
     //   console.log("session , ", session);
-
 
       return session;
     },

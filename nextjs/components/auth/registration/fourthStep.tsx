@@ -7,16 +7,19 @@ import DropZone from "../../Dashboard/DropZone";
 import {useRouter} from "next/navigation";
 import Avatar from "@mui/joy/Avatar";
 import {Box, Stack} from "@mui/joy";
+import {useSession} from "next-auth/react";
 
 export default function FourthStep() {
     const router = useRouter();
     const {userData, setStep, userRole} = useContext(multiStepContext);
+    const {data: session, update} = useSession()
+
+
     const [imageLinkState, setImageLinkState] = useState(userData.image || "");
 
-
     async function profileHandling(e: ChangeEvent<HTMLFormElement>) {
-        e.preventDefault();
 
+        e.preventDefault();
         const freelancerRequiredFields = ["portfolio", "image"];
         const clientRequiredFields = ["jobTitle", "educationLevel", "image"];
 
@@ -25,7 +28,8 @@ export default function FourthStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) =>  !userData[field]);
 
         if (missingFields.length) {
             return toast.error(
@@ -42,19 +46,20 @@ export default function FourthStep() {
             body: JSON.stringify(userData),
         }).then((res) => {
             return res.json();
-        }).then((data) => {
+        }).then(async (data) => {
             if (data.status === "failed") {
                 throw new Error(data.message);
+            }
+            await update();
+            if (userRole === "Freelancer") {
+                router.push("/find-work");
+            } else {
+                router.push("/dashboard");
             }
             return data;
         }), {
             loading: "Creating profile...",
             success: (data: { message: string }) => {
-                if (userRole === "Freelancer") {
-                    router.push("/find-work");
-                } else {
-                    router.push("/dashboard");
-                }
                 return data.message;
             },
             error: (err) => {
@@ -62,6 +67,9 @@ export default function FourthStep() {
             }
 
         }).catch(e => console.error(e));
+        // tmp
+
+
     }
 
     return (
