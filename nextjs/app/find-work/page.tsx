@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { Avatar } from "@mui/material";
 import Link from "next/link";
+import { FooterSection } from "../../components/FreelancerHome/Footer";
 
 const Page = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,6 +78,7 @@ const Page = () => {
           </div>
         </div>
       </section>
+      <FooterSection />
     </>
   );
 };
