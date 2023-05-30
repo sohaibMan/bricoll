@@ -39,9 +39,9 @@ export default function SecondStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-
-
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) => !userData[field]);
+        console.log(userData)
         if (missingFields.length) {
             toast.error(
                 `Please fill in the following fields: ${missingFields.join(", ")}`

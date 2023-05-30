@@ -30,6 +30,10 @@ export default function FirstStep() {
         setSkillsLevel(prv => [...prv, level]);
         userData.skillsLevel = skillLevel
     };
+    const handleskillsCategories = (categorie: string) => {
+        setSkillCategories(prv => [...prv, categorie]);
+        userData.skillsCategories = skillCategories
+    };
 
     const popularSkillsCategories = [
         "Web Development",
@@ -66,8 +70,8 @@ export default function FirstStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
         if (missingFields.length) {
             toast.error(
@@ -127,18 +131,17 @@ export default function FirstStep() {
                 </>
             ) : (
                 <>
-                    <div style={{marginBottom: "10px", marginTop: "20px"}}>
-
+                    <div style={{marginBottom: "10px"}}>
                         <Autocomplete
-                            placeholder={"Enter the skills you search for"}
+                            defaultValue={userData["skillCategories"]}
+                            placeholder={"Choose desired categories"}
                             multiple
-                            style={{width: "100%", margin: "auto"}}
                             id="tags-filled"
+                            style={{width: "100%", margin: "auto"}}
                             options={popularSkillsCategories}
-                            defaultValue={skillCategories}
                             freeSolo
-                            onChange={(event, newSkills) => {
-                                handleSpecificSkills(newSkills as unknown as string);
+                            onChange={(event, categorie) => {
+                                handleskillsCategories(categorie as unknown as string);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
@@ -154,13 +157,12 @@ export default function FirstStep() {
                                 <TextField
                                     {...params}
                                     variant="filled"
-                                    label="Skills Categories"
-                                    placeholder="add more skill categories..."
+                                    label="Category"
+                                    placeholder="add a  Category..."
                                 />
                             )}
                         />
                     </div>
-                    {/*<SkillsAutocomplete skill={skill} setSkills={setSkills}/>*/}
                     <div style={{marginBottom: "10px"}}>
                         <Autocomplete
                             placeholder={"Enter some specific skills you search for"}
@@ -225,6 +227,7 @@ export default function FirstStep() {
                             )}
                         />
                     </div>
+
                 </>
             )}
             <div>

@@ -73,10 +73,11 @@ export default async function handler(
         // ? Checking if the user's email is existed in DB
         const cachedUser = await redis.get(email);
 
-        if (cachedUser !== "null") {
+
+        if (JSON.parse(cachedUser)) {
             return res.status(400).json({
                 status: "failed",
-                message: "This email is already exists1 !",
+                message: "This email is already exists !",
             });
         }
         const existedUser = await userCollection.findOne({email});
@@ -104,6 +105,7 @@ export default async function handler(
         }
 
         const user = await userCollection.insertOne(userData);
+        console.log(user)
         await redis.set(email, JSON.stringify(userData))
 
 

@@ -10,6 +10,7 @@ import "../../../styles/quill.css"
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import ReactQuill from "react-quill";
 import {toast} from "react-hot-toast";
+import dayjs from "dayjs";
 
 
 // shared between forms
@@ -36,22 +37,17 @@ export default function FirstStep() {
             "timeZone",
         ];
 
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+        const missingFields = requiredFields.filter((field) => !userData[field]);
 
-        const missingFields = requiredFields.filter((field: string) => !userData[field as keyof UserData]);
 
+        if (missingFields.length) return toast.error(
+            `Please fill in the following fields: ${missingFields.join(", ")}`
+        );
+        else if (userData.bio.length < 100) return toast.error("Bio must be at least 100 characters")
+        else setStep(2);
 
-        if (missingFields.length) {
-            toast.error(
-                `Please fill in the following fields: ${missingFields.join(", ")}`
-            );
-        } else {
-            setStep(2);
-        }
     }
-
-    // const handleCountryChange = (selectedCountry: string) => {
-    //     userData.country = selectedCountry
-    // };
 
 
     return (
@@ -70,6 +66,7 @@ export default function FirstStep() {
                 <Divider orientation="vertical"/>
                 <Input
                     sx={{width: "100%"}}
+                    type={"text"}
                     placeholder="Language"
                     defaultValue={userData["language"]}
                     onChange={(e) => {
@@ -107,7 +104,7 @@ export default function FirstStep() {
             <Input
                 sx={{width: "100%"}}
                 placeholder="Address"
-                defaultValue={userData["address"]}
+                defaultValue={userData.address}
                 onChange={(e) => {
                     userData.address = e.target.value
                 }}
@@ -115,12 +112,12 @@ export default function FirstStep() {
             <Stack direction={"row"} spacing={1}>
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
+                            disableFuture
+                            defaultValue={userData.birthday && dayjs(userData.birthday)}
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {
-                                if (value & $ value.$d
-                            )
-                                userData.birthday = value.$d
+                                if (value && value.$d) userData.birthday = value.$d
                             }}/>
 
 
@@ -130,7 +127,7 @@ export default function FirstStep() {
                 <Input
                     sx={{width: "100%"}}
                     placeholder="Time Zone"
-                    // defaultValue={userData["timeZone"]}
+                    defaultValue={userData.timeZone}
                     onChange={(e) => {
                         userData.timeZone = e.target.value
                     }}

@@ -1,3 +1,4 @@
+"use client"
 import {DocumentNode, useMutation} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
