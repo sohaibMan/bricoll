@@ -1,0 +1,825 @@
+Index: nextjs/components/auth/signin/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {FormEvent, useState} from \"react\";\nimport {toast} from \"react-hot-toast\";\nimport google from \"../../../assets/imgs/google.png\";\nimport facebook from \"../../../assets/imgs/facebook.png\";\nimport Image from \"next/image\";\nimport Link from \"next/link\";\nimport {signIn} from \"next-auth/react\";\nimport {useRouter} from \"next/navigation\";\n\n\nconst SignupForm = () => {\n    const [email, setEmail] = useState(\"\");\n    const [password, setPassword] = useState(\"\");\n    const [emailError, setEmailError] = useState(\"\");\n    const [passwordError, setPasswordError] = useState(\"\");\n    // const router = useRouter()\n\n    const handleSubmit = async (e: FormEvent) => {\n        e.preventDefault()\n\n\n        if (!email || !password) {\n            return toast.error(\"Please fill in all fields\");\n        }\n        // tmp callback\n\n\n        await toast.promise(signIn<'credentials'>(\"credentials\", {\n                email, password, redirect: false\n            }).then(res => {\n                if (!res || !res.ok) {\n                    throw Error(res?.error || \"Email or password are not valid\")\n                }\n                // if (res.ok) {\n                //     const callbackURL = decodeURIComponent(res.url && res.url.split(\"?\")[1]?.split(\"=\")[1] || \"/\")\n                //     console.log(callbackURL)\n                //     router.push(callbackURL)\n                // }\n                // return res\n            })\n            ,\n            {\n                loading: \"Signing in...\",\n                success: \"Signed in successfully\",\n                error: (err) => err.message\n            }).catch(err => {\n            console.error(err)\n        })\n\n\n    };\n\n    const validateEmail = (value: string) => {\n        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n        if (!emailRegex.test(value)) {\n            setEmailError(\"Invalid email address\");\n        } else {\n            setEmailError(\"\");\n        }\n    };\n\n    const validatePassword = (value: string) => {\n        if (value.length < 8) {\n            setPasswordError(\"Password must be at least 8 characters long\");\n        } else {\n            setPasswordError(\"\");\n        }\n    };\n\n    return (\n        <div\n            className=\"flex flex-col items-center rounded-lg border border-newColor p-4 \"\n\n        >\n            <h2 className=\"text-3xl font-semibold text-second my-2 py-4 mb-4\">\n                Sign up to find work you love\n            </h2>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={google}\n                    alt=\"google\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn<>(\"google\",)}\n                    className=\"w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >Continue with Google\n                </button>\n            </div>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={facebook}\n                    alt=\"facebook\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn(\"facebook\",)}\n                    className=\"py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >\n                    Continue with Facebook\n                </button>\n            </div>\n            <p className=\"mx-4 my-2 text-gray-500 font-medium\">Or</p>\n            <form className=\"flex flex-col space-y-6 my-4\" onSubmit={handleSubmit}>\n                <input\n                    type=\"email\"\n                    placeholder=\"Email\"\n                    value={email}\n                    onChange={(e) => {\n                        setEmail(e.target.value);\n                        validateEmail(e.target.value);\n                    }}\n                    style={{width: \"500px\"}}\n                    className={`px-4 py-2 rounded border border-gray ${\n                        emailError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {emailError && <p className=\"text-red-500 text-sm\">{emailError}</p>}\n                <input\n                    type=\"password\"\n                    placeholder=\"Password (8 or more characters)\"\n                    value={password}\n                    onChange={(e) => {\n                        setPassword(e.target.value);\n                        validatePassword(e.target.value);\n                    }}\n                    className={`px-4 py-2 rounded border  border-gray ${\n                        passwordError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {passwordError && (\n                    <p className=\"text-red-500 text-sm\">{passwordError}</p>\n                )}\n                <p className=\"font-light text-base mx-45 text-second\">\n                    <Link href=\"/forgetPassword\" className=\"text-primary\">\n                        Forget your password?\n                    </Link>\n                </p>\n                <button\n                    type=\"submit\"\n                    className=\"py-2 px-20 rounded-full font-medium text-base text-white bg-primary\"\n                >\n                    Log in\n                </button>\n                <p className=\"font-normal my-2 mx-32 text-second\">\n                    Don't have an account ?{\" \"}\n                    <Link href=\"/signup\" className=\"text-primary\">\n                        Sign Up\n                    </Link>\n                </p>\n                {/* </div> */}\n            </form>\n        </div>\n    );\n};\n\nexport default SignupForm;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/components/auth/signin/index.tsx b/nextjs/components/auth/signin/index.tsx
+--- a/nextjs/components/auth/signin/index.tsx	(revision d5ee190535e8f492e64868fe045d0af2e377ce0d)
++++ b/nextjs/components/auth/signin/index.tsx	(date 1685459165303)
+@@ -28,6 +28,7 @@
+         await toast.promise(signIn<'credentials'>("credentials", {
+                 email, password, redirect: false
+             }).then(res => {
++                console.log(res)
+                 if (!res || !res.ok) {
+                     throw Error(res?.error || "Email or password are not valid")
+                 }
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"db9d2332-6806-4db8-a4e9-c11236ccc437\" name=\"Changes\" comment=\"fix steps and move projects folder\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/app/register/page.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/app/register/page.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"TypeScript JSX File\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"NewMain\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProblemsViewState\">\n    <option name=\"autoscrollToSource\" value=\"true\" />\n    <option name=\"selectedTabId\" value=\"CurrentFile\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2QKjZSyVh7xdRblggmyQMwL8S1C\" />\n  <component name=\"ProjectLevelVcsManager\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\n    &quot;git-widget-placeholder&quot;: &quot;NewMain&quot;,\n    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\n    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,\n    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,\n    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\n  }\n}</component>\n  <component name=\"ReactBuddySettings\">\n    <option name=\"extensionsIgnore\" value=\"true\" />\n  </component>\n  <component name=\"ReactDesignerToolWindowState\">\n    <option name=\"myId2Visible\">\n      <map>\n        <entry key=\"com.haulmont.rcb.reactComponents\" value=\"false\" />\n        <entry key=\"com.haulmont.rcb.reactInspector\" value=\"false\" />\n      </map>\n    </option>\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"$PROJECT_DIR$/nextjs/app/projects/[project_id]/proposals/create\" />\n      <recent name=\"$PROJECT_DIR$/nextjs/components/FreelancerHome\" />\n      <recent name=\"$PROJECT_DIR$/nextjs/components\" />\n      <recent name=\"$PROJECT_DIR$/nextjs/app/find-work\" />\n      <recent name=\"$PROJECT_DIR$/nextjs/app\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task id=\"LOCAL-00001\" summary=\"fix sign up form\">\n      <created>1685104014346</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685104014347</updated>\n    </task>\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"db9d2332-6806-4db8-a4e9-c11236ccc437\" name=\"Changes\" comment=\"fix sign up form\" />\n      <created>1685109301070</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1685109301070</updated>\n      <workItem from=\"1685109306781\" duration=\"24504000\" />\n      <workItem from=\"1685136815252\" duration=\"4323000\" />\n      <workItem from=\"1685141376606\" duration=\"1942000\" />\n      <workItem from=\"1685193715457\" duration=\"107000\" />\n      <workItem from=\"1685201570211\" duration=\"5029000\" />\n      <workItem from=\"1685216370090\" duration=\"51000\" />\n      <workItem from=\"1685228201590\" duration=\"4477000\" />\n      <workItem from=\"1685269144020\" duration=\"386000\" />\n      <workItem from=\"1685269733451\" duration=\"5858000\" />\n      <workItem from=\"1685283961846\" duration=\"614000\" />\n      <workItem from=\"1685284884994\" duration=\"9299000\" />\n      <workItem from=\"1685296653799\" duration=\"5000\" />\n      <workItem from=\"1685359558568\" duration=\"10378000\" />\n      <workItem from=\"1685373869454\" duration=\"1831000\" />\n      <workItem from=\"1685386989776\" duration=\"3040000\" />\n      <workItem from=\"1685390376711\" duration=\"1037000\" />\n      <workItem from=\"1685391612608\" duration=\"2761000\" />\n      <workItem from=\"1685402989225\" duration=\"1870000\" />\n      <workItem from=\"1685405211292\" duration=\"1446000\" />\n      <workItem from=\"1685407218062\" duration=\"2761000\" />\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"Add: Port Mapping to redis container&#10;Fix some types issue\">\n      <created>1685208419627</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685208419627</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"fix the register ui and steps and add a connector between steps and fix the type system\">\n      <created>1685294440146</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685294440146</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"fix types\">\n      <created>1685373097234</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685373097234</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"fix steps and move projects folder\">\n      <created>1685397776894</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1685397776894</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"6\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT\" value=\"false\" />\n    <option name=\"CHECK_NEW_TODO\" value=\"false\" />\n    <MESSAGE value=\"fix sign up form\" />\n    <MESSAGE value=\"complete direction from signup to register\" />\n    <MESSAGE value=\"complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider\" />\n    <MESSAGE value=\"Add: Port Mapping to redis container&#10;Fix some types issue\" />\n    <MESSAGE value=\"move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default\" />\n    <MESSAGE value=\"fix the register ui and steps and add a connector between steps and fix the type system\" />\n    <MESSAGE value=\"fix types\" />\n    <MESSAGE value=\"fix steps and move projects folder\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"fix steps and move projects folder\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d5ee190535e8f492e64868fe045d0af2e377ce0d)
++++ b/.idea/workspace.xml	(date 1685474311466)
+@@ -4,14 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix steps and move projects folder">
++    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="restore sign in page from new Main branch">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/app/register/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/register/page.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/firstStep.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/fourthStep.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/secondStep.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/auth/[...nextauth].ts" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -28,7 +24,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="NewMain" />
++        <entry key="$PROJECT_DIR$" value="Main" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -48,23 +44,23 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent">{
+-  &quot;keyToString&quot;: {
+-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+-    &quot;git-widget-placeholder&quot;: &quot;NewMain&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
+-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
+-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
++  <component name="PropertiesComponent"><![CDATA[{
++  "keyToString": {
++    "RunOnceActivity.OpenProjectViewOnStart": "true",
++    "RunOnceActivity.ShowReadmeOnStart": "true",
++    "WebServerToolWindowFactoryState": "false",
++    "git-widget-placeholder": "findWorkPageLast",
++    "last_opened_file_path": "/home/sohaib/Desktop/graph_theory_project",
++    "node.js.detected.package.eslint": "true",
++    "node.js.selected.package.eslint": "(autodetect)",
++    "node.js.selected.package.tslint": "(autodetect)",
++    "nodejs_package_manager_path": "yarn",
++    "settings.editor.selected.configurable": "preferences.keymap",
++    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
++    "typescript.add.unambiguous.imports.on.the.fly": "true",
++    "vue.rearranger.settings.migration": "true"
+   }
+-}</component>
++}]]></component>
+   <component name="ReactBuddySettings">
+     <option name="extensionsIgnore" value="true" />
+   </component>
+@@ -120,6 +116,8 @@
+       <workItem from="1685402989225" duration="1870000" />
+       <workItem from="1685405211292" duration="1446000" />
+       <workItem from="1685407218062" duration="2761000" />
++      <workItem from="1685461519818" duration="1149000" />
++      <workItem from="1685469381516" duration="3546000" />
+     </task>
+     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
+       <created>1685208419627</created>
+@@ -149,11 +147,29 @@
+       <option name="project" value="LOCAL" />
+       <updated>1685397776894</updated>
+     </task>
+-    <option name="localTasksCounter" value="6" />
++    <task id="LOCAL-00006" summary="restore sign in page from new Main branch">
++      <created>1685459080176</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1685459080177</updated>
++    </task>
++    <option name="localTasksCounter" value="7" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="3" />
++  </component>
++  <component name="Vcs.Log.History.Properties">
++    <option name="COLUMN_ID_ORDER">
++      <list>
++        <option value="Default.Root" />
++        <option value="Default.Author" />
++        <option value="Default.Date" />
++        <option value="Default.Subject" />
++        <option value="Space.CommitStatus" />
++      </list>
++    </option>
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+     <option name="TAB_STATES">
+@@ -177,6 +193,7 @@
+     <MESSAGE value="fix the register ui and steps and add a connector between steps and fix the type system" />
+     <MESSAGE value="fix types" />
+     <MESSAGE value="fix steps and move projects folder" />
+-    <option name="LAST_COMMIT_MESSAGE" value="fix steps and move projects folder" />
++    <MESSAGE value="restore sign in page from new Main branch" />
++    <option name="LAST_COMMIT_MESSAGE" value="restore sign in page from new Main branch" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: nextjs/package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/package-lock.json b/nextjs/package-lock.json
+--- a/nextjs/package-lock.json	(revision d5ee190535e8f492e64868fe045d0af2e377ce0d)
++++ b/nextjs/package-lock.json	(date 1685473067549)
+@@ -1126,9 +1126,9 @@
+       }
+     },
+     "node_modules/@babel/parser": {
+-      "version": "7.22.3",
+-      "resolved": "https://registry.npmjs.org/@babel/parser/-/parser-7.22.3.tgz",
+-      "integrity": "sha512-vrukxyW/ep8UD1UDzOYpTKQ6abgjFoeG6L+4ar9+c5TN9QnlqiOi6QK7LSR5ewm/ERyGkT/Ai6VboNrxhbr9Uw==",
++      "version": "7.22.4",
++      "resolved": "https://registry.npmjs.org/@babel/parser/-/parser-7.22.4.tgz",
++      "integrity": "sha512-VLLsx06XkEYqBtE5YGPwfSGwfrjnyPP5oiGty3S8pQLFDFLaS8VwWSIxkTXpcvr5zeYLE6+MBNl2npl/YnfofA==",
+       "bin": {
+         "parser": "bin/babel-parser.js"
+       },
+@@ -2248,16 +2248,16 @@
+       }
+     },
+     "node_modules/@babel/preset-env": {
+-      "version": "7.22.2",
+-      "resolved": "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.22.2.tgz",
+-      "integrity": "sha512-UPNK9pgphMULvA2EMKIWHU90C47PKyuvQ8pE1MzH7l9PgFcRabdrHhlePpBuWxYZQ+TziP2nycKoI5C1Yhdm9Q==",
++      "version": "7.22.4",
++      "resolved": "https://registry.npmjs.org/@babel/preset-env/-/preset-env-7.22.4.tgz",
++      "integrity": "sha512-c3lHOjbwBv0TkhYCr+XCR6wKcSZ1QbQTVdSkZUaVpLv8CVWotBMArWUi5UAJrcrQaEnleVkkvaV8F/pmc/STZQ==",
+       "dependencies": {
+-        "@babel/compat-data": "^7.22.0",
++        "@babel/compat-data": "^7.22.3",
+         "@babel/helper-compilation-targets": "^7.22.1",
+         "@babel/helper-plugin-utils": "^7.21.5",
+         "@babel/helper-validator-option": "^7.21.0",
+         "@babel/plugin-bugfix-safari-id-destructuring-collision-in-function-expression": "^7.18.6",
+-        "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.22.0",
++        "@babel/plugin-bugfix-v8-spread-parameters-in-optional-chaining": "^7.22.3",
+         "@babel/plugin-proposal-private-property-in-object": "^7.21.0",
+         "@babel/plugin-syntax-async-generators": "^7.8.4",
+         "@babel/plugin-syntax-class-properties": "^7.12.13",
+@@ -2265,7 +2265,7 @@
+         "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+         "@babel/plugin-syntax-export-namespace-from": "^7.8.3",
+         "@babel/plugin-syntax-import-assertions": "^7.20.0",
+-        "@babel/plugin-syntax-import-attributes": "^7.22.0",
++        "@babel/plugin-syntax-import-attributes": "^7.22.3",
+         "@babel/plugin-syntax-import-meta": "^7.10.4",
+         "@babel/plugin-syntax-json-strings": "^7.8.3",
+         "@babel/plugin-syntax-logical-assignment-operators": "^7.10.4",
+@@ -2278,12 +2278,12 @@
+         "@babel/plugin-syntax-top-level-await": "^7.14.5",
+         "@babel/plugin-syntax-unicode-sets-regex": "^7.18.6",
+         "@babel/plugin-transform-arrow-functions": "^7.21.5",
+-        "@babel/plugin-transform-async-generator-functions": "^7.22.0",
++        "@babel/plugin-transform-async-generator-functions": "^7.22.3",
+         "@babel/plugin-transform-async-to-generator": "^7.20.7",
+         "@babel/plugin-transform-block-scoped-functions": "^7.18.6",
+         "@babel/plugin-transform-block-scoping": "^7.21.0",
+-        "@babel/plugin-transform-class-properties": "^7.22.0",
+-        "@babel/plugin-transform-class-static-block": "^7.22.0",
++        "@babel/plugin-transform-class-properties": "^7.22.3",
++        "@babel/plugin-transform-class-static-block": "^7.22.3",
+         "@babel/plugin-transform-classes": "^7.21.0",
+         "@babel/plugin-transform-computed-properties": "^7.21.5",
+         "@babel/plugin-transform-destructuring": "^7.21.3",
+@@ -2291,28 +2291,28 @@
+         "@babel/plugin-transform-duplicate-keys": "^7.18.9",
+         "@babel/plugin-transform-dynamic-import": "^7.22.1",
+         "@babel/plugin-transform-exponentiation-operator": "^7.18.6",
+-        "@babel/plugin-transform-export-namespace-from": "^7.22.0",
++        "@babel/plugin-transform-export-namespace-from": "^7.22.3",
+         "@babel/plugin-transform-for-of": "^7.21.5",
+         "@babel/plugin-transform-function-name": "^7.18.9",
+-        "@babel/plugin-transform-json-strings": "^7.22.0",
++        "@babel/plugin-transform-json-strings": "^7.22.3",
+         "@babel/plugin-transform-literals": "^7.18.9",
+-        "@babel/plugin-transform-logical-assignment-operators": "^7.22.0",
++        "@babel/plugin-transform-logical-assignment-operators": "^7.22.3",
+         "@babel/plugin-transform-member-expression-literals": "^7.18.6",
+         "@babel/plugin-transform-modules-amd": "^7.20.11",
+         "@babel/plugin-transform-modules-commonjs": "^7.21.5",
+-        "@babel/plugin-transform-modules-systemjs": "^7.22.0",
++        "@babel/plugin-transform-modules-systemjs": "^7.22.3",
+         "@babel/plugin-transform-modules-umd": "^7.18.6",
+-        "@babel/plugin-transform-named-capturing-groups-regex": "^7.22.0",
+-        "@babel/plugin-transform-new-target": "^7.22.0",
+-        "@babel/plugin-transform-nullish-coalescing-operator": "^7.22.0",
+-        "@babel/plugin-transform-numeric-separator": "^7.22.0",
+-        "@babel/plugin-transform-object-rest-spread": "^7.22.0",
++        "@babel/plugin-transform-named-capturing-groups-regex": "^7.22.3",
++        "@babel/plugin-transform-new-target": "^7.22.3",
++        "@babel/plugin-transform-nullish-coalescing-operator": "^7.22.3",
++        "@babel/plugin-transform-numeric-separator": "^7.22.3",
++        "@babel/plugin-transform-object-rest-spread": "^7.22.3",
+         "@babel/plugin-transform-object-super": "^7.18.6",
+-        "@babel/plugin-transform-optional-catch-binding": "^7.22.0",
+-        "@babel/plugin-transform-optional-chaining": "^7.22.0",
+-        "@babel/plugin-transform-parameters": "^7.22.0",
+-        "@babel/plugin-transform-private-methods": "^7.22.0",
+-        "@babel/plugin-transform-private-property-in-object": "^7.22.0",
++        "@babel/plugin-transform-optional-catch-binding": "^7.22.3",
++        "@babel/plugin-transform-optional-chaining": "^7.22.3",
++        "@babel/plugin-transform-parameters": "^7.22.3",
++        "@babel/plugin-transform-private-methods": "^7.22.3",
++        "@babel/plugin-transform-private-property-in-object": "^7.22.3",
+         "@babel/plugin-transform-property-literals": "^7.18.6",
+         "@babel/plugin-transform-regenerator": "^7.21.5",
+         "@babel/plugin-transform-reserved-words": "^7.18.6",
+@@ -2322,12 +2322,12 @@
+         "@babel/plugin-transform-template-literals": "^7.18.9",
+         "@babel/plugin-transform-typeof-symbol": "^7.18.9",
+         "@babel/plugin-transform-unicode-escapes": "^7.21.5",
+-        "@babel/plugin-transform-unicode-property-regex": "^7.22.0",
++        "@babel/plugin-transform-unicode-property-regex": "^7.22.3",
+         "@babel/plugin-transform-unicode-regex": "^7.18.6",
+-        "@babel/plugin-transform-unicode-sets-regex": "^7.22.0",
++        "@babel/plugin-transform-unicode-sets-regex": "^7.22.3",
+         "@babel/preset-modules": "^0.1.5",
+-        "@babel/types": "^7.22.0",
+-        "babel-plugin-polyfill-corejs2": "^0.4.2",
++        "@babel/types": "^7.22.4",
++        "babel-plugin-polyfill-corejs2": "^0.4.3",
+         "babel-plugin-polyfill-corejs3": "^0.8.1",
+         "babel-plugin-polyfill-regenerator": "^0.5.0",
+         "core-js-compat": "^3.30.2",
+@@ -2385,18 +2385,18 @@
+       }
+     },
+     "node_modules/@babel/traverse": {
+-      "version": "7.22.1",
+-      "resolved": "https://registry.npmjs.org/@babel/traverse/-/traverse-7.22.1.tgz",
+-      "integrity": "sha512-lAWkdCoUFnmwLBhIRLciFntGYsIIoC6vIbN8zrLPqBnJmPu7Z6nzqnKd7FsxQUNAvZfVZ0x6KdNvNp8zWIOHSQ==",
++      "version": "7.22.4",
++      "resolved": "https://registry.npmjs.org/@babel/traverse/-/traverse-7.22.4.tgz",
++      "integrity": "sha512-Tn1pDsjIcI+JcLKq1AVlZEr4226gpuAQTsLMorsYg9tuS/kG7nuwwJ4AB8jfQuEgb/COBwR/DqJxmoiYFu5/rQ==",
+       "dependencies": {
+         "@babel/code-frame": "^7.21.4",
+-        "@babel/generator": "^7.22.0",
++        "@babel/generator": "^7.22.3",
+         "@babel/helper-environment-visitor": "^7.22.1",
+         "@babel/helper-function-name": "^7.21.0",
+         "@babel/helper-hoist-variables": "^7.18.6",
+         "@babel/helper-split-export-declaration": "^7.18.6",
+-        "@babel/parser": "^7.22.0",
+-        "@babel/types": "^7.22.0",
++        "@babel/parser": "^7.22.4",
++        "@babel/types": "^7.22.4",
+         "debug": "^4.1.0",
+         "globals": "^11.1.0"
+       },
+@@ -2405,9 +2405,9 @@
+       }
+     },
+     "node_modules/@babel/types": {
+-      "version": "7.22.3",
+-      "resolved": "https://registry.npmjs.org/@babel/types/-/types-7.22.3.tgz",
+-      "integrity": "sha512-P3na3xIQHTKY4L0YOG7pM8M8uoUIB910WQaSiiMCZUC2Cy8XFEQONGABFnHWBa2gpGKODTAJcNhi5Zk0sLRrzg==",
++      "version": "7.22.4",
++      "resolved": "https://registry.npmjs.org/@babel/types/-/types-7.22.4.tgz",
++      "integrity": "sha512-Tx9x3UBHTTsMSW85WB2kphxYQVvrZ/t1FxD88IpSgIjiUJlCm9z+xWIDwyo1vffTwSqteqyznB8ZE9vYYk16zA==",
+       "dependencies": {
+         "@babel/helper-string-parser": "^7.21.5",
+         "@babel/helper-validator-identifier": "^7.19.1",
+@@ -2665,9 +2665,9 @@
+       "integrity": "sha512-EvYTiXet5XqweYGClEmpu3BoxmsQ4hkj3QaYA6qEnigCWffTP3vNRwBReTdrwDwo7OoJ3wM8Uoe9Uk4n+d4hfg=="
+     },
+     "node_modules/@floating-ui/dom": {
+-      "version": "1.2.8",
+-      "resolved": "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.2.8.tgz",
+-      "integrity": "sha512-XLwhYV90MxiHDq6S0rzFZj00fnDM+A1R9jhSioZoMsa7G0Q0i+Q4x40ajR8FHSdYDE1bgjG45mIWe6jtv9UPmg==",
++      "version": "1.2.9",
++      "resolved": "https://registry.npmjs.org/@floating-ui/dom/-/dom-1.2.9.tgz",
++      "integrity": "sha512-sosQxsqgxMNkV3C+3UqTS6LxP7isRLwX8WMepp843Rb3/b0Wz8+MdUkxJksByip3C2WwLugLHN1b4ibn//zKwQ==",
+       "dependencies": {
+         "@floating-ui/core": "^1.2.6"
+       }
+@@ -3995,9 +3995,9 @@
+       }
+     },
+     "node_modules/@mui/base": {
+-      "version": "5.0.0-beta.2",
+-      "resolved": "https://registry.npmjs.org/@mui/base/-/base-5.0.0-beta.2.tgz",
+-      "integrity": "sha512-R9R+aqrl1QhZJaO05rhvooqxOaf7SKpQ+EjW80sbP3ticTVmLmrn4YBLQS7/ML+WXdrkrPtqSmKFdSE5Ik3gBQ==",
++      "version": "5.0.0-beta.3",
++      "resolved": "https://registry.npmjs.org/@mui/base/-/base-5.0.0-beta.3.tgz",
++      "integrity": "sha512-ErOMoGNpgf6BF5W+jgXDiRlXJnpSeg8XSRonuY5UCCMHIlOWtKDtt/LS3qDAbFFGb7tV/y6EBddbcMeexx+zHw==",
+       "dependencies": {
+         "@babel/runtime": "^7.21.0",
+         "@emotion/is-prop-valid": "^1.2.1",
+@@ -4027,9 +4027,9 @@
+       }
+     },
+     "node_modules/@mui/core-downloads-tracker": {
+-      "version": "5.13.2",
+-      "resolved": "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.13.2.tgz",
+-      "integrity": "sha512-aOLCXMCySMFL2WmUhnz+DjF84AoFVu8rn35OsL759HXOZMz8zhEwVf5w/xxkWx7DycM2KXDTgAvYW48nTfqTLA==",
++      "version": "5.13.3",
++      "resolved": "https://registry.npmjs.org/@mui/core-downloads-tracker/-/core-downloads-tracker-5.13.3.tgz",
++      "integrity": "sha512-w4//nRIi9fiMow/MmhkForOezd8nc229EpSZZ5DzwpJNOmAXwypFTapOUVAGTUQiTJyeZXUNbQqYuUIrIs2nbg==",
+       "funding": {
+         "type": "opencollective",
+         "url": "https://opencollective.com/mui"
+@@ -4061,13 +4061,13 @@
+       }
+     },
+     "node_modules/@mui/joy": {
+-      "version": "5.0.0-alpha.81",
+-      "resolved": "https://registry.npmjs.org/@mui/joy/-/joy-5.0.0-alpha.81.tgz",
+-      "integrity": "sha512-OnYu+Xbm5YxXYiMFQ9IgolFOvKz9FHvGjVdmp5L1238Dg08KcdyEXdRj68c/Zw1yPpyae3TI2zjynHL2Ffyp/A==",
++      "version": "5.0.0-alpha.82",
++      "resolved": "https://registry.npmjs.org/@mui/joy/-/joy-5.0.0-alpha.82.tgz",
++      "integrity": "sha512-zKIUq0f8v/qp2okolcUu1AU7tBvFOVcvZ/1tFEtlTs/0/vWimSfBisO2LMNqlI3Mei1Ollg/zRwBPHscZyGevA==",
+       "dependencies": {
+         "@babel/runtime": "^7.21.0",
+-        "@mui/base": "5.0.0-beta.2",
+-        "@mui/core-downloads-tracker": "^5.13.2",
++        "@mui/base": "5.0.0-beta.3",
++        "@mui/core-downloads-tracker": "^5.13.3",
+         "@mui/system": "^5.13.2",
+         "@mui/types": "^7.2.4",
+         "@mui/utils": "^5.13.1",
+@@ -4103,13 +4103,13 @@
+       }
+     },
+     "node_modules/@mui/material": {
+-      "version": "5.13.2",
+-      "resolved": "https://registry.npmjs.org/@mui/material/-/material-5.13.2.tgz",
+-      "integrity": "sha512-Pfke1l0GG2OJb/Nr10aVr8huoBFcBTdWKV5iFSTEHqf9c2C1ZlyYMISn7ui6X3Gix8vr+hP5kVqH1LAWwQSb6w==",
++      "version": "5.13.3",
++      "resolved": "https://registry.npmjs.org/@mui/material/-/material-5.13.3.tgz",
++      "integrity": "sha512-10pek+Bz+PZ4rjUf3KTKfXWjPMUqU1nSnRPf4DAXABhsjzelGGfGW/EICgrLRrttYplTJZhoponWALezAge8ug==",
+       "dependencies": {
+         "@babel/runtime": "^7.21.0",
+-        "@mui/base": "5.0.0-beta.2",
+-        "@mui/core-downloads-tracker": "^5.13.2",
++        "@mui/base": "5.0.0-beta.3",
++        "@mui/core-downloads-tracker": "^5.13.3",
+         "@mui/system": "^5.13.2",
+         "@mui/types": "^7.2.4",
+         "@mui/utils": "^5.13.1",
+@@ -5105,9 +5105,9 @@
+       "integrity": "sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg=="
+     },
+     "node_modules/@stripe/stripe-js": {
+-      "version": "1.53.0",
+-      "resolved": "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.53.0.tgz",
+-      "integrity": "sha512-qhhAa5WxlgVqh1J41ppyqqQVu6S1T1Q9lDAk2Ho9eI/GjrkMvAHcJpKqhekJRsZ1vjsK4P68PYOcXBXPyNCpnQ=="
++      "version": "1.54.0",
++      "resolved": "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.54.0.tgz",
++      "integrity": "sha512-nElTXkS+nMfDNMkWfLmyeqHQfMGJ1JjrjAVMibV61Oc/rYdUv0cKRYCi1l4ivZ5SySB3vQLcLolxbKBkbNznZA=="
+     },
+     "node_modules/@surma/rollup-plugin-off-main-thread": {
+       "version": "2.2.3",
+@@ -5138,9 +5138,9 @@
+       }
+     },
+     "node_modules/@tanstack/react-query": {
+-      "version": "4.29.11",
+-      "resolved": "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.29.11.tgz",
+-      "integrity": "sha512-aLaOAhBnCr12YKPjDsZOc0fAtkyaW7f9KfVfw49oYpfe0H9EPXBUgDBIKJ8qdHF3uGzTVSMcmpiw1Za41BLZlw==",
++      "version": "4.29.12",
++      "resolved": "https://registry.npmjs.org/@tanstack/react-query/-/react-query-4.29.12.tgz",
++      "integrity": "sha512-zhcN6+zF6cxprxhTHQajHGlvxgK8npnp9uLe9yaWhGc6sYcPWXzyO4raL4HomUzQOPzu3jLvkriJQ7BOrDM8vA==",
+       "dependencies": {
+         "@tanstack/query-core": "4.29.11",
+         "use-sync-external-store": "^1.2.0"
+@@ -6379,9 +6379,9 @@
+       }
+     },
+     "node_modules/browserslist": {
+-      "version": "4.21.5",
+-      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-4.21.5.tgz",
+-      "integrity": "sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==",
++      "version": "4.21.7",
++      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-4.21.7.tgz",
++      "integrity": "sha512-BauCXrQ7I2ftSqd2mvKHGo85XR0u7Ru3C/Hxsy/0TkfCtjrmAbPdzLGasmoiBxplpDXlPvdjX9u7srIMfgasNA==",
+       "funding": [
+         {
+           "type": "opencollective",
+@@ -6390,13 +6390,17 @@
+         {
+           "type": "tidelift",
+           "url": "https://tidelift.com/funding/github/npm/browserslist"
++        },
++        {
++          "type": "github",
++          "url": "https://github.com/sponsors/ai"
+         }
+       ],
+       "dependencies": {
+-        "caniuse-lite": "^1.0.30001449",
+-        "electron-to-chromium": "^1.4.284",
+-        "node-releases": "^2.0.8",
+-        "update-browserslist-db": "^1.0.10"
++        "caniuse-lite": "^1.0.30001489",
++        "electron-to-chromium": "^1.4.411",
++        "node-releases": "^2.0.12",
++        "update-browserslist-db": "^1.0.11"
+       },
+       "bin": {
+         "browserslist": "cli.js"
+@@ -6539,9 +6543,9 @@
+       }
+     },
+     "node_modules/caniuse-lite": {
+-      "version": "1.0.30001489",
+-      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001489.tgz",
+-      "integrity": "sha512-x1mgZEXK8jHIfAxm+xgdpHpk50IN3z3q3zP261/WS+uvePxW8izXuCu6AHz0lkuYTlATDehiZ/tNyYBdSQsOUQ==",
++      "version": "1.0.30001491",
++      "resolved": "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001491.tgz",
++      "integrity": "sha512-17EYIi4TLnPiTzVKMveIxU5ETlxbSO3B6iPvMbprqnKh4qJsQGk5Nh1Lp4jIMAE0XfrujsJuWZAM3oJdMHaKBA==",
+       "funding": [
+         {
+           "type": "opencollective",
+@@ -7457,12 +7461,15 @@
+       }
+     },
+     "node_modules/dotenv": {
+-      "version": "16.0.3",
+-      "resolved": "https://registry.npmjs.org/dotenv/-/dotenv-16.0.3.tgz",
+-      "integrity": "sha512-7GO6HghkA5fYG9TYnNxi14/7K9f5occMlp3zXAuSxn7CKCxt9xbNWG7yF8hTCSUchlfWSe3uLmlPfigevRItzQ==",
++      "version": "16.1.0",
++      "resolved": "https://registry.npmjs.org/dotenv/-/dotenv-16.1.0.tgz",
++      "integrity": "sha512-XiwP/4cqatBNLEnKe169vPZCrovUmYngyVA4DgZ3uIVLJfZaBgr4uT0EF2TrEQqgWDDlekGo0muEYme5SR78Ww==",
+       "dev": true,
+       "engines": {
+         "node": ">=12"
++      },
++      "funding": {
++        "url": "https://github.com/motdotla/dotenv?sponsor=1"
+       }
+     },
+     "node_modules/dset": {
+@@ -7502,9 +7509,9 @@
+       }
+     },
+     "node_modules/electron-to-chromium": {
+-      "version": "1.4.411",
+-      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.411.tgz",
+-      "integrity": "sha512-5VXLW4Qw89vM2WTICHua/y8v7fKGDRVa2VPOtBB9IpLvW316B+xd8yD1wTmLPY2ot/00P/qt87xdolj4aG/Lzg=="
++      "version": "1.4.414",
++      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.414.tgz",
++      "integrity": "sha512-RRuCvP6ekngVh2SAJaOKT/hxqc9JAsK+Pe0hP5tGQIfonU2Zy9gMGdJ+mBdyl/vNucMG6gkXYtuM4H/1giws5w=="
+     },
+     "node_modules/emoji-regex": {
+       "version": "8.0.0",
+@@ -8840,9 +8847,9 @@
+       }
+     },
+     "node_modules/graphql-scalars": {
+-      "version": "1.22.0",
+-      "resolved": "https://registry.npmjs.org/graphql-scalars/-/graphql-scalars-1.22.0.tgz",
+-      "integrity": "sha512-t3r6c/cMF6OP64oN+YYVwempyMA4tbI/JdWWDdPN1U45IgpIfPZmJdO+wvPPoptxL9Lr/7jmgRFRsAUg66DFmA==",
++      "version": "1.22.1",
++      "resolved": "https://registry.npmjs.org/graphql-scalars/-/graphql-scalars-1.22.1.tgz",
++      "integrity": "sha512-PurWR2/a78EpYapRyPttBDfjIdsSg7q5or6cTaaGyZSV/VDh3o/6m6/BIpvGKGvmE3sY94UrLOZaCHskF5MuiA==",
+       "dependencies": {
+         "tslib": "^2.5.0"
+       },
+@@ -9951,9 +9958,9 @@
+       }
+     },
+     "node_modules/libphonenumber-js": {
+-      "version": "1.10.30",
+-      "resolved": "https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.10.30.tgz",
+-      "integrity": "sha512-PLGc+xfrQrkya/YK2/5X+bPpxRmyJBHM+xxz9krUdSgk4Vs2ZwxX5/Ow0lv3r9PDlDtNWb4u+it8MY5rZ0IyGw=="
++      "version": "1.10.31",
++      "resolved": "https://registry.npmjs.org/libphonenumber-js/-/libphonenumber-js-1.10.31.tgz",
++      "integrity": "sha512-qYTzElLePmz3X/6I0JPX5n87tu7jVIMtR/yRLi5PGVPvMCMSVTCR+079KmdNK005i4dBjFxY/bMYceI9IBp47w=="
+     },
+     "node_modules/lilconfig": {
+       "version": "2.1.0",
+@@ -10268,9 +10275,9 @@
+       }
+     },
+     "node_modules/mdb-react-ui-kit": {
+-      "version": "6.0.0",
+-      "resolved": "https://registry.npmjs.org/mdb-react-ui-kit/-/mdb-react-ui-kit-6.0.0.tgz",
+-      "integrity": "sha512-oCUIpTbxqQHfHomdKNKkGAYF/VP9UBHynyeIv09ugOZXwK3g8FAQMmddYQROMd9f+BVxNfn8SL9eLG6ugTJApA==",
++      "version": "6.1.0",
++      "resolved": "https://registry.npmjs.org/mdb-react-ui-kit/-/mdb-react-ui-kit-6.1.0.tgz",
++      "integrity": "sha512-IvtD0abO9St+nbGT2xBvKuFm1ZotrdoVGJ/QgXSboWgYhiJYvR9kcpwzgUIlLGmBnuo/JZOyXcwhuPAbF1BDQQ==",
+       "dependencies": {
+         "@popperjs/core": "2.11.5",
+         "clsx": "1.1.1",
+@@ -11694,9 +11701,9 @@
+       }
+     },
+     "node_modules/postcss": {
+-      "version": "8.4.23",
+-      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.4.23.tgz",
+-      "integrity": "sha512-bQ3qMcpF6A/YjR55xtoTr0jGOlnPOKAIMdOWiv0EIT6HVPEaJiJB4NLljSbiHoC2RX7DN5Uvjtpbg1NPdwv1oA==",
++      "version": "8.4.24",
++      "resolved": "https://registry.npmjs.org/postcss/-/postcss-8.4.24.tgz",
++      "integrity": "sha512-M0RzbcI0sO/XJNucsGjvWU9ERWxb/ytp1w6dKtxTKgixdtQDq4rmx/g8W1hnaheq9jgwL/oyEdH5Bc4WwJKMqg==",
+       "dev": true,
+       "funding": [
+         {
+@@ -14605,26 +14612,26 @@
+       "integrity": "sha512-gvVzJFlPycKc5dZN4yPkP8w7Dc37BtP1yczEneOb4uq34pXZcvrtRTmWV8W+Ume+XCxKgbjM+nevkyFPMybd4Q=="
+     },
+     "node_modules/workbox-background-sync": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-background-sync/-/workbox-background-sync-6.6.0.tgz",
+-      "integrity": "sha512-jkf4ZdgOJxC9u2vztxLuPT/UjlH7m/nWRQ/MgGL0v8BJHoZdVGJd18Kck+a0e55wGXdqyHO+4IQTk0685g4MUw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-background-sync/-/workbox-background-sync-6.6.1.tgz",
++      "integrity": "sha512-trJd3ovpWCvzu4sW0E8rV3FUyIcC0W8G+AZ+VcqzzA890AsWZlUGOTSxIMmIHVusUw/FDq1HFWfy/kC/WTRqSg==",
+       "dependencies": {
+         "idb": "^7.0.1",
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-broadcast-update": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-broadcast-update/-/workbox-broadcast-update-6.6.0.tgz",
+-      "integrity": "sha512-nm+v6QmrIFaB/yokJmQ/93qIJ7n72NICxIwQwe5xsZiV2aI93MGGyEyzOzDPVz5THEr5rC3FJSsO3346cId64Q==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-broadcast-update/-/workbox-broadcast-update-6.6.1.tgz",
++      "integrity": "sha512-fBhffRdaANdeQ1V8s692R9l/gzvjjRtydBOvR6WCSB0BNE2BacA29Z4r9/RHd9KaXCPl6JTdI9q0bR25YKP8TQ==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-build": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-build/-/workbox-build-6.6.0.tgz",
+-      "integrity": "sha512-Tjf+gBwOTuGyZwMz2Nk/B13Fuyeo0Q84W++bebbVsfr9iLkDSo6j6PST8tET9HYA58mlRXwlMGpyWO8ETJiXdQ==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-build/-/workbox-build-6.6.1.tgz",
++      "integrity": "sha512-INPgDx6aRycAugUixbKgiEQBWD0MPZqU5r0jyr24CehvNuLPSXp/wGOpdRJmts656lNiXwqV7dC2nzyrzWEDnw==",
+       "dependencies": {
+         "@apideck/better-ajv-errors": "^0.3.1",
+         "@babel/core": "^7.11.1",
+@@ -14648,24 +14655,24 @@
+         "strip-comments": "^2.0.1",
+         "tempy": "^0.6.0",
+         "upath": "^1.2.0",
+-        "workbox-background-sync": "6.6.0",
+-        "workbox-broadcast-update": "6.6.0",
+-        "workbox-cacheable-response": "6.6.0",
+-        "workbox-core": "6.6.0",
+-        "workbox-expiration": "6.6.0",
+-        "workbox-google-analytics": "6.6.0",
+-        "workbox-navigation-preload": "6.6.0",
+-        "workbox-precaching": "6.6.0",
+-        "workbox-range-requests": "6.6.0",
+-        "workbox-recipes": "6.6.0",
+-        "workbox-routing": "6.6.0",
+-        "workbox-strategies": "6.6.0",
+-        "workbox-streams": "6.6.0",
+-        "workbox-sw": "6.6.0",
+-        "workbox-window": "6.6.0"
++        "workbox-background-sync": "6.6.1",
++        "workbox-broadcast-update": "6.6.1",
++        "workbox-cacheable-response": "6.6.1",
++        "workbox-core": "6.6.1",
++        "workbox-expiration": "6.6.1",
++        "workbox-google-analytics": "6.6.1",
++        "workbox-navigation-preload": "6.6.1",
++        "workbox-precaching": "6.6.1",
++        "workbox-range-requests": "6.6.1",
++        "workbox-recipes": "6.6.1",
++        "workbox-routing": "6.6.1",
++        "workbox-strategies": "6.6.1",
++        "workbox-streams": "6.6.1",
++        "workbox-sw": "6.6.1",
++        "workbox-window": "6.6.1"
+       },
+       "engines": {
+-        "node": ">=10.0.0"
++        "node": ">=16.0.0"
+       }
+     },
+     "node_modules/workbox-build/node_modules/@apideck/better-ajv-errors": {
+@@ -14795,120 +14802,120 @@
+       }
+     },
+     "node_modules/workbox-cacheable-response": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-cacheable-response/-/workbox-cacheable-response-6.6.0.tgz",
+-      "integrity": "sha512-JfhJUSQDwsF1Xv3EV1vWzSsCOZn4mQ38bWEBR3LdvOxSPgB65gAM6cS2CX8rkkKHRgiLrN7Wxoyu+TuH67kHrw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-cacheable-response/-/workbox-cacheable-response-6.6.1.tgz",
++      "integrity": "sha512-85LY4veT2CnTCDxaVG7ft3NKaFbH6i4urZXgLiU4AiwvKqS2ChL6/eILiGRYXfZ6gAwDnh5RkuDbr/GMS4KSag==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-core": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-core/-/workbox-core-6.6.0.tgz",
+-      "integrity": "sha512-GDtFRF7Yg3DD859PMbPAYPeJyg5gJYXuBQAC+wyrWuuXgpfoOrIQIvFRZnQ7+czTIQjIr1DhLEGFzZanAT/3bQ=="
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-core/-/workbox-core-6.6.1.tgz",
++      "integrity": "sha512-ZrGBXjjaJLqzVothoE12qTbVnOAjFrHDXpZe7coCb6q65qI/59rDLwuFMO4PcZ7jcbxY+0+NhUVztzR/CbjEFw=="
+     },
+     "node_modules/workbox-expiration": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-expiration/-/workbox-expiration-6.6.0.tgz",
+-      "integrity": "sha512-baplYXcDHbe8vAo7GYvyAmlS4f6998Jff513L4XvlzAOxcl8F620O91guoJ5EOf5qeXG4cGdNZHkkVAPouFCpw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-expiration/-/workbox-expiration-6.6.1.tgz",
++      "integrity": "sha512-qFiNeeINndiOxaCrd2DeL1Xh1RFug3JonzjxUHc5WkvkD2u5abY3gZL1xSUNt3vZKsFFGGORItSjVTVnWAZO4A==",
+       "dependencies": {
+         "idb": "^7.0.1",
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-google-analytics": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-google-analytics/-/workbox-google-analytics-6.6.0.tgz",
+-      "integrity": "sha512-p4DJa6OldXWd6M9zRl0H6vB9lkrmqYFkRQ2xEiNdBFp9U0LhsGO7hsBscVEyH9H2/3eZZt8c97NB2FD9U2NJ+Q==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-google-analytics/-/workbox-google-analytics-6.6.1.tgz",
++      "integrity": "sha512-1TjSvbFSLmkpqLcBsF7FuGqqeDsf+uAXO/pjiINQKg3b1GN0nBngnxLcXDYo1n/XxK4N7RaRrpRlkwjY/3ocuA==",
+       "dependencies": {
+-        "workbox-background-sync": "6.6.0",
+-        "workbox-core": "6.6.0",
+-        "workbox-routing": "6.6.0",
+-        "workbox-strategies": "6.6.0"
++        "workbox-background-sync": "6.6.1",
++        "workbox-core": "6.6.1",
++        "workbox-routing": "6.6.1",
++        "workbox-strategies": "6.6.1"
+       }
+     },
+     "node_modules/workbox-navigation-preload": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-navigation-preload/-/workbox-navigation-preload-6.6.0.tgz",
+-      "integrity": "sha512-utNEWG+uOfXdaZmvhshrh7KzhDu/1iMHyQOV6Aqup8Mm78D286ugu5k9MFD9SzBT5TcwgwSORVvInaXWbvKz9Q==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-navigation-preload/-/workbox-navigation-preload-6.6.1.tgz",
++      "integrity": "sha512-DQCZowCecO+wRoIxJI2V6bXWK6/53ff+hEXLGlQL4Rp9ZaPDLrgV/32nxwWIP7QpWDkVEtllTAK5h6cnhxNxDA==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-precaching": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-precaching/-/workbox-precaching-6.6.0.tgz",
+-      "integrity": "sha512-eYu/7MqtRZN1IDttl/UQcSZFkHP7dnvr/X3Vn6Iw6OsPMruQHiVjjomDFCNtd8k2RdjLs0xiz9nq+t3YVBcWPw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-precaching/-/workbox-precaching-6.6.1.tgz",
++      "integrity": "sha512-K4znSJ7IKxCnCYEdhNkMr7X1kNh8cz+mFgx9v5jFdz1MfI84pq8C2zG+oAoeE5kFrUf7YkT5x4uLWBNg0DVZ5A==",
+       "dependencies": {
+-        "workbox-core": "6.6.0",
+-        "workbox-routing": "6.6.0",
+-        "workbox-strategies": "6.6.0"
++        "workbox-core": "6.6.1",
++        "workbox-routing": "6.6.1",
++        "workbox-strategies": "6.6.1"
+       }
+     },
+     "node_modules/workbox-range-requests": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-range-requests/-/workbox-range-requests-6.6.0.tgz",
+-      "integrity": "sha512-V3aICz5fLGq5DpSYEU8LxeXvsT//mRWzKrfBOIxzIdQnV/Wj7R+LyJVTczi4CQ4NwKhAaBVaSujI1cEjXW+hTw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-range-requests/-/workbox-range-requests-6.6.1.tgz",
++      "integrity": "sha512-4BDzk28govqzg2ZpX0IFkthdRmCKgAKreontYRC5YsAPB2jDtPNxqx3WtTXgHw1NZalXpcH/E4LqUa9+2xbv1g==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-recipes": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-recipes/-/workbox-recipes-6.6.0.tgz",
+-      "integrity": "sha512-TFi3kTgYw73t5tg73yPVqQC8QQjxJSeqjXRO4ouE/CeypmP2O/xqmB/ZFBBQazLTPxILUQ0b8aeh0IuxVn9a6A==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-recipes/-/workbox-recipes-6.6.1.tgz",
++      "integrity": "sha512-/oy8vCSzromXokDA+X+VgpeZJvtuf8SkQ8KL0xmRivMgJZrjwM3c2tpKTJn6PZA6TsbxGs3Sc7KwMoZVamcV2g==",
+       "dependencies": {
+-        "workbox-cacheable-response": "6.6.0",
+-        "workbox-core": "6.6.0",
+-        "workbox-expiration": "6.6.0",
+-        "workbox-precaching": "6.6.0",
+-        "workbox-routing": "6.6.0",
+-        "workbox-strategies": "6.6.0"
++        "workbox-cacheable-response": "6.6.1",
++        "workbox-core": "6.6.1",
++        "workbox-expiration": "6.6.1",
++        "workbox-precaching": "6.6.1",
++        "workbox-routing": "6.6.1",
++        "workbox-strategies": "6.6.1"
+       }
+     },
+     "node_modules/workbox-routing": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-routing/-/workbox-routing-6.6.0.tgz",
+-      "integrity": "sha512-x8gdN7VDBiLC03izAZRfU+WKUXJnbqt6PG9Uh0XuPRzJPpZGLKce/FkOX95dWHRpOHWLEq8RXzjW0O+POSkKvw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-routing/-/workbox-routing-6.6.1.tgz",
++      "integrity": "sha512-j4ohlQvfpVdoR8vDYxTY9rA9VvxTHogkIDwGdJ+rb2VRZQ5vt1CWwUUZBeD/WGFAni12jD1HlMXvJ8JS7aBWTg==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-strategies": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-strategies/-/workbox-strategies-6.6.0.tgz",
+-      "integrity": "sha512-eC07XGuINAKUWDnZeIPdRdVja4JQtTuc35TZ8SwMb1ztjp7Ddq2CJ4yqLvWzFWGlYI7CG/YGqaETntTxBGdKgQ==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-strategies/-/workbox-strategies-6.6.1.tgz",
++      "integrity": "sha512-WQLXkRnsk4L81fVPkkgon1rZNxnpdO5LsO+ws7tYBC6QQQFJVI6v98klrJEjFtZwzw/mB/HT5yVp7CcX0O+mrw==",
+       "dependencies": {
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/workbox-streams": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-streams/-/workbox-streams-6.6.0.tgz",
+-      "integrity": "sha512-rfMJLVvwuED09CnH1RnIep7L9+mj4ufkTyDPVaXPKlhi9+0czCu+SJggWCIFbPpJaAZmp2iyVGLqS3RUmY3fxg==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-streams/-/workbox-streams-6.6.1.tgz",
++      "integrity": "sha512-maKG65FUq9e4BLotSKWSTzeF0sgctQdYyTMq529piEN24Dlu9b6WhrAfRpHdCncRS89Zi2QVpW5V33NX8PgH3Q==",
+       "dependencies": {
+-        "workbox-core": "6.6.0",
+-        "workbox-routing": "6.6.0"
++        "workbox-core": "6.6.1",
++        "workbox-routing": "6.6.1"
+       }
+     },
+     "node_modules/workbox-sw": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-sw/-/workbox-sw-6.6.0.tgz",
+-      "integrity": "sha512-R2IkwDokbtHUE4Kus8pKO5+VkPHD2oqTgl+XJwh4zbF1HyjAbgNmK/FneZHVU7p03XUt9ICfuGDYISWG9qV/CQ=="
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-sw/-/workbox-sw-6.6.1.tgz",
++      "integrity": "sha512-R7whwjvU2abHH/lR6kQTTXLHDFU2izht9kJOvBRYK65FbwutT4VvnUAJIgHvfWZ/fokrOPhfoWYoPCMpSgUKHQ=="
+     },
+     "node_modules/workbox-webpack-plugin": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-webpack-plugin/-/workbox-webpack-plugin-6.6.0.tgz",
+-      "integrity": "sha512-xNZIZHalboZU66Wa7x1YkjIqEy1gTR+zPM+kjrYJzqN7iurYZBctBLISyScjhkJKYuRrZUP0iqViZTh8rS0+3A==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-webpack-plugin/-/workbox-webpack-plugin-6.6.1.tgz",
++      "integrity": "sha512-zpZ+ExFj9NmiI66cFEApyjk7hGsfJ1YMOaLXGXBoZf0v7Iu6hL0ZBe+83mnDq3YYWAfA3fnyFejritjOHkFcrA==",
+       "dependencies": {
+         "fast-json-stable-stringify": "^2.1.0",
+         "pretty-bytes": "^5.4.1",
+         "upath": "^1.2.0",
+         "webpack-sources": "^1.4.3",
+-        "workbox-build": "6.6.0"
++        "workbox-build": "6.6.1"
+       },
+       "engines": {
+-        "node": ">=10.0.0"
++        "node": ">=16.0.0"
+       },
+       "peerDependencies": {
+         "webpack": "^4.4.0 || ^5.9.0"
+@@ -14932,12 +14939,12 @@
+       }
+     },
+     "node_modules/workbox-window": {
+-      "version": "6.6.0",
+-      "resolved": "https://registry.npmjs.org/workbox-window/-/workbox-window-6.6.0.tgz",
+-      "integrity": "sha512-L4N9+vka17d16geaJXXRjENLFldvkWy7JyGxElRD0JvBxvFEd8LOhr+uXCcar/NzAmIBRv9EZ+M+Qr4mOoBITw==",
++      "version": "6.6.1",
++      "resolved": "https://registry.npmjs.org/workbox-window/-/workbox-window-6.6.1.tgz",
++      "integrity": "sha512-wil4nwOY58nTdCvif/KEZjQ2NP8uk3gGeRNy2jPBbzypU4BT4D9L8xiwbmDBpZlSgJd2xsT9FvSNU0gsxV51JQ==",
+       "dependencies": {
+         "@types/trusted-types": "^2.0.2",
+-        "workbox-core": "6.6.0"
++        "workbox-core": "6.6.1"
+       }
+     },
+     "node_modules/wrap-ansi": {

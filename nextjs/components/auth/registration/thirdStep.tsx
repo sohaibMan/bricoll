@@ -17,7 +17,7 @@ export default function FirstStep() {
         userData.specificSkills || [] as string[]
     );
 
-    const [skillLevel, setSkillsLevel] = useState(
+    const [skillsLevel, setSkillsLevel] = useState(
         userData.skillsLevel || [] as string[]);
 
 
@@ -28,7 +28,7 @@ export default function FirstStep() {
 
     const handleSkillsLevel = (level: string) => {
         setSkillsLevel(prv => [...prv, level]);
-        userData.skillsLevel = skillLevel
+        userData.skillsLevel = skillsLevel
     };
     const handleskillsCategories = (categorie: string) => {
         setSkillCategories(prv => [...prv, categorie]);
@@ -202,7 +202,7 @@ export default function FirstStep() {
                             id="tags-filled"
                             style={{width: "100%", margin: "auto"}}
                             options={popularSkillsLevel}
-                            defaultValue={skillLevel}
+                            defaultValue={skillsLevel}
                             freeSolo
                             onChange={(event, newSkills) => {
                                 handleSkillsLevel(newSkills as unknown as string);
