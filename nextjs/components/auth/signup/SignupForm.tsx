@@ -65,7 +65,7 @@ const SignupForm = () => {
                 success: (data) => data.message,
                 error: (err) => err.message,
             }).then(
-                () => router.push(`/signin?callbackUrl=${encodeURIComponent(process.env.NEXT_PUBLIC_NEXTAUTH_URL + '/register')}`)
+                () => router.push(`/signin`)
             ).catch((err) => {
                 console.error(err.message);
             });

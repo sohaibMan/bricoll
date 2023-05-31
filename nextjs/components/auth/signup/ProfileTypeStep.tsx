@@ -1,10 +1,10 @@
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 import Link from "next/link";
 import Image, {StaticImageData} from "next/image";
-import clientImage from "../../../assets/imgs/client.png";
 import freelancerImage from "../../../assets/imgs/freelancer.png";
-import {UserRole} from "../../../types/resolvers";
+import clientImage from "../../../assets/imgs/client.png";
 import {multiStepContext} from "../registration/stepContext";
+import {UserRole} from "../../../types/resolvers";
 
 type CardProps = {
     label: string;
@@ -37,7 +37,12 @@ const Card = ({label, imageSrc, selected, onClick}: CardProps) => {
 
 const ProfileTypeStep = () => {
 
-        const {setStep, userData, setUserData} = useContext(multiStepContext);
+        const {setStep, userRole, setUserRole, userData} = useContext(multiStepContext);
+
+        useEffect(() => {
+            //    set the user role in the userData object
+            userData.userRole = userRole
+        }, [userRole])
 
 
         return (
@@ -54,17 +59,17 @@ const ProfileTypeStep = () => {
                         <Card
                             label="I’m a freelancer, looking for work"
                             imageSrc={freelancerImage}
-                            selected={userData.userRole === UserRole.Freelancer}
-                            onClick={() => setUserData({...userData, userRole: UserRole.Freelancer})}
+                            selected={userRole === UserRole.Freelancer}
+                            onClick={() => setUserRole(UserRole.Freelancer)}
                         />
                         <Card
                             label="I’m a client, hiring for a project"
                             imageSrc={clientImage}
-                            selected={userData.userRole === UserRole.Client}
-                            onClick={() => setUserData({...userData, userRole: UserRole.Client})}
+                            selected={userRole === UserRole.Client}
+                            onClick={() => setUserRole(UserRole.Client)}
                         />
                     </div>
-                    <div className="my-12">
+                    <div className="flex flex-col my-12">
                         <button
                             className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
                             onClick={() => setStep(1)}

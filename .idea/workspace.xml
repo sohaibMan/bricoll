@@ -4,45 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix package.json peer dependency problem">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/ResetPasswordSent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/forgetPassword/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/resetPassword/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/ProfileTypeStep.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signup/SignupForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/CommentsSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/ExpertiseSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/Footer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/GuidesSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/HeroSection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/home/WhySection.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/accept.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/accept.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/client.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/client.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/dev.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/dev.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/facebook.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/facebook.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/freelancer.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/freelancer.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/fst.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/fst.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/google.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/google.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/graphic.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/graphic.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/heroImage.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/heroImage.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/job.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/job.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/man.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/man.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/microsoft.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/microsoft.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/quality.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/quality.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/reply.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/reply.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/security.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/security.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/social.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/social.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/thumb.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/thumb.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/tick.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/tick.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/trust.png" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/trust.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/public/woman.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/assets/imgs/woman.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/target/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/target/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="forgetPasswordPage" />
+        <entry key="$PROJECT_DIR$" value="Main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,6 +38,7 @@
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2QKjZSyVh7xdRblggmyQMwL8S1C" />
   <component name="ProjectLevelVcsManager">
@@ -89,7 +59,9 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
+    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -106,11 +78,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/nextjs/assets" />
-      <recent name="$PROJECT_DIR$/nextjs/static_assets" />
-      <recent name="$PROJECT_DIR$/nextjs/app/users" />
+      <recent name="$PROJECT_DIR$/nextjs/app/projects/[project_id]/proposals/create" />
+      <recent name="$PROJECT_DIR$/nextjs/components/FreelancerHome" />
+      <recent name="$PROJECT_DIR$/nextjs/components" />
+      <recent name="$PROJECT_DIR$/nextjs/app/find-work" />
       <recent name="$PROJECT_DIR$/nextjs/app" />
-      <recent name="$PROJECT_DIR$/nextjs/app/emailverification" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -135,6 +107,25 @@
       <workItem from="1685201570211" duration="5029000" />
       <workItem from="1685216370090" duration="51000" />
       <workItem from="1685228201590" duration="4477000" />
+      <workItem from="1685269144020" duration="386000" />
+      <workItem from="1685269733451" duration="5858000" />
+      <workItem from="1685283961846" duration="614000" />
+      <workItem from="1685284884994" duration="9299000" />
+      <workItem from="1685296653799" duration="5000" />
+      <workItem from="1685359558568" duration="10378000" />
+      <workItem from="1685373869454" duration="1831000" />
+      <workItem from="1685386989776" duration="3040000" />
+      <workItem from="1685390376711" duration="1037000" />
+      <workItem from="1685391612608" duration="2761000" />
+      <workItem from="1685402989225" duration="1870000" />
+      <workItem from="1685405211292" duration="1446000" />
+      <workItem from="1685407218062" duration="2761000" />
+      <workItem from="1685461519818" duration="1149000" />
+      <workItem from="1685469381516" duration="3546000" />
+      <workItem from="1685475544567" duration="109000" />
+      <workItem from="1685476502212" duration="507000" />
+      <workItem from="1685477404221" duration="1238000" />
+      <workItem from="1685478826783" duration="676000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>
@@ -143,21 +134,82 @@
       <option name="project" value="LOCAL" />
       <updated>1685208419627</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="fix the register ui and steps and add a connector between steps and fix the type system">
+      <created>1685294440146</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1685294440146</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix types">
+      <created>1685373097234</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685373097234</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix steps and move projects folder">
+      <created>1685397776894</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685397776894</updated>
+    </task>
+    <task id="LOCAL-00006" summary="restore sign in page from new Main branch">
+      <created>1685459080176</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1685459080177</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix package.json peer dependency problem">
+      <created>1685476998627</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1685476998627</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="UpdateCopyrightCheckinHandler">
-    <option name="UPDATE_COPYRIGHT" value="true" />
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="fix sign up form" />
     <MESSAGE value="complete direction from signup to register" />
     <MESSAGE value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
     <MESSAGE value="Add: Port Mapping to redis container&#10;Fix some types issue" />
     <MESSAGE value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
-    <option name="LAST_COMMIT_MESSAGE" value="move images to assets folder&#10;remove &quot;use client&quot; to make the component server components by default" />
+    <MESSAGE value="fix the register ui and steps and add a connector between steps and fix the type system" />
+    <MESSAGE value="fix types" />
+    <MESSAGE value="fix steps and move projects folder" />
+    <MESSAGE value="restore sign in page from new Main branch" />
+    <MESSAGE value="fix package.json peer dependency problem" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix package.json peer dependency problem" />
   </component>
 </project>

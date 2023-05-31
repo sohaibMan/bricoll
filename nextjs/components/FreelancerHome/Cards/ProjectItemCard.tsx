@@ -3,11 +3,11 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Chip, Stack} from '@mui/joy';
-import {Project} from "../../types/resolvers";
+import {Project} from "../../../types/resolvers";
 import moment from "moment";
-import CustomLink from "../CustomLinks/CustomLink";
+import CustomLink from "../../CustomLinks/CustomLink";
 
-import {RichTextEditor} from "../Inputs/RichTextEditor";
+import {RichTextEditor} from "../../Inputs/RichTextEditor";
 
 
 export default function ProjectItemCard({project, children}: {
@@ -37,7 +37,7 @@ export default function ProjectItemCard({project, children}: {
             >
 
                 {/*<Box sx={{width: "80%"}}>*/}
-                <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
+                <Typography level="h1" sx={{fontSize: '19px', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
                         href={`projects/${project._id}`}
@@ -62,9 +62,11 @@ export default function ProjectItemCard({project, children}: {
                     spacing={1}
 
                 >
-                    {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
-                    <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
+                    {project.skills.map((skill, id) => <Chip key={id} sx={{backgroundColor: "#eee", color: "#4C4444"}} size="sm">{skill}</Chip>)}
+                    <Chip sx={{backgroundColor: "#73bb44", color: "#fff"}} size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
+
+                {children}
 
             </Card>
         </Box>

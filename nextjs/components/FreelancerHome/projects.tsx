@@ -1,10 +1,11 @@
+"use client"
 import {gql, useQuery} from '@apollo/client';
-import ProjectItemCard from "../../components/Cards/ProjectItemCard";
+import ProjectItemCard from "../Cards/ProjectItemCard";
 import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
-import {SearchForm} from "../../components/Forms/base/SearchForm";
-import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
-import {ProjectCardControlButtons} from "../../components/Buttons/ProjectCardControlButtons";
+import {SearchForm} from "../Forms/base/SearchForm";
+import ProjectItemCardSkeleton from "../Skeletons/ProjectItemCardSkeleton";
+import {ProjectCardControlButtons} from "../Buttons/ProjectCardControlButtons";
 import moment from "moment/moment";
 
 const GET_PROJECTS = gql`
@@ -31,7 +32,7 @@ const GET_PROJECTS = gql`
 `
 
 
-export default function Index() {
+export default function Projects() {
     // the types are not specific to check the query if you have any problem
 
     const {loading, error, refetch, data} = useQuery<{ Projects: Project[] }>(GET_PROJECTS);

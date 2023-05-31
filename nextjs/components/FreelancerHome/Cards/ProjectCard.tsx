@@ -2,13 +2,13 @@ import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
-import {Project} from "../../types/resolvers";
+import {Project} from "../../../types/resolvers";
 import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
-import Attachments from "../ListItems/Attachments";
-import {ProjectStatsBarChart} from "../Charts/wrappers/ProjectStats";
+import Attachments from "../../ListItems/Attachments";
+import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
 
-import {RichTextEditor} from "../Inputs/RichTextEditor";
+import {RichTextEditor} from "../../Inputs/RichTextEditor";
 
 
 export default function ProjectCard({project}: { project: Project }) {

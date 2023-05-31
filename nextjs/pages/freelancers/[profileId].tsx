@@ -4,6 +4,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import moment from "moment";
+import "react-quill/dist/quill.snow.css";
+import "../../styles/quill.css";
 
 export const revalidate = 3600
 
@@ -28,6 +30,7 @@ import { User } from "../../types/resolvers";
 import { client } from "../_app";
 // import db from "../../lib/mongodb";
 import CustomLink from "../../components/CustomLinks/CustomLink";
+import { RichTextEditor } from "../../components/Inputs/RichTextEditor";
 
 // const usersCollection = db.collection("users")
 
@@ -268,7 +271,12 @@ export default function ProfilePage({ profile }: { profile: User }) {
                   </div>
 
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                    <MDBCardText>{profile.bio}</MDBCardText>
+                    {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
+                    <RichTextEditor
+                      readOnly={true}
+                      value={profile.bio}
+                      theme="bubble"
+                    />
                   </MDBListGroupItem>
                 </MDBListGroup>
               </MDBCardBody>

@@ -13,10 +13,10 @@ export default function CustomAutocomplete(props: {
     return (
         <Autocomplete
             onChange={props.changeHandler}
-            sx={{width: "100%"}}
+            sx={{width: "100%", borderColor: "#73bb44"}}
             defaultValue={defaultValue}
             placeholder={props.placeholder}
-            disableClearable={false}
+            // disableClearable={false}
             options={props.labels.map(el => el.label.split("_").join(" ").toLowerCase())}
             slotProps={{input: {ref: props.parentRef}}}
         />

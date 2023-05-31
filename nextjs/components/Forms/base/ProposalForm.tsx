@@ -1,3 +1,4 @@
+"use client"
 import {DocumentNode, useMutation} from "@apollo/client";
 import Box from "@mui/joy/Box";
 import * as React from "react";
@@ -117,12 +118,12 @@ export default function ProposalForm(props: {
                     <Textarea placeholder="description" value={description} required maxRows={5}
                               onChange={(e) => setDescription(() => e.target.value)} minRows={2}/>
 
-                    {/*<Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}*/}
-                    {/*          onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>*/}
+                    <Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}
+                              onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>
 
-                    <RichTextEditor defaultValue={coverLetter}
-                                    onChange={(input) => setCoverLetter(() => input)}
-                                    theme="snow"/>
+                    {/*<RichTextEditor defaultValue={coverLetter}*/}
+                    {/*                onChange={(input) => setCoverLetter(() => input)}*/}
+                    {/*                theme="snow"/>*/}
 
 
                     <Button disabled={loading} type=" submit"> Submit</Button>

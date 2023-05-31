@@ -1,39 +1,38 @@
 "use client"
 import React, {useContext, useState} from "react";
-import {Button, TextField} from "@mui/material";
-import {multiStepContext} from "./stepContext";
-import {toast} from "react-hot-toast";
+import {TextField} from "@mui/material";
+import {multiStepContext, UserData} from "./stepContext";
 import Chip from "@mui/material/Chip";
-import Autocomplete from "@mui/material/Autocomplete";
 import {UserRole} from "../../../types/resolvers";
+import Autocomplete from "@mui/joy/Autocomplete";
+import {toast} from "react-hot-toast";
 
 export default function FirstStep() {
-    const {setStep, userData, setUserData} = useContext(multiStepContext);
-    const userRole = userData.userRole as UserRole;
-    const [skillCategories, setSkillCategories] = useState<any>(
-        userData.skillCategories || []
+    const {setStep, userData, userRole} = useContext(multiStepContext);
+
+    const [skillCategories, setSkillCategories] = useState(
+        userData.skillsCategories || [] as string[]
     );
-    const [specificSkills, setSpecificSkills] = useState<any>(
-        userData.specificSkills || []
+    const [specificSkills, setSpecificSkills] = useState(
+        userData.specificSkills || [] as string[]
     );
 
-    const [skillLevel, setSkillsLevel] = useState<any>(
-        userData.skillLevel || []
-    );
+    const [skillLevel, setSkillsLevel] = useState(
+        userData.skillsLevel || [] as string[]);
 
-    const handleSkillCategories = (newSkills: any) => {
-        setSkillCategories(newSkills);
-        setUserData({...userData, skillCategories: newSkills});
+
+    const handleSpecificSkills = (skill: string) => {
+        setSpecificSkills((prv) => [...prv, skill]);
+        userData.specificSkills = specificSkills;
     };
 
-    const handleSpecificSkills = (newSkills: any) => {
-        setSpecificSkills(newSkills);
-        setUserData({...userData, specificSkills: newSkills});
+    const handleSkillsLevel = (level: string) => {
+        setSkillsLevel(prv => [...prv, level]);
+        userData.skillsLevel = skillLevel
     };
-
-    const handleSkillsLevel = (newSkills: any) => {
-        setSkillsLevel(newSkills);
-        setUserData({...userData, skillLevel: newSkills});
+    const handleskillsCategories = (categorie: string) => {
+        setSkillCategories(prv => [...prv, categorie]);
+        userData.skillsCategories = skillCategories
     };
 
     const popularSkillsCategories = [
@@ -61,9 +60,9 @@ export default function FirstStep() {
     function handleSubmit() {
         const freelancerRequiredFields = ["jobTitle", "company", "educationLevel"];
         const clientRequiredFields = [
-            "skillCategories",
+            "skillsCategories",
             "specificSkills",
-            "skillLevel",
+            "skillsLevel",
         ];
 
         const requiredFields =
@@ -71,6 +70,7 @@ export default function FirstStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
+        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
         const missingFields = requiredFields.filter((field) => !userData[field]);
 
         if (missingFields.length) {
@@ -83,12 +83,12 @@ export default function FirstStep() {
     }
 
     return (
-        <div>
+        <div style={{width: "50%"}}>
             {userRole === UserRole.Freelancer ? (
                 <>
                     <div>
                         <TextField
-                            style={{width: "30%"}}
+                            style={{width: "100%"}}
                             label="Job Title"
                             margin="normal"
                             variant="outlined"
@@ -96,13 +96,13 @@ export default function FirstStep() {
                             name="jobTitle"
                             defaultValue={userData["jobTitle"]}
                             onChange={(e) =>
-                                setUserData({...userData, jobTitle: e.target.value})
+                                userData.jobTitle = e.target.value
                             }
                         />
                     </div>
                     <div>
                         <TextField
-                            style={{width: "30%"}}
+                            style={{width: "100%"}}
                             label="Company Name"
                             margin="normal"
                             variant="outlined"
@@ -110,13 +110,13 @@ export default function FirstStep() {
                             name="company"
                             defaultValue={userData["company"]}
                             onChange={(e) =>
-                                setUserData({...userData, company: e.target.value})
+                                userData.company = e.target.value
                             }
                         />
                     </div>
                     <div>
                         <TextField
-                            style={{width: "30%"}}
+                            style={{width: "100%"}}
                             label="Education Level"
                             margin="normal"
                             variant="outlined"
@@ -124,30 +124,32 @@ export default function FirstStep() {
                             name="educationLevel"
                             defaultValue={userData["educationLevel"]}
                             onChange={(e) =>
-                                setUserData({...userData, educationLevel: e.target.value})
+                                userData.educationLevel = e.target.value
                             }
                         />
                     </div>
                 </>
             ) : (
                 <>
-                    <div style={{marginBottom: "10px", marginTop: "20px"}}>
+                    <div style={{marginBottom: "10px"}}>
                         <Autocomplete
+                            defaultValue={userData["skillCategories"]}
+                            placeholder={"Choose desired categories"}
                             multiple
-                            style={{width: "40%", margin: "auto"}}
                             id="tags-filled"
+                            style={{width: "100%", margin: "auto"}}
                             options={popularSkillsCategories}
-                            defaultValue={skillCategories}
                             freeSolo
-                            onChange={(event, newSkills) => {
-                                handleSkillCategories(newSkills);
+                            onChange={(event, categorie) => {
+                                handleskillsCategories(categorie as unknown as string);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }
@@ -155,30 +157,31 @@ export default function FirstStep() {
                                 <TextField
                                     {...params}
                                     variant="filled"
-                                    label="Skills Categories"
-                                    placeholder="add more skill categories..."
+                                    label="Category"
+                                    placeholder="add a  Category..."
                                 />
                             )}
                         />
                     </div>
-                    {/* <SkillsAutocomplete skill={skill} setSkills={setSkills}/> */}
                     <div style={{marginBottom: "10px"}}>
                         <Autocomplete
+                            placeholder={"Enter some specific skills you search for"}
                             multiple
-                            style={{width: "40%", margin: "auto"}}
+                            style={{width: "100%", margin: "auto"}}
                             id="tags-filled"
                             options={popularSpecificSkills}
                             defaultValue={specificSkills}
                             freeSolo
-                            onChange={(event, newSkills) => {
+                            onChange={(event, newSkills: string) => {
                                 handleSpecificSkills(newSkills);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }
@@ -194,21 +197,23 @@ export default function FirstStep() {
                     </div>
                     <div style={{marginBottom: "10px"}}>
                         <Autocomplete
+                            placeholder={"Choose a skills level"}
                             multiple
                             id="tags-filled"
-                            style={{width: "40%", margin: "auto"}}
+                            style={{width: "100%", margin: "auto"}}
                             options={popularSkillsLevel}
                             defaultValue={skillLevel}
                             freeSolo
                             onChange={(event, newSkills) => {
-                                handleSkillsLevel(newSkills);
+                                handleSkillsLevel(newSkills as unknown as string);
                             }}
                             renderTags={(value: string[], getTagProps) =>
                                 value.map((option: string, index: number) => (
                                     <Chip
+                                        {...getTagProps({index})}
                                         variant="outlined"
                                         label={option}
-                                        {...getTagProps({index})}
+
                                     />
                                 ))
                             }
@@ -222,29 +227,29 @@ export default function FirstStep() {
                             )}
                         />
                     </div>
+
                 </>
             )}
             <div>
-                <Button
-                    style={{marginRight: "80px", marginTop: "50px"}}
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setStep(2)}
-                >
-                    {" "}
-                    Back{" "}
-                </Button>{" "}
-                <span></span>
-                <Button
-                    style={{marginTop: "50px"}}
-                    variant="contained"
-                    color="success"
-                    type="submit"
-                    onClick={handleSubmit}
-                >
-                    {" "}
-                    Next{" "}
-                </Button>
+                <div className={"flex flex-col gap-2"}>
+
+                    <button
+                        className="py-2 px-20 rounded-full font-medium text-base text-white bg-red-300"
+
+                        onClick={() => setStep(2)}
+                    >
+                        Prev
+                    </button>
+
+                    <button
+                        className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
+                        onClick={handleSubmit}
+                    >
+                        Next
+                    </button>
+
+
+                </div>
             </div>
         </div>
     );
