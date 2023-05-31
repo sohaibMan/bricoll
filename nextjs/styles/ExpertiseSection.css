@@ -1,0 +1,9 @@
+/* Apply the smooth animation to the lazy-loaded images */
+.lazyload-placeholder {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.lazyload-loaded {
+  opacity: 1;
+}

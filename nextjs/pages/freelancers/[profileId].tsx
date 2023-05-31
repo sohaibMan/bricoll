@@ -7,6 +7,8 @@ import moment from "moment";
 import "react-quill/dist/quill.snow.css";
 import "../../styles/quill.css";
 
+export const revalidate = 3600
+
 import {
   MDBBreadcrumb,
   MDBBreadcrumbItem,
