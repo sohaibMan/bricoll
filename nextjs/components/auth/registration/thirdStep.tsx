@@ -60,9 +60,9 @@ export default function FirstStep() {
     function handleSubmit() {
         const freelancerRequiredFields = ["jobTitle", "company", "educationLevel"];
         const clientRequiredFields = [
-            "skillCategories",
+            "skillsCategories",
             "specificSkills",
-            "skillLevel",
+            "skillsLevel",
         ];
 
         const requiredFields =
