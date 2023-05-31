@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix package.json peer dependency problem">
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix typo in step 4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/find-work/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/app/signin/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Buttons/ReactionButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/base/ProposalForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectCardControlButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/FreelancerHome/Cards/ProjectItemCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/.env.local.example" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/.env.local.example" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +49,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Fixes&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -125,7 +121,10 @@
       <workItem from="1685475544567" duration="109000" />
       <workItem from="1685476502212" duration="507000" />
       <workItem from="1685477404221" duration="1238000" />
-      <workItem from="1685478826783" duration="676000" />
+      <workItem from="1685478826783" duration="939000" />
+      <workItem from="1685479876980" duration="1168000" />
+      <workItem from="1685483299686" duration="473000" />
+      <workItem from="1685484269085" duration="1265000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>
@@ -169,7 +168,21 @@
       <option name="project" value="LOCAL" />
       <updated>1685476998627</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="fix find work styles issues">
+      <created>1685479744238</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1685479744239</updated>
+    </task>
+    <task id="LOCAL-00009" summary="fix typo in step 4">
+      <created>1685481031960</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1685481031960</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -210,6 +223,8 @@
     <MESSAGE value="fix steps and move projects folder" />
     <MESSAGE value="restore sign in page from new Main branch" />
     <MESSAGE value="fix package.json peer dependency problem" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix package.json peer dependency problem" />
+    <MESSAGE value="fix find work styles issues" />
+    <MESSAGE value="fix typo in step 4" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix typo in step 4" />
   </component>
 </project>

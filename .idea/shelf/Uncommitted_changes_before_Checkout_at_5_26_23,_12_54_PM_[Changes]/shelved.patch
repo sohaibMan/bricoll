@@ -1,0 +1,927 @@
+Index: nextjs/app/signin/page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"use client\"\nimport {useState} from 'react';\nimport SigninForm from \"../../components/auth/signin\";\n\nconst SigninPage = () => {\n    // const router = useRouter();\n    const [isOpen, setIsOpen] = useState(false);\n\n    const toggleNavbar = () => {\n        setIsOpen(!isOpen);\n    };\n\n\n    // const handleSignin = (formData: any) => {\n    //     // todo call our api with the data\n    //     router.push('/register');\n    // };\n\n    return (\n        <>\n            <nav className=\"container mx-auto p-6\">\n                <div className=\"flex items-center justify-between\">\n                    <div>\n                        <p className=\"text-primary font-bold text-2xl px-6\">BRICOL</p>\n                    </div>\n                    <div className=\"md:hidden\">\n                        <button\n                            className=\"text-gray-500 hover:text-gray-600 focus:outline-none\"\n                            onClick={toggleNavbar}\n                        >\n                            <svg\n                                className=\"h-6 w-6\"\n                                fill=\"none\"\n                                strokeLinecap=\"round\"\n                                strokeLinejoin=\"round\"\n                                strokeWidth=\"2\"\n                                viewBox=\"0 0 24 24\"\n                            >\n                                <path d=\"M4 6h16M4 12h16M4 18h16\"></path>\n                            </svg>\n                        </button>\n                    </div>\n                </div>\n            </nav>\n            <div className=\"flex flex-col items-center mt-8\">\n                <SigninForm/>\n            </div>\n        </>\n    );\n};\n\nexport default SigninPage;\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/app/signin/page.tsx b/nextjs/app/signin/page.tsx
+--- a/nextjs/app/signin/page.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/app/signin/page.tsx	(date 1685101943821)
+@@ -11,10 +11,7 @@
+     };
+ 
+ 
+-    // const handleSignin = (formData: any) => {
+-    //     // todo call our api with the data
+-    //     router.push('/register');
+-    // };
++
+ 
+     return (
+         <>
+Index: nextjs/app/signup/page.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"use client\"\nimport {useState} from 'react';\nimport ProfileTypeStep from '../../components/auth/signup/ProfileTypeStep';\nimport SignupForm from \"../../components/auth/signup\";\n\nconst SignupPage = () => {\n    const [profileType, setProfileType] = useState('');\n    // const router = useRouter();\n    const [isOpen, setIsOpen] = useState(false);\n\n    const toggleNavbar = () => {\n        setIsOpen(!isOpen);\n    };\n\n\n    const handleProfileTypeSelect = (type: string) => {\n        setProfileType(type);\n    };\n\n    const handleSignup = (formData: any) => {\n        console.log(formData);\n        // todo call our api with the data\n        // router.push('/register');\n    };\n\n    return (\n        <>\n            <nav className=\"container mx-auto p-6\">\n                <div className=\"flex items-center justify-between\">\n                    <div>\n                        <p className=\"text-primary font-bold text-2xl px-6\">BRICOL</p>\n                    </div>\n                    <div className=\"md:hidden\">\n                        <button\n                            className=\"text-gray-500 hover:text-gray-600 focus:outline-none\"\n                            onClick={toggleNavbar}\n                        >\n                            <svg\n                                className=\"h-6 w-6\"\n                                fill=\"none\"\n                                strokeLinecap=\"round\"\n                                strokeLinejoin=\"round\"\n                                strokeWidth=\"2\"\n                                viewBox=\"0 0 24 24\"\n                            >\n                                <path d=\"M4 6h16M4 12h16M4 18h16\"></path>\n                            </svg>\n                        </button>\n                    </div>\n                </div>\n            </nav>\n            <div className=\"flex flex-col items-center mt-8\">\n                {profileType ? (\n                    <SignupForm profileType={profileType} onSubmit={handleSignup}/>\n                ) : (\n                    <ProfileTypeStep onSelect={handleProfileTypeSelect}/>\n                )}\n            </div>\n        </>\n    );\n};\n\nexport default SignupPage;\n\n\n// \"use client\"\n// import {FormEvent, useRef} from \"react\";\n// import {useRouter} from \"next/router\";\n\n// export default function () {\n\n//     // let userRole;\n//     const router = useRouter()\n//     // useEffect(() => {\n//     //     userRole = localStorage.getItem('userRole')\n//     //     if (!userRole) {\n//     //         router.push('/signup/chooseProfile')\n//     //     }\n//     // })\n\n//     const emailRef = useRef<HTMLInputElement>(null);\n//     const usernameRef = useRef<HTMLInputElement>(null);\n//     const passwordRef = useRef<HTMLInputElement>(null);\n//     const passwordConfirmRef = useRef<HTMLInputElement>(null);\n//     const submitHandler = (e: FormEvent) => {\n//         e.preventDefault();\n//         const userRole = localStorage.getItem('userRole')\n//         if (!userRole) {\n//             router.push('/signup/chooseProfile')\n//         }\n//         const email = emailRef.current?.value;\n//         const username = usernameRef.current?.value;\n//         const password = passwordRef.current?.value;\n//         const passwordConfirm = passwordConfirmRef.current?.value;\n//         console.log(email, username, password);\n//         // some validation\n//         fetch('/api/users/signup', {\n//                 method: 'POST',\n//                 body: JSON.stringify({\n//                     email,\n//                     username,\n//                     password,\n//                     passwordConfirm,\n//                     userRole\n//                 })\n//             }\n//         ).then(r => r.json()).then(data => {\n//                 console.log(data)\n//                 router.push(\"api/auth/signin?callbackUrl=/register\")\n//             }\n//         )\n//     }\n\n\n//     return (\n//         <form onSubmit={submitHandler}>\n//             <input ref={usernameRef} placeholder={\"enter your username\"} type={\"text\"}/>\n//             <input ref={emailRef} placeholder={\"enter your email\"} type={\"email\"}/>\n//             <input ref={passwordRef} placeholder={\"enter your password\"} type={\"password\"}/>\n//             <input ref={passwordConfirmRef} placeholder={\"enter your password again\"} type={\"password\"}/>\n//             <button type={\"submit\"}>Sign up</button>\n//         </form>\n//     );\n// }\n\n\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/app/signup/page.tsx b/nextjs/app/signup/page.tsx
+--- a/nextjs/app/signup/page.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/app/signup/page.tsx	(date 1685101944485)
+@@ -1,11 +1,11 @@
+ "use client"
+ import {useState} from 'react';
+ import ProfileTypeStep from '../../components/auth/signup/ProfileTypeStep';
+-import SignupForm from "../../components/auth/signup";
++import {useRouter} from "next/router";
++import SignupForm from "../../components/auth/signup/SignupForm";
+ 
+ const SignupPage = () => {
+     const [profileType, setProfileType] = useState('');
+-    // const router = useRouter();
+     const [isOpen, setIsOpen] = useState(false);
+ 
+     const toggleNavbar = () => {
+@@ -17,11 +17,7 @@
+         setProfileType(type);
+     };
+ 
+-    const handleSignup = (formData: any) => {
+-        console.log(formData);
+-        // todo call our api with the data
+-        // router.push('/register');
+-    };
++
+ 
+     return (
+         <>
+@@ -51,7 +47,7 @@
+             </nav>
+             <div className="flex flex-col items-center mt-8">
+                 {profileType ? (
+-                    <SignupForm profileType={profileType} onSubmit={handleSignup}/>
++                    <SignupForm profileType={profileType} />
+                 ) : (
+                     <ProfileTypeStep onSelect={handleProfileTypeSelect}/>
+                 )}
+Index: nextjs/components/auth/signin/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {FormEvent, useState} from \"react\";\nimport {toast} from \"react-hot-toast\";\nimport google from \"../../../public/google.png\";\nimport facebook from \"../../../public/facebook.png\";\nimport Image from \"next/image\";\nimport Link from \"next/link\";\nimport {signIn} from \"next-auth/react\";\n\n\nconst SignupForm = () => {\n    const [email, setEmail] = useState(\"\");\n    const [password, setPassword] = useState(\"\");\n    const [emailError, setEmailError] = useState(\"\");\n    const [passwordError, setPasswordError] = useState(\"\");\n    // const router = useRouter()\n\n    const handleSubmit = (e: FormEvent) => {\n        e.preventDefault();\n\n\n        if (!email || !password) {\n            return toast.error(\"Please fill in all fields\");\n        }\n        // tmp callback\n\n        signIn(\"credentials\", {\n            email, password, callbackUrl: \"/dashboard\"\n        })\n\n    };\n\n    const validateEmail = (value: string) => {\n        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n        if (!emailRegex.test(value)) {\n            setEmailError(\"Invalid email address\");\n        } else {\n            setEmailError(\"\");\n        }\n    };\n\n    const validatePassword = (value: string) => {\n        if (value.length < 8) {\n            setPasswordError(\"Password must be at least 8 characters long\");\n        } else {\n            setPasswordError(\"\");\n        }\n    };\n\n    return (\n        <div\n            className=\"flex flex-col items-center rounded-lg border border-newColor\"\n            style={{width: \"780px\", height: \"630px\"}}\n        >\n            <h2 className=\"text-3xl font-semibold text-second my-2 py-4 mb-4\">\n                Sign up to find work you love\n            </h2>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={google}\n                    alt=\"google\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn(\"google\")}\n                    className=\"w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >Continue with Google\n                </button>\n            </div>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={facebook}\n                    alt=\"facebook\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn(\"facebook\")}\n                    className=\"py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >\n                    Continue with Facebook\n                </button>\n            </div>\n            <p className=\"mx-4 my-2 text-gray-500 font-medium\">Or</p>\n            <form className=\"flex flex-col space-y-6 my-4\" onSubmit={handleSubmit}>\n                <input\n                    type=\"email\"\n                    placeholder=\"Email\"\n                    value={email}\n                    onChange={(e) => {\n                        setEmail(e.target.value);\n                        validateEmail(e.target.value);\n                    }}\n                    style={{width: \"500px\"}}\n                    className={`px-4 py-2 rounded border border-gray ${\n                        emailError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {emailError && <p className=\"text-red-500 text-sm\">{emailError}</p>}\n                <input\n                    type=\"password\"\n                    placeholder=\"Password (8 or more characters)\"\n                    value={password}\n                    onChange={(e) => {\n                        setPassword(e.target.value);\n                        validatePassword(e.target.value);\n                    }}\n                    className={`px-4 py-2 rounded border  border-gray ${\n                        passwordError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {passwordError && (\n                    <p className=\"text-red-500 text-sm\">{passwordError}</p>\n                )}\n                <button\n                    type=\"submit\"\n                    className=\"py-2 px-20 rounded-full font-medium text-base text-white bg-primary\"\n                >\n                    Log in\n                </button>\n                <p className=\"font-normal my-2 mx-32 text-second\">\n                    Don't have an account ?{\" \"}\n                    <Link href=\"/app/signup/page\" className=\"text-primary\">\n                        Sign Up\n                    </Link>\n                </p>\n                {/* </div> */}\n            </form>\n        </div>\n    );\n};\n\nexport default SignupForm;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/components/auth/signin/index.tsx b/nextjs/components/auth/signin/index.tsx
+--- a/nextjs/components/auth/signin/index.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/components/auth/signin/index.tsx	(date 1685101944145)
+@@ -118,7 +118,7 @@
+                 </button>
+                 <p className="font-normal my-2 mx-32 text-second">
+                     Don't have an account ?{" "}
+-                    <Link href="/app/signup/page" className="text-primary">
++                    <Link href="/signup" className="text-primary">
+                         Sign Up
+                     </Link>
+                 </p>
+Index: nextjs/components/auth/signup/index.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {FormEvent, useState} from \"react\";\nimport {toast} from \"react-hot-toast\";\nimport google from \"../../../public/google.png\";\nimport facebook from \"../../../public/facebook.png\";\nimport Image from \"next/image\";\nimport Link from \"next/link\";\nimport {signIn} from \"next-auth/react\";\n\ntype SignupFormProps = {\n    profileType: string;\n    onSubmit: (formData: any) => void;\n};\n\nconst SignupForm = ({profileType, onSubmit}: SignupFormProps) => {\n    const [username, setUsername] = useState(\"\");\n    const [email, setEmail] = useState(\"\");\n    const [password, setPassword] = useState(\"\");\n    const [passwordConfirm, setPasswordConfirm] = useState(\"\");\n    const [emailError, setEmailError] = useState(\"\");\n    const [passwordError, setPasswordError] = useState(\"\");\n    const [acceptTerms, setAcceptTerms] = useState(false);\n\n    const handleSubmit = (e: FormEvent) => {\n        e.preventDefault();\n        if (!acceptTerms) {\n            return toast.error(\"Please accept our terms first\")\n        }\n\n        if (!username || !email || !password || !passwordConfirm) {\n            // console.log('Please fill in all fields');\n\n            return toast.error(\"Please fill in all fields\");\n        }\n\n        if (password !== passwordConfirm) {\n            return toast.error(\"Password and password confirmation do not match\");\n        }\n\n        const formData = {\n            username,\n            email,\n            password,\n            profileType,\n        };\n\n        onSubmit(formData);\n    };\n\n    const validateEmail = (value: string) => {\n        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n        if (!emailRegex.test(value)) {\n            setEmailError(\"Invalid email address\");\n        } else {\n            setEmailError(\"\");\n        }\n    };\n\n    const validatePassword = (value: string) => {\n        if (value.length < 8) {\n            setPasswordError(\"Password must be at least 8 characters long\");\n        } else {\n            setPasswordError(\"\");\n        }\n    };\n\n    return (\n        <div\n            className=\"flex flex-col items-center rounded-lg border border-newColor\"\n            style={{width: \"780px\", height: \"630px\"}}\n        >\n            <h2 className=\"text-3xl font-semibold text-second my-2 py-4 mb-4\">\n                Sign up to find work you love\n            </h2>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={google}\n                    alt=\"google\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn(\"google\")}\n                    className=\"w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >Continue with Google\n                </button>\n            </div>\n            <div className=\"mt-4 flex space-x-4\">\n                <Image\n                    src={facebook}\n                    alt=\"facebook\"\n                    style={{width: \"35px\", height: \"35px\"}}\n                />\n                <button\n                    onClick={() => signIn(\"facebook\")}\n                    className=\"py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n                >\n                    Continue with Facebook\n                </button>\n            </div>\n            <p className=\"mx-4 my-2 text-gray-500 font-medium\">Or</p>\n            <form className=\"flex flex-col space-y-6 my-4\" onSubmit={handleSubmit}>\n                <input\n                    type=\"text\"\n                    placeholder=\"Username\"\n                    value={username}\n                    onChange={(e) => setUsername(e.target.value)}\n                    className=\"px-4 py-2 rounded border border-gray\"\n                />\n                <input\n                    type=\"email\"\n                    placeholder=\"Email\"\n                    value={email}\n                    onChange={(e) => {\n                        setEmail(e.target.value);\n                        validateEmail(e.target.value);\n                    }}\n                    style={{width: \"500px\"}}\n                    className={`px-4 py-2 rounded border border-gray ${\n                        emailError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {emailError && <p className=\"text-red-500 text-sm\">{emailError}</p>}\n                <input\n                    type=\"password\"\n                    placeholder=\"Password (8 or more characters)\"\n                    value={password}\n                    onChange={(e) => {\n                        setPassword(e.target.value);\n                        validatePassword(e.target.value);\n                    }}\n                    className={`px-4 py-2 rounded border  border-gray ${\n                        passwordError ? \"border-red-500\" : \"\"\n                    }`}\n                />\n                {passwordError && (\n                    <p className=\"text-red-500 text-sm\">{passwordError}</p>\n                )}\n                <input\n                    type=\"password\"\n                    placeholder=\"Confirm Password\"\n                    value={passwordConfirm}\n                    onChange={(e) => setPasswordConfirm(e.target.value)}\n                    className=\"px-4 py-2 rounded border  border-gray\"\n                />\n                <div className=\"flex space-x-2\" style={{width: \"500px\"}}>\n                    <input\n                        type=\"checkbox\"\n                        id=\"termsCheckbox\"\n                        className=\"rounded border border-gray-300\"\n                        onClick={() => {\n                            setAcceptTerms(prv => !prv)\n                        }}\n                    />\n                    <label\n                        htmlFor=\"termsCheckbox\"\n                        className=\"text-gray-500 font-normal text-sm\"\n                    >\n                        Yes, I understand and agree to the{\" \"}\n                        <Link href=\"/app/legalTerms\" className=\"text-primary\">\n                            Bricol Terms of Service\n                        </Link>\n                        , including the User Agreement and Privacy Policy\n                    </label>\n                </div>\n                {/* <div className=\"my-2\"> */}\n                <button\n                    type=\"submit\"\n                    className=\"py-2 px-20 rounded-full font-medium text-base text-white bg-primary\"\n                >\n                    Create my account\n                </button>\n                <p className=\"font-normal my-2 mx-32 text-second\">\n                    Already have an account ?{\" \"}\n                    <Link href=\"/app/signin/page\" className=\"text-primary\">\n                        Log In\n                    </Link>\n                </p>\n                {/* </div> */}\n            </form>\n        </div>\n    );\n};\n\nexport default SignupForm;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/components/auth/signup/index.tsx b/nextjs/components/auth/signup/index.tsx
+--- a/nextjs/components/auth/signup/index.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/components/auth/signup/index.tsx	(date 1685101372624)
+@@ -1,183 +1,194 @@
+-import {FormEvent, useState} from "react";
+-import {toast} from "react-hot-toast";
+-import google from "../../../public/google.png";
+-import facebook from "../../../public/facebook.png";
+-import Image from "next/image";
+-import Link from "next/link";
+-import {signIn} from "next-auth/react";
+-
+-type SignupFormProps = {
+-    profileType: string;
+-    onSubmit: (formData: any) => void;
+-};
+-
+-const SignupForm = ({profileType, onSubmit}: SignupFormProps) => {
+-    const [username, setUsername] = useState("");
+-    const [email, setEmail] = useState("");
+-    const [password, setPassword] = useState("");
+-    const [passwordConfirm, setPasswordConfirm] = useState("");
+-    const [emailError, setEmailError] = useState("");
+-    const [passwordError, setPasswordError] = useState("");
+-    const [acceptTerms, setAcceptTerms] = useState(false);
+-
+-    const handleSubmit = (e: FormEvent) => {
+-        e.preventDefault();
+-        if (!acceptTerms) {
+-            return toast.error("Please accept our terms first")
+-        }
+-
+-        if (!username || !email || !password || !passwordConfirm) {
+-            // console.log('Please fill in all fields');
+-
+-            return toast.error("Please fill in all fields");
+-        }
+-
+-        if (password !== passwordConfirm) {
+-            return toast.error("Password and password confirmation do not match");
+-        }
+-
+-        const formData = {
+-            username,
+-            email,
+-            password,
+-            profileType,
+-        };
+-
+-        onSubmit(formData);
+-    };
+-
+-    const validateEmail = (value: string) => {
+-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+-        if (!emailRegex.test(value)) {
+-            setEmailError("Invalid email address");
+-        } else {
+-            setEmailError("");
+-        }
+-    };
+-
+-    const validatePassword = (value: string) => {
+-        if (value.length < 8) {
+-            setPasswordError("Password must be at least 8 characters long");
+-        } else {
+-            setPasswordError("");
+-        }
+-    };
+-
+-    return (
+-        <div
+-            className="flex flex-col items-center rounded-lg border border-newColor"
+-            style={{width: "780px", height: "630px"}}
+-        >
+-            <h2 className="text-3xl font-semibold text-second my-2 py-4 mb-4">
+-                Sign up to find work you love
+-            </h2>
+-            <div className="mt-4 flex space-x-4">
+-                <Image
+-                    src={google}
+-                    alt="google"
+-                    style={{width: "35px", height: "35px"}}
+-                />
+-                <button
+-                    onClick={() => signIn("google")}
+-                    className="w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
+-                >Continue with Google
+-                </button>
+-            </div>
+-            <div className="mt-4 flex space-x-4">
+-                <Image
+-                    src={facebook}
+-                    alt="facebook"
+-                    style={{width: "35px", height: "35px"}}
+-                />
+-                <button
+-                    onClick={() => signIn("facebook")}
+-                    className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
+-                >
+-                    Continue with Facebook
+-                </button>
+-            </div>
+-            <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
+-            <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
+-                <input
+-                    type="text"
+-                    placeholder="Username"
+-                    value={username}
+-                    onChange={(e) => setUsername(e.target.value)}
+-                    className="px-4 py-2 rounded border border-gray"
+-                />
+-                <input
+-                    type="email"
+-                    placeholder="Email"
+-                    value={email}
+-                    onChange={(e) => {
+-                        setEmail(e.target.value);
+-                        validateEmail(e.target.value);
+-                    }}
+-                    style={{width: "500px"}}
+-                    className={`px-4 py-2 rounded border border-gray ${
+-                        emailError ? "border-red-500" : ""
+-                    }`}
+-                />
+-                {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
+-                <input
+-                    type="password"
+-                    placeholder="Password (8 or more characters)"
+-                    value={password}
+-                    onChange={(e) => {
+-                        setPassword(e.target.value);
+-                        validatePassword(e.target.value);
+-                    }}
+-                    className={`px-4 py-2 rounded border  border-gray ${
+-                        passwordError ? "border-red-500" : ""
+-                    }`}
+-                />
+-                {passwordError && (
+-                    <p className="text-red-500 text-sm">{passwordError}</p>
+-                )}
+-                <input
+-                    type="password"
+-                    placeholder="Confirm Password"
+-                    value={passwordConfirm}
+-                    onChange={(e) => setPasswordConfirm(e.target.value)}
+-                    className="px-4 py-2 rounded border  border-gray"
+-                />
+-                <div className="flex space-x-2" style={{width: "500px"}}>
+-                    <input
+-                        type="checkbox"
+-                        id="termsCheckbox"
+-                        className="rounded border border-gray-300"
+-                        onClick={() => {
+-                            setAcceptTerms(prv => !prv)
+-                        }}
+-                    />
+-                    <label
+-                        htmlFor="termsCheckbox"
+-                        className="text-gray-500 font-normal text-sm"
+-                    >
+-                        Yes, I understand and agree to the{" "}
+-                        <Link href="/app/legalTerms" className="text-primary">
+-                            Bricol Terms of Service
+-                        </Link>
+-                        , including the User Agreement and Privacy Policy
+-                    </label>
+-                </div>
+-                {/* <div className="my-2"> */}
+-                <button
+-                    type="submit"
+-                    className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
+-                >
+-                    Create my account
+-                </button>
+-                <p className="font-normal my-2 mx-32 text-second">
+-                    Already have an account ?{" "}
+-                    <Link href="/app/signin/page" className="text-primary">
+-                        Log In
+-                    </Link>
+-                </p>
+-                {/* </div> */}
+-            </form>
+-        </div>
+-    );
+-};
+-
+-export default SignupForm;
++// import {FormEvent, useState} from "react";
++// import {toast} from "react-hot-toast";
++// import google from "../../../public/google.png";
++// import facebook from "../../../public/facebook.png";
++// import Image from "next/image";
++// import Link from "next/link";
++// import {signIn} from "next-auth/react";
++//
++// export type LoginFormData = {
++//     username: string;
++//     email: string;
++//     password: string;
++//     passwordConfirm: string;
++//     profileType: string;
++//     acceptTerms: boolean;
++// }
++//
++// type SignupFormProps = {
++//     profileType: string;
++//     // onSubmit: (formData: LoginFormData) => void;
++// };
++//
++// const SignupForm = ({profileType}: SignupFormProps) => {
++//     const [username, setUsername] = useState("");
++//     const [email, setEmail] = useState("");
++//     const [password, setPassword] = useState("");
++//     const [passwordConfirm, setPasswordConfirm] = useState("");
++//     const [emailError, setEmailError] = useState("");
++//     const [passwordError, setPasswordError] = useState("");
++//     const [acceptTerms, setAcceptTerms] = useState(false);
++//
++//     const handleSubmit = (e: FormEvent) => {
++//         e.preventDefault();
++//         if (!acceptTerms) {
++//             return toast.error("Please accept our terms first")
++//         }
++//
++//         if (!username || !email || !password || !passwordConfirm) {
++//
++//
++//             return toast.error("Please fill in all fields");
++//         }
++//
++//         if (password !== passwordConfirm) {
++//             return toast.error("Password and password confirmation do not match");
++//         }
++//
++//         const formData: LoginFormData = {
++//             username,
++//             email,
++//             password,
++//             passwordConfirm,
++//             profileType,
++//             acceptTerms
++//         };
++//
++//         // onSubmit(formData);
++//     };
++//
++//     const validateEmail = (value: string) => {
++//         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
++//         if (!emailRegex.test(value)) {
++//             setEmailError("Invalid email address");
++//         } else {
++//             setEmailError("");
++//         }
++//     };
++//
++//     const validatePassword = (value: string) => {
++//         if (value.length < 8) {
++//             setPasswordError("Password must be at least 8 characters long");
++//         } else {
++//             setPasswordError("");
++//         }
++//     };
++//
++//     return (
++//         <div
++//             className="flex flex-col items-center rounded-lg border border-newColor"
++//             style={{width: "780px", height: "630px"}}
++//         >
++//             <h2 className="text-3xl font-semibold text-second my-2 py-4 mb-4">
++//                 Sign up to find work you love
++//             </h2>
++//             <div className="mt-4 flex space-x-4">
++//                 <Image
++//                     src={google}
++//                     alt="google"
++//                     style={{width: "35px", height: "35px"}}
++//                 />
++//                 <button
++//                     onClick={() => signIn("google")}
++//                     className="w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
++//                 >Continue with Google
++//                 </button>
++//             </div>
++//             <div className="mt-4 flex space-x-4">
++//                 <Image
++//                     src={facebook}
++//                     alt="facebook"
++//                     style={{width: "35px", height: "35px"}}
++//                 />
++//                 <button
++//                     onClick={() => signIn("facebook")}
++//                     className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
++//                 >
++//                     Continue with Facebook
++//                 </button>
++//             </div>
++//             <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
++//             <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
++//                 <input
++//                     type="text"
++//                     placeholder="Username"
++//                     value={username}
++//                     onChange={(e) => setUsername(e.target.value)}
++//                     className="px-4 py-2 rounded border border-gray"
++//                 />
++//                 <input
++//                     type="email"
++//                     placeholder="Email"
++//                     value={email}
++//                     onChange={(e) => {
++//                         setEmail(e.target.value);
++//                         validateEmail(e.target.value);
++//                     }}
++//                     style={{width: "500px"}}
++//                     className={`px-4 py-2 rounded border border-gray ${
++//                         emailError ? "border-red-500" : ""
++//                     }`}
++//                 />
++//                 {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
++//                 <input
++//                     type="password"
++//                     placeholder="Password (8 or more characters)"
++//                     value={password}
++//                     onChange={(e) => {
++//                         setPassword(e.target.value);
++//                         validatePassword(e.target.value);
++//                     }}
++//                     className={`px-4 py-2 rounded border  border-gray ${
++//                         passwordError ? "border-red-500" : ""
++//                     }`}
++//                 />
++//                 {passwordError && (
++//                     <p className="text-red-500 text-sm">{passwordError}</p>
++//                 )}
++//                 <input
++//                     type="password"
++//                     placeholder="Confirm Password"
++//                     value={passwordConfirm}
++//                     onChange={(e) => setPasswordConfirm(e.target.value)}
++//                     className="px-4 py-2 rounded border  border-gray"
++//                 />
++//                 <div className="flex space-x-2" style={{width: "500px"}}>
++//                     <input
++//                         type="checkbox"
++//                         id="termsCheckbox"
++//                         className="rounded border border-gray-300"
++//                         onClick={() => {
++//                             setAcceptTerms(prv => !prv)
++//                         }}
++//                     />
++//                     <label
++//                         htmlFor="termsCheckbox"
++//                         className="text-gray-500 font-normal text-sm"
++//                     >
++//                         Yes, I understand and agree to the{" "}
++//                         <Link href="/app/legalTerms" className="text-primary">
++//                             Bricol Terms of Service
++//                         </Link>
++//                         , including the User Agreement and Privacy Policy
++//                     </label>
++//                 </div>
++//                 {/* <div className="my-2"> */}
++//                 <button
++//                     type="submit"
++//                     className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
++//                 >
++//                     Create my account
++//                 </button>
++//                 <p className="font-normal my-2 mx-32 text-second">
++//                     Already have an account ?{" "}
++//                     <Link href="/signin" className="text-primary">
++//                         Log In
++//                     </Link>
++//                 </p>
++//                 {/* </div> */}
++//             </form>
++//         </div>
++//     );
++// };
++//
++// export default SignupForm;
+Index: nextjs/components/auth/signup/SignupForm.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { ChangeEvent, useState } from \"react\";\nimport { toast } from \"react-hot-toast\";\nimport google from \"../../../public/google.png\";\nimport Image from \"next/image\";\nimport Link from \"next/link\";\n// import { useRouter } from \"next/router\";\n\ntype SignupFormProps = {\n  profileType: string;\n  // onSubmit: (formData: any) => void;\n};\n\nconst SignupForm = ({ profileType }: SignupFormProps) => {\n  const [username, setUsername] = useState(\"\");\n  const [email, setEmail] = useState(\"\");\n  const [password, setPassword] = useState(\"\");\n  const [passwordConfirm, setPasswordConfirm] = useState(\"\");\n  const [emailError, setEmailError] = useState(\"\");\n  const [passwordError, setPasswordError] = useState(\"\");\n\n  async function handleSubmit (e: ChangeEvent<HTMLFormElement>) {\n\n    // const router = useRouter()\n    \n    e.preventDefault();\n\n    if (!username || !email || !password || !passwordConfirm) {\n      // console.log('Please fill in all fields');\n\n      return toast.error(\"Please fill in all fields\");\n    }\n\n    if (password !== passwordConfirm) {\n      return toast.error(\"Password and password confirmation do not match\");\n    }\n\n    const formData = {\n      username,\n      email,\n      password,\n      passwordConfirm,\n      userRole: profileType,\n    };\n\n    console.log(formData);\n\n\n    const response = await fetch(`/api/users/signup`, {\n        method: \"POST\",\n        headers: {\n            \"Content-Type\": \"application/json\",\n        },\n        body: JSON.stringify(formData),\n    });\n\n    // const res = await response.json();\n\n    // if (!response.ok) {\n    //     return toast.error(res.message);\n    // }\n\n    // alert(JSON.stringify(res));\n    toast.success(\" ✅\")\n\n    // router.push('/');\n\n    // onSubmit(formData);\n  };\n\n  const validateEmail = (value: string) => {\n    const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;\n    if (!emailRegex.test(value)) {\n      setEmailError(\"Invalid email address\");\n    } else {\n      setEmailError(\"\");\n    }\n  };\n\n  const validatePassword = (value: string) => {\n    if (value.length < 8) {\n      setPasswordError(\"Password must be at least 8 characters long\");\n    } else {\n      setPasswordError(\"\");\n    }\n  };\n\n  return (\n    <div\n      className=\"flex flex-col items-center rounded-lg border border-newColor\"\n      style={{ width: \"780px\", height: \"630px\" }}\n    >\n      <h2 className=\"text-3xl font-semibold text-second my-2 py-4 mb-4\">\n        Sign up to find work you love\n      </h2>\n      <div className=\"mt-4 flex space-x-4\">\n        <Image\n          src={google}\n          alt=\"google\"\n          style={{ width: \"35px\", height: \"35px\" }}\n        />\n        <Link\n          href=\"https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=932659660327-umv57v7u0698dfaqpanb05t927p66go8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=wf62W3NNLndEjY9sIFzeywBl0-yGakHfsLL8xgPcLPE&code_challenge=ngv7RLBjO35eHngZ0pw36GqGkhC8sHZNrA5dqXOU9YY&code_challenge_method=S256&service=lso&o2v=2&flowName=GeneralOAuthFlow\"\n          className=\"py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white\"\n        >\n          Continue with Google\n        </Link>\n      </div>\n      <p className=\"mx-4 my-2 text-gray-500 font-medium\">Or</p>\n      <form className=\"flex flex-col space-y-6 my-4\" onSubmit={handleSubmit}>\n        <input\n          type=\"text\"\n          placeholder=\"Username\"\n          value={username}\n          onChange={(e) => setUsername(e.target.value)}\n          className=\"px-4 py-2 rounded border border-gray\"\n        />\n        <input\n          type=\"email\"\n          placeholder=\"Email\"\n          value={email}\n          onChange={(e) => {\n            setEmail(e.target.value);\n            validateEmail(e.target.value);\n          }}\n          style={{ width: \"500px\" }}\n          className={`px-4 py-2 rounded border border-gray ${\n            emailError ? \"border-red-500\" : \"\"\n          }`}\n        />\n        {emailError && <p className=\"text-red-500 text-sm\">{emailError}</p>}\n        <input\n          type=\"password\"\n          placeholder=\"Password (8 or more characters)\"\n          value={password}\n          onChange={(e) => {\n            setPassword(e.target.value);\n            validatePassword(e.target.value);\n          }}\n          className={`px-4 py-2 rounded border  border-gray ${\n            passwordError ? \"border-red-500\" : \"\"\n          }`}\n        />\n        {passwordError && (\n          <p className=\"text-red-500 text-sm\">{passwordError}</p>\n        )}\n        <input\n          type=\"password\"\n          placeholder=\"Confirm Password\"\n          value={passwordConfirm}\n          onChange={(e) => setPasswordConfirm(e.target.value)}\n          className=\"px-4 py-2 rounded border  border-gray\"\n        />\n        <div className=\"flex space-x-2\" style={{ width: \"500px\" }}>\n          <input\n            type=\"checkbox\"\n            id=\"termsCheckbox\"\n            className=\"rounded border border-gray-300\"\n          />\n          <label\n            htmlFor=\"termsCheckbox\"\n            className=\"text-gray-500 font-normal text-sm\"\n          >\n            Yes, I understand and agree to the{\" \"}\n            <Link href=\"/legalTerms\" className=\"text-primary\">\n              Bricol Terms of Service\n            </Link>\n            , including the User Agreement and Privacy Policy\n          </label>\n        </div>\n        {/* <div className=\"my-2\"> */}\n        <button\n          type=\"submit\"\n          className=\"py-2 px-20 rounded-full font-medium text-base text-white bg-primary\"\n        >\n          Create my account\n        </button>\n        <p className=\"font-normal my-2 mx-32 text-second\">\n          Already have an account ?{\" \"}\n          <Link href=\"/api/auth/signin\" className=\"text-primary\">\n            Log In\n          </Link>\n        </p>\n        {/* </div> */}\n      </form>\n    </div>\n  );\n};\n\nexport default SignupForm;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/components/auth/signup/SignupForm.tsx b/nextjs/components/auth/signup/SignupForm.tsx
+--- a/nextjs/components/auth/signup/SignupForm.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/components/auth/signup/SignupForm.tsx	(date 1685101090032)
+@@ -1,189 +1,181 @@
+-import { ChangeEvent, useState } from "react";
+-import { toast } from "react-hot-toast";
++import {ChangeEvent, useState} from "react";
++import {toast} from "react-hot-toast";
+ import google from "../../../public/google.png";
+ import Image from "next/image";
+ import Link from "next/link";
+-// import { useRouter } from "next/router";
++
+ 
+ type SignupFormProps = {
+-  profileType: string;
+-  // onSubmit: (formData: any) => void;
++    profileType: string;
+ };
+ 
+-const SignupForm = ({ profileType }: SignupFormProps) => {
+-  const [username, setUsername] = useState("");
+-  const [email, setEmail] = useState("");
+-  const [password, setPassword] = useState("");
+-  const [passwordConfirm, setPasswordConfirm] = useState("");
+-  const [emailError, setEmailError] = useState("");
+-  const [passwordError, setPasswordError] = useState("");
++const SignupForm = ({profileType}: SignupFormProps) => {
++    const [username, setUsername] = useState("");
++    const [email, setEmail] = useState("");
++    const [password, setPassword] = useState("");
++    const [passwordConfirm, setPasswordConfirm] = useState("");
++    const [emailError, setEmailError] = useState("");
++    const [passwordError, setPasswordError] = useState("");
+ 
+-  async function handleSubmit (e: ChangeEvent<HTMLFormElement>) {
++    async function handleSubmit(e: ChangeEvent<HTMLFormElement>) {
+ 
+-    // const router = useRouter()
+-    
+-    e.preventDefault();
++        // const router = useRouter()
++
++        e.preventDefault();
+ 
+-    if (!username || !email || !password || !passwordConfirm) {
+-      // console.log('Please fill in all fields');
++        if (!username || !email || !password || !passwordConfirm) {
++            // console.log('Please fill in all fields');
+ 
+-      return toast.error("Please fill in all fields");
+-    }
++            return toast.error("Please fill in all fields");
++        }
+ 
+-    if (password !== passwordConfirm) {
+-      return toast.error("Password and password confirmation do not match");
+-    }
++        if (password !== passwordConfirm) {
++            return toast.error("Password and password confirmation do not match");
++        }
+ 
+-    const formData = {
+-      username,
+-      email,
+-      password,
+-      passwordConfirm,
+-      userRole: profileType,
+-    };
++        const formData = {
++            username,
++            email,
++            password,
++            passwordConfirm,
++            userRole: profileType,
++        };
+ 
+-    console.log(formData);
+-
+ 
+-    const response = await fetch(`/api/users/signup`, {
+-        method: "POST",
+-        headers: {
+-            "Content-Type": "application/json",
+-        },
+-        body: JSON.stringify(formData),
+-    });
++        const response = await fetch(`/api/users/signup`, {
++            method: "POST",
++            headers: {
++                "Content-Type": "application/json",
++            },
++            body: JSON.stringify(formData),
++        });
+ 
+-    // const res = await response.json();
++        const res = await response.json();
+ 
+-    // if (!response.ok) {
+-    //     return toast.error(res.message);
+-    // }
++        if (!response.ok) {
++            return toast.error(res.message);
++        }
+ 
+-    // alert(JSON.stringify(res));
+-    toast.success(" ✅")
+-
+-    // router.push('/');
+-
+-    // onSubmit(formData);
+-  };
++        toast.success(" ✅")
++    };
+ 
+-  const validateEmail = (value: string) => {
+-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+-    if (!emailRegex.test(value)) {
+-      setEmailError("Invalid email address");
+-    } else {
+-      setEmailError("");
+-    }
+-  };
++    const validateEmail = (value: string) => {
++        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
++        if (!emailRegex.test(value)) {
++            setEmailError("Invalid email address");
++        } else {
++            setEmailError("");
++        }
++    };
+ 
+-  const validatePassword = (value: string) => {
+-    if (value.length < 8) {
+-      setPasswordError("Password must be at least 8 characters long");
+-    } else {
+-      setPasswordError("");
+-    }
+-  };
++    const validatePassword = (value: string) => {
++        if (value.length < 8) {
++            setPasswordError("Password must be at least 8 characters long");
++        } else {
++            setPasswordError("");
++        }
++    };
+ 
+-  return (
+-    <div
+-      className="flex flex-col items-center rounded-lg border border-newColor"
+-      style={{ width: "780px", height: "630px" }}
+-    >
+-      <h2 className="text-3xl font-semibold text-second my-2 py-4 mb-4">
+-        Sign up to find work you love
+-      </h2>
+-      <div className="mt-4 flex space-x-4">
+-        <Image
+-          src={google}
+-          alt="google"
+-          style={{ width: "35px", height: "35px" }}
+-        />
+-        <Link
+-          href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=932659660327-umv57v7u0698dfaqpanb05t927p66go8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=wf62W3NNLndEjY9sIFzeywBl0-yGakHfsLL8xgPcLPE&code_challenge=ngv7RLBjO35eHngZ0pw36GqGkhC8sHZNrA5dqXOU9YY&code_challenge_method=S256&service=lso&o2v=2&flowName=GeneralOAuthFlow"
+-          className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
+-        >
+-          Continue with Google
+-        </Link>
+-      </div>
+-      <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
+-      <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
+-        <input
+-          type="text"
+-          placeholder="Username"
+-          value={username}
+-          onChange={(e) => setUsername(e.target.value)}
+-          className="px-4 py-2 rounded border border-gray"
+-        />
+-        <input
+-          type="email"
+-          placeholder="Email"
+-          value={email}
+-          onChange={(e) => {
+-            setEmail(e.target.value);
+-            validateEmail(e.target.value);
+-          }}
+-          style={{ width: "500px" }}
+-          className={`px-4 py-2 rounded border border-gray ${
+-            emailError ? "border-red-500" : ""
+-          }`}
+-        />
+-        {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
+-        <input
+-          type="password"
+-          placeholder="Password (8 or more characters)"
+-          value={password}
+-          onChange={(e) => {
+-            setPassword(e.target.value);
+-            validatePassword(e.target.value);
+-          }}
+-          className={`px-4 py-2 rounded border  border-gray ${
+-            passwordError ? "border-red-500" : ""
+-          }`}
+-        />
+-        {passwordError && (
+-          <p className="text-red-500 text-sm">{passwordError}</p>
+-        )}
+-        <input
+-          type="password"
+-          placeholder="Confirm Password"
+-          value={passwordConfirm}
+-          onChange={(e) => setPasswordConfirm(e.target.value)}
+-          className="px-4 py-2 rounded border  border-gray"
+-        />
+-        <div className="flex space-x-2" style={{ width: "500px" }}>
+-          <input
+-            type="checkbox"
+-            id="termsCheckbox"
+-            className="rounded border border-gray-300"
+-          />
+-          <label
+-            htmlFor="termsCheckbox"
+-            className="text-gray-500 font-normal text-sm"
+-          >
+-            Yes, I understand and agree to the{" "}
+-            <Link href="/legalTerms" className="text-primary">
+-              Bricol Terms of Service
+-            </Link>
+-            , including the User Agreement and Privacy Policy
+-          </label>
+-        </div>
+-        {/* <div className="my-2"> */}
+-        <button
+-          type="submit"
+-          className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
+-        >
+-          Create my account
+-        </button>
+-        <p className="font-normal my-2 mx-32 text-second">
+-          Already have an account ?{" "}
+-          <Link href="/api/auth/signin" className="text-primary">
+-            Log In
+-          </Link>
+-        </p>
+-        {/* </div> */}
+-      </form>
+-    </div>
+-  );
++    return (
++        <div
++            className="flex flex-col items-center rounded-lg border border-newColor"
++            style={{width: "780px", height: "630px"}}
++        >
++            <h2 className="text-3xl font-semibold text-second my-2 py-4 mb-4">
++                Sign up to find work you love
++            </h2>
++            <div className="mt-4 flex space-x-4">
++                <Image
++                    src={google}
++                    alt="google"
++                    style={{width: "35px", height: "35px"}}
++                />
++                <Link
++                    href="https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=932659660327-umv57v7u0698dfaqpanb05t927p66go8.apps.googleusercontent.com&scope=openid%20email%20profile&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fapi%2Fauth%2Fcallback%2Fgoogle&state=wf62W3NNLndEjY9sIFzeywBl0-yGakHfsLL8xgPcLPE&code_challenge=ngv7RLBjO35eHngZ0pw36GqGkhC8sHZNrA5dqXOU9YY&code_challenge_method=S256&service=lso&o2v=2&flowName=GeneralOAuthFlow"
++                    className="py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
++                >
++                    Continue with Google
++                </Link>
++            </div>
++            <p className="mx-4 my-2 text-gray-500 font-medium">Or</p>
++            <form className="flex flex-col space-y-6 my-4" onSubmit={handleSubmit}>
++                <input
++                    type="text"
++                    placeholder="Username"
++                    value={username}
++                    onChange={(e) => setUsername(e.target.value)}
++                    className="px-4 py-2 rounded border border-gray"
++                />
++                <input
++                    type="email"
++                    placeholder="Email"
++                    value={email}
++                    onChange={(e) => {
++                        setEmail(e.target.value);
++                        validateEmail(e.target.value);
++                    }}
++                    style={{width: "500px"}}
++                    className={`px-4 py-2 rounded border border-gray ${
++                        emailError ? "border-red-500" : ""
++                    }`}
++                />
++                {emailError && <p className="text-red-500 text-sm">{emailError}</p>}
++                <input
++                    type="password"
++                    placeholder="Password (8 or more characters)"
++                    value={password}
++                    onChange={(e) => {
++                        setPassword(e.target.value);
++                        validatePassword(e.target.value);
++                    }}
++                    className={`px-4 py-2 rounded border  border-gray ${
++                        passwordError ? "border-red-500" : ""
++                    }`}
++                />
++                {passwordError && (
++                    <p className="text-red-500 text-sm">{passwordError}</p>
++                )}
++                <input
++                    type="password"
++                    placeholder="Confirm Password"
++                    value={passwordConfirm}
++                    onChange={(e) => setPasswordConfirm(e.target.value)}
++                    className="px-4 py-2 rounded border  border-gray"
++                />
++                <div className="flex space-x-2" style={{width: "500px"}}>
++                    <input
++                        type="checkbox"
++                        id="termsCheckbox"
++                        className="rounded border border-gray-300"
++                    />
++                    <label
++                        htmlFor="termsCheckbox"
++                        className="text-gray-500 font-normal text-sm"
++                    >
++                        Yes, I understand and agree to the{" "}
++                        <Link href="/legalTerms" className="text-primary">
++                            Bricol Terms of Service
++                        </Link>
++                        , including the User Agreement and Privacy Policy
++                    </label>
++                </div>
++                {/* <div className="my-2"> */}
++                <button
++                    type="submit"
++                    className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"
++                >
++                    Create my account
++                </button>
++                <p className="font-normal my-2 mx-32 text-second">
++                    Already have an account ?{" "}
++                    <Link href="/signin" className="text-primary">
++                        Log In
++                    </Link>
++                </p>
++                {/* </div> */}
++            </form>
++        </div>
++    );
+ };
+ 
+ export default SignupForm;
+Index: nextjs/pages/api/users/signup.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import bcrypt from \"bcrypt\";\nimport validate from 'deep-email-validator'\nimport {NextApiRequest, NextApiResponse} from \"next\";\nimport db from \"../../../lib/mongodb\";\nimport {deleteCookie, setCookie} from \"cookies-next\";\nimport jwt from \"jsonwebtoken\";\nimport {sendEmailVerification} from \"../../../email/notifyEmail\";\nimport {redis} from \"../../../lib/redis\";\n\n\nconst userCollection = db.collection(\"users\");\n\n\nexport default async function handler(\n    req: NextApiRequest,\n    res: NextApiResponse\n) {\n    if (req.method !== \"POST\") {\n        return res.status(405).json({\n            message: \"Only POST requests are allowed\",\n        });\n    }\n\n    try {\n        // todos (validate users existence and create infos ...)\n\n        // const userRole = getCookie(\"userRole\", {req, res});\n        const parsedBody = JSON.parse(req.body);\n\n        console.log(\"req.body \", parsedBody);\n        \n\n        const email = parsedBody.email;\n        const username = parsedBody.username;\n        const password = parsedBody.password;\n        const userRole = parsedBody.userRole;\n        const passwordConfirm = parsedBody.passwordConfirm;\n\n        if (!userRole) {\n            //todo redirect to the choose role page\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"You are not allowed to create an account ! before choosing your role\",\n            });\n        }\n\n        // ? Verifying the incoming data from the users\n        if (!email || !username || !password || !passwordConfirm) {\n            // throw new Error('There are some fields not filling them yet!')\n            return res.status(400).json({message: \"Missing fields\"});\n        }\n        const emailValidation = await validate(email);\n        if (!emailValidation.valid) {\n            return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})\n        }\n\n        // ? Verifying if the password and passwordConfirm are the same\n        if (password !== passwordConfirm) {\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"The password and passwordConfirm are not the same !\",\n            });\n        }\n        if (password.length < 6) {\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"The password is too short !\",\n            });\n        }\n        if (username.length < 3) {\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"The username is too short !\",\n            });\n        }\n\n\n\n        // ? Checking if the users's email is existed in DB\n        // index scan (email) (the\n        const cachedUser = await redis.get(email);\n        if (cachedUser) {\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"This email is already exists !\",\n            });\n        }\n        const existedUser = await userCollection.findOne({email});\n        if (existedUser) {\n            return res.status(400).json({\n                status: \"failed\",\n                message: \"This email is already exists !\",\n            });\n        }\n\n\n        // ? Hashing the password\n        // if password is too short\n        // if username is too short\n        // if email already exists\n        const hashedPassword = await bcrypt.hash(password, 10);\n\n        // ? Inserting the users information into DB\n\n        const userData = {\n            email,\n            username,\n            hashedPassword,\n            userRole,\n            isCompleted: false,\n            created_at: new Date(),\n            isEmailVerified: false,\n        }\n\n        const user = await userCollection.insertOne(userData);\n        await redis.set(email, JSON.stringify(userData))\n\n\n        //* Generating Token\n        const token = jwt.sign({user_id: user.insertedId.toString()}, process.env.NEXTAUTH_SECRET, {\n            expiresIn: \"70d\",\n        });\n\n\n        // res.setHeader(\"jwt\", cookie.serialize(\"jwt\", token, cookieOptions));\n        setCookie(\"jwt\", token, {req, res, maxAge: 60 * 60 * 24});\n        deleteCookie(\"userRole\", {req, res})\n\n\n        // ? Sending the email to verify the account\n        const emailVerificationLink = `${process.env.NEXTAUTH_URL}/users/emailverification/${token}`;\n\n        await sendEmailVerification(email, username, emailVerificationLink);\n\n\n        // ? sending the success response\n        return res.status(201).json({\n            status: \"success\",\n            message: \"profile create successfully\"\n        });\n    } catch (error) {\n        res.status(500).json({\n            status: \"failed\",\n            message: error,\n        });\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/pages/api/users/signup.ts b/nextjs/pages/api/users/signup.ts
+--- a/nextjs/pages/api/users/signup.ts	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/pages/api/users/signup.ts	(date 1685101090016)
+@@ -22,22 +22,27 @@
+     }
+ 
+     try {
+-        // todos (validate users existence and create infos ...)
+ 
+-        // const userRole = getCookie("userRole", {req, res});
+         const parsedBody = JSON.parse(req.body);
+ 
+-        console.log("req.body ", parsedBody);
+-        
+ 
+         const email = parsedBody.email;
+         const username = parsedBody.username;
+         const password = parsedBody.password;
+         const userRole = parsedBody.userRole;
+         const passwordConfirm = parsedBody.passwordConfirm;
++        const acceptTerms = parsedBody.acceptTerms;
++
++
++        if (!acceptTerms) {
++            return res.status(400).json({
++                status: "failed",
++                message: "You have to accept the terms and conditions !",
++            });
++        }
++
+ 
+         if (!userRole) {
+-            //todo redirect to the choose role page
+             return res.status(400).json({
+                 status: "failed",
+                 message: "You are not allowed to create an account ! before choosing your role",
+@@ -46,10 +51,10 @@
+ 
+         // ? Verifying the incoming data from the users
+         if (!email || !username || !password || !passwordConfirm) {
+-            // throw new Error('There are some fields not filling them yet!')
+             return res.status(400).json({message: "Missing fields"});
+         }
+         const emailValidation = await validate(email);
++
+         if (!emailValidation.valid) {
+             return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
+         }
+@@ -75,9 +80,7 @@
+         }
+ 
+ 
+-
+         // ? Checking if the users's email is existed in DB
+-        // index scan (email) (the
+         const cachedUser = await redis.get(email);
+         if (cachedUser) {
+             return res.status(400).json({
+@@ -94,10 +97,6 @@
+         }
+ 
+ 
+-        // ? Hashing the password
+-        // if password is too short
+-        // if username is too short
+-        // if email already exists
+         const hashedPassword = await bcrypt.hash(password, 10);
+ 
+         // ? Inserting the users information into DB
+Index: nextjs/components/auth/signup/ProfileTypeStep.tsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {useState} from \"react\";\nimport Link from \"next/link\";\nimport Image, {StaticImageData} from \"next/image\";\nimport clientImage from \"../../../public/client.png\";\nimport freelancerImage from \"../../../public/freelancer.png\";\n\ntype CardProps = {\n    label: string;\n    imageSrc: StaticImageData;\n    selected: boolean;\n    onClick: () => void;\n};\n\nconst Card = ({label, imageSrc, selected, onClick}: CardProps) => {\n    return (\n        <div\n            className={`flex items-center justify-center flex-col p-4 rounded-lg cursor-pointer border ${\n                selected ? \"border-green-500\" : \"border-newColor\"\n            }`}\n            onClick={onClick}\n        >\n            <div\n                className={`w-6 h-6 rounded-full border border-gray-300 flex items-center justify-center my-2 ${\n                    selected ? \"bg-primary border-primary\" : \"\"\n                }`}\n            >\n                {selected && <div className=\"w-3 h-3 rounded-full bg-white\"/>}\n            </div>\n            <Image src={imageSrc} alt={label} className=\"w-8 h-8 mt-2 my-6\"/>\n            <span className=\"font-medium text-xl text-second\">{label}</span>\n        </div>\n    );\n};\n\ntype ProfileTypeStepProps = {\n    onSelect: (type: string) => void;\n};\n\nconst ProfileTypeStep = ({onSelect}: ProfileTypeStepProps) => {\n    const [profileType, setProfileType] = useState(\"\");\n    const [buttonDisabled, setButtonDisabled] = useState(true);\n\n    const handleProfileTypeSelect = (type: string) => {\n        setProfileType(type);\n        setButtonDisabled(false);\n    };\n\n    const handleNext = () => {\n        if (profileType) {\n            onSelect(profileType);\n        }\n    };\n\n  return (\n    <div\n      className=\"flex flex-col items-center my-14 rounded-lg border border-newColor\"\n      style={{ width: \"780px\", height: \"420px\" }}\n    >\n      <h2 className=\"text-3xl font-semibold text-second my-6 py-4 mb-4\">\n        Join as a client or freelancer\n      </h2>\n      <div className=\"flex space-x-4\">\n        <Card\n          label=\"I’m a freelancer, looking for work\"\n          imageSrc={freelancerImage}\n          selected={profileType === \"freelancer\"}\n          onClick={() => handleProfileTypeSelect(\"freelancer\")}\n        />\n        <Card\n          label=\"I’m a client, hiring for a project\"\n          imageSrc={clientImage}\n          selected={profileType === \"client\"}\n          onClick={() => handleProfileTypeSelect(\"client\")}\n        />\n      </div>\n      <div className=\"my-12\">\n      <button\n        className=\"py-2 px-20 rounded-full font-medium text-base text-white bg-primary\"\n        onClick={handleNext}\n        disabled={buttonDisabled}\n      >\n        {buttonDisabled\n          ? \"Create Account\"\n          : profileType === \"freelancer\"\n          ? \"Apply as a Freelancer\"\n          : \"Join as a Client\"}\n      </button>\n      <p className=\"font-normal my-2 mx-7 text-second\">\n        Already have an account ? <Link href=\"/api/auth/signin\" className=\"text-primary\">Log In</Link>\n      </p>\n      </div>\n    </div>\n  );\n};\n\nexport default ProfileTypeStep;\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/nextjs/components/auth/signup/ProfileTypeStep.tsx b/nextjs/components/auth/signup/ProfileTypeStep.tsx
+--- a/nextjs/components/auth/signup/ProfileTypeStep.tsx	(revision 1e149d255162de56c3323326619b5d26d1fe91fe)
++++ b/nextjs/components/auth/signup/ProfileTypeStep.tsx	(date 1685100569667)
+@@ -86,7 +86,7 @@
+           : "Join as a Client"}
+       </button>
+       <p className="font-normal my-2 mx-7 text-second">
+-        Already have an account ? <Link href="/api/auth/signin" className="text-primary">Log In</Link>
++        Already have an account ? <Link href="/signin" className="text-primary">Log In</Link>
+       </p>
+       </div>
+     </div>
