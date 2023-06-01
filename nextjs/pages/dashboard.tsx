@@ -12,6 +12,7 @@ export enum DashboardItems {
     CreateProject = "CreateProject",
     Proposals = "Proposals",
     Contracts = "Contracts",
+    SubmitReview = "SubmitReview",
     SubmissionReviews = "SubmissionReviews",
 }
 
@@ -131,9 +132,10 @@ export default function Index() {
             <LoadingDashboard/>
         );
 
-    if (!session.data?.user.userRole) return <h1>not auth</h1>;
-    const userRole = session.data?.user.userRole;
-    // todo :fix this mess
+    const userRole = session?.data?.user?.userRole;
+    if (!userRole) return <h1>not auth</h1>;
+
+
     if (error || !data || !data.Profile)
         return (
             <h1>

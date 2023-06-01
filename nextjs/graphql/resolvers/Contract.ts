@@ -154,7 +154,6 @@ export const ContractResolvers: Resolvers = {
                 project_id: new ObjectId(args.project_id),
                 proposal_id: new ObjectId(args.proposal_id),
                 status: Contract_Status.Pending,
-                // @ts-ignore
                 client_id: new ObjectId(context.user.id),
                 duration: args.duration,
                 price: args.price,

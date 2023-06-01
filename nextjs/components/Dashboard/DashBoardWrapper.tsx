@@ -2,7 +2,7 @@ import DashBoardProjects from "./MenuItems/ProjectsItem";
 import moment from "moment/moment";
 import {ContractsItem} from "./MenuItems/ContractsItem";
 import {DashboardItems} from "../../pages/dashboard";
-import {User, UserRole} from "../../types/resolvers";
+import {Submission_Review, User, UserRole} from "../../types/resolvers";
 import * as React from "react";
 import {createContext, Dispatch, useEffect, useState} from "react";
 import {MyProfileItem} from "./MenuItems/MyProfileItem";
@@ -14,17 +14,23 @@ import Box from "@mui/joy/Box";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import customTheme from "../../utils/theme";
 import {CssBaseline, CssVarsProvider} from "@mui/joy";
+import {SubmissionReviewsItem} from "./MenuItems/SubmissionReviewsItem";
 
 
-export const currentComponentContext = createContext({} as { currentComponent: DashboardItems ,setCurrentComponent:Dispatch<React.SetStateAction<DashboardItems>>})
+export const currentComponentContext = createContext({} as {
+    currentComponent: DashboardItems,
+    setCurrentComponent: Dispatch<React.SetStateAction<DashboardItems>>
+})
 export const DashBoardWrapper = ({userRole, profile,}: {
     userRole: UserRole,
-    profile: User,
+    profile: User
 }) => {
 
     const [projects, setProjects] = useState(profile.projects);
     const [proposals, setProposals] = useState(profile.proposals);
-    const [contracts, setContracts] = useState(profile.contracts);
+    const [contracts, setContracts] = useState(profile.contracts)
+    const [submissionReviews, setSubmissionReviews] = useState(() => profile.contracts.filter(contract => !!contract.submission_reviews).map(contract => contract.submission_reviews));
+
     const router = useRouter();
     const pathname = usePathname();
     // extract the search parameter to decide which is the default component to show from the url
@@ -120,6 +126,12 @@ export const DashBoardWrapper = ({userRole, profile,}: {
                                 )}
                             setContracts={setContracts}
                         />
+                        <SubmissionReviewsItem
+                            userRole={userRole}
+                            submissionReviews={submissionReviews.sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                )}
+                        />
+
                     </Box>
                 </Box>
             </CssVarsProvider>

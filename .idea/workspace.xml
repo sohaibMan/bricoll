@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="fix typo in step 4">
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/SubmissionReviewsItem.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Forms/base/SubmissionReview.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Forms/wrappers/CreateSubmissionReview.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/.env.local.example" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/.env.local.example" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/registration/thirdStep.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardWrapper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/DashBoardWrapper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Forms/base/ProjectForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Forms/base/ProjectForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/auth/signin/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/Contract.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +58,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Fixes&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/graph_theory_project&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Forms/wrappers&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -73,6 +81,10 @@
     </option>
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms/wrappers" />
+      <recent name="$PROJECT_DIR$/nextjs/components/Forms/base" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/nextjs/app/projects/[project_id]/proposals/create" />
       <recent name="$PROJECT_DIR$/nextjs/components/FreelancerHome" />
@@ -125,6 +137,8 @@
       <workItem from="1685479876980" duration="1168000" />
       <workItem from="1685483299686" duration="473000" />
       <workItem from="1685484269085" duration="1265000" />
+      <workItem from="1685542235686" duration="6153000" />
+      <workItem from="1685548442555" duration="711000" />
     </task>
     <task id="LOCAL-00002" summary="Add: Port Mapping to redis container&#10;Fix some types issue">
       <created>1685208419627</created>

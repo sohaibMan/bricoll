@@ -33,7 +33,7 @@ import logo from "../../public/logo.png";
 import Link from "next/link"
 import Badge from '@mui/joy/Badge';
 import {currentComponentContext} from "./DashBoardWrapper";
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function Sidebar(props: {
     user: User;
@@ -46,7 +46,6 @@ export default function Sidebar(props: {
     const [projectsTab, setProjectsTabsOpen] = useState(false);
     const [contractsTab, setContractsTabOpen] = useState(false);
     const {currentComponent, setCurrentComponent} = useContext(currentComponentContext)
-
 
 
     return (
@@ -332,43 +331,62 @@ export default function Sidebar(props: {
                                 <ExpandLessOutlinedIcon/>
                             )}
                         </ListItemButton>
-                        {contractsTab && (
-                            <ListItem nested>
-                                <ListItemButton
-                                    onClick={() =>
-                                        setCurrentComponent(DashboardItems.SubmissionReviews)
-                                    }
-                                    selected={
-                                        currentComponent === DashboardItems.SubmissionReviews
-                                    }
-                                    variant={
-                                        currentComponent === DashboardItems.SubmissionReviews
-                                            ? "soft"
-                                            : "plain"
-                                    }
-                                >
-                                    <ListItemDecorator>
-                                        {/* <i data-feather="layers" /> */}
-                                        <AddBoxOutlinedIcon/>
-                                    </ListItemDecorator>
-                                    <ListItemContent
-
-                                    >Submissions
-                                    </ListItemContent>
-                                </ListItemButton>
-                            </ListItem>
-                        )}
                     </ListItem>
+
+                    {contractsTab && props.userRole === UserRole.Freelancer &&
+                        <ListItem nested>
+                            <ListItemButton
+                                onClick={() =>
+                                    setCurrentComponent(DashboardItems.SubmitReview)
+                                }
+                                selected={
+                                    currentComponent === DashboardItems.SubmitReview
+                                }
+                                variant={
+                                    currentComponent === DashboardItems.SubmitReview
+                                        ? "soft"
+                                        : "plain"
+                                }
+                            >
+                                <ListItemDecorator>
+                                    {/* <i data-feather="layers" /> */}
+                                    <AddBoxOutlinedIcon/>
+                                </ListItemDecorator>
+                                <ListItemContent
+
+                                >Submit a Project
+                                </ListItemContent>
+                            </ListItemButton>
+                        </ListItem>
+                    }
+                    {contractsTab && (
+                        <ListItem nested>
+                            <ListItemButton
+                                onClick={() =>
+                                    setCurrentComponent(DashboardItems.SubmissionReviews)
+                                }
+                                selected={
+                                    currentComponent === DashboardItems.SubmissionReviews
+                                }
+                                variant={
+                                    currentComponent === DashboardItems.SubmissionReviews
+                                        ? "soft"
+                                        : "plain"
+                                }
+                            >
+                                <ListItemDecorator>
+                                    <AddShoppingCartIcon/>
+                                </ListItemDecorator>
+                                <ListItemContent
+
+                                >Submissions
+                                </ListItemContent>
+                            </ListItemButton>
+                        </ListItem>
+                    )}
+
                 </List>
-                {/*<ListItemButton>New users</ListItemButton>*/}
-                {/*</ListItem>*/}
-                {/*<ListItem>*/}
-                {/*<ListItemButton>Role & Permission</ListItemButton>*/}
-                {/*</ListItem>*/}
-                {/*</List>*/}
-                {/*</ListItem>*/}
-                {/*</List>*/}
-                {/*</ListItem>*/}
+
                 <List
                     sx={{
                         mt: "auto",
@@ -395,28 +413,7 @@ export default function Sidebar(props: {
                     </ListItem>
                 </List>
 
-                {/*<Card*/}
-                {/*    variant="soft"*/}
-                {/*    color="primary"*/}
-                {/*    invertedColors*/}
-                {/*    sx={{boxShadow: "none"}}*/}
-                {/*>*/}
-                {/*    <Typography fontSize="sm" fontWeight="lg" mb={0.5}>*/}
-                {/*        Used space*/}
-                {/*    </Typography>*/}
-                {/*    <Typography level="body3">*/}
-                {/*        Your team has used 80% of your available space. Need more?*/}
-                {/*    </Typography>*/}
-                {/*    <LinearProgress value={80} determinate sx={{my: 1.5}}/>*/}
-                {/*    <Box sx={{display: "flex", gap: 2}}>*/}
-                {/*        <Link fontSize="sm" component="button" fontWeight="lg">*/}
-                {/*            Upgrade plan*/}
-                {/*        </Link>*/}
-                {/*        <Link fontSize="sm" component="button">*/}
-                {/*            Dismiss*/}
-                {/*        </Link>*/}
-                {/*    </Box>*/}
-                {/*</Card>*/}
+
             </Box>
             <Divider/>
 
@@ -430,20 +427,14 @@ export default function Sidebar(props: {
                             {props.user.username}
                         </Typography>
                         <IconButton variant="plain" color="neutral">
-                            <LogoutIcon onClick={() => {
-                                signOut();
+                            <LogoutIcon onClick={async () => {
+                                await signOut();
                             }}/>
                         </IconButton>
                     </Stack>
                     <Typography level="body3"> {props.user.email}</Typography>
                 </Box>
-                {/*<Box sx={{minWidth: 0, flex: 1}}>*/}
-                {/*    <IconButton variant="plain" color="neutral">*/}
-                {/*        <LogoutIcon onClick={() => {*/}
-                {/*            signOut();*/}
-                {/*        }}/>*/}
-                {/*    </IconButton>*/}
-                {/*</Box>*/}
+
 
             </Stack>
         </Sheet>

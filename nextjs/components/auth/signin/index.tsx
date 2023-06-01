@@ -82,7 +82,7 @@ const SignupForm = () => {
                     style={{width: "35px", height: "35px"}}
                 />
                 <button
-                    onClick={() => signIn<>("google",)}
+                    onClick={() => signIn<>("google")}
                     className="w-full py-2 px-36 rounded-full font-medium text-base bg-blue-400 text-white"
                 >Continue with Google
                 </button>
