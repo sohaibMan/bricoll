@@ -1,11 +1,11 @@
 import * as React from "react";
-import DeleteChipWithLabel from "../Chip/DeleteChipWithLabel";
-import EditChipWithLabel from "../Chip/EditChipWithLabel";
+import DeleteChip from "../../Chip/DeleteChip";
+import EditChip from "../../Chip/EditChip";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {Project} from "../../types/resolvers";
+import {Project} from "../../../types/resolvers";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import EditProjectForm from "../Forms/wrappers/EditProjectForm";
+import EditProjectForm from "../../Forms/wrappers/EditProjectForm";
 
 
 export function EditDeleteProjectControlButtons(props: {
@@ -54,8 +54,8 @@ export function EditDeleteProjectControlButtons(props: {
 
 
     return <>
-        <EditChipWithLabel clickHandler={() => setOpen(true)}/>
-        <DeleteChipWithLabel actionHandler={deleteProjectHandler}/>
+        <EditChip clickHandler={() => setOpen(true)}/>
+        <DeleteChip actionHandler={deleteProjectHandler}/>
         <Modal open={open} onClose={() => setOpen(false)}>
             <ModalDialog
                 aria-labelledby="basic-modal-dialog-title"

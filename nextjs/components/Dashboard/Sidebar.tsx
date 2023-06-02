@@ -304,7 +304,8 @@ export default function Sidebar(props: {
 
                     {/*contracts*/}
 
-                    <ListItem nested>
+                    <ListItem>
+                    {/*<ListItem nested>*/}
                         <ListItemButton
                             onClick={() => {
                                 setContractsTabOpen(!contractsTab)
@@ -333,57 +334,57 @@ export default function Sidebar(props: {
                         </ListItemButton>
                     </ListItem>
 
-                    {contractsTab && props.userRole === UserRole.Freelancer &&
-                        <ListItem nested>
-                            <ListItemButton
-                                onClick={() =>
-                                    setCurrentComponent(DashboardItems.SubmitReview)
-                                }
-                                selected={
-                                    currentComponent === DashboardItems.SubmitReview
-                                }
-                                variant={
-                                    currentComponent === DashboardItems.SubmitReview
-                                        ? "soft"
-                                        : "plain"
-                                }
-                            >
-                                <ListItemDecorator>
-                                    {/* <i data-feather="layers" /> */}
-                                    <AddBoxOutlinedIcon/>
-                                </ListItemDecorator>
-                                <ListItemContent
+                    {/*{contractsTab && props.userRole === UserRole.Freelancer &&*/}
+                    {/*    <ListItem nested>*/}
+                    {/*        <ListItemButton*/}
+                    {/*            onClick={() =>*/}
+                    {/*                setCurrentComponent(DashboardItems.SubmitReview)*/}
+                    {/*            }*/}
+                    {/*            selected={*/}
+                    {/*                currentComponent === DashboardItems.SubmitReview*/}
+                    {/*            }*/}
+                    {/*            variant={*/}
+                    {/*                currentComponent === DashboardItems.SubmitReview*/}
+                    {/*                    ? "soft"*/}
+                    {/*                    : "plain"*/}
+                    {/*            }*/}
+                    {/*        >*/}
+                    {/*            <ListItemDecorator>*/}
+                    {/*                /!* <i data-feather="layers" /> *!/*/}
+                    {/*                <AddBoxOutlinedIcon/>*/}
+                    {/*            </ListItemDecorator>*/}
+                    {/*            <ListItemContent*/}
 
-                                >Submit a Project
-                                </ListItemContent>
-                            </ListItemButton>
-                        </ListItem>
-                    }
-                    {contractsTab && (
-                        <ListItem nested>
-                            <ListItemButton
-                                onClick={() =>
-                                    setCurrentComponent(DashboardItems.SubmissionReviews)
-                                }
-                                selected={
-                                    currentComponent === DashboardItems.SubmissionReviews
-                                }
-                                variant={
-                                    currentComponent === DashboardItems.SubmissionReviews
-                                        ? "soft"
-                                        : "plain"
-                                }
-                            >
-                                <ListItemDecorator>
-                                    <AddShoppingCartIcon/>
-                                </ListItemDecorator>
-                                <ListItemContent
+                    {/*            >Submit a Project*/}
+                    {/*            </ListItemContent>*/}
+                    {/*        </ListItemButton>*/}
+                    {/*    </ListItem>*/}
+                    {/*}*/}
+                    {/*{contractsTab && (*/}
+                    {/*    <ListItem nested>*/}
+                    {/*        <ListItemButton*/}
+                    {/*            onClick={() =>*/}
+                    {/*                setCurrentComponent(DashboardItems.SubmissionReviews)*/}
+                    {/*            }*/}
+                    {/*            selected={*/}
+                    {/*                currentComponent === DashboardItems.SubmissionReviews*/}
+                    {/*            }*/}
+                    {/*            variant={*/}
+                    {/*                currentComponent === DashboardItems.SubmissionReviews*/}
+                    {/*                    ? "soft"*/}
+                    {/*                    : "plain"*/}
+                    {/*            }*/}
+                    {/*        >*/}
+                    {/*            <ListItemDecorator>*/}
+                    {/*                <AddShoppingCartIcon/>*/}
+                    {/*            </ListItemDecorator>*/}
+                    {/*            <ListItemContent*/}
 
-                                >Submissions
-                                </ListItemContent>
-                            </ListItemButton>
-                        </ListItem>
-                    )}
+                    {/*            >Submissions*/}
+                    {/*            </ListItemContent>*/}
+                    {/*        </ListItemButton>*/}
+                    {/*    </ListItem>*/}
+                    {/*)}*/}
 
                 </List>
 

@@ -45,7 +45,7 @@ export type Contract = {
   project_id: Scalars['ObjectID']['output'];
   proposal_id: Scalars['ObjectID']['output'];
   status: Contract_Status;
-  submission_reviews: Array<Maybe<Submission_Review>>;
+  submission_reviews: Array<Submission_Review>;
   terms: Array<Scalars['String']['output']>;
   updated_at: Scalars['Date']['output'];
 };
@@ -672,7 +672,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['Contract_status'], ParentType, ContextType>;
-  submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
+  submission_reviews?: Resolver<Array<ResolversTypes['Submission_review']>, ParentType, ContextType>;
   terms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

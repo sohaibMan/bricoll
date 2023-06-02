@@ -1,11 +1,11 @@
 import * as React from "react";
-import EditChipWithLabel from "../Chip/EditChipWithLabel";
+import EditChip from "../../Chip/EditChip";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {Proposal, Proposal_Status} from "../../types/resolvers";
+import {Proposal, Proposal_Status} from "../../../types/resolvers";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import EditProposalForm from "../Forms/wrappers/EditProposalForm";
-import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
+import EditProposalForm from "../../Forms/wrappers/EditProposalForm";
+import CancelChip from "../../Chip/CancelChip";
 
 
 export function EditCancelProposalControlButtons(props: {
@@ -57,8 +57,8 @@ export function EditCancelProposalControlButtons(props: {
 
 
     return <>
-        <EditChipWithLabel clickHandler={() => setOpen(true)}/>
-        <CancelChipWithLabel actionHandler={cancelProposalHandler}/>
+        <EditChip clickHandler={() => setOpen(true)}/>
+        <CancelChip actionHandler={cancelProposalHandler}/>
         <Modal open={open} onClose={() => setOpen(false)}>
 
             <ModalDialog

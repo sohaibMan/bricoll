@@ -59,7 +59,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             }
 
             const session = await stripe.checkout.sessions.create({
-                client_reference_id:14321,
+                client_reference_id: 14321,
                 metadata: {
                     contract_id,
 
@@ -72,10 +72,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 ],
                 mode: 'payment',
-                success_url: `${req.headers.origin}/dashboard/?success=true`,
-                cancel_url: `${req.headers.origin}/dashboard/?canceled=true`,
+                success_url: `${req.headers.origin}/dashboard/?search=Contracts&&success=true`,
+                cancel_url: `${req.headers.origin}/dashboard/?search=Contracts&&canceled=true`,
             });
-
 
 
             res.redirect(303, session.url);

@@ -5,7 +5,7 @@ import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
 
-import {Submission_Review,} from "../../../types/resolvers";
+import {Contract, Submission_Review,} from "../../../types/resolvers";
 import Typography from '@mui/joy/Typography';
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import uploadFilesToBlob from "../../../utils/azure-storage-blob";
@@ -15,37 +15,40 @@ import "../../../styles/quill.css"
 import {RichTextEditor} from "../../Inputs/RichTextEditor";
 
 
-// note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE submission)
 export default function SubmissionReview(props: {
-    submissionReview?: Submission_Review,
-    REQUEST_SUBMISSION_REVIEW_MUTATION: DocumentNode,
-    onSubmissionReview: (submission: Submission_Review) => void
-    label?: string
+    // submissionReview?: Submission_Review,
+    currentContract: Contract,
+    REQUEST_PROJECT_SUBMISSION_REVIEW_MUTATION: DocumentNode,
+    onSubmissionReview: () => void
+    label: string
 }) {
 
 
-    const defaultState = {}
+    const defaultState = {
+        title: "",
+        description: "",
+    }
 
 
     const [description, setDescription] = useState<string>(defaultState.description);
+    const [mutationSubmission, {error, loading}] = useMutation(props.REQUEST_PROJECT_SUBMISSION_REVIEW_MUTATION);
+
+
     const [title, setTitle] = useState<string>(defaultState.title);
-
-
     const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        if (+title.length >= 100 || +title.length <= 5) return toast.error("Title should be between 5 and 1000")
-        if (+description.length >= 100000 || +description.length <= 5) return toast.error("Description should be between 5 and 100000")
+
+        if (title.length >= 100 || title.length <= 5) return toast.error("Title should be between 5 and 1000")
+        if (description.length >= 100000 || description.length <= 5) return toast.error("Description should be between 5 and 100000")
         if (uploadedFilesList && uploadedFilesList.length >= 6) return toast.error("You can't upload more than 5 files")
 
 
-        const [mutationSubmission, {error}] = useMutation(props.REQUEST_SUBMISSION_REVIEW_MUTATION);
-
         const mutationSubmissionArgs = {
-            contract_id: props.submissionReview?._id,
+            contract_id: props.currentContract._id,
             title,
             description,
-            attachments: [] // default value
+            attachments: []
         }
 
         if (uploadedFilesList) {
@@ -70,17 +73,17 @@ export default function SubmissionReview(props: {
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(({data}: any) => {
+            ).then(({data} ) => {
 
 
-                const editsubmission = {
-                    _id: props.submission?._id || data.createsubmission._id,
-                    price: +price,
-                    title,
-                    description,
-                } as unknown as Submission_Review;
+                // const editedsubmission = {
+                //     submission: props.submission?._id || data.createsubmission._id,
+                //     price: +price,
+                //     title,
+                //     description,
+                // } as unknown as Submission_Review;
 
-                props.onSubmissionReview(editsubmission)//to close the modal and update the ui
+                props.onSubmissionReview()//to close the modal and update the ui
 
             })
 
@@ -101,7 +104,7 @@ export default function SubmissionReview(props: {
 
 
                 <RichTextEditor defaultValue={description}
-                                onChange={(input) => setDescription(() => input)}
+                                onChange={(input) => setDescription(input)}
                                 theme="snow"/>
 
 

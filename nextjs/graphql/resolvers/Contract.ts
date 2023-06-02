@@ -202,10 +202,10 @@ export const ContractResolvers: Resolvers = {
 
         },
         requestProjectSubmissionReview: async (parent, args, context, _) => {
-            //     rules : only client can request a review
-            //     rules : the contract status must be completed
-            //     rules : the contract must be paid
-            // the freelancer can send multiple requests for review (for example multiple versions of the project)
+            //     rules: only freelancers can request a review
+            //     rules: the contract status must be completed
+            //     rules: the contract must be paid
+            //     the freelancer can send multiple requests for review (for example multiple versions of the project)
             freelancerMiddleware(context);
 
             const submission_review: Submission_Review = {
@@ -224,7 +224,6 @@ export const ContractResolvers: Resolvers = {
                     status: Contract_Status.Completed,
                 },
                 {
-                    // @ts-ignore
                     $push: {
                         submission_reviews: submission_review
                     }

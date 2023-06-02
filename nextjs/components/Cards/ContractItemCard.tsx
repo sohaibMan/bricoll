@@ -101,19 +101,9 @@ export default function ContractItemCard({contract, children}: {
                 </Stack>
 
 
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 2,
-                        maxWidth: 200,
-                    }}
-                >
-                    {children &&
-                        <Box sx={{display: 'flex', gap: 1}}>
-                            {children}
-                        </Box>}
-                </Box>
+
+
+                    {children}
 
 
             </Card>

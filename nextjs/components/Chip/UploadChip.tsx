@@ -1,9 +1,9 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Chip from '@mui/joy/Chip';
-import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 
-export default function CancelChipWithLabel({actionHandler, label = "cancel"}: {
+export default function UploadChip({actionHandler, label = "Accept"}: {
     actionHandler: () => void,
     label?: string
 }) {
@@ -12,9 +12,9 @@ export default function CancelChipWithLabel({actionHandler, label = "cancel"}: {
 
             <Chip
                 variant="soft"
-                color="danger"
+                color="success"
                 onClick={actionHandler}
-                endDecorator={<CancelOutlinedIcon color="disabled"/>}
+                endDecorator={<DriveFolderUploadIcon color="disabled"/>}
             >
                 {label}
             </Chip>

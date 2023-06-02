@@ -5,7 +5,7 @@ import {Project} from "../../types/resolvers";
 import {Stack} from "@mui/joy";
 import {SearchForm} from "../Forms/base/SearchForm";
 import ProjectItemCardSkeleton from "../Skeletons/ProjectItemCardSkeleton";
-import {ProjectCardControlButtons} from "../Buttons/ProjectCardControlButtons";
+import {ProjectCardControlButtons} from "../Buttons/DashBoardControlButtons/ProjectCardControlButtons";
 import moment from "moment/moment";
 
 const GET_PROJECTS = gql`

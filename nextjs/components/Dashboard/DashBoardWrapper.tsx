@@ -28,8 +28,7 @@ export const DashBoardWrapper = ({userRole, profile,}: {
 
     const [projects, setProjects] = useState(profile.projects);
     const [proposals, setProposals] = useState(profile.proposals);
-    const [contracts, setContracts] = useState(profile.contracts)
-    const [submissionReviews, setSubmissionReviews] = useState(() => profile.contracts.filter(contract => !!contract.submission_reviews).map(contract => contract.submission_reviews));
+    const [contracts, setContracts] = useState(profile.contracts);
 
     const router = useRouter();
     const pathname = usePathname();
@@ -125,11 +124,6 @@ export const DashBoardWrapper = ({userRole, profile,}: {
                                     moment(b.created_at).isAfter(a.created_at) ? 1 : -1
                                 )}
                             setContracts={setContracts}
-                        />
-                        <SubmissionReviewsItem
-                            userRole={userRole}
-                            submissionReviews={submissionReviews.sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                                )}
                         />
 
                     </Box>

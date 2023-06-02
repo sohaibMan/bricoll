@@ -2,7 +2,7 @@ import {Project} from "../../../types/resolvers";
 import {Dispatch, useContext, useState} from "react";
 import Stack from "@mui/joy/Stack";
 import ProjectItemCard from "../../Cards/ProjectItemCard";
-import {EditDeleteProjectControlButtons} from "../../Buttons/EditDeleteProjectControlButtons";
+import {EditDeleteProjectControlButtons} from "../../Buttons/DashBoardControlButtons/EditDeleteProjectControlButtons";
 import CreateProjectForm from "../../Forms/wrappers/CreateProjectForm";
 import {DashboardItems} from "../../../pages/dashboard";
 import Typography from "@mui/joy/Typography";
@@ -11,28 +11,16 @@ import Attachments from "../../ListItems/Attachments";
 import {Divider} from "@mui/joy";
 import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
 import Box from "@mui/joy/Box";
-import IconButton from "@mui/joy/IconButton";
-import {KeyboardArrowDown} from "@mui/icons-material";
 import {Collapse} from "@mantine/core";
 import {currentComponentContext} from "../DashBoardWrapper";
+import CollapseButton from "../../Buttons/CollapseButton";
+
 
 
 function ProjectItemsDetails(props: { project: Project }) {
     const [open, setOpen] = useState<boolean>(false)
     return <>
-        <Box>
-            <IconButton
-                variant="plain"
-                size="sm"
-                color="neutral"
-                onClick={() => setOpen(prv => !prv)}
-            >
-                <KeyboardArrowDown
-                    sx={{transform: open ? "initial" : "rotate(-90deg)"}}
-                />
-                Show details
-            </IconButton>
-        </Box>
+        <CollapseButton onClick={() => setOpen(prv => !prv)} open={open}/>
 
         <Collapse in={open}>
             <Divider sx={{margin: "10px"}}/>
@@ -83,7 +71,7 @@ export default function DashBoardProjects(props: {
 
                 <Stack spacing={2} sx={{width: "100%"}}>
 
-                    <Stack spacing={1} direction="row" >
+                    <Stack spacing={1} direction="row">
                         <EditDeleteProjectControlButtons project={project} setProjects={props.setProjects}/>
                     </Stack>
 
