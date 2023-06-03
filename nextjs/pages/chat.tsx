@@ -1,11 +1,15 @@
 import React from "react";
 import ChatComponent from "../components/ChatComponent";
+import { useRouter } from "next/router";
 
-const OtherPage: React.FC = () => {
+const chatPage: React.FC = () => {
+  const router = useRouter();
+  const { profileId, name, email } = router.query;
+
   const receiverUser = {
-    id: "646509dfc0edd86d1253454e",
-    name: "anas zn",
-    email: "anas.zn@example.com",
+    id: profileId,
+    name: name as string,
+    email: email as string,
   };
 
   return (
@@ -16,4 +20,4 @@ const OtherPage: React.FC = () => {
   );
 };
 
-export default OtherPage;
+export default chatPage;

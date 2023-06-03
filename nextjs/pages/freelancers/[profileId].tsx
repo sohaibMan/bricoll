@@ -4,10 +4,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import moment from "moment";
-import "react-quill/dist/quill.snow.css";
-import "../../styles/quill.css";
+import { useRouter } from "next/router";
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
 import {
   MDBBreadcrumb,
@@ -30,7 +29,6 @@ import { User } from "../../types/resolvers";
 import { client } from "../_app";
 // import db from "../../lib/mongodb";
 import CustomLink from "../../components/CustomLinks/CustomLink";
-import { RichTextEditor } from "../../components/Inputs/RichTextEditor";
 
 // const usersCollection = db.collection("users")
 
@@ -38,12 +36,15 @@ import { RichTextEditor } from "../../components/Inputs/RichTextEditor";
 // todo fix the static reviews count
 // todo hand user not found
 
+var freelancerId: string;
+
 export async function getServerSideProps({
   params,
 }: {
   params: { profileId: string };
 }) {
   const profileId = params.profileId;
+  freelancerId = profileId
 
   if (!profileId)
     return {
@@ -71,33 +72,10 @@ export async function getServerSideProps({
   };
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     paths
-
-//     const freelancers = await usersCollection.find({
-//             userRole: UserRole.Freelancer,
-//             isCompleted: true,
-//             // isEmailVerfied: true
-//         },
-//         {
-//             projection: {
-//                 _id: 1
-//             }
-//         }).toArray()
-//     const paths = freelancers.map(doc => ({
-//         params: {profileId: doc._id.toString()},
-//     }))
-// temporary don't generate any path
-// return {
-//     paths: [], fallback: "blocking"
-//
-// }
-//
-// }
-
 const USER_PROFILE = gql`
   query ProfileById($profileId: ObjectID!) {
     ProfileById(id: $profileId) {
+      _id  
       username
       email
       image
@@ -123,80 +101,14 @@ const USER_PROFILE = gql`
 `;
 
 export default function ProfilePage({ profile }: { profile: User }) {
-  // const {data: session} = useSession();
-  // const router = useRouter();
-  // const {profileId} = router.query;
+  const router = useRouter();
 
-  // TODO: -> Checking if the users is authenticated : but we can remove this condition
+  const handleChatClick = () => {
+    const { _id, username, email } = profile;
 
-  // TODO: -> Linking the reviews with projects to get the rating
-  // TODO: OPTIONAL -> Implementing the logic of followers
-
-  // console.log("profileId : ", profileId);
-
-  // if(!profileId) {
-  //   profileId = JSON.stringify(session?.users.id)
-  //   router.push(`/freelancers/${profileId}`)
-  // }
-
-  // console.log("session data : ", session?.users.id);
-  //
-  // const {loading, error, data} = useQuery<{ ProfileById: User }>(
-  //     USER_PROFILE,
-  //     {
-  //         variables: {
-  //             profileByIdId: profileId,
-  //         },
-  //     }
-  // );
-
-  // let averageRating;
-  //
-  // if (profile.reviews && profile.reviews?.length > 0) {
-  //     const totalRating = profile.reviews.reduce((sum, review) => {
-  //         if (review?.rating && sum + review?.rating) {
-  //             return sum + review?.rating;
-  //         }
-  //         return 0;
-  //     }, 0);
-  //     averageRating = totalRating / profile.reviews.length;
-  //     console.log("Average rating:", averageRating);
-  // } else {
-  //     console.log("No reviews found.");
-  // }
-
-  // console.log("userData: ", data);
-
-  // if (loading)
-  //     return (
-  //         <Box
-  //             sx={{
-  //                 justifyContent: "center",
-  //                 display: "flex",
-  //                 gap: 2,
-  //                 alignItems: "center",
-  //                 flexWrap: "wrap",
-  //                 marginTop: "350px",
-  //             }}
-  //         >
-  //             <Link
-  //                 component="button"
-  //                 variant="outlined"
-  //                 startDecorator={
-  //                     <CircularProgress
-  //                         variant="plain"
-  //                         thickness={2}
-  //                         sx={{"--CircularProgress-size": "16px"}}
-  //                     />
-  //                 }
-  //                 sx={{p: 1}}
-  //             >
-  //                 Loading...
-  //             </Link>
-  //         </Box>
-  //     );
-  //
-  // if (error) return <h1>{error.message}</h1>;
+    // Redirect to the chat page with profileId, name, and email as query parameters
+    router.push(`/chat?profileId=${_id}&name=${username}&email=${email}`);
+  };
 
   return (
     <section style={{ backgroundColor: "#eee" }}>
@@ -255,7 +167,7 @@ export default function ProfilePage({ profile }: { profile: User }) {
                 {/* <br /> */}
                 <div className="d-flex justify-content-center mb-2">
                   <MDBBtn style={{ backgroundColor: "#73bb44" }}>Follow</MDBBtn>
-                  <MDBBtn outline className="ms-1">
+                  <MDBBtn outline className="ms-1" onClick={handleChatClick}>
                     Message
                   </MDBBtn>
                 </div>
@@ -271,12 +183,7 @@ export default function ProfilePage({ profile }: { profile: User }) {
                   </div>
 
                   <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                    {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
-                    <RichTextEditor
-                      readOnly={true}
-                      value={profile.bio}
-                      theme="bubble"
-                    />
+                    <MDBCardText>{profile.bio}</MDBCardText>
                   </MDBListGroupItem>
                 </MDBListGroup>
               </MDBCardBody>
@@ -368,11 +275,6 @@ export default function ProfilePage({ profile }: { profile: User }) {
                   <MDBCol sm="3">
                     <MDBCardText>{profile.jobTitle}</MDBCardText>
                   </MDBCol>
-                  {/* <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      Johnatan Smith
-                    </MDBCardText>
-                  </MDBCol> */}
                 </MDBRow>
                 <hr />
               </MDBCardBody>
@@ -386,11 +288,6 @@ export default function ProfilePage({ profile }: { profile: User }) {
                   <MDBCol sm="3">
                     <MDBCardText>{profile.skills.join(" ")}</MDBCardText>
                   </MDBCol>
-                  {/* <MDBCol sm="9">
-                    <MDBCardText className="text-muted">
-                      Johnatan Smith
-                    </MDBCardText>
-                  </MDBCol> */}
                 </MDBRow>
                 <hr />
               </MDBCardBody>
@@ -448,77 +345,9 @@ export default function ProfilePage({ profile }: { profile: User }) {
                       </div>
                     );
                   })}
-
-                  {/* </MDBCol> */}
                 </MDBRow>
               </MDBCardBody>
             </MDBCard>
-
-            {/* <MDBRow>
-              <MDBCol md="6"> */}
-            {/* <MDBCard className="mb-4 mb-md-0">
-                  <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="font-italic me-1">assigment</span> Project Status</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Web Design</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar style={{backgroundColor: '#73bb44'}} width={80} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Website Markup</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>One Page</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Mobile Template</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Backend API</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-
-              <MDBCol md="6">
-                <MDBCard className="mb-4 mb-md-0">
-                  <MDBCardBody>
-                    <MDBCardText className="mb-4"><span className="text-primary font-italic me-1">assigment</span> Project Status</MDBCardText>
-                    <MDBCardText className="mb-1" style={{ fontSize: '.77rem' }}>Web Design</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={80} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Website Markup</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={72} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>One Page</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={89} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Mobile Template</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={55} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-
-                    <MDBCardText className="mt-4 mb-1" style={{ fontSize: '.77rem' }}>Backend API</MDBCardText>
-                    <MDBProgress className="rounded">
-                      <MDBProgressBar width={66} valuemin={0} valuemax={100} />
-                    </MDBProgress>
-                  </MDBCardBody>
-                </MDBCard> */}
-            {/* </MDBCol> */}
-            {/* </MDBRow> */}
           </MDBCol>
         </MDBRow>
       </MDBContainer>
