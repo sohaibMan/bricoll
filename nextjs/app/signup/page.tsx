@@ -4,6 +4,7 @@ import SignupForm from "../../components/auth/signup/SignupForm";
 import {useSession} from "next-auth/react";
 import {useRouter} from "next/navigation";
 import {UserRole} from "../../types/resolvers";
+import "../../styles/globals.css";
 
 const SignupPage = () => {
 

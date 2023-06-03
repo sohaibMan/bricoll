@@ -14,6 +14,7 @@ import {
   THEME_ID as MATERIAL_THEME_ID,
 } from "@mui/material/styles";
 import { CssVarsProvider as JoyCssVarsProvider } from "@mui/joy/styles";
+// import "../styles/globals.css";
 
 const materialTheme = materialExtendTheme();
 
@@ -48,9 +49,9 @@ export default function RootLayout({
               <MaterialCssVarsProvider
                 theme={{ [MATERIAL_THEME_ID]: materialTheme }}
               > */}
-                {/* <JoyCssVarsProvider> */}
-                {children}
-                {/* </JoyCssVarsProvider>
+            {/* <JoyCssVarsProvider> */}
+            {children}
+            {/* </JoyCssVarsProvider>
               </MaterialCssVarsProvider>
             </ThemeProvider> */}
           </ApolloProvider>

@@ -19,6 +19,7 @@ export default function ProjectItemCard({project, children}: {
         <Box sx={{minHeight: 150}}>
             <Card
                 variant="outlined"
+                color='success'
                 sx={(theme) => ({
                     width: "100%",
                     gridColumn: 'span 2',

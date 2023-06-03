@@ -4,6 +4,8 @@ import SigninForm from "../../components/auth/signin";
 import {useRouter} from "next/navigation";
 import {useSession} from "next-auth/react";
 import {UserRole} from "../../types/resolvers";
+import "../../styles/globals.css";
+
 
 const SigninPage = () => {
     // const router = useRouter();

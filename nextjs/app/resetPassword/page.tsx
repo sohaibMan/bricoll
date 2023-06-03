@@ -2,6 +2,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ResetPasswordForm from "../../components/auth/resetPassword";
+import "../../styles/globals.css";
 
 
 const resetPasswordPage = () => {

@@ -14,6 +14,7 @@ import { Avatar } from "@mui/material";
 import Link from "next/link";
 import { FooterSection } from "../../../components/FreelancerHome/Footer";
 import CustomLink from "../../../components/FreelancerHome/Cards/CustomLink";
+import "../../../styles/globals.css";
 
 const GET_PROJECT = gql`
   query Project($projectId: ObjectID!) {
@@ -137,3 +138,5 @@ export default function Project() {
     </>
   );
 }
+
+

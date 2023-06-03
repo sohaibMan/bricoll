@@ -236,9 +236,9 @@ const Page = () => {
           </Box>
         </Box>
       </Box>
-      <FooterSection />
+      {/* <FooterSection /> */}
     </>
   );
-};
+};  
 
 export default Page;

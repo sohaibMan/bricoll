@@ -14,6 +14,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import {Step, StepIconProps, StepLabel, Stepper} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import StepConnector, {stepConnectorClasses} from '@mui/material/StepConnector';
+import "../../styles/globals.css";
 
 
 const freelancerSteps = [{

@@ -3,6 +3,8 @@ import { useState } from "react";
 import ForgetPasswordForm from "../../components/auth/forgetPassword";
 import ResetPasswordSent from "../../components/auth/forgetPassword/ResetPasswordSent";
 import toast from "react-hot-toast";
+import "../../styles/globals.css";
+
 
 const forgetPasswordPage = () => {
   // const router = useRouter();
