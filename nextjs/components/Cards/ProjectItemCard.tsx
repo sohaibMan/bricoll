@@ -1,3 +1,4 @@
+import * as React from 'react';
 import {ReactNode} from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
@@ -6,14 +7,17 @@ import {Chip, Stack} from '@mui/joy';
 import {Project} from "../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
-
-import {RichTextEditor} from "../Inputs/RichTextEditor";
+import {ReadOnlyRichTextEditor} from "../RichTextEditor/ReadOnlyRichTextEditor";
+import CircularProgress from "@mui/joy/CircularProgress";
+import {useEditor} from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 
 export default function ProjectItemCard({project, children}: {
     project: Project,
     children: ReactNode
 }) {
+    const editor = useEditor({extensions: [StarterKit], content: project.description});
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -36,7 +40,7 @@ export default function ProjectItemCard({project, children}: {
                 })}
             >
 
-                {/*<Box sx={{width: "80%"}}>*/}
+
                 <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
@@ -54,7 +58,9 @@ export default function ProjectItemCard({project, children}: {
                     Posted {moment(project.created_at).fromNow()}
                 </Typography>
 
-                <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
+
+                {editor ? <ReadOnlyRichTextEditor editor={editor}/> :
+                    <CircularProgress/>}
 
                 <Stack
                     direction="row"
@@ -65,7 +71,7 @@ export default function ProjectItemCard({project, children}: {
                     {project.skills.map((skill, id) => <Chip key={id} color="primary" size="sm">{skill}</Chip>)}
                     <Chip size="sm" color="success">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
-
+                {children}
             </Card>
         </Box>
     );

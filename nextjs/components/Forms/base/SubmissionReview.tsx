@@ -5,14 +5,13 @@ import {Stack} from "@mui/joy";
 import Button from "@mui/joy/Button";
 import toast from "react-hot-toast";
 
-import {Contract, Submission_Review,} from "../../../types/resolvers";
+import {Contract,} from "../../../types/resolvers";
 import Typography from '@mui/joy/Typography';
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import uploadFilesToBlob from "../../../utils/azure-storage-blob";
-
-import 'react-quill/dist/quill.snow.css'
-import "../../../styles/quill.css"
-import {RichTextEditor} from "../../Inputs/RichTextEditor";
+import {useEditor} from "@tiptap/react";
+import {EditableRichTextEditor, RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import {Skeleton} from "@mui/material";
 
 
 export default function SubmissionReview(props: {
@@ -30,9 +29,11 @@ export default function SubmissionReview(props: {
     }
 
 
-    const [description, setDescription] = useState<string>(defaultState.description);
     const [mutationSubmission, {error, loading}] = useMutation(props.REQUEST_PROJECT_SUBMISSION_REVIEW_MUTATION);
-
+    const editor = useEditor({
+        extensions: RichTextEditorExtensions("Enter your description"),
+        content: defaultState.description
+    });
 
     const [title, setTitle] = useState<string>(defaultState.title);
     const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
@@ -40,14 +41,15 @@ export default function SubmissionReview(props: {
         e.preventDefault();
 
         if (title.length >= 100 || title.length <= 5) return toast.error("Title should be between 5 and 1000")
-        if (description.length >= 100000 || description.length <= 5) return toast.error("Description should be between 5 and 100000")
+        const editorLength = editor?.storage?.characterCount?.characters() || 0;
+        if (editorLength <= 5) return toast.error("Description should be between 5 and 100000")
         if (uploadedFilesList && uploadedFilesList.length >= 6) return toast.error("You can't upload more than 5 files")
 
 
         const mutationSubmissionArgs = {
             contract_id: props.currentContract._id,
             title,
-            description,
+            description: JSON.stringify(editor?.getJSON()),
             attachments: []
         }
 
@@ -73,7 +75,7 @@ export default function SubmissionReview(props: {
                     success: <b>Form submitted!</b>,
                     error: <b>{error?.message}</b>,
                 }
-            ).then(({data} ) => {
+            ).then(({}) => {
 
 
                 // const editedsubmission = {
@@ -103,9 +105,8 @@ export default function SubmissionReview(props: {
                           onChange={(e) => setTitle(() => e.target.value)} minRows={2}/>
 
 
-                <RichTextEditor defaultValue={description}
-                                onChange={(input) => setDescription(input)}
-                                theme="snow"/>
+                {editor ? <EditableRichTextEditor editor={editor}/> :
+                    <Skeleton variant="rounded" width={"100%"} height={200}/>}
 
 
                 <Stack spacing={1} direction="row" justifyContent="space-between">

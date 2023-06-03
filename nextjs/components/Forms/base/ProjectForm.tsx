@@ -1,4 +1,5 @@
 import {DocumentNode, useMutation} from "@apollo/client";
+import * as React from "react";
 import {FormEvent, useRef, useState} from "react";
 import Textarea from '@mui/joy/Textarea';
 import {Divider, Stack} from "@mui/joy";
@@ -21,9 +22,9 @@ import Typography from '@mui/joy/Typography';
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import uploadFilesToBlob from "../../../utils/azure-storage-blob";
 
-import 'react-quill/dist/quill.snow.css'
-import "../../../styles/quill.css"
-import {RichTextEditor} from "../../Inputs/RichTextEditor";
+import {useEditor} from "@tiptap/react";
+import {EditableRichTextEditor, RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 
 // note : THIS PAGE IS USED IN 2 PLACES(EDIT AND CREATE PROJECT)
@@ -49,17 +50,17 @@ export default function ProjectForm(props: {
 
     const [price, setPrice] = useState<string>(defaultState.price.toString());
     const [duration, setDuration] = useState<string>(defaultState.duration.toString());
-    const [description, setDescription] = useState<string>(defaultState.description);
     const [skills, setSkills] = useState<string[]>(defaultState.skills);
     const [title, setTitle] = useState<string>(defaultState.title);
     const categoriesAutocompleteRef = useRef<HTMLInputElement | null>(null);
     const levelOfExpertiseAutoComplete = useRef<HTMLInputElement | null>(null);
     const projectSizeAutocompleteRef = useRef<HTMLInputElement | null>(null);
-
     const [mutationProject, {loading, error}] = useMutation(props.PROJECT_MUTATION)
-
-
     const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
+    const editor = useEditor({
+        extensions: RichTextEditorExtensions("Enter your description"),
+        content: defaultState.description
+    });
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         if (+title.length >= 100 || +title.length <= 5) return toast.error("Title should be between 5 and 1000")
@@ -69,7 +70,8 @@ export default function ProjectForm(props: {
         if (!levelOfExpertiseAutoComplete.current?.value) return toast.error("Please select a level of expertise")
         if (!projectSizeAutocompleteRef.current?.value) return toast.error("Please select a project size")
         if (skills.length > 5) return toast.error("Max 5 skills")
-        if (+description.length >= 100000 || +description.length <= 5) return toast.error("Description should be between 5 and 100000")
+        const editorLength = editor?.storage?.characterCount?.characters() || 0;
+        if (editorLength <= 5) return toast.error("Description should be between 5 and 100000")
         if (uploadedFilesList && uploadedFilesList.length >= 6) return toast.error("You can't upload more than 5 files")
 
 
@@ -80,15 +82,15 @@ export default function ProjectForm(props: {
         }
 
 
-        const mutationProjectArgs: any = {
+        const mutationProjectArgs= {
             id: props.project?._id,
             price: +price,
             title,
-            description,
+            description:JSON.stringify(editor?.getJSON()),
             skills,
             projectScope,
             category: categoriesAutocompleteRef.current?.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum,
-            attachments: [] // default value
+            attachments: [] as any[] // default value
         }
 
         if (uploadedFilesList) {
@@ -120,7 +122,7 @@ export default function ProjectForm(props: {
                     _id: props.project?._id || data.createProject._id,
                     price: +price,
                     title,
-                    description,
+                    description:mutationProjectArg.description,
                     skills,
                     projectScope,
                     category: categoriesAutocompleteRef.current?.value,
@@ -173,10 +175,8 @@ export default function ProjectForm(props: {
                 {/*</Stack>*/}
                 <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
-
-                <RichTextEditor defaultValue={description}
-                                onChange={(input) => setDescription(() => input)}
-                                theme="snow"/>
+                {editor ? <EditableRichTextEditor editor={editor}/> :
+                    <CircularProgress  height={200}/>}
 
 
                 {/*<Stack direction={"row"} alignItems={"center"}>*/}

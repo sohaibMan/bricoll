@@ -6,14 +6,16 @@ import {Chip, Stack} from '@mui/joy';
 import {Project} from "../../../types/resolvers";
 import moment from "moment";
 import CustomLink from "../../CustomLinks/CustomLink";
-
-import {RichTextEditor} from "../../Inputs/RichTextEditor";
+import {useEditor} from "@tiptap/react";
+import {Skeleton} from "@mui/material";
+import {ReadOnlyRichTextEditor} from "../../RichTextEditor/ReadOnlyRichTextEditor";
 
 
 export default function ProjectItemCard({project, children}: {
     project: Project,
     children: ReactNode
 }) {
+    const editor = useEditor({content: project.description})
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -54,7 +56,8 @@ export default function ProjectItemCard({project, children}: {
                     Posted {moment(project.created_at).fromNow()}
                 </Typography>
 
-                <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
+                {editor ? <ReadOnlyRichTextEditor editor={editor}/> :
+                    <Skeleton variant="rounded" width={"100%"} height={100}/>}
 
                 <Stack
                     direction="row"
@@ -62,8 +65,10 @@ export default function ProjectItemCard({project, children}: {
                     spacing={1}
 
                 >
-                    {project.skills.map((skill, id) => <Chip key={id} sx={{backgroundColor: "#eee", color: "#4C4444"}} size="sm">{skill}</Chip>)}
-                    <Chip sx={{backgroundColor: "#73bb44", color: "#fff"}} size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
+                    {project.skills.map((skill, id) => <Chip key={id} sx={{backgroundColor: "#eee", color: "#4C4444"}}
+                                                             size="sm">{skill}</Chip>)}
+                    <Chip sx={{backgroundColor: "#73bb44", color: "#fff"}}
+                          size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
 
                 {children}
