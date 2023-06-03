@@ -74,7 +74,7 @@ export default async function handler(
         const cachedUser = await redis.get(email);
 
 
-        if (JSON.parse(cachedUser)) {
+        if (cachedUser && JSON.parse(cachedUser)) {
             return res.status(400).json({
                 status: "failed",
                 message: "This email is already exists !",

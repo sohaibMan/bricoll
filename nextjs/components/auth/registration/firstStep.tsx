@@ -1,6 +1,6 @@
 "use client"
 import React, {useContext} from "react";
-import {multiStepContext} from "./stepContext";
+import {multiStepContext, UserData} from "./stepContext";
 import {Divider, Stack} from "@mui/joy";
 import Input from "@mui/joy/Input";
 import CountrySelector from "../../AutoCompletes/CountrySelector";
@@ -8,8 +8,9 @@ import "react-tagsinput/react-tagsinput.css";
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import {toast} from "react-hot-toast";
 import dayjs from "dayjs";
-import {RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import {EditableRichTextEditor, RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
 import {useEditor} from "@tiptap/react";
+import {Skeleton} from "@mui/material";
 
 
 export default function FirstStep() {
@@ -34,7 +35,7 @@ export default function FirstStep() {
         ];
 
 
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field) => !userData[field as keyof UserData]);
 
 
         if (missingFields.length) return toast.error(
@@ -109,7 +110,7 @@ export default function FirstStep() {
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
                             disableFuture
-                            defaultValue={userData.birthday && dayjs(userData.birthday)}
+                            defaultValue={userData.birthday && {$d: dayjs(userData.birthday)}}
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {

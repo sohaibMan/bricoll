@@ -2,7 +2,7 @@ import DashBoardProjects from "./MenuItems/ProjectsItem";
 import moment from "moment/moment";
 import {ContractsItem} from "./MenuItems/ContractsItem";
 import {DashboardItems} from "../../pages/dashboard";
-import {Submission_Review, User, UserRole} from "../../types/resolvers";
+import {User, UserRole} from "../../types/resolvers";
 import * as React from "react";
 import {createContext, Dispatch, useEffect, useState} from "react";
 import {MyProfileItem} from "./MenuItems/MyProfileItem";
@@ -14,7 +14,6 @@ import Box from "@mui/joy/Box";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import customTheme from "../../utils/theme";
 import {CssBaseline, CssVarsProvider} from "@mui/joy";
-import {SubmissionReviewsItem} from "./MenuItems/SubmissionReviewsItem";
 
 
 export const currentComponentContext = createContext({} as {

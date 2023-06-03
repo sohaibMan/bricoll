@@ -21,7 +21,7 @@ export default function FirstStep() {
         userData.skillsLevel || [] as string[]);
 
 
-    const handleSpecificSkills = (skill: string) => {
+    const handleSpecificSkills = (skill: string[]) => {
         setSpecificSkills((prv) => [...prv, skill]);
         userData.specificSkills = specificSkills;
     };
@@ -133,7 +133,7 @@ export default function FirstStep() {
                 <>
                     <div style={{marginBottom: "10px"}}>
                         <Autocomplete
-                            defaultValue={userData["skillCategories"]}
+                            defaultValue={userData["skillsCategories"]}
                             placeholder={"Choose desired categories"}
                             multiple
                             id="tags-filled"
@@ -172,7 +172,7 @@ export default function FirstStep() {
                             options={popularSpecificSkills}
                             defaultValue={specificSkills}
                             freeSolo
-                            onChange={(event, newSkills: string) => {
+                            onChange={(event, newSkills) => {
                                 handleSpecificSkills(newSkills);
                             }}
                             renderTags={(value: string[], getTagProps) =>

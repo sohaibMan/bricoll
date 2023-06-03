@@ -40,7 +40,7 @@ export default function SecondStep() {
                 : clientRequiredFields;
 
         // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field) => !userData[field as keyof UserData]);
         console.log(userData)
         if (missingFields.length) {
             toast.error(

@@ -70,7 +70,7 @@ function ContractItemDetails(props: {
 
     const [submissions, setSubmissions] = useState(() => props.submissions)
 
-    const cancelHandler = async (submissionReviewId) => {
+    const cancelHandler = async (submissionReviewId:string) => {
 
 
         const confirmation = confirm("Are you sure you want to cancel this request?");
@@ -98,7 +98,7 @@ function ContractItemDetails(props: {
 
 
     }
-    const declineHandler = async (submissionReviewId) => {
+    const declineHandler = async (submissionReviewId:string) => {
 
 
         const confirmation = confirm("Are you sure you want to decline this request?");
@@ -126,7 +126,7 @@ function ContractItemDetails(props: {
 
 
     }
-    const acceptHandler = async (submissionReviewId) => {
+    const acceptHandler = async (submissionReviewId:string) => {
 
 
         const confirmation = confirm("Are you sure you want to accept this request?");
@@ -157,6 +157,7 @@ function ContractItemDetails(props: {
             if (contract._id === props.current_contract._id) {
                 return {...contract, status: Contract_Status.Paid}
             }
+            return contract;
         }))
 
 

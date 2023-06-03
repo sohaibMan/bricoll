@@ -2,7 +2,7 @@ import {ObjectId} from "mongodb";
 import db from "../lib/mongodb";
 import {User} from "../types/resolvers";
 
-async function getUserById(user_id: ObjectId) {
+async function getUserById(user_id: string) {
     const usersCollection = db.collection("users")
     // todo (redis) : caching the data
     return await usersCollection.findOne({_id: new ObjectId(user_id)}) as unknown as User;

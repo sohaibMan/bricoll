@@ -50,7 +50,7 @@ export default function SubmissionReview(props: {
             contract_id: props.currentContract._id,
             title,
             description: JSON.stringify(editor?.getJSON()),
-            attachments: []
+            attachments: [] as {url: string, name: string, type: string}[]
         }
 
         if (uploadedFilesList) {

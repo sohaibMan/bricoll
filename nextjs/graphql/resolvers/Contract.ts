@@ -71,7 +71,7 @@ export const ContractResolvers: Resolvers = {
             if (!updatedContract.value) throw new Error("The Contract no longer exists");
             //return the value (the updated proposals)
             // send email to the client
-            await onAcceptContract(updatedContract.value.client_id as ObjectId)
+            await onAcceptContract(updatedContract.value.client_id.toString())
             return updatedContract.value as unknown as Contract;
 
         },
@@ -91,7 +91,7 @@ export const ContractResolvers: Resolvers = {
             });
             if (updatedContract.lastErrorObject?.updatedExisting === false || updatedContract.value === null) throw new Error("The updatedContract no longer exists");
             //return the value (the updated proposals)
-            await onCancelContract(updatedContract.value.client_id as ObjectId)
+            await onCancelContract(updatedContract.value.client_id.toString())
             return updatedContract.value as unknown as Contract;
         },
         createContract: async (parent, args, context, _) => {
@@ -154,6 +154,7 @@ export const ContractResolvers: Resolvers = {
                 project_id: new ObjectId(args.project_id),
                 proposal_id: new ObjectId(args.proposal_id),
                 status: Contract_Status.Pending,
+                //@ts-ignore
                 client_id: new ObjectId(context.user.id),
                 duration: args.duration,
                 price: args.price,
@@ -224,6 +225,7 @@ export const ContractResolvers: Resolvers = {
                     status: Contract_Status.Completed,
                 },
                 {
+                    // @ts-ignore
                     $push: {
                         submission_reviews: submission_review
                     }
@@ -237,7 +239,7 @@ export const ContractResolvers: Resolvers = {
                     http: {status: 404},
                 }
             })
-            await onRequestProjectSubmissionReview(contract.value.client_id as ObjectId)
+            await onRequestProjectSubmissionReview(contract.value.client_id.toString())
             return {
                 acknowledgement: true,
                 _id: submission_review._id

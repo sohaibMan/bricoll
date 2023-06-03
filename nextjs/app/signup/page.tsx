@@ -52,7 +52,7 @@ const SignupPage = () => {
             </nav>
             <div className="flex flex-col items-center mt-8">
 
-                <SignupForm router={router}/>
+                <SignupForm />
 
             </div>
         </>

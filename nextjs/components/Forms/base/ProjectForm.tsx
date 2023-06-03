@@ -81,12 +81,12 @@ export default function ProjectForm(props: {
             size_of_project: projectSizeAutocompleteRef.current?.value.split(" ").join("_").toUpperCase() as Size_Of_Project
         }
 
-
-        const mutationProjectArgs= {
+        const description = JSON.stringify(editor?.getJSON());
+        const mutationProjectArgs = {
             id: props.project?._id,
             price: +price,
             title,
-            description:JSON.stringify(editor?.getJSON()),
+            description,
             skills,
             projectScope,
             category: categoriesAutocompleteRef.current?.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum,
@@ -122,7 +122,7 @@ export default function ProjectForm(props: {
                     _id: props.project?._id || data.createProject._id,
                     price: +price,
                     title,
-                    description:mutationProjectArg.description,
+                    description,
                     skills,
                     projectScope,
                     category: categoriesAutocompleteRef.current?.value,
@@ -176,7 +176,7 @@ export default function ProjectForm(props: {
                 <SkillsAutocomplete skills={skills} setSkills={setSkills}/>
 
                 {editor ? <EditableRichTextEditor editor={editor}/> :
-                    <CircularProgress  height={200}/>}
+                    <CircularProgress/>}
 
 
                 {/*<Stack direction={"row"} alignItems={"center"}>*/}

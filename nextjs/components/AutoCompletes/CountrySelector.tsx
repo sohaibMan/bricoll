@@ -7,6 +7,7 @@ import ListItemDecorator from '@mui/joy/ListItemDecorator';
 import Typography from '@mui/joy/Typography';
 import Autocomplete from "@mui/joy/Autocomplete";
 import {multiStepContext} from "../auth/registration/stepContext";
+import Image from "next/image";
 
 
 const CountrySelector = memo(() => {
@@ -24,11 +25,11 @@ const CountrySelector = memo(() => {
                     <AutocompleteOption {...optionProps}>
                         <ListItemDecorator>
                             <AspectRatio ratio="1" sx={{minWidth: 20, borderRadius: '50%'}}>
-                                <img
+                                <Image
                                     loading="lazy"
                                     width="20"
                                     src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-                                    srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
+                                    // srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
                                     alt=""
                                 />
                             </AspectRatio>

@@ -29,7 +29,7 @@ export default function FourthStep() {
                 : clientRequiredFields;
 
         // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-        const missingFields = requiredFields.filter((field) =>  !userData[field]);
+        const missingFields = requiredFields.filter((field) =>  !userData[field as keyof UserData]);
 
         if (missingFields.length) {
             return toast.error(

@@ -50,7 +50,9 @@ const GET_PROJECT = gql`
 `;
 
 export default function Project() {
-    const {project_id} = useParams();
+    const params= useParams();
+    if (!params) return <></>;
+    const {project_id}=params;
     const {data: session} = useSession();
     const [open, setOpen] = useState(false)
 
@@ -129,7 +131,7 @@ export default function Project() {
 
                 >
                     <ModalClose/>
-                    <SubmitProposalForm project_id={project_id}/>
+                    <SubmitProposalForm project_id={project_id.toString()}/>
 
                 </ModalDialog>
             </Modal>

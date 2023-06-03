@@ -8,6 +8,8 @@ import moment from "moment";
 import Attachments from "../../ListItems/Attachments";
 import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
 import {useEditor} from "@tiptap/react";
+import {ReadOnlyRichTextEditor} from "../../RichTextEditor/ReadOnlyRichTextEditor";
+import {Skeleton} from "@mui/material";
 
 
 export default function ProjectCard({project}: { project: Project }) {

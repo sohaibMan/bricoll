@@ -93,11 +93,9 @@ export const authOptions: NextAuthOptions = {
  callbacks: {
         async jwt({token, user,  trigger}) {
 
-
             if (trigger === "update" && token && token.email) {
                 const cacheResults = await redis.get(token.email);
-                console.log(cacheResults, JSON.parse(cacheResults))
-                if (JSON.parse(cacheResults)) {
+                if (cacheResults && JSON.parse(cacheResults)) {
 
                     token.isCompleted = JSON.parse(cacheResults).isCompleted;
                     token.userRole = JSON.parse(cacheResults).userRole
@@ -122,16 +120,19 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      if (!session.user) return session;
+      if (!session.user || !token) return session;
 
       const userData = await db.collection("users").findOne({
         email: session.user.email,
       });
 
-      session.user.id = token.sub;
+
+
+      if(token.sub) session.user.id = token.sub;
       session.user.accessToken = token.accessToken;
       session.user.userRole = token.userRole;
       session.user.isCompleted = token.isCompleted;
+
 
       session.user.username = userData?.username;
       session.user.jobTitle = userData?.jobTitle;

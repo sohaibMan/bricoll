@@ -1,9 +1,8 @@
-import {ObjectId} from "mongodb";
 import emailService from "../lib/email";
 import {getUserById, htmlMarkupGenerator} from "./emailHelpers";
 
 
-async function OnCreateProposal(client_id: ObjectId) {
+async function OnCreateProposal(client_id: string) {
     const user = await getUserById(client_id);
     const email = user.email;
     const username = user.username;
@@ -16,7 +15,7 @@ async function OnCreateProposal(client_id: ObjectId) {
     await emailService.sendEmail({to: email, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function OnAcceptProposal(freelancer_id: ObjectId) {
+async function OnAcceptProposal(freelancer_id: string) {
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const username = user.username;
@@ -29,7 +28,7 @@ async function OnAcceptProposal(freelancer_id: ObjectId) {
     await emailService.sendEmail({to: email, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function OnCancelProposal(freelancer_id: ObjectId) {
+async function OnCancelProposal(freelancer_id: string) {
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const username = user.username;
@@ -42,12 +41,11 @@ async function OnCancelProposal(freelancer_id: ObjectId) {
     await emailService.sendEmail({to: email, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function OnProposalDeclined(client_id: ObjectId) {
+async function OnProposalDeclined(client_id: string) {
 
     const user = await getUserById(client_id);
     const email = user.email;
     const username = user.username;
-    // todo (create the link to the project from the frontend)
     const subject = 'Sorry your proposals has been withdrawn by the freelancer  ';
     const html = `
       
@@ -59,7 +57,7 @@ async function OnProposalDeclined(client_id: ObjectId) {
 
 }
 
-async function OnEditProposal(client_id: ObjectId) {
+async function OnEditProposal(client_id: string) {
     const user = await getUserById(client_id);
     const email = user.email;
     const username = user.username;
@@ -73,7 +71,7 @@ async function OnEditProposal(client_id: ObjectId) {
 
 }
 
-async function OnPaymentReceive(freelancer_id: ObjectId, contract_id: string, amount: number) {
+async function OnPaymentReceive(freelancer_id: string, contract_id: string, amount: number) {
     const user = await getUserById(freelancer_id);
     const email = user.email;
     const username = user.username;
@@ -88,7 +86,7 @@ async function OnPaymentReceive(freelancer_id: ObjectId, contract_id: string, am
 
 }
 
-async function onAcceptContract(client_id: ObjectId) {
+async function onAcceptContract(client_id: string) {
     // send to client
     const client = await getUserById(client_id);
     const clientEmail = client.email;
@@ -102,7 +100,7 @@ async function onAcceptContract(client_id: ObjectId) {
 
 }
 
-async function onCancelContract(client_id: ObjectId) {
+async function onCancelContract(client_id: string) {
     // send to client
     const client = await getUserById(client_id);
     const clientEmail = client.email;
@@ -115,7 +113,7 @@ async function onCancelContract(client_id: ObjectId) {
     await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function onCreateContract(freelancer_id: ObjectId) {
+async function onCreateContract(freelancer_id: string) {
     const freelancer = await getUserById(freelancer_id);
     const freelancerEmail = freelancer.email;
     const freelancerName = freelancer.username;
@@ -128,7 +126,7 @@ async function onCreateContract(freelancer_id: ObjectId) {
 
 }
 
-async function onRequestProjectSubmissionReview(client_id: ObjectId) {
+async function onRequestProjectSubmissionReview(client_id: string) {
     const client = await getUserById(client_id);
     const clientEmail = client.email;
     const clientName = client.username;
@@ -140,7 +138,7 @@ async function onRequestProjectSubmissionReview(client_id: ObjectId) {
     await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function onAcceptRequestProjectSubmissionReview(freelancer_id: ObjectId) {
+async function onAcceptRequestProjectSubmissionReview(freelancer_id: string) {
     const freelancer = await getUserById(freelancer_id);
     const clientEmail = freelancer.email;
     const clientName = freelancer.username;
@@ -152,7 +150,7 @@ async function onAcceptRequestProjectSubmissionReview(freelancer_id: ObjectId) {
     await emailService.sendEmail({to: clientEmail, subject, html: htmlMarkupGenerator(html)});
 }
 
-async function onDeclineRequestProjectSubmissionReview(freelancer_id: ObjectId) {
+async function onDeclineRequestProjectSubmissionReview(freelancer_id: string) {
     const freelancer = await getUserById(freelancer_id);
     const clientEmail = freelancer.email;
     const clientName = freelancer.username;

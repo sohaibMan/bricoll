@@ -5,6 +5,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import moment from "moment";
 
+
 import {
     MDBBreadcrumb,
     MDBBreadcrumbItem,
@@ -26,6 +27,8 @@ import {User} from "../../types/resolvers";
 import {client} from "../_app";
 import CustomLink from "../../components/CustomLinks/CustomLink";
 import {Skeleton} from "@mui/material";
+import {useEditor} from "@tiptap/react";
+import {ReadOnlyRichTextEditor} from "../../components/RichTextEditor/ReadOnlyRichTextEditor";
 
 
 export async function getServerSideProps({params}: { params: { profileId: string } }) {
@@ -186,7 +189,7 @@ export default function ProfilePage({profile}: { profile: User }) {
                                     </div>
 
                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
+
 
                                         {editor ? <ReadOnlyRichTextEditor editor={editor}/> :
                                             <Skeleton variant="rounded" width={"100%"} height={200}/>}V
