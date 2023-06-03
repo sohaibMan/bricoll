@@ -23,6 +23,7 @@ const USER_PROFILE = gql`
             username
             email
             image
+            userRole
             projects_stats {
                 month
                 count

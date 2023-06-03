@@ -1,15 +1,16 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
-import {Payments} from "../../types/resolvers";
+import {User, UserRole} from "../../types/resolvers";
 import Typography from "@mui/joy/Typography";
-import CustomLink from "../CustomLinks/CustomLink";
 import LinkAccountButton from "../Buttons/LinkAccountButton";
+import {useContext} from "react";
 
 
-export default function BillingCard({payments}: {
-    payments: Payments[],
+export default function BillingCard({user}: {
+    user: User,
 }) {
+    console.log(user)
     return (
         <Box sx={{minHeight: 150}}>
             <Card
@@ -30,18 +31,17 @@ export default function BillingCard({payments}: {
                     '& > *': {minWidth: 'clamp(0px, (360px - 100%) * 999,100%)'},
                 })}
             >
-                <LinkAccountButton/>
+                {user.userRole===UserRole.Freelancer && <LinkAccountButton/>}
 
-                {payments.map(payment => <CustomLink href={"/dashboard"}> <Typography textColor="success.400"
-                                                                                      key={payment.contract_id}
-                                                                                      fontSize="xl3" fontWeight="xl"
-                                                                                      my={1}>
+                {user.payments.map(payment => <Typography textColor={payment.amount >= 0 ? `success.400` : 'error.400'}
+                                                          key={payment.contract_id}
+                                                          fontSize="xl3" fontWeight="xl"
+                                                          my={1}>
                         {payment.currency === 'usd' ? "$" : payment.currency}{" "}{payment.amount}{' '}
                         <Typography fontSize="sm" textColor="text.secondary" fontWeight="md">
                             － {payment.description}
                         </Typography>
                     </Typography>
-                    </CustomLink>
                 )}
             </Card>
         </Box>

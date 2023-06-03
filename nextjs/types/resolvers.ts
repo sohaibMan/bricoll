@@ -433,9 +433,9 @@ export type User = {
   proposals: Array<Proposal>;
   proposals_stats: Array<Proposals_Stats>;
   reviews: Array<Review>;
-  role: Scalars['String']['output'];
   skills: Array<Scalars['String']['output']>;
   status?: Maybe<StatusEnum>;
+  userRole: UserRole;
   username: Scalars['String']['output'];
 };
 
@@ -845,9 +845,9 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
   proposals_stats?: Resolver<Array<ResolversTypes['Proposals_stats']>, ParentType, ContextType>;
   reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
-  role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
+  userRole?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
   username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

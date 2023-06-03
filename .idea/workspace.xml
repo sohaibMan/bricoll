@@ -5,13 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="+ complete accept decline cancel submission review">
-      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/LinkAccountButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/BillingCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/BillingCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/ContractsItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/ContractsItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/HomeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/HomeItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/MyProfileItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/MyProfileItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nextjs/pages/linkaccount.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/schema/User.graphql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/checkout_sessions/[contract_id].ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/users/link_account/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/users/link_account/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/api/webhook.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/pages/dashboard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/types/resolvers.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/types/resolvers.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,9 +39,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="NxVcsManagerConfiguration">
-    <option name="NX_REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="ProblemsViewState">
     <option name="autoscrollToSource" value="true" />
@@ -213,14 +213,18 @@
       <option name="project" value="LOCAL" />
       <updated>1685647159860</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="+ complete accept decline cancel submission review">
+      <created>1685793763573</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1685793763573</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="UpdateCopyrightCheckinHandler">
-    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ID_ORDER">
@@ -245,7 +249,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="fix sign up form" />
     <MESSAGE value="complete direction from signup to register" />
     <MESSAGE value="complete direction from signup to register&#10;+ fix register to work for both users coming from an auth provider (google +facebook) and in the same with credential provider" />
@@ -262,8 +267,5 @@
     <MESSAGE value="+ Add Request Submission Review form" />
     <MESSAGE value="+ complete accept decline cancel submission review" />
     <option name="LAST_COMMIT_MESSAGE" value="+ complete accept decline cancel submission review" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

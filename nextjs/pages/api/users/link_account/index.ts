@@ -20,7 +20,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
         {
             projection: {
-                // stripe_account_link: 1,
                 stripe_account_id: 1
             }
         }

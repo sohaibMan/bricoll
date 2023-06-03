@@ -17,15 +17,18 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 if (!process.env.SIGNING_SECRET) throw new Error("no ENDPOINT_SECRET was found");
 
 const endpointSecret = process.env.SIGNING_SECRET;
-
+const contractCollection = db.collection("contracts")
 async function handlePaymentIntentSucceeded(contract_id: string) {
 
-    // console.log(contract_id)
 
-    const contractCollection = db.collection("contracts")
+
+
     await contractCollection.updateOne({
         _id: new ObjectId(contract_id),
     }, {$set: {status: Contract_Status.Completed, updated_at: new Date()}});
+
+
+
 // make the product inactive so the client can't pay for it again
     await stripe.products.update(
         contract_id,
