@@ -1,16 +1,32 @@
 import { SessionProvider } from "next-auth/react";
-import "../styles/styles.css";
+// import "../styles/styles.css";
 import type { AppProps } from "next/app";
 import type { Session } from "next-auth";
-import { ApolloClient, ApolloProvider, InMemoryCache, from } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloProvider,
+  InMemoryCache,
+  from,
+} from "@apollo/client";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+let theme = createTheme({
+  palette: {
+    primary: {
+      main: "#73bb44",
+      // main: "#8bc34a",
+    },
+    secondary: {
+      main: "#4C4444",
+    },
+  },
+});
 
 export const client = new ApolloClient({
   uri: `${process.env.NEXT_PUBLIC_NEXTAUTH_URL}/api/graphql`,
   cache: new InMemoryCache(),
 });
-
-
 
 // Use of the <SessionProvider> is mandatory to allow components that call
 // `useSession()` anywhere in your application to access the `session` object.
@@ -21,8 +37,10 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ApolloProvider client={client}>
-        <Toaster />
-        <Component {...pageProps} />
+        {/* <ThemeProvider theme={theme}> */}
+          <Toaster />
+          <Component {...pageProps} />
+        {/* </ThemeProvider> */}
       </ApolloProvider>
     </SessionProvider>
   );

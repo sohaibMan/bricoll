@@ -63,7 +63,7 @@ export default function ProjectItemCard({project, children}: {
 
                 >
                     {project.skills.map((skill, id) => <Chip key={id} sx={{backgroundColor: "#eee", color: "#4C4444"}} size="sm">{skill}</Chip>)}
-                    <Chip sx={{backgroundColor: "#73bb44", color: "#fff"}} size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
+                    <Chip color='success' size="sm">{project.category.split("_").join(" ").toLowerCase()}</Chip>
                 </Stack>
 
                 {children}

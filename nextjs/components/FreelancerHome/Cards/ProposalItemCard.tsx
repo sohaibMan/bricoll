@@ -3,13 +3,13 @@ import Box from '@mui/joy/Box';
 import Card from '@mui/joy/Card';
 import Typography from '@mui/joy/Typography';
 import {Chip, Divider, Stack} from '@mui/joy';
-import {Proposal, Proposal_Status} from "../../types/resolvers";
+import {Proposal, Proposal_Status} from "../../../types/resolvers";
 import moment from "moment";
-import CustomLink from "../CustomLinks/CustomLink";
-import Attachments from "../ListItems/Attachments";
+import CustomLink from "../../CustomLinks/CustomLink";
+import Attachments from "../../ListItems/Attachments";
 import Avatar from "@mui/joy/Avatar";
 
-import {RichTextEditor} from "../Inputs/RichTextEditor";
+import {RichTextEditor} from "../../Inputs/RichTextEditor";
 
 
 export default function ProposalItemCard({proposal, children}: {

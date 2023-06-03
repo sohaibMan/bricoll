@@ -85,7 +85,6 @@
 import * as React from "react";
 import { useRef, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
-import Input from "@mui/joy/Input";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Collapse from "@mui/material/Collapse";
@@ -212,10 +211,12 @@ export function SearchForm(props: {
           // variant="outlined"
           variant="contained"
           size="small"
+          color="success"
+
           sx={{
             alignSelf: "flex-start",
-            backgroundColor: "#73bb44",
-            borderColor: "#73bb44",
+            // backgroundColor: "#73bb44",
+            // borderColor: "#73bb44",
             borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
@@ -228,10 +229,11 @@ export function SearchForm(props: {
         <Button
           variant="contained"
           size="small"
+          color="success"
           sx={{
             alignSelf: "flex-start",
-            backgroundColor: "#73bb44",
-            borderColor: "#73bb44",
+            // backgroundColor: "#73bb44",
+            // borderColor: "#73bb44",
             borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
@@ -249,14 +251,16 @@ export function SearchForm(props: {
           size="small"
           sx={{
             alignSelf: "flex-start",
-            backgroundColor: "#73bb44",
-            borderColor: "#73bb44",
+            // backgroundColor: "#73bb44",
+            // borderColor: "#73bb44",
             borderRadius: "15px",
             color: "#eee",
             padding: "0.8%",
             paddingRight: "1.5%",
             paddingLeft: "1.5%",
           }}
+          color="success"
+
           endIcon={<SearchIcon />}
         >
           Best match
