@@ -4,19 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="+ Add Request Submission Review form">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/docker-publish.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Bricoll.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Bricoll.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23,_12_13_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23,_12_54_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23,_12_54_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23__12_13_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23__12_54_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_26_23__12_54_PM__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_27_23,_12_27_AM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_27_23__12_27_AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="db9d2332-6806-4db8-a4e9-c11236ccc437" name="Changes" comment="+ complete accept decline cancel submission review">
+      <change afterPath="$PROJECT_DIR$/nextjs/components/Buttons/LinkAccountButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Cards/BillingCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Cards/BillingCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/ContractsItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/ContractsItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/HomeItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/components/Dashboard/MenuItems/HomeItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" beforeDir="false" afterPath="$PROJECT_DIR$/nextjs/graphql/resolvers/Contract.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nextjs/pages/linkaccount.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,23 +52,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Dashboard&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/components/Chip&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib&quot;,
-    &quot;typescript.add.unambiguous.imports.on.the.fly&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Dashboard",
+    "last_opened_file_path": "/home/sohaib/Desktop/Bricoll/nextjs/components/Chip",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "preferences.keymap",
+    "ts.external.directory.path": "/home/sohaib/Desktop/Bricoll/nextjs/node_modules/typescript/lib",
+    "typescript.add.unambiguous.imports.on.the.fly": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactBuddySettings">
     <option name="extensionsIgnore" value="true" />
   </component>
@@ -93,11 +88,14 @@
       <recent name="$PROJECT_DIR$/nextjs/components/Forms/base" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/nextjs/components/Buttons" />
       <recent name="$PROJECT_DIR$/nextjs/components/Buttons/DashBoardControlButtons" />
       <recent name="$PROJECT_DIR$/nextjs/app/projects/[project_id]/proposals/create" />
       <recent name="$PROJECT_DIR$/nextjs/components/FreelancerHome" />
       <recent name="$PROJECT_DIR$/nextjs/components" />
-      <recent name="$PROJECT_DIR$/nextjs/app/find-work" />
+    </key>
+    <key name="es6.move.members.recent.items">
+      <recent name="$PROJECT_DIR$/nextjs/components/linkaccount.tsx" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -262,7 +260,8 @@
     <MESSAGE value="fix typo in step 4" />
     <MESSAGE value="create a sidebar for submitted review and create submission in the dashboard" />
     <MESSAGE value="+ Add Request Submission Review form" />
-    <option name="LAST_COMMIT_MESSAGE" value="+ Add Request Submission Review form" />
+    <MESSAGE value="+ complete accept decline cancel submission review" />
+    <option name="LAST_COMMIT_MESSAGE" value="+ complete accept decline cancel submission review" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />

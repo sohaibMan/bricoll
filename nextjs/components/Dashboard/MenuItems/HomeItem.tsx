@@ -17,7 +17,7 @@ export const HomeItem = (props: {
             <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
                 welcome {props.profile.username}
             </Typography>
-            <Stack sx={{width: "100%", height: "50%", alignItems: "center", justifyContent: "center"}}
+            <Stack sx={{width: "100%", height: "100%", alignItems: "center", justifyContent: "center"}}
                    direction={"row"} spacing={4}>
 
                 <Box sx={{width: "100%"}}>

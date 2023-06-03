@@ -4,13 +4,12 @@ import Card from '@mui/joy/Card';
 import {Payments} from "../../types/resolvers";
 import Typography from "@mui/joy/Typography";
 import CustomLink from "../CustomLinks/CustomLink";
+import LinkAccountButton from "../Buttons/LinkAccountButton";
 
 
 export default function BillingCard({payments}: {
     payments: Payments[],
 }) {
-    // todo fix the link
-    // todo green + red -
     return (
         <Box sx={{minHeight: 150}}>
             <Card
@@ -31,6 +30,7 @@ export default function BillingCard({payments}: {
                     '& > *': {minWidth: 'clamp(0px, (360px - 100%) * 999,100%)'},
                 })}
             >
+                <LinkAccountButton/>
 
                 {payments.map(payment => <CustomLink href={"/dashboard"}> <Typography textColor="success.400"
                                                                                       key={payment.contract_id}

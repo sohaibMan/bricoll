@@ -383,7 +383,7 @@ export const ContractResolvers: Resolvers = {
                     http: {status: 404},
                 }
             })
-            await onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
+            await onDeclineRequestProjectSubmissionReview(contract.value.freelancer_id);
 
             return {
                 acknowledgement: contract.ok === 1,
