@@ -1,12 +1,12 @@
 import * as React from "react";
 import {gql, QueryResult, useMutation} from "@apollo/client";
 import toast from "react-hot-toast";
-import {Contract, Proposal, Proposal_Status} from "../../types/resolvers";
-import CancelChipWithLabel from "../Chip/CancelChipWithLabel";
-import AcceptChipWithLabel from "../Chip/AcceptChipWithLabel";
-import HireChipWithLabel from "../Chip/HireChipWithLabel";
+import {Contract, Proposal, Proposal_Status} from "../../../types/resolvers";
+import CancelChip from "../../Chip/CancelChip";
+import AcceptChip from "../../Chip/AcceptChip";
+import HireChip from "../../Chip/HireChip";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
-import CreateContractForm from "../Forms/wrappers/CreateContractForm";
+import CreateContractForm from "../../Forms/wrappers/CreateContractForm";
 
 
 export function AcceptDeclineHireProposalControlButtons(props: {
@@ -92,12 +92,12 @@ export function AcceptDeclineHireProposalControlButtons(props: {
         {/*&& proposal.status === (Proposal_Status.InProgress || Proposal_Status.Completed)*/}
         {props.proposal_status === Proposal_Status.InProgress &&
             <>
-                <CancelChipWithLabel label={"decline"} actionHandler={declineProposalHandler}/>
-                <AcceptChipWithLabel actionHandler={acceptProposalHandler}/>
+                <CancelChip label={"decline"} actionHandler={declineProposalHandler}/>
+                <AcceptChip actionHandler={acceptProposalHandler}/>
             </>
         }
 
-        {props.proposal.status === Proposal_Status.Approved && <HireChipWithLabel actionHandler={() => setOpen(true)}/>}
+        {props.proposal.status === Proposal_Status.Approved && <HireChip actionHandler={() => setOpen(true)}/>}
 
         <Modal open={open} onClose={() => setOpen(false)}>
 

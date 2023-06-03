@@ -11,6 +11,7 @@ it connects businesses with independent professionals and agencies around the gl
 **Menu (click on the links below for more details ):**
 
 
+
 [Technical Details ](https://sohaibmanah.notion.site/Technical-Details-37881f4890f84997bb00cff78a523802)
 
 [Features](https://sohaibmanah.notion.site/Features-d7d9969d1da4460db10de9f0b5e885cd)
@@ -22,6 +23,7 @@ it connects businesses with independent professionals and agencies around the gl
 [Installation Process ](https://sohaibmanah.notion.site/Installation-Process-f488342ebfd3424bb05558e8a249cca5)
 
 [Outlines](https://sohaibmanah.notion.site/Outlines-9d31c39d18724dfca5e0225e5ef84a02)
+
 
 # **Contributors:**
 
@@ -47,5 +49,4 @@ Dr. *Lotfi* EL *ACHAAK*
 
 # **License :**
 
-![Untitled](Bircoll%20Project%207b01de36a2004f69b16fb13a69f2f503/Untitled.png)
 

@@ -12,7 +12,8 @@ export enum DashboardItems {
     CreateProject = "CreateProject",
     Proposals = "Proposals",
     Contracts = "Contracts",
-    SubmissionReviews = "SubmissionReviews",
+    // SubmitReview = "SubmitReview",
+    // SubmissionReviews = "SubmissionReviews",
 }
 
 const USER_PROFILE = gql`
@@ -22,6 +23,7 @@ const USER_PROFILE = gql`
             username
             email
             image
+            userRole
             projects_stats {
                 month
                 count
@@ -131,9 +133,10 @@ export default function Index() {
             <LoadingDashboard/>
         );
 
-    if (!session.data?.user.userRole) return <h1>not auth</h1>;
-    const userRole = session.data?.user.userRole;
-    // todo :fix this mess
+    const userRole = session?.data?.user?.userRole;
+    if (!userRole) return <h1>not auth</h1>;
+
+
     if (error || !data || !data.Profile)
         return (
             <h1>

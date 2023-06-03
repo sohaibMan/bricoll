@@ -99,7 +99,7 @@ export const MyProfileItem = (props: {
                     My profile
                 </Typography>
                 <Tabs
-                    defaultValue={currentTab}
+                    value={currentTab}
                     onChange={(event, value) => setCurrentTab(value as currentTabEnum)}
                     sx={{
                         bgcolor: "background.body",
@@ -198,8 +198,8 @@ export const MyProfileItem = (props: {
                         </Tab>
                     </TabList>
                 </Tabs>
-                {currentTab === currentTabEnum.Billing && props.user.payments && (props.user.payments.length > 1 ?
-                    <BillingCard payments={props.user.payments}/> :
+                {currentTab === currentTabEnum.Billing && props.user.payments && (props.user.payments.length >= 1 ?
+                    <BillingCard user={props.user}/> :
                     <Typography   level="h6" sx={{marginTop: "1rem"}}>No payments Yet</Typography>)}
                 {currentTab === currentTabEnum.AccountSetting && (
                     <Box
@@ -236,10 +236,7 @@ export const MyProfileItem = (props: {
                                     value={usernameState}
                                 />
                             </FormControl>
-                            {/* <FormControl sx={{ flex: 1 }}>
-              <FormLabel sx={{ display: { sm: "none" } }}>Last username</FormLabel>
-              <Input placeholder="last username" value="" />
-            </FormControl> */}
+
                         </Box>
 
                         <Divider role="presentation"/>

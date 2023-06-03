@@ -45,7 +45,7 @@ export type Contract = {
   project_id: Scalars['ObjectID']['output'];
   proposal_id: Scalars['ObjectID']['output'];
   status: Contract_Status;
-  submission_reviews: Array<Maybe<Submission_Review>>;
+  submission_reviews: Array<Submission_Review>;
   terms: Array<Scalars['String']['output']>;
   updated_at: Scalars['Date']['output'];
 };
@@ -433,9 +433,9 @@ export type User = {
   proposals: Array<Proposal>;
   proposals_stats: Array<Proposals_Stats>;
   reviews: Array<Review>;
-  role: Scalars['String']['output'];
   skills: Array<Scalars['String']['output']>;
   status?: Maybe<StatusEnum>;
+  userRole: UserRole;
   username: Scalars['String']['output'];
 };
 
@@ -672,7 +672,7 @@ export type ContractResolvers<ContextType = ServerContext, ParentType extends Re
   project_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   proposal_id?: Resolver<ResolversTypes['ObjectID'], ParentType, ContextType>;
   status?: Resolver<ResolversTypes['Contract_status'], ParentType, ContextType>;
-  submission_reviews?: Resolver<Array<Maybe<ResolversTypes['Submission_review']>>, ParentType, ContextType>;
+  submission_reviews?: Resolver<Array<ResolversTypes['Submission_review']>, ParentType, ContextType>;
   terms?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   updated_at?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -845,9 +845,9 @@ export type UserResolvers<ContextType = ServerContext, ParentType extends Resolv
   proposals?: Resolver<Array<ResolversTypes['Proposal']>, ParentType, ContextType>;
   proposals_stats?: Resolver<Array<ResolversTypes['Proposals_stats']>, ParentType, ContextType>;
   reviews?: Resolver<Array<ResolversTypes['Review']>, ParentType, ContextType>;
-  role?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   skills?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
   status?: Resolver<Maybe<ResolversTypes['StatusEnum']>, ParentType, ContextType>;
+  userRole?: Resolver<ResolversTypes['userRole'], ParentType, ContextType>;
   username?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;

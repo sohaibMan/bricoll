@@ -1,19 +1,19 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Chip from '@mui/joy/Chip';
-import DoneIcon from '@mui/icons-material/Done';
+import ApprovalIcon from '@mui/icons-material/Approval';
 
-export default function AcceptChipWithLabel({actionHandler}: { actionHandler: () => void }) {
+export default function HireChip({actionHandler}: { actionHandler: () => void }) {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
 
             <Chip
                 variant="soft"
-                color="success"
+                color="primary"
                 onClick={actionHandler}
-                endDecorator={<DoneIcon color="disabled"/>}
+                endDecorator={<ApprovalIcon color="disabled"/>}
             >
-                Accept
+                Hire
             </Chip>
 
         </Box>

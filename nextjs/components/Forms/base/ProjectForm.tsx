@@ -52,9 +52,9 @@ export default function ProjectForm(props: {
     const [description, setDescription] = useState<string>(defaultState.description);
     const [skills, setSkills] = useState<string[]>(defaultState.skills);
     const [title, setTitle] = useState<string>(defaultState.title);
-    const categoriesAutocompleteRef = useRef<HTMLInputElement>(null);
-    const levelOfExpertiseAutoComplete = useRef<HTMLInputElement>(null);
-    const projectSizeAutocompleteRef = useRef<HTMLInputElement>(null);
+    const categoriesAutocompleteRef = useRef<HTMLInputElement | null>(null);
+    const levelOfExpertiseAutoComplete = useRef<HTMLInputElement | null>(null);
+    const projectSizeAutocompleteRef = useRef<HTMLInputElement | null>(null);
 
     const [mutationProject, {loading, error}] = useMutation(props.PROJECT_MUTATION)
 
@@ -75,8 +75,8 @@ export default function ProjectForm(props: {
 
         const projectScope: ProjectScopeInput = {
             estimated_duration_in_days: +duration,
-            level_of_expertise: levelOfExpertiseAutoComplete.current.value.split(" ").join("_").toUpperCase() as Level_Of_Expertise,
-            size_of_project: projectSizeAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as Size_Of_Project
+            level_of_expertise: levelOfExpertiseAutoComplete.current?.value.split(" ").join("_").toUpperCase() as Level_Of_Expertise,
+            size_of_project: projectSizeAutocompleteRef.current?.value.split(" ").join("_").toUpperCase() as Size_Of_Project
         }
 
 
@@ -87,7 +87,7 @@ export default function ProjectForm(props: {
             description,
             skills,
             projectScope,
-            category: categoriesAutocompleteRef.current.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum,
+            category: categoriesAutocompleteRef.current?.value.split(" ").join("_").toUpperCase() as ProjectCategoriesEnum,
             attachments: [] // default value
         }
 

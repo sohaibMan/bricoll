@@ -2,10 +2,10 @@ name: Bricoll Docker Image Publish
 
 on:
   push:
-    branches: [ "Production" ]
+    branches: [ "Main" ]
     tags: [ "v*.*.*" ]
   pull_request:
-    branches: [ "Production" ]
+    branches: [ "Main" ]
 permissions:
   packages: write
   contents: read

@@ -154,7 +154,6 @@ export const ContractResolvers: Resolvers = {
                 project_id: new ObjectId(args.project_id),
                 proposal_id: new ObjectId(args.proposal_id),
                 status: Contract_Status.Pending,
-                // @ts-ignore
                 client_id: new ObjectId(context.user.id),
                 duration: args.duration,
                 price: args.price,
@@ -203,10 +202,10 @@ export const ContractResolvers: Resolvers = {
 
         },
         requestProjectSubmissionReview: async (parent, args, context, _) => {
-            //     rules : only client can request a review
-            //     rules : the contract status must be completed
-            //     rules : the contract must be paid
-            // the freelancer can send multiple requests for review (for example multiple versions of the project)
+            //     rules: only freelancers can request a review
+            //     rules: the contract status must be completed
+            //     rules: the contract must be paid
+            //     the freelancer can send multiple requests for review (for example multiple versions of the project)
             freelancerMiddleware(context);
 
             const submission_review: Submission_Review = {
@@ -225,7 +224,6 @@ export const ContractResolvers: Resolvers = {
                     status: Contract_Status.Completed,
                 },
                 {
-                    // @ts-ignore
                     $push: {
                         submission_reviews: submission_review
                     }
@@ -258,8 +256,7 @@ export const ContractResolvers: Resolvers = {
             };
             session.startTransaction(transactionOptions);
             let contract;
-            // const transactionResults = await session.withTransaction(async () => {
-            // }, transactionOptions);
+
             try {
                 contract = await contractCollection.findOneAndUpdate(
                     {
@@ -295,22 +292,36 @@ export const ContractResolvers: Resolvers = {
                 // console.log(contract)
                 if (contract.ok === 0 || !contract.value) throw new Error("The contract no longer exists");
 
+                const amount= contract.value.price - contract.value.fees;
 
                 const freelancer = await usersCollection.updateOne({_id: contract.value.freelancer_id}, {
                         $push: {
                             payments: {
                                 contract_id: new ObjectId(args.contract_id),
-                                amount: contract.value.price - contract.value.fees,
+                                amount,
                                 created_at: new Date(),
                                 currency: "usd",
-                                description: "Payment for the contract",
+                                description: "Earning for the contract",
                                 status: EarningsStatus.Pending,
                             }
                         }
                     },
                     {session}
                 )
-                if (freelancer.modifiedCount !== 1) {
+                const client = await usersCollection.updateOne( {_id: new ObjectId(context.user?.id)} , {
+                        $push: {
+                            payments: {
+                                contract_id: new ObjectId(args.contract_id),
+                                amount: -amount,
+                                created_at: new Date(),
+                                currency: "usd",
+                                description: "Payment for the contract",
+                            }
+                        }
+                    },
+                    {session}
+                )
+                if (freelancer.modifiedCount !== 1 || client.modifiedCount !== 1) {
                     //rol back if the freelancer is not found
                     throw new Error("An error has occurred while updating the freelancer earnings")
                 }
@@ -385,7 +396,7 @@ export const ContractResolvers: Resolvers = {
                     http: {status: 404},
                 }
             })
-            await onDeclineRequestProjectSubmissionReview(contract.value.freelancer);
+            await onDeclineRequestProjectSubmissionReview(contract.value.freelancer_id);
 
             return {
                 acknowledgement: contract.ok === 1,

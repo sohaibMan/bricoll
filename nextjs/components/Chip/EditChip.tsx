@@ -4,7 +4,7 @@ import Chip from '@mui/joy/Chip';
 import ChipDelete from '@mui/joy/ChipDelete';
 import EditIcon from '@mui/icons-material/Edit';
 
-export default function EditChipWithLabel({clickHandler}: { clickHandler: () => void }) {
+export default function EditChip({clickHandler}: { clickHandler: () => void }) {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
 

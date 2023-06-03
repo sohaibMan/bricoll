@@ -12,7 +12,7 @@ type User {
     _id: ObjectID!
     username: String!
     email: String!
-    role: String!
+    userRole: userRole!
     phone: String!
     address: String!
     bio: String!
@@ -54,7 +54,7 @@ type Contract_stats{
     count: Int!
     status: Contract_status!
 }
-#todo add project and contract stats (number of hired devs ....)
+
 
 type ProfileMetaData{
     _id: ObjectID!

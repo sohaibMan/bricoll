@@ -1,19 +1,22 @@
 import * as React from 'react';
 import Box from '@mui/joy/Box';
 import Chip from '@mui/joy/Chip';
-import ApprovalIcon from '@mui/icons-material/Approval';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 
-export default function HireChipWithLabel({actionHandler}: { actionHandler: () => void }) {
+export default function CancelChip({actionHandler, label = "cancel"}: {
+    actionHandler: () => void,
+    label?: string
+}) {
     return (
         <Box sx={{display: 'flex', gap: 1, alignItems: 'center'}}>
 
             <Chip
                 variant="soft"
-                color="primary"
+                color="danger"
                 onClick={actionHandler}
-                endDecorator={<ApprovalIcon color="disabled"/>}
+                endDecorator={<CancelOutlinedIcon color="disabled"/>}
             >
-                Hire
+                {label}
             </Chip>
 
         </Box>
