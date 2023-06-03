@@ -1,7 +1,6 @@
 "use client"
-import {useParams} from "next/navigation";
 import * as React from "react";
-import ProposalForm from "../../../../../components/Forms/base/ProposalForm";
+import ProposalForm from "../base/ProposalForm";
 import {gql} from "@apollo/client";
 
 const CREATE_PROPOSAL_MUTATION = gql`
@@ -11,10 +10,9 @@ const CREATE_PROPOSAL_MUTATION = gql`
         }
     }
 `;
-export default function SubmitProposal() {
-    const {project_id} = useParams()
-    if (!project_id) return (<></>)
+export default function SubmitProposalForm({project_id}: { project_id: string
+}) {
     return <ProposalForm onSubmitProposalHandler={() => {
-    }} label={"Submit a Proposal"} PROPOSAL_MUTATION={CREATE_PROPOSAL_MUTATION} project_id={project_id.toString()}/>
+    }} label={"Submit a Proposal"} PROPOSAL_MUTATION={CREATE_PROPOSAL_MUTATION} project_id={project_id}/>
 
 }

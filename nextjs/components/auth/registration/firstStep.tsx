@@ -1,30 +1,26 @@
 "use client"
 import React, {useContext} from "react";
-import {multiStepContext, UserData} from "./stepContext";
+import {multiStepContext} from "./stepContext";
 import {Divider, Stack} from "@mui/joy";
 import Input from "@mui/joy/Input";
 import CountrySelector from "../../AutoCompletes/CountrySelector";
 import "react-tagsinput/react-tagsinput.css";
-import 'react-quill/dist/quill.snow.css'
-import "../../../styles/quill.css"
 import {DatePicker} from '@mui/x-date-pickers/DatePicker';
-import ReactQuill from "react-quill";
 import {toast} from "react-hot-toast";
 import dayjs from "dayjs";
+import {RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import {useEditor} from "@tiptap/react";
 
-
-// shared between forms
-// const RichTextEditor = dynamic(import('react-quill'), {
-//     ssr: false,
-//     loading: () => <p>Loading ...</p>,
-// })
 
 export default function FirstStep() {
     const {setStep, userData} = useContext(multiStepContext);
+    const editor = useEditor({extensions: RichTextEditorExtensions("Enter your bio "), content: userData.bio});
 
 
     function handleSubmit() {
 
+        userData.bio = JSON.stringify(editor?.getJSON());
+        const editorLength = editor?.storage?.characterCount?.characters() || 0;
 
         const requiredFields = [
             "bio",
@@ -37,14 +33,14 @@ export default function FirstStep() {
             "timeZone",
         ];
 
-        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
+
         const missingFields = requiredFields.filter((field) => !userData[field]);
 
 
         if (missingFields.length) return toast.error(
             `Please fill in the following fields: ${missingFields.join(", ")}`
         );
-        else if (userData.bio.length < 100) return toast.error("Bio must be at least 100 characters")
+        else if (editorLength < 100) return toast.error("Bio must be at least 100 characters")
         else setStep(2);
 
     }
@@ -144,10 +140,8 @@ export default function FirstStep() {
             {/*/>*/}
 
 
-            <ReactQuill defaultValue={userData.bio}
-                        placeholder={"Describe your self"}
-                        onChange={(input) => userData.bio = input}
-                        theme="snow"/>
+            {editor ? <EditableRichTextEditor editor={editor}/> :
+                <Skeleton variant="rounded" width={"100%"} height={200}/>}
 
             <button
                 className="py-2 px-20 rounded-full font-medium text-base text-white bg-primary"

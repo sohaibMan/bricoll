@@ -26,7 +26,7 @@ async function verifyUserData(
     throw new Error("Invalid credentials");
   }
 
-  // console.log("queried data from Redis ...");
+
 
   return {
     id: user._id.toString(),
@@ -69,12 +69,10 @@ export const authOptions: NextAuthOptions = {
           const cacheResults = await redis.get(credentials.email);
           if (cacheResults) {
             user = JSON.parse(cacheResults);
-            // console.log("queried data from Redis Database ...",users)
-            // console.log("verfication",await verifyUserData(users, credentials.password))
 
             return await verifyUserData(user, credentials.password);
           }
-          // console.log("cache miss ...")
+
           user = await db
             .collection("users")
             .findOne({ email: credentials.email });
@@ -93,23 +91,22 @@ export const authOptions: NextAuthOptions = {
     colorScheme: "light",
   },
  callbacks: {
-        async jwt({token, user, account, profile, trigger}) {
+        async jwt({token, user,  trigger}) {
 
-            console.log(profile,user,account,token)
 
             if (trigger === "update" && token && token.email) {
                 const cacheResults = await redis.get(token.email);
                 console.log(cacheResults, JSON.parse(cacheResults))
                 if (JSON.parse(cacheResults)) {
-                    console.log("cache hit ...", JSON.parse(cacheResults))
+
                     token.isCompleted = JSON.parse(cacheResults).isCompleted;
                     token.userRole = JSON.parse(cacheResults).userRole
                 } else {
-                    console.log("cache miss ...")
+
                     const user = await db
                         .collection("users")
                         .findOne({email: token.email});
-                    console.log(user)
+
                     await redis.set(token.email, JSON.stringify(user));
                     token.isCompleted = user?.isCompleted;
                     token.userRole = user?.userRole;

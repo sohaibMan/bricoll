@@ -7,11 +7,11 @@ import {Chip, Divider, Stack} from "@mui/joy";
 import moment from "moment";
 import Attachments from "../../ListItems/Attachments";
 import {ProjectStatsBarChart} from "../../Charts/wrappers/ProjectStats";
-
-import {RichTextEditor} from "../../Inputs/RichTextEditor";
+import {useEditor} from "@tiptap/react";
 
 
 export default function ProjectCard({project}: { project: Project }) {
+    const editor = useEditor({content: project.description})
 
 
     return (
@@ -52,7 +52,8 @@ export default function ProjectCard({project}: { project: Project }) {
                 {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
                 {/*    {project.description}*/}
                 {/*</Typography>*/}
-                <RichTextEditor readOnly={true} value={project.description} theme="bubble"/>
+                {editor ? <ReadOnlyRichTextEditor editor={editor}/> :
+                    <Skeleton variant="rounded" width={"100%"} height={200}/>}
 
 
                 <Stack
@@ -89,7 +90,8 @@ export default function ProjectCard({project}: { project: Project }) {
                     </Typography>
                     {
                         <Box sx={{width: "100%", height: "20rem"}}>
-                            {project.stats ? <ProjectStatsBarChart stats={project.stats}/>:<Typography>No statistics</Typography>}
+                            {project.stats ? <ProjectStatsBarChart stats={project.stats}/> :
+                                <Typography>No statistics</Typography>}
                         </Box>
 
                     }

@@ -25,15 +25,16 @@ export const HomeItem = (props: {
                                                   proposals_stats={props.profile.proposals_stats}/>
 
                 </Box>
-                {props.profile.projects_stats && props.userRole === UserRole.Client &&
-                    <>
-                        <Divider orientation="vertical"/>
-                        <Box sx={{width: "100%"}}>
-                            <ProjectStatsBarChartPerMonth stats={props.profile.projects_stats}/>
-                        </Box>
 
-                    </>
-                }
+                <>
+                    <Divider orientation="vertical"/>
+                    <Box sx={{width: "100%"}}>
+                        {props.profile.projects_stats && props.userRole === UserRole.Client &&
+                            <ProjectStatsBarChartPerMonth stats={props.profile.projects_stats}/>
+                        }
+                    </Box>
+
+                </>
 
 
             </Stack>

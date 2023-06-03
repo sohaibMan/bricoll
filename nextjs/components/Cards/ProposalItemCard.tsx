@@ -8,14 +8,17 @@ import moment from "moment";
 import CustomLink from "../CustomLinks/CustomLink";
 import Attachments from "../ListItems/Attachments";
 import Avatar from "@mui/joy/Avatar";
-
-import {RichTextEditor} from "../Inputs/RichTextEditor";
+import {useEditor} from "@tiptap/react";
+import {ReadOnlyRichTextEditor} from "../RichTextEditor/ReadOnlyRichTextEditor";
+import CircularProgress from "@mui/joy/CircularProgress";
+import StarterKit from "@tiptap/starter-kit";
 
 
 export default function ProposalItemCard({proposal, children}: {
     proposal: Proposal,
     children: React.ReactNode
 }) {
+    const editor = useEditor({extensions: [StarterKit], content: proposal.description});
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -73,7 +76,9 @@ export default function ProposalItemCard({proposal, children}: {
                 {/*<Typography level="inherit" sx={{fontSize: 'sm', fontWeight: "medium"}} mb={0.5}>*/}
                 {/*    {proposal.cover_letter}*/}
                 {/*</Typography>*/}
-                <RichTextEditor readOnly={true} value={proposal.cover_letter} theme="bubble"/>
+
+                {editor ? <ReadOnlyRichTextEditor editor={editor}/> :
+                    <CircularProgress/>}
 
                 <Stack
                     direction="row"
