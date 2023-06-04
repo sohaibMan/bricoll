@@ -12,8 +12,6 @@ export enum DashboardItems {
     CreateProject = "CreateProject",
     Proposals = "Proposals",
     Contracts = "Contracts",
-    // SubmitReview = "SubmitReview",
-    // SubmissionReviews = "SubmissionReviews",
 }
 
 const USER_PROFILE = gql`

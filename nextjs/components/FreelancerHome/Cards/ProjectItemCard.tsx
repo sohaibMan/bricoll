@@ -15,7 +15,8 @@ export default function ProjectItemCard({project, children}: {
     project: Project,
     children: ReactNode
 }) {
-    const editor = useEditor({content: project.description})
+
+    const editor = useEditor({extensions:[StarterKit],content: JSON.parse(project.description || "{}")});
 
     return (
         <Box sx={{minHeight: 150}}>

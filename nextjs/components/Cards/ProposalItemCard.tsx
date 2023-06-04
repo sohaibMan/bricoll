@@ -18,7 +18,8 @@ export default function ProposalItemCard({proposal, children}: {
     proposal: Proposal,
     children: React.ReactNode
 }) {
-    const editor = useEditor({extensions: [StarterKit], content:JSON.parse(proposal.cover_letter)});
+
+    const editor = useEditor({extensions:[StarterKit],content: JSON.parse(proposal.cover_letter || "{}")});
 
     return (
         <Box sx={{minHeight: 150}}>

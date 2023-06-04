@@ -266,7 +266,7 @@ export default function ProfilePage({profile}: { profile: User }) {
 
                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
                                         {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
-                                        <RichTextEditor readOnly={true} value={profile.bio} theme="bubble"/>
+                                        {/*<RichTextEditor readOnly={true} value={profile.bio} theme="bubble"/>*/}
                                     </MDBListGroupItem>
                                 </MDBListGroup>
                             </MDBCardBody>

@@ -80,7 +80,7 @@ const Page = () => {
           animate="visible"
           variants={containerVariants}
           transition={{ duration: 0.5 }}
-          sx={{
+          style={{
             border: "2px solid #E3EAF6",
             borderRadius: "12px",
             p: 4,
@@ -105,7 +105,7 @@ const Page = () => {
         animate="visible"
         variants={containerVariants}
         transition={{ duration: 0.5 }}
-        sx={{
+        style={{
           border: "2px solid #E3EAF6",
           borderRadius: "12px",
           p: 4,

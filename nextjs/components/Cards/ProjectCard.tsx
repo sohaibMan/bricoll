@@ -10,10 +10,11 @@ import {ProjectStatsBarChart} from "../Charts/wrappers/ProjectStats";
 import {ReadOnlyRichTextEditor} from "../RichTextEditor/ReadOnlyRichTextEditor";
 import {useEditor} from "@tiptap/react";
 import {Skeleton} from "@mui/material";
+import StarterKit from "@tiptap/starter-kit";
 
 
 export default function ProjectCard({project}: { project: Project }) {
-    const editor = useEditor({content: project.description});
+    const editor = useEditor({extensions:[StarterKit],content: JSON.parse(project.description || "{}")});
 
 
     return (
