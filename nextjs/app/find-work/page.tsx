@@ -46,6 +46,8 @@ const Page = () => {
 
 
     function Projects() {
+      "use client"
+      
         const {loading, error, refetch, data} = useQuery<{ Projects: Project[] }>(
             GET_PROJECTS
         );
