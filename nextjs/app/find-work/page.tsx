@@ -1,186 +1,244 @@
 "use client";
-import {SetStateAction, useState} from "react";
-import {NavBar} from "../../components/FreelancerHome/NavBar";
-import {useSession} from "next-auth/react";
-import {Avatar} from "@mui/material";
+import { SetStateAction, useState } from "react";
+import { NavBar } from "../../components/FreelancerHome/NavBar";
+import { useSession } from "next-auth/react";
+import {
+  Avatar,
+  Stack,
+  Box,
+  CircularProgress,
+  Typography,
+  Divider,
+  Button,
+} from "@mui/material";
 import Link from "next/link";
-import {FooterSection} from "../../components/FreelancerHome/Footer";
+import { FooterSection } from "../../components/FreelancerHome/Footer";
 
-import {gql, useQuery} from "@apollo/client";
-import {Project} from "../../types/resolvers";
-import {Stack} from "@mui/joy";
+import { gql, useQuery } from "@apollo/client";
+import { Project } from "../../types/resolvers";
 import moment from "moment/moment";
 import ProjectItemCard from "../../components/FreelancerHome/Cards/ProjectItemCard";
-import {ProjectCardControlButtons} from "../../components/FreelancerHome/Cards/ProjectCardControlButtons";
+import { ProjectCardControlButtons } from "../../components/FreelancerHome/Cards/ProjectCardControlButtons";
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
-import {SearchForm} from "../../components/FreelancerHome/Cards/SearchForm";
-import {motion} from 'framer-motion';
+import { SearchForm } from "../../components/FreelancerHome/Cards/SearchForm";
+import { motion } from "framer-motion";
 
 const GET_PROJECTS = gql`
-    query Project($query: String, $filter: filterOptionsInput) {
-        Projects(query: $query, filter: $filter) {
-            _id
-            title
-            description
-            price
-            skills
-            created_at
-            projectScope {
-                estimated_duration_in_days
-                level_of_expertise
-                size_of_project
-            }
-            category
-            reactions {
-                freelancer_id
-                reaction_type
-            }
-        }
+  query Project($query: String, $filter: filterOptionsInput) {
+    Projects(query: $query, filter: $filter) {
+      _id
+      title
+      description
+      price
+      skills
+      created_at
+      projectScope {
+        estimated_duration_in_days
+        level_of_expertise
+        size_of_project
+      }
+      category
+      reactions {
+        freelancer_id
+        reaction_type
+      }
     }
+  }
 `;
 
 const Page = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [activeTab, setActiveTab] = useState("bestMatches");
-    const {data: session} = useSession();
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("bestMatches");
+  const { data: session } = useSession();
 
-    console.log("session from find-work, ", session);
+  console.log("session from find-work, ", session);
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleTabChange = (tab: SetStateAction<string>) => {
+    setActiveTab(tab);
+  };
+
+  function Projects() {
+    const { loading, error, refetch, data } = useQuery<{ Projects: Project[] }>(
+      GET_PROJECTS
+    );
+
+    const containerVariants = {
+      visible: {
+        opacity: 1,
+        border: "2px solid #E3EAF6",
+        borderRadius: "12px",
+      },
     };
 
-    const handleTabChange = (tab: SetStateAction<string>) => {
-        setActiveTab(tab);
-    };
-
-    function Projects() {
-        // the types are not specific to check the query if you have any problem
-
-        const {loading, error, refetch, data} = useQuery<{ Projects: Project[] }>(GET_PROJECTS);
-
-
-        const containerVariants = {
-            visible: {opacity: 1, border: '2px solid #E3EAF6', borderRadius: '12px'},
-        };
-
-
-        if (loading) return <motion.div
-            animate="visible"
-            variants={containerVariants}
-            transition={{duration: 0.5}}
-            className="border border-solid border-blue-200 rounded p-4"
+    if (loading)
+      return (
+        <motion.div
+          animate="visible"
+          variants={containerVariants}
+          transition={{ duration: 0.5 }}
+          sx={{
+            border: "2px solid #E3EAF6",
+            borderRadius: "12px",
+            p: 4,
+          }}
         >
-            <Stack spacing={4}>
-                <SearchForm onRefetch={refetch}/>
-                <Stack spacing={2}>
-                    {
-                        [0, 1, 2, 4].map((_, i) => <ProjectItemCardSkeleton key={i}/>)
-                    }
-                </Stack>
+          <Stack spacing={4}>
+            <SearchForm onRefetch={refetch} />
+            <Stack spacing={2}>
+              {[0, 1, 2, 4].map((_, i) => (
+                <ProjectItemCardSkeleton key={i} />
+              ))}
             </Stack>
+          </Stack>
         </motion.div>
+      );
 
-        if (error) return <p>Error : {error.message}</p>;
-        if (!data) return <p>No projects</p>
-
-
-
-        // return <Stack spacing={4}>
-        //     <SearchForm onRefetch={refetch}/>
-        //     <Stack
-        //         spacing={2}>{data.Projects.slice().sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1).map((project) =>
-        //         <ProjectItemCard key={project._id.toString()} project={project}>
-        //             <ProjectCardControlButtons projectId={project._id} reactions={project.reactions}/>
-        //         </ProjectItemCard>
-        //     )}</Stack>
-        // </Stack>
-        return (
-            <motion.div
-                animate="visible"
-                variants={containerVariants}
-                transition={{duration: 0.5}}
-                className="border border-solid border-blue-200 rounded p-4"
-            >
-                <SearchForm onRefetch={refetch}/>
-
-                <hr className="border-t-2 border-newColor my-8"/>
-
-                <h2 className="font-semibold text-2xl mx-2 my-8 ">Jobs you might like</h2>
-
-                <Stack spacing={2}>
-                    {data.Projects.slice()
-                        .sort((a, b) => moment(b.created_at).isAfter(a.created_at) ? 1 : -1)
-                        .map((project) => (
-                            <ProjectItemCard key={project._id.toString()} project={project}>
-                                <ProjectCardControlButtons projectId={project._id} reactions={project.reactions}/>
-                            </ProjectItemCard>
-                        ))}
-                </Stack>
-            </motion.div>
-        );
-
-    }
+    if (error) return <Typography>Error : {error.message}</Typography>;
+    if (!data) return <Typography>No projects</Typography>;
 
     return (
-        <>
-            <NavBar/>
-            <section>
-                <div className="container mx-auto my-16 grid gap-6 grid-cols-1 md:grid-cols-12">
-                    {/* Left Sidebar */}
-                    <div
-                        style={{marginLeft: "10%", marginRight: "3%", marginTop: "3%"}}
-                        className={`md:col-span-8 lg:col-span-9 bg-gray-200 overflow-hidden transition-all duration-300`}
-                    >
-                        <Projects/>
-                    </div>
+      <motion.div
+        animate="visible"
+        variants={containerVariants}
+        transition={{ duration: 0.5 }}
+        sx={{
+          border: "2px solid #E3EAF6",
+          borderRadius: "12px",
+          p: 4,
+        }}
+      >
+        <SearchForm onRefetch={refetch} />
 
-                    {/* Right Side */}
-                    <div
-                        style={{marginTop: "10%", marginRight: "13%"}}
-                        className="hidden md:block md:col-span-4 lg:col-span-3 bg-gray-100"
-                    >
-                        {/* User Card */}
-                        <div className="p-4 bg-white h-64 rounded-lg shadow-md">
-                            <div className="flex mx-14 items-center space-x-4">
-                                <div className="rounded-full overflow-hidden w-12 h-12">
-                                    {session?.user.image && (
-                                        <Avatar
-                                            style={{width: "50px", height: "50px"}}
-                                            alt={session.user.username}
-                                            src={session.user.image}
-                                        />
-                                        // <Image
-                                        //   src={session?.user.image}
-                                        //   alt="User"
-                                        //   width={50}
-                                        //   height={50}
-                                        //   className="object-cover w-full h-full"
-                                        // />
-                                    )}
-                                </div>
-                                <div>
-                                    <p className="text-gray-800 font-semibold">
+        <Divider sx={{ my: 4, mx: 6 }} />
 
-                                        {session?.user.username}
+        <Typography variant="h6" fontWeight="bold" mx={2} my={4}>
+          Jobs you might like
+        </Typography>
 
-                                    </p>
-                                    <p className="text-gray-500">{session?.user.jobTitle}</p>
-                                </div>
-                            </div>
-                            <div className="p-4 my-6 ">
-                                <button
-                                    className="block text-center text-white bg-primary_2 hover:bg-primary_3 py-2 rounded-md mx-auto font-medium w-44">
-                                    <Link href="/dashboard">Dashboard</Link>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <FooterSection/>
-        </>
+        <Stack mx={2} spacing={2}>
+          {data.Projects.slice()
+            .sort((a, b) =>
+              moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+            )
+            .map((project) => (
+              <ProjectItemCard key={project._id.toString()} project={project}>
+                <ProjectCardControlButtons
+                  projectId={project._id}
+                  reactions={project.reactions}
+                />
+              </ProjectItemCard>
+            ))}
+        </Stack>
+      </motion.div>
     );
-};
+  }
+
+  return (
+    <>
+      <NavBar />
+      <Box component="section">
+        <Box
+          sx={{
+            mx: "auto",
+            my: "5%",
+            display: "grid",
+            gap: 6,
+            gridTemplateColumns: "1fr",
+            md: "repeat(12, 1fr)",
+          }}
+        >
+          {/* Left Sidebar */}
+          <Box
+            sx={{
+              marginLeft: "10%",
+              marginRight: "3%",
+              marginTop: "3%",
+              gridColumn: "1 / span 8",
+              bgcolor: "gray.200",
+              overflow: "hidden",
+              transition: "all 300ms",
+            }}
+          >
+            <Projects />
+          </Box>
+
+          {/* Right Side */}
+          <Box
+            sx={{
+              marginTop: "10%",
+              marginRight: "0%",
+              gridColumn: "9 / span 8",
+              bgcolor: "gray.100",
+            }}
+          >
+            {/* User Card */}
+            <Box
+              sx={{
+                p: 2,
+                mx: 6,
+                bgcolor: "white",
+                border: "2px solid #E3EAF6",
+                borderRadius: "15px",
+                height: "64",
+                boxShadow: "lg",
+              }}
+            >
+              <Box
+                sx={{ display: "flex", mx: 2, alignItems: "center", spaceX: 4 }}
+              >
+                <Box
+                  mx={2}
+                  sx={{
+                    borderRadius: "full",
+                    overflow: "hidden",
+                    width: "12",
+                    height: "12",
+                  }}
+                >
+                  {session?.user.image && (
+                    <Avatar
+                      sx={{ width: "50px", height: "50px" }}
+                      alt={session.user.username}
+                      src={session.user.image}
+                    />
+                  )}
+                </Box>
+                <Box>
+                  <Typography sx={{ color: "gray.800", fontWeight: "bold" }}>
+                    {session?.user.username}
+                  </Typography>
+                  <Typography sx={{ color: "gray.500" }}>
+                    {session?.user.jobTitle}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box sx={{ p: 4, my: 6 }}>
+                <Button
+                  variant="contained"
+                  color="success"
+                  sx={{
+                    display: "block",
+                    mx: "auto",
+                    textTransform: "none",
+                    width: "44",
+                    bgcolor: "success",
+                    // "&:hover": { bgcolor: "success" },
+                  }}
+                >
+                  <Link href="/dashboard">Dashboard</Link>
+                </Button>
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+      </Box>
+      {/* <FooterSection /> */}
+    </>
+  );
+};  
 
 export default Page;

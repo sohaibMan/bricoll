@@ -125,8 +125,8 @@ export function SearchForm(props: {
                     size="small"
                     sx={{
                         alignSelf: "flex-start",
-                        backgroundColor: "#73bb44",
-                        borderColor: "#73bb44",
+            backgroundColor: "#73bb44",
+            borderColor: "#73bb44",
                         borderRadius: "15px",
                         color: "#eee",
                         padding: "0.8%",
@@ -141,8 +141,8 @@ export function SearchForm(props: {
                     size="small"
                     sx={{
                         alignSelf: "flex-start",
-                        backgroundColor: "#73bb44",
-                        borderColor: "#73bb44",
+            backgroundColor: "#73bb44",
+            borderColor: "#73bb44",
                         borderRadius: "15px",
                         color: "#eee",
                         padding: "0.8%",
@@ -160,14 +160,16 @@ export function SearchForm(props: {
                     size="small"
                     sx={{
                         alignSelf: "flex-start",
-                        backgroundColor: "#73bb44",
-                        borderColor: "#73bb44",
+            // backgroundColor: "#73bb44",
+            // borderColor: "#73bb44",
                         borderRadius: "15px",
                         color: "#eee",
                         padding: "0.8%",
                         paddingRight: "1.5%",
                         paddingLeft: "1.5%",
                     }}
+          color="success"
+
                     endIcon={<SearchIcon/>}
                 >
                     Best match

@@ -11,6 +11,8 @@ import {useSession} from "next-auth/react";
 import {Avatar} from "@mui/material";
 import Link from "next/link";
 import {FooterSection} from "../../../components/FreelancerHome/Footer";
+import CustomLink from "../../../components/FreelancerHome/Cards/CustomLink";
+import "../../../styles/globals.css";
 import {Modal, ModalClose, ModalDialog} from "@mui/joy";
 import SubmitProposalForm from "../../../components/Forms/wrappers/SubmitProposalForm";
 import {useState} from "react";
@@ -54,7 +56,6 @@ export default function Project() {
     if (!params) return <></>;
     const {project_id}=params;
     const {data: session} = useSession();
-    const [open, setOpen] = useState(false)
 
     if (!project_id) return <></>;
 

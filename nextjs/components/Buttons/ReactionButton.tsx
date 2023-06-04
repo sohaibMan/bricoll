@@ -53,6 +53,7 @@ export function ReactionButton(props: {
     }
 
     return <Badge
+        sx={{marginRight: "8px"}}
         badgeContent={reactionCount}
         color={"success"}
     >

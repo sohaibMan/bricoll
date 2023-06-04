@@ -13,7 +13,8 @@ export default function CustomAutocomplete(props: {
     return (
         <Autocomplete
             onChange={props.changeHandler}
-            sx={{width: "100%", borderColor: "#73bb44"}}
+            color='success'
+            sx={{width: "100%"}}
             defaultValue={defaultValue}
             placeholder={props.placeholder}
             // disableClearable={false}

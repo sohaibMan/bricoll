@@ -9,6 +9,8 @@ import Image from "next/image";
 import man from "../../assets/imgs/man.jpg";
 import { Avatar } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
+import "../../styles/globals.css";
+
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);

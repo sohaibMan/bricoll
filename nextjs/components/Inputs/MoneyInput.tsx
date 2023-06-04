@@ -5,7 +5,8 @@ export default function MoneyInput(props: { placeholder: string, parentRef: Reac
     return (
         <Input
             // className='my-2'
-            sx={{borderColor: "#73bb44"}}
+            // sx={{borderColor: "#73bb44"}}
+            color='success'
             slotProps={{input: {ref: props.parentRef}}}
             placeholder={props.placeholder}
             startDecorator='$'
