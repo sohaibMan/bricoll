@@ -28,20 +28,19 @@ export default function SkillsAutocomplete(props: {
             {props.skills.map((el, i) => <DeleteChipX onDelete={deleteHandler} key={i} label={el}/>)}
         </Stack>
         <Stack direction="row" spacing={2} justifyContent="space-between" sx={{width: "100%"}}>
-            <Input color='success' disabled={props.skills.length >= 5} size="md" sx={{width: "100%"}}
-                   slotProps={{input: {ref: InputRef}}}
-                   placeholder={props.skills.length >= 5 ? "Max 5 skills" : "Skills"}/>
+            <Input
+                // color='success'
+                disabled={props.skills.length >= 5} size="md" sx={{width: "100%"}}
+                slotProps={{input: {ref: InputRef}}}
+                placeholder={props.skills.length >= 5 ? "Max 5 skills" : "Skills"}/>
             <Button disabled={props.skills.length >= 5} onClick={addHandler} size="md"
                     startDecorator={<Add/>}
-                    color='success'
+                // color='success'
                     sx={{
                         alignSelf: "flex-start",
-                        // backgroundColor: "#73bb44",
-                        // borderColor: "#73bb44",
                         color: "#eee",
-                        // padding: "0.8%",
-                      }}
-                    >Add</Button>
+                    }}
+            >Add</Button>
         </Stack>
 
     </>

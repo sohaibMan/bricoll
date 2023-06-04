@@ -13,7 +13,7 @@ export default function CustomAutocomplete(props: {
     return (
         <Autocomplete
             onChange={props.changeHandler}
-            color='success'
+            // color='success'
             sx={{width: "100%"}}
             defaultValue={defaultValue}
             placeholder={props.placeholder}

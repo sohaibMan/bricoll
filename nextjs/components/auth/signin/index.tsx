@@ -1,3 +1,4 @@
+"use client"
 import {FormEvent, useState} from "react";
 import {toast} from "react-hot-toast";
 import google from "../../../assets/imgs/google.png";
@@ -13,7 +14,7 @@ const SignupForm = () => {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
-    // const router = useRouter()
+
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -31,12 +32,7 @@ const SignupForm = () => {
                 if (!res || !res.ok) {
                     throw Error(res?.error || "Email or password are not valid")
                 }
-                // if (res.ok) {
-                //     const callbackURL = decodeURIComponent(res.url && res.url.split("?")[1]?.split("=")[1] || "/")
-                //     console.log(callbackURL)
-                //     router.push(callbackURL)
-                // }
-                // return res
+
             })
             ,
             {
@@ -148,7 +144,6 @@ const SignupForm = () => {
                         Sign Up
                     </Link>
                 </p>
-                {/* </div> */}
             </form>
         </div>
     );

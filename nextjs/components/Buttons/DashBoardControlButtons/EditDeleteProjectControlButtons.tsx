@@ -13,7 +13,7 @@ export function EditDeleteProjectControlButtons(props: {
     setProjects: React.Dispatch<React.SetStateAction<Project[]>>
 }) {
     const [open, setOpen] = React.useState<boolean>(false);
-    // todo remove the deleted project from the ui
+
 
     const DELETE_PROJECT = gql`
         mutation DeleteProject($deleteProjectId: ObjectID!) {

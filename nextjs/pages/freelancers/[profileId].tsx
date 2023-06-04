@@ -29,9 +29,11 @@ import CustomLink from "../../components/CustomLinks/CustomLink";
 import {Skeleton} from "@mui/material";
 import {useEditor} from "@tiptap/react";
 import {ReadOnlyRichTextEditor} from "../../components/RichTextEditor/ReadOnlyRichTextEditor";
+import StarterKit from "@tiptap/starter-kit";
 
 
 export async function getServerSideProps({params}: { params: { profileId: string } }) {
+
 
     const profileId = params.profileId;
 
@@ -117,81 +119,7 @@ const USER_PROFILE = gql`
 
 export default function ProfilePage({profile}: { profile: User }) {
 
-    // const {data: session} = useSession();
-    // const router = useRouter();
-    // const {profileId} = router.query;
-
-
-    // TODO: -> Checking if the users is authenticated : but we can remove this condition
-
-    // TODO: -> Linking the reviews with projects to get the rating
-    // TODO: OPTIONAL -> Implementing the logic of followers
-
-    // console.log("profileId : ", profileId);
-
-    // if(!profileId) {
-    //   profileId = JSON.stringify(session?.users.id)
-    //   router.push(`/freelancers/${profileId}`)
-    // }
-
-    // console.log("session data : ", session?.users.id);
-    //
-    // const {loading, error, data} = useQuery<{ ProfileById: User }>(
-    //     USER_PROFILE,
-    //     {
-    //         variables: {
-    //             profileByIdId: profileId,
-    //         },
-    //     }
-    // );
-
-    // let averageRating;
-    //
-    // if (profile.reviews && profile.reviews?.length > 0) {
-    //     const totalRating = profile.reviews.reduce((sum, review) => {
-    //         if (review?.rating && sum + review?.rating) {
-    //             return sum + review?.rating;
-    //         }
-    //         return 0;
-    //     }, 0);
-    //     averageRating = totalRating / profile.reviews.length;
-    //     console.log("Average rating:", averageRating);
-    // } else {
-    //     console.log("No reviews found.");
-    // }
-
-    // console.log("userData: ", data);
-
-    // if (loading)
-    //     return (
-    //         <Box
-    //             sx={{
-    //                 justifyContent: "center",
-    //                 display: "flex",
-    //                 gap: 2,
-    //                 alignItems: "center",
-    //                 flexWrap: "wrap",
-    //                 marginTop: "350px",
-    //             }}
-    //         >
-    //             <Link
-    //                 component="button"
-    //                 variant="outlined"
-    //                 startDecorator={
-    //                     <CircularProgress
-    //                         variant="plain"
-    //                         thickness={2}
-    //                         sx={{"--CircularProgress-size": "16px"}}
-    //                     />
-    //                 }
-    //                 sx={{p: 1}}
-    //             >
-    //                 Loading...
-    //             </Link>
-    //         </Box>
-    //     );
-    //
-    // if (error) return <h1>{error.message}</h1>;
+    const editor = useEditor({extensions: [StarterKit], content: JSON.parse(profile.bio || "{}")});
 
     return (
         <section style={{backgroundColor: "#eee"}}>
@@ -259,14 +187,12 @@ export default function ProfilePage({profile}: { profile: User }) {
                         <MDBCard className="mb-4 mb-lg-0">
                             <MDBCardBody className="p-0">
                                 <MDBListGroup flush={"true"} className="rounded-3">
-                                    {/* <br /> */}
                                     <div style={{padding: "20px"}}>
                                         <h3>Bio</h3>
                                     </div>
 
                                     <MDBListGroupItem className="d-flex justify-content-between align-items-center p-3">
-                                        {/*<MDBCardText>{profile.bio}</MDBCardText>*/}
-                                        {/*<RichTextEditor readOnly={true} value={profile.bio} theme="bubble"/>*/}
+                                        {editor ? <ReadOnlyRichTextEditor editor={editor}/> : <Skeleton/>}
                                     </MDBListGroupItem>
                                 </MDBListGroup>
                             </MDBCardBody>
