@@ -65,29 +65,7 @@ export async function getServerSideProps({params}: { params: { profileId: string
     };
 }
 
-// export const getStaticPaths: GetStaticPaths = async () => {
-//     paths
 
-//     const freelancers = await usersCollection.find({
-//             userRole: UserRole.Freelancer,
-//             isCompleted: true,
-//             // isEmailVerfied: true
-//         },
-//         {
-//             projection: {
-//                 _id: 1
-//             }
-//         }).toArray()
-//     const paths = freelancers.map(doc => ({
-//         params: {profileId: doc._id.toString()},
-//     }))
-// temporary don't generate any path
-// return {
-//     paths: [], fallback: "blocking"
-//
-// }
-//
-// }
 
 
 const USER_PROFILE = gql`
