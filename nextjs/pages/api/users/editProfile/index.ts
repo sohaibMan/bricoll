@@ -13,17 +13,27 @@ export default async function handler(
     res: NextApiResponse
 ) {
     try {
-        // const router = useRouter();
 
-        const email = req.body?.email;
-        const name = req.body?.name;
-        const image = req.body?.image;
 
-        if (name || email || image)
-            return res.status(401).json({
+        const email: string | null | undefined = req.body?.email;
+        const username: string | null | undefined = req.body?.username;
+        const image: string | null | undefined = req.body?.image;
+        const bio: Object | null | undefined = req.body?.bio;
+
+        if (!username || !email || !image || !bio)
+            return res.status(400).json({
                 status: "failed",
                 message: "Missing fields",
             });
+
+        if (username.length < 3 || username.length > 20 || image.length < 3 || image.length > 10000) {
+
+            return res.status(400).json({
+                status: "failed",
+                message: "Invalid fields",
+            });
+        }
+
 
         const token = await getToken({req});
 
@@ -39,12 +49,13 @@ export default async function handler(
             return res.status(400).json({message: 'Invalid email ' + emailValidation.reason})
         }
 
-        // check of some users has this email(todo validate ussr email)
-        if (await redis.get(email)) {
-            return res.json({status: "failed", message: "this email is already used"})
-        }
+        // check of some users has this email
+        let AnExistingUser: any = await redis.get(email)
 
-        if (await usersCollection.findOne({email: email}, {projection: {email: 1}})) {
+        if(AnExistingUser) AnExistingUser = JSON.parse(AnExistingUser)
+        else AnExistingUser = await usersCollection.findOne({email}, {projection: {email: 1}})
+
+        if (AnExistingUser && AnExistingUser.email !== token.email) {
             return res.json({status: "failed", message: "this email is already used"})
         }
 
@@ -53,9 +64,10 @@ export default async function handler(
             {_id: new ObjectId(token.sub)},
             {
                 $set: {
-                    name,
+                    username,
                     email,
                     image,
+                    bio:JSON.stringify(bio)
                 },
             }
         ) as unknown as User;
@@ -65,7 +77,7 @@ export default async function handler(
 
         res.status(200).json({
             status: "success",
-            // message:
+            message:"Your profile has been updated successfully"
         });
     } catch (error) {
         res.status(400).json({

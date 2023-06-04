@@ -1,4 +1,4 @@
-import {ChangeEvent, MouseEvent, useState} from "react";
+import React, {ChangeEvent, MouseEvent, useState} from "react";
 import Avatar from "@mui/joy/Avatar";
 import Box from "@mui/joy/Box";
 import Button from "@mui/joy/Button";
@@ -19,6 +19,10 @@ import toast from "react-hot-toast";
 import MailOutlinedIcon from "@mui/icons-material/MailOutlined";
 import {DashboardItems} from "../../../pages/dashboard";
 import BillingCard from "../../Cards/BillingCard";
+import {useEditor} from "@tiptap/react";
+import {EditableRichTextEditor, RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import CircularProgress from '@mui/joy/CircularProgress'
+import Stack from "@mui/joy/Stack";
 
 // const imageURL = ref
 enum currentTabEnum {
@@ -36,13 +40,16 @@ export const MyProfileItem = (props: {
     const [currentTab, setCurrentTab] = useState<currentTabEnum>(
         currentTabEnum.AccountSetting
     );
-    const isSameState =
-        usernameState === props.user.username &&
-        emailState === props.user.email &&
-        imageLinkState === props.user.image;
+    const editor = useEditor({extensions: RichTextEditorExtensions("Enter your bio "), content: JSON.parse(props.user.bio)});
+
     if (props.currentComponent != DashboardItems.MyProfile) return <></>;
 
-    console.log(currentTab);
+    // const isSameState =
+    //     usernameState === props.user.username &&
+    //     emailState === props.user.email &&
+    //     imageLinkState === props.user.image &&
+    //     bio=== JSON.stringify(props.user.bio);
+
 
     async function updateHandling(e: MouseEvent<HTMLFormElement>) {
         e.preventDefault();
@@ -50,11 +57,17 @@ export const MyProfileItem = (props: {
         if (!usernameState) return toast.error("The username is empty, try to insert it!");
         if (!emailState)
             return toast.error("The email is empty, try to insert it!");
-        // // if(!emailState.includes('@')) return toast.error("Invalid Email Format!")
+
+        if (!emailState.includes('@')) return toast.error("Invalid Email Format!")
+
         if (!imageLinkState)
             return toast.error("The image is empty, try to upload it!");
 
-        const response = await fetch(`/api/user/editProfile`, {
+
+        const bio = editor?.getJSON();
+
+
+        await toast.promise(fetch(`/api/users/editProfile`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -63,18 +76,25 @@ export const MyProfileItem = (props: {
                 username: usernameState,
                 email: emailState,
                 image: imageLinkState,
-                // image: `https://${nextPublicAzureStorageAccountName}.blob.core.windows.net/${containerName}/${imageLinkState}`,
+                bio
             }),
-        });
+        }).then((res)=>res.json()).then((data)=>{
+            // if(data.status==="failed") throw new Error(data.message);
+            return data.message;
+        }),{
+            loading: "Updating...",
+            success: msg=>msg,
+            error: (err) => err
+        }).catch(err=>console.error(err))
 
-        const res = await response.json();
+        // const response = ;
+        //
+        // const res = await response.json();
+        //
+        // if (res.status != "success") toast.error("oops an error has occurred");
 
-        if (res.status != "success") toast.error("oops an error has occurred");
 
-        // setImageLinkState(
-        //     `https://${nextpublicazurestorageaccountusername}.blob.core.windows.net/${containerName}/${imageLinkState}`
-        // );
-        toast.success("The profile is updated successfully ");
+        // toast.success("The profile is updated successfully ");
     }
 
     function cancelHandling() {
@@ -82,6 +102,7 @@ export const MyProfileItem = (props: {
         setEmailState(props.user.email);
         setNameState(props.user.username);
         setImageLinkState(props.user.image);
+        editor?.commands.setContent(props.user.bio);
     }
 
     return (
@@ -200,7 +221,7 @@ export const MyProfileItem = (props: {
                 </Tabs>
                 {currentTab === currentTabEnum.Billing && props.user.payments && (props.user.payments.length >= 1 ?
                     <BillingCard user={props.user}/> :
-                    <Typography   level="h6" sx={{marginTop: "1rem"}}>No payments Yet</Typography>)}
+                    <Typography level="h6" sx={{marginTop: "1rem"}}>No payments Yet</Typography>)}
                 {currentTab === currentTabEnum.AccountSetting && (
                     <Box
                         sx={{
@@ -232,7 +253,6 @@ export const MyProfileItem = (props: {
                                         setNameState(() => event.target.value);
                                     }}
                                     placeholder="first username"
-                                    // value={data.Profile.username}
                                     value={usernameState}
                                 />
                             </FormControl>
@@ -262,27 +282,34 @@ export const MyProfileItem = (props: {
                             <FormHelperText>
                                 This will be displayed on your profile.
                             </FormHelperText>
+                            {imageLinkState && (
+                                <Avatar
+                                    size="lg"
+                                    src={imageLinkState}
+                                    sx={{"--Avatar-size": "64px", marginTop: "1rem"}}
+                                />
+                            )}
                         </Box>
                         <Box
                             sx={{
                                 display: "flex",
                                 alignItems: "flex-start",
+                                justifyContent: "center",
                                 flexWrap: "wrap",
                                 gap: 2.5,
                             }}
                         >
-                            {imageLinkState && (
-                                <Avatar
-                                    size="lg"
-                                    src={imageLinkState}
-                                    sx={{"--Avatar-size": "64px"}}
-                                    // value={props.users.image}
-                                />
-                            )}
-
                             <DropZone uploadHandler={setImageLinkState}/>
-                            {/* <Upload onUpload={setImageLinkState} /> */}
                         </Box>
+
+                        <Divider role="presentation"/>
+                        <Box> <FormLabel>Bio</FormLabel></Box>
+
+                        <Stack sx={{alignItems: "center", justifyContent: "center"}}>
+                            {editor ? <EditableRichTextEditor editor={editor}/> :
+                                <CircularProgress/>}
+                        </Stack>
+
 
                         <Divider role="presentation"/>
 
@@ -302,7 +329,9 @@ export const MyProfileItem = (props: {
                             >
                                 Cancel
                             </Button>
-                            <Button type="submit" size="sm" disabled={isSameState}>
+                            <Button type="submit" size="sm"
+                                // disabled={isSameState}
+                            >
                                 Save
                             </Button>
                         </Box>

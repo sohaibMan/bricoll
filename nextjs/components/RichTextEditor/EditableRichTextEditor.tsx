@@ -11,7 +11,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 
 
 // set the limit of 100000 characters
-const limit = 100
+const limit = 100000
 
 export const RichTextEditorExtensions = (placeholder:string)=>[
     StarterKit,

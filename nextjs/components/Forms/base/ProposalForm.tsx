@@ -11,9 +11,9 @@ import {Proposal, Proposal_Status} from "../../../types/resolvers";
 import {DurationInput} from "../../Inputs/DurationInput";
 import {PriceInput} from "../../Inputs/PriceInput";
 import Typography from "@mui/joy/Typography";
-import {EditableRichTextEditor,RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
-import  {useEditor} from "@tiptap/react";
-import {Skeleton} from "@mui/material";
+import {EditableRichTextEditor, RichTextEditorExtensions} from "../../RichTextEditor/EditableRichTextEditor";
+import {useEditor} from "@tiptap/react";
+import CircularProgress from "@mui/joy/CircularProgress";
 
 export default function ProposalForm(props: {
     onSubmitProposalHandler: (proposal: Proposal) => void,
@@ -35,10 +35,10 @@ export default function ProposalForm(props: {
     const [price, setPrice] = useState<string>(defaultState.price);
     const [duration, setDuration] = useState<string>(defaultState.duration);
     const [description, setDescription] = useState<string>(defaultState.description);
-    const editor = useEditor({extensions:RichTextEditorExtensions("Enter your cover letter"),content: defaultState.coverLetter});
-
-
-
+    const editor = useEditor({
+        extensions: RichTextEditorExtensions("Enter your cover letter"),
+        content: JSON.parse(defaultState.coverLetter || "{}")
+    });
 
 
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
@@ -55,7 +55,7 @@ export default function ProposalForm(props: {
             project_id: props.project_id, // needed in the created project and the edit project
             price: +price,
             duration: +duration,
-            cover_letter:JSON.stringify(editor?.getJSON()),
+            cover_letter: JSON.stringify(editor?.getJSON()),
             description
         }
         try {
@@ -122,7 +122,7 @@ export default function ProposalForm(props: {
                     {/*<Textarea placeholder="cover letter" value={coverLetter} required maxRows={5}*/}
                     {/*          onChange={(e) => setCoverLetter(() => e.target.value)} minRows={4}/>*/}
 
-                    {editor ? <EditableRichTextEditor editor={editor} /> : <Skeleton variant="rounded" width={"100%"} height={200} />}
+                    {editor ? <EditableRichTextEditor editor={editor}/> : <CircularProgress/>}
 
 
                     <Button disabled={loading} type=" submit"> Submit</Button>

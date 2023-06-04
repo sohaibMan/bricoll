@@ -13,7 +13,6 @@ export function EditCancelProposalControlButtons(props: {
     setProposals: React.Dispatch<React.SetStateAction<Proposal[]>>
 }) {
     const [open, setOpen] = React.useState<boolean>(false);
-    // todo remove the canceld proposal from the ui
 
     const CANCEL_PROPOSAL = gql`
         mutation EditProposal($cancelProposalId: ObjectID!) {

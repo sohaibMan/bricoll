@@ -18,7 +18,7 @@ export default function ProposalItemCard({proposal, children}: {
     proposal: Proposal,
     children: React.ReactNode
 }) {
-    const editor = useEditor({extensions: [StarterKit], content: proposal.description});
+    const editor = useEditor({extensions: [StarterKit], content:JSON.parse(proposal.cover_letter)});
 
     return (
         <Box sx={{minHeight: 150}}>
@@ -41,11 +41,11 @@ export default function ProposalItemCard({proposal, children}: {
                 })}
             >
 
-                {/*<Box sx={{width: "80%"}}>*/}
+
                 <Typography level="h1" sx={{fontSize: 'md', fontWeight: "bold", color: "#495057"}} mb={0.5}>
 
                     <CustomLink
-                        href={`freelancers/${proposal.user._id}`}
+                        href={`freelancers/${proposal.freelancer_id._id}`}
                     >
                         <Stack direction="row"
                                spacing={2}
