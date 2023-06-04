@@ -75,7 +75,8 @@ export default function ProposalForm(props: {
                     price: +price,
                     description,
                     cover_letter: mutationCreateProposalArgs.cover_letter,
-                    status: data?.editProposal?.status || props.proposal?.status || Proposal_Status.InProgress
+                    status: data?.editProposal?.status || props.proposal?.status || Proposal_Status.InProgress,
+                    user:props.proposal?.user || {username:"" , image:""}
                 } as Proposal // it miss some fields but it's ok i won't use them in the edit proposal
                 // setPrice("")
                 // setDuration("")

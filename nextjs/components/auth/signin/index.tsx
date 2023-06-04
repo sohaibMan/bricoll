@@ -6,7 +6,6 @@ import facebook from "../../../assets/imgs/facebook.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
-import {useRouter} from "next/navigation";
 
 
 const SignupForm = () => {
@@ -23,7 +22,6 @@ const SignupForm = () => {
         if (!email || !password) {
             return toast.error("Please fill in all fields");
         }
-
 
 
         await toast.promise(signIn<'credentials'>("credentials", {
