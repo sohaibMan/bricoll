@@ -11,8 +11,8 @@ import moment from "moment/moment";
 import ProjectItemCard from "../../components/Cards/ProjectItemCard";
 import {ProjectCardControlButtons} from "../../components/Cards/ProjectCardControlButtons";
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
-import {SearchForm} from "../../components/Cards/SearchForm";
 import {motion} from "framer-motion";
+import { SearchForm } from "../../components/Forms/base/SearchForm";
 
 const GET_PROJECTS = gql`
     query Project($query: String, $filter: filterOptionsInput) {
