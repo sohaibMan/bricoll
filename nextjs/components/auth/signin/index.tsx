@@ -23,7 +23,7 @@ const SignupForm = () => {
         if (!email || !password) {
             return toast.error("Please fill in all fields");
         }
-        // tmp callback
+
 
 
         await toast.promise(signIn<'credentials'>("credentials", {
