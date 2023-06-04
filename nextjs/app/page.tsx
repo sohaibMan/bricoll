@@ -5,6 +5,8 @@ import { WhySection } from "../components/home/WhySection";
 import { GuidesSection } from "../components/home/GuidesSection";
 import { CommentsSection } from "../components/home/CommentsSection";
 import { FooterSection } from "../components/home/Footer";
+import "../styles/globals.css";
+
 // this page is static and will be rendered at build time
 const Home = () => {
   return (
