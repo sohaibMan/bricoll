@@ -110,7 +110,7 @@ export default function FirstStep() {
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
                             disableFuture
-                            defaultValue={userData.birthday && {$d: dayjs(userData.birthday)}} // todo handle this to have a default value
+                            defaultValue={userData.birthday && dayjs(userData.birthday)}  // todo handle this to have a default value
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {

@@ -22,7 +22,7 @@ export default function FirstStep() {
 
 
     const handleSpecificSkills = (skill: string[]) => {
-        setSpecificSkills((prv) => [...prv, skill]);
+        setSpecificSkills( skill);
         userData.specificSkills = specificSkills;
     };
 
@@ -70,8 +70,7 @@ export default function FirstStep() {
                 ? freelancerRequiredFields
                 : clientRequiredFields;
 
-        // const missingFields = requiredFields.filter((field) => field in userData && !userData[field as keyof UserData]);
-        const missingFields = requiredFields.filter((field) => !userData[field]);
+        const missingFields = requiredFields.filter((field) => !userData[field as keyof UserData]);
 
         if (missingFields.length) {
             toast.error(
