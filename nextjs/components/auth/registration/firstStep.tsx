@@ -15,7 +15,7 @@ import {Skeleton} from "@mui/material";
 
 export default function FirstStep() {
     const {setStep, userData} = useContext(multiStepContext);
-    const editor = useEditor({extensions: RichTextEditorExtensions("Enter your bio "), content: userData.bio});
+    const editor = useEditor({extensions: RichTextEditorExtensions("Enter your bio "), content: JSON.parse(userData.bio || "{}")});
 
 
     function handleSubmit() {
@@ -110,7 +110,7 @@ export default function FirstStep() {
 
                 <DatePicker sx={{width: "100%"}} views={['year', 'month', 'day']} label="Choose your birthday"
                             disableFuture
-                            defaultValue={userData.birthday && {$d: dayjs(userData.birthday)}}
+                            // defaultValue={userData.birthday && dayjs(userData.birthday)}  // todo handle this to have a default value
                             onChange={(value: {
                                 $d: Date | null
                             } | null) => {

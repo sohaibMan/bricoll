@@ -1,16 +1,13 @@
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import QuestionMarkOutlinedIcon from "@mui/icons-material/QuestionMarkOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
-import Image from "next/image";
-import man from "../../assets/imgs/man.jpg";
 import { Avatar } from "@mui/material";
 import { signOut, useSession } from "next-auth/react";
 import "../../styles/globals.css";
-
 
 export function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +22,11 @@ export function NavBar() {
     <nav className="container mx-auto p-6">
       <div className="flex items-center justify-between">
         <div>
-        <p ><Link href="/" className="text-primary font-bold text-2xl px-6">BRICOL</Link></p>
+          <p>
+            <Link href="/" className="text-primary font-bold text-2xl px-6">
+              BRICOL
+            </Link>
+          </p>
         </div>
         <div className="md:hidden">
           <button
@@ -58,7 +59,7 @@ export function NavBar() {
               Find Talent
             </Link>
             <Link
-              href="/home/sohaib/Desktop/Bricoll/nextjs/about"
+              href="/find-work"
               passHref
               className="text-lg font-sans text-primary_2 hover:text-primary"
             >

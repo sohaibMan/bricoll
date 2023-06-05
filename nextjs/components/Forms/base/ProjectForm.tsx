@@ -59,7 +59,7 @@ export default function ProjectForm(props: {
     const [uploadedFilesList, setUploadedFilesList] = useState<FileList | null>(null);
     const editor = useEditor({
         extensions: RichTextEditorExtensions("Enter your description"),
-        content: defaultState.description
+        content: JSON.parse(defaultState.description || "{}")
     });
     const handleSubmit = async function (e: FormEvent<HTMLFormElement>) {
         e.preventDefault();

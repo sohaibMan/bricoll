@@ -1,3 +1,4 @@
+"use client"
 import {FormEvent, useState} from "react";
 import {toast} from "react-hot-toast";
 import google from "../../../assets/imgs/google.png";
@@ -5,7 +6,6 @@ import facebook from "../../../assets/imgs/facebook.png";
 import Image from "next/image";
 import Link from "next/link";
 import {signIn} from "next-auth/react";
-import {useRouter} from "next/navigation";
 
 
 const SignupForm = () => {
@@ -13,7 +13,7 @@ const SignupForm = () => {
     const [password, setPassword] = useState("");
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
-    // const router = useRouter()
+
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault()
@@ -22,7 +22,6 @@ const SignupForm = () => {
         if (!email || !password) {
             return toast.error("Please fill in all fields");
         }
-        // tmp callback
 
 
         await toast.promise(signIn<'credentials'>("credentials", {
@@ -31,12 +30,7 @@ const SignupForm = () => {
                 if (!res || !res.ok) {
                     throw Error(res?.error || "Email or password are not valid")
                 }
-                // if (res.ok) {
-                //     const callbackURL = decodeURIComponent(res.url && res.url.split("?")[1]?.split("=")[1] || "/")
-                //     console.log(callbackURL)
-                //     router.push(callbackURL)
-                // }
-                // return res
+
             })
             ,
             {
@@ -148,7 +142,6 @@ const SignupForm = () => {
                         Sign Up
                     </Link>
                 </p>
-                {/* </div> */}
             </form>
         </div>
     );

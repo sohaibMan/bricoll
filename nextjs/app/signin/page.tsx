@@ -8,7 +8,6 @@ import "../../styles/globals.css";
 
 
 const SigninPage = () => {
-    // const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const {data: session} = useSession()
     const router = useRouter()

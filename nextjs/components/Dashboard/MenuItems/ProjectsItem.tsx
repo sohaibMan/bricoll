@@ -1,5 +1,5 @@
 import {Project} from "../../../types/resolvers";
-import {Dispatch, useContext, useState} from "react";
+import {Dispatch, SetStateAction, useContext, useState} from "react";
 import Stack from "@mui/joy/Stack";
 import ProjectItemCard from "../../Cards/ProjectItemCard";
 import {EditDeleteProjectControlButtons} from "../../Buttons/DashBoardControlButtons/EditDeleteProjectControlButtons";
@@ -50,7 +50,7 @@ function ProjectItemsDetails(props: { project: Project }) {
 
 export default function DashBoardProjects(props: {
     projects: Array<Project>,
-    setProjects: Dispatch<React.SetStateAction<Project[]>>,
+    setProjects: Dispatch<SetStateAction<Project[]>>,
 }) {
 
 

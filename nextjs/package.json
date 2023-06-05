@@ -1,7 +1,7 @@
 {
   "private": true,
   "description": "Upwork clone with Next.js, GraphQL, Apollo, MongoDB, NextAuth.js, and Nginx (Docker) and much more ",
-  "repository": "https://github.com/sohaibMan/NextJsCourse",
+  "repository": "https://github.com/sohaibMan/Bricoll",
   "scripts": {
     "dev": "run-p nextdev generate",
     "nextdev": "next",
@@ -85,7 +85,7 @@
     "redis": "^4.6.5",
     "sharp": "^0.32.1",
     "stripe": "^12.2.0",
-    "styled-components": "^5.3.11"
+    "styled-components": "^6.0.0-rc.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^4.0.0",

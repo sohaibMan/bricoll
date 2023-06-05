@@ -12,7 +12,7 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 RUN \
   if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
+  elif [ -f package-lock.json ]; then npm ci -f; \
   elif [ -f pnpm-lock.yaml ]; then yarn global add pnpm && pnpm i --frozen-lockfile; \
   else echo "Lockfile not found." && exit 1; \
   fi
@@ -21,10 +21,10 @@ RUN \
 COPY . .
 
 
-RUN npm run build
+RUN #npm run build
 
 #
-ENV NODE_ENV production
+#ENV NODE_ENV production
 
 
 #RUN addgroup --system --gid 1001 nodejs
@@ -40,5 +40,5 @@ EXPOSE 3000
 ENV PORT 3000
 
 
-CMD ["npm", "run","start"]
-#CMD ["npm", "run","dev"]
+#CMD ["npm", "run","start"]
+CMD ["npm", "run","simple-dev"]

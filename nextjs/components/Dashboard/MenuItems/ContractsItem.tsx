@@ -70,7 +70,7 @@ function ContractItemDetails(props: {
 
     const [submissions, setSubmissions] = useState(() => props.submissions)
 
-    const cancelHandler = async (submissionReviewId:string) => {
+    const cancelHandler = async (submissionReviewId: string) => {
 
 
         const confirmation = confirm("Are you sure you want to cancel this request?");
@@ -98,7 +98,7 @@ function ContractItemDetails(props: {
 
 
     }
-    const declineHandler = async (submissionReviewId:string) => {
+    const declineHandler = async (submissionReviewId: string) => {
 
 
         const confirmation = confirm("Are you sure you want to decline this request?");
@@ -126,7 +126,7 @@ function ContractItemDetails(props: {
 
 
     }
-    const acceptHandler = async (submissionReviewId:string) => {
+    const acceptHandler = async (submissionReviewId: string) => {
 
 
         const confirmation = confirm("Are you sure you want to accept this request?");
@@ -290,10 +290,16 @@ export const ContractsItem = (props: {
                                                 mb={1.5}>
                                         Submissions
                                     </Typography>
-                                    <ContractItemDetails submissions={contract.submission_reviews.slice().sort((a, b) =>
-                                        moment(b.created_at).isAfter(a.created_at) ? 1 : -1
-                                    )} current_contract={contract} userRole={props.userRole}
-                                                         setContracts={props.setContracts}/>
+                                    {contract.submission_reviews ? <ContractItemDetails
+                                            submissions={contract.submission_reviews.slice().sort((a, b) =>
+                                                moment(b.created_at).isAfter(a.created_at) ? 1 : -1
+                                            )} current_contract={contract} userRole={props.userRole}
+                                            setContracts={props.setContracts}/> :
+                                        <Typography mb={1.5}>
+                                            No Submissions
+                                        </Typography>
+
+                                    }
                                 </Collapse>
 
 
