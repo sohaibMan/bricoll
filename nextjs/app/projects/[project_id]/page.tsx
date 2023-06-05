@@ -79,13 +79,26 @@ export default function Project() {
           >
             <ProjectCard project={data.Project} />
             {data.Project.proposals && data.Project.proposals.length > 0 ? (
-              <Typography sx={{}} level="h6">
-                You already submitted a proposal
-              </Typography>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Typography
+                  sx={{
+                    marginTop: "15px",
+                    fontWeight: "bold",
+                    fontSize: "18px",
+                    color: "#73bb44",
+                  }}
+                  level="h6"
+                >
+                  You already submitted a proposal
+                </Typography>
+              </div>
             ) : (
               //   <div className=" my-8 mx-96" onClick={() => setOpen(true)}>
-              <Button onClick={() => setOpen(true)}>Submit a proposal</Button>
-              //   </div>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button sx={{
+                    marginTop: "15px",
+                  }} onClick={() => setOpen(true)}>Submit a proposal</Button>
+              </div>
             )}
           </div>
           {/* Right Side */}
