@@ -13,6 +13,7 @@ import {ProjectCardControlButtons} from "../../components/Cards/ProjectCardContr
 import ProjectItemCardSkeleton from "../../components/Skeletons/ProjectItemCardSkeleton";
 import {motion} from "framer-motion";
 import { SearchForm } from "../../components/Forms/base/SearchForm";
+// import "../../styles/globals.css"
 
 const GET_PROJECTS = gql`
     query Project($query: String, $filter: filterOptionsInput) {
