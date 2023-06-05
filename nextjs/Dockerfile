@@ -21,10 +21,10 @@ RUN \
 COPY . .
 
 
-RUN npm run build
+RUN #npm run build
 
 #
-ENV NODE_ENV production
+#ENV NODE_ENV production
 
 
 #RUN addgroup --system --gid 1001 nodejs
@@ -40,5 +40,5 @@ EXPOSE 3000
 ENV PORT 3000
 
 
-CMD ["npm", "run","start"]
-#CMD ["npm", "run","dev"]
+#CMD ["npm", "run","start"]
+CMD ["npm", "run","simple-dev"]
